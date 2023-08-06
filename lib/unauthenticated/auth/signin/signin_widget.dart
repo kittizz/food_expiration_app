@@ -197,6 +197,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                                   .bodyLargeFamily),
                                       lineHeight: 3.0,
                                     ),
+                                keyboardType: TextInputType.emailAddress,
                                 validator: _model.emailTextControllerValidator
                                     .asValidator(context),
                               ),
