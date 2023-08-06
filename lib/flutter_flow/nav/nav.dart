@@ -94,14 +94,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => WelcomeWidget(),
         ),
         FFRoute(
-          name: 'Signin',
-          path: '/signin',
-          builder: (context, params) => SigninWidget(),
-        ),
-        FFRoute(
           name: 'Signup',
           path: '/signup',
           builder: (context, params) => SignupWidget(),
+        ),
+        FFRoute(
+          name: 'Signin',
+          path: '/signin',
+          builder: (context, params) => SigninWidget(),
         ),
         FFRoute(
           name: 'ForgotPassword',

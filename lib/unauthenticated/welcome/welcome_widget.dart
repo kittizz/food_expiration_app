@@ -37,6 +37,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -129,7 +131,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                               16.0, 12.0, 16.0, 16.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('Signin');
+                              context.pushNamed('Signup');
                             },
                             text: 'ลงทะเบียน ด้วย อีเมล',
                             icon: Icon(
@@ -259,7 +261,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed('Signup');
+                              context.pushNamed('Signin');
                             },
                             child: RichText(
                               text: TextSpan(

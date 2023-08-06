@@ -55,6 +55,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -244,7 +246,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                             },
                           );
 
-                          context.pushNamed('Signup');
+                          context.pushNamed('Signin');
                         },
                         text: 'ส่ง',
                         options: FFButtonOptions(

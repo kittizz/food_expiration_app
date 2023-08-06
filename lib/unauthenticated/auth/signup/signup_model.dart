@@ -19,19 +19,26 @@ class SignupModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? emailTextControllerValidator;
   // State field(s) for TextField widget.
   TextEditingController? passwordTextController;
-  late bool passwordVisibility;
+  late bool passwordVisibility1;
   String? Function(BuildContext, String?)? passwordTextControllerValidator;
+  // State field(s) for TextField widget.
+  TextEditingController? confirmPasswordTextController;
+  late bool passwordVisibility2;
+  String? Function(BuildContext, String?)?
+      confirmPasswordTextControllerValidator;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    passwordVisibility = false;
+    passwordVisibility1 = false;
+    passwordVisibility2 = false;
   }
 
   void dispose() {
     unfocusNode.dispose();
     emailTextController?.dispose();
     passwordTextController?.dispose();
+    confirmPasswordTextController?.dispose();
   }
 
   /// Action blocks are added here.

@@ -16,22 +16,27 @@ class FoodexpirationGroup {
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
   };
-  static GetUserCall getUserCall = GetUserCall();
+  static RegisterDeviceCall registerDeviceCall = RegisterDeviceCall();
 }
 
-class GetUserCall {
+class RegisterDeviceCall {
   Future<ApiCallResponse> call({
     String? authToken = 'no',
   }) {
+    final body = '''
+{
+  "auth_token": "${authToken}"
+}''';
     return ApiManager.instance.makeApiCall(
-      callName: 'GetUser',
-      apiUrl: '${FoodexpirationGroup.baseUrl}/user',
-      callType: ApiCallType.GET,
+      callName: 'registerDevice',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/user/register-device',
+      callType: ApiCallType.POST,
       headers: {
         ...FoodexpirationGroup.headers,
-        'Authorization': 'Bearer ${authToken}',
       },
       params: {},
+      body: body,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -47,13 +52,13 @@ class GetUserCall {
         response,
         r'''$.signInProvider''',
       );
-  dynamic uid(dynamic response) => getJsonField(
-        response,
-        r'''$.uid''',
-      );
   dynamic message(dynamic response) => getJsonField(
         response,
         r'''$.message''',
+      );
+  dynamic deviceid(dynamic response) => getJsonField(
+        response,
+        r'''$.device_id''',
       );
 }
 

@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -19,26 +20,21 @@ class SigninModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? emailTextControllerValidator;
   // State field(s) for TextField widget.
   TextEditingController? passwordTextController;
-  late bool passwordVisibility1;
+  late bool passwordVisibility;
   String? Function(BuildContext, String?)? passwordTextControllerValidator;
-  // State field(s) for TextField widget.
-  TextEditingController? confirmPasswordTextController;
-  late bool passwordVisibility2;
-  String? Function(BuildContext, String?)?
-      confirmPasswordTextControllerValidator;
+  // Stores action output result for [Backend Call - API (registerDevice)] action in Button widget.
+  ApiCallResponse? apiResultou6;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    passwordVisibility1 = false;
-    passwordVisibility2 = false;
+    passwordVisibility = false;
   }
 
   void dispose() {
     unfocusNode.dispose();
     emailTextController?.dispose();
     passwordTextController?.dispose();
-    confirmPasswordTextController?.dispose();
   }
 
   /// Action blocks are added here.
