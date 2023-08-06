@@ -31,7 +31,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResultou6 = await FoodexpirationGroup.getUserCall.call(
-        authToken: 'test',
+        authToken: currentJwtToken,
       );
       if (!(_model.apiResultou6?.succeeded ?? true)) {
         await showDialog(
