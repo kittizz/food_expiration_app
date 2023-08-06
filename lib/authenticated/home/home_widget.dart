@@ -30,6 +30,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      Function() _navigate = () {};
       _model.apiResultou6 = await FoodexpirationGroup.getUserCall.call(
         authToken: currentJwtToken,
       );
@@ -57,9 +58,27 @@ class _HomeWidgetState extends State<HomeWidget> {
         GoRouter.of(context).prepareAuthEvent();
         await authManager.signOut();
         GoRouter.of(context).clearRedirectLocation();
-      }
 
-      context.goNamedAuth('Welcome', context.mounted);
+        _navigate = () => context.goNamedAuth('Welcome', context.mounted);
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'ยินดีต้อนรับกลับ',
+            style: FlutterFlowTheme.of(context).bodyLarge.override(
+                  fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).bodyLargeFamily),
+                ),
+          ),
+          duration: Duration(milliseconds: 4000),
+          backgroundColor: FlutterFlowTheme.of(context).secondary,
+        ),
+      );
+
+      _navigate();
     });
   }
 
