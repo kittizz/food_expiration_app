@@ -14,7 +14,6 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 class FoodexpirationGroup {
   static String baseUrl = 'https://food_expiration.kittiza.com';
   static Map<String, String> headers = {
-    'Authorization': 'Bearer [auth_token]',
     'Content-Type': 'application/json',
   };
   static GetUserCall getUserCall = GetUserCall();
@@ -22,7 +21,7 @@ class FoodexpirationGroup {
 
 class GetUserCall {
   Future<ApiCallResponse> call({
-    String? authToken = '',
+    String? authToken = 'no',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'GetUser',
@@ -30,6 +29,7 @@ class GetUserCall {
       callType: ApiCallType.GET,
       headers: {
         ...FoodexpirationGroup.headers,
+        'Authorization': 'Bearer ${authToken}',
       },
       params: {},
       returnBody: true,
