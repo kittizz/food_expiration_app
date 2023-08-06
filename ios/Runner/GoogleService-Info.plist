@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>584012263661-ij8l9mfjqdfftbj7nkcmlmvdrjs3rgks.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.584012263661-ij8l9mfjqdfftbj7nkcmlmvdrjs3rgks</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>584012263661-a19e7vh190pi40ndsr2sf0al6llfan81.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDoHMNiT_A86SFCCKSSqnf8xLxlxUA1Feo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>584012263661</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.kittizz.foodexpiration</string>
+	<key>PROJECT_ID</key>
+	<string>food-expiration-82ca0</string>
+	<key>STORAGE_BUCKET</key>
+	<string>food-expiration-82ca0.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:584012263661:ios:62c920ad183676d9405ce4</string>
+</dict>
+</plist>
