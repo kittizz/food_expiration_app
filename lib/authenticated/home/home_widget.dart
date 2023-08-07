@@ -36,7 +36,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            (_model.apiResulturm?.bodyText ?? ''),
+            (_model.apiResulturm?.statusCode ?? 200).toString(),
             style: TextStyle(
               color: FlutterFlowTheme.of(context).primaryText,
             ),
