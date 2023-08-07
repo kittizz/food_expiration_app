@@ -80,13 +80,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                         color: Color(0xFFFF9E9E),
                         borderRadius: BorderRadius.circular(0.0),
                       ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            12.0, 0.0, 12.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        child: Stack(
                           children: [
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
