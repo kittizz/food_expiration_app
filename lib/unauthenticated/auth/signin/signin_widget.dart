@@ -420,8 +420,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .bodyLargeFamily,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
+                                      color: FlutterFlowTheme.of(context).info,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
@@ -430,7 +429,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                               ),
                               duration: Duration(milliseconds: 4000),
                               backgroundColor:
-                                  FlutterFlowTheme.of(context).grey400,
+                                  FlutterFlowTheme.of(context).success,
                             ),
                           );
 

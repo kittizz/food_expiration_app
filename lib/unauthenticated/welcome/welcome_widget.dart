@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -178,8 +179,15 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 16.0, 16.0),
                           child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              GoRouter.of(context).prepareAuthEvent();
+                              final user =
+                                  await authManager.signInWithGoogle(context);
+                              if (user == null) {
+                                return;
+                              }
+
+                              context.goNamedAuth('Home', context.mounted);
                             },
                             text: 'ลงทะเบียน ด้วย Google',
                             icon: FaIcon(
@@ -218,7 +226,14 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                               16.0, 12.0, 16.0, 16.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('ListFood');
+                              GoRouter.of(context).prepareAuthEvent();
+                              final user =
+                                  await authManager.signInWithFacebook(context);
+                              if (user == null) {
+                                return;
+                              }
+
+                              context.goNamedAuth('Home', context.mounted);
                             },
                             text: 'ลงทะเบียน ด้วย Facebook',
                             icon: Icon(

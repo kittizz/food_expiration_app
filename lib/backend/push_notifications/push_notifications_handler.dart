@@ -116,7 +116,6 @@ final parametersBuilderMap =
   'Signup': ParameterData.none(),
   'Signin': ParameterData.none(),
   'ForgotPassword': ParameterData.none(),
-  'ForgotPassword-OTP': ParameterData.none(),
   'Home': ParameterData.none(),
   'Search': ParameterData.none(),
   'Blog': ParameterData.none(),

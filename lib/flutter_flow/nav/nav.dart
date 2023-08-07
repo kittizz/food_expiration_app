@@ -109,11 +109,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ForgotPasswordWidget(),
         ),
         FFRoute(
-          name: 'ForgotPassword-OTP',
-          path: '/forgotPasswordOTP',
-          builder: (context, params) => ForgotPasswordOTPWidget(),
-        ),
-        FFRoute(
           name: 'Home',
           path: '/home',
           builder: (context, params) => HomeWidget(),
