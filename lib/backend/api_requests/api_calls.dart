@@ -65,9 +65,10 @@ class GetUserCall {
       callType: ApiCallType.GET,
       headers: {
         ...FoodexpirationGroup.headers,
-        'deviceId': '${deviceId}',
       },
-      params: {},
+      params: {
+        'deviceId': deviceId,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
