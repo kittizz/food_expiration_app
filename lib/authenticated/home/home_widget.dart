@@ -33,6 +33,18 @@ class _HomeWidgetState extends State<HomeWidget> {
       _model.apiResulturm = await FoodexpirationGroup.getUserCall.call(
         deviceId: FFAppState().deviceId,
       );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            (_model.apiResulturm?.bodyText ?? ''),
+            style: TextStyle(
+              color: FlutterFlowTheme.of(context).primaryText,
+            ),
+          ),
+          duration: Duration(milliseconds: 4000),
+          backgroundColor: FlutterFlowTheme.of(context).secondary,
+        ),
+      );
       if ((_model.apiResulturm?.succeeded ?? true)) {
         return;
       }
