@@ -14,12 +14,14 @@ Future registerDevice(BuildContext context) async {
     authToken: currentJwtToken,
   );
   if ((apiResultou6?.succeeded ?? true)) {
-    FFAppState().deviceId = FoodexpirationGroup.registerDeviceCall
-        .deviceid(
-          (apiResultou6?.jsonBody ?? ''),
-        )
-        .toString()
-        .toString();
+    FFAppState().update(() {
+      FFAppState().deviceId = FoodexpirationGroup.registerDeviceCall
+          .deviceId(
+            (apiResultou6?.jsonBody ?? ''),
+          )
+          .toString()
+          .toString();
+    });
   } else {
     await showDialog(
       context: context,

@@ -33,6 +33,12 @@ class FFAppState extends ChangeNotifier {
     _deviceId = _value;
     prefs.setString('ff_deviceId', _value);
   }
+
+  bool _isDebug = true;
+  bool get isDebug => _isDebug;
+  set isDebug(bool _value) {
+    _isDebug = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

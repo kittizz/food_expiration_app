@@ -49,9 +49,9 @@ class RegisterDeviceCall {
         response,
         r'''$.message''',
       );
-  dynamic deviceid(dynamic response) => getJsonField(
+  dynamic deviceId(dynamic response) => getJsonField(
         response,
-        r'''$.device_id''',
+        r'''$.deviceId''',
       );
 }
 
