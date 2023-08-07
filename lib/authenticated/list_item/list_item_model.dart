@@ -7,7 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ListFoodModel extends FlutterFlowModel {
+class ListItemModel extends FlutterFlowModel {
   ///  Local state fields for this page.
 
   DateTime? testDate;

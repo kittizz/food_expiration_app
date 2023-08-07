@@ -6,25 +6,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'list_food_model.dart';
-export 'list_food_model.dart';
+import 'list_item_model.dart';
+export 'list_item_model.dart';
 
-class ListFoodWidget extends StatefulWidget {
-  const ListFoodWidget({Key? key}) : super(key: key);
+class ListItemWidget extends StatefulWidget {
+  const ListItemWidget({Key? key}) : super(key: key);
 
   @override
-  _ListFoodWidgetState createState() => _ListFoodWidgetState();
+  _ListItemWidgetState createState() => _ListItemWidgetState();
 }
 
-class _ListFoodWidgetState extends State<ListFoodWidget> {
-  late ListFoodModel _model;
+class _ListItemWidgetState extends State<ListItemWidget> {
+  late ListItemModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ListFoodModel());
+    _model = createModel(context, () => ListItemModel());
   }
 
   @override
@@ -112,7 +112,7 @@ class _ListFoodWidgetState extends State<ListFoodWidget> {
                           ),
                           Divider(
                             thickness: 1.0,
-                            color: FlutterFlowTheme.of(context).accent4,
+                            color: FlutterFlowTheme.of(context).grey50,
                           ),
                         ],
                       ),
@@ -135,7 +135,7 @@ class _ListFoodWidgetState extends State<ListFoodWidget> {
                           ),
                           Divider(
                             thickness: 1.0,
-                            color: FlutterFlowTheme.of(context).accent4,
+                            color: FlutterFlowTheme.of(context).grey50,
                           ),
                         ],
                       ),

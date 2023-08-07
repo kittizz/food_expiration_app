@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/component/blog_card/blog_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -30,7 +31,6 @@ class _HomeWidgetState extends State<HomeWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      Function() _navigate = () {};
       _model.apiResulturm = await FoodexpirationGroup.getUserCall.call(
         deviceId: FFAppState().deviceId,
       );
@@ -40,22 +40,10 @@ class _HomeWidgetState extends State<HomeWidget> {
         await authManager.signOut();
         GoRouter.of(context).clearRedirectLocation();
 
-        _navigate = () => context.goNamedAuth('Welcome', context.mounted);
+        return;
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            (_model.apiResulturm?.succeeded ?? true).toString(),
-            style: TextStyle(
-              color: FlutterFlowTheme.of(context).primaryText,
-            ),
-          ),
-          duration: Duration(milliseconds: 4000),
-          backgroundColor: FlutterFlowTheme.of(context).secondary,
-        ),
-      );
 
-      _navigate();
+      context.goNamedAuth('Welcome', context.mounted);
     });
   }
 
@@ -273,8 +261,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                               color: FlutterFlowTheme.of(context).red300,
                               size: 30.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.pushNamed('ListItem');
                             },
                           ),
                           Text(
@@ -449,39 +437,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              'assets/images/dry-food-storage-method-fresh-food-1448x543.webp',
-                              width: MediaQuery.sizeOf(context).width * 1.0,
-                              height: 160.0,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 5.0, 0.0, 0.0),
-                            child: Text(
-                              'วิธีเก็บอาหารแห้ง อาหารสดให้อยู่นาน ',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .labelLargeFamily,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .labelLargeFamily),
-                                  ),
-                            ),
-                          ),
-                        ],
+                      wrapWithModel(
+                        model: _model.blogCardModel,
+                        updateCallback: () => setState(() {}),
+                        child: BlogCardWidget(),
                       ),
                     ].divide(SizedBox(height: 8.0)),
                   ),

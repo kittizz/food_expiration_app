@@ -8,4 +8,4 @@ export '/authenticated/home/home_widget.dart' show HomeWidget;
 export '/authenticated/search/search_widget.dart' show SearchWidget;
 export '/authenticated/blog/blog_widget.dart' show BlogWidget;
 export '/authenticated/blog_post/blog_post_widget.dart' show BlogPostWidget;
-export '/authenticated/list_food/list_food_widget.dart' show ListFoodWidget;
+export '/authenticated/list_item/list_item_widget.dart' show ListItemWidget;
