@@ -34,14 +34,16 @@ class _HomeWidgetState extends State<HomeWidget> {
       _model.apiResulturm = await FoodexpirationGroup.getUserCall.call(
         deviceId: FFAppState().deviceId,
       );
-      if (!(_model.apiResulturm?.succeeded ?? true)) {
-        FFAppState().deviceId = '';
-        GoRouter.of(context).prepareAuthEvent();
-        await authManager.signOut();
-        GoRouter.of(context).clearRedirectLocation();
-
+      if ((_model.apiResulturm?.succeeded ?? true)) {
         return;
       }
+
+      FFAppState().deviceId = '';
+      GoRouter.of(context).prepareAuthEvent();
+      await authManager.signOut();
+      GoRouter.of(context).clearRedirectLocation();
+
+      return;
 
       context.goNamedAuth('Welcome', context.mounted);
     });
