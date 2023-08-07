@@ -1,16 +1,24 @@
-import '/component/food_item/food_item_widget.dart';
+import '/component/list_items/list_items_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'list_item_model.dart';
 export 'list_item_model.dart';
 
 class ListItemWidget extends StatefulWidget {
-  const ListItemWidget({Key? key}) : super(key: key);
+  const ListItemWidget({
+    Key? key,
+    bool? isLocation,
+  })  : this.isLocation = isLocation ?? false,
+        super(key: key);
+
+  final bool isLocation;
 
   @override
   _ListItemWidgetState createState() => _ListItemWidgetState();
@@ -43,6 +51,18 @@ class _ListItemWidgetState extends State<ListItemWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            print('FloatingActionButton pressed ...');
+          },
+          backgroundColor: FlutterFlowTheme.of(context).red50,
+          elevation: 5.0,
+          child: Icon(
+            Icons.add_alert,
+            color: FlutterFlowTheme.of(context).red300,
+            size: 25.0,
+          ),
+        ),
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
@@ -78,114 +98,119 @@ class _ListItemWidgetState extends State<ListItemWidget> {
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 1.0,
-                  height: 45.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  height: 135.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).grey50,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Stack(
                     children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            12.0, 0.0, 12.0, 0.0),
-                        child: Text(
-                          'หมดอายุไปแล้ว',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyLarge
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyLargeFamily,
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: FlutterFlowExpandedImageView(
+                                        image: Image.network(
+                                          'https://picsum.photos/seed/119/600',
+                                          fit: BoxFit.contain,
+                                        ),
+                                        allowRotation: false,
+                                        tag: 'imageTag',
+                                        useHeroAnimation: true,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Hero(
+                                  tag: 'imageTag',
+                                  transitionOnUserGestures: true,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(8.0),
+                                      bottomRight: Radius.circular(0.0),
+                                      topLeft: Radius.circular(8.0),
+                                      topRight: Radius.circular(0.0),
+                                    ),
+                                    child: Image.network(
+                                      'https://picsum.photos/seed/119/600',
+                                      width: 130.0,
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              1.0,
+                                      fit: BoxFit.scaleDown,
+                                    ),
+                                  ),
+                                ),
                               ),
-                        ),
+                              Align(
+                                alignment: AlignmentDirectional(1.0, 1.0),
+                                child: Icon(
+                                  Icons.zoom_in_rounded,
+                                  color: FlutterFlowTheme.of(context).grey400,
+                                  size: 24.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Flexible(
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 5.0, 5.0, 0.0),
+                              child: SelectionArea(
+                                  child: Text(
+                                'Hello Worldasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd',
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              )),
+                            ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            12.0, 0.0, 12.0, 0.0),
-                        child: Text(
-                          'ลบ',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyLarge
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyLargeFamily,
-                                color: FlutterFlowTheme.of(context).red400,
-                                fontWeight: FontWeight.normal,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily),
-                              ),
+                      Align(
+                        alignment: AlignmentDirectional(1.0, 1.0),
+                        child: FlutterFlowIconButton(
+                          borderRadius: 20.0,
+                          borderWidth: 1.0,
+                          buttonSize: 40.0,
+                          icon: Icon(
+                            Icons.edit,
+                            color: FlutterFlowTheme.of(context).grey400,
+                            size: 24.0,
+                          ),
+                          onPressed: () {
+                            print('IconButton pressed ...');
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-              Divider(
-                thickness: 1.0,
-                color: FlutterFlowTheme.of(context).grey50,
-              ),
-              ListView(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      wrapWithModel(
-                        model: _model.foodItemModel1,
-                        updateCallback: () => setState(() {}),
-                        child: FoodItemWidget(
-                          name: 'รายการ',
-                          image:
-                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                          expiryDate: _model.testDate == null
-                              ? getCurrentTimestamp
-                              : _model.testDate!,
-                          location: 'สถานที่',
-                          preDay: 3,
-                        ),
-                      ),
-                      Divider(
-                        thickness: 1.0,
-                        color: FlutterFlowTheme.of(context).grey50,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      wrapWithModel(
-                        model: _model.foodItemModel2,
-                        updateCallback: () => setState(() {}),
-                        child: FoodItemWidget(
-                          name: 'รายการ',
-                          image:
-                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                          expiryDate: _model.testDate == null
-                              ? getCurrentTimestamp
-                              : _model.testDate!,
-                          location: 'สถานที่',
-                          preDay: 3,
-                        ),
-                      ),
-                      Divider(
-                        thickness: 1.0,
-                        color: FlutterFlowTheme.of(context).grey50,
-                      ),
-                    ],
-                  ),
-                ],
+              wrapWithModel(
+                model: _model.listItemsModel,
+                updateCallback: () => setState(() {}),
+                child: ListItemsWidget(
+                  parameter1: _model.testDate,
+                  title: 'หมดอายุไปแล้ว',
+                  showClear: true,
+                ),
               ),
             ],
           ),

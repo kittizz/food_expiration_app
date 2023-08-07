@@ -63,6 +63,18 @@ class _HomeWidgetState extends State<HomeWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            print('FloatingActionButton pressed ...');
+          },
+          backgroundColor: FlutterFlowTheme.of(context).red50,
+          elevation: 5.0,
+          child: Icon(
+            Icons.add_alert,
+            color: FlutterFlowTheme.of(context).red300,
+            size: 25.0,
+          ),
+        ),
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
@@ -84,6 +96,21 @@ class _HomeWidgetState extends State<HomeWidget> {
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         child: Stack(
                           children: [
+                            Align(
+                              alignment: AlignmentDirectional(1.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 55.0, 12.0, 0.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/banner-onlygf.png',
+                                    height: 120.0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 0.0),
@@ -92,20 +119,22 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'สวัสดีคุณ ${currentUserEmail}',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily,
-                                          fontSize: 20.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLargeFamily),
-                                        ),
+                                  Flexible(
+                                    child: Text(
+                                      'สวัสดีคุณ ${currentUserEmail}',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLargeFamily,
+                                            fontSize: 20.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLargeFamily),
+                                          ),
+                                    ),
                                   ),
                                   Text(
                                     dateTimeFormat(
@@ -128,21 +157,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         ),
                                   ),
                                 ],
-                              ),
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional(1.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 55.0, 0.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/banner-onlygf.png',
-                                    height: 120.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
                               ),
                             ),
                           ],
@@ -437,17 +451,15 @@ class _HomeWidgetState extends State<HomeWidget> {
                 Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 12.0, 0.0),
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       wrapWithModel(
                         model: _model.blogCardModel,
                         updateCallback: () => setState(() {}),
                         child: BlogCardWidget(),
                       ),
-                    ].divide(SizedBox(height: 8.0)),
+                    ],
                   ),
                 ),
               ],

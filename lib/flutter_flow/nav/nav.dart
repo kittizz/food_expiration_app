@@ -133,7 +133,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ListItem',
           path: '/listItem',
-          builder: (context, params) => ListItemWidget(),
+          builder: (context, params) => ListItemWidget(
+            isLocation: params.getParam('isLocation', ParamType.bool),
+          ),
+        ),
+        FFRoute(
+          name: 'ItemInfo',
+          path: '/itemInfo',
+          builder: (context, params) => ItemInfoWidget(
+            title: params.getParam('title', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'creat',
+          path: '/creat',
+          builder: (context, params) => CreatWidget(),
+        ),
+        FFRoute(
+          name: 'create',
+          path: '/create',
+          builder: (context, params) => CreateWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
