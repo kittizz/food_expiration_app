@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -186,6 +187,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                               if (user == null) {
                                 return;
                               }
+                              await action_blocks.registerDevice(context);
 
                               context.goNamedAuth('Home', context.mounted);
                             },
@@ -232,6 +234,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                               if (user == null) {
                                 return;
                               }
+                              await action_blocks.registerDevice(context);
 
                               context.goNamedAuth('Home', context.mounted);
                             },

@@ -17,6 +17,7 @@ class FoodexpirationGroup {
     'Content-Type': 'application/json',
   };
   static RegisterDeviceCall registerDeviceCall = RegisterDeviceCall();
+  static GetUserCall getUserCall = GetUserCall();
 }
 
 class RegisterDeviceCall {
@@ -44,14 +45,6 @@ class RegisterDeviceCall {
     );
   }
 
-  dynamic email(dynamic response) => getJsonField(
-        response,
-        r'''$.email''',
-      );
-  dynamic signInProvider(dynamic response) => getJsonField(
-        response,
-        r'''$.signInProvider''',
-      );
   dynamic message(dynamic response) => getJsonField(
         response,
         r'''$.message''',
@@ -59,6 +52,36 @@ class RegisterDeviceCall {
   dynamic deviceid(dynamic response) => getJsonField(
         response,
         r'''$.device_id''',
+      );
+}
+
+class GetUserCall {
+  Future<ApiCallResponse> call({
+    String? deviceId = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getUser',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/user',
+      callType: ApiCallType.GET,
+      headers: {
+        ...FoodexpirationGroup.headers,
+        'deviceId': '${deviceId}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic email(dynamic response) => getJsonField(
+        response,
+        r'''$.email''',
+      );
+  dynamic signInProvider(dynamic response) => getJsonField(
+        response,
+        r'''$.signInProvider''',
       );
 }
 

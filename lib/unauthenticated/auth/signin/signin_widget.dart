@@ -1,10 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
+import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -351,8 +351,6 @@ class _SigninWidgetState extends State<SigninWidget> {
                           16.0, 12.0, 16.0, 24.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          var _shouldSetState = false;
-                          Function() _navigate = () {};
                           GoRouter.of(context).prepareAuthEvent();
 
                           final user = await authManager.signInWithEmail(
@@ -364,77 +362,9 @@ class _SigninWidgetState extends State<SigninWidget> {
                             return;
                           }
 
-                          _navigate = () =>
-                              context.goNamedAuth('Home', context.mounted);
-                          _model.apiResultou6 =
-                              await FoodexpirationGroup.registerDeviceCall.call(
-                            authToken: currentJwtToken,
-                          );
-                          _shouldSetState = true;
-                          if ((_model.apiResultou6?.succeeded ?? true)) {
-                            FFAppState().deviceId =
-                                FoodexpirationGroup.registerDeviceCall
-                                    .deviceid(
-                                      (_model.apiResultou6?.jsonBody ?? ''),
-                                    )
-                                    .toString();
-                          } else {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('ข้อผิดพลาด'),
-                                  content: Text(
-                                      FoodexpirationGroup.registerDeviceCall
-                                          .message(
-                                            (_model.apiResultou6?.jsonBody ??
-                                                ''),
-                                          )
-                                          .toString()),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('ตกลง'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                            GoRouter.of(context).prepareAuthEvent();
-                            await authManager.signOut();
-                            GoRouter.of(context).clearRedirectLocation();
+                          await action_blocks.registerDevice(context);
 
-                            _navigate = () =>
-                                context.goNamedAuth('Welcome', context.mounted);
-                            if (_shouldSetState) setState(() {});
-                            return;
-                          }
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'ยินดีต้อนรับกลับ',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
-                                      color: FlutterFlowTheme.of(context).info,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily),
-                                    ),
-                              ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).success,
-                            ),
-                          );
-
-                          _navigate();
-                          if (_shouldSetState) setState(() {});
+                          context.goNamedAuth('Home', context.mounted);
                         },
                         text: 'เข้าสู่ระบบ',
                         options: FFButtonOptions(
