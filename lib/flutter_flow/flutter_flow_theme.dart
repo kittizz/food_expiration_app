@@ -52,6 +52,7 @@ abstract class FlutterFlowTheme {
   late Color green800;
   late Color orange600;
   late Color blue600;
+  late Color grey700;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -167,6 +168,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color green800 = Color(0xFF008446);
   late Color orange600 = Color(0xFFDA7F00);
   late Color blue600 = Color(0xFF0049DA);
+  late Color grey700 = Color(0xFF323232);
 }
 
 abstract class Typography {

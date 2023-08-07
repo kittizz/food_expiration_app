@@ -119,7 +119,7 @@ final parametersBuilderMap =
   'Home': ParameterData.none(),
   'Search': ParameterData.none(),
   'Blog': ParameterData.none(),
-  'Blog-Post': (data) async => ParameterData(
+  'BlogPost': (data) async => ParameterData(
         allParams: {
           'blogId': getParameter<String>(data, 'blogId'),
         },

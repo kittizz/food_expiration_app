@@ -42,7 +42,7 @@ class _ListItemWidgetState extends State<ListItemWidget> {
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
@@ -61,7 +61,7 @@ class _ListItemWidgetState extends State<ListItemWidget> {
             },
           ),
           title: Text(
-            'รายการทั้งหมด',
+            _model.titleName,
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -78,70 +78,114 @@ class _ListItemWidgetState extends State<ListItemWidget> {
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 1.0,
-                  height: MediaQuery.sizeOf(context).height * 1.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
+                  height: 45.0,
+                  decoration: BoxDecoration(),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          wrapWithModel(
-                            model: _model.foodItemModel1,
-                            updateCallback: () => setState(() {}),
-                            child: FoodItemWidget(
-                              name: 'รายการ',
-                              image:
-                                  'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                              expiryDate: _model.testDate == null
-                                  ? getCurrentTimestamp
-                                  : _model.testDate!,
-                              location: 'สถานที่',
-                              preDay: 3,
-                            ),
-                          ),
-                          Divider(
-                            thickness: 1.0,
-                            color: FlutterFlowTheme.of(context).grey50,
-                          ),
-                        ],
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            12.0, 0.0, 12.0, 0.0),
+                        child: Text(
+                          'หมดอายุไปแล้ว',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyLarge
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyLargeFamily,
+                                fontWeight: FontWeight.w500,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyLargeFamily),
+                              ),
+                        ),
                       ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          wrapWithModel(
-                            model: _model.foodItemModel2,
-                            updateCallback: () => setState(() {}),
-                            child: FoodItemWidget(
-                              name: 'รายการ',
-                              image:
-                                  'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                              expiryDate: _model.testDate == null
-                                  ? getCurrentTimestamp
-                                  : _model.testDate!,
-                              location: 'สถานที่',
-                              preDay: 3,
-                            ),
-                          ),
-                          Divider(
-                            thickness: 1.0,
-                            color: FlutterFlowTheme.of(context).grey50,
-                          ),
-                        ],
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            12.0, 0.0, 12.0, 0.0),
+                        child: Text(
+                          'ลบ',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyLarge
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyLargeFamily,
+                                color: FlutterFlowTheme.of(context).red400,
+                                fontWeight: FontWeight.normal,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyLargeFamily),
+                              ),
+                        ),
                       ),
                     ],
                   ),
                 ),
+              ),
+              Divider(
+                thickness: 1.0,
+                color: FlutterFlowTheme.of(context).grey50,
+              ),
+              ListView(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      wrapWithModel(
+                        model: _model.foodItemModel1,
+                        updateCallback: () => setState(() {}),
+                        child: FoodItemWidget(
+                          name: 'รายการ',
+                          image:
+                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                          expiryDate: _model.testDate == null
+                              ? getCurrentTimestamp
+                              : _model.testDate!,
+                          location: 'สถานที่',
+                          preDay: 3,
+                        ),
+                      ),
+                      Divider(
+                        thickness: 1.0,
+                        color: FlutterFlowTheme.of(context).grey50,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      wrapWithModel(
+                        model: _model.foodItemModel2,
+                        updateCallback: () => setState(() {}),
+                        child: FoodItemWidget(
+                          name: 'รายการ',
+                          image:
+                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                          expiryDate: _model.testDate == null
+                              ? getCurrentTimestamp
+                              : _model.testDate!,
+                          location: 'สถานที่',
+                          preDay: 3,
+                        ),
+                      ),
+                      Divider(
+                        thickness: 1.0,
+                        color: FlutterFlowTheme.of(context).grey50,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
