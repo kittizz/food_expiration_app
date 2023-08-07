@@ -30,13 +30,22 @@ class _HomeWidgetState extends State<HomeWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      Function() _navigate = () {};
       _model.apiResulturm = await FoodexpirationGroup.getUserCall.call(
         deviceId: FFAppState().deviceId,
       );
+      if (!(_model.apiResulturm?.succeeded ?? true)) {
+        FFAppState().deviceId = '';
+        GoRouter.of(context).prepareAuthEvent();
+        await authManager.signOut();
+        GoRouter.of(context).clearRedirectLocation();
+
+        _navigate = () => context.goNamedAuth('Welcome', context.mounted);
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            (_model.apiResulturm?.statusCode ?? 200).toString(),
+            (_model.apiResulturm?.succeeded ?? true).toString(),
             style: TextStyle(
               color: FlutterFlowTheme.of(context).primaryText,
             ),
@@ -45,18 +54,8 @@ class _HomeWidgetState extends State<HomeWidget> {
           backgroundColor: FlutterFlowTheme.of(context).secondary,
         ),
       );
-      if ((_model.apiResulturm?.succeeded ?? true)) {
-        return;
-      }
 
-      FFAppState().deviceId = '';
-      GoRouter.of(context).prepareAuthEvent();
-      await authManager.signOut();
-      GoRouter.of(context).clearRedirectLocation();
-
-      return;
-
-      context.goNamedAuth('Welcome', context.mounted);
+      _navigate();
     });
   }
 
