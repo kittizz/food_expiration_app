@@ -1,10 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/component/blog_card/blog_card_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -74,6 +76,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           ..reset()
           ..repeat();
       }
+      await FoodexpirationGroup.blogRecommendCall.call();
+      _model.blogRecommendOutput = await actions.toBlogStructList(
+        (_model.apiResulturm?.jsonBody ?? ''),
+      );
     });
 
     setupAnimations(
@@ -498,46 +504,35 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                  child: FutureBuilder<ApiCallResponse>(
-                    future: FoodexpirationGroup.blogRecommendCall.call(),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: SpinKitDoubleBounce(
-                              color: FlutterFlowTheme.of(context).error,
-                              size: 50.0,
+                Builder(
+                  builder: (context) {
+                    final list = _model.blogRecommendOutput!.toList();
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: List.generate(list.length, (listIndex) {
+                        final listItem = list[listIndex];
+                        return Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              12.0, 0.0, 12.0, 0.0),
+                          child: wrapWithModel(
+                            model: _model.blogCardModels.getModel(
+                              listIndex.toString(),
+                              listIndex,
+                            ),
+                            updateCallback: () => setState(() {}),
+                            child: BlogCardWidget(
+                              key: Key(
+                                'Keyew7_${listIndex.toString()}',
+                              ),
+                              blogId: listItem.id,
+                              image: listItem.image,
+                              title: listItem.title,
                             ),
                           ),
                         );
-                      }
-                      final blogCardBlogRecommendResponse = snapshot.data!;
-                      return wrapWithModel(
-                        model: _model.blogCardModel,
-                        updateCallback: () => setState(() {}),
-                        child: BlogCardWidget(
-                          blogId: FoodexpirationGroup.blogRecommendCall.id(
-                            blogCardBlogRecommendResponse.jsonBody,
-                          ),
-                          image: FoodexpirationGroup.blogRecommendCall
-                              .image(
-                                blogCardBlogRecommendResponse.jsonBody,
-                              )
-                              .toString(),
-                          title: FoodexpirationGroup.blogRecommendCall
-                              .title(
-                                blogCardBlogRecommendResponse.jsonBody,
-                              )
-                              .toString(),
-                        ),
-                      );
-                    },
-                  ),
+                      }),
+                    );
+                  },
                 ),
               ],
             ),

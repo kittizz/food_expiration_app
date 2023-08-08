@@ -9,7 +9,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class BlogStruct extends FFFirebaseStruct {
   BlogStruct({
-    String? id,
+    int? id,
     String? createdAt,
     String? title,
     String? content,
@@ -23,9 +23,10 @@ class BlogStruct extends FFFirebaseStruct {
         super(firestoreUtilData);
 
   // "id" field.
-  String? _id;
-  String get id => _id ?? '';
-  set id(String? val) => _id = val;
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
+  void incrementId(int amount) => _id = id + amount;
   bool hasId() => _id != null;
 
   // "createdAt" field.
@@ -53,7 +54,7 @@ class BlogStruct extends FFFirebaseStruct {
   bool hasImage() => _image != null;
 
   static BlogStruct fromMap(Map<String, dynamic> data) => BlogStruct(
-        id: data['id'] as String?,
+        id: castToType<int>(data['id']),
         createdAt: data['createdAt'] as String?,
         title: data['title'] as String?,
         content: data['content'] as String?,
@@ -75,7 +76,7 @@ class BlogStruct extends FFFirebaseStruct {
   Map<String, dynamic> toSerializableMap() => {
         'id': serializeParam(
           _id,
-          ParamType.String,
+          ParamType.int,
         ),
         'createdAt': serializeParam(
           _createdAt,
@@ -99,7 +100,7 @@ class BlogStruct extends FFFirebaseStruct {
       BlogStruct(
         id: deserializeParam(
           data['id'],
-          ParamType.String,
+          ParamType.int,
           false,
         ),
         createdAt: deserializeParam(
@@ -143,7 +144,7 @@ class BlogStruct extends FFFirebaseStruct {
 }
 
 BlogStruct createBlogStruct({
-  String? id,
+  int? id,
   String? createdAt,
   String? title,
   String? content,
