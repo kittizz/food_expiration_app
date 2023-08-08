@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'blog_card_model.dart';
 export 'blog_card_model.dart';
@@ -75,8 +76,8 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: Image.asset(
-                'assets/images/dry-food-storage-method-fresh-food-1448x543.webp',
+              child: Image.network(
+                widget.image!,
                 width: double.infinity,
                 height: 160.0,
                 fit: BoxFit.cover,
@@ -86,7 +87,7 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
                 child: Text(
-                  'วิธีเก็บอาหารแห้ง อาหารสดให้อยู่นาน ',
+                  widget.title!,
                   style: FlutterFlowTheme.of(context).labelLarge.override(
                         fontFamily:
                             FlutterFlowTheme.of(context).labelLargeFamily,
