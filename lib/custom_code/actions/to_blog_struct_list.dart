@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future<List<BlogStruct>> toBlogStructList(dynamic jsonArray) async {
+Future<List<BlogStruct>?> toBlogStructList(dynamic jsonArray) async {
   List<BlogStruct> listOfStruct = [];
   for (var item in jsonArray) {
     listOfStruct.add(BlogStruct.fromMap(item));

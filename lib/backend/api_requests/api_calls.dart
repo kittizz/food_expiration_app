@@ -104,27 +104,6 @@ class BlogRecommendCall {
       cache: false,
     );
   }
-
-  dynamic id(dynamic response) => getJsonField(
-        response,
-        r'''$[:].id''',
-      );
-  dynamic createdAt(dynamic response) => getJsonField(
-        response,
-        r'''$[:].createdAt''',
-      );
-  dynamic title(dynamic response) => getJsonField(
-        response,
-        r'''$[:].title''',
-      );
-  dynamic content(dynamic response) => getJsonField(
-        response,
-        r'''$[:].content''',
-      );
-  dynamic image(dynamic response) => getJsonField(
-        response,
-        r'''$[:].image''',
-      );
 }
 
 class BlogByIDCall {
