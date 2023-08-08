@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/component/blog_card/blog_card_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -17,13 +18,18 @@ class HomeModel extends FlutterFlowModel {
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (getUser)] action in Home widget.
   ApiCallResponse? apiResulturm;
+  // Model for BlogCard component.
+  late BlogCardModel blogCardModel;
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    blogCardModel = createModel(context, () => BlogCardModel());
+  }
 
   void dispose() {
     unfocusNode.dispose();
+    blogCardModel.dispose();
   }
 
   /// Action blocks are added here.
