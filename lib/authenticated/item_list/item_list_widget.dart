@@ -8,11 +8,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'list_item_model.dart';
-export 'list_item_model.dart';
+import 'item_list_model.dart';
+export 'item_list_model.dart';
 
-class ListItemWidget extends StatefulWidget {
-  const ListItemWidget({
+class ItemListWidget extends StatefulWidget {
+  const ItemListWidget({
     Key? key,
     bool? isLocation,
   })  : this.isLocation = isLocation ?? false,
@@ -21,18 +21,18 @@ class ListItemWidget extends StatefulWidget {
   final bool isLocation;
 
   @override
-  _ListItemWidgetState createState() => _ListItemWidgetState();
+  _ItemListWidgetState createState() => _ItemListWidgetState();
 }
 
-class _ListItemWidgetState extends State<ListItemWidget> {
-  late ListItemModel _model;
+class _ItemListWidgetState extends State<ItemListWidget> {
+  late ItemListModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ListItemModel());
+    _model = createModel(context, () => ItemListModel());
   }
 
   @override
@@ -52,8 +52,22 @@ class _ListItemWidgetState extends State<ListItemWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            print('FloatingActionButton pressed ...');
+          onPressed: () async {
+            context.pushNamed(
+              'ItemInfo',
+              queryParameters: {
+                'title': serializeParam(
+                  'เพิ่มรายการ',
+                  ParamType.String,
+                ),
+              }.withoutNulls,
+              extra: <String, dynamic>{
+                kTransitionInfoKey: TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.bottomToTop,
+                ),
+              },
+            );
           },
           backgroundColor: FlutterFlowTheme.of(context).red50,
           elevation: 5.0,
@@ -194,8 +208,16 @@ class _ListItemWidgetState extends State<ListItemWidget> {
                             color: FlutterFlowTheme.of(context).grey400,
                             size: 24.0,
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
+                          onPressed: () async {
+                            context.pushNamed(
+                              'LocationInfo',
+                              queryParameters: {
+                                'title': serializeParam(
+                                  '',
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                            );
                           },
                         ),
                       ),

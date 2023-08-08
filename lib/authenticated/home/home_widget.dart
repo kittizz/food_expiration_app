@@ -101,8 +101,22 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            print('FloatingActionButton pressed ...');
+          onPressed: () async {
+            context.pushNamed(
+              'ItemInfo',
+              queryParameters: {
+                'title': serializeParam(
+                  'เพิ่มรายการ',
+                  ParamType.String,
+                ),
+              }.withoutNulls,
+              extra: <String, dynamic>{
+                kTransitionInfoKey: TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.bottomToTop,
+                ),
+              },
+            );
           },
           backgroundColor: FlutterFlowTheme.of(context).red50,
           elevation: 5.0,
@@ -309,7 +323,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               size: 30.0,
                             ),
                             onPressed: () async {
-                              context.pushNamed('ListItem');
+                              context.pushNamed('ItemList');
                             },
                           ),
                           Text(
@@ -341,8 +355,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               color: FlutterFlowTheme.of(context).red300,
                               size: 30.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.pushNamed('LocationList');
                             },
                           ),
                           Text(

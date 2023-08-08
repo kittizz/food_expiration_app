@@ -13,20 +13,16 @@ class ListItemsModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this component.
 
   // Model for Item component.
-  late ItemModel itemModel1;
-  // Model for Item component.
-  late ItemModel itemModel2;
+  late ItemModel itemModel;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    itemModel1 = createModel(context, () => ItemModel());
-    itemModel2 = createModel(context, () => ItemModel());
+    itemModel = createModel(context, () => ItemModel());
   }
 
   void dispose() {
-    itemModel1.dispose();
-    itemModel2.dispose();
+    itemModel.dispose();
   }
 
   /// Action blocks are added here.

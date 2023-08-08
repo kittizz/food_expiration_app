@@ -48,13 +48,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
           begin: Offset(1.0, 1.0),
           end: Offset(1.02, 1.02),
         ),
-        ScaleEffect(
-          curve: Curves.easeOut,
-          delay: 600.ms,
-          duration: 600.ms,
-          begin: Offset(1.02, 1.02),
-          end: Offset(1.0, 1.0),
-        ),
       ],
     ),
   };

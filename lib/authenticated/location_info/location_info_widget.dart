@@ -1,10 +1,8 @@
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -12,27 +10,27 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
-import 'item_info_model.dart';
-export 'item_info_model.dart';
+import 'location_info_model.dart';
+export 'location_info_model.dart';
 
-class ItemInfoWidget extends StatefulWidget {
-  const ItemInfoWidget({
+class LocationInfoWidget extends StatefulWidget {
+  const LocationInfoWidget({
     Key? key,
     String? title,
-    this.itemId,
+    this.locationId,
   })  : this.title = title ?? '',
         super(key: key);
 
   final String title;
-  final String? itemId;
+  final String? locationId;
 
   @override
-  _ItemInfoWidgetState createState() => _ItemInfoWidgetState();
+  _LocationInfoWidgetState createState() => _LocationInfoWidgetState();
 }
 
-class _ItemInfoWidgetState extends State<ItemInfoWidget>
+class _LocationInfoWidgetState extends State<LocationInfoWidget>
     with TickerProviderStateMixin {
-  late ItemInfoModel _model;
+  late LocationInfoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -55,11 +53,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ItemInfoModel());
+    _model = createModel(context, () => LocationInfoModel());
 
     _model.nameFieldController ??= TextEditingController();
-    _model.descriptionFieldController1 ??= TextEditingController();
-    _model.descriptionFieldController2 ??= TextEditingController();
+    _model.descriptionFieldController ??= TextEditingController();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -343,7 +340,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget>
                                   autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'ชื่อรายการ',
+                                    labelText: 'ชื่อสถานที่',
                                     labelStyle:
                                         FlutterFlowTheme.of(context).labelLarge,
                                     enabledBorder: UnderlineInputBorder(
@@ -416,8 +413,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget>
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 5.0),
                                 child: TextFormField(
-                                  controller:
-                                      _model.descriptionFieldController1,
+                                  controller: _model.descriptionFieldController,
                                   autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
@@ -475,219 +471,12 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget>
                                         EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 16.0, 8.0),
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyLargeFamily,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyLargeFamily),
-                                        lineHeight: 2.0,
-                                      ),
+                                  style: FlutterFlowTheme.of(context).bodyLarge,
                                   maxLines: null,
+                                  minLines: 3,
                                   validator: _model
-                                      .descriptionFieldController1Validator
+                                      .descriptionFieldControllerValidator
                                       .asValidator(context),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(
-                                      'สถานที่',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyLarge,
-                                    ),
-                                    Expanded(
-                                      child: FlutterFlowDropDown<String>(
-                                        controller: _model
-                                                .locationOptionValueController ??=
-                                            FormFieldController<String>(null),
-                                        options: ['Option 1'],
-                                        onChanged: (val) => setState(() =>
-                                            _model.locationOptionValue = val),
-                                        width: double.infinity,
-                                        height: 50.0,
-                                        searchHintTextStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .labelMedium,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .bodyLarge,
-                                        hintText: 'โปรดเลือก...',
-                                        searchHintText: 'ค้นหาสถานที่...',
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_down_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 24.0,
-                                        ),
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        elevation: 2.0,
-                                        borderColor: Colors.transparent,
-                                        borderWidth: 0.0,
-                                        borderRadius: 0.0,
-                                        margin: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 4.0, 16.0, 4.0),
-                                        hidesUnderline: true,
-                                        isSearchable: true,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 5.0),
-                                child: TextFormField(
-                                  controller:
-                                      _model.descriptionFieldController2,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'เตือนล่วงหน้า (วัน)',
-                                    labelStyle:
-                                        FlutterFlowTheme.of(context).labelLarge,
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).red400,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    errorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedErrorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    filled: true,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 16.0, 16.0, 8.0),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyLargeFamily,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyLargeFamily),
-                                        lineHeight: 1.0,
-                                      ),
-                                  maxLines: null,
-                                  validator: _model
-                                      .descriptionFieldController2Validator
-                                      .asValidator(context),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
-                                        },
-                                        text: widget.itemId == ''
-                                            ? ' วันหมดอายุ'
-                                            : '${dateTimeFormat(
-                                                'yMMMd',
-                                                _model.expireDate,
-                                                locale:
-                                                    FFLocalizations.of(context)
-                                                        .languageCode,
-                                              )}',
-                                        icon: Icon(
-                                          Icons.date_range_outlined,
-                                          color: FlutterFlowTheme.of(context)
-                                              .blue600,
-                                          size: 15.0,
-                                        ),
-                                        options: FFButtonOptions(
-                                          height: 40.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  24.0, 0.0, 24.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium,
-                                          elevation: 3.0,
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                      ),
-                                    ),
-                                    FlutterFlowIconButton(
-                                      borderColor: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      borderRadius: 20.0,
-                                      borderWidth: 1.0,
-                                      buttonSize: 42.0,
-                                      icon: Icon(
-                                        Icons.document_scanner_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .grey700,
-                                        size: 20.0,
-                                      ),
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
-                                      },
-                                    ),
-                                  ].divide(SizedBox(width: 10.0)),
                                 ),
                               ),
                               Padding(
@@ -697,7 +486,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget>
                                   onPressed: () {
                                     print('Button pressed ...');
                                   },
-                                  text: 'บันทึกรายการ',
+                                  text: 'บันทึกสถานที่',
                                   options: FFButtonOptions(
                                     width: double.infinity,
                                     height: 50.0,

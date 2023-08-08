@@ -149,21 +149,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
           scrollDirection: Axis.vertical,
           children: [
             wrapWithModel(
-              model: _model.itemModel1,
-              updateCallback: () => setState(() {}),
-              child: ItemWidget(
-                name: 'รายการ',
-                image:
-                    'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                expiryDate: widget.parameter1 == null
-                    ? getCurrentTimestamp
-                    : widget.parameter1!,
-                location: 'สถานที่',
-                preDay: 3,
-              ),
-            ),
-            wrapWithModel(
-              model: _model.itemModel2,
+              model: _model.itemModel,
               updateCallback: () => setState(() {}),
               child: ItemWidget(
                 name: 'รายการ',

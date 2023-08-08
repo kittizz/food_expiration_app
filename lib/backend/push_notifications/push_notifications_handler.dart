@@ -124,7 +124,7 @@ final parametersBuilderMap =
           'blogId': getParameter<String>(data, 'blogId'),
         },
       ),
-  'ListItem': (data) async => ParameterData(
+  'ItemList': (data) async => ParameterData(
         allParams: {
           'isLocation': getParameter<bool>(data, 'isLocation'),
         },
@@ -132,10 +132,18 @@ final parametersBuilderMap =
   'ItemInfo': (data) async => ParameterData(
         allParams: {
           'title': getParameter<String>(data, 'title'),
+          'itemId': getParameter<String>(data, 'itemId'),
         },
       ),
   'creat': ParameterData.none(),
   'create': ParameterData.none(),
+  'LocationInfo': (data) async => ParameterData(
+        allParams: {
+          'title': getParameter<String>(data, 'title'),
+          'locationId': getParameter<String>(data, 'locationId'),
+        },
+      ),
+  'LocationList': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

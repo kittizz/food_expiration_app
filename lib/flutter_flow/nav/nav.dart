@@ -111,6 +111,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Home',
           path: '/home',
+          requireAuth: true,
           builder: (context, params) => HomeWidget(),
         ),
         FFRoute(
@@ -131,17 +132,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'ListItem',
-          path: '/listItem',
-          builder: (context, params) => ListItemWidget(
+          name: 'ItemList',
+          path: '/itemList',
+          requireAuth: true,
+          builder: (context, params) => ItemListWidget(
             isLocation: params.getParam('isLocation', ParamType.bool),
           ),
         ),
         FFRoute(
           name: 'ItemInfo',
           path: '/itemInfo',
+          requireAuth: true,
           builder: (context, params) => ItemInfoWidget(
             title: params.getParam('title', ParamType.String),
+            itemId: params.getParam('itemId', ParamType.String),
           ),
         ),
         FFRoute(
@@ -153,6 +157,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'create',
           path: '/create',
           builder: (context, params) => CreateWidget(),
+        ),
+        FFRoute(
+          name: 'LocationInfo',
+          path: '/locationInfo',
+          requireAuth: true,
+          builder: (context, params) => LocationInfoWidget(
+            title: params.getParam('title', ParamType.String),
+            locationId: params.getParam('locationId', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'LocationList',
+          path: '/locationList',
+          requireAuth: true,
+          builder: (context, params) => LocationListWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

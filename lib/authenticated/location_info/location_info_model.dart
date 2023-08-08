@@ -1,10 +1,8 @@
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -13,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
-class ItemInfoModel extends FlutterFlowModel {
+class LocationInfoModel extends FlutterFlowModel {
   ///  Local state fields for this page.
 
   DateTime? expireDate;
@@ -26,14 +24,8 @@ class ItemInfoModel extends FlutterFlowModel {
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
   // State field(s) for DescriptionField widget.
-  TextEditingController? descriptionFieldController1;
-  String? Function(BuildContext, String?)? descriptionFieldController1Validator;
-  // State field(s) for LocationOption widget.
-  String? locationOptionValue;
-  FormFieldController<String>? locationOptionValueController;
-  // State field(s) for DescriptionField widget.
-  TextEditingController? descriptionFieldController2;
-  String? Function(BuildContext, String?)? descriptionFieldController2Validator;
+  TextEditingController? descriptionFieldController;
+  String? Function(BuildContext, String?)? descriptionFieldControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -42,8 +34,7 @@ class ItemInfoModel extends FlutterFlowModel {
   void dispose() {
     unfocusNode.dispose();
     nameFieldController?.dispose();
-    descriptionFieldController1?.dispose();
-    descriptionFieldController2?.dispose();
+    descriptionFieldController?.dispose();
   }
 
   /// Action blocks are added here.
