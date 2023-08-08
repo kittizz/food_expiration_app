@@ -1,4 +1,3 @@
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -6,8 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -30,27 +27,10 @@ class ItemInfoWidget extends StatefulWidget {
   _ItemInfoWidgetState createState() => _ItemInfoWidgetState();
 }
 
-class _ItemInfoWidgetState extends State<ItemInfoWidget>
-    with TickerProviderStateMixin {
+class _ItemInfoWidgetState extends State<ItemInfoWidget> {
   late ItemInfoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 250.ms),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 250.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 70.0),
-          end: Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
 
   @override
   void initState() {
@@ -60,12 +40,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget>
     _model.nameFieldController ??= TextEditingController();
     _model.descriptionFieldController1 ??= TextEditingController();
     _model.descriptionFieldController2 ??= TextEditingController();
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
   }
 
   @override
@@ -727,8 +701,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget>
                           ),
                         ),
                       ),
-                    ).animateOnPageLoad(
-                        animationsMap['containerOnPageLoadAnimation']!),
+                    ),
                   ),
                 ),
               ],

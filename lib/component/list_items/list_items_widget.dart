@@ -120,17 +120,47 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                    child: Text(
-                      'ล้าง',
-                      style: FlutterFlowTheme.of(context).bodyLarge.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyLargeFamily,
-                            color: FlutterFlowTheme.of(context).red400,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.normal,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyLargeFamily),
-                          ),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        var confirmDialogResponse = await showDialog<bool>(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('ลบรายการทั้งหมด'),
+                                  content: Text('คุณกำลังจะลบ....'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(
+                                          alertDialogContext, false),
+                                      child: Text('ยกเลิก'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(
+                                          alertDialogContext, true),
+                                      child: Text('ยืนยัน'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ) ??
+                            false;
+                      },
+                      child: Text(
+                        'ล้าง',
+                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyLargeFamily,
+                              color: FlutterFlowTheme.of(context).red400,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.normal,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyLargeFamily),
+                            ),
+                      ),
                     ).animateOnActionTrigger(
                       animationsMap['textOnActionTriggerAnimation']!,
                     ),

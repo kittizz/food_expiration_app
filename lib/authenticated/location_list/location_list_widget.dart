@@ -134,149 +134,90 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 children: [
-                  Slidable(
-                    endActionPane: ActionPane(
-                      motion: const ScrollMotion(),
-                      extentRatio: 0.5,
-                      children: [
-                        SlidableAction(
-                          label: 'ลบ',
-                          backgroundColor: FlutterFlowTheme.of(context).red300,
-                          icon: Icons.delete_outlined,
-                          onPressed: (_) {
-                            print('SlidableActionWidget pressed ...');
-                          },
-                        ),
-                        SlidableAction(
-                          label: 'แก้ไข',
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).primaryText,
-                          icon: Icons.edit_square,
-                          onPressed: (_) async {
-                            context.pushNamed(
-                              'LocationInfo',
-                              queryParameters: {
-                                'title': serializeParam(
-                                  '',
-                                  ParamType.String,
-                                ),
-                              }.withoutNulls,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        'Title',
-                        style: FlutterFlowTheme.of(context).titleLarge,
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed(
+                        'ItemList',
+                        queryParameters: {
+                          'isLocation': serializeParam(
+                            true,
+                            ParamType.bool,
+                          ),
+                        }.withoutNulls,
+                      );
+                    },
+                    child: Slidable(
+                      endActionPane: ActionPane(
+                        motion: const ScrollMotion(),
+                        extentRatio: 0.5,
+                        children: [
+                          SlidableAction(
+                            label: 'ลบ',
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).red300,
+                            icon: Icons.delete_outlined,
+                            onPressed: (_) async {
+                              var confirmDialogResponse =
+                                  await showDialog<bool>(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('ลบสถานที่จัดเก็บ'),
+                                            content: Text('คุณกำลังจะลบ'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, false),
+                                                child: Text('ยกเลิก'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, true),
+                                                child: Text('ยืนยัน'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ) ??
+                                      false;
+                            },
+                          ),
+                          SlidableAction(
+                            label: 'แก้ไข',
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            icon: Icons.edit_square,
+                            onPressed: (_) async {
+                              context.pushNamed(
+                                'LocationInfo',
+                                queryParameters: {
+                                  'title': serializeParam(
+                                    '',
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                      subtitle: Text(
-                        'Subtitle goes here...',
-                        style: FlutterFlowTheme.of(context).labelMedium,
-                      ),
-                      tileColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                      dense: false,
-                    ),
-                  ),
-                  Slidable(
-                    endActionPane: ActionPane(
-                      motion: const ScrollMotion(),
-                      extentRatio: 0.5,
-                      children: [
-                        SlidableAction(
-                          label: 'ลบ',
-                          backgroundColor: FlutterFlowTheme.of(context).red300,
-                          icon: Icons.delete_outlined,
-                          onPressed: (_) {
-                            print('SlidableActionWidget pressed ...');
-                          },
+                      child: ListTile(
+                        title: Text(
+                          'Title',
+                          style: FlutterFlowTheme.of(context).titleLarge,
                         ),
-                        SlidableAction(
-                          label: 'แก้ไข',
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).primaryText,
-                          icon: Icons.edit_square,
-                          onPressed: (_) async {
-                            context.pushNamed(
-                              'LocationInfo',
-                              queryParameters: {
-                                'title': serializeParam(
-                                  '',
-                                  ParamType.String,
-                                ),
-                              }.withoutNulls,
-                            );
-                          },
+                        subtitle: Text(
+                          'Subtitle goes here...',
+                          style: FlutterFlowTheme.of(context).labelMedium,
                         ),
-                      ],
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        'Title',
-                        style: FlutterFlowTheme.of(context).titleLarge,
+                        tileColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
+                        dense: false,
                       ),
-                      subtitle: Text(
-                        'Subtitle goes here...',
-                        style: FlutterFlowTheme.of(context).labelMedium,
-                      ),
-                      tileColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                      dense: false,
-                    ),
-                  ),
-                ],
-              ),
-              ListView(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                children: [
-                  Slidable(
-                    endActionPane: ActionPane(
-                      motion: const ScrollMotion(),
-                      extentRatio: 0.5,
-                      children: [
-                        SlidableAction(
-                          label: 'ลบ',
-                          backgroundColor: FlutterFlowTheme.of(context).red300,
-                          icon: Icons.delete_outlined,
-                          onPressed: (_) {
-                            print('SlidableActionWidget pressed ...');
-                          },
-                        ),
-                        SlidableAction(
-                          label: 'แก้ไข',
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).primaryText,
-                          icon: Icons.edit_square,
-                          onPressed: (_) async {
-                            context.pushNamed(
-                              'LocationInfo',
-                              queryParameters: {
-                                'title': serializeParam(
-                                  '',
-                                  ParamType.String,
-                                ),
-                              }.withoutNulls,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        'Title',
-                        style: FlutterFlowTheme.of(context).titleLarge,
-                      ),
-                      subtitle: Text(
-                        'Subtitle goes here...',
-                        style: FlutterFlowTheme.of(context).labelMedium,
-                      ),
-                      tileColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                      dense: false,
                     ),
                   ),
                 ],

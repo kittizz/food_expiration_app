@@ -90,6 +90,19 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                   style: FlutterFlowTheme.of(context).headlineSmall,
                 ),
               ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 0.0, 0.0),
+                child: Text(
+                  '....',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        fontSize: 16.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                      ),
+                ),
+              ),
             ],
           ),
         ),

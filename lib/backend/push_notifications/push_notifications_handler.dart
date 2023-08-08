@@ -135,8 +135,6 @@ final parametersBuilderMap =
           'itemId': getParameter<String>(data, 'itemId'),
         },
       ),
-  'creat': ParameterData.none(),
-  'create': ParameterData.none(),
   'LocationInfo': (data) async => ParameterData(
         allParams: {
           'title': getParameter<String>(data, 'title'),
@@ -144,6 +142,11 @@ final parametersBuilderMap =
         },
       ),
   'LocationList': ParameterData.none(),
+  'Archived': (data) async => ParameterData(
+        allParams: {
+          'isLocation': getParameter<bool>(data, 'isLocation'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

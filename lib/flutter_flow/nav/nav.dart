@@ -149,16 +149,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'creat',
-          path: '/creat',
-          builder: (context, params) => CreatWidget(),
-        ),
-        FFRoute(
-          name: 'create',
-          path: '/create',
-          builder: (context, params) => CreateWidget(),
-        ),
-        FFRoute(
           name: 'LocationInfo',
           path: '/locationInfo',
           requireAuth: true,
@@ -172,6 +162,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/locationList',
           requireAuth: true,
           builder: (context, params) => LocationListWidget(),
+        ),
+        FFRoute(
+          name: 'Archived',
+          path: '/archived',
+          requireAuth: true,
+          builder: (context, params) => ArchivedWidget(
+            isLocation: params.getParam('isLocation', ParamType.bool),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
