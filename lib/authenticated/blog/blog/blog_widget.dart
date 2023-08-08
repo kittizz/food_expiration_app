@@ -1,7 +1,13 @@
+import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/component/blog_card/blog_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +30,17 @@ class _BlogWidgetState extends State<BlogWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BlogModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiResultuzq = await FoodexpirationGroup.blogAllCall.call();
+      _model.blogList = await actions.toBlogStructList(
+        (_model.apiResultuzq?.jsonBody ?? ''),
+      );
+      setState(() {
+        _model.pageBlogList = _model.blogList!.toList().cast<BlogStruct>();
+      });
+    });
   }
 
   @override
@@ -89,11 +106,33 @@ class _BlogWidgetState extends State<BlogWidget> {
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(12.0, 5.0, 12.0, 0.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [],
-                    ),
+                  child: Builder(
+                    builder: (context) {
+                      final list = _model.pageBlogList.toList();
+                      return SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: List.generate(list.length, (listIndex) {
+                            final listItem = list[listIndex];
+                            return wrapWithModel(
+                              model: _model.blogCardModels.getModel(
+                                listIndex.toString(),
+                                listIndex,
+                              ),
+                              updateCallback: () => setState(() {}),
+                              child: BlogCardWidget(
+                                key: Key(
+                                  'Key0z1_${listIndex.toString()}',
+                                ),
+                                blogId: listItem.id,
+                                image: listItem.image,
+                                title: listItem.title,
+                              ),
+                            );
+                          }),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],

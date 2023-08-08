@@ -20,6 +20,7 @@ class FoodexpirationGroup {
   static GetUserCall getUserCall = GetUserCall();
   static BlogRecommendCall blogRecommendCall = BlogRecommendCall();
   static BlogByIDCall blogByIDCall = BlogByIDCall();
+  static BlogAllCall blogAllCall = BlogAllCall();
 }
 
 class RegisterDeviceCall {
@@ -147,6 +148,24 @@ class BlogByIDCall {
         response,
         r'''$.image''',
       );
+}
+
+class BlogAllCall {
+  Future<ApiCallResponse> call() {
+    return ApiManager.instance.makeApiCall(
+      callName: 'blogAll',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/blog/all',
+      callType: ApiCallType.GET,
+      headers: {
+        ...FoodexpirationGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
 }
 
 /// End foodexpiration Group Code
