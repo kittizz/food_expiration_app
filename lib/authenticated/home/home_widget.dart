@@ -1,11 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/component/blog_card/blog_card_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -19,10 +20,33 @@ class HomeWidget extends StatefulWidget {
   _HomeWidgetState createState() => _HomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
   late HomeModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = {
+    'iconOnActionTriggerAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: true,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 800.ms,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.15, 1.15),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 800.ms,
+          duration: 800.ms,
+          begin: Offset(1.15, 1.15),
+          end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
@@ -44,7 +68,19 @@ class _HomeWidgetState extends State<HomeWidget> {
 
         return;
       }
+      if (animationsMap['iconOnActionTriggerAnimation'] != null) {
+        await animationsMap['iconOnActionTriggerAnimation']!.controller
+          ..reset()
+          ..repeat();
+      }
     });
+
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
   }
 
   @override
@@ -441,20 +477,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                               Icons.arrow_forward,
                               color: FlutterFlowTheme.of(context).secondaryText,
                               size: 18.0,
+                            ).animateOnActionTrigger(
+                              animationsMap['iconOnActionTriggerAnimation']!,
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 12.0, 0.0),
-                  child: wrapWithModel(
-                    model: _model.blogCardModel,
-                    updateCallback: () => setState(() {}),
-                    child: BlogCardWidget(),
                   ),
                 ),
               ],
