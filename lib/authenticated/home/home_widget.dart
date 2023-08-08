@@ -512,22 +512,25 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                       mainAxisSize: MainAxisSize.max,
                       children: List.generate(list.length, (listIndex) {
                         final listItem = list[listIndex];
-                        return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 0.0, 12.0, 0.0),
-                          child: wrapWithModel(
-                            model: _model.blogCardModels.getModel(
-                              listIndex.toString(),
-                              listIndex,
-                            ),
-                            updateCallback: () => setState(() {}),
-                            child: BlogCardWidget(
-                              key: Key(
-                                'Keyew7_${listIndex.toString()}',
+                        return Visibility(
+                          visible: listItem != null,
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 12.0, 0.0),
+                            child: wrapWithModel(
+                              model: _model.blogCardModels.getModel(
+                                listIndex.toString(),
+                                listIndex,
                               ),
-                              blogId: listItem.id,
-                              image: listItem.image,
-                              title: listItem.title,
+                              updateCallback: () => setState(() {}),
+                              child: BlogCardWidget(
+                                key: Key(
+                                  'Keyew7_${listIndex.toString()}',
+                                ),
+                                blogId: listItem.id,
+                                image: listItem.image,
+                                title: listItem.title,
+                              ),
                             ),
                           ),
                         );
