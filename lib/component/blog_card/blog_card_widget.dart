@@ -47,38 +47,56 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Container(
-      width: double.infinity,
-      height: 195.0,
-      decoration: BoxDecoration(),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.asset(
-              'assets/images/dry-food-storage-method-fresh-food-1448x543.webp',
-              width: double.infinity,
-              height: 160.0,
-              fit: BoxFit.cover,
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () async {
+        context.pushNamed(
+          'BlogPost',
+          queryParameters: {
+            'blogId': serializeParam(
+              ' ',
+              ParamType.String,
             ),
-          ),
-          Flexible(
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
-              child: Text(
-                'วิธีเก็บอาหารแห้ง อาหารสดให้อยู่นาน ',
-                style: FlutterFlowTheme.of(context).labelLarge.override(
-                      fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).labelLargeFamily),
-                    ),
+          }.withoutNulls,
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        height: 195.0,
+        decoration: BoxDecoration(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.asset(
+                'assets/images/dry-food-storage-method-fresh-food-1448x543.webp',
+                width: double.infinity,
+                height: 160.0,
+                fit: BoxFit.cover,
               ),
             ),
-          ),
-        ],
+            Flexible(
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
+                child: Text(
+                  'วิธีเก็บอาหารแห้ง อาหารสดให้อยู่นาน ',
+                  style: FlutterFlowTheme.of(context).labelLarge.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).labelLargeFamily,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).labelLargeFamily),
+                      ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

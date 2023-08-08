@@ -85,116 +85,125 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-          child: Container(
-            width: MediaQuery.sizeOf(context).width * 1.0,
-            height: 45.0,
-            decoration: BoxDecoration(),
-            alignment: AlignmentDirectional(-1.0, 0.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                  child: Text(
-                    valueOrDefault<String>(
-                      widget.title,
-                      'หมดอายุไปแล้ว',
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyLargeFamily,
-                          fontWeight: FontWeight.w500,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyLargeFamily),
-                        ),
-                  ),
-                ),
-                if (widget.showClear)
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            child: Container(
+              width: MediaQuery.sizeOf(context).width * 1.0,
+              height: 45.0,
+              decoration: BoxDecoration(),
+              alignment: AlignmentDirectional(-1.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        var confirmDialogResponse = await showDialog<bool>(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('ลบรายการทั้งหมด'),
-                                  content: Text('คุณกำลังจะลบ....'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(
-                                          alertDialogContext, false),
-                                      child: Text('ยกเลิก'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(
-                                          alertDialogContext, true),
-                                      child: Text('ยืนยัน'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ) ??
-                            false;
-                      },
-                      child: Text(
-                        'ล้าง',
-                        style: FlutterFlowTheme.of(context).bodyLarge.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyLargeFamily,
-                              color: FlutterFlowTheme.of(context).red400,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.normal,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyLargeFamily),
-                            ),
+                    child: Text(
+                      valueOrDefault<String>(
+                        widget.title,
+                        'หมดอายุไปแล้ว',
                       ),
-                    ).animateOnActionTrigger(
-                      animationsMap['textOnActionTriggerAnimation']!,
+                      style: FlutterFlowTheme.of(context).bodyLarge.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyLargeFamily,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyLargeFamily),
+                          ),
                     ),
                   ),
-              ],
-            ),
-          ),
-        ),
-        Divider(
-          thickness: 1.0,
-          color: FlutterFlowTheme.of(context).grey50,
-        ),
-        ListView(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          children: [
-            wrapWithModel(
-              model: _model.itemModel,
-              updateCallback: () => setState(() {}),
-              child: ItemWidget(
-                name: 'รายการ',
-                image:
-                    'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                expiryDate: widget.parameter1 == null
-                    ? getCurrentTimestamp
-                    : widget.parameter1!,
-                location: 'สถานที่',
-                preDay: 3,
+                  if (widget.showClear)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          var confirmDialogResponse = await showDialog<bool>(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('ลบรายการทั้งหมด'),
+                                    content: Text('คุณกำลังจะลบ....'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, false),
+                                        child: Text('ยกเลิก'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, true),
+                                        child: Text('ยืนยัน'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ) ??
+                              false;
+                        },
+                        child: Text(
+                          'ล้าง',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyLarge
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyLargeFamily,
+                                color: FlutterFlowTheme.of(context).red400,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.normal,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyLargeFamily),
+                              ),
+                        ),
+                      ).animateOnActionTrigger(
+                        animationsMap['textOnActionTriggerAnimation']!,
+                      ),
+                    ),
+                ],
               ),
             ),
-          ],
-        ),
-      ],
+          ),
+          Divider(
+            thickness: 1.0,
+            color: FlutterFlowTheme.of(context).grey50,
+          ),
+          ListView(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: [
+              wrapWithModel(
+                model: _model.itemModel,
+                updateCallback: () => setState(() {}),
+                child: ItemWidget(
+                  name: 'รายการ',
+                  image:
+                      'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                  expiryDate: widget.parameter1 == null
+                      ? getCurrentTimestamp
+                      : widget.parameter1!,
+                  location: 'สถานที่',
+                  preDay: 3,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
