@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/blog_card/blog_card_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -81,7 +82,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
       _model.bloglist = await actions.toBlogStructList(
         (_model.apiBlogRecommendOutput?.jsonBody ?? ''),
       );
-      setState(() {});
+      setState(() {
+        _model.blogList = _model.blogList.toList().cast<BlogStruct>();
+      });
     });
 
     setupAnimations(
@@ -508,7 +511,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                 ),
                 Builder(
                   builder: (context) {
-                    final list = _model.bloglist!.toList();
+                    final list = _model.blogList.toList();
                     return Column(
                       mainAxisSize: MainAxisSize.max,
                       children: List.generate(list.length, (listIndex) {

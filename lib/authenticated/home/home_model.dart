@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/blog_card/blog_card_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -15,6 +16,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomeModel extends FlutterFlowModel {
+  ///  Local state fields for this page.
+
+  List<BlogStruct> blogList = [];
+  void addToBlogList(BlogStruct item) => blogList.add(item);
+  void removeFromBlogList(BlogStruct item) => blogList.remove(item);
+  void removeAtIndexFromBlogList(int index) => blogList.removeAt(index);
+  void updateBlogListAtIndex(int index, Function(BlogStruct) updateFn) =>
+      blogList[index] = updateFn(blogList[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
