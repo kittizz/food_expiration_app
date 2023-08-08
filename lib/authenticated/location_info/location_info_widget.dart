@@ -15,11 +15,13 @@ class LocationInfoWidget extends StatefulWidget {
     Key? key,
     String? title,
     this.locationId,
+    this.isAdd,
   })  : this.title = title ?? '',
         super(key: key);
 
   final String title;
   final String? locationId;
+  final bool? isAdd;
 
   @override
   _LocationInfoWidgetState createState() => _LocationInfoWidgetState();

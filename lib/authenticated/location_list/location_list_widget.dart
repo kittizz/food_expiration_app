@@ -105,26 +105,47 @@ class _LocationListWidgetState extends State<LocationListWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Container(
-                width: double.infinity,
-                height: 48.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: Align(
-                  alignment: AlignmentDirectional(1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                    child: Text(
-                      'เพิ่มสถานที่',
-                      style: FlutterFlowTheme.of(context).bodyLarge.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyLargeFamily,
-                            color: FlutterFlowTheme.of(context).success,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyLargeFamily),
-                          ),
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.pushNamed(
+                    'LocationInfo',
+                    queryParameters: {
+                      'title': serializeParam(
+                        'เพิ่มสถานที่',
+                        ParamType.String,
+                      ),
+                      'isAdd': serializeParam(
+                        true,
+                        ParamType.bool,
+                      ),
+                    }.withoutNulls,
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 48.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child: Align(
+                    alignment: AlignmentDirectional(1.0, 0.0),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                      child: Text(
+                        'เพิ่มสถานที่',
+                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyLargeFamily,
+                              color: FlutterFlowTheme.of(context).success,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyLargeFamily),
+                            ),
+                      ),
                     ),
                   ),
                 ),

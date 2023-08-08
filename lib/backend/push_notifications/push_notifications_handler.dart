@@ -139,6 +139,7 @@ final parametersBuilderMap =
         allParams: {
           'title': getParameter<String>(data, 'title'),
           'locationId': getParameter<String>(data, 'locationId'),
+          'isAdd': getParameter<bool>(data, 'isAdd'),
         },
       ),
   'LocationList': ParameterData.none(),

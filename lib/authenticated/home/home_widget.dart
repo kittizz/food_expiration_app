@@ -508,7 +508,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                 ),
                 Builder(
                   builder: (context) {
-                    final list = _model.bloglist?.toList() ?? [];
+                    final list = _model.bloglist!.toList();
                     return Column(
                       mainAxisSize: MainAxisSize.max,
                       children: List.generate(list.length, (listIndex) {
