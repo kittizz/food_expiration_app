@@ -147,6 +147,7 @@ final parametersBuilderMap =
           'isLocation': getParameter<bool>(data, 'isLocation'),
         },
       ),
+  'Setting': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

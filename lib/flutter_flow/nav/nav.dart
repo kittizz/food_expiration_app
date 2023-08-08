@@ -170,6 +170,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ArchivedWidget(
             isLocation: params.getParam('isLocation', ParamType.bool),
           ),
+        ),
+        FFRoute(
+          name: 'Setting',
+          path: '/setting',
+          builder: (context, params) => SettingWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -16,3 +16,4 @@ export '/authenticated/location_info/location_info_widget.dart'
 export '/authenticated/location_list/location_list_widget.dart'
     show LocationListWidget;
 export '/authenticated/archived/archived_widget.dart' show ArchivedWidget;
+export '/authenticated/setting/setting_widget.dart' show SettingWidget;

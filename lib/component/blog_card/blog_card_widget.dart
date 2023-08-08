@@ -57,7 +57,7 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
           'BlogPost',
           queryParameters: {
             'blogId': serializeParam(
-              ' ',
+              '123',
               ParamType.String,
             ),
           }.withoutNulls,

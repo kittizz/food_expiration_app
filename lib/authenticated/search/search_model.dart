@@ -1,11 +1,9 @@
-import '/flutter_flow/flutter_flow_animations.dart';
+import '/component/list_items/list_items_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,14 +15,19 @@ class SearchModel extends FlutterFlowModel {
   // State field(s) for TextField widget.
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // Model for ListItems component.
+  late ListItemsModel listItemsModel;
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    listItemsModel = createModel(context, () => ListItemsModel());
+  }
 
   void dispose() {
     unfocusNode.dispose();
     textController?.dispose();
+    listItemsModel.dispose();
   }
 
   /// Action blocks are added here.
