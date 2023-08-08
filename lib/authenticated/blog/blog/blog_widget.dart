@@ -1,4 +1,3 @@
-import '/component/blog_card/blog_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -93,33 +92,7 @@ class _BlogWidgetState extends State<BlogWidget> {
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
-                      children: [
-                        wrapWithModel(
-                          model: _model.blogCardModel1,
-                          updateCallback: () => setState(() {}),
-                          child: BlogCardWidget(),
-                        ),
-                        wrapWithModel(
-                          model: _model.blogCardModel2,
-                          updateCallback: () => setState(() {}),
-                          child: BlogCardWidget(),
-                        ),
-                        wrapWithModel(
-                          model: _model.blogCardModel3,
-                          updateCallback: () => setState(() {}),
-                          child: BlogCardWidget(),
-                        ),
-                        wrapWithModel(
-                          model: _model.blogCardModel4,
-                          updateCallback: () => setState(() {}),
-                          child: BlogCardWidget(),
-                        ),
-                        wrapWithModel(
-                          model: _model.blogCardModel5,
-                          updateCallback: () => setState(() {}),
-                          child: BlogCardWidget(),
-                        ),
-                      ],
+                      children: [],
                     ),
                   ),
                 ),

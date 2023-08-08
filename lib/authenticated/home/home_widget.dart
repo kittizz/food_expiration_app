@@ -500,12 +500,43 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                  child: wrapWithModel(
-                    model: _model.blogCardModel,
-                    updateCallback: () => setState(() {}),
-                    child: BlogCardWidget(
-                      blogId: 1,
-                    ),
+                  child: FutureBuilder<ApiCallResponse>(
+                    future: FoodexpirationGroup.blogRecommendCall.call(),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: SpinKitDoubleBounce(
+                              color: FlutterFlowTheme.of(context).error,
+                              size: 50.0,
+                            ),
+                          ),
+                        );
+                      }
+                      final blogCardBlogRecommendResponse = snapshot.data!;
+                      return wrapWithModel(
+                        model: _model.blogCardModel,
+                        updateCallback: () => setState(() {}),
+                        child: BlogCardWidget(
+                          blogId: FoodexpirationGroup.blogRecommendCall.id(
+                            blogCardBlogRecommendResponse.jsonBody,
+                          ),
+                          image: FoodexpirationGroup.blogRecommendCall
+                              .image(
+                                blogCardBlogRecommendResponse.jsonBody,
+                              )
+                              .toString(),
+                          title: FoodexpirationGroup.blogRecommendCall
+                              .title(
+                                blogCardBlogRecommendResponse.jsonBody,
+                              )
+                              .toString(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],

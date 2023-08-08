@@ -11,9 +11,13 @@ class BlogCardWidget extends StatefulWidget {
   const BlogCardWidget({
     Key? key,
     this.blogId,
+    required this.image,
+    required this.title,
   }) : super(key: key);
 
   final int? blogId;
+  final String? image;
+  final String? title;
 
   @override
   _BlogCardWidgetState createState() => _BlogCardWidgetState();
