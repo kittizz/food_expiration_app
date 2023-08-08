@@ -503,7 +503,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                   child: wrapWithModel(
                     model: _model.blogCardModel,
                     updateCallback: () => setState(() {}),
-                    child: BlogCardWidget(),
+                    child: BlogCardWidget(
+                      blogId: 1,
+                    ),
                   ),
                 ),
               ],
