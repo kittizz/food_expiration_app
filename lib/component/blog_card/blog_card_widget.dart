@@ -55,7 +55,7 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
           borderRadius: BorderRadius.circular(8.0),
           child: Image.asset(
             'assets/images/dry-food-storage-method-fresh-food-1448x543.webp',
-            width: MediaQuery.sizeOf(context).width * 1.0,
+            width: double.infinity,
             height: 160.0,
             fit: BoxFit.cover,
           ),
