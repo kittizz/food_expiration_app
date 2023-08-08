@@ -451,15 +451,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                 Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 12.0, 0.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      wrapWithModel(
-                        model: _model.blogCardModel,
-                        updateCallback: () => setState(() {}),
-                        child: BlogCardWidget(),
-                      ),
-                    ],
+                  child: wrapWithModel(
+                    model: _model.blogCardModel,
+                    updateCallback: () => setState(() {}),
+                    child: BlogCardWidget(),
                   ),
                 ),
               ],
