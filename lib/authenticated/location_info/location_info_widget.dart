@@ -116,14 +116,14 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget>
           top: true,
           child: SingleChildScrollView(
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Flexible(
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
                     child: Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      width: double.infinity,
                       constraints: BoxConstraints(
                         maxWidth: 670.0,
                       ),
