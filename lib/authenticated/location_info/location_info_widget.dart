@@ -248,7 +248,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                       options: FFButtonOptions(
                                         height: 40.0,
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 0.0, 24.0, 0.0),
+                                            5.0, 0.0, 5.0, 0.0),
                                         iconPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
@@ -256,7 +256,6 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                             FlutterFlowTheme.of(context).info,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium,
-                                        elevation: 3.0,
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
                                               .alternate,
@@ -282,7 +281,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                       options: FFButtonOptions(
                                         height: 40.0,
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 0.0, 24.0, 0.0),
+                                            5.0, 0.0, 5.0, 0.0),
                                         iconPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
@@ -290,7 +289,6 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                             FlutterFlowTheme.of(context).info,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium,
-                                        elevation: 3.0,
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
                                               .alternate,
@@ -452,35 +450,92 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 20.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
-                                  },
-                                  text: 'บันทึกสถานที่',
-                                  options: FFButtonOptions(
-                                    width: double.infinity,
-                                    height: 50.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).red500,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Plus Jakarta Sans',
-                                          color: Colors.white,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmallFamily),
+                                    0.0, 25.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    FlutterFlowIconButton(
+                                      borderColor: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      borderRadius: 50.0,
+                                      borderWidth: 1.0,
+                                      buttonSize: 50.0,
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 24.0,
+                                      ),
+                                      onPressed: () async {
+                                        var confirmDialogResponse =
+                                            await showDialog<bool>(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('ลบรายการ'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  false),
+                                                          child: Text('ยกเลิก'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  true),
+                                                          child: Text('ยืนยัน'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ) ??
+                                                false;
+                                      },
+                                    ),
+                                    Expanded(
+                                      child: FFButtonWidget(
+                                        onPressed: () {
+                                          print('Button pressed ...');
+                                        },
+                                        text: 'บันทึกสถานที่',
+                                        options: FFButtonOptions(
+                                          width: double.infinity,
+                                          height: 50.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .red300,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily:
+                                                        'Plus Jakarta Sans',
+                                                    color: Colors.white,
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: GoogleFonts
+                                                            .asMap()
+                                                        .containsKey(
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmallFamily),
+                                                  ),
+                                          elevation: 2.0,
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
                                         ),
-                                    elevation: 2.0,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
+                                      ),
+                                    ),
+                                  ].divide(SizedBox(width: 10.0)),
                                 ),
                               ),
                             ],

@@ -18,6 +18,8 @@ class FoodexpirationGroup {
   };
   static RegisterDeviceCall registerDeviceCall = RegisterDeviceCall();
   static GetUserCall getUserCall = GetUserCall();
+  static BlogRecommendCall blogRecommendCall = BlogRecommendCall();
+  static BlogByIDCall blogByIDCall = BlogByIDCall();
 }
 
 class RegisterDeviceCall {
@@ -83,6 +85,88 @@ class GetUserCall {
   dynamic signInProvider(dynamic response) => getJsonField(
         response,
         r'''$.signInProvider''',
+      );
+}
+
+class BlogRecommendCall {
+  Future<ApiCallResponse> call() {
+    return ApiManager.instance.makeApiCall(
+      callName: 'blogRecommend',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/blog/recommend',
+      callType: ApiCallType.GET,
+      headers: {
+        ...FoodexpirationGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic id(dynamic response) => getJsonField(
+        response,
+        r'''$[:].id''',
+      );
+  dynamic createdAt(dynamic response) => getJsonField(
+        response,
+        r'''$[:].createdAt''',
+      );
+  dynamic title(dynamic response) => getJsonField(
+        response,
+        r'''$[:].title''',
+      );
+  dynamic content(dynamic response) => getJsonField(
+        response,
+        r'''$[:].content''',
+      );
+  dynamic image(dynamic response) => getJsonField(
+        response,
+        r'''$[:].image''',
+      );
+}
+
+class BlogByIDCall {
+  Future<ApiCallResponse> call({
+    int? id,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'blogByID',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/blog/query',
+      callType: ApiCallType.GET,
+      headers: {
+        ...FoodexpirationGroup.headers,
+      },
+      params: {
+        'id': id,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic id(dynamic response) => getJsonField(
+        response,
+        r'''$.id''',
+      );
+  dynamic createdAt(dynamic response) => getJsonField(
+        response,
+        r'''$.createdAt''',
+      );
+  dynamic title(dynamic response) => getJsonField(
+        response,
+        r'''$.title''',
+      );
+  dynamic content(dynamic response) => getJsonField(
+        response,
+        r'''$.content''',
+      );
+  dynamic image(dynamic response) => getJsonField(
+        response,
+        r'''$.image''',
       );
 }
 

@@ -131,7 +131,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/blogPost',
           requireAuth: true,
           builder: (context, params) => BlogPostWidget(
-            blogId: params.getParam('blogId', ParamType.String),
+            blogId: params.getParam('blogId', ParamType.int),
           ),
         ),
         FFRoute(

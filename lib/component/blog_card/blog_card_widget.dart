@@ -10,12 +10,10 @@ export 'blog_card_model.dart';
 class BlogCardWidget extends StatefulWidget {
   const BlogCardWidget({
     Key? key,
-    this.width,
-    this.height,
+    this.blogId,
   }) : super(key: key);
 
-  final double? width;
-  final double? height;
+  final int? blogId;
 
   @override
   _BlogCardWidgetState createState() => _BlogCardWidgetState();
@@ -57,8 +55,8 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
           'BlogPost',
           queryParameters: {
             'blogId': serializeParam(
-              '123',
-              ParamType.String,
+              widget.blogId,
+              ParamType.int,
             ),
           }.withoutNulls,
         );
