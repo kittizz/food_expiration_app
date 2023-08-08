@@ -388,8 +388,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               color: FlutterFlowTheme.of(context).red300,
                               size: 30.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.pushNamed('Archived');
                             },
                           ),
                           Text(
@@ -422,11 +422,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               size: 30.0,
                             ),
                             onPressed: () async {
-                              GoRouter.of(context).prepareAuthEvent();
-                              await authManager.signOut();
-                              GoRouter.of(context).clearRedirectLocation();
-
-                              context.goNamedAuth('Welcome', context.mounted);
+                              context.pushNamed('Setting');
                             },
                           ),
                           Text(

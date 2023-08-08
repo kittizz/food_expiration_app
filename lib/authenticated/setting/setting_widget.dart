@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -106,7 +107,15 @@ class _SettingWidgetState extends State<SettingWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
             child: FFButtonWidget(
               onPressed: () async {
-                context.pop();
+                GoRouter.of(context).prepareAuthEvent();
+                await authManager.signOut();
+                GoRouter.of(context).clearRedirectLocation();
+
+                setState(() {
+                  FFAppState().deviceId = '';
+                });
+
+                context.goNamedAuth('Welcome', context.mounted);
               },
               text: 'ลงชื่อออก',
               options: FFButtonOptions(

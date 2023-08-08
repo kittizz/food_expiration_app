@@ -93,7 +93,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
           top: true,
           child: SingleChildScrollView(
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Flexible(
                   child: Padding(

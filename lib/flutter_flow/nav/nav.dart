@@ -117,16 +117,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Search',
           path: '/search',
+          requireAuth: true,
           builder: (context, params) => SearchWidget(),
         ),
         FFRoute(
           name: 'Blog',
           path: '/blog',
+          requireAuth: true,
           builder: (context, params) => BlogWidget(),
         ),
         FFRoute(
           name: 'BlogPost',
           path: '/blogPost',
+          requireAuth: true,
           builder: (context, params) => BlogPostWidget(
             blogId: params.getParam('blogId', ParamType.String),
           ),
@@ -174,6 +177,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Setting',
           path: '/setting',
+          requireAuth: true,
           builder: (context, params) => SettingWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
