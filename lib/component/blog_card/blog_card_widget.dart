@@ -48,7 +48,7 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
     context.watch<FFAppState>();
 
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ClipRRect(
