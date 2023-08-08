@@ -83,7 +83,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         (_model.apiBlogRecommendOutput?.jsonBody ?? ''),
       );
       setState(() {
-        _model.blogList = _model.blogList.toList().cast<BlogStruct>();
+        _model.blogList = _model.bloglist!.toList().cast<BlogStruct>();
       });
     });
 
