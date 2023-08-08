@@ -20,8 +20,10 @@ class HomeModel extends FlutterFlowModel {
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (getUser)] action in Home widget.
   ApiCallResponse? apiResulturm;
+  // Stores action output result for [Backend Call - API (blogRecommend)] action in Home widget.
+  ApiCallResponse? apiBlogRecommendOutput;
   // Stores action output result for [Custom Action - toBlogStructList] action in Home widget.
-  List<BlogStruct>? blogRecommendOutput;
+  List<BlogStruct>? bloglist;
   // Models for BlogCard dynamic component.
   late FlutterFlowDynamicModels<BlogCardModel> blogCardModels;
 

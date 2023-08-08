@@ -76,9 +76,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           ..reset()
           ..repeat();
       }
-      await FoodexpirationGroup.blogRecommendCall.call();
-      _model.blogRecommendOutput = await actions.toBlogStructList(
-        (_model.apiResulturm?.jsonBody ?? ''),
+      _model.apiBlogRecommendOutput =
+          await FoodexpirationGroup.blogRecommendCall.call();
+      _model.bloglist = await actions.toBlogStructList(
+        (_model.apiBlogRecommendOutput?.jsonBody ?? ''),
       );
     });
 
@@ -506,7 +507,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                 ),
                 Builder(
                   builder: (context) {
-                    final list = _model.blogRecommendOutput!.toList();
+                    final list = _model.bloglist!.toList();
                     return Column(
                       mainAxisSize: MainAxisSize.max,
                       children: List.generate(list.length, (listIndex) {
