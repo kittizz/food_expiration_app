@@ -127,6 +127,8 @@ final parametersBuilderMap =
   'ItemList': (data) async => ParameterData(
         allParams: {
           'isLocation': getParameter<bool>(data, 'isLocation'),
+          'title': getParameter<String>(data, 'title'),
+          'locationId': getParameter<int>(data, 'locationId'),
         },
       ),
   'ItemInfo': (data) async => ParameterData(

@@ -141,6 +141,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           requireAuth: true,
           builder: (context, params) => ItemListWidget(
             isLocation: params.getParam('isLocation', ParamType.bool),
+            title: params.getParam('title', ParamType.String),
+            locationId: params.getParam('locationId', ParamType.int),
           ),
         ),
         FFRoute(

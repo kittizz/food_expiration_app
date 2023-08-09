@@ -15,10 +15,14 @@ class ItemListWidget extends StatefulWidget {
   const ItemListWidget({
     Key? key,
     bool? isLocation,
+    this.title,
+    this.locationId,
   })  : this.isLocation = isLocation ?? false,
         super(key: key);
 
   final bool isLocation;
+  final String? title;
+  final int? locationId;
 
   @override
   _ItemListWidgetState createState() => _ItemListWidgetState();
@@ -95,7 +99,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
             },
           ),
           title: Text(
-            _model.titleName,
+            widget.title!,
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,

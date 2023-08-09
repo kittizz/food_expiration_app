@@ -22,6 +22,7 @@ class FoodexpirationGroup {
   static BlogByIDCall blogByIDCall = BlogByIDCall();
   static BlogAllCall blogAllCall = BlogAllCall();
   static LocationListCall locationListCall = LocationListCall();
+  static DeleteLocationCall deleteLocationCall = DeleteLocationCall();
 }
 
 class RegisterDeviceCall {
@@ -194,6 +195,30 @@ class LocationListCall {
         response,
         r'''$.message''',
       );
+}
+
+class DeleteLocationCall {
+  Future<ApiCallResponse> call({
+    String? deviceId = '',
+    int? id,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'deleteLocation',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/location',
+      callType: ApiCallType.DELETE,
+      headers: {
+        ...FoodexpirationGroup.headers,
+      },
+      params: {
+        'deviceId': deviceId,
+        'id': id,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
 }
 
 /// End foodexpiration Group Code

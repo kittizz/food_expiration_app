@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -162,113 +163,144 @@ class _LocationListWidgetState extends State<LocationListWidget> {
               Builder(
                 builder: (context) {
                   final list = _model.locationList.toList();
-                  return ListView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: list.length,
-                    itemBuilder: (context, listIndex) {
-                      final listItem = list[listIndex];
-                      return InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(
-                            'ItemList',
-                            queryParameters: {
-                              'isLocation': serializeParam(
-                                true,
-                                ParamType.bool,
-                              ),
-                            }.withoutNulls,
-                          );
-                        },
-                        child: Slidable(
-                          endActionPane: ActionPane(
-                            motion: const ScrollMotion(),
-                            extentRatio: 0.5,
-                            children: [
-                              SlidableAction(
-                                label: 'ลบ',
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).red300,
-                                icon: Icons.delete_outlined,
-                                onPressed: (_) async {
-                                  var confirmDialogResponse =
-                                      await showDialog<bool>(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text('ลบสถานที่จัดเก็บ'),
-                                                content: Text('คุณกำลังจะลบ'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext,
-                                                            false),
-                                                    child: Text('ยกเลิก'),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext,
-                                                            true),
-                                                    child: Text('ยืนยัน'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          ) ??
-                                          false;
-                                },
-                              ),
-                              SlidableAction(
-                                label: 'แก้ไข',
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).primaryText,
-                                icon: Icons.edit_square,
-                                onPressed: (_) async {
-                                  context.pushNamed(
-                                    'LocationInfo',
-                                    queryParameters: {
-                                      'title': serializeParam(
-                                        listItem.name,
-                                        ParamType.String,
-                                      ),
-                                      'locationId': serializeParam(
-                                        listItem.id.toString(),
-                                        ParamType.String,
-                                      ),
-                                      'isAdd': serializeParam(
-                                        false,
-                                        ParamType.bool,
-                                      ),
-                                    }.withoutNulls,
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                            title: Text(
-                              listItem.name,
-                              style: FlutterFlowTheme.of(context).titleLarge,
-                            ),
-                            subtitle: Text(
-                              listItem.description
-                                  .maybeHandleOverflow(maxChars: 32),
-                              style: FlutterFlowTheme.of(context).labelMedium,
-                            ),
-                            tileColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            dense: false,
-                          ),
-                        ),
-                      );
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      await _model.loadLocations(context);
+                      setState(() {});
                     },
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: list.length,
+                      itemBuilder: (context, listIndex) {
+                        final listItem = list[listIndex];
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(
+                              'ItemList',
+                              queryParameters: {
+                                'isLocation': serializeParam(
+                                  true,
+                                  ParamType.bool,
+                                ),
+                                'title': serializeParam(
+                                  listItem.name,
+                                  ParamType.String,
+                                ),
+                                'locationId': serializeParam(
+                                  listItem.id,
+                                  ParamType.int,
+                                ),
+                              }.withoutNulls,
+                            );
+                          },
+                          child: Slidable(
+                            endActionPane: ActionPane(
+                              motion: const ScrollMotion(),
+                              extentRatio: 0.5,
+                              children: [
+                                SlidableAction(
+                                  label: 'ลบ',
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).red300,
+                                  icon: Icons.delete_outlined,
+                                  onPressed: (_) async {
+                                    var _shouldSetState = false;
+                                    var confirmDialogResponse =
+                                        await showDialog<bool>(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title:
+                                                      Text('ลบสถานที่จัดเก็บ'),
+                                                  content: Text('คุณกำลังจะลบ'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext,
+                                                              false),
+                                                      child: Text('ยกเลิก'),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext,
+                                                              true),
+                                                      child: Text('ยืนยัน'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ) ??
+                                            false;
+                                    if (confirmDialogResponse) {
+                                      _model.apiResulttxv =
+                                          await FoodexpirationGroup
+                                              .deleteLocationCall
+                                              .call(
+                                        deviceId: FFAppState().deviceId,
+                                        id: listItem.id,
+                                      );
+                                      _shouldSetState = true;
+                                      await _model.loadLocations(context);
+                                      setState(() {});
+                                      if (_shouldSetState) setState(() {});
+                                      return;
+                                    }
+                                    if (_shouldSetState) setState(() {});
+                                  },
+                                ),
+                                SlidableAction(
+                                  label: 'แก้ไข',
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  icon: Icons.edit_square,
+                                  onPressed: (_) async {
+                                    context.pushNamed(
+                                      'LocationInfo',
+                                      queryParameters: {
+                                        'title': serializeParam(
+                                          listItem.name,
+                                          ParamType.String,
+                                        ),
+                                        'locationId': serializeParam(
+                                          listItem.id.toString(),
+                                          ParamType.String,
+                                        ),
+                                        'isAdd': serializeParam(
+                                          false,
+                                          ParamType.bool,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                listItem.name,
+                                style: FlutterFlowTheme.of(context).titleLarge,
+                              ),
+                              subtitle: Text(
+                                listItem.description
+                                    .maybeHandleOverflow(maxChars: 32),
+                                style: FlutterFlowTheme.of(context).labelMedium,
+                              ),
+                              tileColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              dense: false,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   );
                 },
               ),

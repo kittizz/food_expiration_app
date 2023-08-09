@@ -14,8 +14,6 @@ class ItemListModel extends FlutterFlowModel {
 
   DateTime? testDate;
 
-  String titleName = 'รายการทั้งหมด';
-
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

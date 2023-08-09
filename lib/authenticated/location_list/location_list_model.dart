@@ -26,6 +26,8 @@ class LocationListModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - API (deleteLocation)] action in SlidableActionWidget widget.
+  ApiCallResponse? apiResulttxv;
 
   /// Initialization and disposal methods.
 

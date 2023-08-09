@@ -334,7 +334,19 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               size: 30.0,
                             ),
                             onPressed: () async {
-                              context.pushNamed('ItemList');
+                              context.pushNamed(
+                                'ItemList',
+                                queryParameters: {
+                                  'isLocation': serializeParam(
+                                    false,
+                                    ParamType.bool,
+                                  ),
+                                  'title': serializeParam(
+                                    'รายการทั้งหมด',
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
+                              );
                             },
                           ),
                           Text(
