@@ -21,6 +21,7 @@ class FoodexpirationGroup {
   static BlogRecommendCall blogRecommendCall = BlogRecommendCall();
   static BlogByIDCall blogByIDCall = BlogByIDCall();
   static BlogAllCall blogAllCall = BlogAllCall();
+  static LocationListCall locationListCall = LocationListCall();
 }
 
 class RegisterDeviceCall {
@@ -166,6 +167,33 @@ class BlogAllCall {
       cache: false,
     );
   }
+}
+
+class LocationListCall {
+  Future<ApiCallResponse> call({
+    String? deviceId = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'locationList',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/location/list',
+      callType: ApiCallType.GET,
+      headers: {
+        ...FoodexpirationGroup.headers,
+      },
+      params: {
+        'deviceId': deviceId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
 }
 
 /// End foodexpiration Group Code

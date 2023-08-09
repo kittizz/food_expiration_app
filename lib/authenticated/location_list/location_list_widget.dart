@@ -1,7 +1,10 @@
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,6 +28,12 @@ class _LocationListWidgetState extends State<LocationListWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LocationListModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await _model.loadLocations(context);
+      setState(() {});
+    });
   }
 
   @override
@@ -150,98 +159,118 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                   ),
                 ),
               ),
-              ListView(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                children: [
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed(
-                        'ItemList',
-                        queryParameters: {
-                          'isLocation': serializeParam(
-                            true,
-                            ParamType.bool,
+              Builder(
+                builder: (context) {
+                  final list = _model.locationList.toList();
+                  return ListView.builder(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: list.length,
+                    itemBuilder: (context, listIndex) {
+                      final listItem = list[listIndex];
+                      return InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            'ItemList',
+                            queryParameters: {
+                              'isLocation': serializeParam(
+                                true,
+                                ParamType.bool,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                        child: Slidable(
+                          endActionPane: ActionPane(
+                            motion: const ScrollMotion(),
+                            extentRatio: 0.5,
+                            children: [
+                              SlidableAction(
+                                label: 'ลบ',
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).red300,
+                                icon: Icons.delete_outlined,
+                                onPressed: (_) async {
+                                  var confirmDialogResponse =
+                                      await showDialog<bool>(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('ลบสถานที่จัดเก็บ'),
+                                                content: Text('คุณกำลังจะลบ'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            false),
+                                                    child: Text('ยกเลิก'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            true),
+                                                    child: Text('ยืนยัน'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ) ??
+                                          false;
+                                },
+                              ),
+                              SlidableAction(
+                                label: 'แก้ไข',
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).primaryText,
+                                icon: Icons.edit_square,
+                                onPressed: (_) async {
+                                  context.pushNamed(
+                                    'LocationInfo',
+                                    queryParameters: {
+                                      'title': serializeParam(
+                                        listItem.name,
+                                        ParamType.String,
+                                      ),
+                                      'locationId': serializeParam(
+                                        listItem.id.toString(),
+                                        ParamType.String,
+                                      ),
+                                      'isAdd': serializeParam(
+                                        false,
+                                        ParamType.bool,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                        }.withoutNulls,
+                          child: ListTile(
+                            title: Text(
+                              listItem.name,
+                              style: FlutterFlowTheme.of(context).titleLarge,
+                            ),
+                            subtitle: Text(
+                              listItem.description
+                                  .maybeHandleOverflow(maxChars: 32),
+                              style: FlutterFlowTheme.of(context).labelMedium,
+                            ),
+                            tileColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            dense: false,
+                          ),
+                        ),
                       );
                     },
-                    child: Slidable(
-                      endActionPane: ActionPane(
-                        motion: const ScrollMotion(),
-                        extentRatio: 0.5,
-                        children: [
-                          SlidableAction(
-                            label: 'ลบ',
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).red300,
-                            icon: Icons.delete_outlined,
-                            onPressed: (_) async {
-                              var confirmDialogResponse =
-                                  await showDialog<bool>(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('ลบสถานที่จัดเก็บ'),
-                                            content: Text('คุณกำลังจะลบ'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext, false),
-                                                child: Text('ยกเลิก'),
-                                              ),
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext, true),
-                                                child: Text('ยืนยัน'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      ) ??
-                                      false;
-                            },
-                          ),
-                          SlidableAction(
-                            label: 'แก้ไข',
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).primaryText,
-                            icon: Icons.edit_square,
-                            onPressed: (_) async {
-                              context.pushNamed(
-                                'LocationInfo',
-                                queryParameters: {
-                                  'title': serializeParam(
-                                    '',
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                      child: ListTile(
-                        title: Text(
-                          'Title',
-                          style: FlutterFlowTheme.of(context).titleLarge,
-                        ),
-                        subtitle: Text(
-                          'Subtitle goes here...',
-                          style: FlutterFlowTheme.of(context).labelMedium,
-                        ),
-                        tileColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        dense: false,
-                      ),
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ],
           ),
