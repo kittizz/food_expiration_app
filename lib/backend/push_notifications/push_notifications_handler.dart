@@ -151,6 +151,17 @@ final parametersBuilderMap =
         },
       ),
   'Setting': ParameterData.none(),
+  'ThumbnailCategory': ParameterData.none(),
+  'ThumbnailSelection': (data) async => ParameterData(
+        allParams: {
+          'thumbnailCategoryId': getParameter<int>(data, 'thumbnailCategoryId'),
+        },
+      ),
+  'ThumbnailViewer': (data) async => ParameterData(
+        allParams: {
+          'image': getParameter<String>(data, 'image'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

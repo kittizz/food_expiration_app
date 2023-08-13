@@ -146,15 +146,39 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                      child: Text(
-                        'เพิ่มสถานที่',
-                        style: FlutterFlowTheme.of(context).bodyLarge.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyLargeFamily,
-                              color: FlutterFlowTheme.of(context).success,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyLargeFamily),
-                            ),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            'LocationInfo',
+                            queryParameters: {
+                              'title': serializeParam(
+                                'เพิ่มสถานที่',
+                                ParamType.String,
+                              ),
+                              'isAdd': serializeParam(
+                                true,
+                                ParamType.bool,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                        child: Text(
+                          'เพิ่มสถานที่',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyLarge
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyLargeFamily,
+                                color: FlutterFlowTheme.of(context).success,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyLargeFamily),
+                              ),
+                        ),
                       ),
                     ),
                   ),

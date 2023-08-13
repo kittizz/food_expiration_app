@@ -106,7 +106,13 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: const [
         Locale('th'),
       ],
-      theme: ThemeData(brightness: Brightness.light),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        scrollbarTheme: ScrollbarThemeData(
+          thumbVisibility: MaterialStateProperty.all(false),
+          interactive: false,
+        ),
+      ),
       themeMode: _themeMode,
       routerConfig: _router,
     );

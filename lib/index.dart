@@ -17,3 +17,9 @@ export '/authenticated/location_list/location_list_widget.dart'
     show LocationListWidget;
 export '/authenticated/archived/archived_widget.dart' show ArchivedWidget;
 export '/authenticated/setting/setting_widget.dart' show SettingWidget;
+export '/authenticated/thumbnail/thumbnail_category/thumbnail_category_widget.dart'
+    show ThumbnailCategoryWidget;
+export '/authenticated/thumbnail/thumbnail_selection/thumbnail_selection_widget.dart'
+    show ThumbnailSelectionWidget;
+export '/authenticated/thumbnail/thumbnail_viewer/thumbnail_viewer_widget.dart'
+    show ThumbnailViewerWidget;

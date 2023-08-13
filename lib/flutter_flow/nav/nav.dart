@@ -183,6 +183,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/setting',
           requireAuth: true,
           builder: (context, params) => SettingWidget(),
+        ),
+        FFRoute(
+          name: 'ThumbnailCategory',
+          path: '/thumbnailCategory',
+          builder: (context, params) => ThumbnailCategoryWidget(),
+        ),
+        FFRoute(
+          name: 'ThumbnailSelection',
+          path: '/thumbnailSelection',
+          builder: (context, params) => ThumbnailSelectionWidget(
+            thumbnailCategoryId:
+                params.getParam('thumbnailCategoryId', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'ThumbnailViewer',
+          path: '/thumbnailViewer',
+          builder: (context, params) => ThumbnailViewerWidget(
+            image: params.getParam('image', ParamType.String),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

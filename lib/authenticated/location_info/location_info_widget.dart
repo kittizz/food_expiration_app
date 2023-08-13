@@ -270,8 +270,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                   ),
                                   Expanded(
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        context.pushNamed('ThumbnailCategory');
                                       },
                                       text: 'เลือกรูปภาพ',
                                       icon: Icon(
