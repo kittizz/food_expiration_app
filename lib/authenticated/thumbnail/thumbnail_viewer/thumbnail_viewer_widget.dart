@@ -14,9 +14,11 @@ class ThumbnailViewerWidget extends StatefulWidget {
   const ThumbnailViewerWidget({
     Key? key,
     this.image,
+    this.name,
   }) : super(key: key);
 
   final String? image;
+  final String? name;
 
   @override
   _ThumbnailViewerWidgetState createState() => _ThumbnailViewerWidgetState();

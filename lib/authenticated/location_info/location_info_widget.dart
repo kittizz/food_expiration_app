@@ -84,7 +84,48 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                       FlutterFlowTheme.of(context).titleLargeFamily),
                 ),
           ),
-          actions: [],
+          actions: [
+            Visibility(
+              visible: widget.isAdd == false,
+              child: Align(
+                alignment: AlignmentDirectional(1.0, 0.0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed(
+                        'LocationInfo',
+                        queryParameters: {
+                          'title': serializeParam(
+                            'เพิ่มสถานที่',
+                            ParamType.String,
+                          ),
+                          'isAdd': serializeParam(
+                            true,
+                            ParamType.bool,
+                          ),
+                        }.withoutNulls,
+                      );
+                    },
+                    child: Text(
+                      'ลบสถานที่จัดเก็บ',
+                      style: FlutterFlowTheme.of(context).bodyLarge.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyLargeFamily,
+                            color: FlutterFlowTheme.of(context).error,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyLargeFamily),
+                          ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
           centerTitle: false,
           elevation: 0.0,
         ),
@@ -456,48 +497,6 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    FlutterFlowIconButton(
-                                      borderColor: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      borderRadius: 50.0,
-                                      borderWidth: 1.0,
-                                      buttonSize: 50.0,
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 24.0,
-                                      ),
-                                      onPressed: () async {
-                                        var confirmDialogResponse =
-                                            await showDialog<bool>(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      title: Text('ลบรายการ'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  false),
-                                                          child: Text('ยกเลิก'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  true),
-                                                          child: Text('ยืนยัน'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                ) ??
-                                                false;
-                                      },
-                                    ),
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () {

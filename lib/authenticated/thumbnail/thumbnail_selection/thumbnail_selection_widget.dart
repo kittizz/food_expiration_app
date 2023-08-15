@@ -101,6 +101,10 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                             'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
                             ParamType.String,
                           ),
+                          'name': serializeParam(
+                            'เลย์',
+                            ParamType.String,
+                          ),
                         }.withoutNulls,
                       );
                     },

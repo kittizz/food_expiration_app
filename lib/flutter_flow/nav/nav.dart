@@ -202,6 +202,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/thumbnailViewer',
           builder: (context, params) => ThumbnailViewerWidget(
             image: params.getParam('image', ParamType.String),
+            name: params.getParam('name', ParamType.String),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

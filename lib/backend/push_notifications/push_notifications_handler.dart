@@ -160,6 +160,7 @@ final parametersBuilderMap =
   'ThumbnailViewer': (data) async => ParameterData(
         allParams: {
           'image': getParameter<String>(data, 'image'),
+          'name': getParameter<String>(data, 'name'),
         },
       ),
 };
