@@ -162,12 +162,12 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               alignment: AlignmentDirectional(1.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 55.0, 12.0, 0.0),
+                                    0.0, 40.0, 12.0, 0.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.asset(
                                     'assets/images/banner-onlygf.png',
-                                    height: 120.0,
+                                    height: 140.0,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
