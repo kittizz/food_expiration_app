@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
+import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -421,6 +422,8 @@ class _SignupWidgetState extends State<SignupWidget> {
                           if (user == null) {
                             return;
                           }
+
+                          await action_blocks.registerDevice(context);
 
                           context.goNamedAuth('Home', context.mounted);
                         },
