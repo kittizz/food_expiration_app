@@ -57,5 +57,5 @@ String getDateStatus(
 }
 
 String getImage(String path) {
-  return "https://th-bkk-1.xvercloud.com" + path;
+  return "https://th-bkk-1.xvercloud.com/food-expiration/" + path;
 }

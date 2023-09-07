@@ -36,6 +36,10 @@ class HomeModel extends FlutterFlowModel {
   ApiCallResponse? apiBlogRecommendOutput;
   // Stores action output result for [Custom Action - toBlogStructList] action in Home widget.
   List<BlogStruct>? bloglist;
+  // Stores action output result for [Backend Call - API (blogRecommend)] action in Column widget.
+  ApiCallResponse? apiBlogRecommendOutputCopy;
+  // Stores action output result for [Custom Action - toBlogStructList] action in Column widget.
+  List<BlogStruct>? bloglistCopy;
   // Models for BlogCard dynamic component.
   late FlutterFlowDynamicModels<BlogCardModel> blogCardModels;
 
