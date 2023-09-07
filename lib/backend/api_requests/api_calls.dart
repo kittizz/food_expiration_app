@@ -23,6 +23,7 @@ class FoodexpirationGroup {
   static BlogAllCall blogAllCall = BlogAllCall();
   static LocationListCall locationListCall = LocationListCall();
   static DeleteLocationCall deleteLocationCall = DeleteLocationCall();
+  static UploadImageCall uploadImageCall = UploadImageCall();
 }
 
 class RegisterDeviceCall {
@@ -70,6 +71,7 @@ class GetUserCall {
       callType: ApiCallType.GET,
       headers: {
         ...FoodexpirationGroup.headers,
+        'device-Id': '${deviceId}',
       },
       params: {
         'deviceId': deviceId,
@@ -213,6 +215,31 @@ class DeleteLocationCall {
         'deviceId': deviceId,
         'id': id,
       },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class UploadImageCall {
+  Future<ApiCallResponse> call({
+    String? deviceId = '',
+    FFUploadedFile? file,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'uploadImage',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/image/upload',
+      callType: ApiCallType.POST,
+      headers: {
+        ...FoodexpirationGroup.headers,
+        'device-Id': '${deviceId}',
+      },
+      params: {
+        'file': file,
+      },
+      bodyType: BodyType.MULTIPART,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
