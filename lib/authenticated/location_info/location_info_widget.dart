@@ -287,6 +287,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                           context: context,
                                           imageQuality: 100,
                                           allowPhoto: true,
+                                          includeBlurHash: true,
                                         );
                                         if (selectedMedia != null &&
                                             selectedMedia.every((m) =>
