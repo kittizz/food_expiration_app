@@ -150,9 +150,13 @@ class BlogByIDCall {
         response,
         r'''$.content''',
       );
-  dynamic image(dynamic response) => getJsonField(
+  dynamic imagePath(dynamic response) => getJsonField(
         response,
-        r'''$.image''',
+        r'''$.Image.Path''',
+      );
+  dynamic imageBlurHash(dynamic response) => getJsonField(
+        response,
+        r'''$.Image.BlurHash''',
       );
 }
 
