@@ -338,6 +338,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                   .call(
                                             file: _model.uploadedLocalFile,
                                             deviceId: FFAppState().deviceId,
+                                            hash: _model
+                                                .uploadedLocalFile.blurHash,
                                           );
                                           _shouldSetState = true;
                                         } else {

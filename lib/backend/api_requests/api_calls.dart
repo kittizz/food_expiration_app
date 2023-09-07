@@ -228,6 +228,7 @@ class UploadImageCall {
   Future<ApiCallResponse> call({
     String? deviceId = '',
     FFUploadedFile? file,
+    String? hash = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'uploadImage',
