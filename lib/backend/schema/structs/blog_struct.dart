@@ -13,7 +13,7 @@ class BlogStruct extends FFFirebaseStruct {
     String? createdAt,
     String? title,
     String? content,
-    String? image,
+    ImageStruct? image,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _createdAt = createdAt,
@@ -47,10 +47,12 @@ class BlogStruct extends FFFirebaseStruct {
   set content(String? val) => _content = val;
   bool hasContent() => _content != null;
 
-  // "image" field.
-  String? _image;
-  String get image => _image ?? '';
-  set image(String? val) => _image = val;
+  // "Image" field.
+  ImageStruct? _image;
+  ImageStruct get image => _image ?? ImageStruct();
+  set image(ImageStruct? val) => _image = val;
+  void updateImage(Function(ImageStruct) updateFn) =>
+      updateFn(_image ??= ImageStruct());
   bool hasImage() => _image != null;
 
   static BlogStruct fromMap(Map<String, dynamic> data) => BlogStruct(
@@ -58,7 +60,7 @@ class BlogStruct extends FFFirebaseStruct {
         createdAt: data['createdAt'] as String?,
         title: data['title'] as String?,
         content: data['content'] as String?,
-        image: data['image'] as String?,
+        image: ImageStruct.maybeFromMap(data['Image']),
       );
 
   static BlogStruct? maybeFromMap(dynamic data) =>
@@ -69,7 +71,7 @@ class BlogStruct extends FFFirebaseStruct {
         'createdAt': _createdAt,
         'title': _title,
         'content': _content,
-        'image': _image,
+        'Image': _image?.toMap(),
       }.withoutNulls;
 
   @override
@@ -90,9 +92,9 @@ class BlogStruct extends FFFirebaseStruct {
           _content,
           ParamType.String,
         ),
-        'image': serializeParam(
+        'Image': serializeParam(
           _image,
-          ParamType.String,
+          ParamType.DataStruct,
         ),
       }.withoutNulls;
 
@@ -118,10 +120,11 @@ class BlogStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        image: deserializeParam(
-          data['image'],
-          ParamType.String,
+        image: deserializeStructParam(
+          data['Image'],
+          ParamType.DataStruct,
           false,
+          structBuilder: ImageStruct.fromSerializableMap,
         ),
       );
 
@@ -148,7 +151,7 @@ BlogStruct createBlogStruct({
   String? createdAt,
   String? title,
   String? content,
-  String? image,
+  ImageStruct? image,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -159,7 +162,7 @@ BlogStruct createBlogStruct({
       createdAt: createdAt,
       title: title,
       content: content,
-      image: image,
+      image: image ?? (clearUnsetFields ? ImageStruct() : null),
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
@@ -213,6 +216,14 @@ Map<String, dynamic> getBlogFirestoreData(
     return {};
   }
   final firestoreData = mapToFirestore(blog.toMap());
+
+  // Handle nested data for "Image" field.
+  addImageStructData(
+    firestoreData,
+    blog.hasImage() ? blog.image : null,
+    'Image',
+    forFieldValue,
+  );
 
   // Add any Firestore field values
   blog.firestoreUtilData.fieldValues.forEach((k, v) => firestoreData[k] = v);

@@ -44,6 +44,12 @@ class FFAppState extends ChangeNotifier {
   set isDebug(bool _value) {
     _isDebug = _value;
   }
+
+  String _cdn = 'th-bkk-1.xvercloud.com';
+  String get cdn => _cdn;
+  set cdn(String _value) {
+    _cdn = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

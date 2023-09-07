@@ -55,3 +55,7 @@ String getDateStatus(
 
   return result;
 }
+
+String getImage(String path) {
+  return "https://th-bkk-1.xvercloud.com" + path;
+}

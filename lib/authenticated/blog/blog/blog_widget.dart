@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -126,8 +127,9 @@ class _BlogWidgetState extends State<BlogWidget> {
                                   'Key0z1_${listIndex.toString()}',
                                 ),
                                 blogId: listItem.id,
-                                image: listItem.image,
+                                image: functions.getImage(listItem.image.path),
                                 title: listItem.title,
+                                blurHash: listItem.image.blurHash,
                               ),
                             );
                           }),

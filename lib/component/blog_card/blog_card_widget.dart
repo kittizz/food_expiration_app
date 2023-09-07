@@ -14,11 +14,13 @@ class BlogCardWidget extends StatefulWidget {
     this.blogId,
     required this.image,
     required this.title,
+    this.blurHash,
   }) : super(key: key);
 
   final int? blogId;
   final String? image;
   final String? title;
+  final String? blurHash;
 
   @override
   _BlogCardWidgetState createState() => _BlogCardWidgetState();
@@ -76,8 +78,13 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                widget.image!,
+              child: OctoImage(
+                placeholderBuilder: OctoPlaceholder.blurHash(
+                  widget.blurHash!,
+                ),
+                image: NetworkImage(
+                  widget.image!,
+                ),
                 width: double.infinity,
                 height: 160.0,
                 fit: BoxFit.cover,
