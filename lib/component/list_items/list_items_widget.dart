@@ -95,7 +95,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
             width: MediaQuery.sizeOf(context).width * 1.0,
             height: 45.0,
             decoration: BoxDecoration(),
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: AlignmentDirectional(-1.00, 0.00),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

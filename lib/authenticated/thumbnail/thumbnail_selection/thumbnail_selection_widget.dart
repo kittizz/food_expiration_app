@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -152,7 +153,7 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                                   ),
                                 ),
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.0, 1.0),
+                                  alignment: AlignmentDirectional(0.00, 1.00),
                                   child: Text(
                                     'ทะเล',
                                     style: FlutterFlowTheme.of(context)
@@ -197,7 +198,7 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                                   ),
                                 ),
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.0, 1.0),
+                                  alignment: AlignmentDirectional(0.00, 1.00),
                                   child: Text(
                                     'ทะเล',
                                     style: FlutterFlowTheme.of(context)

@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -159,7 +160,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                         child: Stack(
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(1.0, 0.0),
+                              alignment: AlignmentDirectional(1.00, 0.00),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 40.0, 12.0, 0.0),
@@ -226,13 +227,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.0, 1.0),
+                      alignment: AlignmentDirectional(0.00, 1.00),
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         height: 220.0,
                         decoration: BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(0.0, 1.0),
+                          alignment: AlignmentDirectional(0.00, 1.00),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 8.0, 12.0, 0.0),

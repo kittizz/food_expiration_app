@@ -1,7 +1,9 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -88,7 +90,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
             Visibility(
               visible: widget.isAdd == false,
               child: Align(
-                alignment: AlignmentDirectional(1.0, 0.0),
+                alignment: AlignmentDirectional(1.00, 0.00),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
                   child: InkWell(
@@ -278,8 +280,71 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                 children: [
                                   Expanded(
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        var _shouldSetState = false;
+                                        final selectedMedia =
+                                            await selectMediaWithSourceBottomSheet(
+                                          context: context,
+                                          imageQuality: 100,
+                                          allowPhoto: true,
+                                        );
+                                        if (selectedMedia != null &&
+                                            selectedMedia.every((m) =>
+                                                validateFileFormat(
+                                                    m.storagePath, context))) {
+                                          setState(() =>
+                                              _model.isDataUploading = true);
+                                          var selectedUploadedFiles =
+                                              <FFUploadedFile>[];
+
+                                          try {
+                                            selectedUploadedFiles =
+                                                selectedMedia
+                                                    .map((m) => FFUploadedFile(
+                                                          name: m.storagePath
+                                                              .split('/')
+                                                              .last,
+                                                          bytes: m.bytes,
+                                                          height: m.dimensions
+                                                              ?.height,
+                                                          width: m.dimensions
+                                                              ?.width,
+                                                          blurHash: m.blurHash,
+                                                        ))
+                                                    .toList();
+                                          } finally {
+                                            _model.isDataUploading = false;
+                                          }
+                                          if (selectedUploadedFiles.length ==
+                                              selectedMedia.length) {
+                                            setState(() {
+                                              _model.uploadedLocalFile =
+                                                  selectedUploadedFiles.first;
+                                            });
+                                          } else {
+                                            setState(() {});
+                                            return;
+                                          }
+                                        }
+
+                                        if (_model.uploadedLocalFile != null &&
+                                            (_model.uploadedLocalFile.bytes
+                                                    ?.isNotEmpty ??
+                                                false)) {
+                                          _model.apiResultp50 =
+                                              await FoodexpirationGroup
+                                                  .uploadImageCall
+                                                  .call(
+                                            file: _model.uploadedLocalFile,
+                                            deviceId: FFAppState().deviceId,
+                                          );
+                                          _shouldSetState = true;
+                                        } else {
+                                          if (_shouldSetState) setState(() {});
+                                          return;
+                                        }
+
+                                        if (_shouldSetState) setState(() {});
                                       },
                                       text: 'อัปโหลด',
                                       icon: Icon(

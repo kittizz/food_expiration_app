@@ -2,6 +2,7 @@ import '/component/list_items/list_items_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -84,7 +85,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: AlignmentDirectional(0.00, 1.00),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(12.0, 8.0, 12.0, 0.0),
                   child: Container(

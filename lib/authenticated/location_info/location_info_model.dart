@@ -1,7 +1,9 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +19,12 @@ class LocationInfoModel extends FlutterFlowModel {
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
+  // Stores action output result for [Backend Call - API (uploadImage)] action in Button widget.
+  ApiCallResponse? apiResultp50;
   // State field(s) for NameField widget.
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;

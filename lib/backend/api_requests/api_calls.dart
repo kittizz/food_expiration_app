@@ -30,7 +30,7 @@ class RegisterDeviceCall {
   Future<ApiCallResponse> call({
     String? authToken = 'no',
   }) {
-    final body = '''
+    final ffApiRequestBody = '''
 {
   "auth_token": "${authToken}"
 }''';
@@ -42,7 +42,7 @@ class RegisterDeviceCall {
         ...FoodexpirationGroup.headers,
       },
       params: {},
-      body: body,
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,

@@ -282,6 +282,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                               context.pushNamed('Signin');
                             },
                             child: RichText(
+                              textScaleFactor:
+                                  MediaQuery.of(context).textScaleFactor,
                               text: TextSpan(
                                 children: [
                                   TextSpan(
