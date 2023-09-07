@@ -71,11 +71,9 @@ class GetUserCall {
       callType: ApiCallType.GET,
       headers: {
         ...FoodexpirationGroup.headers,
-        'device-Id': '${deviceId}',
+        'x-device-id': '${deviceId}',
       },
-      params: {
-        'deviceId': deviceId,
-      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -90,6 +88,10 @@ class GetUserCall {
   dynamic signInProvider(dynamic response) => getJsonField(
         response,
         r'''$.signInProvider''',
+      );
+  dynamic role(dynamic response) => getJsonField(
+        response,
+        r'''$.role''',
       );
 }
 
@@ -182,10 +184,9 @@ class LocationListCall {
       callType: ApiCallType.GET,
       headers: {
         ...FoodexpirationGroup.headers,
+        'x-device-id': '${deviceId}',
       },
-      params: {
-        'deviceId': deviceId,
-      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -210,9 +211,9 @@ class DeleteLocationCall {
       callType: ApiCallType.DELETE,
       headers: {
         ...FoodexpirationGroup.headers,
+        'x-device-id': '${deviceId}',
       },
       params: {
-        'deviceId': deviceId,
         'id': id,
       },
       returnBody: true,
@@ -234,7 +235,7 @@ class UploadImageCall {
       callType: ApiCallType.POST,
       headers: {
         ...FoodexpirationGroup.headers,
-        'device-Id': '${deviceId}',
+        'x-device-id': '${deviceId}',
       },
       params: {
         'file': file,
