@@ -97,58 +97,60 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
             ),
             body: SafeArea(
               top: true,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(0.0),
-                    child: OctoImage(
-                      placeholderBuilder: OctoPlaceholder.blurHash(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(0.0),
+                      child: OctoImage(
+                        placeholderBuilder: OctoPlaceholder.blurHash(
+                          FoodexpirationGroup.blogByIDCall
+                              .imageBlurHash(
+                                blogPostBlogByIDResponse.jsonBody,
+                              )
+                              .toString(),
+                        ),
+                        image: NetworkImage(
+                          functions.getImage(FoodexpirationGroup.blogByIDCall
+                              .imagePath(
+                                blogPostBlogByIDResponse.jsonBody,
+                              )
+                              .toString()),
+                        ),
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: 200.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 0.0, 0.0),
+                      child: Text(
                         FoodexpirationGroup.blogByIDCall
-                            .imageBlurHash(
+                            .title(
+                              blogPostBlogByIDResponse.jsonBody,
+                            )
+                            .toString(),
+                        style: FlutterFlowTheme.of(context).headlineSmall,
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: MediaQuery.sizeOf(context).height * 1.0,
+                      child: custom_widgets.MarkdownWidget(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: MediaQuery.sizeOf(context).height * 1.0,
+                        content: FoodexpirationGroup.blogByIDCall
+                            .content(
                               blogPostBlogByIDResponse.jsonBody,
                             )
                             .toString(),
                       ),
-                      image: NetworkImage(
-                        functions.getImage(FoodexpirationGroup.blogByIDCall
-                            .imagePath(
-                              blogPostBlogByIDResponse.jsonBody,
-                            )
-                            .toString()),
-                      ),
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: 200.0,
-                      fit: BoxFit.cover,
                     ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 0.0, 0.0),
-                    child: Text(
-                      FoodexpirationGroup.blogByIDCall
-                          .title(
-                            blogPostBlogByIDResponse.jsonBody,
-                          )
-                          .toString(),
-                      style: FlutterFlowTheme.of(context).headlineSmall,
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.sizeOf(context).width * 1.0,
-                    height: MediaQuery.sizeOf(context).height * 1.0,
-                    child: custom_widgets.MarkdownWidget(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: MediaQuery.sizeOf(context).height * 1.0,
-                      content: FoodexpirationGroup.blogByIDCall
-                          .content(
-                            blogPostBlogByIDResponse.jsonBody,
-                          )
-                          .toString(),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
