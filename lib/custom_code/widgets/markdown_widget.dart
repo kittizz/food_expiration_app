@@ -34,6 +34,7 @@ class _MarkdownWidgetState extends State<MarkdownWidget> {
   Widget build(BuildContext context) {
     return Markdown(
       selectable: true,
+      physics: NeverScrollableScrollPhysics(),
       data: widget.content,
     );
   }
