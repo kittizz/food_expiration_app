@@ -148,6 +148,18 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
               _model.bloglistCopy = await actions.toBlogStructList(
                 (_model.apiBlogRecommendOutput?.jsonBody ?? ''),
               );
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'รีเฟรช',
+                    style: TextStyle(
+                      color: FlutterFlowTheme.of(context).primaryText,
+                    ),
+                  ),
+                  duration: Duration(milliseconds: 4000),
+                  backgroundColor: FlutterFlowTheme.of(context).secondary,
+                ),
+              );
               setState(() {
                 _model.blogList = _model.bloglist!.toList().cast<BlogStruct>();
               });
