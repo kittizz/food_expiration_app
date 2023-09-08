@@ -135,26 +135,17 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                       style: FlutterFlowTheme.of(context).headlineSmall,
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: custom_widgets.MarkdownWidget(
-                          width: double.infinity,
-                          height: double.infinity,
-                          content: FoodexpirationGroup.blogByIDCall
-                              .content(
-                                blogPostBlogByIDResponse.jsonBody,
-                              )
-                              .toString(),
-                        ),
-                      ),
+                  Container(
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: MediaQuery.sizeOf(context).height * 1.0,
+                    child: custom_widgets.MarkdownWidget(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: MediaQuery.sizeOf(context).height * 1.0,
+                      content: FoodexpirationGroup.blogByIDCall
+                          .content(
+                            blogPostBlogByIDResponse.jsonBody,
+                          )
+                          .toString(),
                     ),
                   ),
                 ],
