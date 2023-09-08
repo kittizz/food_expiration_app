@@ -99,7 +99,7 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
               top: true,
               child: SingleChildScrollView(
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ClipRRect(
