@@ -99,7 +99,7 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
               top: true,
               child: SingleChildScrollView(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ClipRRect(
@@ -136,17 +136,19 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                         style: FlutterFlowTheme.of(context).headlineSmall,
                       ),
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: MediaQuery.sizeOf(context).height * 1.0,
-                      child: custom_widgets.MarkdownWidget(
-                        width: double.infinity,
-                        height: MediaQuery.sizeOf(context).height * 1.0,
-                        content: FoodexpirationGroup.blogByIDCall
-                            .content(
-                              blogPostBlogByIDResponse.jsonBody,
-                            )
-                            .toString(),
+                    Flexible(
+                      child: Container(
+                        width: 0.0,
+                        height: 0.0,
+                        child: custom_widgets.MarkdownWidget(
+                          width: 0.0,
+                          height: 0.0,
+                          content: FoodexpirationGroup.blogByIDCall
+                              .content(
+                                blogPostBlogByIDResponse.jsonBody,
+                              )
+                              .toString(),
+                        ),
                       ),
                     ),
                   ],
