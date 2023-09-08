@@ -137,10 +137,10 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                       ),
                     ),
                     Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      width: double.infinity,
                       height: MediaQuery.sizeOf(context).height * 1.0,
                       child: custom_widgets.MarkdownWidget(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        width: double.infinity,
                         height: MediaQuery.sizeOf(context).height * 1.0,
                         content: FoodexpirationGroup.blogByIDCall
                             .content(
