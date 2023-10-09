@@ -26,7 +26,7 @@ class MarkdownWidget extends StatefulWidget {
   final double? width;
   final double? height;
   final String content;
-  final String? title;
+  final String title;
   final String image;
 
   @override
