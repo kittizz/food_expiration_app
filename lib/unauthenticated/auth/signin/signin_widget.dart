@@ -44,7 +44,8 @@ class _SigninWidgetState extends State<SigninWidget> {
     _model.emailTextController ??= TextEditingController();
     _model.passwordTextController ??= TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          _model.emailTextController?.text = 'me@kittiza';
+          _model.emailTextController?.text = 'me@kittiza.com';
+          _model.passwordTextController?.text = 'zxc25861';
         }));
   }
 
