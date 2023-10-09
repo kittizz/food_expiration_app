@@ -441,7 +441,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               buttonSize: 75.0,
                               fillColor: FlutterFlowTheme.of(context).red50,
                               icon: Icon(
-                                Icons.archive_outlined,
+                                Icons.restore_from_trash,
                                 color: FlutterFlowTheme.of(context).red300,
                                 size: 30.0,
                               ),
@@ -450,7 +450,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               },
                             ),
                             Text(
-                              'จัดเก็บ',
+                              'ถังขยะ',
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(

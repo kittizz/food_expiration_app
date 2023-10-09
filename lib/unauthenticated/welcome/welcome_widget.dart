@@ -186,7 +186,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                             if (user == null) {
                               return;
                             }
-                            await action_blocks.registerDevice(context);
+                            await action_blocks.registerDevice(
+                              context,
+                              nickname: currentUserDisplayName,
+                            );
 
                             context.goNamedAuth('Home', context.mounted);
                           },
@@ -232,7 +235,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                             if (user == null) {
                               return;
                             }
-                            await action_blocks.registerDevice(context);
+                            await action_blocks.registerDevice(
+                              context,
+                              nickname: currentUserDisplayName,
+                            );
 
                             context.goNamedAuth('Home', context.mounted);
                           },

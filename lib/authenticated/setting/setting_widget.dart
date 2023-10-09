@@ -17,7 +17,8 @@ class SettingWidget extends StatefulWidget {
   _SettingWidgetState createState() => _SettingWidgetState();
 }
 
-class _SettingWidgetState extends State<SettingWidget> {
+class _SettingWidgetState extends State<SettingWidget>
+    with TickerProviderStateMixin {
   late SettingModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -26,6 +27,12 @@ class _SettingWidgetState extends State<SettingWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SettingModel());
+
+    _model.tabBarController = TabController(
+      vsync: this,
+      length: 2,
+      initialIndex: 0,
+    )..addListener(() => setState(() {}));
   }
 
   @override
@@ -66,80 +73,169 @@ class _SettingWidgetState extends State<SettingWidget> {
         centerTitle: false,
         elevation: 0.0,
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-            child: SwitchListTile.adaptive(
-              value: _model.switchListTileValue ??= true,
-              onChanged: (newValue) async {
-                setState(() => _model.switchListTileValue = newValue!);
-              },
-              title: Text(
-                'Push Notifications',
-                style: FlutterFlowTheme.of(context).bodyLarge.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyLargeFamily),
-                      lineHeight: 2.0,
+      body: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment(0.0, 0),
+                    child: TabBar(
+                      labelColor: FlutterFlowTheme.of(context).primaryText,
+                      unselectedLabelColor:
+                          FlutterFlowTheme.of(context).secondaryText,
+                      labelStyle: FlutterFlowTheme.of(context).titleMedium,
+                      unselectedLabelStyle: TextStyle(),
+                      indicatorColor: FlutterFlowTheme.of(context).red400,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
+                      tabs: [
+                        Tab(
+                          text: 'แจ้งเตือน',
+                        ),
+                        Tab(
+                          text: 'บัญชี',
+                        ),
+                      ],
+                      controller: _model.tabBarController,
                     ),
-              ),
-              subtitle: Text(
-                'รับการแจ้งเตือนจากแอปพลิเคชัน',
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                      color: Color(0xFF8B97A2),
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
-                    ),
-              ),
-              tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-              activeColor: FlutterFlowTheme.of(context).primary,
-              activeTrackColor: FlutterFlowTheme.of(context).accent1,
-              dense: false,
-              controlAffinity: ListTileControlAffinity.trailing,
-              contentPadding:
-                  EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 24.0, 12.0),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-            child: FFButtonWidget(
-              onPressed: () async {
-                GoRouter.of(context).prepareAuthEvent();
-                await authManager.signOut();
-                GoRouter.of(context).clearRedirectLocation();
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _model.tabBarController,
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            SwitchListTile.adaptive(
+                              value: _model.switchListTileValue ??= true,
+                              onChanged: (newValue) async {
+                                setState(() =>
+                                    _model.switchListTileValue = newValue!);
+                              },
+                              title: Text(
+                                'Push Notifications',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLargeFamily),
+                                      lineHeight: 2.0,
+                                    ),
+                              ),
+                              subtitle: Text(
+                                'รับการแจ้งเตือนจากแอปพลิเคชัน',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
+                                      color: Color(0xFF8B97A2),
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
+                                    ),
+                              ),
+                              tileColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              activeColor: FlutterFlowTheme.of(context).red400,
+                              activeTrackColor:
+                                  FlutterFlowTheme.of(context).red200,
+                              dense: false,
+                              controlAffinity: ListTileControlAffinity.trailing,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 12.0, 24.0, 12.0),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  width: 200.0,
+                                  height: 200.0,
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Image.network(
+                                    'https://picsum.photos/seed/398/600',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.edit,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 24.0, 0.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  GoRouter.of(context).prepareAuthEvent();
+                                  await authManager.signOut();
+                                  GoRouter.of(context).clearRedirectLocation();
 
-                setState(() {
-                  FFAppState().deviceId = '';
-                });
+                                  setState(() {
+                                    FFAppState().deviceId = '';
+                                  });
 
-                context.goNamedAuth('Welcome', context.mounted);
-              },
-              text: 'ลงชื่อออก',
-              options: FFButtonOptions(
-                width: 190.0,
-                height: 50.0,
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                color: FlutterFlowTheme.of(context).red300,
-                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                      fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
-                      color: Colors.white,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).titleSmallFamily),
+                                  context.goNamedAuth(
+                                      'Welcome', context.mounted);
+                                },
+                                text: 'ลงชื่อออก',
+                                options: FFButtonOptions(
+                                  width: 190.0,
+                                  height: 50.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).red300,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleSmallFamily,
+                                        color: Colors.white,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily),
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                elevation: 3.0,
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 1.0,
-                ),
-                borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

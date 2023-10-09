@@ -8,11 +8,15 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Future registerDevice(BuildContext context) async {
+Future registerDevice(
+  BuildContext context, {
+  String? nickname,
+}) async {
   ApiCallResponse? apiResultou6;
 
   apiResultou6 = await FoodexpirationGroup.registerDeviceCall.call(
     authToken: currentJwtToken,
+    nickname: nickname,
   );
   if ((apiResultou6?.succeeded ?? true)) {
     FFAppState().update(() {

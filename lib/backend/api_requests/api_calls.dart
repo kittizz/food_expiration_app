@@ -28,6 +28,7 @@ class FoodexpirationGroup {
 class RegisterDeviceCall {
   Future<ApiCallResponse> call({
     String? authToken = 'no',
+    String? nickname = '',
   }) {
     final ffApiRequestBody = '''
 {

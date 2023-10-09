@@ -42,6 +42,7 @@ class _SignupWidgetState extends State<SignupWidget> {
     }
 
     _model.emailTextController ??= TextEditingController();
+    _model.textController1 ??= TextEditingController();
     _model.passwordTextController ??= TextEditingController();
     _model.confirmPasswordTextController ??= TextEditingController();
   }
@@ -139,6 +140,80 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 controller: _model.emailTextController,
                                 obscureText: false,
                                 decoration: InputDecoration(
+                                  labelText: 'Nickname',
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).labelLarge,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  errorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedErrorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  filled: true,
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 16.0, 16.0, 8.0),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLargeFamily),
+                                      lineHeight: 3.0,
+                                    ),
+                                validator: _model.emailTextControllerValidator
+                                    .asValidator(context),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 12.0, 16.0, 0.0),
+                              child: TextFormField(
+                                controller: _model.textController1,
+                                obscureText: false,
+                                decoration: InputDecoration(
                                   labelText: 'Email Address',
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
@@ -203,7 +278,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                       lineHeight: 3.0,
                                     ),
                                 keyboardType: TextInputType.emailAddress,
-                                validator: _model.emailTextControllerValidator
+                                validator: _model.textController1Validator
                                     .asValidator(context),
                               ),
                             ),
@@ -425,7 +500,10 @@ class _SignupWidgetState extends State<SignupWidget> {
                             return;
                           }
 
-                          await action_blocks.registerDevice(context);
+                          await action_blocks.registerDevice(
+                            context,
+                            nickname: _model.emailTextController.text,
+                          );
 
                           context.goNamedAuth('Home', context.mounted);
                         },
