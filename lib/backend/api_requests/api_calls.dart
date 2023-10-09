@@ -23,6 +23,7 @@ class FoodexpirationGroup {
   static LocationListCall locationListCall = LocationListCall();
   static DeleteLocationCall deleteLocationCall = DeleteLocationCall();
   static UploadImageCall uploadImageCall = UploadImageCall();
+  static GetBannerCall getBannerCall = GetBannerCall();
 }
 
 class RegisterDeviceCall {
@@ -256,6 +257,33 @@ class UploadImageCall {
       cache: false,
     );
   }
+}
+
+class GetBannerCall {
+  Future<ApiCallResponse> call() {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getBanner',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/image/banner',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic banner(dynamic response) => getJsonField(
+        response,
+        r'''$.banner''',
+      );
+  dynamic blurhash(dynamic response) => getJsonField(
+        response,
+        r'''$.blurhash''',
+      );
 }
 
 /// End foodexpiration Group Code
