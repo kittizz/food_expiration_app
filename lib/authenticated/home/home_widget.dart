@@ -74,7 +74,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
               .toString()
               .toString();
         });
-        _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();
       } else {
         FFAppState().deviceId = '';
         GoRouter.of(context).prepareAuthEvent();
@@ -204,26 +203,40 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 40.0, 12.0, 0.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: CachedNetworkImage(
-                                      fadeInDuration:
-                                          Duration(milliseconds: 500),
-                                      fadeOutDuration:
-                                          Duration(milliseconds: 500),
-                                      imageUrl: FoodexpirationGroup
-                                          .getBannerCall
-                                          .banner(
-                                        (_model.apiBanner?.jsonBody ?? ''),
-                                      ),
-                                      height: 140.0,
-                                      fit: BoxFit.cover,
-                                      errorWidget:
-                                          (context, error, stackTrace) =>
-                                              Image.asset(
-                                        'assets/images/error_image.png',
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      _model.apibanner =
+                                          await FoodexpirationGroup
+                                              .getBannerCall
+                                              .call();
+
+                                      setState(() {});
+                                    },
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: CachedNetworkImage(
+                                        fadeInDuration:
+                                            Duration(milliseconds: 500),
+                                        fadeOutDuration:
+                                            Duration(milliseconds: 500),
+                                        imageUrl: FoodexpirationGroup
+                                            .getBannerCall
+                                            .banner(
+                                          (_model.apibanner?.jsonBody ?? ''),
+                                        ),
                                         height: 140.0,
                                         fit: BoxFit.cover,
+                                        errorWidget:
+                                            (context, error, stackTrace) =>
+                                                Image.asset(
+                                          'assets/images/error_image.png',
+                                          height: 140.0,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                   ),
