@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import '../../flutter_flow/flutter_flow_util.dart';
-
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -39,7 +38,7 @@ class RegisterDeviceCall {
       apiUrl: '${FoodexpirationGroup.baseUrl}/user/register-device',
       callType: ApiCallType.POST,
       headers: {
-        ...FoodexpirationGroup.headers,
+        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -70,7 +69,7 @@ class GetUserCall {
       apiUrl: '${FoodexpirationGroup.baseUrl}/user',
       callType: ApiCallType.GET,
       headers: {
-        ...FoodexpirationGroup.headers,
+        'Content-Type': 'application/json',
         'x-device-id': '${deviceId}',
       },
       params: {},
@@ -102,7 +101,7 @@ class BlogRecommendCall {
       apiUrl: '${FoodexpirationGroup.baseUrl}/blog/recommend',
       callType: ApiCallType.GET,
       headers: {
-        ...FoodexpirationGroup.headers,
+        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -122,7 +121,7 @@ class BlogByIDCall {
       apiUrl: '${FoodexpirationGroup.baseUrl}/blog/query',
       callType: ApiCallType.GET,
       headers: {
-        ...FoodexpirationGroup.headers,
+        'Content-Type': 'application/json',
       },
       params: {
         'id': id,
@@ -167,7 +166,7 @@ class BlogAllCall {
       apiUrl: '${FoodexpirationGroup.baseUrl}/blog/all',
       callType: ApiCallType.GET,
       headers: {
-        ...FoodexpirationGroup.headers,
+        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -187,7 +186,7 @@ class LocationListCall {
       apiUrl: '${FoodexpirationGroup.baseUrl}/location/list',
       callType: ApiCallType.GET,
       headers: {
-        ...FoodexpirationGroup.headers,
+        'Content-Type': 'application/json',
         'x-device-id': '${deviceId}',
       },
       params: {},
@@ -214,7 +213,7 @@ class DeleteLocationCall {
       apiUrl: '${FoodexpirationGroup.baseUrl}/location',
       callType: ApiCallType.DELETE,
       headers: {
-        ...FoodexpirationGroup.headers,
+        'Content-Type': 'application/json',
         'x-device-id': '${deviceId}',
       },
       params: {
@@ -239,7 +238,7 @@ class UploadImageCall {
       apiUrl: '${FoodexpirationGroup.baseUrl}/image/upload',
       callType: ApiCallType.POST,
       headers: {
-        ...FoodexpirationGroup.headers,
+        'Content-Type': 'application/json',
         'x-device-id': '${deviceId}',
       },
       params: {

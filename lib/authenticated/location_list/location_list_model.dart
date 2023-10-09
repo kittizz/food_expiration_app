@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import 'location_list_widget.dart' show LocationListWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -13,13 +14,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class LocationListModel extends FlutterFlowModel {
+class LocationListModel extends FlutterFlowModel<LocationListWidget> {
   ///  Local state fields for this page.
 
   List<LocationStruct> locationList = [];
   void addToLocationList(LocationStruct item) => locationList.add(item);
   void removeFromLocationList(LocationStruct item) => locationList.remove(item);
   void removeAtIndexFromLocationList(int index) => locationList.removeAt(index);
+  void insertAtIndexInLocationList(int index, LocationStruct item) =>
+      locationList.insert(index, item);
   void updateLocationListAtIndex(
           int index, Function(LocationStruct) updateFn) =>
       locationList[index] = updateFn(locationList[index]);

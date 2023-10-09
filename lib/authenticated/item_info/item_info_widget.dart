@@ -55,7 +55,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).grey50,
@@ -667,7 +669,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             );
 
                                             if (_datePickedDate != null) {
-                                              setState(() {
+                                              safeSetState(() {
                                                 _model.datePicked = DateTime(
                                                   _datePickedDate.year,
                                                   _datePickedDate.month,

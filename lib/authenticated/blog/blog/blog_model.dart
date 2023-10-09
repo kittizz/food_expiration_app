@@ -8,19 +8,22 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'blog_widget.dart' show BlogWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class BlogModel extends FlutterFlowModel {
+class BlogModel extends FlutterFlowModel<BlogWidget> {
   ///  Local state fields for this page.
 
   List<BlogStruct> pageBlogList = [];
   void addToPageBlogList(BlogStruct item) => pageBlogList.add(item);
   void removeFromPageBlogList(BlogStruct item) => pageBlogList.remove(item);
   void removeAtIndexFromPageBlogList(int index) => pageBlogList.removeAt(index);
+  void insertAtIndexInPageBlogList(int index, BlogStruct item) =>
+      pageBlogList.insert(index, item);
   void updatePageBlogListAtIndex(int index, Function(BlogStruct) updateFn) =>
       pageBlogList[index] = updateFn(pageBlogList[index]);
 
