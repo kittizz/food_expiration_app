@@ -144,6 +144,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         body: SafeArea(
           top: true,
           child: RefreshIndicator(
+            color: FlutterFlowTheme.of(context).red200,
             onRefresh: () async {
               _model.apiBlogRecommendOutputCopy =
                   await FoodexpirationGroup.blogRecommendCall.call();

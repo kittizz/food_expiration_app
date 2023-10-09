@@ -4,11 +4,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'blog_post_model.dart';
 export 'blog_post_model.dart';
@@ -103,40 +101,6 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(0.0),
-                    child: OctoImage(
-                      placeholderBuilder: OctoPlaceholder.blurHash(
-                        FoodexpirationGroup.blogByIDCall
-                            .imageBlurHash(
-                              blogPostBlogByIDResponse.jsonBody,
-                            )
-                            .toString(),
-                      ),
-                      image: NetworkImage(
-                        functions.getImage(FoodexpirationGroup.blogByIDCall
-                            .imagePath(
-                              blogPostBlogByIDResponse.jsonBody,
-                            )
-                            .toString()),
-                      ),
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: 200.0,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 0.0, 0.0),
-                    child: Text(
-                      FoodexpirationGroup.blogByIDCall
-                          .title(
-                            blogPostBlogByIDResponse.jsonBody,
-                          )
-                          .toString(),
-                      style: FlutterFlowTheme.of(context).headlineSmall,
-                    ),
-                  ),
                   Flexible(
                     child: Container(
                       width: double.infinity,
@@ -153,6 +117,14 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                                 blogPostBlogByIDResponse.jsonBody,
                               )
                               .toString(),
+                          title: FoodexpirationGroup.blogByIDCall
+                              .title(
+                                blogPostBlogByIDResponse.jsonBody,
+                              )
+                              .toString(),
+                          image: FoodexpirationGroup.blogByIDCall.imagePath(
+                            blogPostBlogByIDResponse.jsonBody,
+                          ),
                         ),
                       ),
                     ),

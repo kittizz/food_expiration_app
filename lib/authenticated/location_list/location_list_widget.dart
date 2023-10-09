@@ -191,6 +191,7 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                 builder: (context) {
                   final list = _model.locationList.toList();
                   return RefreshIndicator(
+                    color: FlutterFlowTheme.of(context).red200,
                     onRefresh: () async {
                       await _model.loadLocations(context);
                       setState(() {});

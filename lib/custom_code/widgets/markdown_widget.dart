@@ -19,11 +19,15 @@ class MarkdownWidget extends StatefulWidget {
     this.width,
     this.height,
     required this.content,
+    this.title,
+    required this.image,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final String content;
+  final String? title;
+  final String image;
 
   @override
   _MarkdownWidgetState createState() => _MarkdownWidgetState();
@@ -35,7 +39,12 @@ class _MarkdownWidgetState extends State<MarkdownWidget> {
     return Markdown(
       selectable: true,
       // physics: NeverScrollableScrollPhysics(),
-      data: widget.content,
+      data: "![title](" +
+          widget.image +
+          ")\n## " +
+          widget.title +
+          "\n" +
+          widget.content,
     );
   }
 }
