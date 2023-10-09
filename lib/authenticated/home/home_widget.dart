@@ -64,7 +64,16 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
       _model.apiResulturm = await FoodexpirationGroup.getUserCall.call(
         deviceId: FFAppState().deviceId,
       );
-      if (!(_model.apiResulturm?.succeeded ?? true)) {
+      if ((_model.apiResulturm?.succeeded ?? true)) {
+        setState(() {
+          FFAppState().nickname = FoodexpirationGroup.getUserCall
+              .nickname(
+                (_model.apiResulturm?.jsonBody ?? ''),
+              )
+              .toString()
+              .toString();
+        });
+      } else {
         FFAppState().deviceId = '';
         GoRouter.of(context).prepareAuthEvent();
         await authManager.signOut();
@@ -74,6 +83,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
 
         return;
       }
+
       if (animationsMap['iconOnActionTriggerAnimation'] != null) {
         await animationsMap['iconOnActionTriggerAnimation']!.controller
           ..reset()
@@ -211,22 +221,24 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Flexible(
-                                      child: Text(
-                                        'สวัสดีคุณ ${currentUserEmail}',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLargeFamily,
-                                              fontSize: 20.0,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLargeFamily),
-                                            ),
+                                      child: AuthUserStreamWidget(
+                                        builder: (context) => Text(
+                                          'สวัสดี${currentUserDisplayName}',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLargeFamily,
+                                                fontSize: 20.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyLargeFamily),
+                                              ),
+                                        ),
                                       ),
                                     ),
                                     Text(

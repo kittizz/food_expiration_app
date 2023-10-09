@@ -93,6 +93,10 @@ class GetUserCall {
         response,
         r'''$.role''',
       );
+  dynamic nickname(dynamic response) => getJsonField(
+        response,
+        r'''$.nickname''',
+      );
 }
 
 class BlogRecommendCall {

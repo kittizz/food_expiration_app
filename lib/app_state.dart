@@ -50,6 +50,12 @@ class FFAppState extends ChangeNotifier {
   set cdn(String _value) {
     _cdn = _value;
   }
+
+  String _nickname = '';
+  String get nickname => _nickname;
+  set nickname(String _value) {
+    _nickname = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

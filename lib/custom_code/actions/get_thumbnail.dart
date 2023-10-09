@@ -11,6 +11,6 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 Future<String> getThumbnail(BuildContext context) async {
-  final result = await context.pushNamed('Signin') as String;
+  // final result = await context.pushNamed('Signin') as String;
   return "";
 }
