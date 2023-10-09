@@ -280,10 +280,6 @@ class GetBannerCall {
         response,
         r'''$.banner''',
       );
-  dynamic blurhash(dynamic response) => getJsonField(
-        response,
-        r'''$.blurhash''',
-      );
 }
 
 /// End foodexpiration Group Code
