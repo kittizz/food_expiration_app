@@ -19,7 +19,7 @@ class MarkdownWidget extends StatefulWidget {
     this.width,
     this.height,
     required this.content,
-    this.title,
+    required this.title,
     required this.image,
   }) : super(key: key);
 
