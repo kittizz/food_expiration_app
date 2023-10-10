@@ -94,12 +94,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             (_model.apiBanner?.jsonBody ?? ''),
           )
           .toString());
-      FFAppState().nickname = FoodexpirationGroup.getUserCall
-          .nickname(
-            (_model.apiResulturm?.jsonBody ?? ''),
-          )
-          .toString()
-          .toString();
+      setState(() {
+        FFAppState().nickname = FoodexpirationGroup.getUserCall
+            .nickname(
+              (_model.apiResulturm?.jsonBody ?? ''),
+            )
+            .toString()
+            .toString();
+      });
     });
 
     setupAnimations(
