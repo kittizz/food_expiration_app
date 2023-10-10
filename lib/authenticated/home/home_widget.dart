@@ -66,6 +66,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         deviceId: FFAppState().deviceId,
       );
       if ((_model.apiResulturm?.succeeded ?? true)) {
+        _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();
         setState(() {
           FFAppState().nickname = FoodexpirationGroup.getUserCall
               .nickname(
@@ -203,40 +204,26 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 40.0, 12.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      _model.apibanner =
-                                          await FoodexpirationGroup
-                                              .getBannerCall
-                                              .call();
-
-                                      setState(() {});
-                                    },
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: CachedNetworkImage(
-                                        fadeInDuration:
-                                            Duration(milliseconds: 500),
-                                        fadeOutDuration:
-                                            Duration(milliseconds: 500),
-                                        imageUrl: FoodexpirationGroup
-                                            .getBannerCall
-                                            .banner(
-                                          (_model.apibanner?.jsonBody ?? ''),
-                                        ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: CachedNetworkImage(
+                                      fadeInDuration:
+                                          Duration(milliseconds: 500),
+                                      fadeOutDuration:
+                                          Duration(milliseconds: 500),
+                                      imageUrl: FoodexpirationGroup
+                                          .getBannerCall
+                                          .banner(
+                                        (_model.apiBanner?.jsonBody ?? ''),
+                                      ),
+                                      height: 140.0,
+                                      fit: BoxFit.cover,
+                                      errorWidget:
+                                          (context, error, stackTrace) =>
+                                              Image.asset(
+                                        'assets/images/error_image.png',
                                         height: 140.0,
                                         fit: BoxFit.cover,
-                                        errorWidget:
-                                            (context, error, stackTrace) =>
-                                                Image.asset(
-                                          'assets/images/error_image.png',
-                                          height: 140.0,
-                                          fit: BoxFit.cover,
-                                        ),
                                       ),
                                     ),
                                   ),
@@ -251,24 +238,22 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Flexible(
-                                      child: AuthUserStreamWidget(
-                                        builder: (context) => Text(
-                                          'สวัสดี${currentUserDisplayName}',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLargeFamily,
-                                                fontSize: 20.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyLargeFamily),
-                                              ),
-                                        ),
+                                      child: Text(
+                                        'สวัสดี${FFAppState().nickname}',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLargeFamily,
+                                              fontSize: 20.0,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyLargeFamily),
+                                            ),
                                       ),
                                     ),
                                     Text(
