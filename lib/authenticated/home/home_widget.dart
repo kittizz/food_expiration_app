@@ -203,32 +203,23 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 40.0, 12.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onLongPress: () async {
-                                      await launchURL('https://flutter.dev');
-                                    },
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: CachedNetworkImage(
-                                        fadeInDuration:
-                                            Duration(milliseconds: 500),
-                                        fadeOutDuration:
-                                            Duration(milliseconds: 500),
-                                        imageUrl:
-                                            'https://th-bkk-1.xvercloud.com/food-expiration/images/banner-onlygf.png',
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: CachedNetworkImage(
+                                      fadeInDuration:
+                                          Duration(milliseconds: 500),
+                                      fadeOutDuration:
+                                          Duration(milliseconds: 500),
+                                      imageUrl:
+                                          'https://th-bkk-1.xvercloud.com/food-expiration/images/banner-onlygf.png',
+                                      height: 140.0,
+                                      fit: BoxFit.cover,
+                                      errorWidget:
+                                          (context, error, stackTrace) =>
+                                              Image.asset(
+                                        'assets/images/error_image.png',
                                         height: 140.0,
                                         fit: BoxFit.cover,
-                                        errorWidget:
-                                            (context, error, stackTrace) =>
-                                                Image.asset(
-                                          'assets/images/error_image.png',
-                                          height: 140.0,
-                                          fit: BoxFit.cover,
-                                        ),
                                       ),
                                     ),
                                   ),
@@ -244,7 +235,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        'สวัสดีคุณ ${FFAppState().nickname == null || FFAppState().nickname == '' ? FFAppState().nickname : 'ผู้ใช้งาน'}',
+                                        'สวัสดีคุณ ${FFAppState().nickname == null || FFAppState().nickname == '' ? 'ผู้ใช้' : FFAppState().nickname}',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge
                                             .override(
@@ -512,6 +503,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 size: 30.0,
                               ),
                               onPressed: () async {
+                                await launchURL('https://flutter.dev');
+
                                 context.pushNamed('Setting');
                               },
                             ),
