@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MarkdownWidget extends StatefulWidget {
   const MarkdownWidget({
@@ -45,6 +46,7 @@ class _MarkdownWidgetState extends State<MarkdownWidget> {
           widget.title +
           "\n" +
           widget.content,
+      onTapLink: (text, href, title) => launchUrl(Uri.parse(href!)),
     );
   }
 }
