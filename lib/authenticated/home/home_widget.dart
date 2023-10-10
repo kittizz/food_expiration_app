@@ -71,46 +71,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           ..repeat();
       }
       if ((_model.apiResulturm?.succeeded ?? true)) {
-        setState(() {
-          FFAppState().nickname = FoodexpirationGroup.getUserCall
-              .nickname(
-                (_model.apiResulturm?.jsonBody ?? ''),
-              )
-              .toString()
-              .toString();
-        });
         _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();
-        if ((_model.apiBanner?.succeeded ?? true)) {
-          await showDialog(
-            context: context,
-            builder: (alertDialogContext) {
-              return AlertDialog(
-                content: Text((_model.apiBanner?.bodyText ?? '')),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('Ok'),
-                  ),
-                ],
-              );
-            },
-          );
-        } else {
-          await showDialog(
-            context: context,
-            builder: (alertDialogContext) {
-              return AlertDialog(
-                content: Text((_model.apiBanner?.bodyText ?? '')),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('Ok'),
-                  ),
-                ],
-              );
-            },
-          );
-        }
       } else {
         FFAppState().deviceId = '';
         GoRouter.of(context).prepareAuthEvent();
@@ -127,9 +88,18 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
       _model.bloglist = await actions.toBlogStructList(
         (_model.apiBlogRecommendOutput?.jsonBody ?? ''),
       );
-      setState(() {
-        _model.blogList = _model.bloglist!.toList().cast<BlogStruct>();
-      });
+      _model.blogList = _model.bloglist!.toList().cast<BlogStruct>();
+      _model.bannerImage = functions.getImage(FoodexpirationGroup.getBannerCall
+          .banner(
+            (_model.apiBanner?.jsonBody ?? ''),
+          )
+          .toString());
+      FFAppState().nickname = FoodexpirationGroup.getUserCall
+          .nickname(
+            (_model.apiResulturm?.jsonBody ?? ''),
+          )
+          .toString()
+          .toString();
     });
 
     setupAnimations(
@@ -242,8 +212,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           Duration(milliseconds: 500),
                                       fadeOutDuration:
                                           Duration(milliseconds: 500),
-                                      imageUrl:
-                                          'https://th-bkk-1.xvercloud.com/food-expiration/images/banner-onlygf.png',
+                                      imageUrl: _model.bannerImage!,
                                       height: 140.0,
                                       fit: BoxFit.cover,
                                       errorWidget:
