@@ -150,7 +150,11 @@ final parametersBuilderMap =
           'isLocation': getParameter<bool>(data, 'isLocation'),
         },
       ),
-  'Setting': ParameterData.none(),
+  'Setting': (data) async => ParameterData(
+        allParams: {
+          'tabId': getParameter<int>(data, 'tabId'),
+        },
+      ),
   'ThumbnailCategory': ParameterData.none(),
   'ThumbnailSelection': (data) async => ParameterData(
         allParams: {

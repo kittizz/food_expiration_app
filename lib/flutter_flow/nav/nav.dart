@@ -183,7 +183,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Setting',
           path: '/setting',
           requireAuth: true,
-          builder: (context, params) => SettingWidget(),
+          builder: (context, params) => SettingWidget(
+            tabId: params.getParam('tabId', ParamType.int),
+          ),
         ),
         FFRoute(
           name: 'ThumbnailCategory',
