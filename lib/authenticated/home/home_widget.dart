@@ -202,6 +202,30 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           child: Stack(
                             children: [
+                              if (_model.bannerImage == null ||
+                                  _model.bannerImage == '')
+                                Align(
+                                  alignment: AlignmentDirectional(1.00, 0.00),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 40.0, 12.0, 0.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/banner-onlygf.png',
+                                        height: 140.0,
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                Image.asset(
+                                          'assets/images/error_image.png',
+                                          height: 140.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               Align(
                                 alignment: AlignmentDirectional(1.00, 0.00),
                                 child: Padding(
@@ -210,10 +234,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: CachedNetworkImage(
-                                      fadeInDuration: Duration(milliseconds: 0),
+                                      fadeInDuration:
+                                          Duration(milliseconds: 500),
                                       fadeOutDuration:
-                                          Duration(milliseconds: 0),
-                                      imageUrl: _model.bannerImage,
+                                          Duration(milliseconds: 500),
+                                      imageUrl: _model.bannerImage!,
                                       height: 140.0,
                                       fit: BoxFit.cover,
                                       errorWidget:
