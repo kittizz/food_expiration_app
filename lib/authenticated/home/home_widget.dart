@@ -235,33 +235,16 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed(
-                                          'Setting',
-                                          queryParameters: {
-                                            'tabId': serializeParam(
-                                              1,
-                                              ParamType.int,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                      child: Container(
-                                        width: 65.0,
-                                        height: 65.0,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.network(
-                                          'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
-                                          fit: BoxFit.cover,
-                                        ),
+                                    child: Container(
+                                      width: 65.0,
+                                      height: 65.0,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Image.network(
+                                        'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),
