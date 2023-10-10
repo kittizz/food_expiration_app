@@ -104,12 +104,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                 )
                 .toString()
                 .toString());
-        _model.profilePictureBlurHash = FoodexpirationGroup.getUserCall
-            .profilePictureBlurHash(
-              (_model.apiUser?.jsonBody ?? ''),
-            )
-            .toString()
-            .toString();
         _model.nickname = FoodexpirationGroup.getUserCall
             .nickname(
               (_model.apiUser?.jsonBody ?? ''),

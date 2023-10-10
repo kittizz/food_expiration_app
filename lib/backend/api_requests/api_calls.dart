@@ -103,10 +103,6 @@ class GetUserCall {
         response,
         r'''$.profilePicture''',
       );
-  dynamic profilePictureBlurHash(dynamic response) => getJsonField(
-        response,
-        r'''$.profilePictureBlurHash''',
-      );
 }
 
 class BlogRecommendCall {

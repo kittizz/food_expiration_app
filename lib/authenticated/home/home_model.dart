@@ -32,12 +32,11 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   void updateBlogListAtIndex(int index, Function(BlogStruct) updateFn) =>
       blogList[index] = updateFn(blogList[index]);
 
-  String bannerImage = 'no';
+  String bannerImage =
+      'https://th-bkk-1.xvercloud.com/food-expiration/images/banner-onlygf.png';
 
   String profilePicture =
       'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png';
-
-  String profilePictureBlurHash = '';
 
   String nickname = 'ผู้ใช้';
 
