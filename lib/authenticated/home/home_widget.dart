@@ -210,10 +210,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: CachedNetworkImage(
-                                      fadeInDuration:
-                                          Duration(milliseconds: 500),
+                                      fadeInDuration: Duration(milliseconds: 0),
                                       fadeOutDuration:
-                                          Duration(milliseconds: 500),
+                                          Duration(milliseconds: 0),
                                       imageUrl: _model.bannerImage,
                                       height: 140.0,
                                       fit: BoxFit.cover,
@@ -506,8 +505,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 size: 30.0,
                               ),
                               onPressed: () async {
-                                await launchURL('https://flutter.dev');
-
                                 context.pushNamed('Setting');
                               },
                             ),
