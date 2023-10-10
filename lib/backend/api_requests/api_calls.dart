@@ -33,7 +33,8 @@ class RegisterDeviceCall {
   }) {
     final ffApiRequestBody = '''
 {
-  "auth_token": "${authToken}"
+  "auth_token": "${authToken}",
+  "nickname": "${nickname}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'registerDevice',

@@ -218,10 +218,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           Duration(milliseconds: 500),
                                       fadeOutDuration:
                                           Duration(milliseconds: 500),
-                                      imageUrl: _model.bannerImage,
+                                      imageUrl: valueOrDefault<String>(
+                                        _model.bannerImage,
+                                        'https://th-bkk-1.xvercloud.com/food-expiration/images/banner-onlygf.png',
+                                      ),
                                       width: 140.0,
                                       height: 140.0,
-                                      fit: BoxFit.none,
+                                      fit: BoxFit.contain,
                                     ),
                                   ),
                                 ),
