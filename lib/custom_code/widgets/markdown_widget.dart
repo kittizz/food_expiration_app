@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MarkdownWidget extends StatefulWidget {
   const MarkdownWidget({
@@ -53,17 +52,15 @@ class _MarkdownWidgetState extends State<MarkdownWidget> {
   void _launchUrl(String? href) async {
     if (href == null) return;
 
-    var url = Uri.parse(href);
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      // Handle the error, e.g., show a dialog with an error message
+    try {
+      await launchURL(href);
+    } catch (e) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Error'),
-            content: Text('Could not launch $href'),
+            content: Text('Could not launch $e'),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
