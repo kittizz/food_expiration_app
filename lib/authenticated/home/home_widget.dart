@@ -213,17 +213,15 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       0.0, 40.0, 12.0, 0.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
-                                    child: OctoImage(
-                                      placeholderBuilder:
-                                          OctoPlaceholder.blurHash(
-                                        'LWMP{}tj0fMxCTV{M|WV\$zsSjFog',
-                                      ),
-                                      image: CachedNetworkImageProvider(
-                                        _model.bannerImage,
-                                      ),
+                                    child: CachedNetworkImage(
+                                      fadeInDuration:
+                                          Duration(milliseconds: 500),
+                                      fadeOutDuration:
+                                          Duration(milliseconds: 500),
+                                      imageUrl: _model.bannerImage,
                                       width: 140.0,
                                       height: 140.0,
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.none,
                                     ),
                                   ),
                                 ),
