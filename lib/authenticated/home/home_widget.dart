@@ -63,15 +63,15 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResulturm = await FoodexpirationGroup.getUserCall.call(
-        deviceId: FFAppState().deviceId,
-      );
       if (animationsMap['iconOnActionTriggerAnimation'] != null) {
         await animationsMap['iconOnActionTriggerAnimation']!.controller
           ..reset()
           ..repeat();
       }
-      if ((_model.apiResulturm?.succeeded ?? true)) {
+      _model.apiUser = await FoodexpirationGroup.getUserCall.call(
+        deviceId: FFAppState().deviceId,
+      );
+      if ((_model.apiUser?.succeeded ?? true)) {
         _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();
       } else {
         FFAppState().deviceId = '';
@@ -97,13 +97,23 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                   (_model.apiBanner?.jsonBody ?? ''),
                 )
                 .toString());
-      });
-      setState(() {
-        FFAppState().nickname = FoodexpirationGroup.getUserCall
-            .nickname(
-              (_model.apiResulturm?.jsonBody ?? ''),
+        _model.profilePicture =
+            functions.getImage(FoodexpirationGroup.getUserCall
+                .profilePicture(
+                  (_model.apiUser?.jsonBody ?? ''),
+                )
+                .toString()
+                .toString());
+        _model.profilePictureBlurHash = FoodexpirationGroup.getUserCall
+            .profilePictureBlurHash(
+              (_model.apiUser?.jsonBody ?? ''),
             )
             .toString()
+            .toString();
+        _model.nickname = FoodexpirationGroup.getUserCall
+            .nickname(
+              (_model.apiUser?.jsonBody ?? ''),
+            )
             .toString();
       });
     });
@@ -210,7 +220,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 alignment: AlignmentDirectional(1.00, 0.00),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 40.0, 12.0, 0.0),
+                                      0.0, 60.0, 12.0, 0.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: CachedNetworkImage(
@@ -242,9 +252,19 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                       ),
-                                      child: Image.network(
-                                        'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                      child: CachedNetworkImage(
+                                        fadeInDuration:
+                                            Duration(milliseconds: 500),
+                                        fadeOutDuration:
+                                            Duration(milliseconds: 500),
+                                        imageUrl: _model.profilePicture,
                                         fit: BoxFit.cover,
+                                        errorWidget:
+                                            (context, error, stackTrace) =>
+                                                Image.asset(
+                                          'assets/images/error_image.png',
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -261,7 +281,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         children: [
                                           Flexible(
                                             child: Text(
-                                              'สวัสดีคุณ ${FFAppState().nickname == null || FFAppState().nickname == '' ? 'ผู้ใช้' : FFAppState().nickname}',
+                                              'สวัสดีคุณ ${_model.nickname}',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyLarge

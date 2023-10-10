@@ -34,11 +34,18 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
 
   String bannerImage = 'no';
 
+  String profilePicture =
+      'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png';
+
+  String profilePictureBlurHash = '';
+
+  String nickname = 'ผู้ใช้';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (getUser)] action in Home widget.
-  ApiCallResponse? apiResulturm;
+  ApiCallResponse? apiUser;
   // Stores action output result for [Backend Call - API (getBanner)] action in Home widget.
   ApiCallResponse? apiBanner;
   // Stores action output result for [Backend Call - API (blogRecommend)] action in Home widget.

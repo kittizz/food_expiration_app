@@ -99,6 +99,14 @@ class GetUserCall {
         response,
         r'''$.nickname''',
       );
+  dynamic profilePicture(dynamic response) => getJsonField(
+        response,
+        r'''$.profilePicture''',
+      );
+  dynamic profilePictureBlurHash(dynamic response) => getJsonField(
+        response,
+        r'''$.profilePictureBlurHash''',
+      );
 }
 
 class BlogRecommendCall {

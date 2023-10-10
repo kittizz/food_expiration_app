@@ -71,8 +71,7 @@ class _SettingWidgetState extends State<SettingWidget>
           ),
           1),
     )..addListener(() => setState(() {}));
-    _model.textController ??=
-        TextEditingController(text: FFAppState().nickname);
+    _model.textController ??= TextEditingController();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
