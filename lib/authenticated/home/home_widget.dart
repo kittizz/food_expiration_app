@@ -212,7 +212,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           Duration(milliseconds: 500),
                                       fadeOutDuration:
                                           Duration(milliseconds: 500),
-                                      imageUrl: _model.bannerImage!,
+                                      imageUrl: _model.bannerImage,
                                       height: 140.0,
                                       fit: BoxFit.cover,
                                       errorWidget:

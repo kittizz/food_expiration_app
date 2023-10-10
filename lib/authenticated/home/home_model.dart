@@ -31,7 +31,7 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   void updateBlogListAtIndex(int index, Function(BlogStruct) updateFn) =>
       blogList[index] = updateFn(blogList[index]);
 
-  String? bannerImage;
+  String bannerImage = 'null';
 
   ///  State fields for stateful widgets in this page.
 
