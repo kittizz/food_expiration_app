@@ -11,7 +11,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start foodexpiration Group Code
 
 class FoodexpirationGroup {
-  static String baseUrl = 'http://10.10.10.118:8080';
+  static String baseUrl = 'https://food_expiration.kittiza.com';
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
   };
@@ -24,6 +24,8 @@ class FoodexpirationGroup {
   static DeleteLocationCall deleteLocationCall = DeleteLocationCall();
   static UploadImageCall uploadImageCall = UploadImageCall();
   static GetBannerCall getBannerCall = GetBannerCall();
+  static ChangeProfilepictureCall changeProfilepictureCall =
+      ChangeProfilepictureCall();
 }
 
 class RegisterDeviceCall {
@@ -285,6 +287,31 @@ class GetBannerCall {
         response,
         r'''$.banner''',
       );
+}
+
+class ChangeProfilepictureCall {
+  Future<ApiCallResponse> call({
+    String? deviceId = '',
+    FFUploadedFile? file,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'changeProfilepicture',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/user/change-profilepicture',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-device-id': '${deviceId}',
+      },
+      params: {
+        'file': file,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
 }
 
 /// End foodexpiration Group Code
