@@ -66,8 +66,7 @@ class _MarkdownWidgetState extends State<MarkdownWidget> {
             content: Text('Could not launch $href'),
             actions: <Widget>[
               TextButton(
-                // onPressed: () => Navigator.of(context).pop(),
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).pop(),
                 child: Text('OK'),
               ),
             ],
