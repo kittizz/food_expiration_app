@@ -19,6 +19,9 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
 
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue;
+  // State field(s) for TextField widget.
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -26,6 +29,7 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
 
   void dispose() {
     tabBarController?.dispose();
+    textController?.dispose();
   }
 
   /// Action blocks are added here.

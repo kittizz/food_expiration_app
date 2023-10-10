@@ -66,7 +66,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         deviceId: FFAppState().deviceId,
       );
       if ((_model.apiResulturm?.succeeded ?? true)) {
-        _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();
         setState(() {
           FFAppState().nickname = FoodexpirationGroup.getUserCall
               .nickname(
@@ -163,6 +162,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
               _model.bloglistCopy = await actions.toBlogStructList(
                 (_model.apiBlogRecommendOutput?.jsonBody ?? ''),
               );
+              setState(() {
+                _model.blogList = _model.bloglist!.toList().cast<BlogStruct>();
+              });
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
@@ -175,9 +177,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                   backgroundColor: FlutterFlowTheme.of(context).secondary,
                 ),
               );
-              setState(() {
-                _model.blogList = _model.bloglist!.toList().cast<BlogStruct>();
-              });
             },
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -211,11 +210,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           Duration(milliseconds: 500),
                                       fadeOutDuration:
                                           Duration(milliseconds: 500),
-                                      imageUrl: FoodexpirationGroup
-                                          .getBannerCall
-                                          .banner(
-                                        (_model.apiBanner?.jsonBody ?? ''),
-                                      ),
+                                      imageUrl:
+                                          'https://th-bkk-1.xvercloud.com/food-expiration/images/banner-onlygf.png',
                                       height: 140.0,
                                       fit: BoxFit.cover,
                                       errorWidget:
@@ -239,7 +235,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        'สวัสดี${FFAppState().nickname}',
+                                        'สวัสดีคุณ ${FFAppState().nickname == null || FFAppState().nickname == '' ? FFAppState().nickname : 'ผู้ใช้งาน'}',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge
                                             .override(

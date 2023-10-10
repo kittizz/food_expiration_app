@@ -140,7 +140,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 controller: _model.emailTextController,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Nickname',
+                                  labelText: 'ชื่อ',
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(
@@ -214,7 +214,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 controller: _model.textController1,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Email Address',
+                                  labelText: 'อีเมล',
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(
@@ -290,7 +290,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: !_model.passwordVisibility1,
                                 decoration: InputDecoration(
-                                  labelText: 'Password',
+                                  labelText: 'รหัสผ่าน',
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(
@@ -382,7 +382,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: !_model.passwordVisibility2,
                                 decoration: InputDecoration(
-                                  labelText: 'Password',
+                                  labelText: 'ยืนยันรหัสผ่าน',
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(

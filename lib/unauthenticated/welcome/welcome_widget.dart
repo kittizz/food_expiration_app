@@ -61,7 +61,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -167,13 +167,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 12.0, 0.0, 12.0),
-                        child: Text(
-                          'หรือ ใช้ โซเชียลมีเดีย',
-                          style: FlutterFlowTheme.of(context).labelMedium,
-                        ),
+                      Text(
+                        'หรือ ใช้ โซเชียลมีเดีย',
+                        style: FlutterFlowTheme.of(context).labelMedium,
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
