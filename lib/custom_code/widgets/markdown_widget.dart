@@ -46,7 +46,34 @@ class _MarkdownWidgetState extends State<MarkdownWidget> {
           widget.title +
           "\n" +
           widget.content,
-      onTapLink: (text, href, title) => launchUrl(Uri.parse(href!)),
+      onTapLink: (text, href, title) => _launchUrl(href),
     );
+  }
+
+  void _launchUrl(String? href) async {
+    if (href == null) return;
+
+    var url = Uri.parse(href);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      // Handle the error, e.g., show a dialog with an error message
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Could not launch $href'),
+            actions: <Widget>[
+              TextButton(
+                // onPressed: () => Navigator.of(context).pop(),
+                onPressed: () {},
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 }
