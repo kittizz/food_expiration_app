@@ -65,6 +65,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
       _model.apiResulturm = await FoodexpirationGroup.getUserCall.call(
         deviceId: FFAppState().deviceId,
       );
+      if (animationsMap['iconOnActionTriggerAnimation'] != null) {
+        await animationsMap['iconOnActionTriggerAnimation']!.controller
+          ..reset()
+          ..repeat();
+      }
       if ((_model.apiResulturm?.succeeded ?? true)) {
         setState(() {
           FFAppState().nickname = FoodexpirationGroup.getUserCall
@@ -74,6 +79,38 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
               .toString()
               .toString();
         });
+        _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();
+        if ((_model.apiBanner?.succeeded ?? true)) {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                content: Text((_model.apiBanner?.bodyText ?? '')),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+        } else {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                content: Text((_model.apiBanner?.bodyText ?? '')),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       } else {
         FFAppState().deviceId = '';
         GoRouter.of(context).prepareAuthEvent();
@@ -85,11 +122,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         return;
       }
 
-      if (animationsMap['iconOnActionTriggerAnimation'] != null) {
-        await animationsMap['iconOnActionTriggerAnimation']!.controller
-          ..reset()
-          ..repeat();
-      }
       _model.apiBlogRecommendOutput =
           await FoodexpirationGroup.blogRecommendCall.call();
       _model.bloglist = await actions.toBlogStructList(

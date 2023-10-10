@@ -36,6 +36,8 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (getUser)] action in Home widget.
   ApiCallResponse? apiResulturm;
+  // Stores action output result for [Backend Call - API (getBanner)] action in Home widget.
+  ApiCallResponse? apiBanner;
   // Stores action output result for [Backend Call - API (blogRecommend)] action in Home widget.
   ApiCallResponse? apiBlogRecommendOutput;
   // Stores action output result for [Custom Action - toBlogStructList] action in Home widget.
