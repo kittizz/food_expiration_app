@@ -501,6 +501,9 @@ class _SettingWidgetState extends State<SettingWidget>
                                                             .deviceId,
                                                         file: _model
                                                             .uploadedLocalFile,
+                                                        hash: _model
+                                                            .uploadedLocalFile
+                                                            .blurHash,
                                                       );
                                                       _shouldSetState = true;
                                                       if ((_model

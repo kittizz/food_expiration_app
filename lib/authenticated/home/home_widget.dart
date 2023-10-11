@@ -231,9 +231,12 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       child: OctoImage(
                                         placeholderBuilder:
                                             OctoPlaceholder.blurHash(
-                                          FFAppState()
-                                              .user
-                                              .profilePictureBlurHash,
+                                          valueOrDefault<String>(
+                                            FFAppState()
+                                                .user
+                                                .profilePictureBlurHash,
+                                            'LIEpzCa#1mt7EjWB?Hof5Xoe}fR%',
+                                          ),
                                         ),
                                         image: CachedNetworkImageProvider(
                                           valueOrDefault<String>(
