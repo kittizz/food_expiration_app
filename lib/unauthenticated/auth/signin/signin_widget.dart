@@ -98,7 +98,8 @@ class _SigninWidgetState extends State<SigninWidget> {
             child: Container(
               width: double.infinity,
               constraints: BoxConstraints(
-                maxWidth: 670.0,
+                maxWidth: 400.0,
+                maxHeight: 700.0,
               ),
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
