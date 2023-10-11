@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'setting_model.dart';
 export 'setting_model.dart';
@@ -314,154 +316,59 @@ class _SettingWidgetState extends State<SettingWidget>
                                           height: 160.0,
                                           child: Stack(
                                             children: [
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 10.0, 0.0, 0.0),
-                                                  child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      var _shouldSetState =
-                                                          false;
-                                                      final selectedMedia =
-                                                          await selectMediaWithSourceBottomSheet(
-                                                        context: context,
-                                                        imageQuality: 100,
-                                                        allowPhoto: true,
-                                                        includeBlurHash: true,
-                                                      );
-                                                      if (selectedMedia !=
-                                                              null &&
-                                                          selectedMedia.every((m) =>
-                                                              validateFileFormat(
-                                                                  m.storagePath,
-                                                                  context))) {
-                                                        setState(() => _model
-                                                                .isDataUploading =
-                                                            true);
-                                                        var selectedUploadedFiles =
-                                                            <FFUploadedFile>[];
-
-                                                        try {
-                                                          selectedUploadedFiles =
-                                                              selectedMedia
-                                                                  .map((m) =>
-                                                                      FFUploadedFile(
-                                                                        name: m
-                                                                            .storagePath
-                                                                            .split('/')
-                                                                            .last,
-                                                                        bytes: m
-                                                                            .bytes,
-                                                                        height: m
-                                                                            .dimensions
-                                                                            ?.height,
-                                                                        width: m
-                                                                            .dimensions
-                                                                            ?.width,
-                                                                        blurHash:
-                                                                            m.blurHash,
-                                                                      ))
-                                                                  .toList();
-                                                        } finally {
-                                                          _model.isDataUploading =
-                                                              false;
-                                                        }
-                                                        if (selectedUploadedFiles
-                                                                .length ==
-                                                            selectedMedia
-                                                                .length) {
-                                                          setState(() {
-                                                            _model.uploadedLocalFile =
-                                                                selectedUploadedFiles
-                                                                    .first;
-                                                          });
-                                                        } else {
-                                                          setState(() {});
-                                                          return;
-                                                        }
-                                                      }
-
-                                                      if (_model.uploadedLocalFile !=
-                                                              null &&
-                                                          (_model
-                                                                  .uploadedLocalFile
-                                                                  .bytes
-                                                                  ?.isNotEmpty ??
-                                                              false)) {
-                                                        _model.apiChangeProfilepicture =
-                                                            await FoodexpirationGroup
-                                                                .changeProfilepictureCall
-                                                                .call(
-                                                          deviceId: FFAppState()
-                                                              .deviceId,
-                                                          file: _model
-                                                              .uploadedLocalFile,
-                                                        );
-                                                        _shouldSetState = true;
-                                                        if ((_model
-                                                                .apiChangeProfilepicture
-                                                                ?.succeeded ??
-                                                            true)) {
-                                                          if (Navigator.of(
-                                                                  context)
-                                                              .canPop()) {
-                                                            context.pop();
-                                                          }
-                                                          context.pushNamed(
-                                                              'Home');
-                                                        } else {
-                                                          if (_shouldSetState)
-                                                            setState(() {});
-                                                          return;
-                                                        }
-                                                      } else {
-                                                        if (_shouldSetState)
-                                                          setState(() {});
-                                                        return;
-                                                      }
-
-                                                      if (_shouldSetState)
-                                                        setState(() {});
-                                                    },
-                                                    child: Container(
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await Navigator.push(
+                                                    context,
+                                                    PageTransition(
+                                                      type: PageTransitionType
+                                                          .fade,
+                                                      child:
+                                                          FlutterFlowExpandedImageView(
+                                                        image:
+                                                            CachedNetworkImage(
+                                                          fadeInDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                          fadeOutDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                          imageUrl:
+                                                              'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                          fit: BoxFit.contain,
+                                                        ),
+                                                        allowRotation: false,
+                                                        tag: 'imageTag',
+                                                        useHeroAnimation: true,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Hero(
+                                                  tag: 'imageTag',
+                                                  transitionOnUserGestures:
+                                                      true,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            90.0),
+                                                    child: CachedNetworkImage(
+                                                      fadeInDuration: Duration(
+                                                          milliseconds: 500),
+                                                      fadeOutDuration: Duration(
+                                                          milliseconds: 500),
+                                                      imageUrl:
+                                                          'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
                                                       width: double.infinity,
                                                       height: double.infinity,
-                                                      clipBehavior:
-                                                          Clip.antiAlias,
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: CachedNetworkImage(
-                                                        fadeInDuration:
-                                                            Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                        fadeOutDuration:
-                                                            Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                        imageUrl:
-                                                            'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
-                                                        fit: BoxFit.cover,
-                                                        errorWidget: (context,
-                                                                error,
-                                                                stackTrace) =>
-                                                            Image.asset(
-                                                          'assets/images/error_image.png',
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
+                                                      fit: BoxFit.contain,
                                                     ),
                                                   ),
                                                 ),
@@ -488,9 +395,135 @@ class _SettingWidgetState extends State<SettingWidget>
                                                         .primaryText,
                                                     size: 20.0,
                                                   ),
-                                                  onPressed: () {
-                                                    print(
-                                                        'IconButton pressed ...');
+                                                  onPressed: () async {
+                                                    var _shouldSetState = false;
+                                                    final selectedMedia =
+                                                        await selectMediaWithSourceBottomSheet(
+                                                      context: context,
+                                                      imageQuality: 100,
+                                                      allowPhoto: true,
+                                                      includeBlurHash: true,
+                                                    );
+                                                    if (selectedMedia != null &&
+                                                        selectedMedia.every((m) =>
+                                                            validateFileFormat(
+                                                                m.storagePath,
+                                                                context))) {
+                                                      setState(() => _model
+                                                              .isDataUploading =
+                                                          true);
+                                                      var selectedUploadedFiles =
+                                                          <FFUploadedFile>[];
+
+                                                      try {
+                                                        selectedUploadedFiles =
+                                                            selectedMedia
+                                                                .map((m) =>
+                                                                    FFUploadedFile(
+                                                                      name: m
+                                                                          .storagePath
+                                                                          .split(
+                                                                              '/')
+                                                                          .last,
+                                                                      bytes: m
+                                                                          .bytes,
+                                                                      height: m
+                                                                          .dimensions
+                                                                          ?.height,
+                                                                      width: m
+                                                                          .dimensions
+                                                                          ?.width,
+                                                                      blurHash:
+                                                                          m.blurHash,
+                                                                    ))
+                                                                .toList();
+                                                      } finally {
+                                                        _model.isDataUploading =
+                                                            false;
+                                                      }
+                                                      if (selectedUploadedFiles
+                                                              .length ==
+                                                          selectedMedia
+                                                              .length) {
+                                                        setState(() {
+                                                          _model.uploadedLocalFile =
+                                                              selectedUploadedFiles
+                                                                  .first;
+                                                        });
+                                                      } else {
+                                                        setState(() {});
+                                                        return;
+                                                      }
+                                                    }
+
+                                                    if (_model.uploadedLocalFile !=
+                                                            null &&
+                                                        (_model
+                                                                .uploadedLocalFile
+                                                                .bytes
+                                                                ?.isNotEmpty ??
+                                                            false)) {
+                                                      _model.apiChangeProfilepicture =
+                                                          await FoodexpirationGroup
+                                                              .changeProfilepictureCall
+                                                              .call(
+                                                        deviceId: FFAppState()
+                                                            .deviceId,
+                                                        file: _model
+                                                            .uploadedLocalFile,
+                                                      );
+                                                      _shouldSetState = true;
+                                                      if ((_model
+                                                              .apiChangeProfilepicture
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .clearSnackBars();
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              'แก้ไขรูปโปรไฟล์เรียบร้อย',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodySmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodySmallFamily,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                  ),
+                                                            ),
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    1000),
+                                                            backgroundColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        if (_shouldSetState)
+                                                          setState(() {});
+                                                        return;
+                                                      }
+                                                    } else {
+                                                      if (_shouldSetState)
+                                                        setState(() {});
+                                                      return;
+                                                    }
+
+                                                    if (_shouldSetState)
+                                                      setState(() {});
                                                   },
                                                 ),
                                               ),
