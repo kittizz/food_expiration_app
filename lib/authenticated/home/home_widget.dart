@@ -226,14 +226,23 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 0.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(90.0),
+                                    child: Container(
+                                      width: 65.0,
+                                      height: 65.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .alternate,
+                                        shape: BoxShape.circle,
+                                      ),
                                       child: OctoImage(
                                         placeholderBuilder:
                                             OctoPlaceholder.blurHash(
-                                          FFAppState()
-                                              .user
-                                              .profilePictureBlurHash,
+                                          valueOrDefault<String>(
+                                            FFAppState()
+                                                .user
+                                                .profilePictureBlurHash,
+                                            'LIEpzCa#1mt7EjWB?Hof5Xoe}fR%',
+                                          ),
                                         ),
                                         image: CachedNetworkImageProvider(
                                           valueOrDefault<String>(
@@ -241,15 +250,15 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                             'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
                                           ),
                                         ),
-                                        width: 65.0,
-                                        height: 65.0,
+                                        width: double.infinity,
+                                        height: double.infinity,
                                         fit: BoxFit.cover,
                                         errorBuilder:
                                             (context, error, stackTrace) =>
                                                 Image.asset(
                                           'assets/images/error_image.png',
-                                          width: 65.0,
-                                          height: 65.0,
+                                          width: double.infinity,
+                                          height: double.infinity,
                                           fit: BoxFit.cover,
                                         ),
                                       ),

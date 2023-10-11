@@ -23,6 +23,16 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _deviceId = prefs.getString('ff_deviceId') ?? _deviceId;
     });
+    _safeInit(() {
+      if (prefs.containsKey('ff_user')) {
+        try {
+          final serializedData = prefs.getString('ff_user') ?? '{}';
+          _user = UserStruct.fromSerializableMap(jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
   }
 
   void update(VoidCallback callback) {
@@ -52,14 +62,16 @@ class FFAppState extends ChangeNotifier {
   }
 
   UserStruct _user = UserStruct.fromSerializableMap(jsonDecode(
-      '{\"nickname\":\"ผู้ใช้\",\"profilePicture\":\"/images/user.png\",\"profilePictureBlurHash\":\"\"}'));
+      '{\"nickname\":\"ผู้ใช้\",\"profilePicture\":\"https://th-bkk-1.xvercloud.com/food-expiration/images/user.png\",\"profilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
   UserStruct get user => _user;
   set user(UserStruct _value) {
     _user = _value;
+    prefs.setString('ff_user', _value.serialize());
   }
 
   void updateUserStruct(Function(UserStruct) updateFn) {
     updateFn(_user);
+    prefs.setString('ff_user', _user.serialize());
   }
 }
 
