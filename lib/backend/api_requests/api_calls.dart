@@ -32,7 +32,7 @@ class RegisterDeviceCall {
   Future<ApiCallResponse> call({
     String? authToken = 'no',
     String? nickname = '',
-    String? deviceid = '',
+    String? deviceid = 'xxxxx',
   }) {
     final ffApiRequestBody = '''
 {
@@ -69,7 +69,7 @@ class RegisterDeviceCall {
 class GetUserCall {
   Future<ApiCallResponse> call({
     String? deviceId = '',
-    String? deviceid = '',
+    String? deviceid = 'xxxxx',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'getUser',
@@ -111,7 +111,7 @@ class GetUserCall {
 
 class BlogRecommendCall {
   Future<ApiCallResponse> call({
-    String? deviceid = '',
+    String? deviceid = 'xxxxx',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'blogRecommend',
@@ -132,7 +132,7 @@ class BlogRecommendCall {
 class BlogByIDCall {
   Future<ApiCallResponse> call({
     int? id,
-    String? deviceid = '',
+    String? deviceid = 'xxxxx',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'blogByID',
@@ -179,7 +179,7 @@ class BlogByIDCall {
 
 class BlogAllCall {
   Future<ApiCallResponse> call({
-    String? deviceid = '',
+    String? deviceid = 'xxxxx',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'blogAll',
@@ -200,7 +200,7 @@ class BlogAllCall {
 class LocationListCall {
   Future<ApiCallResponse> call({
     String? deviceId = '',
-    String? deviceid = '',
+    String? deviceid = 'xxxxx',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'locationList',
@@ -228,7 +228,7 @@ class DeleteLocationCall {
   Future<ApiCallResponse> call({
     String? deviceId = '',
     int? id,
-    String? deviceid = '',
+    String? deviceid = 'xxxxx',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteLocation',
@@ -254,7 +254,7 @@ class UploadImageCall {
     String? deviceId = '',
     FFUploadedFile? file,
     String? hash = '',
-    String? deviceid = '',
+    String? deviceid = 'xxxxx',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'uploadImage',
@@ -278,7 +278,7 @@ class UploadImageCall {
 
 class GetBannerCall {
   Future<ApiCallResponse> call({
-    String? deviceid = '',
+    String? deviceid = 'xxxxx',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'getBanner',
@@ -305,7 +305,7 @@ class ChangeProfilepictureCall {
   Future<ApiCallResponse> call({
     String? deviceId = '',
     FFUploadedFile? file,
-    String? deviceid = '',
+    String? deviceid = 'xxxxx',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'changeProfilepicture',
