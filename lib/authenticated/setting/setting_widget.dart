@@ -14,6 +14,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'setting_model.dart';
@@ -338,25 +339,32 @@ class _SettingWidgetState extends State<SettingWidget>
                                                           .fade,
                                                       child:
                                                           FlutterFlowExpandedImageView(
-                                                        image:
-                                                            CachedNetworkImage(
-                                                          fadeInDuration:
-                                                              Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                          fadeOutDuration:
-                                                              Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                          imageUrl:
-                                                              valueOrDefault<
-                                                                  String>(
+                                                        image: OctoImage(
+                                                          placeholderBuilder:
+                                                              OctoPlaceholder
+                                                                  .blurHash(
                                                             FFAppState()
                                                                 .user
-                                                                .profilePicture,
-                                                            'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                                .profilePictureBlurHash,
+                                                          ),
+                                                          image:
+                                                              CachedNetworkImageProvider(
+                                                            valueOrDefault<
+                                                                String>(
+                                                              FFAppState()
+                                                                  .user
+                                                                  .profilePicture,
+                                                              'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                            ),
                                                           ),
                                                           fit: BoxFit.contain,
+                                                          errorBuilder: (context,
+                                                                  error,
+                                                                  stackTrace) =>
+                                                              Image.asset(
+                                                            'assets/images/error_image.png',
+                                                            fit: BoxFit.contain,
+                                                          ),
                                                         ),
                                                         allowRotation: false,
                                                         tag: valueOrDefault<
@@ -384,21 +392,35 @@ class _SettingWidgetState extends State<SettingWidget>
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             90.0),
-                                                    child: CachedNetworkImage(
-                                                      fadeInDuration: Duration(
-                                                          milliseconds: 500),
-                                                      fadeOutDuration: Duration(
-                                                          milliseconds: 500),
-                                                      imageUrl: valueOrDefault<
-                                                          String>(
+                                                    child: OctoImage(
+                                                      placeholderBuilder:
+                                                          OctoPlaceholder
+                                                              .blurHash(
                                                         FFAppState()
                                                             .user
-                                                            .profilePicture,
-                                                        'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                            .profilePictureBlurHash,
+                                                      ),
+                                                      image:
+                                                          CachedNetworkImageProvider(
+                                                        valueOrDefault<String>(
+                                                          FFAppState()
+                                                              .user
+                                                              .profilePicture,
+                                                          'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                        ),
                                                       ),
                                                       width: double.infinity,
                                                       height: double.infinity,
                                                       fit: BoxFit.contain,
+                                                      errorBuilder: (context,
+                                                              error,
+                                                              stackTrace) =>
+                                                          Image.asset(
+                                                        'assets/images/error_image.png',
+                                                        width: double.infinity,
+                                                        height: double.infinity,
+                                                        fit: BoxFit.contain,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),

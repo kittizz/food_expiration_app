@@ -231,12 +231,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       child: OctoImage(
                                         placeholderBuilder:
                                             OctoPlaceholder.blurHash(
-                                          valueOrDefault<String>(
-                                            FFAppState()
-                                                .user
-                                                .profilePictureBlurHash,
-                                            'LIEpzCa#1mt7EjWB?Hof5Xoe}fR%',
-                                          ),
+                                          FFAppState()
+                                              .user
+                                              .profilePictureBlurHash,
                                         ),
                                         image: CachedNetworkImageProvider(
                                           valueOrDefault<String>(
@@ -247,6 +244,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         width: 65.0,
                                         height: 65.0,
                                         fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                Image.asset(
+                                          'assets/images/error_image.png',
+                                          width: 65.0,
+                                          height: 65.0,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                   ),
