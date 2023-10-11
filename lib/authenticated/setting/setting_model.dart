@@ -28,6 +28,8 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
 
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue;
+  // Stores action output result for [Backend Call - API (changeNickname)] action in Text widget.
+  ApiCallResponse? apiChangeNicknam;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -37,8 +39,6 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
   // State field(s) for TextField widget.
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  // Stores action output result for [Backend Call - API (changeNickname)] action in TextField widget.
-  ApiCallResponse? apiChangeNicknam;
 
   /// Initialization and disposal methods.
 
