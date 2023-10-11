@@ -223,43 +223,52 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 0.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: 65.0,
-                                      height: 65.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: OctoImage(
-                                        placeholderBuilder:
-                                            OctoPlaceholder.blurHash(
-                                          valueOrDefault<String>(
-                                            FFAppState()
-                                                .user
-                                                .profilePictureBlurHash,
-                                            'LIEpzCa#1mt7EjWB?Hof5Xoe}fR%',
-                                          ),
+                                  Flexible(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 0.0, 0.0),
+                                      child: Container(
+                                        width: 65.0,
+                                        height: 65.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              blurRadius: 4.0,
+                                              color: Color(0x33000000),
+                                              offset: Offset(0.0, 2.0),
+                                            )
+                                          ],
+                                          shape: BoxShape.circle,
                                         ),
-                                        image: CachedNetworkImageProvider(
-                                          valueOrDefault<String>(
-                                            FFAppState().user.profilePicture,
-                                            'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                        child: OctoImage(
+                                          placeholderBuilder:
+                                              OctoPlaceholder.blurHash(
+                                            valueOrDefault<String>(
+                                              FFAppState()
+                                                  .user
+                                                  .profilePictureBlurHash,
+                                              'LIEpzCa#1mt7EjWB?Hof5Xoe}fR%',
+                                            ),
                                           ),
-                                        ),
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                Image.asset(
-                                          'assets/images/error_image.png',
+                                          image: CachedNetworkImageProvider(
+                                            valueOrDefault<String>(
+                                              FFAppState().user.profilePicture,
+                                              'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                            ),
+                                          ),
                                           width: double.infinity,
                                           height: double.infinity,
                                           fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  Image.asset(
+                                            'assets/images/error_image.png',
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
