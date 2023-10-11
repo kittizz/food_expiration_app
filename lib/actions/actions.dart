@@ -79,18 +79,20 @@ Future<bool?> fetchUser(BuildContext context) async {
     FFAppState().user = userStruct!;
     FFAppState().updateUserStruct(
       (e) => e
-        ..profilePicture =
-            functions.getImage(FoodexpirationGroup.getUserCall.profilePicture(
-                      (apiResultgetUser?.jsonBody ?? ''),
-                    ) ==
-                    null
+        ..profilePicture = functions.getImage(
+            userStruct?.profilePicture == null ||
+                    userStruct?.profilePicture == ''
                 ? '/images/user.png'
                 : FoodexpirationGroup.getUserCall
                     .profilePicture(
                       (apiResultgetUser?.jsonBody ?? ''),
                     )
                     .toString()
-                    .toString()),
+                    .toString())
+        ..profilePictureBlurHash = userStruct?.profilePictureBlurHash == null ||
+                userStruct?.profilePictureBlurHash == ''
+            ? 'LIEpzCa#1mt7EjWB?Hof5Xoe}fR%'
+            : userStruct?.profilePictureBlurHash,
     );
     return true;
   } else {
