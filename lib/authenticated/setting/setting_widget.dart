@@ -467,7 +467,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                                           await FoodexpirationGroup
                                                               .changeProfilepictureCall
                                                               .call(
-                                                        deviceId: FFAppState()
+                                                        deviceid: FFAppState()
                                                             .deviceId,
                                                         file: _model
                                                             .uploadedLocalFile,

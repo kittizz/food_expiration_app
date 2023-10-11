@@ -339,7 +339,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                   .uploadImageCall
                                                   .call(
                                             file: _model.uploadedLocalFile,
-                                            deviceId: FFAppState().deviceId,
+                                            deviceid: FFAppState().deviceId,
                                             hash: _model
                                                 .uploadedLocalFile.blurHash,
                                           );

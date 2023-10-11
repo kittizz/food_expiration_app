@@ -44,15 +44,15 @@ class LocationListModel extends FlutterFlowModel<LocationListWidget> {
   /// Action blocks are added here.
 
   Future<List<LocationStruct>?> loadLocations(BuildContext context) async {
-    ApiCallResponse? apiResultkca;
+    ApiCallResponse? apiLocList;
     List<LocationStruct>? listOutput;
 
-    apiResultkca = await FoodexpirationGroup.locationListCall.call(
-      deviceId: FFAppState().deviceId,
+    apiLocList = await FoodexpirationGroup.locationListCall.call(
+      deviceid: FFAppState().deviceId,
     );
-    if ((apiResultkca?.succeeded ?? true)) {
+    if ((apiLocList?.succeeded ?? true)) {
       listOutput = await actions.toLocationStructList(
-        (apiResultkca?.jsonBody ?? ''),
+        (apiLocList?.jsonBody ?? ''),
       );
       locationList = listOutput!.toList().cast<LocationStruct>();
     } else {
@@ -63,7 +63,7 @@ class LocationListModel extends FlutterFlowModel<LocationListWidget> {
             title: Text('เกิดข้อผิดพลาด'),
             content: Text(FoodexpirationGroup.locationListCall
                 .message(
-                  (apiResultkca?.jsonBody ?? ''),
+                  (apiLocList?.jsonBody ?? ''),
                 )
                 .toString()
                 .toString()),

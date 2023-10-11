@@ -69,7 +69,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           ..repeat();
       }
       _model.apiUser = await FoodexpirationGroup.getUserCall.call(
-        deviceId: FFAppState().deviceId,
+        deviceid: FFAppState().deviceId,
       );
       if ((_model.apiUser?.succeeded ?? true)) {
         _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();

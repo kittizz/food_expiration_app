@@ -13,7 +13,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 class FoodexpirationGroup {
   static String baseUrl = 'https://food_expiration.kittiza.com';
   static Map<String, String> headers = {
-    'x-device-id2': '[deviceid]',
+    'x-device-id': '[deviceid]',
   };
   static RegisterDeviceCall registerDeviceCall = RegisterDeviceCall();
   static GetUserCall getUserCall = GetUserCall();
@@ -32,7 +32,7 @@ class RegisterDeviceCall {
   Future<ApiCallResponse> call({
     String? authToken = 'no',
     String? nickname = '',
-    String? deviceid = 'xxxxx',
+    String? deviceid = '',
   }) {
     final ffApiRequestBody = '''
 {
@@ -44,7 +44,7 @@ class RegisterDeviceCall {
       apiUrl: '${FoodexpirationGroup.baseUrl}/user/register-device',
       callType: ApiCallType.POST,
       headers: {
-        'x-device-id2': '${deviceid}',
+        'x-device-id': '${deviceid}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -68,16 +68,14 @@ class RegisterDeviceCall {
 
 class GetUserCall {
   Future<ApiCallResponse> call({
-    String? deviceId = '',
-    String? deviceid = 'xxxxx',
+    String? deviceid = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'getUser',
       apiUrl: '${FoodexpirationGroup.baseUrl}/user',
       callType: ApiCallType.GET,
       headers: {
-        'x-device-id2': '${deviceid}',
-        'x-device-id': '${deviceId}',
+        'x-device-id': '${deviceid}',
       },
       params: {},
       returnBody: true,
@@ -111,14 +109,14 @@ class GetUserCall {
 
 class BlogRecommendCall {
   Future<ApiCallResponse> call({
-    String? deviceid = 'xxxxx',
+    String? deviceid = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'blogRecommend',
       apiUrl: '${FoodexpirationGroup.baseUrl}/blog/recommend',
       callType: ApiCallType.GET,
       headers: {
-        'x-device-id2': '${deviceid}',
+        'x-device-id': '${deviceid}',
       },
       params: {},
       returnBody: true,
@@ -132,14 +130,14 @@ class BlogRecommendCall {
 class BlogByIDCall {
   Future<ApiCallResponse> call({
     int? id,
-    String? deviceid = 'xxxxx',
+    String? deviceid = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'blogByID',
       apiUrl: '${FoodexpirationGroup.baseUrl}/blog/query',
       callType: ApiCallType.GET,
       headers: {
-        'x-device-id2': '${deviceid}',
+        'x-device-id': '${deviceid}',
       },
       params: {
         'id': id,
@@ -179,14 +177,14 @@ class BlogByIDCall {
 
 class BlogAllCall {
   Future<ApiCallResponse> call({
-    String? deviceid = 'xxxxx',
+    String? deviceid = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'blogAll',
       apiUrl: '${FoodexpirationGroup.baseUrl}/blog/all',
       callType: ApiCallType.GET,
       headers: {
-        'x-device-id2': '${deviceid}',
+        'x-device-id': '${deviceid}',
       },
       params: {},
       returnBody: true,
@@ -199,16 +197,14 @@ class BlogAllCall {
 
 class LocationListCall {
   Future<ApiCallResponse> call({
-    String? deviceId = '',
-    String? deviceid = 'xxxxx',
+    String? deviceid = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'locationList',
       apiUrl: '${FoodexpirationGroup.baseUrl}/location/list',
       callType: ApiCallType.GET,
       headers: {
-        'x-device-id2': '${deviceid}',
-        'x-device-id': '${deviceId}',
+        'x-device-id': '${deviceid}',
       },
       params: {},
       returnBody: true,
@@ -226,17 +222,15 @@ class LocationListCall {
 
 class DeleteLocationCall {
   Future<ApiCallResponse> call({
-    String? deviceId = '',
     int? id,
-    String? deviceid = 'xxxxx',
+    String? deviceid = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteLocation',
       apiUrl: '${FoodexpirationGroup.baseUrl}/location',
       callType: ApiCallType.DELETE,
       headers: {
-        'x-device-id2': '${deviceid}',
-        'x-device-id': '${deviceId}',
+        'x-device-id': '${deviceid}',
       },
       params: {
         'id': id,
@@ -251,18 +245,16 @@ class DeleteLocationCall {
 
 class UploadImageCall {
   Future<ApiCallResponse> call({
-    String? deviceId = '',
     FFUploadedFile? file,
     String? hash = '',
-    String? deviceid = 'xxxxx',
+    String? deviceid = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'uploadImage',
       apiUrl: '${FoodexpirationGroup.baseUrl}/image/upload',
       callType: ApiCallType.POST,
       headers: {
-        'x-device-id2': '${deviceid}',
-        'x-device-id': '${deviceId}',
+        'x-device-id': '${deviceid}',
       },
       params: {
         'file': file,
@@ -278,14 +270,14 @@ class UploadImageCall {
 
 class GetBannerCall {
   Future<ApiCallResponse> call({
-    String? deviceid = 'xxxxx',
+    String? deviceid = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'getBanner',
       apiUrl: '${FoodexpirationGroup.baseUrl}/image/banner',
       callType: ApiCallType.GET,
       headers: {
-        'x-device-id2': '${deviceid}',
+        'x-device-id': '${deviceid}',
       },
       params: {},
       returnBody: true,
@@ -303,20 +295,20 @@ class GetBannerCall {
 
 class ChangeProfilepictureCall {
   Future<ApiCallResponse> call({
-    String? deviceId = '',
     FFUploadedFile? file,
-    String? deviceid = 'xxxxx',
+    String? hash = '',
+    String? deviceid = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'changeProfilepicture',
       apiUrl: '${FoodexpirationGroup.baseUrl}/user/change-profilepicture',
       callType: ApiCallType.POST,
       headers: {
-        'x-device-id2': '${deviceid}',
-        'x-device-id': '${deviceId}',
+        'x-device-id': '${deviceid}',
       },
       params: {
         'file': file,
+        'hash': hash,
       },
       bodyType: BodyType.MULTIPART,
       returnBody: true,

@@ -272,7 +272,7 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                                           await FoodexpirationGroup
                                               .deleteLocationCall
                                               .call(
-                                        deviceId: FFAppState().deviceId,
+                                        deviceid: FFAppState().deviceId,
                                         id: listItem.id,
                                       );
                                       _shouldSetState = true;
