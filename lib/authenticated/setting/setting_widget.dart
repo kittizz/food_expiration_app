@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -227,69 +228,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              _model.apiChangeNicknam =
-                                                  await FoodexpirationGroup
-                                                      .changeNicknameCall
-                                                      .call(
-                                                deviceid: FFAppState().deviceId,
-                                                nickname:
-                                                    _model.textController.text,
-                                              );
-                                              if ((_model.apiChangeNicknam
-                                                      ?.succeeded ??
-                                                  true)) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  SnackBar(
-                                                    content: Text(
-                                                      'แก้ไขชื่อเรียบร้อย',
-                                                      style: TextStyle(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
-                                                    ),
-                                                    duration: Duration(
-                                                        milliseconds: 1000),
-                                                    backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondary,
-                                                  ),
-                                                );
-                                                await action_blocks
-                                                    .fetchUser(context);
-                                                setState(() {});
-                                              } else {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  SnackBar(
-                                                    content: Text(
-                                                      'เกิดข้อผิดพลาด ${getJsonField(
-                                                        (_model.apiChangeNicknam
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                        r'''$.message''',
-                                                      ).toString()}',
-                                                      style: TextStyle(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
-                                                    ),
-                                                    duration: Duration(
-                                                        milliseconds: 4000),
-                                                    backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .red500,
-                                                  ),
-                                                );
-                                              }
-
-                                              setState(() {});
+                                              await _model
+                                                  .saveNickname(context);
                                             },
                                             child: Text(
                                               'บันทึก',
@@ -600,6 +540,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                                   20.0, 12.0, 20.0, 0.0),
                                           child: TextFormField(
                                             controller: _model.textController,
+                                            onFieldSubmitted: (_) async {
+                                              await _model
+                                                  .saveNickname(context);
+                                            },
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: 'ชื่อ',
@@ -696,7 +640,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                         ),
                                       ],
                                     ),
-                                  ],
+                                  ].divide(SizedBox(height: 30.0)),
                                 ),
                               ),
                             ),
@@ -705,16 +649,54 @@ class _SettingWidgetState extends State<SettingWidget>
                                   0.0, 100.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  GoRouter.of(context).prepareAuthEvent();
-                                  await authManager.signOut();
-                                  GoRouter.of(context).clearRedirectLocation();
+                                  Function() _navigate = () {};
+                                  var confirmDialogResponse =
+                                      await showDialog<bool>(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('ลงชื่อออก'),
+                                                content: Text(
+                                                    'คุณกำลังลงชื่อออก แน่ใช่หรือไม่'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            false),
+                                                    child: Text('ไม่'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            true),
+                                                    child: Text('ใช่'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ) ??
+                                          false;
+                                  if (confirmDialogResponse) {
+                                    GoRouter.of(context).prepareAuthEvent();
+                                    await authManager.signOut();
+                                    GoRouter.of(context)
+                                        .clearRedirectLocation();
 
-                                  setState(() {
-                                    FFAppState().deviceId = '';
-                                  });
+                                    _navigate = () => context.goNamedAuth(
+                                        'Welcome', context.mounted);
+                                    setState(() {
+                                      FFAppState().deviceId = '';
+                                      FFAppState().user = UserStruct
+                                          .fromSerializableMap(jsonDecode(
+                                              '{\"nickname\":\"ผู้ใช้\",\"profilePicture\":\"https://th-bkk-1.xvercloud.com/food-expiration/images/user.png\",\"profilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
+                                    });
+                                  } else {
+                                    return;
+                                  }
 
-                                  context.goNamedAuth(
-                                      'Welcome', context.mounted);
+                                  _navigate();
                                 },
                                 text: 'ลงชื่อออก',
                                 icon: Icon(

@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -28,8 +29,6 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
 
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue;
-  // Stores action output result for [Backend Call - API (changeNickname)] action in Text widget.
-  ApiCallResponse? apiChangeNicknam;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -51,6 +50,46 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
   }
 
   /// Action blocks are added here.
+
+  Future saveNickname(BuildContext context) async {
+    ApiCallResponse? apiChangeNicknam;
+
+    apiChangeNicknam = await FoodexpirationGroup.changeNicknameCall.call(
+      deviceid: FFAppState().deviceId,
+      nickname: textController.text,
+    );
+    if ((apiChangeNicknam?.succeeded ?? true)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'แก้ไขชื่อเรียบร้อย',
+            style: TextStyle(
+              color: FlutterFlowTheme.of(context).primaryText,
+            ),
+          ),
+          duration: Duration(milliseconds: 1000),
+          backgroundColor: FlutterFlowTheme.of(context).secondary,
+        ),
+      );
+      await action_blocks.fetchUser(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'เกิดข้อผิดพลาด ${getJsonField(
+              (apiChangeNicknam?.jsonBody ?? ''),
+              r'''$.messages''',
+            ).toString().toString()}',
+            style: TextStyle(
+              color: FlutterFlowTheme.of(context).primaryText,
+            ),
+          ),
+          duration: Duration(milliseconds: 4000),
+          backgroundColor: FlutterFlowTheme.of(context).red500,
+        ),
+      );
+    }
+  }
 
   /// Additional helper methods are added here.
 }
