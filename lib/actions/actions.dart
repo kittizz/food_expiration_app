@@ -5,6 +5,8 @@ import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -61,4 +63,31 @@ Future registerDevice(
       backgroundColor: FlutterFlowTheme.of(context).success,
     ),
   );
+}
+
+Future<bool?> fetchUser(BuildContext context) async {
+  ApiCallResponse? apiResultgetUser;
+  UserStruct? userStruct;
+
+  apiResultgetUser = await FoodexpirationGroup.getUserCall.call(
+    deviceid: FFAppState().deviceId,
+  );
+  if ((apiResultgetUser?.succeeded ?? true)) {
+    userStruct = await actions.toUserStruct(
+      (apiResultgetUser?.jsonBody ?? ''),
+    );
+    FFAppState().user = userStruct!;
+    FFAppState().updateUserStruct(
+      (e) => e
+        ..profilePicture = functions.getImage(FoodexpirationGroup.getUserCall
+            .profilePicture(
+              (apiResultgetUser?.jsonBody ?? ''),
+            )
+            .toString()
+            .toString()),
+    );
+    return true;
+  } else {
+    return false;
+  }
 }

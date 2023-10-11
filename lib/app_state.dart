@@ -50,6 +50,17 @@ class FFAppState extends ChangeNotifier {
   set cdn(String _value) {
     _cdn = _value;
   }
+
+  UserStruct _user = UserStruct.fromSerializableMap(jsonDecode(
+      '{\"profilePicture\":\"https://th-bkk-1.xvercloud.com/food-expiration/images/user.png\"}'));
+  UserStruct get user => _user;
+  set user(UserStruct _value) {
+    _user = _value;
+  }
+
+  void updateUserStruct(Function(UserStruct) updateFn) {
+    updateFn(_user);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

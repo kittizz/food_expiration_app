@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'home_widget.dart' show HomeWidget;
@@ -35,16 +36,11 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   String bannerImage =
       'https://th-bkk-1.xvercloud.com/food-expiration/images/banner-onlygf.png';
 
-  String profilePicture =
-      'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png';
-
-  String nickname = 'ผู้ใช้';
-
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (getUser)] action in Home widget.
-  ApiCallResponse? apiUser;
+  // Stores action output result for [Action Block - fetchUser] action in Home widget.
+  bool? outputFetchUser;
   // Stores action output result for [Backend Call - API (getBanner)] action in Home widget.
   ApiCallResponse? apiBanner;
   // Stores action output result for [Backend Call - API (blogRecommend)] action in Home widget.

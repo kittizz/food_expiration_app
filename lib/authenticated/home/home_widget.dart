@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -68,10 +69,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           ..reset()
           ..repeat();
       }
-      _model.apiUser = await FoodexpirationGroup.getUserCall.call(
-        deviceid: FFAppState().deviceId,
-      );
-      if ((_model.apiUser?.succeeded ?? true)) {
+      _model.outputFetchUser = await action_blocks.fetchUser(context);
+      if (_model.outputFetchUser!) {
         _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();
       } else {
         FFAppState().deviceId = '';
@@ -97,18 +96,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                   (_model.apiBanner?.jsonBody ?? ''),
                 )
                 .toString());
-        _model.profilePicture =
-            functions.getImage(FoodexpirationGroup.getUserCall
-                .profilePicture(
-                  (_model.apiUser?.jsonBody ?? ''),
-                )
-                .toString()
-                .toString());
-        _model.nickname = FoodexpirationGroup.getUserCall
-            .nickname(
-              (_model.apiUser?.jsonBody ?? ''),
-            )
-            .toString();
       });
     });
 
@@ -239,24 +226,30 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: 65.0,
-                                      height: 65.0,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: CachedNetworkImage(
-                                        fadeInDuration:
-                                            Duration(milliseconds: 500),
-                                        fadeOutDuration:
-                                            Duration(milliseconds: 500),
-                                        imageUrl: _model.profilePicture,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(90.0),
+                                      child: OctoImage(
+                                        placeholderBuilder:
+                                            OctoPlaceholder.blurHash(
+                                          FFAppState()
+                                              .user
+                                              .profilePictureBlurHash,
+                                        ),
+                                        image: CachedNetworkImageProvider(
+                                          valueOrDefault<String>(
+                                            FFAppState().user.profilePicture,
+                                            'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                          ),
+                                        ),
+                                        width: 65.0,
+                                        height: 65.0,
                                         fit: BoxFit.cover,
-                                        errorWidget:
+                                        errorBuilder:
                                             (context, error, stackTrace) =>
                                                 Image.asset(
                                           'assets/images/error_image.png',
+                                          width: 65.0,
+                                          height: 65.0,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -275,7 +268,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         children: [
                                           Flexible(
                                             child: Text(
-                                              'สวัสดีคุณ ${_model.nickname}',
+                                              'สวัสดีคุณ ${FFAppState().user.nickname}',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyLarge
