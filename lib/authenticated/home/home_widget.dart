@@ -242,19 +242,26 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           ],
                                           shape: BoxShape.circle,
                                         ),
-                                        child: CachedNetworkImage(
-                                          fadeInDuration:
-                                              Duration(milliseconds: 500),
-                                          fadeOutDuration:
-                                              Duration(milliseconds: 500),
-                                          imageUrl: valueOrDefault<String>(
-                                            FFAppState().user.profilePicture,
-                                            'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                        child: OctoImage(
+                                          placeholderBuilder:
+                                              OctoPlaceholder.blurHash(
+                                            valueOrDefault<String>(
+                                              FFAppState()
+                                                  .user
+                                                  .profilePictureBlurHash,
+                                              'LIEpzCa#1mt7EjWB?Hof5Xoe}fR%',
+                                            ),
+                                          ),
+                                          image: CachedNetworkImageProvider(
+                                            valueOrDefault<String>(
+                                              FFAppState().user.profilePicture,
+                                              'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                            ),
                                           ),
                                           width: double.infinity,
                                           height: double.infinity,
                                           fit: BoxFit.cover,
-                                          errorWidget:
+                                          errorBuilder:
                                               (context, error, stackTrace) =>
                                                   Image.asset(
                                             'assets/images/error_image.png',

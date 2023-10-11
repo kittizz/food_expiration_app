@@ -26,6 +26,7 @@ class FoodexpirationGroup {
   static GetBannerCall getBannerCall = GetBannerCall();
   static ChangeProfilepictureCall changeProfilepictureCall =
       ChangeProfilepictureCall();
+  static ChangeNicknameCall changeNicknameCall = ChangeNicknameCall();
 }
 
 class RegisterDeviceCall {
@@ -311,6 +312,33 @@ class ChangeProfilepictureCall {
         'hash': hash,
       },
       bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class ChangeNicknameCall {
+  Future<ApiCallResponse> call({
+    String? nickname = '',
+    String? deviceid = '',
+  }) {
+    final ffApiRequestBody = '''
+{
+  "nickname": "${nickname}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'changeNickname',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/user/change-nickname',
+      callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
