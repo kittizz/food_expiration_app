@@ -207,8 +207,7 @@ class _SettingWidgetState extends State<SettingWidget>
                             KeepAliveWidgetWrapper(
                               builder: (context) => Column(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
                                     width: double.infinity,
@@ -733,7 +732,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),
                                   ),
-                                ],
+                                ].divide(SizedBox(height: 30.0)),
                               ),
                             ),
                           ],
