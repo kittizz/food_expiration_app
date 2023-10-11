@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/actions/actions.dart' as action_blocks;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -65,6 +66,12 @@ class _SettingWidgetState extends State<SettingWidget>
     super.initState();
     _model = createModel(context, () => SettingModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await action_blocks.fetchUser(context);
+      setState(() {});
+    });
+
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
@@ -75,7 +82,8 @@ class _SettingWidgetState extends State<SettingWidget>
           ),
           1),
     )..addListener(() => setState(() {}));
-    _model.textController ??= TextEditingController();
+    _model.textController ??=
+        TextEditingController(text: FFAppState().user.nickname);
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -341,18 +349,35 @@ class _SettingWidgetState extends State<SettingWidget>
                                                                   milliseconds:
                                                                       500),
                                                           imageUrl:
-                                                              'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                              valueOrDefault<
+                                                                  String>(
+                                                            FFAppState()
+                                                                .user
+                                                                .profilePicture,
+                                                            'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                          ),
                                                           fit: BoxFit.contain,
                                                         ),
                                                         allowRotation: false,
-                                                        tag: 'imageTag',
+                                                        tag: valueOrDefault<
+                                                            String>(
+                                                          FFAppState()
+                                                              .user
+                                                              .profilePicture,
+                                                          'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                        ),
                                                         useHeroAnimation: true,
                                                       ),
                                                     ),
                                                   );
                                                 },
                                                 child: Hero(
-                                                  tag: 'imageTag',
+                                                  tag: valueOrDefault<String>(
+                                                    FFAppState()
+                                                        .user
+                                                        .profilePicture,
+                                                    'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                  ),
                                                   transitionOnUserGestures:
                                                       true,
                                                   child: ClipRRect(
@@ -364,8 +389,13 @@ class _SettingWidgetState extends State<SettingWidget>
                                                           milliseconds: 500),
                                                       fadeOutDuration: Duration(
                                                           milliseconds: 500),
-                                                      imageUrl:
-                                                          'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                      imageUrl: valueOrDefault<
+                                                          String>(
+                                                        FFAppState()
+                                                            .user
+                                                            .profilePicture,
+                                                        'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                      ),
                                                       width: double.infinity,
                                                       height: double.infinity,
                                                       fit: BoxFit.contain,
@@ -516,6 +546,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                                           setState(() {});
                                                         return;
                                                       }
+
+                                                      await action_blocks
+                                                          .fetchUser(context);
+                                                      setState(() {});
                                                     } else {
                                                       if (_shouldSetState)
                                                         setState(() {});

@@ -244,14 +244,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         width: 65.0,
                                         height: 65.0,
                                         fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                Image.asset(
-                                          'assets/images/error_image.png',
-                                          width: 65.0,
-                                          height: 65.0,
-                                          fit: BoxFit.cover,
-                                        ),
                                       ),
                                     ),
                                   ),
