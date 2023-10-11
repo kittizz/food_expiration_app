@@ -148,7 +148,7 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                     alignment: AlignmentDirectional(1.00, 0.00),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,

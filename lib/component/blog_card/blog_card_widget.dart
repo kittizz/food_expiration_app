@@ -80,10 +80,16 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
               borderRadius: BorderRadius.circular(8.0),
               child: OctoImage(
                 placeholderBuilder: OctoPlaceholder.blurHash(
-                  widget.blurHash!,
+                  valueOrDefault<String>(
+                    widget.blurHash,
+                    'L9O:kbz,Xm9|~WRPDj%i?H0LNN-q',
+                  ),
                 ),
                 image: NetworkImage(
-                  widget.image!,
+                  valueOrDefault<String>(
+                    widget.image,
+                    'https://th-bkk-1.xvercloud.com/food-expiration/images/48330b17-bfb0-4c0c-bd79-7e9b303fd438.jpg',
+                  ),
                 ),
                 width: double.infinity,
                 height: 160.0,

@@ -222,7 +222,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                           AlignmentDirectional(1.00, 0.00),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 12.0, 0.0),
+                                            0.0, 0.0, 20.0, 0.0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
                                           focusColor: Colors.transparent,
@@ -326,8 +326,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                         CrossAxisAlignment.center,
                                     children: [
                                       Container(
-                                        width: 160.0,
-                                        height: 160.0,
+                                        width: 200.0,
+                                        height: 200.0,
                                         child: Stack(
                                           children: [
                                             InkWell(
@@ -593,7 +593,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 12.0, 16.0, 0.0),
+                                            20.0, 12.0, 20.0, 0.0),
                                         child: TextFormField(
                                           controller: _model.textController,
                                           obscureText: false,
