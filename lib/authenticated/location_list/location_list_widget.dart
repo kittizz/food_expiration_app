@@ -149,7 +149,7 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                                     PageLocationInfoStruct.fromSerializableMap(
                                         jsonDecode('{\"isAdd\":\"true\"}'));
 
-                                context.pushNamed('LocationList');
+                                context.pushNamed('LocationInfo');
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
