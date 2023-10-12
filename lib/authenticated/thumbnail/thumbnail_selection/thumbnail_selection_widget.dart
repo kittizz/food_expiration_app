@@ -143,55 +143,89 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                         itemCount: list.length,
                         itemBuilder: (context, listIndex) {
                           final listItem = list[listIndex];
-                          return Card(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            elevation: 4.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: OctoImage(
-                                    placeholderBuilder:
-                                        OctoPlaceholder.blurHash(
-                                      listItem.image.blurHash,
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                'ThumbnailViewer',
+                                queryParameters: {
+                                  'name': serializeParam(
+                                    listItem.name,
+                                    ParamType.String,
+                                  ),
+                                  'imagePath': serializeParam(
+                                    listItem.image.path,
+                                    ParamType.String,
+                                  ),
+                                  'imageId': serializeParam(
+                                    listItem.id,
+                                    ParamType.int,
+                                  ),
+                                  'catrgoryId': serializeParam(
+                                    listItem.id,
+                                    ParamType.int,
+                                  ),
+                                  'imageBlurhash': serializeParam(
+                                    listItem.image.blurHash,
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            },
+                            child: Card(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              elevation: 4.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: OctoImage(
+                                      placeholderBuilder:
+                                          OctoPlaceholder.blurHash(
+                                        listItem.image.blurHash,
+                                      ),
+                                      image: CachedNetworkImageProvider(
+                                        functions.getImage(listItem.image.path),
+                                      ),
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
                                     ),
-                                    image: CachedNetworkImageProvider(
-                                      functions.getImage(listItem.image.path),
-                                    ),
+                                  ),
+                                  Container(
                                     width: double.infinity,
                                     height: double.infinity,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Color(0x00FFFFFF),
-                                        Color(0x93000000)
-                                      ],
-                                      stops: [0.5, 1.0],
-                                      begin: AlignmentDirectional(0.0, -1.0),
-                                      end: AlignmentDirectional(0, 1.0),
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Color(0x00FFFFFF),
+                                          Color(0x93000000)
+                                        ],
+                                        stops: [0.5, 1.0],
+                                        begin: AlignmentDirectional(0.0, -1.0),
+                                        end: AlignmentDirectional(0, 1.0),
+                                      ),
+                                    ),
+                                    child: Align(
+                                      alignment:
+                                          AlignmentDirectional(0.00, 1.00),
+                                      child: Text(
+                                        listItem.name,
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium,
+                                      ),
                                     ),
                                   ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(0.00, 1.00),
-                                    child: Text(
-                                      listItem.name,
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleMedium,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         },
