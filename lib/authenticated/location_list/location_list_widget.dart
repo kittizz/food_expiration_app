@@ -139,24 +139,28 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 25.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Icon(
-                                  Icons.add_rounded,
-                                  color: FlutterFlowTheme.of(context).success,
-                                  size: 16.0,
-                                ),
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed('LocationInfo');
-                                  },
-                                  child: Text(
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                FFAppState().pageLocationInfo =
+                                    PageLocationInfoStruct.fromSerializableMap(
+                                        jsonDecode('{\"isAdd\":\"true\"}'));
+
+                                context.pushNamed('LocationList');
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Icon(
+                                    Icons.add_rounded,
+                                    color: FlutterFlowTheme.of(context).success,
+                                    size: 16.0,
+                                  ),
+                                  Text(
                                     'เพิ่ม',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyLarge
@@ -173,8 +177,8 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                                                       .bodyLargeFamily),
                                         ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           Divider(
