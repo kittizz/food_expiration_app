@@ -267,6 +267,19 @@ class UploadImageCall {
       cache: false,
     );
   }
+
+  dynamic id(dynamic response) => getJsonField(
+        response,
+        r'''$.ID''',
+      );
+  dynamic path(dynamic response) => getJsonField(
+        response,
+        r'''$.Path''',
+      );
+  dynamic blurHash(dynamic response) => getJsonField(
+        response,
+        r'''$.BlurHash''',
+      );
 }
 
 class GetBannerCall {

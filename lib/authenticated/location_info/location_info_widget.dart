@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -158,118 +159,320 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(16.0),
                                           ),
-                                          child: Stack(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            children: [
-                                              Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.add_a_photo_outlined,
-                                                    color: Color(0xFF57636C),
-                                                    size: 72.0,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 12.0,
-                                                                0.0, 0.0),
-                                                    child: Text(
-                                                      'Add Photo',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleLarge
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: Color(
-                                                                    0xFF14181B),
-                                                                fontSize: 22.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .titleLargeFamily),
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 4.0,
-                                                                0.0, 0.0),
-                                                    child: Text(
-                                                      'Upload an image here...',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Plus Jakarta Sans',
-                                                                color: Color(
-                                                                    0xFF57636C),
-                                                                fontSize: 14.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .labelMediumFamily),
-                                                              ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              if (valueOrDefault<bool>(
-                                                FFAppState()
-                                                            .pageLocationInfo
-                                                            .image !=
-                                                        null &&
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              var _shouldSetState = false;
+                                              final selectedMedia =
+                                                  await selectMediaWithSourceBottomSheet(
+                                                context: context,
+                                                maxWidth: 300.00,
+                                                maxHeight: 300.00,
+                                                imageQuality: 100,
+                                                allowPhoto: true,
+                                                includeBlurHash: true,
+                                                pickerFontFamily:
+                                                    'IBM Plex Sans Thai',
+                                              );
+                                              if (selectedMedia != null &&
+                                                  selectedMedia.every((m) =>
+                                                      validateFileFormat(
+                                                          m.storagePath,
+                                                          context))) {
+                                                setState(() => _model
+                                                    .isDataUploading1 = true);
+                                                var selectedUploadedFiles =
+                                                    <FFUploadedFile>[];
+
+                                                try {
+                                                  showUploadMessage(
+                                                    context,
+                                                    'Uploading file...',
+                                                    showLoading: true,
+                                                  );
+                                                  selectedUploadedFiles =
+                                                      selectedMedia
+                                                          .map((m) =>
+                                                              FFUploadedFile(
+                                                                name: m
+                                                                    .storagePath
+                                                                    .split('/')
+                                                                    .last,
+                                                                bytes: m.bytes,
+                                                                height: m
+                                                                    .dimensions
+                                                                    ?.height,
+                                                                width: m
+                                                                    .dimensions
+                                                                    ?.width,
+                                                                blurHash:
+                                                                    m.blurHash,
+                                                              ))
+                                                          .toList();
+                                                } finally {
+                                                  ScaffoldMessenger.of(context)
+                                                      .hideCurrentSnackBar();
+                                                  _model.isDataUploading1 =
+                                                      false;
+                                                }
+                                                if (selectedUploadedFiles
+                                                        .length ==
+                                                    selectedMedia.length) {
+                                                  setState(() {
+                                                    _model.uploadedLocalFile1 =
+                                                        selectedUploadedFiles
+                                                            .first;
+                                                  });
+                                                  showUploadMessage(
+                                                      context, 'Success!');
+                                                } else {
+                                                  setState(() {});
+                                                  showUploadMessage(context,
+                                                      'Failed to upload data');
+                                                  return;
+                                                }
+                                              }
+
+                                              if (_model.uploadedLocalFile2 !=
+                                                      null &&
+                                                  (_model.uploadedLocalFile2
+                                                          .bytes?.isNotEmpty ??
+                                                      false)) {
+                                                _model.apiUploadImage2 =
+                                                    await FoodexpirationGroup
+                                                        .uploadImageCall
+                                                        .call(
+                                                  file:
+                                                      _model.uploadedLocalFile2,
+                                                  deviceid:
+                                                      FFAppState().deviceId,
+                                                  hash: _model
+                                                      .uploadedLocalFile2
+                                                      .blurHash,
+                                                );
+                                                _shouldSetState = true;
+                                                if ((_model.apiUploadImage2
+                                                        ?.succeeded ??
+                                                    true)) {
+                                                  setState(() {
                                                     FFAppState()
-                                                            .pageLocationInfo
-                                                            .image !=
-                                                        '',
-                                                false,
-                                              ))
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          8.0, 8.0, 8.0, 8.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    child: OctoImage(
-                                                      placeholderBuilder:
-                                                          OctoPlaceholder
-                                                              .blurHash(
-                                                        FFAppState()
-                                                            .pageLocationInfo
-                                                            .imageBlurhash,
+                                                        .updatePageLocationInfoStruct(
+                                                      (e) => e
+                                                        ..imageId =
+                                                            FoodexpirationGroup
+                                                                .uploadImageCall
+                                                                .id(
+                                                          (_model.apiUploadImage2
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        )
+                                                        ..image =
+                                                            FoodexpirationGroup
+                                                                .uploadImageCall
+                                                                .path(
+                                                                  (_model.apiUploadImage2
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                )
+                                                                .toString()
+                                                        ..imageBlurhash =
+                                                            FoodexpirationGroup
+                                                                .uploadImageCall
+                                                                .blurHash(
+                                                                  (_model.apiUploadImage2
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                )
+                                                                .toString(),
+                                                    );
+                                                  });
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'อัปโหลดรูปสำเร็จ',
+                                                        style: TextStyle(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
                                                       ),
-                                                      image: NetworkImage(
-                                                        functions.getImage(
-                                                            FFAppState()
-                                                                .pageLocationInfo
-                                                                .image),
+                                                      duration: Duration(
+                                                          milliseconds: 1000),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondary,
+                                                    ),
+                                                  );
+                                                  if (_shouldSetState)
+                                                    setState(() {});
+                                                  return;
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        getJsonField(
+                                                          (_model.apiUploadImage2
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$.message''',
+                                                        ).toString(),
+                                                        style: TextStyle(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
                                                       ),
-                                                      width: double.infinity,
-                                                      height: double.infinity,
-                                                      fit: BoxFit.cover,
+                                                      duration: Duration(
+                                                          milliseconds: 1000),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                    ),
+                                                  );
+                                                  if (_shouldSetState)
+                                                    setState(() {});
+                                                  return;
+                                                }
+                                              } else {
+                                                if (_shouldSetState)
+                                                  setState(() {});
+                                                return;
+                                              }
+
+                                              if (_shouldSetState)
+                                                setState(() {});
+                                            },
+                                            child: Stack(
+                                              alignment: AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              children: [
+                                                Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons
+                                                          .add_a_photo_outlined,
+                                                      color: Color(0xFF57636C),
+                                                      size: 72.0,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  12.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        'Add Photo',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  color: Color(
+                                                                      0xFF14181B),
+                                                                  fontSize:
+                                                                      22.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .titleLargeFamily),
+                                                                ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  4.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        'Upload an image here...',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Plus Jakarta Sans',
+                                                                  color: Color(
+                                                                      0xFF57636C),
+                                                                  fontSize:
+                                                                      14.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .labelMediumFamily),
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                if (valueOrDefault<bool>(
+                                                  FFAppState()
+                                                              .pageLocationInfo
+                                                              .image !=
+                                                          null &&
+                                                      FFAppState()
+                                                              .pageLocationInfo
+                                                              .image !=
+                                                          '',
+                                                  false,
+                                                ))
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(8.0, 8.0,
+                                                                8.0, 8.0),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                      child: OctoImage(
+                                                        placeholderBuilder:
+                                                            OctoPlaceholder
+                                                                .blurHash(
+                                                          FFAppState()
+                                                              .pageLocationInfo
+                                                              .imageBlurhash,
+                                                        ),
+                                                        image: NetworkImage(
+                                                          functions.getImage(
+                                                              FFAppState()
+                                                                  .pageLocationInfo
+                                                                  .image),
+                                                        ),
+                                                        width: double.infinity,
+                                                        height: double.infinity,
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -298,7 +501,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                       m.storagePath,
                                                       context))) {
                                             setState(() =>
-                                                _model.isDataUploading = true);
+                                                _model.isDataUploading2 = true);
                                             var selectedUploadedFiles =
                                                 <FFUploadedFile>[];
 
@@ -323,12 +526,12 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                               ))
                                                       .toList();
                                             } finally {
-                                              _model.isDataUploading = false;
+                                              _model.isDataUploading2 = false;
                                             }
                                             if (selectedUploadedFiles.length ==
                                                 selectedMedia.length) {
                                               setState(() {
-                                                _model.uploadedLocalFile =
+                                                _model.uploadedLocalFile2 =
                                                     selectedUploadedFiles.first;
                                               });
                                             } else {
@@ -337,19 +540,19 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                             }
                                           }
 
-                                          if (_model.uploadedLocalFile !=
+                                          if (_model.uploadedLocalFile2 !=
                                                   null &&
-                                              (_model.uploadedLocalFile.bytes
+                                              (_model.uploadedLocalFile2.bytes
                                                       ?.isNotEmpty ??
                                                   false)) {
                                             _model.apiResultp50 =
                                                 await FoodexpirationGroup
                                                     .uploadImageCall
                                                     .call(
-                                              file: _model.uploadedLocalFile,
+                                              file: _model.uploadedLocalFile2,
                                               deviceid: FFAppState().deviceId,
                                               hash: _model
-                                                  .uploadedLocalFile.blurHash,
+                                                  .uploadedLocalFile2.blurHash,
                                             );
                                             _shouldSetState = true;
                                           } else {
