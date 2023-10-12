@@ -688,7 +688,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               ),
                             ),
                           );
-                        }),
+                        }).divide(SizedBox(height: 5.0)),
                       );
                     },
                   ),
