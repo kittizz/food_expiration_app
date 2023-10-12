@@ -159,11 +159,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'LocationInfo',
           path: '/locationInfo',
           requireAuth: true,
-          builder: (context, params) => LocationInfoWidget(
-            title: params.getParam('title', ParamType.String),
-            locationId: params.getParam('locationId', ParamType.String),
-            isAdd: params.getParam('isAdd', ParamType.bool),
-          ),
+          builder: (context, params) => LocationInfoWidget(),
         ),
         FFRoute(
           name: 'LocationList',

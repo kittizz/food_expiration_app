@@ -124,15 +124,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed(
-                    'LocationInfo',
-                    queryParameters: {
-                      'title': serializeParam(
-                        '',
-                        ParamType.String,
-                      ),
-                    }.withoutNulls,
-                  );
+                  context.pushNamed('LocationInfo');
                 },
               ),
             ),

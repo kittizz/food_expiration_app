@@ -154,19 +154,7 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    context.pushNamed(
-                                      'LocationInfo',
-                                      queryParameters: {
-                                        'title': serializeParam(
-                                          'เพิ่มสถานที่',
-                                          ParamType.String,
-                                        ),
-                                        'isAdd': serializeParam(
-                                          true,
-                                          ParamType.bool,
-                                        ),
-                                      }.withoutNulls,
-                                    );
+                                    context.pushNamed('LocationInfo');
                                   },
                                   child: Text(
                                     'เพิ่ม',

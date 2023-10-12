@@ -14,17 +14,7 @@ import 'location_info_model.dart';
 export 'location_info_model.dart';
 
 class LocationInfoWidget extends StatefulWidget {
-  const LocationInfoWidget({
-    Key? key,
-    String? title,
-    this.locationId,
-    this.isAdd,
-  })  : this.title = title ?? '',
-        super(key: key);
-
-  final String title;
-  final String? locationId;
-  final bool? isAdd;
+  const LocationInfoWidget({Key? key}) : super(key: key);
 
   @override
   _LocationInfoWidgetState createState() => _LocationInfoWidgetState();
@@ -82,7 +72,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
             },
           ),
           title: Text(
-            widget.title,
+            FFAppState().pageLocationInfo.name,
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -240,34 +230,45 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                   ),
                                                 ],
                                               ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 8.0, 8.0, 8.0),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  child: OctoImage(
-                                                    placeholderBuilder:
-                                                        OctoPlaceholder
-                                                            .blurHash(
-                                                      FFAppState()
-                                                          .pageLocationInfo
-                                                          .imageBlurhash,
+                                              if (valueOrDefault<bool>(
+                                                FFAppState()
+                                                            .pageLocationInfo
+                                                            .image !=
+                                                        null &&
+                                                    FFAppState()
+                                                            .pageLocationInfo
+                                                            .image !=
+                                                        '',
+                                                false,
+                                              ))
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          8.0, 8.0, 8.0, 8.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    child: OctoImage(
+                                                      placeholderBuilder:
+                                                          OctoPlaceholder
+                                                              .blurHash(
+                                                        FFAppState()
+                                                            .pageLocationInfo
+                                                            .imageBlurhash,
+                                                      ),
+                                                      image: NetworkImage(
+                                                        functions.getImage(
+                                                            FFAppState()
+                                                                .pageLocationInfo
+                                                                .image),
+                                                      ),
+                                                      width: double.infinity,
+                                                      height: double.infinity,
+                                                      fit: BoxFit.cover,
                                                     ),
-                                                    image: NetworkImage(
-                                                      functions.getImage(
-                                                          FFAppState()
-                                                              .pageLocationInfo
-                                                              .image),
-                                                    ),
-                                                    width: double.infinity,
-                                                    height: double.infinity,
-                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
-                                              ),
                                             ],
                                           ),
                                         ),
@@ -589,7 +590,9 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                           onPressed: () {
                                             print('Button pressed ...');
                                           },
-                                          text: widget.isAdd!
+                                          text: FFAppState()
+                                                  .pageLocationInfo
+                                                  .isAdd
                                               ? 'เพิ่ม'
                                               : 'บันทึก',
                                           options: FFButtonOptions(

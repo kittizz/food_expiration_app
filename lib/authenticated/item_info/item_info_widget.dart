@@ -99,19 +99,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed(
-                      'LocationInfo',
-                      queryParameters: {
-                        'title': serializeParam(
-                          'เพิ่มสถานที่',
-                          ParamType.String,
-                        ),
-                        'isAdd': serializeParam(
-                          true,
-                          ParamType.bool,
-                        ),
-                      }.withoutNulls,
-                    );
+                    context.pushNamed('LocationInfo');
                   },
                   child: Text(
                     'ลบ',
