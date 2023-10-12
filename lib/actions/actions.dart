@@ -76,11 +76,6 @@ Future<bool?> fetchUser(BuildContext context) async {
       (apiResultgetUser?.jsonBody ?? ''),
     );
     FFAppState().user = userStruct!;
-    FFAppState().updateUserStruct(
-      (e) => e
-        ..profilePictureBlurHash = userStruct?.profilePictureBlurHash
-        ..profilePicture = userStruct?.profilePicture,
-    );
     return true;
   } else {
     return false;
