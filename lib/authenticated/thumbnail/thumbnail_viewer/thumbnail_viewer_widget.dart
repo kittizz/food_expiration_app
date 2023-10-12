@@ -189,8 +189,8 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                     ),
                     Expanded(
                       child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          context.pushNamed('LocationInfo');
                         },
                         text: 'ตกลง',
                         options: FFButtonOptions(
