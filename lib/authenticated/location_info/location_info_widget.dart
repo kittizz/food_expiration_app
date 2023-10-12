@@ -34,7 +34,9 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.hash = FFAppState().pageLocationInfo.imageBlurhash;
+      setState(() {
+        _model.hash = FFAppState().pageLocationInfo.imageBlurhash;
+      });
     });
 
     _model.nameFieldController ??=
@@ -255,6 +257,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                   if ((_model.apiUploadImage1
                                                           ?.succeeded ??
                                                       true)) {
+                                                    setState(() {
+                                                      _model.hash = _model
+                                                          .uploadedLocalFile
+                                                          .blurHash!;
+                                                    });
                                                     setState(() {
                                                       FFAppState()
                                                           .updatePageLocationInfoStruct(
