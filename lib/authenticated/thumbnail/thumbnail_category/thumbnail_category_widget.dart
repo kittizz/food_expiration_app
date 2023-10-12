@@ -1,4 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -36,6 +38,15 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
       _model.apiCategory = await FoodexpirationGroup.thumbnailCategoryCall.call(
         deviceid: FFAppState().deviceId,
       );
+      if ((_model.apiCategory?.succeeded ?? true)) {
+        setState(() {
+          _model.categorys = functions
+              .toThumbnailCategoryStructList(
+                  (_model.apiCategory?.jsonBody ?? ''))
+              .toList()
+              .cast<ThumbnailCategoryStruct>();
+        });
+      }
     });
   }
 
@@ -99,10 +110,7 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                       EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 12.0, 0.0),
                   child: Builder(
                     builder: (context) {
-                      final list = functions
-                          .toThumbnailCategoryStructList(
-                              (_model.apiCategory?.jsonBody ?? ''))
-                          .toList();
+                      final list = _model.categorys.toList();
                       return GridView.builder(
                         padding: EdgeInsets.zero,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -125,7 +133,7 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                                 'ThumbnailSelection',
                                 queryParameters: {
                                   'thumbnailCategoryId': serializeParam(
-                                    1,
+                                    listItem.id,
                                     ParamType.int,
                                   ),
                                 }.withoutNulls,

@@ -62,7 +62,7 @@ class FFAppState extends ChangeNotifier {
   }
 
   UserStruct _user = UserStruct.fromSerializableMap(jsonDecode(
-      '{\"Role\":\"user\",\"Nickname\":\"ผู้ใช้งาน\",\"ProfilePicture\":\"/images/user.png\",\"ProfilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
+      '{\"role\":\"user\",\"nickname\":\"ผู้ใช้\",\"profilePicture\":\"/images/user.png\",\"profilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
   UserStruct get user => _user;
   set user(UserStruct _value) {
     _user = _value;

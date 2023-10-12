@@ -279,9 +279,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     image:
                                                         CachedNetworkImageProvider(
                                                       valueOrDefault<String>(
-                                                        FFAppState()
-                                                            .user
-                                                            .profilePicture,
+                                                        functions.getImage(
+                                                            FFAppState()
+                                                                .user
+                                                                .profilePicture),
                                                         'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
                                                       ),
                                                     ),

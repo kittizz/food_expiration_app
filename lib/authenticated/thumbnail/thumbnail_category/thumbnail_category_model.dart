@@ -1,4 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -13,6 +15,19 @@ import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
 class ThumbnailCategoryModel extends FlutterFlowModel<ThumbnailCategoryWidget> {
+  ///  Local state fields for this page.
+
+  List<ThumbnailCategoryStruct> categorys = [];
+  void addToCategorys(ThumbnailCategoryStruct item) => categorys.add(item);
+  void removeFromCategorys(ThumbnailCategoryStruct item) =>
+      categorys.remove(item);
+  void removeAtIndexFromCategorys(int index) => categorys.removeAt(index);
+  void insertAtIndexInCategorys(int index, ThumbnailCategoryStruct item) =>
+      categorys.insert(index, item);
+  void updateCategorysAtIndex(
+          int index, Function(ThumbnailCategoryStruct) updateFn) =>
+      categorys[index] = updateFn(categorys[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

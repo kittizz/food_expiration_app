@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/actions/actions.dart' as action_blocks;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -334,9 +335,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                                               CachedNetworkImageProvider(
                                                             valueOrDefault<
                                                                 String>(
-                                                              FFAppState()
-                                                                  .user
-                                                                  .profilePicture,
+                                                              functions.getImage(
+                                                                  FFAppState()
+                                                                      .user
+                                                                      .profilePicture),
                                                               'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
                                                             ),
                                                           ),
@@ -352,9 +354,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                                         allowRotation: false,
                                                         tag: valueOrDefault<
                                                             String>(
-                                                          FFAppState()
-                                                              .user
-                                                              .profilePicture,
+                                                          functions.getImage(
+                                                              FFAppState()
+                                                                  .user
+                                                                  .profilePicture),
                                                           'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
                                                         ),
                                                         useHeroAnimation: true,
@@ -364,9 +367,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                                 },
                                                 child: Hero(
                                                   tag: valueOrDefault<String>(
-                                                    FFAppState()
-                                                        .user
-                                                        .profilePicture,
+                                                    functions.getImage(
+                                                        FFAppState()
+                                                            .user
+                                                            .profilePicture),
                                                     'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
                                                   ),
                                                   transitionOnUserGestures:
@@ -386,9 +390,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                                       image:
                                                           CachedNetworkImageProvider(
                                                         valueOrDefault<String>(
-                                                          FFAppState()
-                                                              .user
-                                                              .profilePicture,
+                                                          functions.getImage(
+                                                              FFAppState()
+                                                                  .user
+                                                                  .profilePicture),
                                                           'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
                                                         ),
                                                       ),
@@ -732,7 +737,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                     FFAppState().deviceId = '';
                                     FFAppState().user = UserStruct
                                         .fromSerializableMap(jsonDecode(
-                                            '{\"Role\":\"user\",\"Nickname\":\"ผู้ใช้งาน\",\"ProfilePicture\":\"/images/user.png\",\"ProfilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
+                                            '{\"role\":\"user\",\"nickname\":\"ผู้ใช้\",\"profilePicture\":\"/images/user.png\",\"profilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
                                   });
                                 } else {
                                   return;
