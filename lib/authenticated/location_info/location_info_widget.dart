@@ -232,9 +232,13 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                       false)) {
                                                 if (_model.uploadedLocalFile
                                                         .blurHash !=
-                                                    FFAppState()
-                                                        .pageLocationInfo
-                                                        .imageBlurhash) {
+                                                    FoodexpirationGroup
+                                                        .uploadImageCall
+                                                        .blurHash(
+                                                      (_model.apiUploadImage1
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    )) {
                                                   _model.apiUploadImage1 =
                                                       await FoodexpirationGroup
                                                           .uploadImageCall
