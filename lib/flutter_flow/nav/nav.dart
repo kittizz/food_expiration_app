@@ -186,7 +186,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ThumbnailCategory',
           path: '/thumbnailCategory',
-          builder: (context, params) => ThumbnailCategoryWidget(),
+          builder: (context, params) => ThumbnailCategoryWidget(
+            type: params.getParam('type', ParamType.String),
+          ),
         ),
         FFRoute(
           name: 'ThumbnailSelection',
@@ -194,6 +196,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ThumbnailSelectionWidget(
             thumbnailCategoryId:
                 params.getParam('thumbnailCategoryId', ParamType.int),
+            type: params.getParam('type', ParamType.String),
           ),
         ),
         FFRoute(

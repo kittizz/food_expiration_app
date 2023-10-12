@@ -86,10 +86,10 @@ class FFAppState extends ChangeNotifier {
     updateFn(_pageLocationInfo);
   }
 
-  String _thumbnailBackPage = '';
-  String get thumbnailBackPage => _thumbnailBackPage;
-  set thumbnailBackPage(String _value) {
-    _thumbnailBackPage = _value;
+  String _thumbnailCategoryMode = '';
+  String get thumbnailCategoryMode => _thumbnailCategoryMode;
+  set thumbnailCategoryMode(String _value) {
+    _thumbnailCategoryMode = _value;
   }
 }
 

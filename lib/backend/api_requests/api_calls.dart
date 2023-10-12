@@ -28,6 +28,8 @@ class FoodexpirationGroup {
       ChangeProfilepictureCall();
   static ChangeNicknameCall changeNicknameCall = ChangeNicknameCall();
   static ThumbnailCategoryCall thumbnailCategoryCall = ThumbnailCategoryCall();
+  static ThumbnailCategoryByIdCall thumbnailCategoryByIdCall =
+      ThumbnailCategoryByIdCall();
 }
 
 class RegisterDeviceCall {
@@ -373,6 +375,29 @@ class ThumbnailCategoryCall {
         'x-device-id': '${deviceid}',
       },
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class ThumbnailCategoryByIdCall {
+  Future<ApiCallResponse> call({
+    String? catrgoryId = '',
+    String? deviceid = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'thumbnailCategoryById',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail',
+      callType: ApiCallType.GET,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {
+        'catrgoryId': catrgoryId,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

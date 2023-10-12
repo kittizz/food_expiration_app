@@ -16,7 +16,12 @@ import 'thumbnail_category_model.dart';
 export 'thumbnail_category_model.dart';
 
 class ThumbnailCategoryWidget extends StatefulWidget {
-  const ThumbnailCategoryWidget({Key? key}) : super(key: key);
+  const ThumbnailCategoryWidget({
+    Key? key,
+    required this.type,
+  }) : super(key: key);
+
+  final String? type;
 
   @override
   _ThumbnailCategoryWidgetState createState() =>
@@ -86,7 +91,7 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
             },
           ),
           title: Text(
-            'เลือกหมวดหมู่',
+            'หมวดหมู่',
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -101,13 +106,26 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 12.0, 0.0),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Text(
+                    'โปรดเลือกหมวดหมู่รูปภาพ',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                  ),
+                ),
+                Expanded(
                   child: Builder(
                     builder: (context) {
                       final list = _model.categorys.toList();
@@ -129,15 +147,21 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed(
-                                'ThumbnailSelection',
-                                queryParameters: {
-                                  'thumbnailCategoryId': serializeParam(
-                                    listItem.id,
-                                    ParamType.int,
-                                  ),
-                                }.withoutNulls,
-                              );
+                              if (widget.type == 'location') {
+                                context.pushNamed(
+                                  'ThumbnailSelection',
+                                  queryParameters: {
+                                    'thumbnailCategoryId': serializeParam(
+                                      listItem.id,
+                                      ParamType.int,
+                                    ),
+                                    'type': serializeParam(
+                                      widget.type,
+                                      ParamType.String,
+                                    ),
+                                  }.withoutNulls,
+                                );
+                              }
                             },
                             child: Card(
                               clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -201,8 +225,8 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                     },
                   ),
                 ),
-              ),
-            ],
+              ].divide(SizedBox(height: 5.0)).around(SizedBox(height: 5.0)),
+            ),
           ),
         ),
       ),

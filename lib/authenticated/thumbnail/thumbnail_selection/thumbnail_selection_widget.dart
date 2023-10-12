@@ -1,8 +1,13 @@
+import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -13,9 +18,11 @@ class ThumbnailSelectionWidget extends StatefulWidget {
   const ThumbnailSelectionWidget({
     Key? key,
     this.thumbnailCategoryId,
+    required this.type,
   }) : super(key: key);
 
   final int? thumbnailCategoryId;
+  final String? type;
 
   @override
   _ThumbnailSelectionWidgetState createState() =>
@@ -31,6 +38,20 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ThumbnailSelectionModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiThumbnails =
+          await FoodexpirationGroup.thumbnailCategoryByIdCall.call(
+        catrgoryId: widget.thumbnailCategoryId?.toString(),
+      );
+      if ((_model.apiThumbnails?.succeeded ?? true)) {
+        setState(() {
+          _model.thumbnails = functions.toThumbnailCategoryStruct(
+              (_model.apiThumbnails?.jsonBody ?? ''));
+        });
+      }
+    });
   }
 
   @override
@@ -69,7 +90,7 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
             },
           ),
           title: Text(
-            'เลือกรูปภาพ',
+            'รูปภาพ',
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -84,13 +105,26 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 12.0, 0.0),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Text(
+                    'โปรดเลือกรูปภาพ',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                  ),
+                ),
+                Expanded(
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -170,8 +204,8 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

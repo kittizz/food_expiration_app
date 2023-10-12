@@ -66,14 +66,64 @@ List<ThumbnailCategoryStruct> toThumbnailCategoryStructList(dynamic jsonbody) {
     return listOfStruct;
   }
   for (var v in jsonbody) {
-    listOfStruct.add(ThumbnailCategoryStruct(
+    ThumbnailCategoryStruct thumCate = new ThumbnailCategoryStruct(
         id: v['id'] as int,
         name: v['name'] as String,
         image: ImageStruct(
           id: v['image']['id'] as int,
           path: v['image']['path'] as String,
           blurHash: v['image']['blurHash'] as String,
-        )));
+        ));
+    List<ThumbnailStruct> thumbnails = [];
+    if (v['thumbnails'].length > 0) {
+      for (var thumb in v['thumbnails']) {
+        ThumbnailStruct thumbnail = new ThumbnailStruct(
+            id: thumb['id'] as int,
+            name: thumb['name'] as String,
+            thumbnailCategoryId: thumb['thumbnailCategoryId'] as int,
+            image: ImageStruct(
+              id: thumb['image']['id'] as int,
+              path: thumb['image']['path'] as String,
+              blurHash: thumb['image']['blurHash'] as String,
+            ));
+        thumbnails.add(thumbnail);
+      }
+    }
+    thumCate.thumbnails = thumbnails;
+    listOfStruct.add(thumCate);
   }
   return listOfStruct;
+}
+
+ThumbnailCategoryStruct toThumbnailCategoryStruct(dynamic jsonbody) {
+  ThumbnailCategoryStruct val = new ThumbnailCategoryStruct();
+  if (jsonbody.length == 0) {
+    return val;
+  }
+  var v = jsonbody;
+  ThumbnailCategoryStruct thumCate = new ThumbnailCategoryStruct(
+      id: v['id'] as int,
+      name: v['name'] as String,
+      image: ImageStruct(
+        id: v['image']['id'] as int,
+        path: v['image']['path'] as String,
+        blurHash: v['image']['blurHash'] as String,
+      ));
+  List<ThumbnailStruct> thumbnails = [];
+  if (v['thumbnails'].length > 0) {
+    for (var thumb in v['thumbnails']) {
+      ThumbnailStruct thumbnail = new ThumbnailStruct(
+          id: thumb['id'] as int,
+          name: thumb['name'] as String,
+          thumbnailCategoryId: thumb['thumbnailCategoryId'] as int,
+          image: ImageStruct(
+            id: thumb['image']['id'] as int,
+            path: thumb['image']['path'] as String,
+            blurHash: thumb['image']['blurHash'] as String,
+          ));
+      thumbnails.add(thumbnail);
+    }
+  }
+  thumCate.thumbnails = thumbnails;
+  return thumCate;
 }
