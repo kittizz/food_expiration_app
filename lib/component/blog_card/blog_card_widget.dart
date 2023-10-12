@@ -70,7 +70,6 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
       },
       child: Container(
         width: double.infinity,
-        height: 195.0,
         decoration: BoxDecoration(),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -100,7 +99,10 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
                 child: Text(
-                  widget.title!,
+                  valueOrDefault<String>(
+                    widget.title,
+                    'asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd',
+                  ),
                   style: FlutterFlowTheme.of(context).labelLarge.override(
                         fontFamily:
                             FlutterFlowTheme.of(context).labelLargeFamily,
