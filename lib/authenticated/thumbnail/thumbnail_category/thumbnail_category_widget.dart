@@ -178,7 +178,7 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                                       alignment:
                                           AlignmentDirectional(0.00, 1.00),
                                       child: Text(
-                                        'ทะเล',
+                                        listItem.name,
                                         style: FlutterFlowTheme.of(context)
                                             .titleMedium,
                                       ),
