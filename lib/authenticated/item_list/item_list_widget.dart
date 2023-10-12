@@ -146,83 +146,83 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                     color: FlutterFlowTheme.of(context).grey50,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: Stack(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Stack(
-                              children: [
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    await Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.fade,
-                                        child: FlutterFlowExpandedImageView(
-                                          image: Image.network(
-                                            'https://picsum.photos/seed/119/600',
-                                            fit: BoxFit.contain,
-                                          ),
-                                          allowRotation: false,
-                                          tag: 'imageTag',
-                                          useHeroAnimation: true,
+                      ClipRRect(
+                        child: Container(
+                          width: 135.0,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: Stack(
+                            children: [
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: FlutterFlowExpandedImageView(
+                                        image: Image.network(
+                                          'https://picsum.photos/seed/119/600',
+                                          fit: BoxFit.contain,
                                         ),
+                                        allowRotation: false,
+                                        tag: 'imageTag',
+                                        useHeroAnimation: true,
                                       ),
-                                    );
-                                  },
-                                  child: Hero(
-                                    tag: 'imageTag',
-                                    transitionOnUserGestures: true,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(8.0),
-                                        bottomRight: Radius.circular(0.0),
-                                        topLeft: Radius.circular(8.0),
-                                        topRight: Radius.circular(0.0),
-                                      ),
-                                      child: Image.network(
-                                        'https://picsum.photos/seed/119/600',
-                                        width: 130.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                1.0,
-                                        fit: BoxFit.scaleDown,
-                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Hero(
+                                  tag: 'imageTag',
+                                  transitionOnUserGestures: true,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(8.0),
+                                      bottomRight: Radius.circular(0.0),
+                                      topLeft: Radius.circular(8.0),
+                                      topRight: Radius.circular(0.0),
+                                    ),
+                                    child: Image.network(
+                                      'https://picsum.photos/seed/119/600',
+                                      width: double.infinity,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, -1.00),
-                                  child: Icon(
-                                    Icons.zoom_in_rounded,
-                                    color: FlutterFlowTheme.of(context).grey400,
-                                    size: 24.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Flexible(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    5.0, 5.0, 5.0, 0.0),
-                                child: SelectionArea(
-                                    child: Text(
-                                  'Hello Worldasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd',
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                )),
                               ),
-                            ),
-                          ],
+                              Align(
+                                alignment: AlignmentDirectional(1.00, 1.00),
+                                child: Icon(
+                                  Icons.zoom_in_rounded,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              5.0, 5.0, 5.0, 0.0),
+                          child: SelectionArea(
+                              child: Text(
+                            'Hello Worldasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd',
+                            style: FlutterFlowTheme.of(context).bodyMedium,
+                          )),
                         ),
                       ),
                     ],

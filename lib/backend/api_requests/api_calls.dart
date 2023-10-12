@@ -27,6 +27,7 @@ class FoodexpirationGroup {
   static ChangeProfilepictureCall changeProfilepictureCall =
       ChangeProfilepictureCall();
   static ChangeNicknameCall changeNicknameCall = ChangeNicknameCall();
+  static ThumbnailCategoryCall thumbnailCategoryCall = ThumbnailCategoryCall();
 }
 
 class RegisterDeviceCall {
@@ -352,6 +353,26 @@ class ChangeNicknameCall {
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class ThumbnailCategoryCall {
+  Future<ApiCallResponse> call({
+    String? deviceid = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'thumbnailCategory',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/category',
+      callType: ApiCallType.GET,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

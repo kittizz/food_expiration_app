@@ -62,7 +62,7 @@ class FFAppState extends ChangeNotifier {
   }
 
   UserStruct _user = UserStruct.fromSerializableMap(jsonDecode(
-      '{\"nickname\":\"ผู้ใช้\",\"profilePicture\":\"https://th-bkk-1.xvercloud.com/food-expiration/images/user.png\",\"profilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
+      '{\"Role\":\"user\",\"Nickname\":\"ผู้ใช้งาน\",\"ProfilePicture\":\"/images/user.png\",\"ProfilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
   UserStruct get user => _user;
   set user(UserStruct _value) {
     _user = _value;
@@ -84,6 +84,12 @@ class FFAppState extends ChangeNotifier {
 
   void updatePageLocationInfoStruct(Function(PageLocationInfoStruct) updateFn) {
     updateFn(_pageLocationInfo);
+  }
+
+  String _thumbnailBackPage = '';
+  String get thumbnailBackPage => _thumbnailBackPage;
+  set thumbnailBackPage(String _value) {
+    _thumbnailBackPage = _value;
   }
 }
 

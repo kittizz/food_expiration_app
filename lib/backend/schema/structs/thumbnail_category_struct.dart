@@ -8,18 +8,14 @@ import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class BlogStruct extends FFFirebaseStruct {
-  BlogStruct({
+class ThumbnailCategoryStruct extends FFFirebaseStruct {
+  ThumbnailCategoryStruct({
     int? id,
-    String? createdAt,
-    String? title,
-    String? content,
+    String? name,
     ImageStruct? image,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
-        _createdAt = createdAt,
-        _title = title,
-        _content = content,
+        _name = name,
         _image = image,
         super(firestoreUtilData);
 
@@ -30,23 +26,11 @@ class BlogStruct extends FFFirebaseStruct {
   void incrementId(int amount) => _id = id + amount;
   bool hasId() => _id != null;
 
-  // "CreatedAt" field.
-  String? _createdAt;
-  String get createdAt => _createdAt ?? '';
-  set createdAt(String? val) => _createdAt = val;
-  bool hasCreatedAt() => _createdAt != null;
-
-  // "Title" field.
-  String? _title;
-  String get title => _title ?? '';
-  set title(String? val) => _title = val;
-  bool hasTitle() => _title != null;
-
-  // "Content" field.
-  String? _content;
-  String get content => _content ?? '';
-  set content(String? val) => _content = val;
-  bool hasContent() => _content != null;
+  // "Name" field.
+  String? _name;
+  String get name => _name ?? '';
+  set name(String? val) => _name = val;
+  bool hasName() => _name != null;
 
   // "Image" field.
   ImageStruct? _image;
@@ -56,22 +40,21 @@ class BlogStruct extends FFFirebaseStruct {
       updateFn(_image ??= ImageStruct());
   bool hasImage() => _image != null;
 
-  static BlogStruct fromMap(Map<String, dynamic> data) => BlogStruct(
+  static ThumbnailCategoryStruct fromMap(Map<String, dynamic> data) =>
+      ThumbnailCategoryStruct(
         id: castToType<int>(data['ID']),
-        createdAt: data['CreatedAt'] as String?,
-        title: data['Title'] as String?,
-        content: data['Content'] as String?,
+        name: data['Name'] as String?,
         image: ImageStruct.maybeFromMap(data['Image']),
       );
 
-  static BlogStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? BlogStruct.fromMap(data) : null;
+  static ThumbnailCategoryStruct? maybeFromMap(dynamic data) =>
+      data is Map<String, dynamic>
+          ? ThumbnailCategoryStruct.fromMap(data)
+          : null;
 
   Map<String, dynamic> toMap() => {
         'ID': _id,
-        'CreatedAt': _createdAt,
-        'Title': _title,
-        'Content': _content,
+        'Name': _name,
         'Image': _image?.toMap(),
       }.withoutNulls;
 
@@ -81,16 +64,8 @@ class BlogStruct extends FFFirebaseStruct {
           _id,
           ParamType.int,
         ),
-        'CreatedAt': serializeParam(
-          _createdAt,
-          ParamType.String,
-        ),
-        'Title': serializeParam(
-          _title,
-          ParamType.String,
-        ),
-        'Content': serializeParam(
-          _content,
+        'Name': serializeParam(
+          _name,
           ParamType.String,
         ),
         'Image': serializeParam(
@@ -99,25 +74,16 @@ class BlogStruct extends FFFirebaseStruct {
         ),
       }.withoutNulls;
 
-  static BlogStruct fromSerializableMap(Map<String, dynamic> data) =>
-      BlogStruct(
+  static ThumbnailCategoryStruct fromSerializableMap(
+          Map<String, dynamic> data) =>
+      ThumbnailCategoryStruct(
         id: deserializeParam(
           data['ID'],
           ParamType.int,
           false,
         ),
-        createdAt: deserializeParam(
-          data['CreatedAt'],
-          ParamType.String,
-          false,
-        ),
-        title: deserializeParam(
-          data['Title'],
-          ParamType.String,
-          false,
-        ),
-        content: deserializeParam(
-          data['Content'],
+        name: deserializeParam(
+          data['Name'],
           ParamType.String,
           false,
         ),
@@ -130,39 +96,32 @@ class BlogStruct extends FFFirebaseStruct {
       );
 
   @override
-  String toString() => 'BlogStruct(${toMap()})';
+  String toString() => 'ThumbnailCategoryStruct(${toMap()})';
 
   @override
   bool operator ==(Object other) {
-    return other is BlogStruct &&
+    return other is ThumbnailCategoryStruct &&
         id == other.id &&
-        createdAt == other.createdAt &&
-        title == other.title &&
-        content == other.content &&
+        name == other.name &&
         image == other.image;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([id, createdAt, title, content, image]);
+  int get hashCode => const ListEquality().hash([id, name, image]);
 }
 
-BlogStruct createBlogStruct({
+ThumbnailCategoryStruct createThumbnailCategoryStruct({
   int? id,
-  String? createdAt,
-  String? title,
-  String? content,
+  String? name,
   ImageStruct? image,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
   bool delete = false,
 }) =>
-    BlogStruct(
+    ThumbnailCategoryStruct(
       id: id,
-      createdAt: createdAt,
-      title: title,
-      content: content,
+      name: name,
       image: image ?? (clearUnsetFields ? ImageStruct() : null),
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
@@ -172,67 +131,74 @@ BlogStruct createBlogStruct({
       ),
     );
 
-BlogStruct? updateBlogStruct(
-  BlogStruct? blog, {
+ThumbnailCategoryStruct? updateThumbnailCategoryStruct(
+  ThumbnailCategoryStruct? thumbnailCategory, {
   bool clearUnsetFields = true,
   bool create = false,
 }) =>
-    blog
+    thumbnailCategory
       ?..firestoreUtilData = FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
       );
 
-void addBlogStructData(
+void addThumbnailCategoryStructData(
   Map<String, dynamic> firestoreData,
-  BlogStruct? blog,
+  ThumbnailCategoryStruct? thumbnailCategory,
   String fieldName, [
   bool forFieldValue = false,
 ]) {
   firestoreData.remove(fieldName);
-  if (blog == null) {
+  if (thumbnailCategory == null) {
     return;
   }
-  if (blog.firestoreUtilData.delete) {
+  if (thumbnailCategory.firestoreUtilData.delete) {
     firestoreData[fieldName] = FieldValue.delete();
     return;
   }
-  final clearFields = !forFieldValue && blog.firestoreUtilData.clearUnsetFields;
+  final clearFields =
+      !forFieldValue && thumbnailCategory.firestoreUtilData.clearUnsetFields;
   if (clearFields) {
     firestoreData[fieldName] = <String, dynamic>{};
   }
-  final blogData = getBlogFirestoreData(blog, forFieldValue);
-  final nestedData = blogData.map((k, v) => MapEntry('$fieldName.$k', v));
+  final thumbnailCategoryData =
+      getThumbnailCategoryFirestoreData(thumbnailCategory, forFieldValue);
+  final nestedData =
+      thumbnailCategoryData.map((k, v) => MapEntry('$fieldName.$k', v));
 
-  final mergeFields = blog.firestoreUtilData.create || clearFields;
+  final mergeFields = thumbnailCategory.firestoreUtilData.create || clearFields;
   firestoreData
       .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
 }
 
-Map<String, dynamic> getBlogFirestoreData(
-  BlogStruct? blog, [
+Map<String, dynamic> getThumbnailCategoryFirestoreData(
+  ThumbnailCategoryStruct? thumbnailCategory, [
   bool forFieldValue = false,
 ]) {
-  if (blog == null) {
+  if (thumbnailCategory == null) {
     return {};
   }
-  final firestoreData = mapToFirestore(blog.toMap());
+  final firestoreData = mapToFirestore(thumbnailCategory.toMap());
 
   // Handle nested data for "Image" field.
   addImageStructData(
     firestoreData,
-    blog.hasImage() ? blog.image : null,
+    thumbnailCategory.hasImage() ? thumbnailCategory.image : null,
     'Image',
     forFieldValue,
   );
 
   // Add any Firestore field values
-  blog.firestoreUtilData.fieldValues.forEach((k, v) => firestoreData[k] = v);
+  thumbnailCategory.firestoreUtilData.fieldValues
+      .forEach((k, v) => firestoreData[k] = v);
 
   return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
 }
 
-List<Map<String, dynamic>> getBlogListFirestoreData(
-  List<BlogStruct>? blogs,
+List<Map<String, dynamic>> getThumbnailCategoryListFirestoreData(
+  List<ThumbnailCategoryStruct>? thumbnailCategorys,
 ) =>
-    blogs?.map((e) => getBlogFirestoreData(e, true)).toList() ?? [];
+    thumbnailCategorys
+        ?.map((e) => getThumbnailCategoryFirestoreData(e, true))
+        .toList() ??
+    [];

@@ -114,7 +114,7 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                     child: GridView(
                       padding: EdgeInsets.zero,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                        crossAxisCount: 3,
                         crossAxisSpacing: 10.0,
                         mainAxisSpacing: 10.0,
                         childAspectRatio: 1.0,
@@ -137,51 +137,6 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                                   'https://images.unsplash.com/photo-1484503793037-5c9644d6a80a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw4fHx3aGl0ZXxlbnwwfHx8fDE2OTE4OTAzNTN8MA&ixlib=rb-4.0.3&q=80&w=1080',
                                   width: double.infinity,
                                   height: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Container(
-                                width: double.infinity,
-                                height: double.infinity,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0x00FFFFFF),
-                                      Color(0x93000000)
-                                    ],
-                                    stops: [0.5, 1.0],
-                                    begin: AlignmentDirectional(0.0, -1.0),
-                                    end: AlignmentDirectional(0, 1.0),
-                                  ),
-                                ),
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.00, 1.00),
-                                  child: Text(
-                                    'ทะเล',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          elevation: 4.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.network(
-                                  'https://images.unsplash.com/photo-1484503793037-5c9644d6a80a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw4fHx3aGl0ZXxlbnwwfHx8fDE2OTE4OTAzNTN8MA&ixlib=rb-4.0.3&q=80&w=1080',
-                                  width: 500.0,
-                                  height: 500.0,
                                   fit: BoxFit.cover,
                                 ),
                               ),

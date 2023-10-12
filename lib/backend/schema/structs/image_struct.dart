@@ -10,12 +10,21 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class ImageStruct extends FFFirebaseStruct {
   ImageStruct({
+    int? id,
     String? blurHash,
     String? path,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
-  })  : _blurHash = blurHash,
+  })  : _id = id,
+        _blurHash = blurHash,
         _path = path,
         super(firestoreUtilData);
+
+  // "ID" field.
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
+  void incrementId(int amount) => _id = id + amount;
+  bool hasId() => _id != null;
 
   // "BlurHash" field.
   String? _blurHash;
@@ -30,6 +39,7 @@ class ImageStruct extends FFFirebaseStruct {
   bool hasPath() => _path != null;
 
   static ImageStruct fromMap(Map<String, dynamic> data) => ImageStruct(
+        id: castToType<int>(data['ID']),
         blurHash: data['BlurHash'] as String?,
         path: data['Path'] as String?,
       );
@@ -38,12 +48,17 @@ class ImageStruct extends FFFirebaseStruct {
       data is Map<String, dynamic> ? ImageStruct.fromMap(data) : null;
 
   Map<String, dynamic> toMap() => {
+        'ID': _id,
         'BlurHash': _blurHash,
         'Path': _path,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
+        'ID': serializeParam(
+          _id,
+          ParamType.int,
+        ),
         'BlurHash': serializeParam(
           _blurHash,
           ParamType.String,
@@ -56,6 +71,11 @@ class ImageStruct extends FFFirebaseStruct {
 
   static ImageStruct fromSerializableMap(Map<String, dynamic> data) =>
       ImageStruct(
+        id: deserializeParam(
+          data['ID'],
+          ParamType.int,
+          false,
+        ),
         blurHash: deserializeParam(
           data['BlurHash'],
           ParamType.String,
@@ -74,15 +94,17 @@ class ImageStruct extends FFFirebaseStruct {
   @override
   bool operator ==(Object other) {
     return other is ImageStruct &&
+        id == other.id &&
         blurHash == other.blurHash &&
         path == other.path;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([blurHash, path]);
+  int get hashCode => const ListEquality().hash([id, blurHash, path]);
 }
 
 ImageStruct createImageStruct({
+  int? id,
   String? blurHash,
   String? path,
   Map<String, dynamic> fieldValues = const {},
@@ -91,6 +113,7 @@ ImageStruct createImageStruct({
   bool delete = false,
 }) =>
     ImageStruct(
+      id: id,
       blurHash: blurHash,
       path: path,
       firestoreUtilData: FirestoreUtilData(

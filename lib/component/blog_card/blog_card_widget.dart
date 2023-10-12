@@ -99,10 +99,7 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
                 child: Text(
-                  valueOrDefault<String>(
-                    widget.title,
-                    'asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd',
-                  ),
+                  widget.title!,
                   style: FlutterFlowTheme.of(context).labelLarge.override(
                         fontFamily:
                             FlutterFlowTheme.of(context).labelLargeFamily,
