@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -30,6 +31,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LocationInfoModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.hash = FFAppState().pageLocationInfo.imageBlurhash;
+    });
 
     _model.nameFieldController ??=
         TextEditingController(text: FFAppState().pageLocationInfo.name);
@@ -232,13 +238,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                       false)) {
                                                 if (_model.uploadedLocalFile
                                                         .blurHash !=
-                                                    FoodexpirationGroup
-                                                        .uploadImageCall
-                                                        .blurHash(
-                                                      (_model.apiUploadImage1
-                                                              ?.jsonBody ??
-                                                          ''),
-                                                    )) {
+                                                    _model.hash) {
                                                   _model.apiUploadImage1 =
                                                       await FoodexpirationGroup
                                                           .uploadImageCall

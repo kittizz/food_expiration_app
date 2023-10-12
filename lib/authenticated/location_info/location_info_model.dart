@@ -8,12 +8,17 @@ import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'location_info_widget.dart' show LocationInfoWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
 class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
+  ///  Local state fields for this page.
+
+  String hash = '';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
