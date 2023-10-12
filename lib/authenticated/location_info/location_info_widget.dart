@@ -258,11 +258,6 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                           ?.succeeded ??
                                                       true)) {
                                                     setState(() {
-                                                      _model.hash = _model
-                                                          .uploadedLocalFile
-                                                          .blurHash!;
-                                                    });
-                                                    setState(() {
                                                       FFAppState()
                                                           .updatePageLocationInfoStruct(
                                                         (e) => e
@@ -283,15 +278,9 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                         ''),
                                                                   )
                                                                   .toString()
-                                                          ..imageBlurhash =
-                                                              FoodexpirationGroup
-                                                                  .uploadImageCall
-                                                                  .blurHash(
-                                                                    (_model.apiUploadImage1
-                                                                            ?.jsonBody ??
-                                                                        ''),
-                                                                  )
-                                                                  .toString(),
+                                                          ..imageBlurhash = _model
+                                                              .uploadedLocalFile
+                                                              .blurHash,
                                                       );
                                                     });
                                                     ScaffoldMessenger.of(
