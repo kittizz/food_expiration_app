@@ -62,8 +62,15 @@ String getImage(String path) {
 
 List<ThumbnailCategoryStruct> toThumbnailCategoryStructList(dynamic jsonbody) {
   List<ThumbnailCategoryStruct> listOfStruct = [];
-  for (var i in jsonbody) {
-    listOfStruct.add(ThumbnailCategoryStruct(id: i['id'] as int));
+  for (var v in jsonbody) {
+    listOfStruct.add(ThumbnailCategoryStruct(
+        id: v['id'] as int,
+        name: v['name'] as String,
+        image: ImageStruct(
+          id: v['image']['id'] as int,
+          path: v['image']['path'] as String,
+          blurHash: v['image']['blurHash'] as String,
+        )));
   }
   return listOfStruct;
 }
