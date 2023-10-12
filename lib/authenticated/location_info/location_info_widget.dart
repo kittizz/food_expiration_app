@@ -258,6 +258,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                           ?.succeeded ??
                                                       true)) {
                                                     setState(() {
+                                                      _model.hash = _model
+                                                          .uploadedLocalFile
+                                                          .blurHash!;
+                                                    });
+                                                    setState(() {
                                                       FFAppState()
                                                           .updatePageLocationInfoStruct(
                                                         (e) => e
@@ -375,7 +380,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        'Add Photo',
+                                                        'เพิ่มรูปภาพ',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -407,7 +412,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        'Upload an image here...',
+                                                        'อัพโหลดรูปภาพที่นี่...',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
