@@ -231,7 +231,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                           .bytes?.isNotEmpty ??
                                                       false)) {
                                                 if (_model.uploadedLocalFile
-                                                        .blurHash ==
+                                                        .blurHash !=
                                                     FFAppState()
                                                         .pageLocationInfo
                                                         .imageBlurhash) {
