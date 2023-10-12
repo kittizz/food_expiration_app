@@ -14,26 +14,16 @@ import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
 class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
-  ///  Local state fields for this page.
-
-  DateTime? expireDate;
-
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  bool isDataUploading1 = false;
-  FFUploadedFile uploadedLocalFile1 =
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // Stores action output result for [Backend Call - API (uploadImage)] action in Stack widget.
-  ApiCallResponse? apiUploadImage2;
-  bool isDataUploading2 = false;
-  FFUploadedFile uploadedLocalFile2 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-
-  // Stores action output result for [Backend Call - API (uploadImage)] action in Button widget.
-  ApiCallResponse? apiResultp50;
+  ApiCallResponse? apiUploadImage1;
   // State field(s) for NameField widget.
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;

@@ -183,16 +183,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                           m.storagePath,
                                                           context))) {
                                                 setState(() => _model
-                                                    .isDataUploading1 = true);
+                                                    .isDataUploading = true);
                                                 var selectedUploadedFiles =
                                                     <FFUploadedFile>[];
 
                                                 try {
-                                                  showUploadMessage(
-                                                    context,
-                                                    'Uploading file...',
-                                                    showLoading: true,
-                                                  );
                                                   selectedUploadedFiles =
                                                       selectedMedia
                                                           .map((m) =>
@@ -213,48 +208,41 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                               ))
                                                           .toList();
                                                 } finally {
-                                                  ScaffoldMessenger.of(context)
-                                                      .hideCurrentSnackBar();
-                                                  _model.isDataUploading1 =
+                                                  _model.isDataUploading =
                                                       false;
                                                 }
                                                 if (selectedUploadedFiles
                                                         .length ==
                                                     selectedMedia.length) {
                                                   setState(() {
-                                                    _model.uploadedLocalFile1 =
+                                                    _model.uploadedLocalFile =
                                                         selectedUploadedFiles
                                                             .first;
                                                   });
-                                                  showUploadMessage(
-                                                      context, 'Success!');
                                                 } else {
                                                   setState(() {});
-                                                  showUploadMessage(context,
-                                                      'Failed to upload data');
                                                   return;
                                                 }
                                               }
 
-                                              if (_model.uploadedLocalFile2 !=
+                                              if (_model.uploadedLocalFile !=
                                                       null &&
-                                                  (_model.uploadedLocalFile2
+                                                  (_model.uploadedLocalFile
                                                           .bytes?.isNotEmpty ??
                                                       false)) {
-                                                _model.apiUploadImage2 =
+                                                _model.apiUploadImage1 =
                                                     await FoodexpirationGroup
                                                         .uploadImageCall
                                                         .call(
                                                   file:
-                                                      _model.uploadedLocalFile2,
+                                                      _model.uploadedLocalFile,
                                                   deviceid:
                                                       FFAppState().deviceId,
-                                                  hash: _model
-                                                      .uploadedLocalFile2
+                                                  hash: _model.uploadedLocalFile
                                                       .blurHash,
                                                 );
                                                 _shouldSetState = true;
-                                                if ((_model.apiUploadImage2
+                                                if ((_model.apiUploadImage1
                                                         ?.succeeded ??
                                                     true)) {
                                                   setState(() {
@@ -265,7 +253,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                             FoodexpirationGroup
                                                                 .uploadImageCall
                                                                 .id(
-                                                          (_model.apiUploadImage2
+                                                          (_model.apiUploadImage1
                                                                   ?.jsonBody ??
                                                               ''),
                                                         )
@@ -273,7 +261,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                             FoodexpirationGroup
                                                                 .uploadImageCall
                                                                 .path(
-                                                                  (_model.apiUploadImage2
+                                                                  (_model.apiUploadImage1
                                                                           ?.jsonBody ??
                                                                       ''),
                                                                 )
@@ -282,7 +270,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                             FoodexpirationGroup
                                                                 .uploadImageCall
                                                                 .blurHash(
-                                                                  (_model.apiUploadImage2
+                                                                  (_model.apiUploadImage1
                                                                           ?.jsonBody ??
                                                                       ''),
                                                                 )
@@ -317,7 +305,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                     SnackBar(
                                                       content: Text(
                                                         getJsonField(
-                                                          (_model.apiUploadImage2
+                                                          (_model.apiUploadImage1
                                                                   ?.jsonBody ??
                                                               ''),
                                                           r'''$.message''',
@@ -486,82 +474,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                   children: [
                                     Expanded(
                                       child: FFButtonWidget(
-                                        onPressed: () async {
-                                          var _shouldSetState = false;
-                                          final selectedMedia =
-                                              await selectMediaWithSourceBottomSheet(
-                                            context: context,
-                                            imageQuality: 100,
-                                            allowPhoto: true,
-                                            includeBlurHash: true,
-                                          );
-                                          if (selectedMedia != null &&
-                                              selectedMedia.every((m) =>
-                                                  validateFileFormat(
-                                                      m.storagePath,
-                                                      context))) {
-                                            setState(() =>
-                                                _model.isDataUploading2 = true);
-                                            var selectedUploadedFiles =
-                                                <FFUploadedFile>[];
-
-                                            try {
-                                              selectedUploadedFiles =
-                                                  selectedMedia
-                                                      .map(
-                                                          (m) => FFUploadedFile(
-                                                                name: m
-                                                                    .storagePath
-                                                                    .split('/')
-                                                                    .last,
-                                                                bytes: m.bytes,
-                                                                height: m
-                                                                    .dimensions
-                                                                    ?.height,
-                                                                width: m
-                                                                    .dimensions
-                                                                    ?.width,
-                                                                blurHash:
-                                                                    m.blurHash,
-                                                              ))
-                                                      .toList();
-                                            } finally {
-                                              _model.isDataUploading2 = false;
-                                            }
-                                            if (selectedUploadedFiles.length ==
-                                                selectedMedia.length) {
-                                              setState(() {
-                                                _model.uploadedLocalFile2 =
-                                                    selectedUploadedFiles.first;
-                                              });
-                                            } else {
-                                              setState(() {});
-                                              return;
-                                            }
-                                          }
-
-                                          if (_model.uploadedLocalFile2 !=
-                                                  null &&
-                                              (_model.uploadedLocalFile2.bytes
-                                                      ?.isNotEmpty ??
-                                                  false)) {
-                                            _model.apiResultp50 =
-                                                await FoodexpirationGroup
-                                                    .uploadImageCall
-                                                    .call(
-                                              file: _model.uploadedLocalFile2,
-                                              deviceid: FFAppState().deviceId,
-                                              hash: _model
-                                                  .uploadedLocalFile2.blurHash,
-                                            );
-                                            _shouldSetState = true;
-                                          } else {
-                                            if (_shouldSetState)
-                                              setState(() {});
-                                            return;
-                                          }
-
-                                          if (_shouldSetState) setState(() {});
+                                        onPressed: () {
+                                          print('Button pressed ...');
                                         },
                                         text: 'อัปโหลด',
                                         icon: Icon(
