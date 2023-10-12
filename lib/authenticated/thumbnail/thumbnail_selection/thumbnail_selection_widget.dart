@@ -6,10 +6,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'thumbnail_selection_model.dart';
 export 'thumbnail_selection_model.dart';
@@ -125,83 +127,76 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                   ),
                 ),
                 Expanded(
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed(
-                        'ThumbnailViewer',
-                        queryParameters: {
-                          'image': serializeParam(
-                            'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                            ParamType.String,
-                          ),
-                          'name': serializeParam(
-                            'เลย์',
-                            ParamType.String,
-                          ),
-                        }.withoutNulls,
-                      );
-                    },
-                    child: GridView(
-                      padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                        childAspectRatio: 1.0,
-                      ),
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          elevation: 4.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.network(
-                                  'https://images.unsplash.com/photo-1484503793037-5c9644d6a80a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw4fHx3aGl0ZXxlbnwwfHx8fDE2OTE4OTAzNTN8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                  child: Builder(
+                    builder: (context) {
+                      final list =
+                          _model.thumbnails?.thumbnails?.toList() ?? [];
+                      return GridView.builder(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 1.0,
+                        ),
+                        scrollDirection: Axis.vertical,
+                        itemCount: list.length,
+                        itemBuilder: (context, listIndex) {
+                          final listItem = list[listIndex];
+                          return Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            elevation: 4.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: OctoImage(
+                                    placeholderBuilder:
+                                        OctoPlaceholder.blurHash(
+                                      listItem.image.blurHash,
+                                    ),
+                                    image: CachedNetworkImageProvider(
+                                      functions.getImage(listItem.image.path),
+                                    ),
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Container(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Container(
-                                width: double.infinity,
-                                height: double.infinity,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0x00FFFFFF),
-                                      Color(0x93000000)
-                                    ],
-                                    stops: [0.5, 1.0],
-                                    begin: AlignmentDirectional(0.0, -1.0),
-                                    end: AlignmentDirectional(0, 1.0),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0x00FFFFFF),
+                                        Color(0x93000000)
+                                      ],
+                                      stops: [0.5, 1.0],
+                                      begin: AlignmentDirectional(0.0, -1.0),
+                                      end: AlignmentDirectional(0, 1.0),
+                                    ),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.00, 1.00),
+                                    child: Text(
+                                      listItem.name,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium,
+                                    ),
                                   ),
                                 ),
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.00, 1.00),
-                                  child: Text(
-                                    'ทะเล',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
               ],

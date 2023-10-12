@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -180,7 +181,7 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                                           OctoPlaceholder.blurHash(
                                         listItem.image.blurHash,
                                       ),
-                                      image: NetworkImage(
+                                      image: CachedNetworkImageProvider(
                                         valueOrDefault<String>(
                                           functions
                                               .getImage(listItem.image.path),
