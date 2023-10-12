@@ -73,6 +73,18 @@ class FFAppState extends ChangeNotifier {
     updateFn(_user);
     prefs.setString('ff_user', _user.serialize());
   }
+
+  PageLocationInfoStruct _pageLocationInfo =
+      PageLocationInfoStruct.fromSerializableMap(
+          jsonDecode('{\"isAdd\":\"true\"}'));
+  PageLocationInfoStruct get pageLocationInfo => _pageLocationInfo;
+  set pageLocationInfo(PageLocationInfoStruct _value) {
+    _pageLocationInfo = _value;
+  }
+
+  void updatePageLocationInfoStruct(Function(PageLocationInfoStruct) updateFn) {
+    updateFn(_pageLocationInfo);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

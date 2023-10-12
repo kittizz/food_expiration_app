@@ -314,26 +314,23 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Flexible(
-                                                      child: Text(
-                                                        'สวัสดีคุณ ${FFAppState().user.nickname}',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyLargeFamily,
-                                                                  fontSize:
-                                                                      20.0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyLargeFamily),
-                                                                ),
-                                                      ),
+                                                    Text(
+                                                      'สวัสดีคุณ ${FFAppState().user.nickname}',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLargeFamily,
+                                                                fontSize: 20.0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyLargeFamily),
+                                                              ),
                                                     ),
                                                     Text(
                                                       dateTimeFormat(
@@ -602,7 +599,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       fillColor:
                                           FlutterFlowTheme.of(context).red50,
                                       icon: Icon(
-                                        Icons.restore_from_trash,
+                                        Icons.auto_delete,
                                         color:
                                             FlutterFlowTheme.of(context).red300,
                                         size: 30.0,

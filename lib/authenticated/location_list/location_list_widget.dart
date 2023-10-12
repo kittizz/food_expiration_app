@@ -1,13 +1,12 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/component/location/location_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -115,224 +114,141 @@ class _LocationListWidgetState extends State<LocationListWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed(
-                    'LocationInfo',
-                    queryParameters: {
-                      'title': serializeParam(
-                        'เพิ่มสถานที่',
-                        ParamType.String,
-                      ),
-                      'isAdd': serializeParam(
-                        true,
-                        ParamType.bool,
-                      ),
-                    }.withoutNulls,
-                  );
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 48.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: Align(
-                    alignment: AlignmentDirectional(1.00, 0.00),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(
-                            'LocationInfo',
-                            queryParameters: {
-                              'title': serializeParam(
-                                'เพิ่มสถานที่',
-                                ParamType.String,
-                              ),
-                              'isAdd': serializeParam(
-                                true,
-                                ParamType.bool,
-                              ),
-                            }.withoutNulls,
-                          );
-                        },
-                        child: Text(
-                          'เพิ่มสถานที่',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyLarge
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyLargeFamily,
-                                color: FlutterFlowTheme.of(context).success,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily),
-                              ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+          child: Align(
+            alignment: AlignmentDirectional(0.00, 0.00),
+            child: Container(
+              width: double.infinity,
+              constraints: BoxConstraints(
+                maxWidth: 450.0,
               ),
-              Builder(
-                builder: (context) {
-                  final list = _model.locationList.toList();
-                  return RefreshIndicator(
-                    color: FlutterFlowTheme.of(context).red200,
-                    onRefresh: () async {
-                      await _model.loadLocations(context);
-                      setState(() {});
-                    },
-                    child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: list.length,
-                      itemBuilder: (context, listIndex) {
-                        final listItem = list[listIndex];
-                        return InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed(
-                              'ItemList',
-                              queryParameters: {
-                                'isLocation': serializeParam(
-                                  true,
-                                  ParamType.bool,
-                                ),
-                                'title': serializeParam(
-                                  listItem.name,
-                                  ParamType.String,
-                                ),
-                                'locationId': serializeParam(
-                                  listItem.id,
-                                  ParamType.int,
-                                ),
-                              }.withoutNulls,
-                            );
-                          },
-                          child: Slidable(
-                            endActionPane: ActionPane(
-                              motion: const ScrollMotion(),
-                              extentRatio: 0.5,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).secondaryBackground,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 25.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                SlidableAction(
-                                  label: 'ลบ',
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).red300,
-                                  icon: Icons.delete_outlined,
-                                  onPressed: (_) async {
-                                    var _shouldSetState = false;
-                                    var confirmDialogResponse =
-                                        await showDialog<bool>(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title:
-                                                      Text('ลบสถานที่จัดเก็บ'),
-                                                  content: Text('คุณกำลังจะลบ'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              false),
-                                                      child: Text('ยกเลิก'),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              true),
-                                                      child: Text('ยืนยัน'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ) ??
-                                            false;
-                                    if (confirmDialogResponse) {
-                                      _model.apiResulttxv =
-                                          await FoodexpirationGroup
-                                              .deleteLocationCall
-                                              .call(
-                                        deviceid: FFAppState().deviceId,
-                                        id: listItem.id,
-                                      );
-                                      _shouldSetState = true;
-                                      await _model.loadLocations(context);
-                                      setState(() {});
-                                      if (_shouldSetState) setState(() {});
-                                      return;
-                                    }
-                                    if (_shouldSetState) setState(() {});
-                                  },
+                                Icon(
+                                  Icons.add_rounded,
+                                  color: FlutterFlowTheme.of(context).success,
+                                  size: 16.0,
                                 ),
-                                SlidableAction(
-                                  label: 'แก้ไข',
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  icon: Icons.edit_square,
-                                  onPressed: (_) async {
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
                                     context.pushNamed(
                                       'LocationInfo',
                                       queryParameters: {
                                         'title': serializeParam(
-                                          listItem.name,
-                                          ParamType.String,
-                                        ),
-                                        'locationId': serializeParam(
-                                          listItem.id.toString(),
+                                          'เพิ่มสถานที่',
                                           ParamType.String,
                                         ),
                                         'isAdd': serializeParam(
-                                          false,
+                                          true,
                                           ParamType.bool,
                                         ),
                                       }.withoutNulls,
                                     );
                                   },
+                                  child: Text(
+                                    'เพิ่ม',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLargeFamily,
+                                          color: FlutterFlowTheme.of(context)
+                                              .success,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLargeFamily),
+                                        ),
+                                  ),
                                 ),
                               ],
                             ),
-                            child: ListTile(
-                              title: Text(
-                                listItem.name,
-                                style: FlutterFlowTheme.of(context).titleLarge,
-                              ),
-                              subtitle: Text(
-                                listItem.description
-                                    .maybeHandleOverflow(maxChars: 32),
-                                style: FlutterFlowTheme.of(context).labelMedium,
-                              ),
-                              tileColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              dense: false,
-                            ),
                           ),
-                        );
-                      },
+                          Divider(
+                            thickness: 1.0,
+                            color: FlutterFlowTheme.of(context).alternate,
+                          ),
+                        ],
+                      ),
                     ),
-                  );
-                },
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      height: 100.0,
+                      decoration: BoxDecoration(),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            25.0, 0.0, 25.0, 0.0),
+                        child: Builder(
+                          builder: (context) {
+                            final list = _model.locationList.toList();
+                            return RefreshIndicator(
+                              color: FlutterFlowTheme.of(context).red200,
+                              onRefresh: () async {
+                                await _model.loadLocations(context);
+                                setState(() {});
+                              },
+                              child: ListView.builder(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: list.length,
+                                itemBuilder: (context, listIndex) {
+                                  final listItem = list[listIndex];
+                                  return Container(
+                                    height: 85.0,
+                                    decoration: BoxDecoration(),
+                                    child: wrapWithModel(
+                                      model: _model.locationModels.getModel(
+                                        listItem.id.toString(),
+                                        listIndex,
+                                      ),
+                                      updateCallback: () => setState(() {}),
+                                      child: LocationWidget(
+                                        key: Key(
+                                          'Key9oj_${listItem.id.toString()}',
+                                        ),
+                                        name: listItem.name,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
