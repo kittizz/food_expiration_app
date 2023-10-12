@@ -230,100 +230,113 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                   (_model.uploadedLocalFile
                                                           .bytes?.isNotEmpty ??
                                                       false)) {
-                                                _model.apiUploadImage1 =
-                                                    await FoodexpirationGroup
-                                                        .uploadImageCall
-                                                        .call(
-                                                  file:
-                                                      _model.uploadedLocalFile,
-                                                  deviceid:
-                                                      FFAppState().deviceId,
-                                                  hash: _model.uploadedLocalFile
-                                                      .blurHash,
-                                                );
-                                                _shouldSetState = true;
-                                                if ((_model.apiUploadImage1
-                                                        ?.succeeded ??
-                                                    true)) {
-                                                  setState(() {
+                                                if (_model.uploadedLocalFile
+                                                        .blurHash ==
                                                     FFAppState()
-                                                        .updatePageLocationInfoStruct(
-                                                      (e) => e
-                                                        ..imageId =
-                                                            FoodexpirationGroup
-                                                                .uploadImageCall
-                                                                .id(
-                                                          (_model.apiUploadImage1
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                        )
-                                                        ..image =
-                                                            FoodexpirationGroup
-                                                                .uploadImageCall
-                                                                .path(
-                                                                  (_model.apiUploadImage1
-                                                                          ?.jsonBody ??
-                                                                      ''),
-                                                                )
-                                                                .toString()
-                                                        ..imageBlurhash =
-                                                            FoodexpirationGroup
-                                                                .uploadImageCall
-                                                                .blurHash(
-                                                                  (_model.apiUploadImage1
-                                                                          ?.jsonBody ??
-                                                                      ''),
-                                                                )
-                                                                .toString(),
+                                                        .pageLocationInfo
+                                                        .imageBlurhash) {
+                                                  _model.apiUploadImage1 =
+                                                      await FoodexpirationGroup
+                                                          .uploadImageCall
+                                                          .call(
+                                                    file: _model
+                                                        .uploadedLocalFile,
+                                                    deviceid:
+                                                        FFAppState().deviceId,
+                                                    hash: _model
+                                                        .uploadedLocalFile
+                                                        .blurHash,
+                                                  );
+                                                  _shouldSetState = true;
+                                                  if ((_model.apiUploadImage1
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    setState(() {
+                                                      FFAppState()
+                                                          .updatePageLocationInfoStruct(
+                                                        (e) => e
+                                                          ..imageId =
+                                                              FoodexpirationGroup
+                                                                  .uploadImageCall
+                                                                  .id(
+                                                            (_model.apiUploadImage1
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                          )
+                                                          ..image =
+                                                              FoodexpirationGroup
+                                                                  .uploadImageCall
+                                                                  .path(
+                                                                    (_model.apiUploadImage1
+                                                                            ?.jsonBody ??
+                                                                        ''),
+                                                                  )
+                                                                  .toString()
+                                                          ..imageBlurhash =
+                                                              FoodexpirationGroup
+                                                                  .uploadImageCall
+                                                                  .blurHash(
+                                                                    (_model.apiUploadImage1
+                                                                            ?.jsonBody ??
+                                                                        ''),
+                                                                  )
+                                                                  .toString(),
+                                                      );
+                                                    });
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          'อัปโหลดรูปสำเร็จ',
+                                                          style: TextStyle(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                          ),
+                                                        ),
+                                                        duration: Duration(
+                                                            milliseconds: 1000),
+                                                        backgroundColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondary,
+                                                      ),
                                                     );
-                                                  });
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        'อัปโหลดรูปสำเร็จ',
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
+                                                    if (_shouldSetState)
+                                                      setState(() {});
+                                                    return;
+                                                  } else {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          getJsonField(
+                                                            (_model.apiUploadImage1
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                            r'''$.message''',
+                                                          ).toString(),
+                                                          style: TextStyle(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                          ),
                                                         ),
+                                                        duration: Duration(
+                                                            milliseconds: 1000),
+                                                        backgroundColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
                                                       ),
-                                                      duration: Duration(
-                                                          milliseconds: 1000),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondary,
-                                                    ),
-                                                  );
-                                                  if (_shouldSetState)
-                                                    setState(() {});
-                                                  return;
+                                                    );
+                                                    if (_shouldSetState)
+                                                      setState(() {});
+                                                    return;
+                                                  }
                                                 } else {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        getJsonField(
-                                                          (_model.apiUploadImage1
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                          r'''$.message''',
-                                                        ).toString(),
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                      ),
-                                                      duration: Duration(
-                                                          milliseconds: 1000),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                    ),
-                                                  );
                                                   if (_shouldSetState)
                                                     setState(() {});
                                                   return;

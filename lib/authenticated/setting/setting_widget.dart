@@ -455,11 +455,6 @@ class _SettingWidgetState extends State<SettingWidget>
                                                           <FFUploadedFile>[];
 
                                                       try {
-                                                        showUploadMessage(
-                                                          context,
-                                                          'Uploading file...',
-                                                          showLoading: true,
-                                                        );
                                                         selectedUploadedFiles =
                                                             selectedMedia
                                                                 .map((m) =>
@@ -482,9 +477,6 @@ class _SettingWidgetState extends State<SettingWidget>
                                                                     ))
                                                                 .toList();
                                                       } finally {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .hideCurrentSnackBar();
                                                         _model.isDataUploading =
                                                             false;
                                                       }
@@ -497,14 +489,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                                               selectedUploadedFiles
                                                                   .first;
                                                         });
-                                                        showUploadMessage(
-                                                            context,
-                                                            'Success!');
                                                       } else {
                                                         setState(() {});
-                                                        showUploadMessage(
-                                                            context,
-                                                            'Failed to upload data');
                                                         return;
                                                       }
                                                     }
