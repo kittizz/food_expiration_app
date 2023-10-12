@@ -21,63 +21,63 @@ class LocationStruct extends FFFirebaseStruct {
         _image = image,
         super(firestoreUtilData);
 
-  // "ID" field.
+  // "id" field.
   int? _id;
   int get id => _id ?? 0;
   set id(int? val) => _id = val;
   void incrementId(int amount) => _id = id + amount;
   bool hasId() => _id != null;
 
-  // "Name" field.
+  // "name" field.
   String? _name;
   String get name => _name ?? '';
   set name(String? val) => _name = val;
   bool hasName() => _name != null;
 
-  // "Description" field.
+  // "description" field.
   String? _description;
   String get description => _description ?? '';
   set description(String? val) => _description = val;
   bool hasDescription() => _description != null;
 
-  // "Image" field.
+  // "image" field.
   String? _image;
   String get image => _image ?? '';
   set image(String? val) => _image = val;
   bool hasImage() => _image != null;
 
   static LocationStruct fromMap(Map<String, dynamic> data) => LocationStruct(
-        id: castToType<int>(data['ID']),
-        name: data['Name'] as String?,
-        description: data['Description'] as String?,
-        image: data['Image'] as String?,
+        id: castToType<int>(data['id']),
+        name: data['name'] as String?,
+        description: data['description'] as String?,
+        image: data['image'] as String?,
       );
 
   static LocationStruct? maybeFromMap(dynamic data) =>
       data is Map<String, dynamic> ? LocationStruct.fromMap(data) : null;
 
   Map<String, dynamic> toMap() => {
-        'ID': _id,
-        'Name': _name,
-        'Description': _description,
-        'Image': _image,
+        'id': _id,
+        'name': _name,
+        'description': _description,
+        'image': _image,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'ID': serializeParam(
+        'id': serializeParam(
           _id,
           ParamType.int,
         ),
-        'Name': serializeParam(
+        'name': serializeParam(
           _name,
           ParamType.String,
         ),
-        'Description': serializeParam(
+        'description': serializeParam(
           _description,
           ParamType.String,
         ),
-        'Image': serializeParam(
+        'image': serializeParam(
           _image,
           ParamType.String,
         ),
@@ -86,22 +86,22 @@ class LocationStruct extends FFFirebaseStruct {
   static LocationStruct fromSerializableMap(Map<String, dynamic> data) =>
       LocationStruct(
         id: deserializeParam(
-          data['ID'],
+          data['id'],
           ParamType.int,
           false,
         ),
         name: deserializeParam(
-          data['Name'],
+          data['name'],
           ParamType.String,
           false,
         ),
         description: deserializeParam(
-          data['Description'],
+          data['description'],
           ParamType.String,
           false,
         ),
         image: deserializeParam(
-          data['Image'],
+          data['image'],
           ParamType.String,
           false,
         ),

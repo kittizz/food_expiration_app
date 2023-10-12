@@ -59,3 +59,11 @@ String getDateStatus(
 String getImage(String path) {
   return "https://th-bkk-1.xvercloud.com/food-expiration/" + path;
 }
+
+List<ThumbnailCategoryStruct> toThumbnailCategoryStructList(dynamic jsonbody) {
+  List<ThumbnailCategoryStruct> listOfStruct = [];
+  for (var i in jsonbody) {
+    listOfStruct.add(ThumbnailCategoryStruct(id: i['id'] as int));
+  }
+  return listOfStruct;
+}

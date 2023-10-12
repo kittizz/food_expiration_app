@@ -13,26 +13,28 @@ class ThumbnailCategoryStruct extends FFFirebaseStruct {
     int? id,
     String? name,
     ImageStruct? image,
+    List<ThumbnailStruct>? thumbnails,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _name = name,
         _image = image,
+        _thumbnails = thumbnails,
         super(firestoreUtilData);
 
-  // "ID" field.
+  // "id" field.
   int? _id;
   int get id => _id ?? 0;
   set id(int? val) => _id = val;
   void incrementId(int amount) => _id = id + amount;
   bool hasId() => _id != null;
 
-  // "Name" field.
+  // "name" field.
   String? _name;
   String get name => _name ?? '';
   set name(String? val) => _name = val;
   bool hasName() => _name != null;
 
-  // "Image" field.
+  // "image" field.
   ImageStruct? _image;
   ImageStruct get image => _image ?? ImageStruct();
   set image(ImageStruct? val) => _image = val;
@@ -40,11 +42,23 @@ class ThumbnailCategoryStruct extends FFFirebaseStruct {
       updateFn(_image ??= ImageStruct());
   bool hasImage() => _image != null;
 
+  // "thumbnails" field.
+  List<ThumbnailStruct>? _thumbnails;
+  List<ThumbnailStruct> get thumbnails => _thumbnails ?? const [];
+  set thumbnails(List<ThumbnailStruct>? val) => _thumbnails = val;
+  void updateThumbnails(Function(List<ThumbnailStruct>) updateFn) =>
+      updateFn(_thumbnails ??= []);
+  bool hasThumbnails() => _thumbnails != null;
+
   static ThumbnailCategoryStruct fromMap(Map<String, dynamic> data) =>
       ThumbnailCategoryStruct(
-        id: castToType<int>(data['ID']),
-        name: data['Name'] as String?,
-        image: ImageStruct.maybeFromMap(data['Image']),
+        id: castToType<int>(data['id']),
+        name: data['name'] as String?,
+        image: ImageStruct.maybeFromMap(data['image']),
+        thumbnails: getStructList(
+          data['thumbnails'],
+          ThumbnailStruct.fromMap,
+        ),
       );
 
   static ThumbnailCategoryStruct? maybeFromMap(dynamic data) =>
@@ -53,24 +67,30 @@ class ThumbnailCategoryStruct extends FFFirebaseStruct {
           : null;
 
   Map<String, dynamic> toMap() => {
-        'ID': _id,
-        'Name': _name,
-        'Image': _image?.toMap(),
+        'id': _id,
+        'name': _name,
+        'image': _image?.toMap(),
+        'thumbnails': _thumbnails?.map((e) => e.toMap()).toList(),
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'ID': serializeParam(
+        'id': serializeParam(
           _id,
           ParamType.int,
         ),
-        'Name': serializeParam(
+        'name': serializeParam(
           _name,
           ParamType.String,
         ),
-        'Image': serializeParam(
+        'image': serializeParam(
           _image,
           ParamType.DataStruct,
+        ),
+        'thumbnails': serializeParam(
+          _thumbnails,
+          ParamType.DataStruct,
+          true,
         ),
       }.withoutNulls;
 
@@ -78,20 +98,26 @@ class ThumbnailCategoryStruct extends FFFirebaseStruct {
           Map<String, dynamic> data) =>
       ThumbnailCategoryStruct(
         id: deserializeParam(
-          data['ID'],
+          data['id'],
           ParamType.int,
           false,
         ),
         name: deserializeParam(
-          data['Name'],
+          data['name'],
           ParamType.String,
           false,
         ),
         image: deserializeStructParam(
-          data['Image'],
+          data['image'],
           ParamType.DataStruct,
           false,
           structBuilder: ImageStruct.fromSerializableMap,
+        ),
+        thumbnails: deserializeStructParam<ThumbnailStruct>(
+          data['thumbnails'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: ThumbnailStruct.fromSerializableMap,
         ),
       );
 
@@ -100,14 +126,16 @@ class ThumbnailCategoryStruct extends FFFirebaseStruct {
 
   @override
   bool operator ==(Object other) {
+    const listEquality = ListEquality();
     return other is ThumbnailCategoryStruct &&
         id == other.id &&
         name == other.name &&
-        image == other.image;
+        image == other.image &&
+        listEquality.equals(thumbnails, other.thumbnails);
   }
 
   @override
-  int get hashCode => const ListEquality().hash([id, name, image]);
+  int get hashCode => const ListEquality().hash([id, name, image, thumbnails]);
 }
 
 ThumbnailCategoryStruct createThumbnailCategoryStruct({
@@ -180,11 +208,11 @@ Map<String, dynamic> getThumbnailCategoryFirestoreData(
   }
   final firestoreData = mapToFirestore(thumbnailCategory.toMap());
 
-  // Handle nested data for "Image" field.
+  // Handle nested data for "image" field.
   addImageStructData(
     firestoreData,
     thumbnailCategory.hasImage() ? thumbnailCategory.image : null,
-    'Image',
+    'image',
     forFieldValue,
   );
 

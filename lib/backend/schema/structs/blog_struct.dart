@@ -23,32 +23,32 @@ class BlogStruct extends FFFirebaseStruct {
         _image = image,
         super(firestoreUtilData);
 
-  // "ID" field.
+  // "id" field.
   int? _id;
   int get id => _id ?? 0;
   set id(int? val) => _id = val;
   void incrementId(int amount) => _id = id + amount;
   bool hasId() => _id != null;
 
-  // "CreatedAt" field.
+  // "createdAt" field.
   String? _createdAt;
   String get createdAt => _createdAt ?? '';
   set createdAt(String? val) => _createdAt = val;
   bool hasCreatedAt() => _createdAt != null;
 
-  // "Title" field.
+  // "title" field.
   String? _title;
   String get title => _title ?? '';
   set title(String? val) => _title = val;
   bool hasTitle() => _title != null;
 
-  // "Content" field.
+  // "content" field.
   String? _content;
   String get content => _content ?? '';
   set content(String? val) => _content = val;
   bool hasContent() => _content != null;
 
-  // "Image" field.
+  // "image" field.
   ImageStruct? _image;
   ImageStruct get image => _image ?? ImageStruct();
   set image(ImageStruct? val) => _image = val;
@@ -57,43 +57,43 @@ class BlogStruct extends FFFirebaseStruct {
   bool hasImage() => _image != null;
 
   static BlogStruct fromMap(Map<String, dynamic> data) => BlogStruct(
-        id: castToType<int>(data['ID']),
-        createdAt: data['CreatedAt'] as String?,
-        title: data['Title'] as String?,
-        content: data['Content'] as String?,
-        image: ImageStruct.maybeFromMap(data['Image']),
+        id: castToType<int>(data['id']),
+        createdAt: data['createdAt'] as String?,
+        title: data['title'] as String?,
+        content: data['content'] as String?,
+        image: ImageStruct.maybeFromMap(data['image']),
       );
 
   static BlogStruct? maybeFromMap(dynamic data) =>
       data is Map<String, dynamic> ? BlogStruct.fromMap(data) : null;
 
   Map<String, dynamic> toMap() => {
-        'ID': _id,
-        'CreatedAt': _createdAt,
-        'Title': _title,
-        'Content': _content,
-        'Image': _image?.toMap(),
+        'id': _id,
+        'createdAt': _createdAt,
+        'title': _title,
+        'content': _content,
+        'image': _image?.toMap(),
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'ID': serializeParam(
+        'id': serializeParam(
           _id,
           ParamType.int,
         ),
-        'CreatedAt': serializeParam(
+        'createdAt': serializeParam(
           _createdAt,
           ParamType.String,
         ),
-        'Title': serializeParam(
+        'title': serializeParam(
           _title,
           ParamType.String,
         ),
-        'Content': serializeParam(
+        'content': serializeParam(
           _content,
           ParamType.String,
         ),
-        'Image': serializeParam(
+        'image': serializeParam(
           _image,
           ParamType.DataStruct,
         ),
@@ -102,27 +102,27 @@ class BlogStruct extends FFFirebaseStruct {
   static BlogStruct fromSerializableMap(Map<String, dynamic> data) =>
       BlogStruct(
         id: deserializeParam(
-          data['ID'],
+          data['id'],
           ParamType.int,
           false,
         ),
         createdAt: deserializeParam(
-          data['CreatedAt'],
+          data['createdAt'],
           ParamType.String,
           false,
         ),
         title: deserializeParam(
-          data['Title'],
+          data['title'],
           ParamType.String,
           false,
         ),
         content: deserializeParam(
-          data['Content'],
+          data['content'],
           ParamType.String,
           false,
         ),
         image: deserializeStructParam(
-          data['Image'],
+          data['image'],
           ParamType.DataStruct,
           false,
           structBuilder: ImageStruct.fromSerializableMap,
@@ -218,11 +218,11 @@ Map<String, dynamic> getBlogFirestoreData(
   }
   final firestoreData = mapToFirestore(blog.toMap());
 
-  // Handle nested data for "Image" field.
+  // Handle nested data for "image" field.
   addImageStructData(
     firestoreData,
     blog.hasImage() ? blog.image : null,
-    'Image',
+    'image',
     forFieldValue,
   );
 

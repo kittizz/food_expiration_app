@@ -25,86 +25,86 @@ class UserStruct extends FFFirebaseStruct {
         _profilePictureBlurHash = profilePictureBlurHash,
         super(firestoreUtilData);
 
-  // "Email" field.
+  // "email" field.
   String? _email;
   String get email => _email ?? '';
   set email(String? val) => _email = val;
   bool hasEmail() => _email != null;
 
-  // "SignInProvider" field.
+  // "signInProvider" field.
   String? _signInProvider;
   String get signInProvider => _signInProvider ?? '';
   set signInProvider(String? val) => _signInProvider = val;
   bool hasSignInProvider() => _signInProvider != null;
 
-  // "Role" field.
+  // "role" field.
   String? _role;
   String get role => _role ?? '';
   set role(String? val) => _role = val;
   bool hasRole() => _role != null;
 
-  // "Nickname" field.
+  // "nickname" field.
   String? _nickname;
   String get nickname => _nickname ?? '';
   set nickname(String? val) => _nickname = val;
   bool hasNickname() => _nickname != null;
 
-  // "ProfilePicture" field.
+  // "profilePicture" field.
   String? _profilePicture;
   String get profilePicture => _profilePicture ?? '';
   set profilePicture(String? val) => _profilePicture = val;
   bool hasProfilePicture() => _profilePicture != null;
 
-  // "ProfilePictureBlurHash" field.
+  // "profilePictureBlurHash" field.
   String? _profilePictureBlurHash;
   String get profilePictureBlurHash => _profilePictureBlurHash ?? '';
   set profilePictureBlurHash(String? val) => _profilePictureBlurHash = val;
   bool hasProfilePictureBlurHash() => _profilePictureBlurHash != null;
 
   static UserStruct fromMap(Map<String, dynamic> data) => UserStruct(
-        email: data['Email'] as String?,
-        signInProvider: data['SignInProvider'] as String?,
-        role: data['Role'] as String?,
-        nickname: data['Nickname'] as String?,
-        profilePicture: data['ProfilePicture'] as String?,
-        profilePictureBlurHash: data['ProfilePictureBlurHash'] as String?,
+        email: data['email'] as String?,
+        signInProvider: data['signInProvider'] as String?,
+        role: data['role'] as String?,
+        nickname: data['nickname'] as String?,
+        profilePicture: data['profilePicture'] as String?,
+        profilePictureBlurHash: data['profilePictureBlurHash'] as String?,
       );
 
   static UserStruct? maybeFromMap(dynamic data) =>
       data is Map<String, dynamic> ? UserStruct.fromMap(data) : null;
 
   Map<String, dynamic> toMap() => {
-        'Email': _email,
-        'SignInProvider': _signInProvider,
-        'Role': _role,
-        'Nickname': _nickname,
-        'ProfilePicture': _profilePicture,
-        'ProfilePictureBlurHash': _profilePictureBlurHash,
+        'email': _email,
+        'signInProvider': _signInProvider,
+        'role': _role,
+        'nickname': _nickname,
+        'profilePicture': _profilePicture,
+        'profilePictureBlurHash': _profilePictureBlurHash,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'Email': serializeParam(
+        'email': serializeParam(
           _email,
           ParamType.String,
         ),
-        'SignInProvider': serializeParam(
+        'signInProvider': serializeParam(
           _signInProvider,
           ParamType.String,
         ),
-        'Role': serializeParam(
+        'role': serializeParam(
           _role,
           ParamType.String,
         ),
-        'Nickname': serializeParam(
+        'nickname': serializeParam(
           _nickname,
           ParamType.String,
         ),
-        'ProfilePicture': serializeParam(
+        'profilePicture': serializeParam(
           _profilePicture,
           ParamType.String,
         ),
-        'ProfilePictureBlurHash': serializeParam(
+        'profilePictureBlurHash': serializeParam(
           _profilePictureBlurHash,
           ParamType.String,
         ),
@@ -113,32 +113,32 @@ class UserStruct extends FFFirebaseStruct {
   static UserStruct fromSerializableMap(Map<String, dynamic> data) =>
       UserStruct(
         email: deserializeParam(
-          data['Email'],
+          data['email'],
           ParamType.String,
           false,
         ),
         signInProvider: deserializeParam(
-          data['SignInProvider'],
+          data['signInProvider'],
           ParamType.String,
           false,
         ),
         role: deserializeParam(
-          data['Role'],
+          data['role'],
           ParamType.String,
           false,
         ),
         nickname: deserializeParam(
-          data['Nickname'],
+          data['nickname'],
           ParamType.String,
           false,
         ),
         profilePicture: deserializeParam(
-          data['ProfilePicture'],
+          data['profilePicture'],
           ParamType.String,
           false,
         ),
         profilePictureBlurHash: deserializeParam(
-          data['ProfilePictureBlurHash'],
+          data['profilePictureBlurHash'],
           ParamType.String,
           false,
         ),
