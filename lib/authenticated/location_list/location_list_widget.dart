@@ -1,4 +1,3 @@
-import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/location/location_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -234,7 +233,7 @@ class _LocationListWidgetState extends State<LocationListWidget>
                     ),
                   ),
                   if (valueOrDefault<bool>(
-                    _model.locationList.length != 0,
+                    FFAppState().locations.length != 0,
                     false,
                   ))
                     Expanded(
@@ -247,7 +246,7 @@ class _LocationListWidgetState extends State<LocationListWidget>
                               25.0, 0.0, 25.0, 0.0),
                           child: Builder(
                             builder: (context) {
-                              final list = _model.locationList.toList();
+                              final list = FFAppState().locations.toList();
                               return RefreshIndicator(
                                 color: FlutterFlowTheme.of(context).red200,
                                 onRefresh: () async {
@@ -310,7 +309,7 @@ class _LocationListWidgetState extends State<LocationListWidget>
                       ),
                     ),
                   if (valueOrDefault<bool>(
-                    _model.locationList.length == 0,
+                    FFAppState().locations.length == 0,
                     true,
                   ))
                     Expanded(

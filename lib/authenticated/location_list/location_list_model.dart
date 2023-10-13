@@ -1,4 +1,3 @@
-import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/location/location_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -16,18 +15,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class LocationListModel extends FlutterFlowModel<LocationListWidget> {
-  ///  Local state fields for this page.
-
-  List<LocationStruct> locationList = [];
-  void addToLocationList(LocationStruct item) => locationList.add(item);
-  void removeFromLocationList(LocationStruct item) => locationList.remove(item);
-  void removeAtIndexFromLocationList(int index) => locationList.removeAt(index);
-  void insertAtIndexInLocationList(int index, LocationStruct item) =>
-      locationList.insert(index, item);
-  void updateLocationListAtIndex(
-          int index, Function(LocationStruct) updateFn) =>
-      locationList[index] = updateFn(locationList[index]);
-
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
