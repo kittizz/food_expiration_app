@@ -196,8 +196,8 @@ class _LocationThumbnailViewerWidgetState
                         ),
                         Expanded(
                           child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              context.safePop();
                             },
                             text: 'ตกลง',
                             options: FFButtonOptions(

@@ -528,6 +528,9 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          if (Navigator.of(context).canPop()) {
+                                            context.pop();
+                                          }
                                           context.pushNamed(
                                               'LocationThumbnailCategory');
                                         },
