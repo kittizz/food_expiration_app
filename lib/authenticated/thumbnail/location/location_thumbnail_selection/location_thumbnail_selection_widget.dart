@@ -148,6 +148,9 @@ class _LocationThumbnailSelectionWidgetState
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              if (Navigator.of(context).canPop()) {
+                                context.pop();
+                              }
                               context.pushNamed(
                                 'LocationThumbnailViewer',
                                 queryParameters: {
@@ -165,6 +168,10 @@ class _LocationThumbnailSelectionWidgetState
                                   ),
                                   'imageBlurhash': serializeParam(
                                     listItem.image.blurHash,
+                                    ParamType.String,
+                                  ),
+                                  'name': serializeParam(
+                                    listItem.name,
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,

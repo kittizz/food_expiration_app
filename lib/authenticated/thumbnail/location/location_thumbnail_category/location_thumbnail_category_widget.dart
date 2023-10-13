@@ -144,6 +144,9 @@ class _LocationThumbnailCategoryWidgetState
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              if (Navigator.of(context).canPop()) {
+                                context.pop();
+                              }
                               context.pushNamed(
                                 'LocationThumbnailSelection',
                                 queryParameters: {
