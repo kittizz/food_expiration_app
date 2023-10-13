@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -51,7 +52,7 @@ class _LocationListWidgetState extends State<LocationListWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await _model.loadLocations(context);
+      await action_blocks.fetchLocations(context);
       setState(() {});
     });
 
@@ -250,7 +251,7 @@ class _LocationListWidgetState extends State<LocationListWidget>
                               return RefreshIndicator(
                                 color: FlutterFlowTheme.of(context).red200,
                                 onRefresh: () async {
-                                  await _model.loadLocations(context);
+                                  await action_blocks.fetchLocations(context);
                                   setState(() {});
                                 },
                                 child: ListView.builder(

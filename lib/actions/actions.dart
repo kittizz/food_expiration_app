@@ -6,6 +6,7 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -79,5 +80,40 @@ Future<bool?> fetchUser(BuildContext context) async {
     return true;
   } else {
     return false;
+  }
+}
+
+Future fetchLocations(BuildContext context) async {
+  ApiCallResponse? apiLocList;
+
+  apiLocList = await FoodexpirationGroup.locationListCall.call(
+    deviceid: FFAppState().deviceId,
+  );
+  if ((apiLocList?.succeeded ?? true)) {
+    FFAppState().locations = functions
+        .toLocationStructList((apiLocList?.jsonBody ?? ''))
+        .toList()
+        .cast<LocationStruct>();
+  } else {
+    await showDialog(
+      context: context,
+      builder: (alertDialogContext) {
+        return AlertDialog(
+          title: Text('เกิดข้อผิดพลาด'),
+          content: Text(FoodexpirationGroup.locationListCall
+              .message(
+                (apiLocList?.jsonBody ?? ''),
+              )
+              .toString()
+              .toString()),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(alertDialogContext),
+              child: Text('ตกลง'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

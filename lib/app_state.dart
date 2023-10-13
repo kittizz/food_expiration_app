@@ -91,6 +91,35 @@ class FFAppState extends ChangeNotifier {
   set thumbnailCategoryMode(String _value) {
     _thumbnailCategoryMode = _value;
   }
+
+  List<LocationStruct> _locations = [];
+  List<LocationStruct> get locations => _locations;
+  set locations(List<LocationStruct> _value) {
+    _locations = _value;
+  }
+
+  void addToLocations(LocationStruct _value) {
+    _locations.add(_value);
+  }
+
+  void removeFromLocations(LocationStruct _value) {
+    _locations.remove(_value);
+  }
+
+  void removeAtIndexFromLocations(int _index) {
+    _locations.removeAt(_index);
+  }
+
+  void updateLocationsAtIndex(
+    int _index,
+    LocationStruct Function(LocationStruct) updateFn,
+  ) {
+    _locations[_index] = updateFn(_locations[_index]);
+  }
+
+  void insertAtIndexInLocations(int _index, LocationStruct _value) {
+    _locations.insert(_index, _value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

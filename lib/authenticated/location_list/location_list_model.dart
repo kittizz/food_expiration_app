@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/location/location_widget.dart';
@@ -7,7 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
+import '/actions/actions.dart' as action_blocks;
 import 'location_list_widget.dart' show LocationListWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -47,43 +46,6 @@ class LocationListModel extends FlutterFlowModel<LocationListWidget> {
   }
 
   /// Action blocks are added here.
-
-  Future<List<LocationStruct>?> loadLocations(BuildContext context) async {
-    ApiCallResponse? apiLocList;
-
-    apiLocList = await FoodexpirationGroup.locationListCall.call(
-      deviceid: FFAppState().deviceId,
-    );
-    if ((apiLocList?.succeeded ?? true)) {
-      locationList = functions
-          .toLocationStructList((apiLocList?.jsonBody ?? ''))
-          .toList()
-          .cast<LocationStruct>();
-    } else {
-      await showDialog(
-        context: context,
-        builder: (alertDialogContext) {
-          return AlertDialog(
-            title: Text('เกิดข้อผิดพลาด'),
-            content: Text(FoodexpirationGroup.locationListCall
-                .message(
-                  (apiLocList?.jsonBody ?? ''),
-                )
-                .toString()
-                .toString()),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(alertDialogContext),
-                child: Text('ตกลง'),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
-    return null;
-  }
 
   /// Additional helper methods are added here.
 }

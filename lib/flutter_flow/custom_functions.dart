@@ -134,22 +134,15 @@ List<LocationStruct> toLocationStructList(dynamic jsonBody) {
     return listOfStruct;
   }
   for (var v in jsonBody) {
-    LocationStruct item = new LocationStruct(
-        id: v['id'] as int,
-        name: v['name'] as String,
-        description: v['description'] as String,
-        image: ImageStruct(
-          id: v['image']['id'] as int,
-          path: v['image']['path'] as String,
-          blurHash: v['image']['blurHash'] as String,
-        ));
-
-    listOfStruct.add(item);
+    listOfStruct.add(toLocationStruct(v));
   }
   return listOfStruct;
 }
 
 LocationStruct toLocationStruct(dynamic jsonBody) {
+  if (jsonBody.length == 0) {
+    return LocationStruct();
+  }
   LocationStruct item = new LocationStruct(
       id: jsonBody['id'] as int,
       name: jsonBody['name'] as String,
