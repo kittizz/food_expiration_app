@@ -271,6 +271,8 @@ class _LocationListWidgetState extends State<LocationListWidget>
                                           'Key9oj_${listItem.id.toString()}',
                                         ),
                                         name: listItem.name,
+                                        image: listItem.image,
+                                        count: 0,
                                       ),
                                     );
                                   },

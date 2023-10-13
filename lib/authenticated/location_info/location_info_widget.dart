@@ -269,7 +269,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                 .titleLarge
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Outfit',
+                                                                      'IBM Plex Sans Thai',
                                                                   color: Color(
                                                                       0xFF14181B),
                                                                   fontSize:
@@ -301,7 +301,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                 .labelMedium
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Plus Jakarta Sans',
+                                                                      'IBM Plex Sans Thai',
                                                                   color: Color(
                                                                       0xFF57636C),
                                                                   fontSize:
