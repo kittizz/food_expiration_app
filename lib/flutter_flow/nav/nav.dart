@@ -184,30 +184,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'ThumbnailCategory',
-          path: '/thumbnailCategory',
-          builder: (context, params) => ThumbnailCategoryWidget(
-            type: params.getParam('type', ParamType.String),
-          ),
+          name: 'LocationThumbnailCategory',
+          path: '/locationThumbnailCategory',
+          builder: (context, params) => LocationThumbnailCategoryWidget(),
         ),
         FFRoute(
-          name: 'ThumbnailSelection',
-          path: '/thumbnailSelection',
-          builder: (context, params) => ThumbnailSelectionWidget(
+          name: 'LocationThumbnailSelection',
+          path: '/locationThumbnailSelection',
+          builder: (context, params) => LocationThumbnailSelectionWidget(
             thumbnailCategoryId:
                 params.getParam('thumbnailCategoryId', ParamType.int),
-            type: params.getParam('type', ParamType.String),
           ),
         ),
         FFRoute(
-          name: 'ThumbnailViewer',
-          path: '/thumbnailViewer',
-          builder: (context, params) => ThumbnailViewerWidget(
-            name: params.getParam('name', ParamType.String),
+          name: 'LocationThumbnailViewer',
+          path: '/locationThumbnailViewer',
+          builder: (context, params) => LocationThumbnailViewerWidget(
             imagePath: params.getParam('imagePath', ParamType.String),
             imageId: params.getParam('imageId', ParamType.int),
             catrgoryId: params.getParam('catrgoryId', ParamType.int),
             imageBlurhash: params.getParam('imageBlurhash', ParamType.String),
+            name: params.getParam('name', ParamType.String),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

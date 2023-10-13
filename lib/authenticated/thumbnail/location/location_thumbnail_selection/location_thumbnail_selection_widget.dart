@@ -13,33 +13,32 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
-import 'thumbnail_selection_model.dart';
-export 'thumbnail_selection_model.dart';
+import 'location_thumbnail_selection_model.dart';
+export 'location_thumbnail_selection_model.dart';
 
-class ThumbnailSelectionWidget extends StatefulWidget {
-  const ThumbnailSelectionWidget({
+class LocationThumbnailSelectionWidget extends StatefulWidget {
+  const LocationThumbnailSelectionWidget({
     Key? key,
     this.thumbnailCategoryId,
-    required this.type,
   }) : super(key: key);
 
   final int? thumbnailCategoryId;
-  final String? type;
 
   @override
-  _ThumbnailSelectionWidgetState createState() =>
-      _ThumbnailSelectionWidgetState();
+  _LocationThumbnailSelectionWidgetState createState() =>
+      _LocationThumbnailSelectionWidgetState();
 }
 
-class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
-  late ThumbnailSelectionModel _model;
+class _LocationThumbnailSelectionWidgetState
+    extends State<LocationThumbnailSelectionWidget> {
+  late LocationThumbnailSelectionModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ThumbnailSelectionModel());
+    _model = createModel(context, () => LocationThumbnailSelectionModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -150,12 +149,8 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                             highlightColor: Colors.transparent,
                             onTap: () async {
                               context.pushNamed(
-                                'ThumbnailViewer',
+                                'LocationThumbnailViewer',
                                 queryParameters: {
-                                  'name': serializeParam(
-                                    listItem.name,
-                                    ParamType.String,
-                                  ),
                                   'imagePath': serializeParam(
                                     listItem.image.path,
                                     ParamType.String,

@@ -13,31 +13,27 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
-import 'thumbnail_category_model.dart';
-export 'thumbnail_category_model.dart';
+import 'location_thumbnail_category_model.dart';
+export 'location_thumbnail_category_model.dart';
 
-class ThumbnailCategoryWidget extends StatefulWidget {
-  const ThumbnailCategoryWidget({
-    Key? key,
-    required this.type,
-  }) : super(key: key);
-
-  final String? type;
+class LocationThumbnailCategoryWidget extends StatefulWidget {
+  const LocationThumbnailCategoryWidget({Key? key}) : super(key: key);
 
   @override
-  _ThumbnailCategoryWidgetState createState() =>
-      _ThumbnailCategoryWidgetState();
+  _LocationThumbnailCategoryWidgetState createState() =>
+      _LocationThumbnailCategoryWidgetState();
 }
 
-class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
-  late ThumbnailCategoryModel _model;
+class _LocationThumbnailCategoryWidgetState
+    extends State<LocationThumbnailCategoryWidget> {
+  late LocationThumbnailCategoryModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ThumbnailCategoryModel());
+    _model = createModel(context, () => LocationThumbnailCategoryModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -142,83 +138,58 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                         itemCount: list.length,
                         itemBuilder: (context, listIndex) {
                           final listItem = list[listIndex];
-                          return InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              if (widget.type == 'location') {
-                                context.pushNamed(
-                                  'ThumbnailSelection',
-                                  queryParameters: {
-                                    'thumbnailCategoryId': serializeParam(
-                                      listItem.id,
-                                      ParamType.int,
+                          return Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            elevation: 4.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: OctoImage(
+                                    placeholderBuilder:
+                                        OctoPlaceholder.blurHash(
+                                      listItem.image.blurHash,
                                     ),
-                                    'type': serializeParam(
-                                      widget.type,
-                                      ParamType.String,
+                                    image: CachedNetworkImageProvider(
+                                      valueOrDefault<String>(
+                                        functions.getImage(listItem.image.path),
+                                        'https://images.unsplash.com/photo-1484503793037-5c9644d6a80a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw4fHx3aGl0ZXxlbnwwfHx8fDE2OTE4OTAzNTN8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                                      ),
                                     ),
-                                  }.withoutNulls,
-                                );
-                              }
-                            },
-                            child: Card(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              elevation: 4.0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: OctoImage(
-                                      placeholderBuilder:
-                                          OctoPlaceholder.blurHash(
-                                        listItem.image.blurHash,
-                                      ),
-                                      image: CachedNetworkImageProvider(
-                                        valueOrDefault<String>(
-                                          functions
-                                              .getImage(listItem.image.path),
-                                          'https://images.unsplash.com/photo-1484503793037-5c9644d6a80a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw4fHx3aGl0ZXxlbnwwfHx8fDE2OTE4OTAzNTN8MA&ixlib=rb-4.0.3&q=80&w=1080',
-                                        ),
-                                      ),
-                                      width: 500.0,
-                                      height: 500.0,
-                                      fit: BoxFit.cover,
+                                    width: 500.0,
+                                    height: 500.0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0x00FFFFFF),
+                                        Color(0x93000000)
+                                      ],
+                                      stops: [0.5, 1.0],
+                                      begin: AlignmentDirectional(0.0, -1.0),
+                                      end: AlignmentDirectional(0, 1.0),
                                     ),
                                   ),
-                                  Container(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Color(0x00FFFFFF),
-                                          Color(0x93000000)
-                                        ],
-                                        stops: [0.5, 1.0],
-                                        begin: AlignmentDirectional(0.0, -1.0),
-                                        end: AlignmentDirectional(0, 1.0),
-                                      ),
-                                    ),
-                                    child: Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 1.00),
-                                      child: Text(
-                                        listItem.name,
-                                        style: FlutterFlowTheme.of(context)
-                                            .titleMedium,
-                                      ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.00, 1.00),
+                                    child: Text(
+                                      listItem.name,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium,
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           );
                         },
