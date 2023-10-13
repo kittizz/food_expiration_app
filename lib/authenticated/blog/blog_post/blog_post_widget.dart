@@ -47,7 +47,7 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
-      future: FoodexpirationGroup.blogByIDCall.call(
+      future: FoodexpirationGroup.blogByIdCall.call(
         id: widget.blogId,
       ),
       builder: (context, snapshot) {
@@ -67,7 +67,7 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
             ),
           );
         }
-        final blogPostBlogByIDResponse = snapshot.data!;
+        final blogPostBlogByIdResponse = snapshot.data!;
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -113,20 +113,20 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                         child: custom_widgets.MarkdownWidget(
                           width: 0.0,
                           height: 0.0,
-                          content: FoodexpirationGroup.blogByIDCall
+                          content: FoodexpirationGroup.blogByIdCall
                               .content(
-                                blogPostBlogByIDResponse.jsonBody,
+                                blogPostBlogByIdResponse.jsonBody,
                               )
                               .toString(),
-                          title: FoodexpirationGroup.blogByIDCall
+                          title: FoodexpirationGroup.blogByIdCall
                               .title(
-                                blogPostBlogByIDResponse.jsonBody,
+                                blogPostBlogByIdResponse.jsonBody,
                               )
                               .toString(),
                           image: functions
-                              .getImage(FoodexpirationGroup.blogByIDCall
+                              .getImage(FoodexpirationGroup.blogByIdCall
                                   .imagePath(
-                                    blogPostBlogByIDResponse.jsonBody,
+                                    blogPostBlogByIdResponse.jsonBody,
                                   )
                                   .toString()),
                         ),

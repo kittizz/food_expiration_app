@@ -19,12 +19,12 @@ class LocationWidget extends StatefulWidget {
     Key? key,
     required this.name,
     this.image,
-    this.count,
+    this.description,
   }) : super(key: key);
 
   final String? name;
   final ImageStruct? image;
-  final int? count;
+  final String? description;
 
   @override
   _LocationWidgetState createState() => _LocationWidgetState();
@@ -94,23 +94,6 @@ class _LocationWidgetState extends State<LocationWidget>
                   .controller
                   .forward(from: 0.0));
         }
-
-        context.pushNamed(
-          'ItemInfo',
-          queryParameters: {
-            'title': serializeParam(
-              widget.name,
-              ParamType.String,
-            ),
-          }.withoutNulls,
-          extra: <String, dynamic>{
-            kTransitionInfoKey: TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.bottomToTop,
-              duration: Duration(milliseconds: 600),
-            ),
-          },
-        );
       },
       onLongPress: () async {
         if (animationsMap['rowOnActionTriggerAnimation'] != null) {
@@ -156,14 +139,7 @@ class _LocationWidgetState extends State<LocationWidget>
                               ),
                         ),
                         Text(
-                          'มีของทั้งหมด ${valueOrDefault<String>(
-                            formatNumber(
-                              widget.count,
-                              formatType: FormatType.decimal,
-                              decimalType: DecimalType.periodDecimal,
-                            ),
-                            '0',
-                          )} ชิ้น',
+                          widget.description!,
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ],

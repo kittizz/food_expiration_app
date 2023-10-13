@@ -148,3 +148,16 @@ List<LocationStruct> toLocationStructList(dynamic jsonBody) {
   }
   return listOfStruct;
 }
+
+LocationStruct toLocationStruct(dynamic jsonBody) {
+  LocationStruct item = new LocationStruct(
+      id: jsonBody['id'] as int,
+      name: jsonBody['name'] as String,
+      description: jsonBody['description'] as String,
+      image: ImageStruct(
+        id: jsonBody['image']['id'] as int,
+        path: jsonBody['image']['path'] as String,
+        blurHash: jsonBody['image']['blurHash'] as String,
+      ));
+  return item;
+}

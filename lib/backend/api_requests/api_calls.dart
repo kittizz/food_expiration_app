@@ -18,7 +18,7 @@ class FoodexpirationGroup {
   static RegisterDeviceCall registerDeviceCall = RegisterDeviceCall();
   static GetUserCall getUserCall = GetUserCall();
   static BlogRecommendCall blogRecommendCall = BlogRecommendCall();
-  static BlogByIDCall blogByIDCall = BlogByIDCall();
+  static BlogByIdCall blogByIdCall = BlogByIdCall();
   static BlogAllCall blogAllCall = BlogAllCall();
   static LocationListCall locationListCall = LocationListCall();
   static DeleteLocationCall deleteLocationCall = DeleteLocationCall();
@@ -31,6 +31,7 @@ class FoodexpirationGroup {
   static ThumbnailCategoryByIdCall thumbnailCategoryByIdCall =
       ThumbnailCategoryByIdCall();
   static CreateLocationCall createLocationCall = CreateLocationCall();
+  static GetLocationByIdCall getLocationByIdCall = GetLocationByIdCall();
 }
 
 class RegisterDeviceCall {
@@ -132,13 +133,13 @@ class BlogRecommendCall {
   }
 }
 
-class BlogByIDCall {
+class BlogByIdCall {
   Future<ApiCallResponse> call({
     int? id,
     String? deviceid = '',
   }) {
     return ApiManager.instance.makeApiCall(
-      callName: 'blogByID',
+      callName: 'blogById',
       apiUrl: '${FoodexpirationGroup.baseUrl}/blog/query',
       callType: ApiCallType.GET,
       headers: {
@@ -430,6 +431,31 @@ class CreateLocationCall {
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class GetLocationByIdCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    bool? items = false,
+    String? deviceid = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getLocationById',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/location',
+      callType: ApiCallType.GET,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {
+        'id': id,
+        'items': items,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
