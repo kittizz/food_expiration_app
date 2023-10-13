@@ -217,21 +217,17 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                                   itemCount: list.length,
                                   itemBuilder: (context, listIndex) {
                                     final listItem = list[listIndex];
-                                    return Container(
-                                      height: 85.0,
-                                      decoration: BoxDecoration(),
-                                      child: wrapWithModel(
-                                        model: _model.locationModels.getModel(
-                                          listItem.id.toString(),
-                                          listIndex,
+                                    return wrapWithModel(
+                                      model: _model.locationModels.getModel(
+                                        listItem.id.toString(),
+                                        listIndex,
+                                      ),
+                                      updateCallback: () => setState(() {}),
+                                      child: LocationWidget(
+                                        key: Key(
+                                          'Key9oj_${listItem.id.toString()}',
                                         ),
-                                        updateCallback: () => setState(() {}),
-                                        child: LocationWidget(
-                                          key: Key(
-                                            'Key9oj_${listItem.id.toString()}',
-                                          ),
-                                          name: listItem.name,
-                                        ),
+                                        name: listItem.name,
                                       ),
                                     );
                                   },
@@ -242,22 +238,29 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                         ),
                       ),
                     ),
-                  Expanded(
-                    child: Align(
-                      alignment: AlignmentDirectional(0.00, 0.00),
-                      child: Text(
-                        'ไม่มีสถานที่จัดเก็บ',
-                        style: FlutterFlowTheme.of(context).bodyLarge.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyLargeFamily,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyLargeFamily),
-                            ),
+                  if (valueOrDefault<bool>(
+                    _model.locationList.length == 0,
+                    true,
+                  ))
+                    Expanded(
+                      child: Align(
+                        alignment: AlignmentDirectional(0.00, 0.00),
+                        child: Text(
+                          'ไม่มีสถานที่จัดเก็บ',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyLarge
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyLargeFamily,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w500,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyLargeFamily),
+                              ),
+                        ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),
