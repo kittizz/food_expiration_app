@@ -158,11 +158,11 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                                     ParamType.String,
                                   ),
                                   'imageId': serializeParam(
-                                    listItem.id,
+                                    listItem.image.id,
                                     ParamType.int,
                                   ),
                                   'catrgoryId': serializeParam(
-                                    listItem.id,
+                                    listItem.thumbnailCategoryId,
                                     ParamType.int,
                                   ),
                                   'imageBlurhash': serializeParam(
