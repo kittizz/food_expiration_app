@@ -17,9 +17,9 @@ export '/authenticated/location_list/location_list_widget.dart'
     show LocationListWidget;
 export '/authenticated/archived/archived_widget.dart' show ArchivedWidget;
 export '/authenticated/setting/setting_widget.dart' show SettingWidget;
-export '/authenticated/thumbnail/location/location_thumbnail_category/location_thumbnail_category_widget.dart'
-    show LocationThumbnailCategoryWidget;
-export '/authenticated/thumbnail/location/location_thumbnail_selection/location_thumbnail_selection_widget.dart'
-    show LocationThumbnailSelectionWidget;
-export '/authenticated/thumbnail/location/location_thumbnail_viewer/location_thumbnail_viewer_widget.dart'
-    show LocationThumbnailViewerWidget;
+export '/authenticated/thumbnail/thumbnail_category/thumbnail_category_widget.dart'
+    show ThumbnailCategoryWidget;
+export '/authenticated/thumbnail/thumbnail_selection/thumbnail_selection_widget.dart'
+    show ThumbnailSelectionWidget;
+export '/authenticated/thumbnail/thumbnail_viewer/thumbnail_viewer_widget.dart'
+    show ThumbnailViewerWidget;

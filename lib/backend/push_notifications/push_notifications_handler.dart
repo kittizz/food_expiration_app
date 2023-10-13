@@ -149,13 +149,13 @@ final parametersBuilderMap =
           'tabId': getParameter<int>(data, 'tabId'),
         },
       ),
-  'LocationThumbnailCategory': ParameterData.none(),
-  'LocationThumbnailSelection': (data) async => ParameterData(
+  'ThumbnailCategory': ParameterData.none(),
+  'ThumbnailSelection': (data) async => ParameterData(
         allParams: {
           'thumbnailCategoryId': getParameter<int>(data, 'thumbnailCategoryId'),
         },
       ),
-  'LocationThumbnailViewer': (data) async => ParameterData(
+  'ThumbnailViewer': (data) async => ParameterData(
         allParams: {
           'imagePath': getParameter<String>(data, 'imagePath'),
           'imageId': getParameter<int>(data, 'imageId'),

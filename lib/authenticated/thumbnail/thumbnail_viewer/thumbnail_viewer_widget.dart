@@ -12,11 +12,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'location_thumbnail_viewer_model.dart';
-export 'location_thumbnail_viewer_model.dart';
+import 'thumbnail_viewer_model.dart';
+export 'thumbnail_viewer_model.dart';
 
-class LocationThumbnailViewerWidget extends StatefulWidget {
-  const LocationThumbnailViewerWidget({
+class ThumbnailViewerWidget extends StatefulWidget {
+  const ThumbnailViewerWidget({
     Key? key,
     required this.imagePath,
     required this.imageId,
@@ -32,20 +32,18 @@ class LocationThumbnailViewerWidget extends StatefulWidget {
   final String? name;
 
   @override
-  _LocationThumbnailViewerWidgetState createState() =>
-      _LocationThumbnailViewerWidgetState();
+  _ThumbnailViewerWidgetState createState() => _ThumbnailViewerWidgetState();
 }
 
-class _LocationThumbnailViewerWidgetState
-    extends State<LocationThumbnailViewerWidget> {
-  late LocationThumbnailViewerModel _model;
+class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
+  late ThumbnailViewerModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LocationThumbnailViewerModel());
+    _model = createModel(context, () => ThumbnailViewerModel());
   }
 
   @override

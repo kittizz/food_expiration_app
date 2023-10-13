@@ -13,40 +13,42 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
-import 'location_thumbnail_category_model.dart';
-export 'location_thumbnail_category_model.dart';
+import 'thumbnail_selection_model.dart';
+export 'thumbnail_selection_model.dart';
 
-class LocationThumbnailCategoryWidget extends StatefulWidget {
-  const LocationThumbnailCategoryWidget({Key? key}) : super(key: key);
+class ThumbnailSelectionWidget extends StatefulWidget {
+  const ThumbnailSelectionWidget({
+    Key? key,
+    this.thumbnailCategoryId,
+  }) : super(key: key);
+
+  final int? thumbnailCategoryId;
 
   @override
-  _LocationThumbnailCategoryWidgetState createState() =>
-      _LocationThumbnailCategoryWidgetState();
+  _ThumbnailSelectionWidgetState createState() =>
+      _ThumbnailSelectionWidgetState();
 }
 
-class _LocationThumbnailCategoryWidgetState
-    extends State<LocationThumbnailCategoryWidget> {
-  late LocationThumbnailCategoryModel _model;
+class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
+  late ThumbnailSelectionModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LocationThumbnailCategoryModel());
+    _model = createModel(context, () => ThumbnailSelectionModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiCategory = await FoodexpirationGroup.thumbnailCategoryCall.call(
-        deviceid: FFAppState().deviceId,
+      _model.apiThumbnails =
+          await FoodexpirationGroup.thumbnailCategoryByIdCall.call(
+        catrgoryId: widget.thumbnailCategoryId?.toString(),
       );
-      if ((_model.apiCategory?.succeeded ?? true)) {
+      if ((_model.apiThumbnails?.succeeded ?? true)) {
         setState(() {
-          _model.categorys = functions
-              .toThumbnailCategoryStructList(
-                  (_model.apiCategory?.jsonBody ?? ''))
-              .toList()
-              .cast<ThumbnailCategoryStruct>();
+          _model.thumbnails = functions.toThumbnailCategoryStruct(
+              (_model.apiThumbnails?.jsonBody ?? ''));
         });
       }
     });
@@ -88,7 +90,7 @@ class _LocationThumbnailCategoryWidgetState
             },
           ),
           title: Text(
-            'หมวดหมู่',
+            'รูปภาพ',
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -111,7 +113,7 @@ class _LocationThumbnailCategoryWidgetState
                 Align(
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Text(
-                    'โปรดเลือกหมวดหมู่รูปภาพ',
+                    'โปรดเลือกรูปภาพ',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).bodyMediumFamily,
@@ -125,11 +127,12 @@ class _LocationThumbnailCategoryWidgetState
                 Expanded(
                   child: Builder(
                     builder: (context) {
-                      final list = _model.categorys.toList();
+                      final list =
+                          _model.thumbnails?.thumbnails?.toList() ?? [];
                       return GridView.builder(
                         padding: EdgeInsets.zero,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
+                          crossAxisCount: 3,
                           crossAxisSpacing: 10.0,
                           mainAxisSpacing: 10.0,
                           childAspectRatio: 1.0,
@@ -148,11 +151,27 @@ class _LocationThumbnailCategoryWidgetState
                                 context.pop();
                               }
                               context.pushNamed(
-                                'LocationThumbnailSelection',
+                                'ThumbnailViewer',
                                 queryParameters: {
-                                  'thumbnailCategoryId': serializeParam(
+                                  'imagePath': serializeParam(
+                                    listItem.image.path,
+                                    ParamType.String,
+                                  ),
+                                  'imageId': serializeParam(
                                     listItem.id,
                                     ParamType.int,
+                                  ),
+                                  'catrgoryId': serializeParam(
+                                    listItem.id,
+                                    ParamType.int,
+                                  ),
+                                  'imageBlurhash': serializeParam(
+                                    listItem.image.blurHash,
+                                    ParamType.String,
+                                  ),
+                                  'name': serializeParam(
+                                    listItem.name,
+                                    ParamType.String,
                                   ),
                                 }.withoutNulls,
                               );
@@ -175,14 +194,10 @@ class _LocationThumbnailCategoryWidgetState
                                         listItem.image.blurHash,
                                       ),
                                       image: CachedNetworkImageProvider(
-                                        valueOrDefault<String>(
-                                          functions
-                                              .getImage(listItem.image.path),
-                                          'https://images.unsplash.com/photo-1484503793037-5c9644d6a80a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw4fHx3aGl0ZXxlbnwwfHx8fDE2OTE4OTAzNTN8MA&ixlib=rb-4.0.3&q=80&w=1080',
-                                        ),
+                                        functions.getImage(listItem.image.path),
                                       ),
-                                      width: 500.0,
-                                      height: 500.0,
+                                      width: double.infinity,
+                                      height: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -219,7 +234,7 @@ class _LocationThumbnailCategoryWidgetState
                     },
                   ),
                 ),
-              ].divide(SizedBox(height: 5.0)).around(SizedBox(height: 5.0)),
+              ],
             ),
           ),
         ),

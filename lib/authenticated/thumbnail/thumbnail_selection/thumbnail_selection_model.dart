@@ -6,8 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'location_thumbnail_category_widget.dart'
-    show LocationThumbnailCategoryWidget;
+import 'thumbnail_selection_widget.dart' show ThumbnailSelectionWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -16,26 +15,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
-class LocationThumbnailCategoryModel
-    extends FlutterFlowModel<LocationThumbnailCategoryWidget> {
+class ThumbnailSelectionModel
+    extends FlutterFlowModel<ThumbnailSelectionWidget> {
   ///  Local state fields for this page.
 
-  List<ThumbnailCategoryStruct> categorys = [];
-  void addToCategorys(ThumbnailCategoryStruct item) => categorys.add(item);
-  void removeFromCategorys(ThumbnailCategoryStruct item) =>
-      categorys.remove(item);
-  void removeAtIndexFromCategorys(int index) => categorys.removeAt(index);
-  void insertAtIndexInCategorys(int index, ThumbnailCategoryStruct item) =>
-      categorys.insert(index, item);
-  void updateCategorysAtIndex(
-          int index, Function(ThumbnailCategoryStruct) updateFn) =>
-      categorys[index] = updateFn(categorys[index]);
+  ThumbnailCategoryStruct? thumbnails;
+  void updateThumbnailsStruct(Function(ThumbnailCategoryStruct) updateFn) =>
+      updateFn(thumbnails ??= ThumbnailCategoryStruct());
 
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (thumbnailCategory)] action in LocationThumbnailCategory widget.
-  ApiCallResponse? apiCategory;
+  // Stores action output result for [Backend Call - API (thumbnailCategoryById)] action in ThumbnailSelection widget.
+  ApiCallResponse? apiThumbnails;
 
   /// Initialization and disposal methods.
 

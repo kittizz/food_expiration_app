@@ -189,52 +189,72 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: 100.0,
-                      decoration: BoxDecoration(),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            25.0, 0.0, 25.0, 0.0),
-                        child: Builder(
-                          builder: (context) {
-                            final list = _model.locationList.toList();
-                            return RefreshIndicator(
-                              color: FlutterFlowTheme.of(context).red200,
-                              onRefresh: () async {
-                                await _model.loadLocations(context);
-                                setState(() {});
-                              },
-                              child: ListView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: list.length,
-                                itemBuilder: (context, listIndex) {
-                                  final listItem = list[listIndex];
-                                  return Container(
-                                    height: 85.0,
-                                    decoration: BoxDecoration(),
-                                    child: wrapWithModel(
-                                      model: _model.locationModels.getModel(
-                                        listItem.id.toString(),
-                                        listIndex,
-                                      ),
-                                      updateCallback: () => setState(() {}),
-                                      child: LocationWidget(
-                                        key: Key(
-                                          'Key9oj_${listItem.id.toString()}',
-                                        ),
-                                        name: listItem.name,
-                                      ),
-                                    ),
-                                  );
+                  if (valueOrDefault<bool>(
+                    _model.locationList.length != 0,
+                    false,
+                  ))
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        height: 100.0,
+                        decoration: BoxDecoration(),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              25.0, 0.0, 25.0, 0.0),
+                          child: Builder(
+                            builder: (context) {
+                              final list = _model.locationList.toList();
+                              return RefreshIndicator(
+                                color: FlutterFlowTheme.of(context).red200,
+                                onRefresh: () async {
+                                  await _model.loadLocations(context);
+                                  setState(() {});
                                 },
-                              ),
-                            );
-                          },
+                                child: ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: list.length,
+                                  itemBuilder: (context, listIndex) {
+                                    final listItem = list[listIndex];
+                                    return Container(
+                                      height: 85.0,
+                                      decoration: BoxDecoration(),
+                                      child: wrapWithModel(
+                                        model: _model.locationModels.getModel(
+                                          listItem.id.toString(),
+                                          listIndex,
+                                        ),
+                                        updateCallback: () => setState(() {}),
+                                        child: LocationWidget(
+                                          key: Key(
+                                            'Key9oj_${listItem.id.toString()}',
+                                          ),
+                                          name: listItem.name,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          ),
                         ),
+                      ),
+                    ),
+                  Expanded(
+                    child: Align(
+                      alignment: AlignmentDirectional(0.00, 0.00),
+                      child: Text(
+                        'ไม่มีสถานที่จัดเก็บ',
+                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyLargeFamily,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyLargeFamily),
+                            ),
                       ),
                     ),
                   ),

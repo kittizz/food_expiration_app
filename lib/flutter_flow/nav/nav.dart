@@ -184,22 +184,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'LocationThumbnailCategory',
-          path: '/locationThumbnailCategory',
-          builder: (context, params) => LocationThumbnailCategoryWidget(),
+          name: 'ThumbnailCategory',
+          path: '/thumbnailCategory',
+          builder: (context, params) => ThumbnailCategoryWidget(),
         ),
         FFRoute(
-          name: 'LocationThumbnailSelection',
-          path: '/locationThumbnailSelection',
-          builder: (context, params) => LocationThumbnailSelectionWidget(
+          name: 'ThumbnailSelection',
+          path: '/thumbnailSelection',
+          builder: (context, params) => ThumbnailSelectionWidget(
             thumbnailCategoryId:
                 params.getParam('thumbnailCategoryId', ParamType.int),
           ),
         ),
         FFRoute(
-          name: 'LocationThumbnailViewer',
-          path: '/locationThumbnailViewer',
-          builder: (context, params) => LocationThumbnailViewerWidget(
+          name: 'ThumbnailViewer',
+          path: '/thumbnailViewer',
+          builder: (context, params) => ThumbnailViewerWidget(
             imagePath: params.getParam('imagePath', ParamType.String),
             imageId: params.getParam('imageId', ParamType.int),
             catrgoryId: params.getParam('catrgoryId', ParamType.int),
