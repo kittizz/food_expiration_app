@@ -127,3 +127,24 @@ ThumbnailCategoryStruct toThumbnailCategoryStruct(dynamic jsonbody) {
   thumCate.thumbnails = thumbnails;
   return thumCate;
 }
+
+List<LocationStruct> toLocationStructList(dynamic jsonBody) {
+  List<LocationStruct> listOfStruct = [];
+  if (jsonBody.length == 0) {
+    return listOfStruct;
+  }
+  for (var v in jsonBody) {
+    LocationStruct item = new LocationStruct(
+        id: v['id'] as int,
+        name: v['name'] as String,
+        description: v['description'] as String,
+        image: ImageStruct(
+          id: v['image']['id'] as int,
+          path: v['image']['path'] as String,
+          blurHash: v['image']['blurHash'] as String,
+        ));
+
+    listOfStruct.add(item);
+  }
+  return listOfStruct;
+}

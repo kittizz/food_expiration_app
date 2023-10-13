@@ -1,12 +1,14 @@
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/location/location_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -20,10 +22,27 @@ class LocationListWidget extends StatefulWidget {
   _LocationListWidgetState createState() => _LocationListWidgetState();
 }
 
-class _LocationListWidgetState extends State<LocationListWidget> {
+class _LocationListWidgetState extends State<LocationListWidget>
+    with TickerProviderStateMixin {
   late LocationListModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  var hasRowTriggered = false;
+  final animationsMap = {
+    'rowOnActionTriggerAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: false,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.02, 1.02),
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
@@ -35,6 +54,13 @@ class _LocationListWidgetState extends State<LocationListWidget> {
       await _model.loadLocations(context);
       setState(() {});
     });
+
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
   }
 
   @override
@@ -136,49 +162,66 @@ class _LocationListWidgetState extends State<LocationListWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 25.0, 0.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                FFAppState().pageLocationInfo =
-                                    PageLocationInfoStruct.fromSerializableMap(
-                                        jsonDecode('{\"isAdd\":\"true\"}'));
+                          Align(
+                            alignment: AlignmentDirectional(1.00, 0.00),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 25.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  if (animationsMap[
+                                          'rowOnActionTriggerAnimation'] !=
+                                      null) {
+                                    setState(() => hasRowTriggered = true);
+                                    SchedulerBinding.instance.addPostFrameCallback(
+                                        (_) async => await animationsMap[
+                                                'rowOnActionTriggerAnimation']!
+                                            .controller
+                                            .forward(from: 0.0));
+                                  }
+                                  FFAppState().pageLocationInfo =
+                                      PageLocationInfoStruct
+                                          .fromSerializableMap(jsonDecode(
+                                              '{\"isAdd\":\"true\"}'));
 
-                                context.pushNamed('LocationInfo');
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Icon(
-                                    Icons.add_rounded,
-                                    color: FlutterFlowTheme.of(context).success,
-                                    size: 16.0,
-                                  ),
-                                  Text(
-                                    'เพิ่ม',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily,
-                                          color: FlutterFlowTheme.of(context)
-                                              .success,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLargeFamily),
-                                        ),
-                                  ),
-                                ],
-                              ),
+                                  context.pushNamed('LocationInfo');
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Icon(
+                                      Icons.add_rounded,
+                                      color:
+                                          FlutterFlowTheme.of(context).success,
+                                      size: 16.0,
+                                    ),
+                                    Text(
+                                      'เพิ่ม',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLargeFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .success,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLargeFamily),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ).animateOnActionTrigger(
+                                  animationsMap['rowOnActionTriggerAnimation']!,
+                                  hasBeenTriggered: hasRowTriggered),
                             ),
                           ),
                           Divider(

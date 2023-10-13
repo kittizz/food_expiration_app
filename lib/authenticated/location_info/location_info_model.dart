@@ -23,12 +23,14 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading1 = false;
+  FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
-  // Stores action output result for [Backend Call - API (uploadImage)] action in Stack widget.
-  ApiCallResponse? apiUploadImage1;
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
   // State field(s) for NameField widget.
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
@@ -49,6 +51,78 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
   }
 
   /// Action blocks are added here.
+
+  Future uploadImage(
+    BuildContext context, {
+    required FFUploadedFile? fileUpload,
+  }) async {
+    ApiCallResponse? apiUploadImage1;
+
+    if (fileUpload != null && (fileUpload.bytes?.isNotEmpty ?? false)) {
+      if (fileUpload?.blurHash != hash) {
+        apiUploadImage1 = await FoodexpirationGroup.uploadImageCall.call(
+          file: fileUpload,
+          deviceid: FFAppState().deviceId,
+          hash: fileUpload?.blurHash,
+        );
+        if ((apiUploadImage1?.succeeded ?? true)) {
+          hash = fileUpload!.blurHash!;
+          FFAppState().updatePageLocationInfoStruct(
+            (e) => e
+              ..imageId = FoodexpirationGroup.uploadImageCall.id(
+                (apiUploadImage1?.jsonBody ?? ''),
+              )
+              ..image = FoodexpirationGroup.uploadImageCall
+                  .path(
+                    (apiUploadImage1?.jsonBody ?? ''),
+                  )
+                  .toString()
+                  .toString()
+              ..imageBlurhash = FoodexpirationGroup.uploadImageCall
+                  .blurHash(
+                    (apiUploadImage1?.jsonBody ?? ''),
+                  )
+                  .toString()
+                  .toString(),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'อัปโหลดรูปสำเร็จ',
+                style: TextStyle(
+                  color: FlutterFlowTheme.of(context).primaryText,
+                ),
+              ),
+              duration: Duration(milliseconds: 1000),
+              backgroundColor: FlutterFlowTheme.of(context).secondary,
+            ),
+          );
+          return;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                getJsonField(
+                  (apiCreateLocation?.jsonBody ?? ''),
+                  r'''$.message''',
+                ).toString().toString(),
+                style: TextStyle(
+                  color: FlutterFlowTheme.of(context).primaryText,
+                ),
+              ),
+              duration: Duration(milliseconds: 1000),
+              backgroundColor: FlutterFlowTheme.of(context).error,
+            ),
+          );
+          return;
+        }
+      } else {
+        return;
+      }
+    } else {
+      return;
+    }
+  }
 
   /// Additional helper methods are added here.
 }

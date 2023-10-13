@@ -2,14 +2,16 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/location/location_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'location_list_widget.dart' show LocationListWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -48,16 +50,15 @@ class LocationListModel extends FlutterFlowModel<LocationListWidget> {
 
   Future<List<LocationStruct>?> loadLocations(BuildContext context) async {
     ApiCallResponse? apiLocList;
-    List<LocationStruct>? listOutput;
 
     apiLocList = await FoodexpirationGroup.locationListCall.call(
       deviceid: FFAppState().deviceId,
     );
     if ((apiLocList?.succeeded ?? true)) {
-      listOutput = await actions.toLocationStructList(
-        (apiLocList?.jsonBody ?? ''),
-      );
-      locationList = listOutput!.toList().cast<LocationStruct>();
+      locationList = functions
+          .toLocationStructList((apiLocList?.jsonBody ?? ''))
+          .toList()
+          .cast<LocationStruct>();
     } else {
       await showDialog(
         context: context,

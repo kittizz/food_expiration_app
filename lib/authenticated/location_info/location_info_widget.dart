@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -161,202 +160,83 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 16.0),
-                                        child: Container(
-                                          width: 120.0,
-                                          height: 250.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFFE0E3E7),
-                                            borderRadius:
-                                                BorderRadius.circular(16.0),
-                                          ),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              var _shouldSetState = false;
-                                              final selectedMedia =
-                                                  await selectMediaWithSourceBottomSheet(
-                                                context: context,
-                                                maxWidth: 300.00,
-                                                maxHeight: 300.00,
-                                                imageQuality: 100,
-                                                allowPhoto: true,
-                                                includeBlurHash: true,
-                                                pickerFontFamily:
-                                                    'IBM Plex Sans Thai',
-                                              );
-                                              if (selectedMedia != null &&
-                                                  selectedMedia.every((m) =>
-                                                      validateFileFormat(
-                                                          m.storagePath,
-                                                          context))) {
-                                                setState(() => _model
-                                                    .isDataUploading = true);
-                                                var selectedUploadedFiles =
-                                                    <FFUploadedFile>[];
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            final selectedMedia =
+                                                await selectMediaWithSourceBottomSheet(
+                                              context: context,
+                                              maxWidth: 512.00,
+                                              maxHeight: 512.00,
+                                              imageQuality: 100,
+                                              allowPhoto: true,
+                                              includeBlurHash: true,
+                                            );
+                                            if (selectedMedia != null &&
+                                                selectedMedia.every((m) =>
+                                                    validateFileFormat(
+                                                        m.storagePath,
+                                                        context))) {
+                                              setState(() => _model
+                                                  .isDataUploading1 = true);
+                                              var selectedUploadedFiles =
+                                                  <FFUploadedFile>[];
 
-                                                try {
-                                                  selectedUploadedFiles =
-                                                      selectedMedia
-                                                          .map((m) =>
-                                                              FFUploadedFile(
-                                                                name: m
-                                                                    .storagePath
-                                                                    .split('/')
-                                                                    .last,
-                                                                bytes: m.bytes,
-                                                                height: m
-                                                                    .dimensions
-                                                                    ?.height,
-                                                                width: m
-                                                                    .dimensions
-                                                                    ?.width,
-                                                                blurHash:
-                                                                    m.blurHash,
-                                                              ))
-                                                          .toList();
-                                                } finally {
-                                                  _model.isDataUploading =
-                                                      false;
-                                                }
-                                                if (selectedUploadedFiles
-                                                        .length ==
-                                                    selectedMedia.length) {
-                                                  setState(() {
-                                                    _model.uploadedLocalFile =
-                                                        selectedUploadedFiles
-                                                            .first;
-                                                  });
-                                                } else {
-                                                  setState(() {});
-                                                  return;
-                                                }
+                                              try {
+                                                selectedUploadedFiles =
+                                                    selectedMedia
+                                                        .map((m) =>
+                                                            FFUploadedFile(
+                                                              name: m
+                                                                  .storagePath
+                                                                  .split('/')
+                                                                  .last,
+                                                              bytes: m.bytes,
+                                                              height: m
+                                                                  .dimensions
+                                                                  ?.height,
+                                                              width: m
+                                                                  .dimensions
+                                                                  ?.width,
+                                                              blurHash:
+                                                                  m.blurHash,
+                                                            ))
+                                                        .toList();
+                                              } finally {
+                                                _model.isDataUploading1 = false;
                                               }
-
-                                              if (_model.uploadedLocalFile !=
-                                                      null &&
-                                                  (_model.uploadedLocalFile
-                                                          .bytes?.isNotEmpty ??
-                                                      false)) {
-                                                if (_model.uploadedLocalFile
-                                                        .blurHash !=
-                                                    _model.hash) {
-                                                  _model.apiUploadImage1 =
-                                                      await FoodexpirationGroup
-                                                          .uploadImageCall
-                                                          .call(
-                                                    file: _model
-                                                        .uploadedLocalFile,
-                                                    deviceid:
-                                                        FFAppState().deviceId,
-                                                    hash: _model
-                                                        .uploadedLocalFile
-                                                        .blurHash,
-                                                  );
-                                                  _shouldSetState = true;
-                                                  if ((_model.apiUploadImage1
-                                                          ?.succeeded ??
-                                                      true)) {
-                                                    setState(() {
-                                                      _model.hash = _model
-                                                          .uploadedLocalFile
-                                                          .blurHash!;
-                                                    });
-                                                    setState(() {
-                                                      FFAppState()
-                                                          .updatePageLocationInfoStruct(
-                                                        (e) => e
-                                                          ..imageId =
-                                                              FoodexpirationGroup
-                                                                  .uploadImageCall
-                                                                  .id(
-                                                            (_model.apiUploadImage1
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )
-                                                          ..image =
-                                                              FoodexpirationGroup
-                                                                  .uploadImageCall
-                                                                  .path(
-                                                                    (_model.apiUploadImage1
-                                                                            ?.jsonBody ??
-                                                                        ''),
-                                                                  )
-                                                                  .toString()
-                                                          ..imageBlurhash = _model
-                                                              .uploadedLocalFile
-                                                              .blurHash,
-                                                      );
-                                                    });
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          'อัปโหลดรูปสำเร็จ',
-                                                          style: TextStyle(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                          ),
-                                                        ),
-                                                        duration: Duration(
-                                                            milliseconds: 1000),
-                                                        backgroundColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondary,
-                                                      ),
-                                                    );
-                                                    if (_shouldSetState)
-                                                      setState(() {});
-                                                    return;
-                                                  } else {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          getJsonField(
-                                                            (_model.apiUploadImage1
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                            r'''$.message''',
-                                                          ).toString(),
-                                                          style: TextStyle(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                          ),
-                                                        ),
-                                                        duration: Duration(
-                                                            milliseconds: 1000),
-                                                        backgroundColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                      ),
-                                                    );
-                                                    if (_shouldSetState)
-                                                      setState(() {});
-                                                    return;
-                                                  }
-                                                } else {
-                                                  if (_shouldSetState)
-                                                    setState(() {});
-                                                  return;
-                                                }
+                                              if (selectedUploadedFiles
+                                                      .length ==
+                                                  selectedMedia.length) {
+                                                setState(() {
+                                                  _model.uploadedLocalFile1 =
+                                                      selectedUploadedFiles
+                                                          .first;
+                                                });
                                               } else {
-                                                if (_shouldSetState)
-                                                  setState(() {});
+                                                setState(() {});
                                                 return;
                                               }
+                                            }
 
-                                              if (_shouldSetState)
-                                                setState(() {});
-                                            },
+                                            await _model.uploadImage(
+                                              context,
+                                              fileUpload:
+                                                  _model.uploadedLocalFile1,
+                                            );
+                                            setState(() {});
+                                          },
+                                          child: Container(
+                                            width: 120.0,
+                                            height: 250.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFE0E3E7),
+                                              borderRadius:
+                                                  BorderRadius.circular(16.0),
+                                            ),
                                             child: Stack(
                                               alignment: AlignmentDirectional(
                                                   0.0, 0.0),
@@ -494,8 +374,67 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                   children: [
                                     Expanded(
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          final selectedMedia =
+                                              await selectMediaWithSourceBottomSheet(
+                                            context: context,
+                                            maxWidth: 512.00,
+                                            maxHeight: 512.00,
+                                            imageQuality: 100,
+                                            allowPhoto: true,
+                                            includeBlurHash: true,
+                                          );
+                                          if (selectedMedia != null &&
+                                              selectedMedia.every((m) =>
+                                                  validateFileFormat(
+                                                      m.storagePath,
+                                                      context))) {
+                                            setState(() =>
+                                                _model.isDataUploading2 = true);
+                                            var selectedUploadedFiles =
+                                                <FFUploadedFile>[];
+
+                                            try {
+                                              selectedUploadedFiles =
+                                                  selectedMedia
+                                                      .map(
+                                                          (m) => FFUploadedFile(
+                                                                name: m
+                                                                    .storagePath
+                                                                    .split('/')
+                                                                    .last,
+                                                                bytes: m.bytes,
+                                                                height: m
+                                                                    .dimensions
+                                                                    ?.height,
+                                                                width: m
+                                                                    .dimensions
+                                                                    ?.width,
+                                                                blurHash:
+                                                                    m.blurHash,
+                                                              ))
+                                                      .toList();
+                                            } finally {
+                                              _model.isDataUploading2 = false;
+                                            }
+                                            if (selectedUploadedFiles.length ==
+                                                selectedMedia.length) {
+                                              setState(() {
+                                                _model.uploadedLocalFile2 =
+                                                    selectedUploadedFiles.first;
+                                              });
+                                            } else {
+                                              setState(() {});
+                                              return;
+                                            }
+                                          }
+
+                                          await _model.uploadImage(
+                                            context,
+                                            fileUpload:
+                                                _model.uploadedLocalFile2,
+                                          );
+                                          setState(() {});
                                         },
                                         text: 'อัปโหลด',
                                         icon: Icon(
