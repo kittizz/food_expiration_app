@@ -30,6 +30,7 @@ class FoodexpirationGroup {
   static ThumbnailCategoryCall thumbnailCategoryCall = ThumbnailCategoryCall();
   static ThumbnailCategoryByIdCall thumbnailCategoryByIdCall =
       ThumbnailCategoryByIdCall();
+  static CreateLocationCall createLocationCall = CreateLocationCall();
 }
 
 class RegisterDeviceCall {
@@ -171,11 +172,11 @@ class BlogByIDCall {
       );
   dynamic imagePath(dynamic response) => getJsonField(
         response,
-        r'''$.Image.Path''',
+        r'''$.image.path''',
       );
   dynamic imageBlurHash(dynamic response) => getJsonField(
         response,
-        r'''$.Image.BlurHash''',
+        r'''$.image.blurHash''',
       );
 }
 
@@ -273,15 +274,15 @@ class UploadImageCall {
 
   dynamic id(dynamic response) => getJsonField(
         response,
-        r'''$.ID''',
+        r'''$.id''',
       );
   dynamic path(dynamic response) => getJsonField(
         response,
-        r'''$.Path''',
+        r'''$.path''',
       );
   dynamic blurHash(dynamic response) => getJsonField(
         response,
-        r'''$.BlurHash''',
+        r'''$.blurHash''',
       );
 }
 
@@ -398,6 +399,37 @@ class ThumbnailCategoryByIdCall {
       params: {
         'catrgoryId': catrgoryId,
       },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class CreateLocationCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? description = '',
+    int? imageId,
+    String? deviceid = '',
+  }) {
+    final ffApiRequestBody = '''
+{
+  "name": "${name}",
+  "description": "",
+  "imageId": "${imageId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'createLocation',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/location',
+      callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

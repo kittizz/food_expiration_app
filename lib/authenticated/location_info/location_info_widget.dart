@@ -94,14 +94,16 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                  child: Icon(
-                    Icons.delete,
-                    color: FlutterFlowTheme.of(context).error,
-                    size: 24.0,
+                if (FFAppState().pageLocationInfo.isAdd == false)
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                    child: Icon(
+                      Icons.delete,
+                      color: FlutterFlowTheme.of(context).error,
+                      size: 24.0,
+                    ),
                   ),
-                ),
               ],
             ),
           ],
@@ -525,6 +527,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                         ),
                                       ),
                                     ),
+                                    Text(
+                                      'หรือ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () async {
@@ -722,8 +729,77 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     children: [
                                       Expanded(
                                         child: FFButtonWidget(
-                                          onPressed: () {
-                                            print('Button pressed ...');
+                                          onPressed: () async {
+                                            if (FFAppState()
+                                                .pageLocationInfo
+                                                .isAdd) {
+                                              _model.apiCreateLocation =
+                                                  await FoodexpirationGroup
+                                                      .createLocationCall
+                                                      .call(
+                                                name: _model
+                                                    .nameFieldController.text,
+                                                description: _model
+                                                    .descriptionFieldController
+                                                    .text,
+                                                imageId: FFAppState()
+                                                    .pageLocationInfo
+                                                    .imageId,
+                                                deviceid: FFAppState().deviceId,
+                                              );
+                                              if ((_model.apiCreateLocation
+                                                      ?.succeeded ??
+                                                  true)) {
+                                                context.safePop();
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'เพิ่มสถานที่จัดเก็บสำเร็จ',
+                                                      style: TextStyle(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 2000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondary,
+                                                  ),
+                                                );
+                                              } else {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('ข้อผิดพลาด'),
+                                                      content:
+                                                          Text(getJsonField(
+                                                        (_model.apiCreateLocation
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.message''',
+                                                      ).toString()),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('ตกลง'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
+                                            }
+
+                                            setState(() {});
                                           },
                                           text: FFAppState()
                                                   .pageLocationInfo
