@@ -13,7 +13,7 @@ class LocationStruct extends FFFirebaseStruct {
     int? id,
     String? name,
     String? description,
-    String? image,
+    ImageStruct? image,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _name = name,
@@ -41,16 +41,18 @@ class LocationStruct extends FFFirebaseStruct {
   bool hasDescription() => _description != null;
 
   // "image" field.
-  String? _image;
-  String get image => _image ?? '';
-  set image(String? val) => _image = val;
+  ImageStruct? _image;
+  ImageStruct get image => _image ?? ImageStruct();
+  set image(ImageStruct? val) => _image = val;
+  void updateImage(Function(ImageStruct) updateFn) =>
+      updateFn(_image ??= ImageStruct());
   bool hasImage() => _image != null;
 
   static LocationStruct fromMap(Map<String, dynamic> data) => LocationStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
         description: data['description'] as String?,
-        image: data['image'] as String?,
+        image: ImageStruct.maybeFromMap(data['image']),
       );
 
   static LocationStruct? maybeFromMap(dynamic data) =>
@@ -60,7 +62,7 @@ class LocationStruct extends FFFirebaseStruct {
         'id': _id,
         'name': _name,
         'description': _description,
-        'image': _image,
+        'image': _image?.toMap(),
       }.withoutNulls;
 
   @override
@@ -79,7 +81,7 @@ class LocationStruct extends FFFirebaseStruct {
         ),
         'image': serializeParam(
           _image,
-          ParamType.String,
+          ParamType.DataStruct,
         ),
       }.withoutNulls;
 
@@ -100,10 +102,11 @@ class LocationStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        image: deserializeParam(
+        image: deserializeStructParam(
           data['image'],
-          ParamType.String,
+          ParamType.DataStruct,
           false,
+          structBuilder: ImageStruct.fromSerializableMap,
         ),
       );
 
@@ -127,7 +130,7 @@ LocationStruct createLocationStruct({
   int? id,
   String? name,
   String? description,
-  String? image,
+  ImageStruct? image,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -137,7 +140,7 @@ LocationStruct createLocationStruct({
       id: id,
       name: name,
       description: description,
-      image: image,
+      image: image ?? (clearUnsetFields ? ImageStruct() : null),
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
@@ -192,6 +195,14 @@ Map<String, dynamic> getLocationFirestoreData(
     return {};
   }
   final firestoreData = mapToFirestore(location.toMap());
+
+  // Handle nested data for "image" field.
+  addImageStructData(
+    firestoreData,
+    location.hasImage() ? location.image : null,
+    'image',
+    forFieldValue,
+  );
 
   // Add any Firestore field values
   location.firestoreUtilData.fieldValues
