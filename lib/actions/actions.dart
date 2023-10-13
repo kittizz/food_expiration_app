@@ -117,3 +117,39 @@ Future fetchLocations(BuildContext context) async {
     );
   }
 }
+
+Future<bool> fetchLocationInfo(
+  BuildContext context, {
+  required int? id,
+}) async {
+  ApiCallResponse? apiLocation;
+
+  apiLocation = await FoodexpirationGroup.getLocationByIdCall.call(
+    id: id,
+    items: false,
+    deviceid: FFAppState().deviceId,
+  );
+  if ((apiLocation?.succeeded ?? true)) {
+    FFAppState().updatePageLocationInfoStruct(
+      (e) => e
+        ..name = functions.toLocationStruct((apiLocation?.jsonBody ?? '')).name
+        ..description = functions
+            .toLocationStruct((apiLocation?.jsonBody ?? ''))
+            .description
+        ..locationId =
+            functions.toLocationStruct((apiLocation?.jsonBody ?? '')).id
+        ..imageId =
+            functions.toLocationStruct((apiLocation?.jsonBody ?? '')).image.id
+        ..image =
+            functions.toLocationStruct((apiLocation?.jsonBody ?? '')).image.path
+        ..imageBlurhash = functions
+            .toLocationStruct((apiLocation?.jsonBody ?? ''))
+            .image
+            .blurHash
+        ..isAdd = false,
+    );
+    return true;
+  } else {
+    return false;
+  }
+}

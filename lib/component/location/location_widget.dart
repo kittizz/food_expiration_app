@@ -2,6 +2,7 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +21,13 @@ class LocationWidget extends StatefulWidget {
     required this.name,
     this.image,
     this.description,
+    required this.id,
   }) : super(key: key);
 
   final String? name;
   final ImageStruct? image;
   final String? description;
+  final int? id;
 
   @override
   _LocationWidgetState createState() => _LocationWidgetState();
@@ -94,6 +97,20 @@ class _LocationWidgetState extends State<LocationWidget>
                   .controller
                   .forward(from: 0.0));
         }
+        await action_blocks.fetchLocationInfo(
+          context,
+          id: widget.id,
+        );
+
+        context.pushNamed(
+          'LocationInfo',
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.bottomToTop,
+            ),
+          },
+        );
       },
       onLongPress: () async {
         if (animationsMap['rowOnActionTriggerAnimation'] != null) {

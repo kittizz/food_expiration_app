@@ -260,44 +260,20 @@ class _LocationListWidgetState extends State<LocationListWidget>
                                   itemCount: list.length,
                                   itemBuilder: (context, listIndex) {
                                     final listItem = list[listIndex];
-                                    return InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        FFAppState().update(() {
-                                          FFAppState()
-                                              .updatePageLocationInfoStruct(
-                                            (e) => e..isAdd = false,
-                                          );
-                                        });
-
-                                        context.pushNamed(
-                                          'LocationInfo',
-                                          extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType: PageTransitionType
-                                                  .bottomToTop,
-                                            ),
-                                          },
-                                        );
-                                      },
-                                      child: wrapWithModel(
-                                        model: _model.locationModels.getModel(
-                                          listItem.id.toString(),
-                                          listIndex,
+                                    return wrapWithModel(
+                                      model: _model.locationModels.getModel(
+                                        listItem.id.toString(),
+                                        listIndex,
+                                      ),
+                                      updateCallback: () => setState(() {}),
+                                      child: LocationWidget(
+                                        key: Key(
+                                          'Key9oj_${listItem.id.toString()}',
                                         ),
-                                        updateCallback: () => setState(() {}),
-                                        child: LocationWidget(
-                                          key: Key(
-                                            'Key9oj_${listItem.id.toString()}',
-                                          ),
-                                          name: listItem.name,
-                                          image: listItem.image,
-                                          description: listItem.description,
-                                        ),
+                                        name: listItem.name,
+                                        image: listItem.image,
+                                        description: listItem.description,
+                                        id: listItem.id,
                                       ),
                                     );
                                   },
