@@ -1,3 +1,4 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -197,6 +198,14 @@ class _LocationThumbnailViewerWidgetState
                         Expanded(
                           child: FFButtonWidget(
                             onPressed: () async {
+                              setState(() {
+                                FFAppState().updatePageLocationInfoStruct(
+                                  (e) => e
+                                    ..imageId = widget.imageId
+                                    ..image = widget.imagePath
+                                    ..imageBlurhash = widget.imageBlurhash,
+                                );
+                              });
                               context.safePop();
                             },
                             text: 'ตกลง',
