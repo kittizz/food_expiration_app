@@ -417,8 +417,8 @@ class CreateLocationCall {
     final ffApiRequestBody = '''
 {
   "name": "${name}",
-  "description": "",
-  "imageId": "${imageId}"
+  "description": "${description}",
+  "imageId": ${imageId}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'createLocation',
