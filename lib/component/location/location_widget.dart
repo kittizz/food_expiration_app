@@ -132,77 +132,86 @@ class _LocationWidgetState extends State<LocationWidget>
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.name!,
-                          style: FlutterFlowTheme.of(context)
-                              .headlineMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .headlineMediumFamily,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 16.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .headlineMediumFamily),
+          Flexible(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 5.0, 0.0, 0.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.name!,
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .headlineMediumFamily,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 16.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineMediumFamily),
+                                    ),
                               ),
+                              Text(
+                                widget.description!,
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              ),
+                            ],
+                          ),
                         ),
-                        Text(
-                          widget.description!,
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                width: 80.0,
-                height: 80.0,
-                decoration: BoxDecoration(),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: OctoImage(
-                    placeholderBuilder: OctoPlaceholder.blurHash(
-                      widget.image!.blurHash,
-                    ),
-                    image: CachedNetworkImageProvider(
-                      valueOrDefault<String>(
-                        functions.getImage(widget.image!.path),
-                        'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
                       ),
-                    ),
-                    width: double.infinity,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Image.asset(
-                      'assets/images/error_image.png',
+                    ],
+                  ),
+                ),
+                Container(
+                  width: 80.0,
+                  height: 80.0,
+                  decoration: BoxDecoration(),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: OctoImage(
+                      placeholderBuilder: OctoPlaceholder.blurHash(
+                        widget.image!.blurHash,
+                      ),
+                      image: CachedNetworkImageProvider(
+                        valueOrDefault<String>(
+                          functions.getImage(widget.image!.path),
+                          'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                        ),
+                      ),
                       width: double.infinity,
                       height: double.infinity,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Image.asset(
+                        'assets/images/error_image.png',
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ).animateOnActionTrigger(
-              animationsMap['rowOnActionTriggerAnimation']!,
-              hasBeenTriggered: hasRowTriggered),
+              ],
+            ).animateOnActionTrigger(
+                animationsMap['rowOnActionTriggerAnimation']!,
+                hasBeenTriggered: hasRowTriggered),
+          ),
           Divider(
             thickness: 1.0,
             color: FlutterFlowTheme.of(context).grey50,
