@@ -103,7 +103,21 @@ class _LocationWidgetState extends State<LocationWidget>
         );
 
         context.pushNamed(
-          'LocationInfo',
+          'ItemList',
+          queryParameters: {
+            'isLocation': serializeParam(
+              true,
+              ParamType.bool,
+            ),
+            'title': serializeParam(
+              widget.name,
+              ParamType.String,
+            ),
+            'locationId': serializeParam(
+              widget.id,
+              ParamType.int,
+            ),
+          }.withoutNulls,
           extra: <String, dynamic>{
             kTransitionInfoKey: TransitionInfo(
               hasTransition: true,

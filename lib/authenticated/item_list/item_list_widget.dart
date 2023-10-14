@@ -4,9 +4,12 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'item_list_model.dart';
@@ -114,18 +117,21 @@ class _ItemListWidgetState extends State<ItemListWidget> {
           actions: [
             Align(
               alignment: AlignmentDirectional(0.00, 0.00),
-              child: FlutterFlowIconButton(
-                borderRadius: 20.0,
-                borderWidth: 1.0,
-                buttonSize: 40.0,
-                icon: Icon(
-                  Icons.edit,
-                  color: FlutterFlowTheme.of(context).grey400,
-                  size: 24.0,
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                child: FlutterFlowIconButton(
+                  borderRadius: 20.0,
+                  borderWidth: 1.0,
+                  buttonSize: 40.0,
+                  icon: Icon(
+                    Icons.edit,
+                    color: FlutterFlowTheme.of(context).grey400,
+                    size: 24.0,
+                  ),
+                  onPressed: () async {
+                    context.pushNamed('LocationInfo');
+                  },
                 ),
-                onPressed: () async {
-                  context.pushNamed('LocationInfo');
-                },
               ),
             ),
           ],
@@ -148,7 +154,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
@@ -172,19 +178,32 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                     PageTransition(
                                       type: PageTransitionType.fade,
                                       child: FlutterFlowExpandedImageView(
-                                        image: Image.network(
-                                          'https://picsum.photos/seed/119/600',
+                                        image: OctoImage(
+                                          placeholderBuilder:
+                                              OctoPlaceholder.blurHash(
+                                            FFAppState()
+                                                .pageLocationInfo
+                                                .imageBlurhash,
+                                          ),
+                                          image: CachedNetworkImageProvider(
+                                            functions.getImage(FFAppState()
+                                                .pageLocationInfo
+                                                .image),
+                                          ),
                                           fit: BoxFit.contain,
                                         ),
                                         allowRotation: false,
-                                        tag: 'imageTag',
+                                        tag: functions.getImage(FFAppState()
+                                            .pageLocationInfo
+                                            .image),
                                         useHeroAnimation: true,
                                       ),
                                     ),
                                   );
                                 },
                                 child: Hero(
-                                  tag: 'imageTag',
+                                  tag: functions.getImage(
+                                      FFAppState().pageLocationInfo.image),
                                   transitionOnUserGestures: true,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.only(
@@ -193,9 +212,20 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       topLeft: Radius.circular(8.0),
                                       topRight: Radius.circular(0.0),
                                     ),
-                                    child: Image.network(
-                                      'https://picsum.photos/seed/119/600',
+                                    child: OctoImage(
+                                      placeholderBuilder:
+                                          OctoPlaceholder.blurHash(
+                                        FFAppState()
+                                            .pageLocationInfo
+                                            .imageBlurhash,
+                                      ),
+                                      image: CachedNetworkImageProvider(
+                                        functions.getImage(FFAppState()
+                                            .pageLocationInfo
+                                            .image),
+                                      ),
                                       width: double.infinity,
+                                      height: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -220,7 +250,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               5.0, 5.0, 5.0, 0.0),
                           child: SelectionArea(
                               child: Text(
-                            'Hello Worldasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd',
+                            FFAppState().pageLocationInfo.description,
                             style: FlutterFlowTheme.of(context).bodyMedium,
                           )),
                         ),
