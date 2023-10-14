@@ -162,8 +162,8 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                       children: [
                         Expanded(
                           child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              context.safePop();
                             },
                             text: 'ยกเลิก',
                             options: FFButtonOptions(

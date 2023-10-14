@@ -108,7 +108,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
             kTransitionInfoKey: TransitionInfo(
               hasTransition: true,
               transitionType: PageTransitionType.bottomToTop,
-              duration: Duration(milliseconds: 600),
             ),
           },
         );
