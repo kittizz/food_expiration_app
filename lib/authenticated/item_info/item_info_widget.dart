@@ -8,6 +8,7 @@ import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -52,6 +53,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
     _model.amountFieldController1 ??= TextEditingController();
     _model.forewarnFieldController2 ??= TextEditingController();
     _model.amountFieldController2 ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          _model.amountFieldController1?.text = '1';
+          _model.forewarnFieldController2?.text = '0';
+        }));
   }
 
   @override
@@ -610,11 +615,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                             .bodyLargeFamily),
                                                 lineHeight: 1.0,
                                               ),
-                                          keyboardType: const TextInputType
-                                              .numberWithOptions(decimal: true),
+                                          keyboardType: TextInputType.number,
                                           validator: _model
                                               .forewarnFieldController1Validator
                                               .asValidator(context),
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp('[0-9]'))
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -706,11 +714,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                             .bodyLargeFamily),
                                                 lineHeight: 1.0,
                                               ),
-                                          keyboardType: const TextInputType
-                                              .numberWithOptions(decimal: true),
+                                          keyboardType: TextInputType.number,
                                           validator: _model
                                               .amountFieldController1Validator
                                               .asValidator(context),
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp('[0-9]'))
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -812,6 +823,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           validator: _model
                                               .forewarnFieldController2Validator
                                               .asValidator(context),
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp('[0-9]'))
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -903,8 +918,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                             .bodyLargeFamily),
                                                 lineHeight: 1.0,
                                               ),
-                                          keyboardType: const TextInputType
-                                              .numberWithOptions(decimal: true),
                                           validator: _model
                                               .amountFieldController2Validator
                                               .asValidator(context),
