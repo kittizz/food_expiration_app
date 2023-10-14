@@ -816,7 +816,20 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                               _model.apiUpdatelocation =
                                                   await FoodexpirationGroup
                                                       .updateLocationCall
-                                                      .call();
+                                                      .call(
+                                                deviceid: FFAppState().deviceId,
+                                                locationId: FFAppState()
+                                                    .pageLocationInfo
+                                                    .locationId,
+                                                imageId: FFAppState()
+                                                    .pageLocationInfo
+                                                    .imageId,
+                                                name: _model
+                                                    .nameFieldController.text,
+                                                description: int.tryParse(_model
+                                                    .descriptionFieldController
+                                                    .text),
+                                              );
                                               _shouldSetState = true;
                                               if (!(_model.apiUpdatelocation
                                                       ?.succeeded ??
