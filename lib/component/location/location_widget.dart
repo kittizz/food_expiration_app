@@ -90,13 +90,6 @@ class _LocationWidgetState extends State<LocationWidget>
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
-        if (animationsMap['rowOnActionTriggerAnimation'] != null) {
-          setState(() => hasRowTriggered = true);
-          SchedulerBinding.instance.addPostFrameCallback((_) async =>
-              await animationsMap['rowOnActionTriggerAnimation']!
-                  .controller
-                  .forward(from: 0.0));
-        }
         await action_blocks.fetchLocationInfo(
           context,
           id: widget.id,

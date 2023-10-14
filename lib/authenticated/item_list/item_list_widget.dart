@@ -115,22 +115,25 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                 ),
           ),
           actions: [
-            Align(
-              alignment: AlignmentDirectional(0.00, 0.00),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                child: FlutterFlowIconButton(
-                  borderRadius: 20.0,
-                  borderWidth: 1.0,
-                  buttonSize: 40.0,
-                  icon: Icon(
-                    Icons.edit,
-                    color: FlutterFlowTheme.of(context).grey400,
-                    size: 24.0,
+            Visibility(
+              visible: widget.isLocation,
+              child: Align(
+                alignment: AlignmentDirectional(0.00, 0.00),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                  child: FlutterFlowIconButton(
+                    borderRadius: 20.0,
+                    borderWidth: 1.0,
+                    buttonSize: 40.0,
+                    icon: Icon(
+                      Icons.edit,
+                      color: FlutterFlowTheme.of(context).grey400,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      context.pushNamed('LocationInfo');
+                    },
                   ),
-                  onPressed: () async {
-                    context.pushNamed('LocationInfo');
-                  },
                 ),
               ),
             ),
@@ -143,122 +146,124 @@ class _ItemListWidgetState extends State<ItemListWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-                child: Container(
-                  width: MediaQuery.sizeOf(context).width * 1.0,
-                  height: 135.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).grey50,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        child: Container(
-                          width: 135.0,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Stack(
-                            children: [
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  await Navigator.push(
-                                    context,
-                                    PageTransition(
-                                      type: PageTransitionType.fade,
-                                      child: FlutterFlowExpandedImageView(
-                                        image: OctoImage(
-                                          placeholderBuilder:
-                                              OctoPlaceholder.blurHash(
-                                            FFAppState()
-                                                .pageLocationInfo
-                                                .imageBlurhash,
+              if (widget.isLocation)
+                Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: 135.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).grey50,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          child: Container(
+                            width: 135.0,
+                            height: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Stack(
+                              children: [
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        type: PageTransitionType.fade,
+                                        child: FlutterFlowExpandedImageView(
+                                          image: OctoImage(
+                                            placeholderBuilder:
+                                                OctoPlaceholder.blurHash(
+                                              FFAppState()
+                                                  .pageLocationInfo
+                                                  .imageBlurhash,
+                                            ),
+                                            image: CachedNetworkImageProvider(
+                                              functions.getImage(FFAppState()
+                                                  .pageLocationInfo
+                                                  .image),
+                                            ),
+                                            fit: BoxFit.contain,
                                           ),
-                                          image: CachedNetworkImageProvider(
-                                            functions.getImage(FFAppState()
-                                                .pageLocationInfo
-                                                .image),
-                                          ),
-                                          fit: BoxFit.contain,
+                                          allowRotation: false,
+                                          tag: functions.getImage(FFAppState()
+                                              .pageLocationInfo
+                                              .image),
+                                          useHeroAnimation: true,
                                         ),
-                                        allowRotation: false,
-                                        tag: functions.getImage(FFAppState()
-                                            .pageLocationInfo
-                                            .image),
-                                        useHeroAnimation: true,
                                       ),
-                                    ),
-                                  );
-                                },
-                                child: Hero(
-                                  tag: functions.getImage(
-                                      FFAppState().pageLocationInfo.image),
-                                  transitionOnUserGestures: true,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(8.0),
-                                      bottomRight: Radius.circular(0.0),
-                                      topLeft: Radius.circular(8.0),
-                                      topRight: Radius.circular(0.0),
-                                    ),
-                                    child: OctoImage(
-                                      placeholderBuilder:
-                                          OctoPlaceholder.blurHash(
-                                        FFAppState()
-                                            .pageLocationInfo
-                                            .imageBlurhash,
+                                    );
+                                  },
+                                  child: Hero(
+                                    tag: functions.getImage(
+                                        FFAppState().pageLocationInfo.image),
+                                    transitionOnUserGestures: true,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(8.0),
+                                        bottomRight: Radius.circular(0.0),
+                                        topLeft: Radius.circular(8.0),
+                                        topRight: Radius.circular(0.0),
                                       ),
-                                      image: CachedNetworkImageProvider(
-                                        functions.getImage(FFAppState()
-                                            .pageLocationInfo
-                                            .image),
+                                      child: OctoImage(
+                                        placeholderBuilder:
+                                            OctoPlaceholder.blurHash(
+                                          FFAppState()
+                                              .pageLocationInfo
+                                              .imageBlurhash,
+                                        ),
+                                        image: CachedNetworkImageProvider(
+                                          functions.getImage(FFAppState()
+                                              .pageLocationInfo
+                                              .image),
+                                        ),
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        fit: BoxFit.cover,
                                       ),
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(1.00, 1.00),
-                                child: Icon(
-                                  Icons.zoom_in_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
+                                Align(
+                                  alignment: AlignmentDirectional(1.00, 1.00),
+                                  child: Icon(
+                                    Icons.zoom_in_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      Flexible(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              5.0, 5.0, 5.0, 0.0),
-                          child: SelectionArea(
-                              child: Text(
-                            FFAppState().pageLocationInfo.description,
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                          )),
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                5.0, 5.0, 5.0, 0.0),
+                            child: SelectionArea(
+                                child: Text(
+                              FFAppState().pageLocationInfo.description,
+                              style: FlutterFlowTheme.of(context).bodyMedium,
+                            )),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
               wrapWithModel(
                 model: _model.listItemsModel,
                 updateCallback: () => setState(() {}),
