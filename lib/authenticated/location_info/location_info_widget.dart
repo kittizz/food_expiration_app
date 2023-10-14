@@ -869,6 +869,14 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                             await action_blocks
                                                 .fetchLocations(context);
                                             setState(() {});
+                                            await action_blocks
+                                                .fetchLocationInfo(
+                                              context,
+                                              id: FFAppState()
+                                                  .pageLocationInfo
+                                                  .locationId,
+                                            );
+                                            setState(() {});
                                             context.safePop();
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
