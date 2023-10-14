@@ -275,45 +275,39 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   color: Color(0x34474747),
                                 ),
                               ),
-                              child: Align(
-                                alignment: AlignmentDirectional(-1.00, -1.00),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Flexible(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 10.0, 5.0, 0.0),
-                                          child: SelectionArea(
-                                              child: Text(
-                                            FFAppState()
-                                                .pageLocationInfo
-                                                .description,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
+                              alignment: AlignmentDirectional(-1.00, -1.00),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 5.0, 5.0, 5.0),
+                                      child: SelectionArea(
+                                          child: Text(
+                                        FFAppState()
+                                            .pageLocationInfo
+                                            .description,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              fontSize: 16.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyMediumFamily,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 16.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          )),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                                          .bodyMediumFamily),
+                                            ),
+                                      )),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
