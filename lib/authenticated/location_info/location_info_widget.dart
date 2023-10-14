@@ -607,7 +607,6 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                       0.0, 10.0, 0.0, 5.0),
                                   child: TextFormField(
                                     controller: _model.nameFieldController,
-                                    autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'ชื่อสถานที่',
@@ -687,7 +686,6 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                   child: TextFormField(
                                     controller:
                                         _model.descriptionFieldController,
-                                    autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'รายละเอียด',

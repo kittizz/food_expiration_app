@@ -65,9 +65,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (animationsMap['iconOnActionTriggerAnimation'] != null) {
-        await animationsMap['iconOnActionTriggerAnimation']!.controller
-          ..reset()
-          ..repeat();
+        await animationsMap['iconOnActionTriggerAnimation']!
+            .controller
+            .forward(from: 0.0);
       }
       _model.outputFetchUser = await action_blocks.fetchUser(context);
       if (_model.outputFetchUser!) {

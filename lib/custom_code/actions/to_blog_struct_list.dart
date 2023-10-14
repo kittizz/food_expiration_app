@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 
 Future<List<BlogStruct>> toBlogStructList(dynamic jsonArray) async {
   List<BlogStruct> listOfStruct = [];
-  if (jsonArray == null) {
+  if (jsonArray.length == 0) {
     return listOfStruct;
   }
   for (var item in jsonArray) {
