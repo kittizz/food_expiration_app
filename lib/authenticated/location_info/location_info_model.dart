@@ -35,9 +35,40 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
   // State field(s) for NameField widget.
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
+  String? _nameFieldControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    if (val.length < 1) {
+      return 'Requires at least 1 characters.';
+    }
+    if (val.length > 64) {
+      return 'Maximum 64 characters allowed, currently ${val.length}.';
+    }
+
+    return null;
+  }
+
   // State field(s) for DescriptionField widget.
   TextEditingController? descriptionFieldController;
   String? Function(BuildContext, String?)? descriptionFieldControllerValidator;
+  String? _descriptionFieldControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    if (val.length < 1) {
+      return 'Requires at least 1 characters.';
+    }
+    if (val.length > 255) {
+      return 'Maximum 255 characters allowed, currently ${val.length}.';
+    }
+
+    return null;
+  }
+
   // Stores action output result for [Backend Call - API (createLocation)] action in Button widget.
   ApiCallResponse? apiCreateLocation;
   // Stores action output result for [Backend Call - API (updateLocation)] action in Button widget.
@@ -47,7 +78,10 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    nameFieldControllerValidator = _nameFieldControllerValidator;
+    descriptionFieldControllerValidator = _descriptionFieldControllerValidator;
+  }
 
   void dispose() {
     unfocusNode.dispose();

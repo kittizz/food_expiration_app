@@ -36,14 +36,17 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   TextEditingController? forewarnFieldController1;
   String? Function(BuildContext, String?)? forewarnFieldController1Validator;
   // State field(s) for AmountField widget.
-  TextEditingController? amountFieldController1;
-  String? Function(BuildContext, String?)? amountFieldController1Validator;
+  TextEditingController? amountFieldController;
+  String? Function(BuildContext, String?)? amountFieldControllerValidator;
   // State field(s) for forewarnField widget.
   TextEditingController? forewarnFieldController2;
   String? Function(BuildContext, String?)? forewarnFieldController2Validator;
-  // State field(s) for AmountField widget.
-  TextEditingController? amountFieldController2;
-  String? Function(BuildContext, String?)? amountFieldController2Validator;
+  // State field(s) for DropDown widget.
+  String? dropDownValue1;
+  FormFieldController<String>? dropDownValueController1;
+  // State field(s) for DropDown widget.
+  String? dropDownValue2;
+  FormFieldController<String>? dropDownValueController2;
   // State field(s) for LocationOption widget.
   String? locationOptionValue1;
   FormFieldController<String>? locationOptionValueController1;
@@ -61,9 +64,8 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
     nameFieldController?.dispose();
     descriptionFieldController?.dispose();
     forewarnFieldController1?.dispose();
-    amountFieldController1?.dispose();
+    amountFieldController?.dispose();
     forewarnFieldController2?.dispose();
-    amountFieldController2?.dispose();
   }
 
   /// Action blocks are added here.

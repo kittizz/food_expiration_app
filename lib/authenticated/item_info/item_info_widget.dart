@@ -50,11 +50,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
     _model.nameFieldController ??= TextEditingController();
     _model.descriptionFieldController ??= TextEditingController();
     _model.forewarnFieldController1 ??= TextEditingController();
-    _model.amountFieldController1 ??= TextEditingController();
+    _model.amountFieldController ??= TextEditingController();
     _model.forewarnFieldController2 ??= TextEditingController();
-    _model.amountFieldController2 ??= TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          _model.amountFieldController1?.text = '1';
+          _model.amountFieldController?.text = '1';
           _model.forewarnFieldController2?.text = '0';
         }));
   }
@@ -632,7 +631,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             0.0, 0.0, 0.0, 5.0),
                                         child: TextFormField(
                                           controller:
-                                              _model.amountFieldController1,
+                                              _model.amountFieldController,
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText: 'จำนวน ',
@@ -716,7 +715,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                               ),
                                           keyboardType: TextInputType.number,
                                           validator: _model
-                                              .amountFieldController1Validator
+                                              .amountFieldControllerValidator
                                               .asValidator(context),
                                           inputFormatters: [
                                             FilteringTextInputFormatter.allow(
@@ -830,99 +829,70 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 5.0),
-                                        child: TextFormField(
-                                          controller:
-                                              _model.amountFieldController2,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: 'ขนาด',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLarge,
-                                            enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                                width: 2.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .red400,
-                                                width: 2.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            errorBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .error,
-                                                width: 2.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            focusedErrorBorder:
-                                                UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .error,
-                                                width: 2.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            filled: true,
-                                            fillColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 16.0, 16.0, 8.0),
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLargeFamily,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyLargeFamily),
-                                                lineHeight: 1.0,
-                                              ),
-                                          validator: _model
-                                              .amountFieldController2Validator
-                                              .asValidator(context),
-                                        ),
+                                    FlutterFlowDropDown<String>(
+                                      controller:
+                                          _model.dropDownValueController1 ??=
+                                              FormFieldController<String>(null),
+                                      options: ['กรัม', 'กิโลกรัม'],
+                                      onChanged: (val) => setState(
+                                          () => _model.dropDownValue1 = val),
+                                      width: 100.0,
+                                      height: 50.0,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                      hintText: 'หน่วย',
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
                                       ),
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      elevation: 2.0,
+                                      borderColor: Colors.transparent,
+                                      borderWidth: 2.0,
+                                      borderRadius: 8.0,
+                                      margin: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 4.0, 16.0, 4.0),
+                                      hidesUnderline: true,
+                                      isSearchable: false,
+                                      isMultiSelect: false,
+                                    ),
+                                    FlutterFlowDropDown<String>(
+                                      controller:
+                                          _model.dropDownValueController2 ??=
+                                              FormFieldController<String>(null),
+                                      options: [
+                                        'เล็ก',
+                                        'กลาง',
+                                        'ใหญ่',
+                                        'พิเศษ'
+                                      ],
+                                      onChanged: (val) => setState(
+                                          () => _model.dropDownValue2 = val),
+                                      width: 100.0,
+                                      height: 50.0,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                      hintText: 'ขนาด',
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      elevation: 2.0,
+                                      borderColor: Colors.transparent,
+                                      borderWidth: 2.0,
+                                      borderRadius: 8.0,
+                                      margin: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 4.0, 16.0, 4.0),
+                                      hidesUnderline: true,
+                                      isSearchable: false,
+                                      isMultiSelect: false,
                                     ),
                                   ].divide(SizedBox(width: 15.0)),
                                 ),
