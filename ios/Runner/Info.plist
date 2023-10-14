@@ -29,7 +29,7 @@
             <key>CFBundleURLSchemes</key>
             <array>
                 <string>com.googleusercontent.apps.584012263661-ij8l9mfjqdfftbj7nkcmlmvdrjs3rgks</string>
-                <string>fb152903007789136</string>
+                <string>fb2055952164742272</string>
             </array>
         </dict>
 
@@ -48,9 +48,9 @@
     <true/>
 
     <key>FacebookAppID</key>
-    <string>152903007789136</string>
+    <string>2055952164742272</string>
     <key>FacebookDisplayName</key>
-    <string>food-expiration</string>
+    <string>Food Expiration</string>
 
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>

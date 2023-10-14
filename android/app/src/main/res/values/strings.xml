@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
     <string name="app_name">Food Expiration</string>
-    <string name="facebook_app_id">152903007789136</string>
-               <string name="fb_login_protocol_scheme">fb152903007789136</string>
+    <string name="facebook_app_id">2055952164742272</string>
+               <string name="fb_login_protocol_scheme">fb2055952164742272</string>
 </resources>

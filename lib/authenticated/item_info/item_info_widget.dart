@@ -316,6 +316,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         ),
                                       ),
                                     ),
+                                    Text(
+                                      'หรือ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () {
@@ -350,11 +355,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                               BorderRadius.circular(8.0),
                                         ),
                                       ),
-                                    ),
-                                    Text(
-                                      'หรือ',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
                                     ),
                                   ].divide(SizedBox(width: 10.0)),
                                 ),
@@ -442,7 +442,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   child: TextFormField(
                                     controller:
                                         _model.descriptionFieldController1,
-                                    autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'รายละเอียด',
@@ -579,7 +578,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   child: TextFormField(
                                     controller:
                                         _model.descriptionFieldController2,
-                                    autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'เตือนล่วงหน้า (วัน)',
@@ -661,62 +659,69 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            final _datePickedDate =
-                                                await showDatePicker(
-                                              context: context,
-                                              initialDate: getCurrentTimestamp,
-                                              firstDate: getCurrentTimestamp,
-                                              lastDate: DateTime(2050),
-                                            );
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 0.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              final _datePickedDate =
+                                                  await showDatePicker(
+                                                context: context,
+                                                initialDate:
+                                                    getCurrentTimestamp,
+                                                firstDate: getCurrentTimestamp,
+                                                lastDate: DateTime(2050),
+                                              );
 
-                                            if (_datePickedDate != null) {
-                                              safeSetState(() {
-                                                _model.datePicked = DateTime(
-                                                  _datePickedDate.year,
-                                                  _datePickedDate.month,
-                                                  _datePickedDate.day,
-                                                );
-                                              });
-                                            }
-                                          },
-                                          text: widget.itemId == ''
-                                              ? ' วันหมดอายุ'
-                                              : '${dateTimeFormat(
-                                                  'yMMMd',
-                                                  _model.expireDate,
-                                                  locale: FFLocalizations.of(
-                                                          context)
-                                                      .languageCode,
-                                                )}',
-                                          icon: Icon(
-                                            Icons.date_range_outlined,
-                                            color: FlutterFlowTheme.of(context)
-                                                .blue600,
-                                            size: 15.0,
-                                          ),
-                                          options: FFButtonOptions(
-                                            height: 40.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    24.0, 0.0, 24.0, 0.0),
-                                            iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: FlutterFlowTheme.of(context)
-                                                .info,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium,
-                                            borderSide: BorderSide(
+                                              if (_datePickedDate != null) {
+                                                safeSetState(() {
+                                                  _model.datePicked = DateTime(
+                                                    _datePickedDate.year,
+                                                    _datePickedDate.month,
+                                                    _datePickedDate.day,
+                                                  );
+                                                });
+                                              }
+                                            },
+                                            text: widget.itemId == ''
+                                                ? ' วันหมดอายุ'
+                                                : '${dateTimeFormat(
+                                                    'yMMMd',
+                                                    _model.expireDate,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  )}',
+                                            icon: Icon(
+                                              Icons.date_range_outlined,
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              width: 1.0,
+                                                      .blue600,
+                                              size: 15.0,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
+                                            options: FFButtonOptions(
+                                              height: 40.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      24.0, 0.0, 24.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
                                           ),
                                         ),
                                       ),
