@@ -826,9 +826,9 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                     .imageId,
                                                 name: _model
                                                     .nameFieldController.text,
-                                                description: int.tryParse(_model
+                                                description: _model
                                                     .descriptionFieldController
-                                                    .text),
+                                                    .text,
                                               );
                                               _shouldSetState = true;
                                               if (!(_model.apiUpdatelocation

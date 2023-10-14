@@ -480,11 +480,16 @@ class UpdateLocationCall {
     int? locationId,
     int? imageId,
     String? name = '',
-    int? description,
+    String? description = '',
     String? deviceid = '',
   }) {
     final ffApiRequestBody = '''
-''';
+{
+  "name": "${name}",
+  "description": "${description}",
+  "imageId": ${imageId},
+  "locationId": ${locationId}
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'updateLocation',
       apiUrl: '${FoodexpirationGroup.baseUrl}/location',
