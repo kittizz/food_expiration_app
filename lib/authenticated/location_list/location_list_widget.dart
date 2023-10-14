@@ -1,5 +1,6 @@
 import '/backend/schema/structs/index.dart';
 import '/component/location/location_widget.dart';
+import '/components/no_location_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -247,6 +248,9 @@ class _LocationListWidgetState extends State<LocationListWidget>
                           child: Builder(
                             builder: (context) {
                               final list = FFAppState().locations.toList();
+                              if (list.isEmpty) {
+                                return NoLocationWidget();
+                              }
                               return RefreshIndicator(
                                 color: FlutterFlowTheme.of(context).red200,
                                 onRefresh: () async {
@@ -281,29 +285,6 @@ class _LocationListWidgetState extends State<LocationListWidget>
                               );
                             },
                           ),
-                        ),
-                      ),
-                    ),
-                  if (valueOrDefault<bool>(
-                    FFAppState().locations.length == 0,
-                    true,
-                  ))
-                    Expanded(
-                      child: Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
-                        child: Text(
-                          'ไม่มีสถานที่จัดเก็บ',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyLarge
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyLargeFamily,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily),
-                              ),
                         ),
                       ),
                     ),
