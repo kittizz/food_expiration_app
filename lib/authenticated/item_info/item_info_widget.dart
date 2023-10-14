@@ -4,8 +4,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -37,6 +39,12 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ItemInfoModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await action_blocks.fetchLocations(context);
+      setState(() {});
+    });
 
     _model.nameFieldController ??= TextEditingController();
     _model.descriptionFieldController1 ??= TextEditingController();
@@ -343,6 +351,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         ),
                                       ),
                                     ),
+                                    Text(
+                                      'หรือ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
                                   ].divide(SizedBox(width: 10.0)),
                                 ),
                                 Padding(
@@ -350,7 +363,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       0.0, 10.0, 0.0, 5.0),
                                   child: TextFormField(
                                     controller: _model.nameFieldController,
-                                    autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'ชื่อรายการ',
@@ -521,7 +533,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           controller: _model
                                                   .locationOptionValueController ??=
                                               FormFieldController<String>(null),
-                                          options: ['Option 1'],
+                                          options: FFAppState()
+                                              .locations
+                                              .map((e) => e.name)
+                                              .toList(),
                                           onChanged: (val) => setState(() =>
                                               _model.locationOptionValue = val),
                                           width: double.infinity,

@@ -882,7 +882,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  'เพิ่มสถานที่จัดเก็บสำเร็จ',
+                                                  'ดำเนินการสำเร็จ',
                                                   style: TextStyle(
                                                     color: FlutterFlowTheme.of(
                                                             context)
