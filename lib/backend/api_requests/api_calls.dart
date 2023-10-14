@@ -32,6 +32,7 @@ class FoodexpirationGroup {
       ThumbnailCategoryByIdCall();
   static CreateLocationCall createLocationCall = CreateLocationCall();
   static GetLocationByIdCall getLocationByIdCall = GetLocationByIdCall();
+  static UpdateLocationCall updateLocationCall = UpdateLocationCall();
 }
 
 class RegisterDeviceCall {
@@ -442,6 +443,11 @@ class CreateLocationCall {
       cache: false,
     );
   }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
 }
 
 class GetLocationByIdCall {
@@ -467,6 +473,39 @@ class GetLocationByIdCall {
       cache: false,
     );
   }
+}
+
+class UpdateLocationCall {
+  Future<ApiCallResponse> call({
+    int? locationId,
+    int? imageId,
+    String? name = '',
+    int? description,
+    String? deviceid = '',
+  }) {
+    final ffApiRequestBody = '''
+''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'updateLocation',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/location',
+      callType: ApiCallType.PATCH,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
 }
 
 /// End foodexpiration Group Code
