@@ -105,7 +105,12 @@ class _ItemListWidgetState extends State<ItemListWidget> {
             },
           ),
           title: Text(
-            widget.title!,
+            valueOrDefault<String>(
+              widget.isLocation
+                  ? FFAppState().pageLocationInfo.name
+                  : widget.title,
+              'null',
+            ),
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -155,6 +160,13 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                     height: 135.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).grey50,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 2.0,
+                          color: Color(0x33000000),
+                          offset: Offset(0.0, 2.0),
+                        )
+                      ],
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Row(
@@ -249,17 +261,45 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                             ),
                           ),
                         ),
-                        Flexible(
+                        Expanded(
                           child: Align(
-                            alignment: AlignmentDirectional(-1.00, -1.00),
+                            alignment: AlignmentDirectional(0.00, 0.00),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  5.0, 5.0, 5.0, 0.0),
-                              child: SelectionArea(
-                                  child: Text(
-                                FFAppState().pageLocationInfo.description,
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              )),
+                                  5.0, 5.0, 5.0, 5.0),
+                              child: Container(
+                                width: double.infinity,
+                                height: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).grey50,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(
+                                    color: Color(0x34474747),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 10.0, 5.0, 0.0),
+                                  child: SelectionArea(
+                                      child: Text(
+                                    FFAppState().pageLocationInfo.description,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 16.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  )),
+                                ),
+                              ),
                             ),
                           ),
                         ),
