@@ -29,14 +29,26 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
   // State field(s) for DescriptionField widget.
-  TextEditingController? descriptionFieldController1;
-  String? Function(BuildContext, String?)? descriptionFieldController1Validator;
+  TextEditingController? descriptionFieldController;
+  String? Function(BuildContext, String?)? descriptionFieldControllerValidator;
+  // State field(s) for forewarnField widget.
+  TextEditingController? forewarnFieldController1;
+  String? Function(BuildContext, String?)? forewarnFieldController1Validator;
+  // State field(s) for AmountField widget.
+  TextEditingController? amountFieldController1;
+  String? Function(BuildContext, String?)? amountFieldController1Validator;
+  // State field(s) for forewarnField widget.
+  TextEditingController? forewarnFieldController2;
+  String? Function(BuildContext, String?)? forewarnFieldController2Validator;
+  // State field(s) for AmountField widget.
+  TextEditingController? amountFieldController2;
+  String? Function(BuildContext, String?)? amountFieldController2Validator;
   // State field(s) for LocationOption widget.
-  String? locationOptionValue;
-  FormFieldController<String>? locationOptionValueController;
-  // State field(s) for DescriptionField widget.
-  TextEditingController? descriptionFieldController2;
-  String? Function(BuildContext, String?)? descriptionFieldController2Validator;
+  String? locationOptionValue1;
+  FormFieldController<String>? locationOptionValueController1;
+  // State field(s) for LocationOption widget.
+  String? locationOptionValue2;
+  FormFieldController<String>? locationOptionValueController2;
   DateTime? datePicked;
 
   /// Initialization and disposal methods.
@@ -46,8 +58,11 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   void dispose() {
     unfocusNode.dispose();
     nameFieldController?.dispose();
-    descriptionFieldController1?.dispose();
-    descriptionFieldController2?.dispose();
+    descriptionFieldController?.dispose();
+    forewarnFieldController1?.dispose();
+    amountFieldController1?.dispose();
+    forewarnFieldController2?.dispose();
+    amountFieldController2?.dispose();
   }
 
   /// Action blocks are added here.

@@ -609,7 +609,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     controller: _model.nameFieldController,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'ชื่อสถานที่',
+                                      labelText: 'ชื่อสถานที่จัดเก็บ',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelLarge,
                                       enabledBorder: UnderlineInputBorder(
@@ -688,7 +688,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                         _model.descriptionFieldController,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'รายละเอียด',
+                                      labelText: 'บันทึกช่วยจำ',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelLarge,
                                       enabledBorder: UnderlineInputBorder(
