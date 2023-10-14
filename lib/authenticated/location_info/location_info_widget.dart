@@ -91,20 +91,112 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                 ),
           ),
           actions: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                if (FFAppState().pageLocationInfo.isAdd == false)
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                    child: Icon(
-                      Icons.delete,
-                      color: FlutterFlowTheme.of(context).error,
-                      size: 24.0,
+            InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                var _shouldSetState = false;
+                var confirmDialogResponse = await showDialog<bool>(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('ลบสถานที่จัดเก็บ'),
+                          content: Text(
+                              'คุณกำลังจะลบสถานที่จัดเก็บ \"${FFAppState().pageLocationInfo.name}\" และรายการทั้งหมดจะถูกลบไปด้วย'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext, false),
+                              child: Text('ยกเลิก'),
+                            ),
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext, true),
+                              child: Text('ยืนยัน'),
+                            ),
+                          ],
+                        );
+                      },
+                    ) ??
+                    false;
+                if (confirmDialogResponse) {
+                  _model.apiLocationDelete =
+                      await FoodexpirationGroup.deleteLocationCall.call(
+                    deviceid: FFAppState().deviceId,
+                    id: FFAppState().pageLocationInfo.locationId,
+                  );
+                  _shouldSetState = true;
+                  if ((_model.apiLocationDelete?.succeeded ?? true)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'ลบสถานที่จัดเก็บเรียบร้อย',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyLarge
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyLargeFamily,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyLargeFamily),
+                              ),
+                        ),
+                        duration: Duration(milliseconds: 4000),
+                        backgroundColor: FlutterFlowTheme.of(context).secondary,
+                      ),
+                    );
+
+                    context.goNamed('Home');
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          FoodexpirationGroup.deleteLocationCall
+                              .message(
+                                (_model.apiLocationDelete?.jsonBody ?? ''),
+                              )
+                              .toString(),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyLarge
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyLargeFamily,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyLargeFamily),
+                              ),
+                        ),
+                        duration: Duration(milliseconds: 1000),
+                        backgroundColor: FlutterFlowTheme.of(context).error,
+                      ),
+                    );
+                  }
+                } else {
+                  if (_shouldSetState) setState(() {});
+                  return;
+                }
+
+                if (_shouldSetState) setState(() {});
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  if (FFAppState().pageLocationInfo.isAdd == false)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                      child: Icon(
+                        Icons.delete,
+                        color: FlutterFlowTheme.of(context).error,
+                        size: 24.0,
+                      ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
           ],
           centerTitle: false,

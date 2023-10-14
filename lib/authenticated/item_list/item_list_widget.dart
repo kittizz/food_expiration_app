@@ -127,7 +127,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                     buttonSize: 40.0,
                     icon: Icon(
                       Icons.edit,
-                      color: FlutterFlowTheme.of(context).grey400,
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       size: 24.0,
                     ),
                     onPressed: () async {
@@ -250,14 +250,17 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                           ),
                         ),
                         Flexible(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                5.0, 5.0, 5.0, 0.0),
-                            child: SelectionArea(
-                                child: Text(
-                              FFAppState().pageLocationInfo.description,
-                              style: FlutterFlowTheme.of(context).bodyMedium,
-                            )),
+                          child: Align(
+                            alignment: AlignmentDirectional(-1.00, -1.00),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 5.0, 5.0, 0.0),
+                              child: SelectionArea(
+                                  child: Text(
+                                FFAppState().pageLocationInfo.description,
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              )),
+                            ),
                           ),
                         ),
                       ],

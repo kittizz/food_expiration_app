@@ -247,6 +247,11 @@ class DeleteLocationCall {
       cache: false,
     );
   }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
 }
 
 class UploadImageCall {

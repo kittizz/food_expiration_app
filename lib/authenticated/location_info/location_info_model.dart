@@ -40,6 +40,8 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
   String? Function(BuildContext, String?)? descriptionFieldControllerValidator;
   // Stores action output result for [Backend Call - API (createLocation)] action in Button widget.
   ApiCallResponse? apiCreateLocation;
+  // Stores action output result for [Backend Call - API (deleteLocation)] action in Row widget.
+  ApiCallResponse? apiLocationDelete;
 
   /// Initialization and disposal methods.
 
