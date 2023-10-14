@@ -683,6 +683,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   );
                                                 });
                                               }
+                                              setState(() {
+                                                _model.expireDate =
+                                                    _model.datePicked;
+                                              });
                                             },
                                             text: _model.expireDate == null
                                                 ? ' วันหมดอายุ'
