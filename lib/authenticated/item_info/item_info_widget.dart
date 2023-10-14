@@ -18,13 +18,13 @@ export 'item_info_model.dart';
 class ItemInfoWidget extends StatefulWidget {
   const ItemInfoWidget({
     Key? key,
-    String? title,
-    this.itemId,
-  })  : this.title = title ?? '',
+    String? name,
+    required this.isAdd,
+  })  : this.name = name ?? '',
         super(key: key);
 
-  final String title;
-  final String? itemId;
+  final String name;
+  final bool? isAdd;
 
   @override
   _ItemInfoWidgetState createState() => _ItemInfoWidgetState();
@@ -87,7 +87,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
             },
           ),
           title: Text(
-            widget.title,
+            widget.name,
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -684,7 +684,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 });
                                               }
                                             },
-                                            text: widget.itemId == ''
+                                            text: _model.expireDate == null
                                                 ? ' วันหมดอายุ'
                                                 : '${dateTimeFormat(
                                                     'yMMMd',

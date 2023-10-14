@@ -151,8 +151,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/itemInfo',
           requireAuth: true,
           builder: (context, params) => ItemInfoWidget(
-            title: params.getParam('title', ParamType.String),
-            itemId: params.getParam('itemId', ParamType.String),
+            name: params.getParam('name', ParamType.String),
+            isAdd: params.getParam('isAdd', ParamType.bool),
           ),
         ),
         FFRoute(

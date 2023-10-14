@@ -19,6 +19,8 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
 
   DateTime? expireDate;
 
+  String hash = '';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

@@ -99,9 +99,13 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
         context.pushNamed(
           'ItemInfo',
           queryParameters: {
-            'title': serializeParam(
+            'name': serializeParam(
               widget.name,
               ParamType.String,
+            ),
+            'isAdd': serializeParam(
+              false,
+              ParamType.bool,
             ),
           }.withoutNulls,
           extra: <String, dynamic>{

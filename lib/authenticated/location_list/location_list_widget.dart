@@ -87,9 +87,13 @@ class _LocationListWidgetState extends State<LocationListWidget>
             context.pushNamed(
               'ItemInfo',
               queryParameters: {
-                'title': serializeParam(
+                'name': serializeParam(
                   'เพิ่มรายการ',
                   ParamType.String,
+                ),
+                'isAdd': serializeParam(
+                  true,
+                  ParamType.bool,
                 ),
               }.withoutNulls,
               extra: <String, dynamic>{

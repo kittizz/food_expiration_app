@@ -133,8 +133,8 @@ final parametersBuilderMap =
       ),
   'ItemInfo': (data) async => ParameterData(
         allParams: {
-          'title': getParameter<String>(data, 'title'),
-          'itemId': getParameter<String>(data, 'itemId'),
+          'name': getParameter<String>(data, 'name'),
+          'isAdd': getParameter<bool>(data, 'isAdd'),
         },
       ),
   'LocationInfo': ParameterData.none(),

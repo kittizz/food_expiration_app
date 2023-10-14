@@ -130,7 +130,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             context.pushNamed(
               'ItemInfo',
               queryParameters: {
-                'title': serializeParam(
+                'isAdd': serializeParam(
+                  true,
+                  ParamType.bool,
+                ),
+                'name': serializeParam(
                   'เพิ่มรายการ',
                   ParamType.String,
                 ),
