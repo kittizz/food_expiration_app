@@ -169,6 +169,7 @@ class _LocationWidgetState extends State<LocationWidget>
                             ),
                             Text(
                               widget.description!,
+                              maxLines: 2,
                               style: FlutterFlowTheme.of(context).bodyMedium,
                             ),
                           ],
