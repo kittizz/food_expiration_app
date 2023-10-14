@@ -76,7 +76,9 @@ Future<bool?> fetchUser(BuildContext context) async {
     userStruct = await actions.toUserStruct(
       (apiResultgetUser?.jsonBody ?? ''),
     );
-    FFAppState().user = userStruct!;
+    FFAppState().update(() {
+      FFAppState().user = userStruct!;
+    });
     return true;
   } else {
     return false;
