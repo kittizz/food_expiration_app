@@ -1004,7 +1004,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           builder: (context) {
                                             final list = FFAppState()
                                                 .addDate
-                                                .where((e) => e.day < 30)
+                                                .where((e) => e.day > 30)
                                                 .toList();
                                             return Row(
                                               mainAxisSize: MainAxisSize.max,
