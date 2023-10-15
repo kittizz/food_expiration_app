@@ -336,9 +336,15 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 ),
                                                 if (valueOrDefault<bool>(
                                                   FFAppState()
-                                                          .thumbnail
-                                                          .image !=
-                                                      null,
+                                                              .thumbnail
+                                                              .image
+                                                              .path !=
+                                                          null &&
+                                                      FFAppState()
+                                                              .thumbnail
+                                                              .image
+                                                              .path !=
+                                                          '',
                                                   false,
                                                 ))
                                                   Padding(
@@ -996,7 +1002,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Expanded(
+                                    Flexible(
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 5.0),
@@ -1004,7 +1010,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           builder: (context) {
                                             final list = FFAppState()
                                                 .addDate
-                                                .where((e) => e.day > 7)
+                                                .where((e) => e.day < 30)
                                                 .toList();
                                             return Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -1016,7 +1022,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 final listItem =
                                                     list[listIndex];
                                                 return Text(
-                                                  '+ ${listItem.day.toString()} ${listItem.short}.',
+                                                  '+ ${listItem.short}.',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
