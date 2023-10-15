@@ -964,7 +964,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     builder: (context) {
                                       final list = FFAppState()
                                           .addDate
-                                          .where((e) => e.day < 30)
+                                          .where((e) => e.day <= 14)
                                           .toList();
                                       return Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1068,7 +1068,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 5.0, 0.0),
                                       child: Text(
-                                        'หรือแสกน',
+                                        'หรือ สแกน',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
