@@ -128,11 +128,11 @@ class FFAppState extends ChangeNotifier {
 
   List<AddDateStruct> _addDate = [
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"ว\",\"day\":\"1\"}')),
+        jsonDecode('{\"short\":\"1 ว\",\"day\":\"1\"}')),
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"ว\",\"day\":\"3\"}')),
+        jsonDecode('{\"short\":\"3 ว\",\"day\":\"3\"}')),
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"ว\",\"day\":\"5\"}')),
+        jsonDecode('{\"short\":\"5 ว\",\"day\":\"5\"}')),
     AddDateStruct.fromSerializableMap(
         jsonDecode('{\"short\":\"ส.\",\"day\":\"7\"}')),
     AddDateStruct.fromSerializableMap(

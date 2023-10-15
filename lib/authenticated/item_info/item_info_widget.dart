@@ -963,7 +963,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             (listIndex) {
                                           final listItem = list[listIndex];
                                           return Text(
-                                            '+ ${listItem.day.toString()} ${listItem.short}.',
+                                            '+ ${listItem.short}.',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -1004,7 +1004,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           builder: (context) {
                                             final list = FFAppState()
                                                 .addDate
-                                                .where((e) => e.day > 30)
+                                                .where((e) => e.day > 7)
                                                 .toList();
                                             return Row(
                                               mainAxisSize: MainAxisSize.max,
