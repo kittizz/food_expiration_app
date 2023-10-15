@@ -53,6 +53,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
     _model.amountFieldController ??= TextEditingController();
     _model.forewarnFieldController2 ??= TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          _model.forewarnFieldController1?.text = '1';
           _model.amountFieldController?.text = '1';
           _model.forewarnFieldController2?.text = '0';
         }));
@@ -453,7 +454,17 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     decoration: InputDecoration(
                                       labelText: 'บันทึกช่วยจำ',
                                       labelStyle: FlutterFlowTheme.of(context)
-                                          .labelLarge,
+                                          .labelLarge
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelLargeFamily,
+                                            fontSize: 14.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLargeFamily),
+                                          ),
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
@@ -511,6 +522,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
                                                   .bodyLargeFamily,
+                                          fontSize: 14.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
@@ -525,11 +537,13 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 5.0),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 5.0),
+                                      child: Container(
+                                        width: 110.0,
                                         child: TextFormField(
                                           controller:
                                               _model.forewarnFieldController1,
@@ -625,7 +639,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         ),
                                       ),
                                     ),
-                                    Expanded(
+                                    Flexible(
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 5.0),
@@ -723,6 +737,46 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           ],
                                         ),
                                       ),
+                                    ),
+                                    FlutterFlowDropDown<String>(
+                                      controller:
+                                          _model.dropDownValueController1 ??=
+                                              FormFieldController<String>(
+                                        _model.dropDownValue1 ??= 'ชิ้น',
+                                      ),
+                                      options: [
+                                        'ชิ้น',
+                                        'โหล',
+                                        'ขวด',
+                                        'กล่อง',
+                                        'แท่ง',
+                                        'ห่อ',
+                                        'ถุง'
+                                      ],
+                                      onChanged: (val) => setState(
+                                          () => _model.dropDownValue1 = val),
+                                      width: 100.0,
+                                      height: 50.0,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                      hintText: 'หน่วย',
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      elevation: 2.0,
+                                      borderColor: Colors.transparent,
+                                      borderWidth: 2.0,
+                                      borderRadius: 8.0,
+                                      margin: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 4.0, 16.0, 4.0),
+                                      hidesUnderline: true,
+                                      isSearchable: false,
+                                      isMultiSelect: false,
                                     ),
                                   ].divide(SizedBox(width: 15.0)),
                                 ),
@@ -831,11 +885,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     ),
                                     FlutterFlowDropDown<String>(
                                       controller:
-                                          _model.dropDownValueController1 ??=
+                                          _model.dropDownValueController2 ??=
                                               FormFieldController<String>(null),
                                       options: ['กรัม', 'กิโลกรัม'],
                                       onChanged: (val) => setState(
-                                          () => _model.dropDownValue1 = val),
+                                          () => _model.dropDownValue2 = val),
                                       width: 100.0,
                                       height: 50.0,
                                       textStyle: FlutterFlowTheme.of(context)
@@ -861,7 +915,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     ),
                                     FlutterFlowDropDown<String>(
                                       controller:
-                                          _model.dropDownValueController2 ??=
+                                          _model.dropDownValueController3 ??=
                                               FormFieldController<String>(null),
                                       options: [
                                         'เล็ก',
@@ -870,7 +924,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         'พิเศษ'
                                       ],
                                       onChanged: (val) => setState(
-                                          () => _model.dropDownValue2 = val),
+                                          () => _model.dropDownValue3 = val),
                                       width: 100.0,
                                       height: 50.0,
                                       textStyle: FlutterFlowTheme.of(context)
