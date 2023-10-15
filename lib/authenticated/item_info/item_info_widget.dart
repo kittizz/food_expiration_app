@@ -143,7 +143,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                 Flexible(
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
+                        EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
                     child: Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: BoxDecoration(
@@ -166,7 +166,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         autovalidateMode: AutovalidateMode.always,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 24.0, 24.0, 24.0),
+                              15.0, 15.0, 15.0, 15.0),
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -683,7 +683,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         borderWidth: 2.0,
                                         borderRadius: 8.0,
                                         margin: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 4.0, 16.0, 4.0),
+                                            0.0, 0.0, 0.0, 0.0),
                                         hidesUnderline: true,
                                         isSearchable: false,
                                         isMultiSelect: false,
@@ -693,109 +693,98 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 5.0),
-                                        child: Container(
-                                          width: 55.0,
-                                          child: TextFormField(
-                                            controller:
-                                                _model.amountFieldController,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText: 'จำนวน ',
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelLarge,
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .alternate,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
+                                        child: TextFormField(
+                                          controller:
+                                              _model.amountFieldController,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            labelText: 'จำนวน ',
+                                            labelStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelLarge,
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 2.0,
                                               ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .red400,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
                                               ),
-                                              errorBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedErrorBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              filled: true,
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              contentPadding:
-                                                  EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 16.0, 16.0, 8.0),
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyLargeFamily,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLargeFamily),
-                                                  lineHeight: 1.0,
-                                                ),
-                                            keyboardType: TextInputType.number,
-                                            validator: _model
-                                                .amountFieldControllerValidator
-                                                .asValidator(context),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp('[0-9]'))
-                                            ],
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .red400,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                            errorBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                            focusedErrorBorder:
+                                                UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                            filled: true,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                            contentPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 16.0, 16.0, 8.0),
                                           ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLargeFamily,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyLargeFamily),
+                                                lineHeight: 1.0,
+                                              ),
+                                          keyboardType: TextInputType.number,
+                                          validator: _model
+                                              .amountFieldControllerValidator
+                                              .asValidator(context),
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp('[0-9]'))
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -836,7 +825,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         borderWidth: 2.0,
                                         borderRadius: 8.0,
                                         margin: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 4.0, 16.0, 4.0),
+                                            0.0, 0.0, 0.0, 0.0),
                                         hidesUnderline: true,
                                         isSearchable: false,
                                         isMultiSelect: false,
@@ -972,7 +961,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       borderWidth: 2.0,
                                       borderRadius: 8.0,
                                       margin: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 4.0, 16.0, 4.0),
+                                          0.0, 0.0, 0.0, 0.0),
                                       hidesUnderline: true,
                                       isSearchable: false,
                                       isMultiSelect: false,
@@ -1007,7 +996,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       borderWidth: 2.0,
                                       borderRadius: 8.0,
                                       margin: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 4.0, 16.0, 4.0),
+                                          0.0, 0.0, 0.0, 0.0),
                                       hidesUnderline: true,
                                       isSearchable: false,
                                       isMultiSelect: false,
