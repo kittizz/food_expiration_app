@@ -52,36 +52,6 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            context.pushNamed(
-              'ItemInfo',
-              queryParameters: {
-                'name': serializeParam(
-                  'เพิ่มรายการ',
-                  ParamType.String,
-                ),
-                'isAdd': serializeParam(
-                  true,
-                  ParamType.bool,
-                ),
-              }.withoutNulls,
-              extra: <String, dynamic>{
-                kTransitionInfoKey: TransitionInfo(
-                  hasTransition: true,
-                  transitionType: PageTransitionType.bottomToTop,
-                ),
-              },
-            );
-          },
-          backgroundColor: FlutterFlowTheme.of(context).red50,
-          elevation: 5.0,
-          child: Icon(
-            Icons.add_alert,
-            color: FlutterFlowTheme.of(context).red300,
-            size: 25.0,
-          ),
-        ),
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,

@@ -86,12 +86,6 @@ class FFAppState extends ChangeNotifier {
     updateFn(_pageLocationInfo);
   }
 
-  String _thumbnailCategoryMode = '';
-  String get thumbnailCategoryMode => _thumbnailCategoryMode;
-  set thumbnailCategoryMode(String _value) {
-    _thumbnailCategoryMode = _value;
-  }
-
   List<LocationStruct> _locations = [];
   List<LocationStruct> get locations => _locations;
   set locations(List<LocationStruct> _value) {
@@ -119,6 +113,17 @@ class FFAppState extends ChangeNotifier {
 
   void insertAtIndexInLocations(int _index, LocationStruct _value) {
     _locations.insert(_index, _value);
+  }
+
+  ThumbnailStruct _thumbnail =
+      ThumbnailStruct.fromSerializableMap(jsonDecode('{\"image\":\"{}\"}'));
+  ThumbnailStruct get thumbnail => _thumbnail;
+  set thumbnail(ThumbnailStruct _value) {
+    _thumbnail = _value;
+  }
+
+  void updateThumbnailStruct(Function(ThumbnailStruct) updateFn) {
+    updateFn(_thumbnail);
   }
 }
 

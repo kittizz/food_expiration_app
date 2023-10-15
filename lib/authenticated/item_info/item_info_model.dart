@@ -35,21 +35,24 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   // State field(s) for forewarnField widget.
   TextEditingController? forewarnFieldController1;
   String? Function(BuildContext, String?)? forewarnFieldController1Validator;
+  // State field(s) for DropDown widget.
+  String? dropDownValue1;
+  FormFieldController<String>? dropDownValueController1;
   // State field(s) for AmountField widget.
   TextEditingController? amountFieldController;
   String? Function(BuildContext, String?)? amountFieldControllerValidator;
   // State field(s) for DropDown widget.
-  String? dropDownValue1;
-  FormFieldController<String>? dropDownValueController1;
+  String? dropDownValue2;
+  FormFieldController<String>? dropDownValueController2;
   // State field(s) for forewarnField widget.
   TextEditingController? forewarnFieldController2;
   String? Function(BuildContext, String?)? forewarnFieldController2Validator;
   // State field(s) for DropDown widget.
-  String? dropDownValue2;
-  FormFieldController<String>? dropDownValueController2;
-  // State field(s) for DropDown widget.
   String? dropDownValue3;
   FormFieldController<String>? dropDownValueController3;
+  // State field(s) for DropDown widget.
+  String? dropDownValue4;
+  FormFieldController<String>? dropDownValueController4;
   // State field(s) for LocationOption widget.
   String? locationOptionValue1;
   FormFieldController<String>? locationOptionValueController1;
