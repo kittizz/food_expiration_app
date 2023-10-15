@@ -7,7 +7,6 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -938,7 +937,13 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'กดเพื่อสแกน',
+                                            dateTimeFormat(
+                                              'yMMMd',
+                                              getCurrentTimestamp,
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
                                             maxLines: 1,
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium,
@@ -1049,6 +1054,25 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         ),
                                       ),
                                     ),
+                                  ],
+                                ),
+                                Divider(
+                                  thickness: 2.0,
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 5.0, 0.0),
+                                      child: Text(
+                                        'หรือแสกน',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                    ),
                                     FlutterFlowIconButton(
                                       borderColor: FlutterFlowTheme.of(context)
                                           .alternate,
@@ -1061,108 +1085,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         Icons.document_scanner_rounded,
                                         color:
                                             FlutterFlowTheme.of(context).error,
-                                        size: 20.0,
-                                      ),
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                Divider(
-                                  thickness: 2.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 5.0, 0.0, 0.0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            final _datePickedDate =
-                                                await showDatePicker(
-                                              context: context,
-                                              initialDate: getCurrentTimestamp,
-                                              firstDate: getCurrentTimestamp,
-                                              lastDate: DateTime(2050),
-                                            );
-
-                                            if (_datePickedDate != null) {
-                                              safeSetState(() {
-                                                _model.datePicked = DateTime(
-                                                  _datePickedDate.year,
-                                                  _datePickedDate.month,
-                                                  _datePickedDate.day,
-                                                );
-                                              });
-                                            }
-                                            setState(() {
-                                              _model.expireDate =
-                                                  _model.datePicked;
-                                            });
-                                          },
-                                          text: _model.expireDate == null
-                                              ? ' กำหนด วันหมดอายุ'
-                                              : ' วันหมดอายุ ${dateTimeFormat(
-                                                  'yMMMd',
-                                                  _model.expireDate,
-                                                  locale: FFLocalizations.of(
-                                                          context)
-                                                      .languageCode,
-                                                )}',
-                                          icon: Icon(
-                                            Icons.date_range_outlined,
-                                            color: FlutterFlowTheme.of(context)
-                                                .blue600,
-                                            size: 15.0,
-                                          ),
-                                          options: FFButtonOptions(
-                                            height: 40.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    24.0, 0.0, 24.0, 0.0),
-                                            iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: FlutterFlowTheme.of(context)
-                                                .info,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium,
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 0.0, 3.0, 0.0),
-                                      child: Text(
-                                        'หรือ แสกน',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                    ),
-                                    FlutterFlowIconButton(
-                                      borderColor: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      borderRadius: 20.0,
-                                      borderWidth: 1.0,
-                                      buttonSize: 42.0,
-                                      icon: Icon(
-                                        Icons.document_scanner_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .grey700,
                                         size: 20.0,
                                       ),
                                       onPressed: () {

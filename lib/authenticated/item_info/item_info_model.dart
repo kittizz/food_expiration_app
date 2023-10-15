@@ -10,7 +10,6 @@ import '/flutter_flow/upload_data.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'item_info_widget.dart' show ItemInfoWidget;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -52,7 +51,6 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   // State field(s) for LocationOption widget.
   String? locationOptionValue2;
   FormFieldController<String>? locationOptionValueController2;
-  DateTime? datePicked;
 
   /// Initialization and disposal methods.
 
