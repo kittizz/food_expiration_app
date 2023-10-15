@@ -173,6 +173,10 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                                     listItem.name,
                                     ParamType.String,
                                   ),
+                                  'thumbailId': serializeParam(
+                                    widget.thumbnailCategoryId,
+                                    ParamType.int,
+                                  ),
                                 }.withoutNulls,
                               );
                             },

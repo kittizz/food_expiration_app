@@ -17,7 +17,12 @@ import 'thumbnail_category_model.dart';
 export 'thumbnail_category_model.dart';
 
 class ThumbnailCategoryWidget extends StatefulWidget {
-  const ThumbnailCategoryWidget({Key? key}) : super(key: key);
+  const ThumbnailCategoryWidget({
+    Key? key,
+    required this.type,
+  }) : super(key: key);
+
+  final String? type;
 
   @override
   _ThumbnailCategoryWidgetState createState() =>
@@ -124,7 +129,9 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                 Expanded(
                   child: Builder(
                     builder: (context) {
-                      final list = _model.categorys.toList();
+                      final list = _model.categorys
+                          .where((e) => e.type == widget.type)
+                          .toList();
                       return GridView.builder(
                         padding: EdgeInsets.zero,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

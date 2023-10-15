@@ -23,6 +23,7 @@ class ThumbnailViewerWidget extends StatefulWidget {
     required this.catrgoryId,
     required this.imageBlurhash,
     this.name,
+    required this.thumbailId,
   }) : super(key: key);
 
   final String? imagePath;
@@ -30,6 +31,7 @@ class ThumbnailViewerWidget extends StatefulWidget {
   final int? catrgoryId;
   final String? imageBlurhash;
   final String? name;
+  final int? thumbailId;
 
   @override
   _ThumbnailViewerWidgetState createState() => _ThumbnailViewerWidgetState();
@@ -202,6 +204,18 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                                     ..imageId = widget.imageId
                                     ..image = widget.imagePath
                                     ..imageBlurhash = widget.imageBlurhash,
+                                );
+                                FFAppState().updateThumbnailStruct(
+                                  (e) => e
+                                    ..id = widget.thumbailId
+                                    ..name = widget.name
+                                    ..thumbnailCategoryId = widget.catrgoryId
+                                    ..updateImage(
+                                      (e) => e
+                                        ..id = widget.imageId
+                                        ..path = widget.imagePath
+                                        ..blurHash = widget.imageBlurhash,
+                                    ),
                                 );
                               });
                               context.safePop();

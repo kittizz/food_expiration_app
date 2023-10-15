@@ -125,6 +125,50 @@ class FFAppState extends ChangeNotifier {
   void updateThumbnailStruct(Function(ThumbnailStruct) updateFn) {
     updateFn(_thumbnail);
   }
+
+  List<AddDateStruct> _addDate = [
+    AddDateStruct.fromSerializableMap(
+        jsonDecode('{\"short\":\"ว\",\"day\":\"1\"}')),
+    AddDateStruct.fromSerializableMap(
+        jsonDecode('{\"short\":\"ว\",\"day\":\"3\"}')),
+    AddDateStruct.fromSerializableMap(
+        jsonDecode('{\"short\":\"ว\",\"day\":\"5\"}')),
+    AddDateStruct.fromSerializableMap(
+        jsonDecode('{\"short\":\"ส.\",\"day\":\"7\"}')),
+    AddDateStruct.fromSerializableMap(
+        jsonDecode('{\"short\":\"ด\",\"day\":\"30\"}')),
+    AddDateStruct.fromSerializableMap(
+        jsonDecode('{\"short\":\"เดือน\",\"day\":\"90\"}')),
+    AddDateStruct.fromSerializableMap(
+        jsonDecode('{\"short\":\"ป\",\"day\":\"365\"}'))
+  ];
+  List<AddDateStruct> get addDate => _addDate;
+  set addDate(List<AddDateStruct> _value) {
+    _addDate = _value;
+  }
+
+  void addToAddDate(AddDateStruct _value) {
+    _addDate.add(_value);
+  }
+
+  void removeFromAddDate(AddDateStruct _value) {
+    _addDate.remove(_value);
+  }
+
+  void removeAtIndexFromAddDate(int _index) {
+    _addDate.removeAt(_index);
+  }
+
+  void updateAddDateAtIndex(
+    int _index,
+    AddDateStruct Function(AddDateStruct) updateFn,
+  ) {
+    _addDate[_index] = updateFn(_addDate[_index]);
+  }
+
+  void insertAtIndexInAddDate(int _index, AddDateStruct _value) {
+    _addDate.insert(_index, _value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

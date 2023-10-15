@@ -533,7 +533,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                         icon: Icon(
                                           Icons.add_a_photo,
                                           color: FlutterFlowTheme.of(context)
-                                              .red300,
+                                              .error,
                                           size: 15.0,
                                         ),
                                         options: FFButtonOptions(
@@ -567,8 +567,15 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context
-                                              .pushNamed('ThumbnailCategory');
+                                          context.pushNamed(
+                                            'ThumbnailCategory',
+                                            queryParameters: {
+                                              'type': serializeParam(
+                                                'location',
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                          );
                                         },
                                         text: 'เลือกรูปภาพ',
                                         icon: Icon(
@@ -914,7 +921,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
-                                                .red300,
+                                                .error,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall

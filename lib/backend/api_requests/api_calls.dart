@@ -291,6 +291,10 @@ class UploadImageCall {
         response,
         r'''$.blurHash''',
       );
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
 }
 
 class GetBannerCall {

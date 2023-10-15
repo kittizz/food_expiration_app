@@ -149,7 +149,11 @@ final parametersBuilderMap =
           'tabId': getParameter<int>(data, 'tabId'),
         },
       ),
-  'ThumbnailCategory': ParameterData.none(),
+  'ThumbnailCategory': (data) async => ParameterData(
+        allParams: {
+          'type': getParameter<String>(data, 'type'),
+        },
+      ),
   'ThumbnailSelection': (data) async => ParameterData(
         allParams: {
           'thumbnailCategoryId': getParameter<int>(data, 'thumbnailCategoryId'),
@@ -162,6 +166,7 @@ final parametersBuilderMap =
           'catrgoryId': getParameter<int>(data, 'catrgoryId'),
           'imageBlurhash': getParameter<String>(data, 'imageBlurhash'),
           'name': getParameter<String>(data, 'name'),
+          'thumbailId': getParameter<int>(data, 'thumbailId'),
         },
       ),
 };

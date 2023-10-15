@@ -577,7 +577,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       },
                                     ),
                                     Text(
-                                      'สถานที่',
+                                      'สถานที่เก็บ',
                                       style: FlutterFlowTheme.of(context)
                                           .labelLarge
                                           .override(
@@ -614,7 +614,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       },
                                     ),
                                     Text(
-                                      'ถังขยะ',
+                                      'หมดอายุ',
                                       style: FlutterFlowTheme.of(context)
                                           .labelLarge
                                           .override(
