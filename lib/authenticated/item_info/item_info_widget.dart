@@ -1002,7 +1002,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Flexible(
+                                    Expanded(
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 5.0),
@@ -1010,7 +1010,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           builder: (context) {
                                             final list = FFAppState()
                                                 .addDate
-                                                .where((e) => e.day > 7)
+                                                .where((e) => e.day >= 30)
                                                 .toList();
                                             return Row(
                                               mainAxisSize: MainAxisSize.max,
