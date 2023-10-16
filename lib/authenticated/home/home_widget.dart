@@ -126,7 +126,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         floatingActionButton: FloatingActionButton(
-          onPressed: () async {},
+          onPressed: () async {
+            await action_blocks.openAddItem(context);
+            setState(() {});
+          },
           backgroundColor: FlutterFlowTheme.of(context).red50,
           elevation: 5.0,
           child: Icon(
