@@ -171,6 +171,17 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInAddDate(int _index, AddDateStruct _value) {
     _addDate.insert(_index, _value);
   }
+
+  PageItemInfoStruct _pageItemInfo = PageItemInfoStruct.fromSerializableMap(
+      jsonDecode('{\"location\":\"{\\\"image\\\":\\\"{}\\\"}\"}'));
+  PageItemInfoStruct get pageItemInfo => _pageItemInfo;
+  set pageItemInfo(PageItemInfoStruct _value) {
+    _pageItemInfo = _value;
+  }
+
+  void updatePageItemInfoStruct(Function(PageItemInfoStruct) updateFn) {
+    updateFn(_pageItemInfo);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

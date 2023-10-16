@@ -155,3 +155,27 @@ Future<bool> fetchLocationInfo(
     return false;
   }
 }
+
+Future openAddItem(BuildContext context) async {
+  FFAppState().update(() {
+    FFAppState().updatePageItemInfoStruct(
+      (e) => e
+        ..storageDate = getCurrentTimestamp
+        ..expireDate = getCurrentTimestamp,
+    );
+  });
+
+  context.pushNamed(
+    'ItemInfo',
+    queryParameters: {
+      'isAdd': serializeParam(
+        true,
+        ParamType.bool,
+      ),
+      'name': serializeParam(
+        'เพิ่มรายการ',
+        ParamType.String,
+      ),
+    }.withoutNulls,
+  );
+}

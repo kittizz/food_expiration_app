@@ -1,3 +1,4 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -718,7 +719,12 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       FlutterFlowDropDown<String>(
                                         controller: _model
                                                 .categoryOptionValueController ??=
-                                            FormFieldController<String>(null),
+                                            FormFieldController<String>(
+                                          _model.categoryOptionValue ??=
+                                              FFAppState()
+                                                  .pageItemInfo
+                                                  .category,
+                                        ),
                                         options: FFAppState()
                                             .locations
                                             .map((e) => e.name)
@@ -782,7 +788,13 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     FlutterFlowDropDown<String>(
                                       controller: _model
                                               .locationOptionValueController ??=
-                                          FormFieldController<String>(null),
+                                          FormFieldController<String>(
+                                        _model.locationOptionValue ??=
+                                            FFAppState()
+                                                .pageItemInfo
+                                                .location
+                                                .name,
+                                      ),
                                       options: FFAppState()
                                           .locations
                                           .map((e) => e.name)
@@ -900,9 +912,13 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       final _datePicked1Date =
                                           await showDatePicker(
                                         context: context,
-                                        initialDate: _model.storageDate!,
+                                        initialDate: FFAppState()
+                                            .pageItemInfo
+                                            .storageDate!,
                                         firstDate: DateTime(1900),
-                                        lastDate: _model.storageDate!,
+                                        lastDate: FFAppState()
+                                            .pageItemInfo
+                                            .storageDate!,
                                       );
 
                                       if (_datePicked1Date != null) {
@@ -915,7 +931,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         });
                                       }
                                       setState(() {
-                                        _model.storageDate = _model.storageDate;
+                                        FFAppState().updatePageItemInfoStruct(
+                                          (e) => e
+                                            ..storageDate = _model.datePicked1,
+                                        );
                                       });
                                     },
                                     child: Row(
@@ -968,8 +987,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       final _datePicked2Date =
                                           await showDatePicker(
                                         context: context,
-                                        initialDate: _model.expireDate!,
-                                        firstDate: _model.expireDate!,
+                                        initialDate: getCurrentTimestamp,
+                                        firstDate: getCurrentTimestamp,
                                         lastDate: DateTime(2050),
                                       );
 
@@ -983,7 +1002,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         });
                                       }
                                       setState(() {
-                                        _model.expireDate = _model.datePicked2;
+                                        FFAppState().updatePageItemInfoStruct(
+                                          (e) => e
+                                            ..expireDate = _model.datePicked2,
+                                        );
                                       });
                                     },
                                     child: Row(
@@ -1047,10 +1069,16 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
                                               setState(() {
-                                                _model.expireDate =
-                                                    functions.addDate(
-                                                        _model.storageDate!,
-                                                        listItem.day);
+                                                FFAppState()
+                                                    .updatePageItemInfoStruct(
+                                                  (e) => e
+                                                    ..expireDate =
+                                                        functions.addDate(
+                                                            FFAppState()
+                                                                .pageItemInfo
+                                                                .expireDate!,
+                                                            listItem.day),
+                                                );
                                               });
                                             },
                                             child: Text(
@@ -1120,11 +1148,16 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                       Colors.transparent,
                                                   onTap: () async {
                                                     setState(() {
-                                                      _model.storageDate =
-                                                          functions.addDate(
-                                                              _model
-                                                                  .storageDate!,
-                                                              listItem.day);
+                                                      FFAppState()
+                                                          .updatePageItemInfoStruct(
+                                                        (e) => e
+                                                          ..expireDate =
+                                                              functions.addDate(
+                                                                  FFAppState()
+                                                                      .pageItemInfo
+                                                                      .expireDate!,
+                                                                  listItem.day),
+                                                      );
                                                     });
                                                   },
                                                   child: Text(

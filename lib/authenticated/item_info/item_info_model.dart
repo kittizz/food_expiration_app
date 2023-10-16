@@ -23,13 +23,7 @@ import 'package:provider/provider.dart';
 class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   ///  Local state fields for this page.
 
-  DateTime? expireDate;
-
   String hash = '';
-
-  DateTime? storageDate;
-
-  String barcode = 'กดเพื่อสแกน';
 
   ///  State fields for stateful widgets in this page.
 
@@ -157,7 +151,11 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
       ScanMode.QR,
     );
 
-    barcode = barcodeOutput!;
+    FFAppState().update(() {
+      FFAppState().updatePageItemInfoStruct(
+        (e) => e..barcode = datePicked2?.toString(),
+      );
+    });
   }
 
   /// Additional helper methods are added here.
