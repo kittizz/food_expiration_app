@@ -10,6 +10,7 @@ import '/flutter_flow/upload_data.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'item_info_widget.dart' show ItemInfoWidget;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -151,11 +152,9 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
       ScanMode.QR,
     );
 
-    FFAppState().update(() {
-      FFAppState().updatePageItemInfoStruct(
-        (e) => e..barcode = datePicked2?.toString(),
-      );
-    });
+    FFAppState().updatePageItemInfoStruct(
+      (e) => e..barcode = datePicked2?.toString(),
+    );
   }
 
   /// Additional helper methods are added here.

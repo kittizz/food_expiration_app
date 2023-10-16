@@ -8,6 +8,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -50,7 +51,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
       setState(() {});
     });
 
-    _model.nameFieldController ??= TextEditingController();
+    _model.nameFieldController ??=
+        TextEditingController(text: FFAppState().pageItemInfo.name);
     _model.descriptionFieldController ??=
         TextEditingController(text: FFAppState().pageItemInfo.description);
   }
@@ -101,27 +103,30 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                 ),
           ),
           actions: [
-            Align(
-              alignment: AlignmentDirectional(1.00, 0.00),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed('LocationInfo');
-                  },
-                  child: Text(
-                    'ลบ',
-                    style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyLargeFamily,
-                          color: FlutterFlowTheme.of(context).error,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyLargeFamily),
-                        ),
+            Visibility(
+              visible: widget.isAdd ?? true,
+              child: Align(
+                alignment: AlignmentDirectional(1.00, 0.00),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('LocationInfo');
+                    },
+                    child: Text(
+                      'ลบ',
+                      style: FlutterFlowTheme.of(context).bodyLarge.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyLargeFamily,
+                            color: FlutterFlowTheme.of(context).error,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyLargeFamily),
+                          ),
+                    ),
                   ),
                 ),
               ),
@@ -543,6 +548,19 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       0.0, 2.0, 0.0, 0.0),
                                   child: TextFormField(
                                     controller: _model.nameFieldController,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.nameFieldController',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        setState(() {
+                                          FFAppState().updatePageItemInfoStruct(
+                                            (e) => e
+                                              ..name = _model
+                                                  .nameFieldController.text,
+                                          );
+                                        });
+                                      },
+                                    ),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'ชื่อ',
@@ -619,6 +637,20 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 ),
                                 TextFormField(
                                   controller: _model.descriptionFieldController,
+                                  onChanged: (_) => EasyDebounce.debounce(
+                                    '_model.descriptionFieldController',
+                                    Duration(milliseconds: 2000),
+                                    () async {
+                                      setState(() {
+                                        FFAppState().updatePageItemInfoStruct(
+                                          (e) => e
+                                            ..description = _model
+                                                .descriptionFieldController
+                                                .text,
+                                        );
+                                      });
+                                    },
+                                  ),
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'บันทึกช่วยจำ',
@@ -730,8 +762,18 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             .locations
                                             .map((e) => e.name)
                                             .toList(),
-                                        onChanged: (val) => setState(() =>
-                                            _model.categoryOptionValue = val),
+                                        onChanged: (val) async {
+                                          setState(() =>
+                                              _model.categoryOptionValue = val);
+                                          setState(() {
+                                            FFAppState()
+                                                .updatePageItemInfoStruct(
+                                              (e) => e
+                                                ..category =
+                                                    _model.categoryOptionValue,
+                                            );
+                                          });
+                                        },
                                         width: 200.0,
                                         height: 40.0,
                                         searchHintTextStyle:
@@ -800,8 +842,19 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           .locations
                                           .map((e) => e.name)
                                           .toList(),
-                                      onChanged: (val) => setState(() =>
-                                          _model.locationOptionValue = val),
+                                      onChanged: (val) async {
+                                        setState(() =>
+                                            _model.locationOptionValue = val);
+                                        setState(() {
+                                          FFAppState().updatePageItemInfoStruct(
+                                            (e) => e
+                                              ..location = LocationStruct(
+                                                name:
+                                                    _model.locationOptionValue,
+                                              ),
+                                          );
+                                        });
+                                      },
                                       width: 200.0,
                                       height: 40.0,
                                       searchHintTextStyle:
@@ -838,63 +891,64 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 2.0, 0.0, 2.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'บาร์ โค้ด',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await _model.scanBarcode(context);
-                                              setState(() {});
-                                            },
-                                            child: Text(
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await _model.scanBarcode(context);
+                                      setState(() {});
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'บาร์ โค้ด',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
                                               'กดเพื่อสแกน',
                                               maxLines: 1,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium,
                                             ),
-                                          ),
-                                          FlutterFlowIconButton(
-                                            borderColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .alternate,
-                                            borderRadius: 5.0,
-                                            borderWidth: 1.0,
-                                            buttonSize: 30.0,
-                                            fillColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .info,
-                                            icon: FaIcon(
-                                              FontAwesomeIcons.barcode,
-                                              color:
+                                            FlutterFlowIconButton(
+                                              borderColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .error,
-                                              size: 14.0,
+                                                      .alternate,
+                                              borderRadius: 5.0,
+                                              borderWidth: 1.0,
+                                              buttonSize: 30.0,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              icon: FaIcon(
+                                                FontAwesomeIcons.barcode,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                size: 14.0,
+                                              ),
+                                              onPressed: () async {
+                                                await _model
+                                                    .scanBarcode(context);
+                                                setState(() {});
+                                              },
                                             ),
-                                            onPressed: () async {
-                                              await _model.scanBarcode(context);
-                                              setState(() {});
-                                            },
-                                          ),
-                                        ].divide(SizedBox(width: 5.0)),
-                                      ),
-                                    ].divide(SizedBox(width: 10.0)),
+                                          ].divide(SizedBox(width: 5.0)),
+                                        ),
+                                      ].divide(SizedBox(width: 10.0)),
+                                    ),
                                   ),
                                 ),
                                 Divider(
@@ -1054,7 +1108,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     builder: (context) {
                                       final list = FFAppState()
                                           .addDate
-                                          .where((e) => e.day <= 14)
+                                          .where((e) => e.day <= 7)
                                           .toList();
                                       return Row(
                                         mainAxisSize: MainAxisSize.max,
