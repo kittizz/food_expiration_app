@@ -1261,6 +1261,45 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 5.0, 0.0),
                                       child: Text(
+                                        'รีเซ็ต',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 10.0, 0.0),
+                                      child: FlutterFlowIconButton(
+                                        borderColor:
+                                            FlutterFlowTheme.of(context)
+                                                .alternate,
+                                        borderRadius: 5.0,
+                                        borderWidth: 1.0,
+                                        buttonSize: 35.0,
+                                        fillColor:
+                                            FlutterFlowTheme.of(context).info,
+                                        icon: Icon(
+                                          Icons.restore,
+                                          color: FlutterFlowTheme.of(context)
+                                              .blue600,
+                                          size: 20.0,
+                                        ),
+                                        onPressed: () async {
+                                          setState(() {
+                                            FFAppState()
+                                                .updatePageItemInfoStruct(
+                                              (e) => e
+                                                ..expireDate =
+                                                    getCurrentTimestamp,
+                                            );
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 5.0, 0.0),
+                                      child: Text(
                                         'หรือ สแกน',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
