@@ -7,6 +7,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -716,15 +717,15 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       ),
                                       FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .locationOptionValueController1 ??=
+                                                .categoryOptionValueController ??=
                                             FormFieldController<String>(null),
                                         options: FFAppState()
                                             .locations
                                             .map((e) => e.name)
                                             .toList(),
                                         onChanged: (val) => setState(() =>
-                                            _model.locationOptionValue1 = val),
-                                        width: 250.0,
+                                            _model.categoryOptionValue = val),
+                                        width: 200.0,
                                         height: 40.0,
                                         searchHintTextStyle:
                                             FlutterFlowTheme.of(context)
@@ -763,36 +764,32 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Expanded(
-                                      child: Text(
-                                        'สถานที่เก็บ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLargeFamily,
-                                              fontSize: 14.0,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLargeFamily),
-                                            ),
-                                      ),
+                                    Text(
+                                      'สถานที่เก็บ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLargeFamily,
+                                            fontSize: 14.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLargeFamily),
+                                          ),
                                     ),
                                     FlutterFlowDropDown<String>(
                                       controller: _model
-                                              .locationOptionValueController2 ??=
+                                              .locationOptionValueController ??=
                                           FormFieldController<String>(null),
                                       options: FFAppState()
                                           .locations
                                           .map((e) => e.name)
                                           .toList(),
                                       onChanged: (val) => setState(() =>
-                                          _model.locationOptionValue2 = val),
-                                      width: 250.0,
+                                          _model.locationOptionValue = val),
+                                      width: 200.0,
                                       height: 40.0,
                                       searchHintTextStyle:
                                           FlutterFlowTheme.of(context)
@@ -843,11 +840,22 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'กดเพื่อสแกน',
-                                            maxLines: 1,
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium,
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await _model.scanBarcode(context);
+                                              setState(() {});
+                                            },
+                                            child: Text(
+                                              'กดเพื่อสแกน',
+                                              maxLines: 1,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium,
+                                            ),
                                           ),
                                           FlutterFlowIconButton(
                                             borderColor:
@@ -866,8 +874,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                       .error,
                                               size: 14.0,
                                             ),
-                                            onPressed: () {
-                                              print('IconButton pressed ...');
+                                            onPressed: () async {
+                                              await _model.scanBarcode(context);
+                                              setState(() {});
                                             },
                                           ),
                                         ].divide(SizedBox(width: 5.0)),
@@ -881,37 +890,66 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 2.0, 0.0, 2.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'วันที่เริ่มเก็บ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            dateTimeFormat(
-                                              'yMMMd',
-                                              getCurrentTimestamp,
-                                              locale:
-                                                  FFLocalizations.of(context)
-                                                      .languageCode,
+                                      0.0, 5.0, 0.0, 5.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      final _datePicked1Date =
+                                          await showDatePicker(
+                                        context: context,
+                                        initialDate: _model.storageDate!,
+                                        firstDate: DateTime(1900),
+                                        lastDate: _model.storageDate!,
+                                      );
+
+                                      if (_datePicked1Date != null) {
+                                        safeSetState(() {
+                                          _model.datePicked1 = DateTime(
+                                            _datePicked1Date.year,
+                                            _datePicked1Date.month,
+                                            _datePicked1Date.day,
+                                          );
+                                        });
+                                      }
+                                      setState(() {
+                                        _model.storageDate = _model.storageDate;
+                                      });
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'วันที่เริ่มเก็บ',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              dateTimeFormat(
+                                                'yMMMd',
+                                                getCurrentTimestamp,
+                                                locale:
+                                                    FFLocalizations.of(context)
+                                                        .languageCode,
+                                              ),
+                                              maxLines: 1,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium,
                                             ),
-                                            maxLines: 1,
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium,
-                                          ),
-                                        ].divide(SizedBox(width: 5.0)),
-                                      ),
-                                    ].divide(SizedBox(width: 10.0)),
+                                          ].divide(SizedBox(width: 5.0)),
+                                        ),
+                                      ].divide(SizedBox(width: 10.0)),
+                                    ),
                                   ),
                                 ),
                                 Divider(
@@ -920,37 +958,66 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 2.0, 0.0, 2.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'วันที่หมดอายุ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            dateTimeFormat(
-                                              'yMMMd',
-                                              getCurrentTimestamp,
-                                              locale:
-                                                  FFLocalizations.of(context)
-                                                      .languageCode,
+                                      0.0, 5.0, 0.0, 5.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      final _datePicked2Date =
+                                          await showDatePicker(
+                                        context: context,
+                                        initialDate: _model.expireDate!,
+                                        firstDate: _model.expireDate!,
+                                        lastDate: DateTime(2050),
+                                      );
+
+                                      if (_datePicked2Date != null) {
+                                        safeSetState(() {
+                                          _model.datePicked2 = DateTime(
+                                            _datePicked2Date.year,
+                                            _datePicked2Date.month,
+                                            _datePicked2Date.day,
+                                          );
+                                        });
+                                      }
+                                      setState(() {
+                                        _model.expireDate = _model.datePicked2;
+                                      });
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'วันที่หมดอายุ',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              dateTimeFormat(
+                                                'yMMMd',
+                                                getCurrentTimestamp,
+                                                locale:
+                                                    FFLocalizations.of(context)
+                                                        .languageCode,
+                                              ),
+                                              maxLines: 1,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium,
                                             ),
-                                            maxLines: 1,
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium,
-                                          ),
-                                        ].divide(SizedBox(width: 5.0)),
-                                      ),
-                                    ].divide(SizedBox(width: 10.0)),
+                                          ].divide(SizedBox(width: 5.0)),
+                                        ),
+                                      ].divide(SizedBox(width: 10.0)),
+                                    ),
                                   ),
                                 ),
                                 Divider(
@@ -964,7 +1031,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     builder: (context) {
                                       final list = FFAppState()
                                           .addDate
-                                          .where((e) => e.day <= 7)
+                                          .where((e) => e.day <= 14)
                                           .toList();
                                       return Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -973,25 +1040,41 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         children: List.generate(list.length,
                                             (listIndex) {
                                           final listItem = list[listIndex];
-                                          return Text(
-                                            '+ ${listItem.short}.',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .blue600,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              setState(() {
+                                                _model.expireDate =
+                                                    functions.addDate(
+                                                        _model.storageDate!,
+                                                        listItem.day);
+                                              });
+                                            },
+                                            child: Text(
+                                              '+ ${listItem.short}.',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .blue600,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                            ),
                                           );
                                         }).divide(SizedBox(width: 10.0)),
                                       );
@@ -1026,27 +1109,45 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   list.length, (listIndex) {
                                                 final listItem =
                                                     list[listIndex];
-                                                return Text(
-                                                  '+ ${listItem.short}.',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .blue600,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
+                                                return InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    setState(() {
+                                                      _model.storageDate =
+                                                          functions.addDate(
+                                                              _model
+                                                                  .storageDate!,
+                                                              listItem.day);
+                                                    });
+                                                  },
+                                                  child: Text(
+                                                    '+ ${listItem.short}.',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .blue600,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                  ),
                                                 );
                                               }).divide(SizedBox(width: 10.0)),
                                             );

@@ -154,3 +154,10 @@ LocationStruct toLocationStruct(dynamic jsonBody) {
       ));
   return item;
 }
+
+DateTime addDate(
+  DateTime date,
+  int day,
+) {
+  return date.add(Duration(days: day));
+}
