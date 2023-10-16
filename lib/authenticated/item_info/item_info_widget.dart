@@ -104,7 +104,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
           ),
           actions: [
             Visibility(
-              visible: widget.isAdd ?? true,
+              visible: !widget.isAdd!,
               child: Align(
                 alignment: AlignmentDirectional(1.00, 0.00),
                 child: Padding(
@@ -552,13 +552,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       '_model.nameFieldController',
                                       Duration(milliseconds: 2000),
                                       () async {
-                                        setState(() {
-                                          FFAppState().updatePageItemInfoStruct(
-                                            (e) => e
-                                              ..name = _model
-                                                  .nameFieldController.text,
-                                          );
-                                        });
+                                        FFAppState().updatePageItemInfoStruct(
+                                          (e) => e
+                                            ..name =
+                                                _model.nameFieldController.text,
+                                        );
                                       },
                                     ),
                                     obscureText: false,
@@ -641,14 +639,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     '_model.descriptionFieldController',
                                     Duration(milliseconds: 2000),
                                     () async {
-                                      setState(() {
-                                        FFAppState().updatePageItemInfoStruct(
-                                          (e) => e
-                                            ..description = _model
-                                                .descriptionFieldController
-                                                .text,
-                                        );
-                                      });
+                                      FFAppState().updatePageItemInfoStruct(
+                                        (e) => e
+                                          ..description = _model
+                                              .descriptionFieldController.text,
+                                      );
                                     },
                                   ),
                                   obscureText: false,
@@ -765,14 +760,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         onChanged: (val) async {
                                           setState(() =>
                                               _model.categoryOptionValue = val);
-                                          setState(() {
-                                            FFAppState()
-                                                .updatePageItemInfoStruct(
-                                              (e) => e
-                                                ..category =
-                                                    _model.categoryOptionValue,
-                                            );
-                                          });
+                                          FFAppState().updatePageItemInfoStruct(
+                                            (e) => e
+                                              ..category =
+                                                  _model.categoryOptionValue,
+                                          );
                                         },
                                         width: 200.0,
                                         height: 40.0,
@@ -845,15 +837,12 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       onChanged: (val) async {
                                         setState(() =>
                                             _model.locationOptionValue = val);
-                                        setState(() {
-                                          FFAppState().updatePageItemInfoStruct(
-                                            (e) => e
-                                              ..location = LocationStruct(
-                                                name:
-                                                    _model.locationOptionValue,
-                                              ),
-                                          );
-                                        });
+                                        FFAppState().updatePageItemInfoStruct(
+                                          (e) => e
+                                            ..location = LocationStruct(
+                                              name: _model.locationOptionValue,
+                                            ),
+                                        );
                                       },
                                       width: 200.0,
                                       height: 40.0,
@@ -916,7 +905,18 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'กดเพื่อสแกน',
+                                              FFAppState()
+                                                              .pageItemInfo
+                                                              .barcode !=
+                                                          null &&
+                                                      FFAppState()
+                                                              .pageItemInfo
+                                                              .barcode !=
+                                                          ''
+                                                  ? FFAppState()
+                                                      .pageItemInfo
+                                                      .barcode
+                                                  : 'กดเพื่อสแกน',
                                               maxLines: 1,
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -1010,7 +1010,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             Text(
                                               dateTimeFormat(
                                                 'yMMMd',
-                                                getCurrentTimestamp,
+                                                FFAppState()
+                                                    .pageItemInfo
+                                                    .storageDate!,
                                                 locale:
                                                     FFLocalizations.of(context)
                                                         .languageCode,
@@ -1081,7 +1083,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             Text(
                                               dateTimeFormat(
                                                 'yMMMd',
-                                                getCurrentTimestamp,
+                                                FFAppState()
+                                                    .pageItemInfo
+                                                    .expireDate!,
                                                 locale:
                                                     FFLocalizations.of(context)
                                                         .languageCode,
