@@ -152,9 +152,11 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
       ScanMode.QR,
     );
 
-    FFAppState().updatePageItemInfoStruct(
-      (e) => e..barcode = datePicked2?.toString(),
-    );
+    FFAppState().update(() {
+      FFAppState().updatePageItemInfoStruct(
+        (e) => e..barcode = barcodeOutput,
+      );
+    });
   }
 
   /// Additional helper methods are added here.
