@@ -51,7 +51,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
     });
 
     _model.nameFieldController ??= TextEditingController();
-    _model.descriptionFieldController ??= TextEditingController();
+    _model.descriptionFieldController ??=
+        TextEditingController(text: FFAppState().pageItemInfo.description);
   }
 
   @override

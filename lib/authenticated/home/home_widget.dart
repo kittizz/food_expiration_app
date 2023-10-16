@@ -126,27 +126,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            context.pushNamed(
-              'ItemInfo',
-              queryParameters: {
-                'isAdd': serializeParam(
-                  true,
-                  ParamType.bool,
-                ),
-                'name': serializeParam(
-                  'เพิ่มรายการ',
-                  ParamType.String,
-                ),
-              }.withoutNulls,
-              extra: <String, dynamic>{
-                kTransitionInfoKey: TransitionInfo(
-                  hasTransition: true,
-                  transitionType: PageTransitionType.bottomToTop,
-                ),
-              },
-            );
-          },
+          onPressed: () async {},
           backgroundColor: FlutterFlowTheme.of(context).red50,
           elevation: 5.0,
           child: Icon(
