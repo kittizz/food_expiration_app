@@ -69,6 +69,7 @@ List<ThumbnailCategoryStruct> toThumbnailCategoryStructList(dynamic jsonbody) {
     ThumbnailCategoryStruct thumCate = new ThumbnailCategoryStruct(
         id: v['id'] as int,
         name: v['name'] as String,
+        type: v['type'] as String,
         image: ImageStruct(
           id: v['image']['id'] as int,
           path: v['image']['path'] as String,
@@ -104,6 +105,7 @@ ThumbnailCategoryStruct toThumbnailCategoryStruct(dynamic jsonbody) {
   ThumbnailCategoryStruct thumCate = new ThumbnailCategoryStruct(
       id: v['id'] as int,
       name: v['name'] as String,
+      type: v['type'] as String,
       image: ImageStruct(
         id: v['image']['id'] as int,
         path: v['image']['path'] as String,
