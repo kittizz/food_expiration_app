@@ -130,6 +130,10 @@ ThumbnailCategoryStruct toThumbnailCategoryStruct(dynamic jsonbody) {
   return thumCate;
 }
 
+List<LocationItemStruct> toLocationItemList(dynamic jsonBody) {
+  return null;
+}
+
 List<LocationStruct> toLocationStructList(dynamic jsonBody) {
   List<LocationStruct> listOfStruct = [];
   if (jsonBody.length == 0) {
@@ -162,4 +166,8 @@ DateTime addDate(
   int day,
 ) {
   return date.add(Duration(days: day));
+}
+
+LocationItemStruct toLocationItem(dynamic jsonBody) {
+  return null;
 }
