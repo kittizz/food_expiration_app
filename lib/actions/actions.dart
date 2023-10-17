@@ -179,3 +179,15 @@ Future openAddItem(BuildContext context) async {
     }.withoutNulls,
   );
 }
+
+Future fetchCategory(BuildContext context) async {
+  ApiCallResponse? apiCategory;
+
+  apiCategory = await FoodexpirationGroup.categoryCall.call(
+    deviceid: FFAppState().deviceId,
+  );
+  if ((apiCategory?.succeeded ?? true)) {
+    FFAppState().categorys =
+        (apiCategory?.jsonBody ?? '').toList().cast<String>();
+  }
+}

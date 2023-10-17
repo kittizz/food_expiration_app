@@ -182,6 +182,35 @@ class FFAppState extends ChangeNotifier {
   void updatePageItemInfoStruct(Function(PageItemInfoStruct) updateFn) {
     updateFn(_pageItemInfo);
   }
+
+  List<String> _categorys = [];
+  List<String> get categorys => _categorys;
+  set categorys(List<String> _value) {
+    _categorys = _value;
+  }
+
+  void addToCategorys(String _value) {
+    _categorys.add(_value);
+  }
+
+  void removeFromCategorys(String _value) {
+    _categorys.remove(_value);
+  }
+
+  void removeAtIndexFromCategorys(int _index) {
+    _categorys.removeAt(_index);
+  }
+
+  void updateCategorysAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _categorys[_index] = updateFn(_categorys[_index]);
+  }
+
+  void insertAtIndexInCategorys(int _index, String _value) {
+    _categorys.insert(_index, _value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
