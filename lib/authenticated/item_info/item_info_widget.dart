@@ -135,7 +135,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -363,7 +363,47 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 5.0, 0.0),
                                       child: Text(
-                                        'คลังรูปภาพ',
+                                        'ดูภาพ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 10.0, 0.0),
+                                      child: FlutterFlowIconButton(
+                                        borderColor:
+                                            FlutterFlowTheme.of(context)
+                                                .alternate,
+                                        borderRadius: 5.0,
+                                        borderWidth: 1.0,
+                                        buttonSize: 30.0,
+                                        fillColor:
+                                            FlutterFlowTheme.of(context).info,
+                                        icon: Icon(
+                                          Icons.zoom_in_outlined,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          size: 15.0,
+                                        ),
+                                        onPressed: () async {
+                                          context.pushNamed(
+                                            'ThumbnailCategory',
+                                            queryParameters: {
+                                              'type': serializeParam(
+                                                'item',
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 5.0, 0.0),
+                                      child: Text(
+                                        'คลังภาพ',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
@@ -891,8 +931,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           FlutterFlowTheme.of(context).info,
                                       icon: FaIcon(
                                         FontAwesomeIcons.barcode,
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         size: 15.0,
                                       ),
                                       onPressed: () async {
@@ -1284,7 +1324,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         FlutterFlowTheme.of(context).info,
                                     icon: Icon(
                                       Icons.document_scanner_rounded,
-                                      color: FlutterFlowTheme.of(context).error,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       size: 15.0,
                                     ),
                                     onPressed: () {
@@ -1299,7 +1340,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       ),
                     ),
                   ),
-                ].divide(SizedBox(height: 15.0)).around(SizedBox(height: 15.0)),
+                ].divide(SizedBox(height: 10.0)).around(SizedBox(height: 10.0)),
               ),
             ),
           ),

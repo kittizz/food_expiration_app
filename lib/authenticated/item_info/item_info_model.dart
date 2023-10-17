@@ -151,11 +151,13 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
       ScanMode.QR,
     );
 
-    FFAppState().update(() {
-      FFAppState().updatePageItemInfoStruct(
-        (e) => e..barcode = barcodeOutput,
-      );
-    });
+    if (barcodeOutput != '-1') {
+      FFAppState().update(() {
+        FFAppState().updatePageItemInfoStruct(
+          (e) => e..barcode = barcodeOutput,
+        );
+      });
+    }
   }
 
   /// Additional helper methods are added here.
