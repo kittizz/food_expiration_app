@@ -1,4 +1,5 @@
 import '/backend/schema/structs/index.dart';
+import '/component/modal05_create_project/modal05_create_project_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -113,7 +114,27 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('LocationInfo');
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return GestureDetector(
+                          onTap: () => _model.unfocusNode.canRequestFocus
+                              ? FocusScope.of(context)
+                                  .requestFocus(_model.unfocusNode)
+                              : FocusScope.of(context).unfocus(),
+                          child: Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: Modal05CreateProjectWidget(),
+                          ),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+
+                    setState(() {
+                      _model.hash = '';
+                    });
                   },
                   child: Text(
                     widget.isAdd! ? 'เพิ่ม' : 'บันทึก',
