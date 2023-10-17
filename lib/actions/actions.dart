@@ -161,20 +161,20 @@ Future openAddItem(BuildContext context) async {
     FFAppState().updatePageItemInfoStruct(
       (e) => e
         ..storageDate = getCurrentTimestamp
-        ..expireDate = getCurrentTimestamp,
+        ..expireDate = functions.addDate(getCurrentTimestamp, 1),
     );
   });
 
   context.pushNamed(
     'ItemInfo',
     queryParameters: {
-      'isAdd': serializeParam(
-        true,
-        ParamType.bool,
-      ),
       'name': serializeParam(
         'เพิ่มรายการ',
         ParamType.String,
+      ),
+      'isAdd': serializeParam(
+        true,
+        ParamType.bool,
       ),
     }.withoutNulls,
   );

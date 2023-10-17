@@ -147,15 +147,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'ItemInfo',
-          path: '/itemInfo',
-          requireAuth: true,
-          builder: (context, params) => ItemInfoWidget(
-            name: params.getParam('name', ParamType.String),
-            isAdd: params.getParam('isAdd', ParamType.bool),
-          ),
-        ),
-        FFRoute(
           name: 'LocationInfo',
           path: '/locationInfo',
           requireAuth: true,
@@ -208,6 +199,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             imageBlurhash: params.getParam('imageBlurhash', ParamType.String),
             name: params.getParam('name', ParamType.String),
             thumbailId: params.getParam('thumbailId', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'ItemInfo',
+          path: '/itemInfo',
+          requireAuth: true,
+          builder: (context, params) => ItemInfoWidget(
+            name: params.getParam('name', ParamType.String),
+            isAdd: params.getParam('isAdd', ParamType.bool),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

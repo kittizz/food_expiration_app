@@ -103,30 +103,27 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                 ),
           ),
           actions: [
-            Visibility(
-              visible: !widget.isAdd!,
-              child: Align(
-                alignment: AlignmentDirectional(1.00, 0.00),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed('LocationInfo');
-                    },
-                    child: Text(
-                      'ลบ',
-                      style: FlutterFlowTheme.of(context).bodyLarge.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyLargeFamily,
-                            color: FlutterFlowTheme.of(context).error,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyLargeFamily),
-                          ),
-                    ),
+            Align(
+              alignment: AlignmentDirectional(1.00, 0.00),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('LocationInfo');
+                  },
+                  child: Text(
+                    'บันทึก',
+                    style: FlutterFlowTheme.of(context).bodyLarge.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyLargeFamily,
+                          color: FlutterFlowTheme.of(context).success,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyLargeFamily),
+                        ),
                   ),
                 ),
               ),
@@ -163,7 +160,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         ),
                       ),
                       child: Form(
-                        key: _model.formKey,
+                        key: _model.formKey2,
                         autovalidateMode: AutovalidateMode.always,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -721,6 +718,124 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 10.0, 0.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 5.0, 0.0),
+                                        child: Text(
+                                          'รีเซ็ต',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 10.0, 0.0),
+                                        child: FlutterFlowIconButton(
+                                          borderColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          borderRadius: 5.0,
+                                          borderWidth: 1.0,
+                                          buttonSize: 35.0,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          icon: Icon(
+                                            Icons.restore,
+                                            color: FlutterFlowTheme.of(context)
+                                                .blue600,
+                                            size: 20.0,
+                                          ),
+                                          onPressed: () async {
+                                            setState(() {
+                                              FFAppState()
+                                                  .updatePageItemInfoStruct(
+                                                (e) => e
+                                                  ..expireDate =
+                                                      getCurrentTimestamp,
+                                              );
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 5.0, 0.0),
+                                        child: Text(
+                                          'ย้ายไปหมดอายุ',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
+                                      ),
+                                      FlutterFlowIconButton(
+                                        borderColor:
+                                            FlutterFlowTheme.of(context)
+                                                .alternate,
+                                        borderRadius: 5.0,
+                                        borderWidth: 1.0,
+                                        buttonSize: 35.0,
+                                        fillColor:
+                                            FlutterFlowTheme.of(context).info,
+                                        icon: Icon(
+                                          Icons.auto_delete,
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          size: 20.0,
+                                        ),
+                                        onPressed: () {
+                                          print('IconButton pressed ...');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ].divide(SizedBox(height: 1.0)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 3.0,
+                            color: Color(0x33000000),
+                            offset: Offset(0.0, 1.0),
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(16.0),
+                        border: Border.all(
+                          color: Color(0xFFE0E3E7),
+                          width: 1.0,
+                        ),
+                      ),
+                      child: Form(
+                        key: _model.formKey3,
+                        autovalidateMode: AutovalidateMode.always,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 20.0, 20.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 2.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -922,29 +1037,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium,
                                             ),
-                                            FlutterFlowIconButton(
-                                              borderColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderRadius: 5.0,
-                                              borderWidth: 1.0,
-                                              buttonSize: 30.0,
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .info,
-                                              icon: FaIcon(
-                                                FontAwesomeIcons.barcode,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .error,
-                                                size: 14.0,
-                                              ),
-                                              onPressed: () async {
-                                                await _model
-                                                    .scanBarcode(context);
-                                                setState(() {});
-                                              },
-                                            ),
                                           ].divide(SizedBox(width: 5.0)),
                                         ),
                                       ].divide(SizedBox(width: 10.0)),
@@ -955,6 +1047,86 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   thickness: 2.0,
                                   color: FlutterFlowTheme.of(context).alternate,
                                 ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 5.0, 0.0),
+                                      child: Text(
+                                        'สแกน',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(1.00, 1.00),
+                                      child: FlutterFlowIconButton(
+                                        borderColor:
+                                            FlutterFlowTheme.of(context)
+                                                .alternate,
+                                        borderRadius: 5.0,
+                                        borderWidth: 1.0,
+                                        buttonSize: 30.0,
+                                        fillColor:
+                                            FlutterFlowTheme.of(context).info,
+                                        icon: FaIcon(
+                                          FontAwesomeIcons.barcode,
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          size: 14.0,
+                                        ),
+                                        onPressed: () async {
+                                          await _model.scanBarcode(context);
+                                          setState(() {});
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ].divide(SizedBox(height: 1.0)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 3.0,
+                            color: Color(0x33000000),
+                            offset: Offset(0.0, 1.0),
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(16.0),
+                        border: Border.all(
+                          color: Color(0xFFE0E3E7),
+                          width: 1.0,
+                        ),
+                      ),
+                      child: Form(
+                        key: _model.formKey1,
+                        autovalidateMode: AutovalidateMode.always,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 20.0, 20.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 5.0),
@@ -1154,6 +1326,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .blue600,
+                                                        fontSize: 16.0,
                                                         useGoogleFonts: GoogleFonts
                                                                 .asMap()
                                                             .containsKey(
@@ -1232,6 +1405,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .blue600,
+                                                          fontSize: 16.0,
                                                           useGoogleFonts: GoogleFonts
                                                                   .asMap()
                                                               .containsKey(
@@ -1290,6 +1464,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 .updatePageItemInfoStruct(
                                               (e) => e
                                                 ..expireDate =
+                                                    functions.addDate(
+                                                        getCurrentTimestamp, 1)
+                                                ..storageDate =
                                                     getCurrentTimestamp,
                                             );
                                           });
@@ -1300,7 +1477,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 5.0, 0.0),
                                       child: Text(
-                                        'หรือ สแกน',
+                                        'สแกน',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
@@ -1324,55 +1501,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       },
                                     ),
                                   ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 25.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: FFButtonWidget(
-                                          onPressed: () {
-                                            print('Button pressed ...');
-                                          },
-                                          text: 'บันทึกรายการ',
-                                          options: FFButtonOptions(
-                                            width: double.infinity,
-                                            height: 50.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: FlutterFlowTheme.of(context)
-                                                .red300,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .override(
-                                                      fontFamily:
-                                                          'Plus Jakarta Sans',
-                                                      color: Colors.white,
-                                                      fontSize: 16.0,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily),
-                                                    ),
-                                            elevation: 2.0,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ].divide(SizedBox(width: 10.0)),
-                                  ),
                                 ),
                               ].divide(SizedBox(height: 1.0)),
                             ),

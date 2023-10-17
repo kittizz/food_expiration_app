@@ -131,12 +131,6 @@ final parametersBuilderMap =
           'locationId': getParameter<int>(data, 'locationId'),
         },
       ),
-  'ItemInfo': (data) async => ParameterData(
-        allParams: {
-          'name': getParameter<String>(data, 'name'),
-          'isAdd': getParameter<bool>(data, 'isAdd'),
-        },
-      ),
   'LocationInfo': ParameterData.none(),
   'LocationList': ParameterData.none(),
   'Archived': (data) async => ParameterData(
@@ -167,6 +161,12 @@ final parametersBuilderMap =
           'imageBlurhash': getParameter<String>(data, 'imageBlurhash'),
           'name': getParameter<String>(data, 'name'),
           'thumbailId': getParameter<int>(data, 'thumbailId'),
+        },
+      ),
+  'ItemInfo': (data) async => ParameterData(
+        allParams: {
+          'name': getParameter<String>(data, 'name'),
+          'isAdd': getParameter<bool>(data, 'isAdd'),
         },
       ),
 };

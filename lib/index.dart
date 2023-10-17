@@ -10,7 +10,6 @@ export '/authenticated/blog/blog/blog_widget.dart' show BlogWidget;
 export '/authenticated/blog/blog_post/blog_post_widget.dart'
     show BlogPostWidget;
 export '/authenticated/item_list/item_list_widget.dart' show ItemListWidget;
-export '/authenticated/item_info/item_info_widget.dart' show ItemInfoWidget;
 export '/authenticated/location_info/location_info_widget.dart'
     show LocationInfoWidget;
 export '/authenticated/location_list/location_list_widget.dart'
@@ -23,3 +22,4 @@ export '/authenticated/thumbnail/thumbnail_selection/thumbnail_selection_widget.
     show ThumbnailSelectionWidget;
 export '/authenticated/thumbnail/thumbnail_viewer/thumbnail_viewer_widget.dart'
     show ThumbnailViewerWidget;
+export '/authenticated/item_info/item_info_widget.dart' show ItemInfoWidget;

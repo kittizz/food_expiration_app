@@ -100,7 +100,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
           'ItemInfo',
           queryParameters: {
             'name': serializeParam(
-              widget.name,
+              '',
               ParamType.String,
             ),
             'isAdd': serializeParam(
