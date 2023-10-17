@@ -13,7 +13,7 @@ class LocationItemStruct extends FFFirebaseStruct {
     int? id,
     String? name,
     String? description,
-    DateTime? storageData,
+    DateTime? storageDate,
     DateTime? expireDate,
     int? forewarnDay,
     bool? isArchived,
@@ -24,7 +24,7 @@ class LocationItemStruct extends FFFirebaseStruct {
   })  : _id = id,
         _name = name,
         _description = description,
-        _storageData = storageData,
+        _storageDate = storageDate,
         _expireDate = expireDate,
         _forewarnDay = forewarnDay,
         _isArchived = isArchived,
@@ -52,11 +52,11 @@ class LocationItemStruct extends FFFirebaseStruct {
   set description(String? val) => _description = val;
   bool hasDescription() => _description != null;
 
-  // "storageData" field.
-  DateTime? _storageData;
-  DateTime? get storageData => _storageData;
-  set storageData(DateTime? val) => _storageData = val;
-  bool hasStorageData() => _storageData != null;
+  // "storageDate" field.
+  DateTime? _storageDate;
+  DateTime? get storageDate => _storageDate;
+  set storageDate(DateTime? val) => _storageDate = val;
+  bool hasStorageDate() => _storageDate != null;
 
   // "expireDate" field.
   DateTime? _expireDate;
@@ -102,7 +102,7 @@ class LocationItemStruct extends FFFirebaseStruct {
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
         description: data['description'] as String?,
-        storageData: data['storageData'] as DateTime?,
+        storageDate: data['storageDate'] as DateTime?,
         expireDate: data['expireDate'] as DateTime?,
         forewarnDay: castToType<int>(data['forewarnDay']),
         isArchived: data['isArchived'] as bool?,
@@ -118,7 +118,7 @@ class LocationItemStruct extends FFFirebaseStruct {
         'id': _id,
         'name': _name,
         'description': _description,
-        'storageData': _storageData,
+        'storageDate': _storageDate,
         'expireDate': _expireDate,
         'forewarnDay': _forewarnDay,
         'isArchived': _isArchived,
@@ -141,8 +141,8 @@ class LocationItemStruct extends FFFirebaseStruct {
           _description,
           ParamType.String,
         ),
-        'storageData': serializeParam(
-          _storageData,
+        'storageDate': serializeParam(
+          _storageDate,
           ParamType.DateTime,
         ),
         'expireDate': serializeParam(
@@ -188,8 +188,8 @@ class LocationItemStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        storageData: deserializeParam(
-          data['storageData'],
+        storageDate: deserializeParam(
+          data['storageDate'],
           ParamType.DateTime,
           false,
         ),
@@ -235,7 +235,7 @@ class LocationItemStruct extends FFFirebaseStruct {
         id == other.id &&
         name == other.name &&
         description == other.description &&
-        storageData == other.storageData &&
+        storageDate == other.storageDate &&
         expireDate == other.expireDate &&
         forewarnDay == other.forewarnDay &&
         isArchived == other.isArchived &&
@@ -249,7 +249,7 @@ class LocationItemStruct extends FFFirebaseStruct {
         id,
         name,
         description,
-        storageData,
+        storageDate,
         expireDate,
         forewarnDay,
         isArchived,
@@ -263,7 +263,7 @@ LocationItemStruct createLocationItemStruct({
   int? id,
   String? name,
   String? description,
-  DateTime? storageData,
+  DateTime? storageDate,
   DateTime? expireDate,
   int? forewarnDay,
   bool? isArchived,
@@ -279,7 +279,7 @@ LocationItemStruct createLocationItemStruct({
       id: id,
       name: name,
       description: description,
-      storageData: storageData,
+      storageDate: storageDate,
       expireDate: expireDate,
       forewarnDay: forewarnDay,
       isArchived: isArchived,

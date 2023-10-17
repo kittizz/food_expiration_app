@@ -185,7 +185,7 @@ LocationItemStruct toLocationItem(dynamic jsonBody) {
     id: v['id'],
     name: v['name'],
     description: v['description'],
-    storageData: DateTime.parse(v['storageData']),
+    storageDate: DateTime.parse(v['storageDate']),
     expireDate: DateTime.parse(v['expireDate']),
     forewarnDay: v['forewarnDay'],
     isArchived: v['isArchived'],
