@@ -14,6 +14,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -41,14 +42,17 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
   // State field(s) for DescriptionField widget.
-  TextEditingController? descriptionFieldController;
-  String? Function(BuildContext, String?)? descriptionFieldControllerValidator;
+  TextEditingController? descriptionFieldController1;
+  String? Function(BuildContext, String?)? descriptionFieldController1Validator;
   // State field(s) for CategoryOption widget.
   String? categoryOptionValue;
   FormFieldController<String>? categoryOptionValueController;
   // State field(s) for LocationOption widget.
   String? locationOptionValue;
   FormFieldController<String>? locationOptionValueController;
+  // State field(s) for DescriptionField widget.
+  TextEditingController? descriptionFieldController2;
+  String? Function(BuildContext, String?)? descriptionFieldController2Validator;
   DateTime? datePicked1;
   DateTime? datePicked2;
 
@@ -59,7 +63,8 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   void dispose() {
     unfocusNode.dispose();
     nameFieldController?.dispose();
-    descriptionFieldController?.dispose();
+    descriptionFieldController1?.dispose();
+    descriptionFieldController2?.dispose();
   }
 
   /// Action blocks are added here.

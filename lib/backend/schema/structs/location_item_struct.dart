@@ -8,26 +8,37 @@ import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class PageItemInfoStruct extends FFFirebaseStruct {
-  PageItemInfoStruct({
+class LocationItemStruct extends FFFirebaseStruct {
+  LocationItemStruct({
+    int? id,
     String? name,
     String? description,
-    int? forewarnDay,
-    String? category,
-    LocationStruct? location,
-    String? barcode,
-    DateTime? storageDate,
+    DateTime? storageData,
     DateTime? expireDate,
+    int? forewarnDay,
+    bool? isArchived,
+    String? category,
+    String? barcode,
+    ImageStruct? image,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
-  })  : _name = name,
+  })  : _id = id,
+        _name = name,
         _description = description,
-        _forewarnDay = forewarnDay,
-        _category = category,
-        _location = location,
-        _barcode = barcode,
-        _storageDate = storageDate,
+        _storageData = storageData,
         _expireDate = expireDate,
+        _forewarnDay = forewarnDay,
+        _isArchived = isArchived,
+        _category = category,
+        _barcode = barcode,
+        _image = image,
         super(firestoreUtilData);
+
+  // "id" field.
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
+  void incrementId(int amount) => _id = id + amount;
+  bool hasId() => _id != null;
 
   // "name" field.
   String? _name;
@@ -41,38 +52,11 @@ class PageItemInfoStruct extends FFFirebaseStruct {
   set description(String? val) => _description = val;
   bool hasDescription() => _description != null;
 
-  // "forewarnDay" field.
-  int? _forewarnDay;
-  int get forewarnDay => _forewarnDay ?? 0;
-  set forewarnDay(int? val) => _forewarnDay = val;
-  void incrementForewarnDay(int amount) => _forewarnDay = forewarnDay + amount;
-  bool hasForewarnDay() => _forewarnDay != null;
-
-  // "category" field.
-  String? _category;
-  String get category => _category ?? '';
-  set category(String? val) => _category = val;
-  bool hasCategory() => _category != null;
-
-  // "location" field.
-  LocationStruct? _location;
-  LocationStruct get location => _location ?? LocationStruct();
-  set location(LocationStruct? val) => _location = val;
-  void updateLocation(Function(LocationStruct) updateFn) =>
-      updateFn(_location ??= LocationStruct());
-  bool hasLocation() => _location != null;
-
-  // "barcode" field.
-  String? _barcode;
-  String get barcode => _barcode ?? '';
-  set barcode(String? val) => _barcode = val;
-  bool hasBarcode() => _barcode != null;
-
-  // "storageDate" field.
-  DateTime? _storageDate;
-  DateTime? get storageDate => _storageDate;
-  set storageDate(DateTime? val) => _storageDate = val;
-  bool hasStorageDate() => _storageDate != null;
+  // "storageData" field.
+  DateTime? _storageData;
+  DateTime? get storageData => _storageData;
+  set storageData(DateTime? val) => _storageData = val;
+  bool hasStorageData() => _storageData != null;
 
   // "expireDate" field.
   DateTime? _expireDate;
@@ -80,34 +64,75 @@ class PageItemInfoStruct extends FFFirebaseStruct {
   set expireDate(DateTime? val) => _expireDate = val;
   bool hasExpireDate() => _expireDate != null;
 
-  static PageItemInfoStruct fromMap(Map<String, dynamic> data) =>
-      PageItemInfoStruct(
+  // "forewarnDay" field.
+  int? _forewarnDay;
+  int get forewarnDay => _forewarnDay ?? 0;
+  set forewarnDay(int? val) => _forewarnDay = val;
+  void incrementForewarnDay(int amount) => _forewarnDay = forewarnDay + amount;
+  bool hasForewarnDay() => _forewarnDay != null;
+
+  // "isArchived" field.
+  bool? _isArchived;
+  bool get isArchived => _isArchived ?? false;
+  set isArchived(bool? val) => _isArchived = val;
+  bool hasIsArchived() => _isArchived != null;
+
+  // "category" field.
+  String? _category;
+  String get category => _category ?? '';
+  set category(String? val) => _category = val;
+  bool hasCategory() => _category != null;
+
+  // "barcode" field.
+  String? _barcode;
+  String get barcode => _barcode ?? '';
+  set barcode(String? val) => _barcode = val;
+  bool hasBarcode() => _barcode != null;
+
+  // "image" field.
+  ImageStruct? _image;
+  ImageStruct get image => _image ?? ImageStruct();
+  set image(ImageStruct? val) => _image = val;
+  void updateImage(Function(ImageStruct) updateFn) =>
+      updateFn(_image ??= ImageStruct());
+  bool hasImage() => _image != null;
+
+  static LocationItemStruct fromMap(Map<String, dynamic> data) =>
+      LocationItemStruct(
+        id: castToType<int>(data['id']),
         name: data['name'] as String?,
         description: data['description'] as String?,
-        forewarnDay: castToType<int>(data['forewarnDay']),
-        category: data['category'] as String?,
-        location: LocationStruct.maybeFromMap(data['location']),
-        barcode: data['barcode'] as String?,
-        storageDate: data['storageDate'] as DateTime?,
+        storageData: data['storageData'] as DateTime?,
         expireDate: data['expireDate'] as DateTime?,
+        forewarnDay: castToType<int>(data['forewarnDay']),
+        isArchived: data['isArchived'] as bool?,
+        category: data['category'] as String?,
+        barcode: data['barcode'] as String?,
+        image: ImageStruct.maybeFromMap(data['image']),
       );
 
-  static PageItemInfoStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? PageItemInfoStruct.fromMap(data) : null;
+  static LocationItemStruct? maybeFromMap(dynamic data) =>
+      data is Map<String, dynamic> ? LocationItemStruct.fromMap(data) : null;
 
   Map<String, dynamic> toMap() => {
+        'id': _id,
         'name': _name,
         'description': _description,
-        'forewarnDay': _forewarnDay,
-        'category': _category,
-        'location': _location?.toMap(),
-        'barcode': _barcode,
-        'storageDate': _storageDate,
+        'storageData': _storageData,
         'expireDate': _expireDate,
+        'forewarnDay': _forewarnDay,
+        'isArchived': _isArchived,
+        'category': _category,
+        'barcode': _barcode,
+        'image': _image?.toMap(),
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
+        'id': serializeParam(
+          _id,
+          ParamType.int,
+        ),
         'name': serializeParam(
           _name,
           ParamType.String,
@@ -116,34 +141,43 @@ class PageItemInfoStruct extends FFFirebaseStruct {
           _description,
           ParamType.String,
         ),
-        'forewarnDay': serializeParam(
-          _forewarnDay,
-          ParamType.int,
-        ),
-        'category': serializeParam(
-          _category,
-          ParamType.String,
-        ),
-        'location': serializeParam(
-          _location,
-          ParamType.DataStruct,
-        ),
-        'barcode': serializeParam(
-          _barcode,
-          ParamType.String,
-        ),
-        'storageDate': serializeParam(
-          _storageDate,
+        'storageData': serializeParam(
+          _storageData,
           ParamType.DateTime,
         ),
         'expireDate': serializeParam(
           _expireDate,
           ParamType.DateTime,
         ),
+        'forewarnDay': serializeParam(
+          _forewarnDay,
+          ParamType.int,
+        ),
+        'isArchived': serializeParam(
+          _isArchived,
+          ParamType.bool,
+        ),
+        'category': serializeParam(
+          _category,
+          ParamType.String,
+        ),
+        'barcode': serializeParam(
+          _barcode,
+          ParamType.String,
+        ),
+        'image': serializeParam(
+          _image,
+          ParamType.DataStruct,
+        ),
       }.withoutNulls;
 
-  static PageItemInfoStruct fromSerializableMap(Map<String, dynamic> data) =>
-      PageItemInfoStruct(
+  static LocationItemStruct fromSerializableMap(Map<String, dynamic> data) =>
+      LocationItemStruct(
+        id: deserializeParam(
+          data['id'],
+          ParamType.int,
+          false,
+        ),
         name: deserializeParam(
           data['name'],
           ParamType.String,
@@ -154,29 +188,8 @@ class PageItemInfoStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        forewarnDay: deserializeParam(
-          data['forewarnDay'],
-          ParamType.int,
-          false,
-        ),
-        category: deserializeParam(
-          data['category'],
-          ParamType.String,
-          false,
-        ),
-        location: deserializeStructParam(
-          data['location'],
-          ParamType.DataStruct,
-          false,
-          structBuilder: LocationStruct.fromSerializableMap,
-        ),
-        barcode: deserializeParam(
-          data['barcode'],
-          ParamType.String,
-          false,
-        ),
-        storageDate: deserializeParam(
-          data['storageDate'],
+        storageData: deserializeParam(
+          data['storageData'],
           ParamType.DateTime,
           false,
         ),
@@ -185,60 +198,94 @@ class PageItemInfoStruct extends FFFirebaseStruct {
           ParamType.DateTime,
           false,
         ),
+        forewarnDay: deserializeParam(
+          data['forewarnDay'],
+          ParamType.int,
+          false,
+        ),
+        isArchived: deserializeParam(
+          data['isArchived'],
+          ParamType.bool,
+          false,
+        ),
+        category: deserializeParam(
+          data['category'],
+          ParamType.String,
+          false,
+        ),
+        barcode: deserializeParam(
+          data['barcode'],
+          ParamType.String,
+          false,
+        ),
+        image: deserializeStructParam(
+          data['image'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: ImageStruct.fromSerializableMap,
+        ),
       );
 
   @override
-  String toString() => 'PageItemInfoStruct(${toMap()})';
+  String toString() => 'LocationItemStruct(${toMap()})';
 
   @override
   bool operator ==(Object other) {
-    return other is PageItemInfoStruct &&
+    return other is LocationItemStruct &&
+        id == other.id &&
         name == other.name &&
         description == other.description &&
+        storageData == other.storageData &&
+        expireDate == other.expireDate &&
         forewarnDay == other.forewarnDay &&
+        isArchived == other.isArchived &&
         category == other.category &&
-        location == other.location &&
         barcode == other.barcode &&
-        storageDate == other.storageDate &&
-        expireDate == other.expireDate;
+        image == other.image;
   }
 
   @override
   int get hashCode => const ListEquality().hash([
+        id,
         name,
         description,
+        storageData,
+        expireDate,
         forewarnDay,
+        isArchived,
         category,
-        location,
         barcode,
-        storageDate,
-        expireDate
+        image
       ]);
 }
 
-PageItemInfoStruct createPageItemInfoStruct({
+LocationItemStruct createLocationItemStruct({
+  int? id,
   String? name,
   String? description,
-  int? forewarnDay,
-  String? category,
-  LocationStruct? location,
-  String? barcode,
-  DateTime? storageDate,
+  DateTime? storageData,
   DateTime? expireDate,
+  int? forewarnDay,
+  bool? isArchived,
+  String? category,
+  String? barcode,
+  ImageStruct? image,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
   bool delete = false,
 }) =>
-    PageItemInfoStruct(
+    LocationItemStruct(
+      id: id,
       name: name,
       description: description,
-      forewarnDay: forewarnDay,
-      category: category,
-      location: location ?? (clearUnsetFields ? LocationStruct() : null),
-      barcode: barcode,
-      storageDate: storageDate,
+      storageData: storageData,
       expireDate: expireDate,
+      forewarnDay: forewarnDay,
+      isArchived: isArchived,
+      category: category,
+      barcode: barcode,
+      image: image ?? (clearUnsetFields ? ImageStruct() : null),
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
@@ -247,72 +294,72 @@ PageItemInfoStruct createPageItemInfoStruct({
       ),
     );
 
-PageItemInfoStruct? updatePageItemInfoStruct(
-  PageItemInfoStruct? pageItemInfo, {
+LocationItemStruct? updateLocationItemStruct(
+  LocationItemStruct? locationItem, {
   bool clearUnsetFields = true,
   bool create = false,
 }) =>
-    pageItemInfo
+    locationItem
       ?..firestoreUtilData = FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
       );
 
-void addPageItemInfoStructData(
+void addLocationItemStructData(
   Map<String, dynamic> firestoreData,
-  PageItemInfoStruct? pageItemInfo,
+  LocationItemStruct? locationItem,
   String fieldName, [
   bool forFieldValue = false,
 ]) {
   firestoreData.remove(fieldName);
-  if (pageItemInfo == null) {
+  if (locationItem == null) {
     return;
   }
-  if (pageItemInfo.firestoreUtilData.delete) {
+  if (locationItem.firestoreUtilData.delete) {
     firestoreData[fieldName] = FieldValue.delete();
     return;
   }
   final clearFields =
-      !forFieldValue && pageItemInfo.firestoreUtilData.clearUnsetFields;
+      !forFieldValue && locationItem.firestoreUtilData.clearUnsetFields;
   if (clearFields) {
     firestoreData[fieldName] = <String, dynamic>{};
   }
-  final pageItemInfoData =
-      getPageItemInfoFirestoreData(pageItemInfo, forFieldValue);
+  final locationItemData =
+      getLocationItemFirestoreData(locationItem, forFieldValue);
   final nestedData =
-      pageItemInfoData.map((k, v) => MapEntry('$fieldName.$k', v));
+      locationItemData.map((k, v) => MapEntry('$fieldName.$k', v));
 
-  final mergeFields = pageItemInfo.firestoreUtilData.create || clearFields;
+  final mergeFields = locationItem.firestoreUtilData.create || clearFields;
   firestoreData
       .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
 }
 
-Map<String, dynamic> getPageItemInfoFirestoreData(
-  PageItemInfoStruct? pageItemInfo, [
+Map<String, dynamic> getLocationItemFirestoreData(
+  LocationItemStruct? locationItem, [
   bool forFieldValue = false,
 ]) {
-  if (pageItemInfo == null) {
+  if (locationItem == null) {
     return {};
   }
-  final firestoreData = mapToFirestore(pageItemInfo.toMap());
+  final firestoreData = mapToFirestore(locationItem.toMap());
 
-  // Handle nested data for "location" field.
-  addLocationStructData(
+  // Handle nested data for "image" field.
+  addImageStructData(
     firestoreData,
-    pageItemInfo.hasLocation() ? pageItemInfo.location : null,
-    'location',
+    locationItem.hasImage() ? locationItem.image : null,
+    'image',
     forFieldValue,
   );
 
   // Add any Firestore field values
-  pageItemInfo.firestoreUtilData.fieldValues
+  locationItem.firestoreUtilData.fieldValues
       .forEach((k, v) => firestoreData[k] = v);
 
   return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
 }
 
-List<Map<String, dynamic>> getPageItemInfoListFirestoreData(
-  List<PageItemInfoStruct>? pageItemInfos,
+List<Map<String, dynamic>> getLocationItemListFirestoreData(
+  List<LocationItemStruct>? locationItems,
 ) =>
-    pageItemInfos?.map((e) => getPageItemInfoFirestoreData(e, true)).toList() ??
+    locationItems?.map((e) => getLocationItemFirestoreData(e, true)).toList() ??
     [];

@@ -12,6 +12,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,8 +54,13 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
 
     _model.nameFieldController ??=
         TextEditingController(text: FFAppState().pageItemInfo.name);
-    _model.descriptionFieldController ??=
+    _model.descriptionFieldController1 ??=
         TextEditingController(text: FFAppState().pageItemInfo.description);
+    _model.descriptionFieldController2 ??= TextEditingController(
+        text: valueOrDefault<String>(
+      FFAppState().pageItemInfo.forewarnDay.toString(),
+      '1',
+    ));
   }
 
   @override
@@ -596,15 +602,15 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 ),
                               ),
                               TextFormField(
-                                controller: _model.descriptionFieldController,
+                                controller: _model.descriptionFieldController1,
                                 onChanged: (_) => EasyDebounce.debounce(
-                                  '_model.descriptionFieldController',
+                                  '_model.descriptionFieldController1',
                                   Duration(milliseconds: 2000),
                                   () async {
                                     FFAppState().updatePageItemInfoStruct(
                                       (e) => e
                                         ..description = _model
-                                            .descriptionFieldController.text,
+                                            .descriptionFieldController1.text,
                                     );
                                   },
                                 ),
@@ -685,7 +691,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     ),
                                 maxLines: null,
                                 validator: _model
-                                    .descriptionFieldControllerValidator
+                                    .descriptionFieldController1Validator
                                     .asValidator(context),
                               ),
                               if (!widget.isAdd!)
@@ -1074,6 +1080,105 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              TextFormField(
+                                controller: _model.descriptionFieldController2,
+                                onChanged: (_) => EasyDebounce.debounce(
+                                  '_model.descriptionFieldController2',
+                                  Duration(milliseconds: 2000),
+                                  () async {
+                                    FFAppState().updatePageItemInfoStruct(
+                                      (e) => e
+                                        ..description = _model
+                                            .descriptionFieldController2.text,
+                                    );
+                                  },
+                                ),
+                                textInputAction: TextInputAction.done,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'เตือนล่วงหน้า (วัน)',
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        fontSize: 16.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
+                                      ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).red400,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  errorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedErrorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  filled: true,
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 16.0, 16.0, 8.0),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily,
+                                      fontSize: 16.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLargeFamily),
+                                      lineHeight: 1.0,
+                                    ),
+                                maxLines: null,
+                                keyboardType: TextInputType.number,
+                                validator: _model
+                                    .descriptionFieldController2Validator
+                                    .asValidator(context),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp('[0-9]'))
+                                ],
+                              ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 5.0, 0.0, 5.0),
