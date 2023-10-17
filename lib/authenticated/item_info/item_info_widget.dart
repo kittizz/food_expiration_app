@@ -483,8 +483,18 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'ชื่อ',
-                                    labelStyle:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          fontSize: 16.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -541,7 +551,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .bodyLargeFamily,
-                                        fontSize: 14.0,
+                                        fontSize: 16.0,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
@@ -568,8 +578,17 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'บันทึกช่วยจำ',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        fontSize: 16.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
+                                      ),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -624,7 +643,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .bodyLargeFamily,
-                                      fontSize: 14.0,
+                                      fontSize: 16.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
@@ -716,7 +735,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyLargeFamily,
-                                            fontSize: 14.0,
+                                            fontSize: 16.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
@@ -745,9 +764,19 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       },
                                       width: 200.0,
                                       height: 40.0,
-                                      searchHintTextStyle:
-                                          FlutterFlowTheme.of(context)
-                                              .labelMedium,
+                                      searchHintTextStyle: FlutterFlowTheme.of(
+                                              context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMediumFamily,
+                                            fontSize: 16.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMediumFamily),
+                                          ),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       hintText: 'โปรดเลือก...',
@@ -790,7 +819,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
                                                   .bodyLargeFamily,
-                                          fontSize: 14.0,
+                                          fontSize: 16.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
@@ -823,9 +852,19 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     },
                                     width: 200.0,
                                     height: 40.0,
-                                    searchHintTextStyle:
-                                        FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                    searchHintTextStyle: FlutterFlowTheme.of(
+                                            context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMediumFamily,
+                                          fontSize: 16.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMediumFamily),
+                                        ),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
                                     hintText: 'โปรดเลือก...',
@@ -874,7 +913,19 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       Text(
                                         'บาร์ โค้ด',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              fontSize: 16.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
                                       ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1015,7 +1066,19 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       Text(
                                         'วันที่เริ่มเก็บ',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              fontSize: 16.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
                                       ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1087,7 +1150,19 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       Text(
                                         'วันที่หมดอายุ',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              fontSize: 16.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
                                       ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
