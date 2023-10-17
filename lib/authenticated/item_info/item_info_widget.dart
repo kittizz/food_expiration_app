@@ -134,25 +134,17 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
                     child: Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 3.0,
-                            color: Color(0x33000000),
-                            offset: Offset(0.0, 1.0),
-                          )
-                        ],
                         borderRadius: BorderRadius.circular(16.0),
                         border: Border.all(
                           color: Color(0xFFE0E3E7),
@@ -800,22 +792,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       ),
                     ),
                   ),
-                ),
-                Flexible(
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
+                  Flexible(
                     child: Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 3.0,
-                            color: Color(0x33000000),
-                            offset: Offset(0.0, 1.0),
-                          )
-                        ],
                         borderRadius: BorderRadius.circular(16.0),
                         border: Border.all(
                           color: Color(0xFFE0E3E7),
@@ -1093,22 +1074,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       ),
                     ),
                   ),
-                ),
-                Flexible(
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
+                  Flexible(
                     child: Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 3.0,
-                            color: Color(0x33000000),
-                            offset: Offset(0.0, 1.0),
-                          )
-                        ],
                         borderRadius: BorderRadius.circular(16.0),
                         border: Border.all(
                           color: Color(0xFFE0E3E7),
@@ -1509,8 +1479,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       ),
                     ),
                   ),
-                ),
-              ],
+                ].divide(SizedBox(height: 15.0)).around(SizedBox(height: 15.0)),
+              ),
             ),
           ),
         ),
