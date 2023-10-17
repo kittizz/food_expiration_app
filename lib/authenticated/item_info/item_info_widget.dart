@@ -135,7 +135,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -1340,7 +1340,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       ),
                     ),
                   ),
-                ].divide(SizedBox(height: 10.0)).around(SizedBox(height: 10.0)),
+                ].divide(SizedBox(height: 20.0)),
               ),
             ),
           ),
