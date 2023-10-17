@@ -373,14 +373,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           .alternate,
                                       borderRadius: 5.0,
                                       borderWidth: 1.0,
-                                      buttonSize: 35.0,
+                                      buttonSize: 30.0,
                                       fillColor:
                                           FlutterFlowTheme.of(context).info,
                                       icon: Icon(
                                         Icons.image_search,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
-                                        size: 20.0,
+                                        size: 15.0,
                                       ),
                                       onPressed: () async {
                                         context.pushNamed(
