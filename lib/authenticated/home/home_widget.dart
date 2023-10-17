@@ -88,6 +88,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
       _model.bloglist = await actions.toBlogStructList(
         (_model.apiBlogRecommendOutput?.jsonBody ?? ''),
       );
+      await action_blocks.fetchCategory(context);
+      setState(() {});
       setState(() {
         _model.blogList = _model.bloglist!.toList().cast<BlogStruct>();
         _model.bannerImage =
