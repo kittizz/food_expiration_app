@@ -808,10 +808,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         _model.categoryOptionValue ??=
                                             FFAppState().pageItemInfo.category,
                                       ),
-                                      options: FFAppState()
-                                          .locations
-                                          .map((e) => e.name)
-                                          .toList(),
+                                      options: FFAppState().categorys,
                                       onChanged: (val) async {
                                         setState(() =>
                                             _model.categoryOptionValue = val);
