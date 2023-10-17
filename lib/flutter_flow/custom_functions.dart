@@ -131,7 +131,14 @@ ThumbnailCategoryStruct toThumbnailCategoryStruct(dynamic jsonbody) {
 }
 
 List<LocationItemStruct> toLocationItemList(dynamic jsonBody) {
-  return null;
+  List<LocationItemStruct> listOfStruct = [];
+  if (jsonBody.length == 0) {
+    return listOfStruct;
+  }
+  for (var v in jsonBody) {
+    listOfStruct.add(toLocationItem(v));
+  }
+  return listOfStruct;
 }
 
 List<LocationStruct> toLocationStructList(dynamic jsonBody) {
@@ -169,5 +176,26 @@ DateTime addDate(
 }
 
 LocationItemStruct toLocationItem(dynamic jsonBody) {
-  return null;
+  LocationItemStruct val = new LocationItemStruct();
+  if (jsonBody.length == 0) {
+    return val;
+  }
+  var v = jsonBody;
+  val = new LocationItemStruct(
+    id: v['id'],
+    name: v['name'],
+    description: v['description'],
+    storageData: DateTime.parse(v['storageData']),
+    expireDate: DateTime.parse(v['expireDate']),
+    forewarnDay: v['forewarnDay'],
+    isArchived: v['isArchived'],
+    category: v['category'],
+    barcode: v['barcode'],
+    image: ImageStruct(
+        id: v['image']['id'],
+        path: v['image']['path'],
+        blurHash: v['image']['blurHash']),
+  );
+
+  return val;
 }
