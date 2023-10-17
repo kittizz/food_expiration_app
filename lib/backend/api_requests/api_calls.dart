@@ -497,7 +497,7 @@ class UpdateLocationCall {
     return ApiManager.instance.makeApiCall(
       callName: 'updateLocation',
       apiUrl: '${FoodexpirationGroup.baseUrl}/location',
-      callType: ApiCallType.PATCH,
+      callType: ApiCallType.PUT,
       headers: {
         'x-device-id': '${deviceid}',
       },

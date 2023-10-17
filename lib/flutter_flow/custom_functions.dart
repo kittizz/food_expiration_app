@@ -130,13 +130,13 @@ ThumbnailCategoryStruct toThumbnailCategoryStruct(dynamic jsonbody) {
   return thumCate;
 }
 
-List<LocationItemStruct> toLocationItemList(dynamic jsonBody) {
-  List<LocationItemStruct> listOfStruct = [];
+List<ItemStruct> toItemList(dynamic jsonBody) {
+  List<ItemStruct> listOfStruct = [];
   if (jsonBody.length == 0) {
     return listOfStruct;
   }
   for (var v in jsonBody) {
-    listOfStruct.add(toLocationItem(v));
+    listOfStruct.add(toItem(v));
   }
   return listOfStruct;
 }
@@ -175,13 +175,13 @@ DateTime addDate(
   return date.add(Duration(days: day));
 }
 
-LocationItemStruct toLocationItem(dynamic jsonBody) {
-  LocationItemStruct val = new LocationItemStruct();
+ItemStruct toItem(dynamic jsonBody) {
+  ItemStruct val = new ItemStruct();
   if (jsonBody.length == 0) {
     return val;
   }
   var v = jsonBody;
-  val = new LocationItemStruct(
+  val = new ItemStruct(
     id: v['id'],
     name: v['name'],
     description: v['description'],
