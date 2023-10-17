@@ -142,7 +142,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                 children: [
                   Flexible(
                     child: Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16.0),
@@ -152,492 +151,301 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         ),
                       ),
                       child: Form(
-                        key: _model.formKey2,
+                        key: _model.formKey3,
                         autovalidateMode: AutovalidateMode.always,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 20.0, 20.0, 20.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 16.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            final selectedMedia =
-                                                await selectMediaWithSourceBottomSheet(
-                                              context: context,
-                                              maxWidth: 512.00,
-                                              maxHeight: 512.00,
-                                              imageQuality: 100,
-                                              allowPhoto: true,
-                                              includeBlurHash: true,
-                                            );
-                                            if (selectedMedia != null &&
-                                                selectedMedia.every((m) =>
-                                                    validateFileFormat(
-                                                        m.storagePath,
-                                                        context))) {
-                                              setState(() => _model
-                                                  .isDataUploading1 = true);
-                                              var selectedUploadedFiles =
-                                                  <FFUploadedFile>[];
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(0.00, 0.00),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 16.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      final selectedMedia =
+                                          await selectMediaWithSourceBottomSheet(
+                                        context: context,
+                                        maxWidth: 512.00,
+                                        maxHeight: 512.00,
+                                        imageQuality: 100,
+                                        allowPhoto: true,
+                                        includeBlurHash: true,
+                                      );
+                                      if (selectedMedia != null &&
+                                          selectedMedia.every((m) =>
+                                              validateFileFormat(
+                                                  m.storagePath, context))) {
+                                        setState(() =>
+                                            _model.isDataUploading = true);
+                                        var selectedUploadedFiles =
+                                            <FFUploadedFile>[];
 
-                                              try {
-                                                selectedUploadedFiles =
-                                                    selectedMedia
-                                                        .map((m) =>
-                                                            FFUploadedFile(
-                                                              name: m
-                                                                  .storagePath
-                                                                  .split('/')
-                                                                  .last,
-                                                              bytes: m.bytes,
-                                                              height: m
-                                                                  .dimensions
-                                                                  ?.height,
-                                                              width: m
-                                                                  .dimensions
-                                                                  ?.width,
-                                                              blurHash:
-                                                                  m.blurHash,
-                                                            ))
-                                                        .toList();
-                                              } finally {
-                                                _model.isDataUploading1 = false;
-                                              }
-                                              if (selectedUploadedFiles
-                                                      .length ==
-                                                  selectedMedia.length) {
-                                                setState(() {
-                                                  _model.uploadedLocalFile1 =
-                                                      selectedUploadedFiles
-                                                          .first;
-                                                });
-                                              } else {
-                                                setState(() {});
-                                                return;
-                                              }
-                                            }
-
-                                            await _model.uploadImage(
-                                              context,
-                                              fileUpload:
-                                                  _model.uploadedLocalFile1,
-                                            );
-                                            setState(() {});
-                                          },
-                                          child: Container(
-                                            width: 120.0,
-                                            height: 250.0,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFE0E3E7),
-                                              borderRadius:
-                                                  BorderRadius.circular(16.0),
-                                            ),
-                                            child: Stack(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              children: [
-                                                Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons
-                                                          .add_a_photo_outlined,
-                                                      color: Color(0xFF57636C),
-                                                      size: 72.0,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  12.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        'เพิ่มรูปภาพ',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'IBM Plex Sans Thai',
-                                                                  color: Color(
-                                                                      0xFF14181B),
-                                                                  fontSize:
-                                                                      22.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .titleLargeFamily),
-                                                                ),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  4.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        'อัพโหลดรูปภาพที่นี่...',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'IBM Plex Sans Thai',
-                                                                  color: Color(
-                                                                      0xFF57636C),
-                                                                  fontSize:
-                                                                      14.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .labelMediumFamily),
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                if (valueOrDefault<bool>(
-                                                  FFAppState()
-                                                              .thumbnail
-                                                              .image
-                                                              .path !=
-                                                          null &&
-                                                      FFAppState()
-                                                              .thumbnail
-                                                              .image
-                                                              .path !=
-                                                          '',
-                                                  false,
-                                                ))
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(8.0, 8.0,
-                                                                8.0, 8.0),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                      child: OctoImage(
-                                                        placeholderBuilder:
-                                                            OctoPlaceholder
-                                                                .blurHash(
-                                                          FFAppState()
-                                                              .thumbnail
-                                                              .image
-                                                              .blurHash,
-                                                        ),
-                                                        image: NetworkImage(
-                                                          functions.getImage(
-                                                              FFAppState()
-                                                                  .thumbnail
-                                                                  .image
-                                                                  .path),
-                                                        ),
-                                                        width: double.infinity,
-                                                        height: double.infinity,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          final selectedMedia =
-                                              await selectMediaWithSourceBottomSheet(
-                                            context: context,
-                                            maxWidth: 512.00,
-                                            maxHeight: 512.00,
-                                            allowPhoto: true,
-                                            includeBlurHash: true,
-                                            pickerFontFamily:
-                                                'IBM Plex Sans Thai',
-                                          );
-                                          if (selectedMedia != null &&
-                                              selectedMedia.every((m) =>
-                                                  validateFileFormat(
-                                                      m.storagePath,
-                                                      context))) {
-                                            setState(() =>
-                                                _model.isDataUploading2 = true);
-                                            var selectedUploadedFiles =
-                                                <FFUploadedFile>[];
-
-                                            try {
-                                              selectedUploadedFiles =
-                                                  selectedMedia
-                                                      .map(
-                                                          (m) => FFUploadedFile(
-                                                                name: m
-                                                                    .storagePath
-                                                                    .split('/')
-                                                                    .last,
-                                                                bytes: m.bytes,
-                                                                height: m
-                                                                    .dimensions
-                                                                    ?.height,
-                                                                width: m
-                                                                    .dimensions
-                                                                    ?.width,
-                                                                blurHash:
-                                                                    m.blurHash,
-                                                              ))
-                                                      .toList();
-                                            } finally {
-                                              _model.isDataUploading2 = false;
-                                            }
-                                            if (selectedUploadedFiles.length ==
-                                                selectedMedia.length) {
-                                              setState(() {
-                                                _model.uploadedLocalFile2 =
-                                                    selectedUploadedFiles.first;
-                                              });
-                                            } else {
-                                              setState(() {});
-                                              return;
-                                            }
-                                          }
-
-                                          await _model.uploadImage(
-                                            context,
-                                            fileUpload:
-                                                _model.uploadedLocalFile2,
-                                          );
+                                        try {
+                                          selectedUploadedFiles = selectedMedia
+                                              .map((m) => FFUploadedFile(
+                                                    name: m.storagePath
+                                                        .split('/')
+                                                        .last,
+                                                    bytes: m.bytes,
+                                                    height:
+                                                        m.dimensions?.height,
+                                                    width: m.dimensions?.width,
+                                                    blurHash: m.blurHash,
+                                                  ))
+                                              .toList();
+                                        } finally {
+                                          _model.isDataUploading = false;
+                                        }
+                                        if (selectedUploadedFiles.length ==
+                                            selectedMedia.length) {
+                                          setState(() {
+                                            _model.uploadedLocalFile =
+                                                selectedUploadedFiles.first;
+                                          });
+                                        } else {
                                           setState(() {});
-                                        },
-                                        text: 'อัปโหลด',
-                                        icon: Icon(
-                                          Icons.add_a_photo,
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          size: 15.0,
-                                        ),
-                                        options: FFButtonOptions(
-                                          height: 40.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 0.0, 5.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium,
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            width: 1.0,
+                                          return;
+                                        }
+                                      }
+
+                                      await _model.uploadImage(
+                                        context,
+                                        fileUpload: _model.uploadedLocalFile,
+                                      );
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 250.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFFE0E3E7),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      child: Stack(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.add_a_photo_outlined,
+                                                color: Color(0xFF57636C),
+                                                size: 72.0,
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 12.0, 0.0, 0.0),
+                                                child: Text(
+                                                  'เพิ่มรูปภาพ',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .titleLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'IBM Plex Sans Thai',
+                                                        color:
+                                                            Color(0xFF14181B),
+                                                        fontSize: 22.0,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLargeFamily),
+                                                      ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 4.0, 0.0, 0.0),
+                                                child: Text(
+                                                  'อัพโหลดรูปภาพที่นี่...',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'IBM Plex Sans Thai',
+                                                        color:
+                                                            Color(0xFF57636C),
+                                                        fontSize: 14.0,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMediumFamily),
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
+                                          if (valueOrDefault<bool>(
+                                            FFAppState().thumbnail.image.path !=
+                                                    null &&
+                                                FFAppState()
+                                                        .thumbnail
+                                                        .image
+                                                        .path !=
+                                                    '',
+                                            false,
+                                          ))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(8.0, 8.0, 8.0, 8.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                child: OctoImage(
+                                                  placeholderBuilder:
+                                                      OctoPlaceholder.blurHash(
+                                                    FFAppState()
+                                                        .thumbnail
+                                                        .image
+                                                        .blurHash,
+                                                  ),
+                                                  image: NetworkImage(
+                                                    functions.getImage(
+                                                        FFAppState()
+                                                            .thumbnail
+                                                            .image
+                                                            .path),
+                                                  ),
+                                                  width: double.infinity,
+                                                  height: double.infinity,
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+                                            ),
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                1.00, 1.00),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 10.0, 10.0),
+                                              child: Icon(
+                                                Icons.file_upload_outlined,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 24.0,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Text(
-                                      'หรือ',
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 5.0, 0.0),
+                                    child: Text(
+                                      'คลังรูปภาพ',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
-                                    Expanded(
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          context.pushNamed(
-                                            'ThumbnailCategory',
-                                            queryParameters: {
-                                              'type': serializeParam(
-                                                'item',
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-                                        },
-                                        text: 'เลือกรูปภาพ',
-                                        icon: Icon(
-                                          Icons.image_search,
-                                          color: FlutterFlowTheme.of(context)
-                                              .grey700,
-                                          size: 15.0,
-                                        ),
-                                        options: FFButtonOptions(
-                                          height: 40.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 0.0, 5.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium,
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ].divide(SizedBox(width: 10.0)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 2.0, 0.0, 0.0),
-                                  child: TextFormField(
-                                    controller: _model.nameFieldController,
-                                    onChanged: (_) => EasyDebounce.debounce(
-                                      '_model.nameFieldController',
-                                      Duration(milliseconds: 2000),
-                                      () async {
-                                        FFAppState().updatePageItemInfoStruct(
-                                          (e) => e
-                                            ..name =
-                                                _model.nameFieldController.text,
-                                        );
-                                      },
-                                    ),
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'ชื่อ',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .red400,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
-                                      ),
-                                      errorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
-                                      ),
-                                      focusedErrorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
-                                      ),
-                                      filled: true,
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 16.0, 16.0, 8.0),
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily,
-                                          fontSize: 14.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLargeFamily),
-                                          lineHeight: 1.0,
-                                        ),
-                                    validator: _model
-                                        .nameFieldControllerValidator
-                                        .asValidator(context),
                                   ),
-                                ),
-                                TextFormField(
-                                  controller: _model.descriptionFieldController,
+                                  FlutterFlowIconButton(
+                                    borderColor:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    borderRadius: 5.0,
+                                    borderWidth: 1.0,
+                                    buttonSize: 35.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).info,
+                                    icon: Icon(
+                                      Icons.image_search,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 20.0,
+                                    ),
+                                    onPressed: () async {
+                                      context.pushNamed(
+                                        'ThumbnailCategory',
+                                        queryParameters: {
+                                          'type': serializeParam(
+                                            'item',
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16.0),
+                        border: Border.all(
+                          color: Color(0xFFE0E3E7),
+                          width: 1.0,
+                        ),
+                      ),
+                      child: Form(
+                        key: _model.formKey1,
+                        autovalidateMode: AutovalidateMode.always,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 20.0, 20.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 2.0, 0.0, 0.0),
+                                child: TextFormField(
+                                  controller: _model.nameFieldController,
                                   onChanged: (_) => EasyDebounce.debounce(
-                                    '_model.descriptionFieldController',
+                                    '_model.nameFieldController',
                                     Duration(milliseconds: 2000),
                                     () async {
                                       FFAppState().updatePageItemInfoStruct(
                                         (e) => e
-                                          ..description = _model
-                                              .descriptionFieldController.text,
+                                          ..name =
+                                              _model.nameFieldController.text,
                                       );
                                     },
                                   ),
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'บันทึกช่วยจำ',
+                                    labelText: 'ชื่อ',
                                     labelStyle:
                                         FlutterFlowTheme.of(context).bodyMedium,
                                     enabledBorder: UnderlineInputBorder(
@@ -703,90 +511,132 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                     .bodyLargeFamily),
                                         lineHeight: 1.0,
                                       ),
-                                  maxLines: null,
-                                  validator: _model
-                                      .descriptionFieldControllerValidator
+                                  validator: _model.nameFieldControllerValidator
                                       .asValidator(context),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 5.0, 0.0),
-                                        child: Text(
-                                          'รีเซ็ต',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 10.0, 0.0),
-                                        child: FlutterFlowIconButton(
-                                          borderColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .alternate,
-                                          borderRadius: 5.0,
-                                          borderWidth: 1.0,
-                                          buttonSize: 35.0,
-                                          fillColor:
-                                              FlutterFlowTheme.of(context).info,
-                                          icon: Icon(
-                                            Icons.restore,
-                                            color: FlutterFlowTheme.of(context)
-                                                .blue600,
-                                            size: 20.0,
-                                          ),
-                                          onPressed: () async {
-                                            setState(() {
-                                              FFAppState()
-                                                  .updatePageItemInfoStruct(
-                                                (e) => e
-                                                  ..expireDate =
-                                                      getCurrentTimestamp,
-                                              );
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 5.0, 0.0),
-                                        child: Text(
-                                          'ย้ายไปหมดอายุ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                      ),
-                                      FlutterFlowIconButton(
-                                        borderColor:
-                                            FlutterFlowTheme.of(context)
-                                                .alternate,
-                                        borderRadius: 5.0,
-                                        borderWidth: 1.0,
-                                        buttonSize: 35.0,
-                                        fillColor:
-                                            FlutterFlowTheme.of(context).info,
-                                        icon: Icon(
-                                          Icons.auto_delete,
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          size: 20.0,
-                                        ),
-                                        onPressed: () {
-                                          print('IconButton pressed ...');
-                                        },
-                                      ),
-                                    ],
-                                  ),
+                              ),
+                              TextFormField(
+                                controller: _model.descriptionFieldController,
+                                onChanged: (_) => EasyDebounce.debounce(
+                                  '_model.descriptionFieldController',
+                                  Duration(milliseconds: 2000),
+                                  () async {
+                                    FFAppState().updatePageItemInfoStruct(
+                                      (e) => e
+                                        ..description = _model
+                                            .descriptionFieldController.text,
+                                    );
+                                  },
                                 ),
-                              ].divide(SizedBox(height: 1.0)),
-                            ),
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'บันทึกช่วยจำ',
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).red400,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  errorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedErrorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  filled: true,
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 16.0, 16.0, 8.0),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily,
+                                      fontSize: 14.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLargeFamily),
+                                      lineHeight: 1.0,
+                                    ),
+                                maxLines: null,
+                                validator: _model
+                                    .descriptionFieldControllerValidator
+                                    .asValidator(context),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 8.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 5.0, 0.0),
+                                      child: Text(
+                                        'ย้ายไปหมดอายุ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                    ),
+                                    FlutterFlowIconButton(
+                                      borderColor: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      borderRadius: 5.0,
+                                      borderWidth: 1.0,
+                                      buttonSize: 30.0,
+                                      fillColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      icon: Icon(
+                                        Icons.auto_delete,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        size: 15.0,
+                                      ),
+                                      onPressed: () {
+                                        print('IconButton pressed ...');
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ].divide(SizedBox(height: 1.0)),
                           ),
                         ),
                       ),
@@ -794,7 +644,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                   ),
                   Flexible(
                     child: Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16.0),
@@ -804,105 +653,26 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         ),
                       ),
                       child: Form(
-                        key: _model.formKey3,
+                        key: _model.formKey4,
                         autovalidateMode: AutovalidateMode.always,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 20.0, 20.0, 20.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 2.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'หมวดหมู่',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLargeFamily,
-                                              fontSize: 14.0,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLargeFamily),
-                                            ),
-                                      ),
-                                      FlutterFlowDropDown<String>(
-                                        controller: _model
-                                                .categoryOptionValueController ??=
-                                            FormFieldController<String>(
-                                          _model.categoryOptionValue ??=
-                                              FFAppState()
-                                                  .pageItemInfo
-                                                  .category,
-                                        ),
-                                        options: FFAppState()
-                                            .locations
-                                            .map((e) => e.name)
-                                            .toList(),
-                                        onChanged: (val) async {
-                                          setState(() =>
-                                              _model.categoryOptionValue = val);
-                                          FFAppState().updatePageItemInfoStruct(
-                                            (e) => e
-                                              ..category =
-                                                  _model.categoryOptionValue,
-                                          );
-                                        },
-                                        width: 200.0,
-                                        height: 40.0,
-                                        searchHintTextStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .labelMedium,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
-                                        hintText: 'โปรดเลือก...',
-                                        searchHintText: 'ค้นหาสถานที่...',
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_down_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 24.0,
-                                        ),
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        elevation: 2.0,
-                                        borderColor: Colors.transparent,
-                                        borderWidth: 0.0,
-                                        borderRadius: 0.0,
-                                        margin: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 4.0, 16.0, 4.0),
-                                        hidesUnderline: true,
-                                        isSearchable: true,
-                                        isMultiSelect: false,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 2.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Row(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 2.0, 0.0, 0.0),
+                                child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'สถานที่เก็บ',
+                                      'หมวดหมู่',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
@@ -918,13 +688,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     ),
                                     FlutterFlowDropDown<String>(
                                       controller: _model
-                                              .locationOptionValueController ??=
+                                              .categoryOptionValueController ??=
                                           FormFieldController<String>(
-                                        _model.locationOptionValue ??=
-                                            FFAppState()
-                                                .pageItemInfo
-                                                .location
-                                                .name,
+                                        _model.categoryOptionValue ??=
+                                            FFAppState().pageItemInfo.category,
                                       ),
                                       options: FFAppState()
                                           .locations
@@ -932,12 +699,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           .toList(),
                                       onChanged: (val) async {
                                         setState(() =>
-                                            _model.locationOptionValue = val);
+                                            _model.categoryOptionValue = val);
                                         FFAppState().updatePageItemInfoStruct(
                                           (e) => e
-                                            ..location = LocationStruct(
-                                              name: _model.locationOptionValue,
-                                            ),
+                                            ..category =
+                                                _model.categoryOptionValue,
                                         );
                                       },
                                       width: 200.0,
@@ -969,106 +735,178 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     ),
                                   ],
                                 ),
-                                Divider(
-                                  thickness: 2.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 2.0, 0.0, 2.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      await _model.scanBarcode(context);
-                                      setState(() {});
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'บาร์ โค้ด',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              FFAppState()
-                                                              .pageItemInfo
-                                                              .barcode !=
-                                                          null &&
-                                                      FFAppState()
-                                                              .pageItemInfo
-                                                              .barcode !=
-                                                          ''
-                                                  ? FFAppState()
-                                                      .pageItemInfo
-                                                      .barcode
-                                                  : 'กดเพื่อสแกน',
-                                              maxLines: 1,
-                                              style:
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'สถานที่เก็บ',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLargeFamily,
+                                          fontSize: 14.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                            ),
-                                          ].divide(SizedBox(width: 5.0)),
+                                                      .bodyLargeFamily),
                                         ),
-                                      ].divide(SizedBox(width: 10.0)),
-                                    ),
                                   ),
-                                ),
-                                Divider(
-                                  thickness: 2.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 5.0, 0.0),
-                                      child: Text(
-                                        'สแกน',
+                                  FlutterFlowDropDown<String>(
+                                    controller:
+                                        _model.locationOptionValueController ??=
+                                            FormFieldController<String>(
+                                      _model.locationOptionValue ??=
+                                          FFAppState()
+                                              .pageItemInfo
+                                              .location
+                                              .name,
+                                    ),
+                                    options: FFAppState()
+                                        .locations
+                                        .map((e) => e.name)
+                                        .toList(),
+                                    onChanged: (val) async {
+                                      setState(() =>
+                                          _model.locationOptionValue = val);
+                                      FFAppState().updatePageItemInfoStruct(
+                                        (e) => e
+                                          ..location = LocationStruct(
+                                            name: _model.locationOptionValue,
+                                          ),
+                                      );
+                                    },
+                                    width: 200.0,
+                                    height: 40.0,
+                                    searchHintTextStyle:
+                                        FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium,
+                                    hintText: 'โปรดเลือก...',
+                                    searchHintText: 'ค้นหาสถานที่...',
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    elevation: 2.0,
+                                    borderColor: Colors.transparent,
+                                    borderWidth: 0.0,
+                                    borderRadius: 0.0,
+                                    margin: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 4.0, 16.0, 4.0),
+                                    hidesUnderline: true,
+                                    isSearchable: true,
+                                    isMultiSelect: false,
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 2.0, 0.0, 2.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await _model.scanBarcode(context);
+                                    setState(() {});
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'บาร์ โค้ด',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(1.00, 1.00),
-                                      child: FlutterFlowIconButton(
-                                        borderColor:
-                                            FlutterFlowTheme.of(context)
-                                                .alternate,
-                                        borderRadius: 5.0,
-                                        borderWidth: 1.0,
-                                        buttonSize: 30.0,
-                                        fillColor:
-                                            FlutterFlowTheme.of(context).info,
-                                        icon: FaIcon(
-                                          FontAwesomeIcons.barcode,
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          size: 14.0,
-                                        ),
-                                        onPressed: () async {
-                                          await _model.scanBarcode(context);
-                                          setState(() {});
-                                        },
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            FFAppState().pageItemInfo.barcode !=
+                                                        null &&
+                                                    FFAppState()
+                                                            .pageItemInfo
+                                                            .barcode !=
+                                                        ''
+                                                ? FFAppState()
+                                                    .pageItemInfo
+                                                    .barcode
+                                                : 'กดเพื่อสแกน',
+                                            maxLines: 1,
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium,
+                                          ),
+                                        ].divide(SizedBox(width: 5.0)),
                                       ),
-                                    ),
-                                  ],
+                                    ].divide(SizedBox(width: 10.0)),
+                                  ),
                                 ),
-                              ].divide(SizedBox(height: 1.0)),
-                            ),
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 5.0, 0.0),
+                                    child: Text(
+                                      'สแกน',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(1.00, 1.00),
+                                    child: FlutterFlowIconButton(
+                                      borderColor: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      borderRadius: 5.0,
+                                      borderWidth: 1.0,
+                                      buttonSize: 30.0,
+                                      fillColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      icon: FaIcon(
+                                        FontAwesomeIcons.barcode,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        size: 15.0,
+                                      ),
+                                      onPressed: () async {
+                                        await _model.scanBarcode(context);
+                                        setState(() {});
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ].divide(SizedBox(height: 1.0)),
                           ),
                         ),
                       ),
@@ -1076,7 +914,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                   ),
                   Flexible(
                     child: Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16.0),
@@ -1086,206 +923,276 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         ),
                       ),
                       child: Form(
-                        key: _model.formKey1,
+                        key: _model.formKey2,
                         autovalidateMode: AutovalidateMode.always,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 20.0, 20.0, 20.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 5.0, 0.0, 5.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      final _datePicked1Date =
-                                          await showDatePicker(
-                                        context: context,
-                                        initialDate: FFAppState()
-                                            .pageItemInfo
-                                            .storageDate!,
-                                        firstDate: DateTime(1900),
-                                        lastDate: FFAppState()
-                                            .pageItemInfo
-                                            .storageDate!,
-                                      );
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    final _datePicked1Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: FFAppState()
+                                          .pageItemInfo
+                                          .storageDate!,
+                                      firstDate: DateTime(1900),
+                                      lastDate: FFAppState()
+                                          .pageItemInfo
+                                          .storageDate!,
+                                    );
 
-                                      if (_datePicked1Date != null) {
-                                        safeSetState(() {
-                                          _model.datePicked1 = DateTime(
-                                            _datePicked1Date.year,
-                                            _datePicked1Date.month,
-                                            _datePicked1Date.day,
-                                          );
-                                        });
-                                      }
-                                      setState(() {
-                                        FFAppState().updatePageItemInfoStruct(
-                                          (e) => e
-                                            ..storageDate = _model.datePicked1,
+                                    if (_datePicked1Date != null) {
+                                      safeSetState(() {
+                                        _model.datePicked1 = DateTime(
+                                          _datePicked1Date.year,
+                                          _datePicked1Date.month,
+                                          _datePicked1Date.day,
                                         );
                                       });
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'วันที่เริ่มเก็บ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              dateTimeFormat(
-                                                'yMMMd',
-                                                FFAppState()
-                                                    .pageItemInfo
-                                                    .storageDate!,
-                                                locale:
-                                                    FFLocalizations.of(context)
-                                                        .languageCode,
-                                              ),
-                                              maxLines: 1,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                            ),
-                                          ].divide(SizedBox(width: 5.0)),
-                                        ),
-                                      ].divide(SizedBox(width: 10.0)),
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 2.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 5.0, 0.0, 5.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      final _datePicked2Date =
-                                          await showDatePicker(
-                                        context: context,
-                                        initialDate: getCurrentTimestamp,
-                                        firstDate: getCurrentTimestamp,
-                                        lastDate: DateTime(2050),
+                                    }
+                                    setState(() {
+                                      FFAppState().updatePageItemInfoStruct(
+                                        (e) =>
+                                            e..storageDate = _model.datePicked1,
                                       );
-
-                                      if (_datePicked2Date != null) {
-                                        safeSetState(() {
-                                          _model.datePicked2 = DateTime(
-                                            _datePicked2Date.year,
-                                            _datePicked2Date.month,
-                                            _datePicked2Date.day,
-                                          );
-                                        });
-                                      }
-                                      setState(() {
-                                        FFAppState().updatePageItemInfoStruct(
-                                          (e) => e
-                                            ..expireDate = _model.datePicked2,
-                                        );
-                                      });
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'วันที่หมดอายุ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              dateTimeFormat(
-                                                'yMMMd',
-                                                FFAppState()
-                                                    .pageItemInfo
-                                                    .expireDate!,
-                                                locale:
-                                                    FFLocalizations.of(context)
-                                                        .languageCode,
-                                              ),
-                                              maxLines: 1,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                            ),
-                                          ].divide(SizedBox(width: 5.0)),
-                                        ),
-                                      ].divide(SizedBox(width: 10.0)),
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 2.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 5.0, 0.0, 5.0),
-                                  child: Builder(
-                                    builder: (context) {
-                                      final list = FFAppState()
-                                          .addDate
-                                          .where((e) => e.day <= 7)
-                                          .toList();
-                                      return Row(
+                                    });
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'วันที่เริ่มเก็บ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                      Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: List.generate(list.length,
-                                            (listIndex) {
-                                          final listItem = list[listIndex];
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              setState(() {
-                                                FFAppState()
-                                                    .updatePageItemInfoStruct(
-                                                  (e) => e
-                                                    ..expireDate =
-                                                        functions.addDate(
-                                                            FFAppState()
-                                                                .pageItemInfo
-                                                                .expireDate!,
-                                                            listItem.day),
-                                                );
-                                              });
-                                            },
-                                            child: Text(
-                                              '+ ${listItem.short}.',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            dateTimeFormat(
+                                              'yMMMd',
+                                              FFAppState()
+                                                  .pageItemInfo
+                                                  .storageDate!,
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
+                                            maxLines: 1,
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium,
+                                          ),
+                                        ].divide(SizedBox(width: 5.0)),
+                                      ),
+                                    ].divide(SizedBox(width: 10.0)),
+                                  ),
+                                ),
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    final _datePicked2Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: getCurrentTimestamp,
+                                      firstDate: getCurrentTimestamp,
+                                      lastDate: DateTime(2050),
+                                    );
+
+                                    if (_datePicked2Date != null) {
+                                      safeSetState(() {
+                                        _model.datePicked2 = DateTime(
+                                          _datePicked2Date.year,
+                                          _datePicked2Date.month,
+                                          _datePicked2Date.day,
+                                        );
+                                      });
+                                    }
+                                    setState(() {
+                                      FFAppState().updatePageItemInfoStruct(
+                                        (e) =>
+                                            e..expireDate = _model.datePicked2,
+                                      );
+                                    });
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'วันที่หมดอายุ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            dateTimeFormat(
+                                              'yMMMd',
+                                              FFAppState()
+                                                  .pageItemInfo
+                                                  .expireDate!,
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
+                                            maxLines: 1,
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium,
+                                          ),
+                                        ].divide(SizedBox(width: 5.0)),
+                                      ),
+                                    ].divide(SizedBox(width: 10.0)),
+                                  ),
+                                ),
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: Builder(
+                                  builder: (context) {
+                                    final list = FFAppState()
+                                        .addDate
+                                        .where((e) => e.day <= 7)
+                                        .toList();
+                                    return Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: List.generate(list.length,
+                                          (listIndex) {
+                                        final listItem = list[listIndex];
+                                        return InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              FFAppState()
+                                                  .updatePageItemInfoStruct(
+                                                (e) => e
+                                                  ..expireDate =
+                                                      functions.addDate(
+                                                          FFAppState()
+                                                              .pageItemInfo
+                                                              .expireDate!,
+                                                          listItem.day),
+                                              );
+                                            });
+                                          },
+                                          child: Text(
+                                            '+ ${listItem.short}.',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .blue600,
+                                                  fontSize: 16.0,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
+                                                ),
+                                          ),
+                                        );
+                                      }).divide(SizedBox(width: 10.0)),
+                                    );
+                                  },
+                                ),
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 5.0),
+                                      child: Builder(
+                                        builder: (context) {
+                                          final list = FFAppState()
+                                              .addDate
+                                              .where((e) => e.day >= 14)
+                                              .toList();
+                                          return Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: List.generate(list.length,
+                                                (listIndex) {
+                                              final listItem = list[listIndex];
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  setState(() {
+                                                    FFAppState()
+                                                        .updatePageItemInfoStruct(
+                                                      (e) => e
+                                                        ..expireDate =
+                                                            functions.addDate(
+                                                                FFAppState()
+                                                                    .pageItemInfo
+                                                                    .expireDate!,
+                                                                listItem.day),
+                                                    );
+                                                  });
+                                                },
+                                                child: Text(
+                                                  '+ ${listItem.short}.',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily:
@@ -1304,176 +1211,92 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                                         context)
                                                                     .bodyMediumFamily),
                                                       ),
-                                            ),
+                                                ),
+                                              );
+                                            }).divide(SizedBox(width: 10.0)),
                                           );
-                                        }).divide(SizedBox(width: 10.0)),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 2.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 5.0, 0.0, 5.0),
-                                        child: Builder(
-                                          builder: (context) {
-                                            final list = FFAppState()
-                                                .addDate
-                                                .where((e) => e.day >= 14)
-                                                .toList();
-                                            return Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: List.generate(
-                                                  list.length, (listIndex) {
-                                                final listItem =
-                                                    list[listIndex];
-                                                return InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    setState(() {
-                                                      FFAppState()
-                                                          .updatePageItemInfoStruct(
-                                                        (e) => e
-                                                          ..expireDate =
-                                                              functions.addDate(
-                                                                  FFAppState()
-                                                                      .pageItemInfo
-                                                                      .expireDate!,
-                                                                  listItem.day),
-                                                      );
-                                                    });
-                                                  },
-                                                  child: Text(
-                                                    '+ ${listItem.short}.',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .blue600,
-                                                          fontSize: 16.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
-                                                  ),
-                                                );
-                                              }).divide(SizedBox(width: 10.0)),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Divider(
-                                  thickness: 2.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 5.0, 0.0),
-                                      child: Text(
-                                        'รีเซ็ต',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 10.0, 0.0),
-                                      child: FlutterFlowIconButton(
-                                        borderColor:
-                                            FlutterFlowTheme.of(context)
-                                                .alternate,
-                                        borderRadius: 5.0,
-                                        borderWidth: 1.0,
-                                        buttonSize: 35.0,
-                                        fillColor:
-                                            FlutterFlowTheme.of(context).info,
-                                        icon: Icon(
-                                          Icons.restore,
-                                          color: FlutterFlowTheme.of(context)
-                                              .blue600,
-                                          size: 20.0,
-                                        ),
-                                        onPressed: () async {
-                                          setState(() {
-                                            FFAppState()
-                                                .updatePageItemInfoStruct(
-                                              (e) => e
-                                                ..expireDate =
-                                                    functions.addDate(
-                                                        getCurrentTimestamp, 1)
-                                                ..storageDate =
-                                                    getCurrentTimestamp,
-                                            );
-                                          });
                                         },
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 5.0, 0.0),
-                                      child: Text(
-                                        'สแกน',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 5.0, 0.0),
+                                    child: Text(
+                                      'รีเซ็ต',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
                                     ),
-                                    FlutterFlowIconButton(
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 10.0, 0.0),
+                                    child: FlutterFlowIconButton(
                                       borderColor: FlutterFlowTheme.of(context)
                                           .alternate,
                                       borderRadius: 5.0,
                                       borderWidth: 1.0,
-                                      buttonSize: 35.0,
+                                      buttonSize: 30.0,
                                       fillColor:
                                           FlutterFlowTheme.of(context).info,
                                       icon: Icon(
-                                        Icons.document_scanner_rounded,
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        size: 20.0,
+                                        Icons.restore,
+                                        color: FlutterFlowTheme.of(context)
+                                            .blue600,
+                                        size: 15.0,
                                       ),
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
+                                      onPressed: () async {
+                                        setState(() {
+                                          FFAppState().updatePageItemInfoStruct(
+                                            (e) => e
+                                              ..expireDate = functions.addDate(
+                                                  getCurrentTimestamp, 1)
+                                              ..storageDate =
+                                                  getCurrentTimestamp,
+                                          );
+                                        });
                                       },
                                     ),
-                                  ],
-                                ),
-                              ].divide(SizedBox(height: 1.0)),
-                            ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 5.0, 0.0),
+                                    child: Text(
+                                      'สแกน',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                  ),
+                                  FlutterFlowIconButton(
+                                    borderColor:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    borderRadius: 5.0,
+                                    borderWidth: 1.0,
+                                    buttonSize: 30.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).info,
+                                    icon: Icon(
+                                      Icons.document_scanner_rounded,
+                                      color: FlutterFlowTheme.of(context).error,
+                                      size: 15.0,
+                                    ),
+                                    onPressed: () {
+                                      print('IconButton pressed ...');
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ].divide(SizedBox(height: 1.0)),
                           ),
                         ),
                       ),

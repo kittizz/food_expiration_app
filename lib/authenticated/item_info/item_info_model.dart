@@ -29,15 +29,12 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  final formKey2 = GlobalKey<FormState>();
   final formKey3 = GlobalKey<FormState>();
   final formKey1 = GlobalKey<FormState>();
-  bool isDataUploading1 = false;
-  FFUploadedFile uploadedLocalFile1 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-
-  bool isDataUploading2 = false;
-  FFUploadedFile uploadedLocalFile2 =
+  final formKey4 = GlobalKey<FormState>();
+  final formKey2 = GlobalKey<FormState>();
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // State field(s) for NameField widget.
@@ -81,7 +78,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
           hash: fileUpload?.blurHash,
         );
         if ((apiUploadImage1?.succeeded ?? true)) {
-          hash = uploadedLocalFile1.blurHash!;
+          hash = uploadedLocalFile.blurHash!;
           FFAppState().updateThumbnailStruct(
             (e) => e
               ..updateImage(
