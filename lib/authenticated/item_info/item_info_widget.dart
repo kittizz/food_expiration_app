@@ -1,5 +1,5 @@
 import '/backend/schema/structs/index.dart';
-import '/component/modal05_create_project/modal05_create_project_widget.dart';
+import '/component/modal03_create_message_bottom/modal03_create_message_bottom_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -126,15 +126,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                               : FocusScope.of(context).unfocus(),
                           child: Padding(
                             padding: MediaQuery.viewInsetsOf(context),
-                            child: Modal05CreateProjectWidget(),
+                            child: Modal03CreateMessageBottomWidget(),
                           ),
                         );
                       },
                     ).then((value) => safeSetState(() {}));
-
-                    setState(() {
-                      _model.hash = '';
-                    });
                   },
                   child: Text(
                     widget.isAdd! ? 'เพิ่ม' : 'บันทึก',
