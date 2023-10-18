@@ -139,8 +139,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       _model.apiCreateItem =
                           await FoodexpirationGroup.createItemCall.call(
                         name: _model.nameFieldController.text,
-                        description: functions.encodeString(
-                            _model.descriptionFieldController.text),
+                        description: _model.descriptionFieldController.text,
                         storageDate: functions
                             .toRFC3339(FFAppState().pageItemInfo.storageDate!),
                         expireDate: functions
@@ -924,7 +923,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   .bodyLargeFamily),
                                       lineHeight: 1.0,
                                     ),
-                                maxLines: null,
                                 validator: _model
                                     .descriptionFieldControllerValidator
                                     .asValidator(context),
