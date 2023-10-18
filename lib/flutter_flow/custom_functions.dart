@@ -62,7 +62,7 @@ String getImage(String path) {
 
 List<ThumbnailCategoryStruct> toThumbnailCategoryStructList(dynamic jsonbody) {
   List<ThumbnailCategoryStruct> listOfStruct = [];
-  if (jsonbody.length == 0) {
+  if (jsonbody == null && jsonbody.length == 0) {
     return listOfStruct;
   }
   for (var v in jsonbody) {
@@ -98,7 +98,7 @@ List<ThumbnailCategoryStruct> toThumbnailCategoryStructList(dynamic jsonbody) {
 
 ThumbnailCategoryStruct toThumbnailCategoryStruct(dynamic jsonbody) {
   ThumbnailCategoryStruct val = new ThumbnailCategoryStruct();
-  if (jsonbody.length == 0) {
+  if (jsonbody == null && jsonbody.length == 0) {
     return val;
   }
   var v = jsonbody;
@@ -132,7 +132,7 @@ ThumbnailCategoryStruct toThumbnailCategoryStruct(dynamic jsonbody) {
 
 List<ItemStruct> toItemList(dynamic jsonBody) {
   List<ItemStruct> listOfStruct = [];
-  if (jsonBody != null && jsonBody.length == 0) {
+  if (jsonBody == null && jsonBody.length == 0) {
     return listOfStruct;
   }
   for (var v in jsonBody) {
@@ -143,7 +143,7 @@ List<ItemStruct> toItemList(dynamic jsonBody) {
 
 List<LocationStruct> toLocationStructList(dynamic jsonBody) {
   List<LocationStruct> listOfStruct = [];
-  if (jsonBody != null && jsonBody.length == 0) {
+  if (jsonBody == null && jsonBody.length == 0) {
     return listOfStruct;
   }
   for (var v in jsonBody) {
@@ -153,7 +153,7 @@ List<LocationStruct> toLocationStructList(dynamic jsonBody) {
 }
 
 LocationStruct toLocationStruct(dynamic jsonBody) {
-  if (jsonBody != null && jsonBody.length == 0) {
+  if (jsonBody == null && jsonBody.length == 0) {
     return LocationStruct();
   }
   LocationStruct item = new LocationStruct(
@@ -178,7 +178,7 @@ DateTime addDate(
 
 ItemStruct toItem(dynamic jsonBody) {
   ItemStruct val = new ItemStruct();
-  if (jsonBody != null && jsonBody.length == 0) {
+  if (jsonBody == null && jsonBody.length == 0) {
     return val;
   }
   var v = jsonBody;
