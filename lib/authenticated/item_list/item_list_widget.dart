@@ -64,7 +64,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            await action_blocks.openAddItem(context);
+            await action_blocks.openAddItem(
+              context,
+              replace: false,
+            );
             setState(() {});
           },
           backgroundColor: FlutterFlowTheme.of(context).red50,
@@ -310,12 +313,40 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
                 child: wrapWithModel(
-                  model: _model.listItemsModel,
+                  model: _model.listItemsModel1,
                   updateCallback: () => setState(() {}),
                   child: ListItemsWidget(
                     parameter1: _model.testDate,
                     title: 'หมดอายุไปแล้ว',
                     showClear: true,
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                child: wrapWithModel(
+                  model: _model.listItemsModel2,
+                  updateCallback: () => setState(() {}),
+                  child: ListItemsWidget(
+                    parameter1: _model.testDate,
+                    title: 'ใกล้จะอายุ',
+                    showClear: false,
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                child: wrapWithModel(
+                  model: _model.listItemsModel3,
+                  updateCallback: () => setState(() {}),
+                  child: ListItemsWidget(
+                    parameter1: _model.testDate,
+                    title: 'รายการที่เหลือ',
+                    showClear: false,
                   ),
                 ),
               ),

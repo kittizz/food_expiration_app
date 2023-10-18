@@ -156,7 +156,10 @@ Future<bool> fetchLocationInfo(
   }
 }
 
-Future openAddItem(BuildContext context) async {
+Future openAddItem(
+  BuildContext context, {
+  required bool? replace,
+}) async {
   FFAppState().update(() {
     FFAppState().updatePageItemInfoStruct(
       (e) => e
@@ -172,20 +175,38 @@ Future openAddItem(BuildContext context) async {
     FFAppState().thumbnail =
         ThumbnailStruct.fromSerializableMap(jsonDecode('{\"image\":\"{}\"}'));
   });
-
-  context.pushNamed(
-    'ItemInfo',
-    queryParameters: {
-      'name': serializeParam(
-        'เพิ่มรายการ',
-        ParamType.String,
-      ),
-      'isAdd': serializeParam(
-        true,
-        ParamType.bool,
-      ),
-    }.withoutNulls,
-  );
+  if (replace!) {
+    if (Navigator.of(context).canPop()) {
+      context.pop();
+    }
+    context.pushNamed(
+      'ItemInfo',
+      queryParameters: {
+        'name': serializeParam(
+          'เพิ่มรายการ',
+          ParamType.String,
+        ),
+        'isAdd': serializeParam(
+          true,
+          ParamType.bool,
+        ),
+      }.withoutNulls,
+    );
+  } else {
+    context.pushNamed(
+      'ItemInfo',
+      queryParameters: {
+        'name': serializeParam(
+          'เพิ่มรายการ',
+          ParamType.String,
+        ),
+        'isAdd': serializeParam(
+          true,
+          ParamType.bool,
+        ),
+      }.withoutNulls,
+    );
+  }
 }
 
 Future fetchCategory(BuildContext context) async {

@@ -83,26 +83,8 @@ class _LocationListWidgetState extends State<LocationListWidget>
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            context.pushNamed(
-              'ItemInfo',
-              queryParameters: {
-                'name': serializeParam(
-                  '',
-                  ParamType.String,
-                ),
-                'isAdd': serializeParam(
-                  false,
-                  ParamType.bool,
-                ),
-              }.withoutNulls,
-              extra: <String, dynamic>{
-                kTransitionInfoKey: TransitionInfo(
-                  hasTransition: true,
-                  transitionType: PageTransitionType.bottomToTop,
-                ),
-              },
-            );
+          onPressed: () {
+            print('FloatingActionButton pressed ...');
           },
           backgroundColor: FlutterFlowTheme.of(context).red50,
           elevation: 5.0,
