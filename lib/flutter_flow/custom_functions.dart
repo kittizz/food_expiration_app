@@ -160,6 +160,7 @@ LocationStruct toLocationStruct(dynamic jsonBody) {
       id: jsonBody['id'] as int,
       name: jsonBody['name'] as String,
       description: jsonBody['description'] as String,
+      items: toItemList(jsonBody['items']),
       image: ImageStruct(
         id: jsonBody['image']['id'] as int,
         path: jsonBody['image']['path'] as String,

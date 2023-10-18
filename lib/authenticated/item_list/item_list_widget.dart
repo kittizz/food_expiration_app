@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -63,25 +64,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            context.pushNamed(
-              'ItemInfo',
-              queryParameters: {
-                'name': serializeParam(
-                  '',
-                  ParamType.String,
-                ),
-                'isAdd': serializeParam(
-                  false,
-                  ParamType.bool,
-                ),
-              }.withoutNulls,
-              extra: <String, dynamic>{
-                kTransitionInfoKey: TransitionInfo(
-                  hasTransition: true,
-                  transitionType: PageTransitionType.bottomToTop,
-                ),
-              },
-            );
+            await action_blocks.openAddItem(context);
+            setState(() {});
           },
           backgroundColor: FlutterFlowTheme.of(context).red50,
           elevation: 5.0,
@@ -321,13 +305,18 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                     ),
                   ),
                 ),
-              wrapWithModel(
-                model: _model.listItemsModel,
-                updateCallback: () => setState(() {}),
-                child: ListItemsWidget(
-                  parameter1: _model.testDate,
-                  title: 'หมดอายุไปแล้ว',
-                  showClear: true,
+              Container(
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                child: wrapWithModel(
+                  model: _model.listItemsModel,
+                  updateCallback: () => setState(() {}),
+                  child: ListItemsWidget(
+                    parameter1: _model.testDate,
+                    title: 'หมดอายุไปแล้ว',
+                    showClear: true,
+                  ),
                 ),
               ),
             ],
