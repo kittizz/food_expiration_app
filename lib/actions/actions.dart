@@ -161,7 +161,13 @@ Future openAddItem(BuildContext context) async {
     FFAppState().updatePageItemInfoStruct(
       (e) => e
         ..storageDate = getCurrentTimestamp
-        ..expireDate = functions.addDate(getCurrentTimestamp, 1),
+        ..expireDate = functions.addDate(getCurrentTimestamp, 1)
+        ..name = null
+        ..description = null
+        ..forewarnDay = 3
+        ..category = null
+        ..barcode = null
+        ..location = null,
     );
   });
 

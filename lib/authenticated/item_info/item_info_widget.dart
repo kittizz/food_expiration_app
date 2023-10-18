@@ -120,6 +120,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    var _shouldSetState = false;
                     _model.apiCreateItem =
                         await FoodexpirationGroup.createItemCall.call(
                       name: _model.nameFieldController.text,
@@ -141,6 +142,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                           .id,
                       deviceid: FFAppState().deviceId,
                     );
+                    _shouldSetState = true;
                     if ((_model.apiCreateItem?.succeeded ?? true)) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -155,9 +157,32 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                               FlutterFlowTheme.of(context).secondary,
                         ),
                       );
+                    } else {
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('ข้อผิดพลาด'),
+                            content: Text(FoodexpirationGroup.createItemCall
+                                .message(
+                                  (_model.apiCreateItem?.jsonBody ?? ''),
+                                )
+                                .toString()),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: Text('ตกลง'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                      if (_shouldSetState) setState(() {});
+                      return;
                     }
 
-                    setState(() {});
+                    if (_shouldSetState) setState(() {});
                   },
                   child: Text(
                     widget.isAdd! ? 'เพิ่ม' : 'บันทึก',
@@ -896,15 +921,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             FFAppState().pageItemInfo.category,
                                       ),
                                       options: FFAppState().categorys,
-                                      onChanged: (val) async {
-                                        setState(() =>
-                                            _model.categoryOptionValue = val);
-                                        FFAppState().updatePageItemInfoStruct(
-                                          (e) => e
-                                            ..category =
-                                                _model.categoryOptionValue,
-                                        );
-                                      },
+                                      onChanged: (val) => setState(() =>
+                                          _model.categoryOptionValue = val),
                                       width: 200.0,
                                       height: 40.0,
                                       searchHintTextStyle: FlutterFlowTheme.of(
@@ -923,7 +941,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       textStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       hintText: 'โปรดเลือก...',
-                                      searchHintText: 'ค้นหาสถานที่...',
+                                      searchHintText: 'ค้นหาหมวดหมู่...',
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
                                         color: FlutterFlowTheme.of(context)
@@ -983,16 +1001,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         .locations
                                         .map((e) => e.name)
                                         .toList(),
-                                    onChanged: (val) async {
-                                      setState(() =>
-                                          _model.locationOptionValue = val);
-                                      FFAppState().updatePageItemInfoStruct(
-                                        (e) => e
-                                          ..location = LocationStruct(
-                                            name: _model.locationOptionValue,
-                                          ),
-                                      );
-                                    },
+                                    onChanged: (val) => setState(
+                                        () => _model.locationOptionValue = val),
                                     width: 200.0,
                                     height: 40.0,
                                     searchHintTextStyle: FlutterFlowTheme.of(
