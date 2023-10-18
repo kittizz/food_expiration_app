@@ -236,9 +236,48 @@ class _SettingWidgetState extends State<SettingWidget>
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              width: double.infinity,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).grey50,
+                              ),
+                              child: Align(
+                                alignment: AlignmentDirectional(1.00, 0.00),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 20.0, 0.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await _model.saveNickname(context);
+                                    },
+                                    child: Text(
+                                      'บันทึก',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLargeFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .success,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w600,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLargeFamily),
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
                               constraints: BoxConstraints(
-                                maxWidth: 400.0,
+                                maxWidth: 450.0,
                               ),
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
@@ -248,52 +287,6 @@ class _SettingWidgetState extends State<SettingWidget>
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    height: 50.0,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          FlutterFlowTheme.of(context).grey50,
-                                    ),
-                                    child: Align(
-                                      alignment:
-                                          AlignmentDirectional(1.00, 0.00),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 20.0, 0.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            await _model.saveNickname(context);
-                                          },
-                                          child: Text(
-                                            'บันทึก',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyLargeFamily,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .success,
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLargeFamily),
-                                                ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -673,116 +666,109 @@ class _SettingWidgetState extends State<SettingWidget>
                                 ].divide(SizedBox(height: 30.0)),
                               ),
                             ),
-                            Flexible(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 100.0, 0.0, 0.0),
-                                child: Wrap(
-                                  spacing: 0.0,
-                                  runSpacing: 0.0,
-                                  alignment: WrapAlignment.start,
-                                  crossAxisAlignment: WrapCrossAlignment.start,
-                                  direction: Axis.horizontal,
-                                  runAlignment: WrapAlignment.start,
-                                  verticalDirection: VerticalDirection.down,
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        Function() _navigate = () {};
-                                        var confirmDialogResponse =
-                                            await showDialog<bool>(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      title: Text('ลงชื่อออก'),
-                                                      content: Text(
-                                                          'คุณกำลังลงชื่อออก แน่ใช่หรือไม่'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  false),
-                                                          child: Text('ไม่'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  true),
-                                                          child: Text('ใช่'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                ) ??
-                                                false;
-                                        if (confirmDialogResponse) {
-                                          GoRouter.of(context)
-                                              .prepareAuthEvent();
-                                          await authManager.signOut();
-                                          GoRouter.of(context)
-                                              .clearRedirectLocation();
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 100.0, 0.0, 0.0),
+                              child: Wrap(
+                                spacing: 0.0,
+                                runSpacing: 0.0,
+                                alignment: WrapAlignment.start,
+                                crossAxisAlignment: WrapCrossAlignment.start,
+                                direction: Axis.horizontal,
+                                runAlignment: WrapAlignment.start,
+                                verticalDirection: VerticalDirection.down,
+                                clipBehavior: Clip.none,
+                                children: [
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      Function() _navigate = () {};
+                                      var confirmDialogResponse =
+                                          await showDialog<bool>(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('ลงชื่อออก'),
+                                                    content: Text(
+                                                        'คุณกำลังลงชื่อออก แน่ใช่หรือไม่'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                false),
+                                                        child: Text('ไม่'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                true),
+                                                        child: Text('ใช่'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              ) ??
+                                              false;
+                                      if (confirmDialogResponse) {
+                                        GoRouter.of(context).prepareAuthEvent();
+                                        await authManager.signOut();
+                                        GoRouter.of(context)
+                                            .clearRedirectLocation();
 
-                                          _navigate = () => context.goNamedAuth(
-                                              'Welcome', context.mounted);
-                                          setState(() {
-                                            FFAppState().deviceId = '';
-                                            FFAppState().user = UserStruct
-                                                .fromSerializableMap(jsonDecode(
-                                                    '{\"role\":\"user\",\"nickname\":\"ผู้ใช้\",\"profilePicture\":\"/images/user.png\",\"profilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
-                                          });
-                                        } else {
-                                          return;
-                                        }
+                                        _navigate = () => context.goNamedAuth(
+                                            'Welcome', context.mounted);
+                                        setState(() {
+                                          FFAppState().deviceId = '';
+                                          FFAppState().user = UserStruct
+                                              .fromSerializableMap(jsonDecode(
+                                                  '{\"role\":\"user\",\"nickname\":\"ผู้ใช้\",\"profilePicture\":\"/images/user.png\",\"profilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
+                                        });
+                                      } else {
+                                        return;
+                                      }
 
-                                        _navigate();
-                                      },
-                                      text: 'ลงชื่อออก',
-                                      icon: Icon(
-                                        Icons.logout,
-                                        size: 15.0,
-                                      ),
-                                      options: FFButtonOptions(
-                                        width: 190.0,
-                                        height: 50.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color:
-                                            FlutterFlowTheme.of(context).red300,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmallFamily,
-                                              color: Colors.white,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmallFamily),
-                                            ),
-                                        elevation: 3.0,
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                      ),
+                                      _navigate();
+                                    },
+                                    text: 'ลงชื่อออก',
+                                    icon: Icon(
+                                      Icons.logout,
+                                      size: 15.0,
                                     ),
-                                  ],
-                                ),
+                                    options: FFButtonOptions(
+                                      width: 190.0,
+                                      height: 50.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color:
+                                          FlutterFlowTheme.of(context).red300,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily,
+                                            color: Colors.white,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmallFamily),
+                                          ),
+                                      elevation: 3.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ].divide(SizedBox(height: 30.0)),
                         ),
                       ),
                     ),
