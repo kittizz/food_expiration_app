@@ -41,18 +41,35 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   // State field(s) for NameField widget.
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
+  String? _nameFieldControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'โปรดกรอกชื่อรายการ';
+    }
+
+    return null;
+  }
+
   // State field(s) for DescriptionField widget.
-  TextEditingController? descriptionFieldController1;
-  String? Function(BuildContext, String?)? descriptionFieldController1Validator;
+  TextEditingController? descriptionFieldController;
+  String? Function(BuildContext, String?)? descriptionFieldControllerValidator;
   // State field(s) for CategoryOption widget.
   String? categoryOptionValue;
   FormFieldController<String>? categoryOptionValueController;
   // State field(s) for LocationOption widget.
   String? locationOptionValue;
   FormFieldController<String>? locationOptionValueController;
-  // State field(s) for DescriptionField widget.
-  TextEditingController? descriptionFieldController2;
-  String? Function(BuildContext, String?)? descriptionFieldController2Validator;
+  // State field(s) for forewarnDayField widget.
+  TextEditingController? forewarnDayFieldController;
+  String? Function(BuildContext, String?)? forewarnDayFieldControllerValidator;
+  String? _forewarnDayFieldControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'โปรดกรอกแจ้งเตือนล่วงหน้า';
+    }
+
+    return null;
+  }
+
   DateTime? datePicked1;
   DateTime? datePicked2;
   // Stores action output result for [Backend Call - API (createItem)] action in Text widget.
@@ -60,13 +77,16 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    nameFieldControllerValidator = _nameFieldControllerValidator;
+    forewarnDayFieldControllerValidator = _forewarnDayFieldControllerValidator;
+  }
 
   void dispose() {
     unfocusNode.dispose();
     nameFieldController?.dispose();
-    descriptionFieldController1?.dispose();
-    descriptionFieldController2?.dispose();
+    descriptionFieldController?.dispose();
+    forewarnDayFieldController?.dispose();
   }
 
   /// Action blocks are added here.

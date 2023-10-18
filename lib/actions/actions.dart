@@ -169,6 +169,8 @@ Future openAddItem(BuildContext context) async {
         ..barcode = null
         ..location = null,
     );
+    FFAppState().thumbnail =
+        ThumbnailStruct.fromSerializableMap(jsonDecode('{\"image\":\"{}\"}'));
   });
 
   context.pushNamed(

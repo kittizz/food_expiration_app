@@ -55,9 +55,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
 
     _model.nameFieldController ??=
         TextEditingController(text: FFAppState().pageItemInfo.name);
-    _model.descriptionFieldController1 ??=
+    _model.descriptionFieldController ??=
         TextEditingController(text: FFAppState().pageItemInfo.description);
-    _model.descriptionFieldController2 ??= TextEditingController(
+    _model.forewarnDayFieldController ??= TextEditingController(
         text: valueOrDefault<String>(
       FFAppState().pageItemInfo.forewarnDay.toString(),
       '1',
@@ -124,13 +124,13 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                     _model.apiCreateItem =
                         await FoodexpirationGroup.createItemCall.call(
                       name: _model.nameFieldController.text,
-                      description: _model.descriptionFieldController1.text,
+                      description: _model.descriptionFieldController.text,
                       storageDate: functions
                           .toRFC3339(FFAppState().pageItemInfo.storageDate!),
                       expireDate: functions
                           .toRFC3339(FFAppState().pageItemInfo.expireDate!),
                       forewarnDay:
-                          int.tryParse(_model.descriptionFieldController2.text),
+                          int.tryParse(_model.forewarnDayFieldController.text),
                       category: _model.categoryOptionValue,
                       barcode: FFAppState().pageItemInfo.barcode,
                       imageId: FFAppState().thumbnail.image.id,
@@ -225,7 +225,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       ),
                       child: Form(
                         key: _model.formKey3,
-                        autovalidateMode: AutovalidateMode.always,
+                        autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 20.0, 20.0, 20.0),
@@ -700,6 +700,26 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     contentPadding:
                                         EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 16.0, 8.0),
+                                    suffixIcon: _model.nameFieldController!.text
+                                            .isNotEmpty
+                                        ? InkWell(
+                                            onTap: () async {
+                                              _model.nameFieldController
+                                                  ?.clear();
+                                              FFAppState()
+                                                  .updatePageItemInfoStruct(
+                                                (e) => e
+                                                  ..name = _model
+                                                      .nameFieldController.text,
+                                              );
+                                              setState(() {});
+                                            },
+                                            child: Icon(
+                                              Icons.clear,
+                                              size: 15.0,
+                                            ),
+                                          )
+                                        : null,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
@@ -718,15 +738,15 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 ),
                               ),
                               TextFormField(
-                                controller: _model.descriptionFieldController1,
+                                controller: _model.descriptionFieldController,
                                 onChanged: (_) => EasyDebounce.debounce(
-                                  '_model.descriptionFieldController1',
+                                  '_model.descriptionFieldController',
                                   Duration(milliseconds: 2000),
                                   () async {
                                     FFAppState().updatePageItemInfoStruct(
                                       (e) => e
                                         ..description = _model
-                                            .descriptionFieldController1.text,
+                                            .descriptionFieldController.text,
                                     );
                                   },
                                 ),
@@ -792,6 +812,27 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           0.0, 16.0, 16.0, 8.0),
+                                  suffixIcon: _model.descriptionFieldController!
+                                          .text.isNotEmpty
+                                      ? InkWell(
+                                          onTap: () async {
+                                            _model.descriptionFieldController
+                                                ?.clear();
+                                            FFAppState()
+                                                .updatePageItemInfoStruct(
+                                              (e) => e
+                                                ..description = _model
+                                                    .descriptionFieldController
+                                                    .text,
+                                            );
+                                            setState(() {});
+                                          },
+                                          child: Icon(
+                                            Icons.clear,
+                                            size: 15.0,
+                                          ),
+                                        )
+                                      : null,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
@@ -807,7 +848,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     ),
                                 maxLines: null,
                                 validator: _model
-                                    .descriptionFieldController1Validator
+                                    .descriptionFieldControllerValidator
                                     .asValidator(context),
                               ),
                               if (!widget.isAdd!)
@@ -1179,22 +1220,27 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TextFormField(
-                                controller: _model.descriptionFieldController2,
+                                controller: _model.forewarnDayFieldController,
                                 onChanged: (_) => EasyDebounce.debounce(
-                                  '_model.descriptionFieldController2',
+                                  '_model.forewarnDayFieldController',
                                   Duration(milliseconds: 2000),
                                   () async {
-                                    FFAppState().updatePageItemInfoStruct(
-                                      (e) => e
-                                        ..description = _model
-                                            .descriptionFieldController2.text,
-                                    );
+                                    setState(() {
+                                      _model.forewarnDayFieldController
+                                          ?.text = ((int.parse(_model
+                                                  .forewarnDayFieldController
+                                                  .text)) <
+                                              0
+                                          ? '1'
+                                          : _model
+                                              .forewarnDayFieldController.text);
+                                    });
                                   },
                                 ),
                                 textInputAction: TextInputAction.done,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'เตือนล่วงหน้า (วัน)',
+                                  labelText: 'แจ้งเตือนล่วงหน้า (วัน)',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -1254,6 +1300,31 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           0.0, 16.0, 16.0, 8.0),
+                                  suffixIcon: _model.forewarnDayFieldController!
+                                          .text.isNotEmpty
+                                      ? InkWell(
+                                          onTap: () async {
+                                            _model.forewarnDayFieldController
+                                                ?.clear();
+                                            setState(() {
+                                              _model.forewarnDayFieldController
+                                                  ?.text = ((int.parse(_model
+                                                          .forewarnDayFieldController
+                                                          .text)) <
+                                                      0
+                                                  ? '1'
+                                                  : _model
+                                                      .forewarnDayFieldController
+                                                      .text);
+                                            });
+                                            setState(() {});
+                                          },
+                                          child: Icon(
+                                            Icons.clear,
+                                            size: 15.0,
+                                          ),
+                                        )
+                                      : null,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
@@ -1270,7 +1341,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 maxLines: null,
                                 keyboardType: TextInputType.number,
                                 validator: _model
-                                    .descriptionFieldController2Validator
+                                    .forewarnDayFieldControllerValidator
                                     .asValidator(context),
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
