@@ -135,67 +135,79 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                     if (_model.locationOptionValue == null) {
                       return;
                     }
-                    if (_model.formKey2.currentState == null ||
-                        !_model.formKey2.currentState!.validate()) {
-                      return;
-                    }
-                    if (_model.datePicked1 == null) {
-                      return;
-                    }
-                    if (_model.datePicked2 == null) {
-                      return;
-                    }
-                    _model.apiCreateItem =
-                        await FoodexpirationGroup.createItemCall.call(
-                      name: _model.nameFieldController.text,
-                      description: _model.descriptionFieldController.text,
-                      storageDate: functions
-                          .toRFC3339(FFAppState().pageItemInfo.storageDate!),
-                      expireDate: functions
-                          .toRFC3339(FFAppState().pageItemInfo.expireDate!),
-                      forewarnDay:
-                          int.tryParse(_model.forewarnDayFieldController.text),
-                      category: _model.categoryOptionValue,
-                      barcode: FFAppState().pageItemInfo.barcode,
-                      imageId: FFAppState().thumbnail.image.id,
-                      locationId: _model.locationOptionValue != null &&
-                              _model.locationOptionValue != ''
-                          ? FFAppState()
-                              .locations
-                              .where(
-                                  (e) => e.name == _model.locationOptionValue)
-                              .toList()
-                              .first
-                              .id
-                          : null,
-                      deviceid: FFAppState().deviceId,
-                    );
-                    _shouldSetState = true;
-                    if ((_model.apiCreateItem?.succeeded ?? true)) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'เพิ่มรายการสำเร็จ',
-                            style: TextStyle(
-                              color: FlutterFlowTheme.of(context).primaryText,
-                            ),
-                          ),
-                          duration: Duration(milliseconds: 2000),
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).secondary,
-                        ),
+                    if (FFAppState().thumbnail.image.id != null) {
+                      _model.apiCreateItem =
+                          await FoodexpirationGroup.createItemCall.call(
+                        name: _model.nameFieldController.text,
+                        description: _model.descriptionFieldController.text,
+                        storageDate: functions
+                            .toRFC3339(FFAppState().pageItemInfo.storageDate!),
+                        expireDate: functions
+                            .toRFC3339(FFAppState().pageItemInfo.expireDate!),
+                        forewarnDay: int.tryParse(
+                            _model.forewarnDayFieldController.text),
+                        category: _model.categoryOptionValue,
+                        barcode: FFAppState().pageItemInfo.barcode,
+                        imageId: FFAppState().thumbnail.image.id,
+                        locationId: _model.locationOptionValue != null &&
+                                _model.locationOptionValue != ''
+                            ? FFAppState()
+                                .locations
+                                .where(
+                                    (e) => e.name == _model.locationOptionValue)
+                                .toList()
+                                .first
+                                .id
+                            : null,
+                        deviceid: FFAppState().deviceId,
                       );
+                      _shouldSetState = true;
+                      if ((_model.apiCreateItem?.succeeded ?? true)) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'เพิ่มรายการสำเร็จ',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 2000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('ข้อผิดพลาด'),
+                              content: Text(FoodexpirationGroup.createItemCall
+                                  .message(
+                                    (_model.apiCreateItem?.jsonBody ?? ''),
+                                  )
+                                  .toString()),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('ตกลง'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        if (_shouldSetState) setState(() {});
+                        return;
+                      }
                     } else {
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
                           return AlertDialog(
                             title: Text('ข้อผิดพลาด'),
-                            content: Text(FoodexpirationGroup.createItemCall
-                                .message(
-                                  (_model.apiCreateItem?.jsonBody ?? ''),
-                                )
-                                .toString()),
+                            content:
+                                Text('โปรดอัพโหลดรูปภาพ หรือ เลือกจากคลังภาพ'),
                             actions: [
                               TextButton(
                                 onPressed: () =>
@@ -544,11 +556,47 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   ),
                                                   onPressed: () async {
                                                     context.pushNamed(
-                                                      'ThumbnailCategory',
+                                                      'ThumbnailViewer',
                                                       queryParameters: {
-                                                        'type': serializeParam(
-                                                          'item',
+                                                        'imagePath':
+                                                            serializeParam(
+                                                          FFAppState()
+                                                              .thumbnail
+                                                              .image
+                                                              .path,
                                                           ParamType.String,
+                                                        ),
+                                                        'imageId':
+                                                            serializeParam(
+                                                          0,
+                                                          ParamType.int,
+                                                        ),
+                                                        'catrgoryId':
+                                                            serializeParam(
+                                                          0,
+                                                          ParamType.int,
+                                                        ),
+                                                        'imageBlurhash':
+                                                            serializeParam(
+                                                          FFAppState()
+                                                              .thumbnail
+                                                              .image
+                                                              .blurHash,
+                                                          ParamType.String,
+                                                        ),
+                                                        'name': serializeParam(
+                                                          '',
+                                                          ParamType.String,
+                                                        ),
+                                                        'thumbailId':
+                                                            serializeParam(
+                                                          0,
+                                                          ParamType.int,
+                                                        ),
+                                                        'viewOnly':
+                                                            serializeParam(
+                                                          true,
+                                                          ParamType.bool,
                                                         ),
                                                       }.withoutNulls,
                                                     );
