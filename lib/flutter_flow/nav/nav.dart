@@ -199,6 +199,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             imageBlurhash: params.getParam('imageBlurhash', ParamType.String),
             name: params.getParam('name', ParamType.String),
             thumbailId: params.getParam('thumbailId', ParamType.int),
+            viewOnly: params.getParam('viewOnly', ParamType.bool),
           ),
         ),
         FFRoute(

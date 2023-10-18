@@ -372,71 +372,120 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                               '',
                                       false,
                                     ))
-                                      Wrap(
-                                        spacing: 0.0,
-                                        runSpacing: 0.0,
-                                        alignment: WrapAlignment.start,
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.start,
-                                        direction: Axis.horizontal,
-                                        runAlignment: WrapAlignment.start,
-                                        verticalDirection:
-                                            VerticalDirection.down,
-                                        clipBehavior: Clip.none,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 5.0, 0.0),
-                                                child: Text(
-                                                  'ดูภาพ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
-                                                ),
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            'ThumbnailViewer',
+                                            queryParameters: {
+                                              'imagePath': serializeParam(
+                                                FFAppState()
+                                                    .thumbnail
+                                                    .image
+                                                    .path,
+                                                ParamType.String,
                                               ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 10.0, 0.0),
-                                                child: FlutterFlowIconButton(
-                                                  borderColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  borderRadius: 5.0,
-                                                  borderWidth: 1.0,
-                                                  buttonSize: 30.0,
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .info,
-                                                  icon: Icon(
-                                                    Icons.zoom_in_outlined,
-                                                    color: FlutterFlowTheme.of(
+                                              'imageId': serializeParam(
+                                                0,
+                                                ParamType.int,
+                                              ),
+                                              'catrgoryId': serializeParam(
+                                                0,
+                                                ParamType.int,
+                                              ),
+                                              'imageBlurhash': serializeParam(
+                                                FFAppState()
+                                                    .thumbnail
+                                                    .image
+                                                    .blurHash,
+                                                ParamType.String,
+                                              ),
+                                              'name': serializeParam(
+                                                '',
+                                                ParamType.String,
+                                              ),
+                                              'thumbailId': serializeParam(
+                                                0,
+                                                ParamType.int,
+                                              ),
+                                              'viewOnly': serializeParam(
+                                                true,
+                                                ParamType.bool,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        },
+                                        child: Wrap(
+                                          spacing: 0.0,
+                                          runSpacing: 0.0,
+                                          alignment: WrapAlignment.start,
+                                          crossAxisAlignment:
+                                              WrapCrossAlignment.start,
+                                          direction: Axis.horizontal,
+                                          runAlignment: WrapAlignment.start,
+                                          verticalDirection:
+                                              VerticalDirection.down,
+                                          clipBehavior: Clip.none,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 5.0, 0.0),
+                                                  child: Text(
+                                                    'ดูภาพ',
+                                                    style: FlutterFlowTheme.of(
                                                             context)
-                                                        .primaryText,
-                                                    size: 15.0,
+                                                        .bodyMedium,
                                                   ),
-                                                  onPressed: () async {
-                                                    context.pushNamed(
-                                                      'ThumbnailCategory',
-                                                      queryParameters: {
-                                                        'type': serializeParam(
-                                                          'item',
-                                                          ParamType.String,
-                                                        ),
-                                                      }.withoutNulls,
-                                                    );
-                                                  },
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 10.0, 0.0),
+                                                  child: FlutterFlowIconButton(
+                                                    borderColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    borderRadius: 5.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 30.0,
+                                                    fillColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .info,
+                                                    icon: Icon(
+                                                      Icons.zoom_in_outlined,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      size: 15.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      context.pushNamed(
+                                                        'ThumbnailCategory',
+                                                        queryParameters: {
+                                                          'type':
+                                                              serializeParam(
+                                                            'item',
+                                                            ParamType.String,
+                                                          ),
+                                                        }.withoutNulls,
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(

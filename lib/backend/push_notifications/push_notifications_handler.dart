@@ -161,6 +161,7 @@ final parametersBuilderMap =
           'imageBlurhash': getParameter<String>(data, 'imageBlurhash'),
           'name': getParameter<String>(data, 'name'),
           'thumbailId': getParameter<int>(data, 'thumbailId'),
+          'viewOnly': getParameter<bool>(data, 'viewOnly'),
         },
       ),
   'ItemInfo': (data) async => ParameterData(

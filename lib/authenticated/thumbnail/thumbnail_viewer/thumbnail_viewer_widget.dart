@@ -24,7 +24,9 @@ class ThumbnailViewerWidget extends StatefulWidget {
     required this.imageBlurhash,
     this.name,
     required this.thumbailId,
-  }) : super(key: key);
+    bool? viewOnly,
+  })  : this.viewOnly = viewOnly ?? false,
+        super(key: key);
 
   final String? imagePath;
   final int? imageId;
@@ -32,6 +34,7 @@ class ThumbnailViewerWidget extends StatefulWidget {
   final String? imageBlurhash;
   final String? name;
   final int? thumbailId;
+  final bool viewOnly;
 
   @override
   _ThumbnailViewerWidgetState createState() => _ThumbnailViewerWidgetState();
@@ -195,59 +198,60 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              setState(() {
-                                FFAppState().updatePageLocationInfoStruct(
-                                  (e) => e
-                                    ..imageId = widget.imageId
-                                    ..image = widget.imagePath
-                                    ..imageBlurhash = widget.imageBlurhash,
-                                );
-                                FFAppState().updateThumbnailStruct(
-                                  (e) => e
-                                    ..id = widget.thumbailId
-                                    ..name = widget.name
-                                    ..thumbnailCategoryId = widget.catrgoryId
-                                    ..updateImage(
-                                      (e) => e
-                                        ..id = widget.imageId
-                                        ..path = widget.imagePath
-                                        ..blurHash = widget.imageBlurhash,
+                        if (!widget.viewOnly)
+                          Expanded(
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                setState(() {
+                                  FFAppState().updatePageLocationInfoStruct(
+                                    (e) => e
+                                      ..imageId = widget.imageId
+                                      ..image = widget.imagePath
+                                      ..imageBlurhash = widget.imageBlurhash,
+                                  );
+                                  FFAppState().updateThumbnailStruct(
+                                    (e) => e
+                                      ..id = widget.thumbailId
+                                      ..name = widget.name
+                                      ..thumbnailCategoryId = widget.catrgoryId
+                                      ..updateImage(
+                                        (e) => e
+                                          ..id = widget.imageId
+                                          ..path = widget.imagePath
+                                          ..blurHash = widget.imageBlurhash,
+                                      ),
+                                  );
+                                });
+                                context.safePop();
+                              },
+                              text: 'ตกลง',
+                              options: FFButtonOptions(
+                                height: 45.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).secondary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .titleSmallFamily,
+                                      color: Colors.white,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmallFamily),
                                     ),
-                                );
-                              });
-                              context.safePop();
-                            },
-                            text: 'ตกลง',
-                            options: FFButtonOptions(
-                              height: 45.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 0.0, 24.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).secondary,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .titleSmallFamily,
-                                    color: Colors.white,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .titleSmallFamily),
-                                  ),
-                              elevation: 3.0,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
+                                elevation: 3.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
-                        ),
                       ].divide(SizedBox(width: 20.0)),
                     ),
                   ),
