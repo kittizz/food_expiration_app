@@ -121,6 +121,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                   highlightColor: Colors.transparent,
                   onTap: () async {
                     var _shouldSetState = false;
+                    if (_model.formKey1.currentState == null ||
+                        !_model.formKey1.currentState!.validate()) {
+                      return;
+                    }
                     _model.apiCreateItem =
                         await FoodexpirationGroup.createItemCall.call(
                       name: _model.nameFieldController.text,
@@ -223,377 +227,358 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                           width: 1.0,
                         ),
                       ),
-                      child: Form(
-                        key: _model.formKey3,
-                        autovalidateMode: AutovalidateMode.disabled,
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 20.0, 20.0, 20.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: AlignmentDirectional(0.00, 0.00),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    final selectedMedia =
-                                        await selectMediaWithSourceBottomSheet(
-                                      context: context,
-                                      maxWidth: 512.00,
-                                      maxHeight: 512.00,
-                                      imageQuality: 100,
-                                      allowPhoto: true,
-                                      includeBlurHash: true,
-                                    );
-                                    if (selectedMedia != null &&
-                                        selectedMedia.every((m) =>
-                                            validateFileFormat(
-                                                m.storagePath, context))) {
-                                      setState(
-                                          () => _model.isDataUploading = true);
-                                      var selectedUploadedFiles =
-                                          <FFUploadedFile>[];
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            20.0, 20.0, 20.0, 20.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0.00, 0.00),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  final selectedMedia =
+                                      await selectMediaWithSourceBottomSheet(
+                                    context: context,
+                                    maxWidth: 512.00,
+                                    maxHeight: 512.00,
+                                    imageQuality: 100,
+                                    allowPhoto: true,
+                                    includeBlurHash: true,
+                                  );
+                                  if (selectedMedia != null &&
+                                      selectedMedia.every((m) =>
+                                          validateFileFormat(
+                                              m.storagePath, context))) {
+                                    setState(
+                                        () => _model.isDataUploading = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
 
-                                      try {
-                                        selectedUploadedFiles = selectedMedia
-                                            .map((m) => FFUploadedFile(
-                                                  name: m.storagePath
-                                                      .split('/')
-                                                      .last,
-                                                  bytes: m.bytes,
-                                                  height: m.dimensions?.height,
-                                                  width: m.dimensions?.width,
-                                                  blurHash: m.blurHash,
-                                                ))
-                                            .toList();
-                                      } finally {
-                                        _model.isDataUploading = false;
-                                      }
-                                      if (selectedUploadedFiles.length ==
-                                          selectedMedia.length) {
-                                        setState(() {
-                                          _model.uploadedLocalFile =
-                                              selectedUploadedFiles.first;
-                                        });
-                                      } else {
-                                        setState(() {});
-                                        return;
-                                      }
+                                    try {
+                                      selectedUploadedFiles = selectedMedia
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                                height: m.dimensions?.height,
+                                                width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
+                                              ))
+                                          .toList();
+                                    } finally {
+                                      _model.isDataUploading = false;
                                     }
+                                    if (selectedUploadedFiles.length ==
+                                        selectedMedia.length) {
+                                      setState(() {
+                                        _model.uploadedLocalFile =
+                                            selectedUploadedFiles.first;
+                                      });
+                                    } else {
+                                      setState(() {});
+                                      return;
+                                    }
+                                  }
 
-                                    await _model.uploadImage(
-                                      context,
-                                      fileUpload: _model.uploadedLocalFile,
-                                    );
-                                    setState(() {});
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 250.0,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFE0E3E7),
-                                      borderRadius: BorderRadius.circular(16.0),
-                                    ),
-                                    child: Stack(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                      children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.add_a_photo_outlined,
-                                              color: Color(0xFF57636C),
-                                              size: 72.0,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 12.0, 0.0, 0.0),
-                                              child: Text(
-                                                'เพิ่มรูปภาพ',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'IBM Plex Sans Thai',
-                                                          color:
-                                                              Color(0xFF14181B),
-                                                          fontSize: 22.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleLargeFamily),
-                                                        ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 4.0, 0.0, 0.0),
-                                              child: Text(
-                                                'อัพโหลดรูปภาพที่นี่...',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'IBM Plex Sans Thai',
-                                                          color:
-                                                              Color(0xFF57636C),
-                                                          fontSize: 14.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMediumFamily),
-                                                        ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        if (valueOrDefault<bool>(
-                                          FFAppState().thumbnail.image.path !=
-                                                  null &&
-                                              FFAppState()
-                                                      .thumbnail
-                                                      .image
-                                                      .path !=
-                                                  '',
-                                          false,
-                                        ))
+                                  await _model.uploadImage(
+                                    context,
+                                    fileUpload: _model.uploadedLocalFile,
+                                  );
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 250.0,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFE0E3E7),
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  child: Stack(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    children: [
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.add_a_photo_outlined,
+                                            color: Color(0xFF57636C),
+                                            size: 72.0,
+                                          ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 8.0, 8.0, 8.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              child: OctoImage(
-                                                placeholderBuilder:
-                                                    OctoPlaceholder.blurHash(
-                                                  FFAppState()
-                                                      .thumbnail
-                                                      .image
-                                                      .blurHash,
-                                                ),
-                                                image: NetworkImage(
-                                                  functions.getImage(
-                                                      FFAppState()
-                                                          .thumbnail
-                                                          .image
-                                                          .path),
-                                                ),
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                fit: BoxFit.contain,
-                                              ),
+                                                    0.0, 12.0, 0.0, 0.0),
+                                            child: Text(
+                                              'เพิ่มรูปภาพ',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleLarge
+                                                  .override(
+                                                    fontFamily:
+                                                        'IBM Plex Sans Thai',
+                                                    color: Color(0xFF14181B),
+                                                    fontSize: 22.0,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: GoogleFonts
+                                                            .asMap()
+                                                        .containsKey(
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLargeFamily),
+                                                  ),
                                             ),
                                           ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(1.00, 1.00),
-                                          child: Padding(
+                                          Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 10.0, 10.0),
-                                            child: Icon(
-                                              Icons.file_upload_outlined,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              size: 24.0,
+                                                    0.0, 4.0, 0.0, 0.0),
+                                            child: Text(
+                                              'อัพโหลดรูปภาพที่นี่...',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily:
+                                                        'IBM Plex Sans Thai',
+                                                    color: Color(0xFF57636C),
+                                                    fontSize: 14.0,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: GoogleFonts
+                                                            .asMap()
+                                                        .containsKey(
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMediumFamily),
+                                                  ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 8.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    if (valueOrDefault<bool>(
-                                      FFAppState().thumbnail.image.path !=
-                                              null &&
-                                          FFAppState().thumbnail.image.path !=
-                                              '',
-                                      false,
-                                    ))
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed(
-                                            'ThumbnailViewer',
-                                            queryParameters: {
-                                              'imagePath': serializeParam(
-                                                FFAppState()
-                                                    .thumbnail
-                                                    .image
-                                                    .path,
-                                                ParamType.String,
-                                              ),
-                                              'imageId': serializeParam(
-                                                0,
-                                                ParamType.int,
-                                              ),
-                                              'catrgoryId': serializeParam(
-                                                0,
-                                                ParamType.int,
-                                              ),
-                                              'imageBlurhash': serializeParam(
+                                        ],
+                                      ),
+                                      if (valueOrDefault<bool>(
+                                        FFAppState().thumbnail.image.path !=
+                                                null &&
+                                            FFAppState().thumbnail.image.path !=
+                                                '',
+                                        false,
+                                      ))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 8.0, 8.0, 8.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: OctoImage(
+                                              placeholderBuilder:
+                                                  OctoPlaceholder.blurHash(
                                                 FFAppState()
                                                     .thumbnail
                                                     .image
                                                     .blurHash,
-                                                ParamType.String,
                                               ),
-                                              'name': serializeParam(
-                                                '',
-                                                ParamType.String,
+                                              image: NetworkImage(
+                                                functions.getImage(FFAppState()
+                                                    .thumbnail
+                                                    .image
+                                                    .path),
                                               ),
-                                              'thumbailId': serializeParam(
-                                                0,
-                                                ParamType.int,
-                                              ),
-                                              'viewOnly': serializeParam(
-                                                true,
-                                                ParamType.bool,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-                                        },
-                                        child: Wrap(
-                                          spacing: 0.0,
-                                          runSpacing: 0.0,
-                                          alignment: WrapAlignment.start,
-                                          crossAxisAlignment:
-                                              WrapCrossAlignment.start,
-                                          direction: Axis.horizontal,
-                                          runAlignment: WrapAlignment.start,
-                                          verticalDirection:
-                                              VerticalDirection.down,
-                                          clipBehavior: Clip.none,
-                                          children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 5.0, 0.0),
-                                                  child: Text(
-                                                    'ดูภาพ',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 10.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .alternate,
-                                                    borderRadius: 5.0,
-                                                    borderWidth: 1.0,
-                                                    buttonSize: 30.0,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .info,
-                                                    icon: Icon(
-                                                      Icons.zoom_in_outlined,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      size: 15.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      context.pushNamed(
-                                                        'ThumbnailCategory',
-                                                        queryParameters: {
-                                                          'type':
-                                                              serializeParam(
-                                                            'item',
-                                                            ParamType.String,
-                                                          ),
-                                                        }.withoutNulls,
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              fit: BoxFit.contain,
                                             ),
-                                          ],
+                                          ),
+                                        ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(1.00, 1.00),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 10.0, 10.0),
+                                          child: Icon(
+                                            Icons.file_upload_outlined,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          ),
                                         ),
                                       ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 5.0, 0.0),
-                                      child: Text(
-                                        'คลังภาพ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                    ),
-                                    FlutterFlowIconButton(
-                                      borderColor: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      borderRadius: 5.0,
-                                      borderWidth: 1.0,
-                                      buttonSize: 30.0,
-                                      fillColor:
-                                          FlutterFlowTheme.of(context).info,
-                                      icon: Icon(
-                                        Icons.image_search,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 15.0,
-                                      ),
-                                      onPressed: () async {
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 8.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  if (valueOrDefault<bool>(
+                                    FFAppState().thumbnail.image.path != null &&
+                                        FFAppState().thumbnail.image.path != '',
+                                    false,
+                                  ))
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
                                         context.pushNamed(
-                                          'ThumbnailCategory',
+                                          'ThumbnailViewer',
                                           queryParameters: {
-                                            'type': serializeParam(
-                                              'item',
+                                            'imagePath': serializeParam(
+                                              FFAppState().thumbnail.image.path,
                                               ParamType.String,
+                                            ),
+                                            'imageId': serializeParam(
+                                              0,
+                                              ParamType.int,
+                                            ),
+                                            'catrgoryId': serializeParam(
+                                              0,
+                                              ParamType.int,
+                                            ),
+                                            'imageBlurhash': serializeParam(
+                                              FFAppState()
+                                                  .thumbnail
+                                                  .image
+                                                  .blurHash,
+                                              ParamType.String,
+                                            ),
+                                            'name': serializeParam(
+                                              '',
+                                              ParamType.String,
+                                            ),
+                                            'thumbailId': serializeParam(
+                                              0,
+                                              ParamType.int,
+                                            ),
+                                            'viewOnly': serializeParam(
+                                              true,
+                                              ParamType.bool,
                                             ),
                                           }.withoutNulls,
                                         );
                                       },
+                                      child: Wrap(
+                                        spacing: 0.0,
+                                        runSpacing: 0.0,
+                                        alignment: WrapAlignment.start,
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.start,
+                                        direction: Axis.horizontal,
+                                        runAlignment: WrapAlignment.start,
+                                        verticalDirection:
+                                            VerticalDirection.down,
+                                        clipBehavior: Clip.none,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 5.0, 0.0),
+                                                child: Text(
+                                                  'ดูภาพ',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 10.0, 0.0),
+                                                child: FlutterFlowIconButton(
+                                                  borderColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                  borderRadius: 5.0,
+                                                  borderWidth: 1.0,
+                                                  buttonSize: 30.0,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .info,
+                                                  icon: Icon(
+                                                    Icons.zoom_in_outlined,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    size: 15.0,
+                                                  ),
+                                                  onPressed: () async {
+                                                    context.pushNamed(
+                                                      'ThumbnailCategory',
+                                                      queryParameters: {
+                                                        'type': serializeParam(
+                                                          'item',
+                                                          ParamType.String,
+                                                        ),
+                                                      }.withoutNulls,
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 5.0, 0.0),
+                                    child: Text(
+                                      'คลังภาพ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                  ),
+                                  FlutterFlowIconButton(
+                                    borderColor:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    borderRadius: 5.0,
+                                    borderWidth: 1.0,
+                                    buttonSize: 30.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).info,
+                                    icon: Icon(
+                                      Icons.image_search,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 15.0,
+                                    ),
+                                    onPressed: () async {
+                                      context.pushNamed(
+                                        'ThumbnailCategory',
+                                        queryParameters: {
+                                          'type': serializeParam(
+                                            'item',
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -610,7 +595,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       ),
                       child: Form(
                         key: _model.formKey1,
-                        autovalidateMode: AutovalidateMode.always,
+                        autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 20.0, 20.0, 20.0),
@@ -925,8 +910,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         ),
                       ),
                       child: Form(
-                        key: _model.formKey4,
-                        autovalidateMode: AutovalidateMode.always,
+                        key: _model.formKey3,
+                        autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 20.0, 20.0, 20.0),
@@ -1210,7 +1195,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       ),
                       child: Form(
                         key: _model.formKey2,
-                        autovalidateMode: AutovalidateMode.always,
+                        autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 20.0, 20.0, 20.0),
