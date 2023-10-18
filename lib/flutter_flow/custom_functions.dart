@@ -112,7 +112,7 @@ ThumbnailCategoryStruct toThumbnailCategoryStruct(dynamic jsonbody) {
         blurHash: v['image']['blurHash'] as String,
       ));
   List<ThumbnailStruct> thumbnails = [];
-  if (v['thumbnails'].length > 0) {
+  if (v['thumbnails'] != null) {
     for (var thumb in v['thumbnails']) {
       ThumbnailStruct thumbnail = new ThumbnailStruct(
           id: thumb['id'] as int,
