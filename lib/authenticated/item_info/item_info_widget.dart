@@ -139,7 +139,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       _model.apiCreateItem =
                           await FoodexpirationGroup.createItemCall.call(
                         name: _model.nameFieldController.text,
-                        description: _model.descriptionFieldController.text,
+                        description: functions.encodeString(
+                            _model.descriptionFieldController.text),
                         storageDate: functions
                             .toRFC3339(FFAppState().pageItemInfo.storageDate!),
                         expireDate: functions
@@ -221,6 +222,30 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       if (_shouldSetState) setState(() {});
                       return;
                     }
+
+                    if (Navigator.of(context).canPop()) {
+                      context.pop();
+                    }
+                    context.pushNamed(
+                      'ItemList',
+                      queryParameters: {
+                        'isLocation': serializeParam(
+                          false,
+                          ParamType.bool,
+                        ),
+                        'title': serializeParam(
+                          FFAppState().pageItemInfo.location.name != null &&
+                                  FFAppState().pageItemInfo.location.name != ''
+                              ? FFAppState().pageItemInfo.location.name
+                              : 'รายการทั้งหมด',
+                          ParamType.String,
+                        ),
+                        'locationId': serializeParam(
+                          FFAppState().pageItemInfo.location.id,
+                          ParamType.int,
+                        ),
+                      }.withoutNulls,
+                    );
 
                     if (_shouldSetState) setState(() {});
                   },

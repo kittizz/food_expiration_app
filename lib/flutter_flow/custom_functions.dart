@@ -205,3 +205,8 @@ String toRFC3339(DateTime date) {
   return DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSSSSS+00:00")
       .format(DateTime.parse(date.toString()).toUtc());
 }
+
+String encodeString(String str) {
+  String escaped = str.split('\n').map((line) => line.trim()).join('\\n');
+  return jsonEncode(escaped);
+}

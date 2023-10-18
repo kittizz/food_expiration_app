@@ -777,9 +777,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                       .call(
                                                 name: _model
                                                     .nameFieldController.text,
-                                                description: _model
-                                                    .descriptionFieldController
-                                                    .text,
+                                                description: functions
+                                                    .encodeString(_model
+                                                        .descriptionFieldController
+                                                        .text),
                                                 imageId: FFAppState()
                                                     .pageLocationInfo
                                                     .imageId,
@@ -833,9 +834,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                     .imageId,
                                                 name: _model
                                                     .nameFieldController.text,
-                                                description: _model
-                                                    .descriptionFieldController
-                                                    .text,
+                                                description: functions
+                                                    .encodeString(_model
+                                                        .descriptionFieldController
+                                                        .text),
                                               );
                                               _shouldSetState = true;
                                               if (!(_model.apiUpdatelocation
