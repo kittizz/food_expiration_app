@@ -202,5 +202,6 @@ ItemStruct toItem(dynamic jsonBody) {
 }
 
 String toRFC3339(DateTime date) {
-  return date.toIso8601String();
+  return DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSSSSS+00:00")
+      .format(DateTime.parse(date.toString()).toUtc());
 }

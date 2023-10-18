@@ -135,11 +135,20 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       barcode: FFAppState().pageItemInfo.barcode,
                       imageId: FFAppState().thumbnail.image.id,
                       locationId: FFAppState()
-                          .locations
-                          .where((e) => e.name == _model.locationOptionValue)
-                          .toList()
-                          .first
-                          .id,
+                                  .locations
+                                  .where((e) =>
+                                      e.name == _model.locationOptionValue)
+                                  .toList()
+                                  .first !=
+                              null
+                          ? FFAppState()
+                              .locations
+                              .where(
+                                  (e) => e.name == _model.locationOptionValue)
+                              .toList()
+                              .first
+                              .id
+                          : 0,
                       deviceid: FFAppState().deviceId,
                     );
                     _shouldSetState = true;
