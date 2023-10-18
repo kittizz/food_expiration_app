@@ -135,7 +135,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                     if (_model.locationOptionValue == null) {
                       return;
                     }
-                    if (FFAppState().thumbnail.image.id != null) {
+                    if (FFAppState().thumbnail.image.id > 0) {
                       _model.apiCreateItem =
                           await FoodexpirationGroup.createItemCall.call(
                         name: _model.nameFieldController.text,
@@ -1280,13 +1280,22 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   () async {
                                     setState(() {
                                       _model.forewarnDayFieldController
-                                          ?.text = ((int.parse(_model
+                                          ?.text = (_model
+                                                      .forewarnDayFieldController
+                                                      .text !=
+                                                  null &&
+                                              _model.forewarnDayFieldController
+                                                      .text !=
+                                                  ''
+                                          ? ((int.parse(_model
+                                                      .forewarnDayFieldController
+                                                      .text)) <
+                                                  0
+                                              ? '1'
+                                              : _model
                                                   .forewarnDayFieldController
-                                                  .text)) <
-                                              0
-                                          ? '1'
-                                          : _model
-                                              .forewarnDayFieldController.text);
+                                                  .text)
+                                          : '1');
                                     });
                                   },
                                 ),
@@ -1361,14 +1370,22 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 ?.clear();
                                             setState(() {
                                               _model.forewarnDayFieldController
-                                                  ?.text = ((int.parse(_model
+                                                  ?.text = (_model
+                                                              .forewarnDayFieldController
+                                                              .text !=
+                                                          null &&
+                                                      _model.forewarnDayFieldController
+                                                              .text !=
+                                                          ''
+                                                  ? ((int.parse(_model
+                                                              .forewarnDayFieldController
+                                                              .text)) <
+                                                          0
+                                                      ? '1'
+                                                      : _model
                                                           .forewarnDayFieldController
-                                                          .text)) <
-                                                      0
-                                                  ? '1'
-                                                  : _model
-                                                      .forewarnDayFieldController
-                                                      .text);
+                                                          .text)
+                                                  : '1');
                                             });
                                             setState(() {});
                                           },
