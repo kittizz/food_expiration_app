@@ -1255,12 +1255,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         );
                                       });
                                     }
-                                    setState(() {
-                                      FFAppState().updatePageItemInfoStruct(
-                                        (e) =>
-                                            e..storageDate = _model.datePicked1,
-                                      );
-                                    });
+                                    if (_model.datePicked1 != null) {
+                                      setState(() {
+                                        FFAppState().updatePageItemInfoStruct(
+                                          (e) => e
+                                            ..storageDate = _model.datePicked1,
+                                        );
+                                      });
+                                    }
                                   },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1339,12 +1341,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         );
                                       });
                                     }
-                                    setState(() {
-                                      FFAppState().updatePageItemInfoStruct(
-                                        (e) =>
-                                            e..expireDate = _model.datePicked2,
-                                      );
-                                    });
+                                    if (_model.datePicked2 != null) {
+                                      setState(() {
+                                        FFAppState().updatePageItemInfoStruct(
+                                          (e) => e
+                                            ..expireDate = _model.datePicked2,
+                                        );
+                                      });
+                                    }
                                   },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
