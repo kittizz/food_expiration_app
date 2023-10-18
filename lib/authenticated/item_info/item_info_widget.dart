@@ -134,13 +134,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       category: _model.categoryOptionValue,
                       barcode: FFAppState().pageItemInfo.barcode,
                       imageId: FFAppState().thumbnail.image.id,
-                      locationId: FFAppState()
-                                  .locations
-                                  .where((e) =>
-                                      e.name == _model.locationOptionValue)
-                                  .toList()
-                                  .first !=
-                              null
+                      locationId: _model.locationOptionValue != null &&
+                              _model.locationOptionValue != ''
                           ? FFAppState()
                               .locations
                               .where(
@@ -148,7 +143,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                               .toList()
                               .first
                               .id
-                          : 0,
+                          : null,
                       deviceid: FFAppState().deviceId,
                     );
                     _shouldSetState = true;
