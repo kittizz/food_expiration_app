@@ -14,11 +14,13 @@ class LocationStruct extends FFFirebaseStruct {
     String? name,
     String? description,
     ImageStruct? image,
+    List<ItemStruct>? items,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _name = name,
         _description = description,
         _image = image,
+        _items = items,
         super(firestoreUtilData);
 
   // "id" field.
@@ -48,11 +50,23 @@ class LocationStruct extends FFFirebaseStruct {
       updateFn(_image ??= ImageStruct());
   bool hasImage() => _image != null;
 
+  // "items" field.
+  List<ItemStruct>? _items;
+  List<ItemStruct> get items => _items ?? const [];
+  set items(List<ItemStruct>? val) => _items = val;
+  void updateItems(Function(List<ItemStruct>) updateFn) =>
+      updateFn(_items ??= []);
+  bool hasItems() => _items != null;
+
   static LocationStruct fromMap(Map<String, dynamic> data) => LocationStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
         description: data['description'] as String?,
         image: ImageStruct.maybeFromMap(data['image']),
+        items: getStructList(
+          data['items'],
+          ItemStruct.fromMap,
+        ),
       );
 
   static LocationStruct? maybeFromMap(dynamic data) =>
@@ -63,6 +77,7 @@ class LocationStruct extends FFFirebaseStruct {
         'name': _name,
         'description': _description,
         'image': _image?.toMap(),
+        'items': _items?.map((e) => e.toMap()).toList(),
       }.withoutNulls;
 
   @override
@@ -82,6 +97,11 @@ class LocationStruct extends FFFirebaseStruct {
         'image': serializeParam(
           _image,
           ParamType.DataStruct,
+        ),
+        'items': serializeParam(
+          _items,
+          ParamType.DataStruct,
+          true,
         ),
       }.withoutNulls;
 
@@ -108,6 +128,12 @@ class LocationStruct extends FFFirebaseStruct {
           false,
           structBuilder: ImageStruct.fromSerializableMap,
         ),
+        items: deserializeStructParam<ItemStruct>(
+          data['items'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: ItemStruct.fromSerializableMap,
+        ),
       );
 
   @override
@@ -115,15 +141,18 @@ class LocationStruct extends FFFirebaseStruct {
 
   @override
   bool operator ==(Object other) {
+    const listEquality = ListEquality();
     return other is LocationStruct &&
         id == other.id &&
         name == other.name &&
         description == other.description &&
-        image == other.image;
+        image == other.image &&
+        listEquality.equals(items, other.items);
   }
 
   @override
-  int get hashCode => const ListEquality().hash([id, name, description, image]);
+  int get hashCode =>
+      const ListEquality().hash([id, name, description, image, items]);
 }
 
 LocationStruct createLocationStruct({
