@@ -125,6 +125,26 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         !_model.formKey1.currentState!.validate()) {
                       return;
                     }
+                    if (_model.formKey3.currentState == null ||
+                        !_model.formKey3.currentState!.validate()) {
+                      return;
+                    }
+                    if (_model.categoryOptionValue == null) {
+                      return;
+                    }
+                    if (_model.locationOptionValue == null) {
+                      return;
+                    }
+                    if (_model.formKey2.currentState == null ||
+                        !_model.formKey2.currentState!.validate()) {
+                      return;
+                    }
+                    if (_model.datePicked1 == null) {
+                      return;
+                    }
+                    if (_model.datePicked2 == null) {
+                      return;
+                    }
                     _model.apiCreateItem =
                         await FoodexpirationGroup.createItemCall.call(
                       name: _model.nameFieldController.text,
