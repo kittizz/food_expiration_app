@@ -55,6 +55,8 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   String? Function(BuildContext, String?)? descriptionFieldController2Validator;
   DateTime? datePicked1;
   DateTime? datePicked2;
+  // Stores action output result for [Backend Call - API (createItem)] action in Text widget.
+  ApiCallResponse? apiCreateItem;
 
   /// Initialization and disposal methods.
 

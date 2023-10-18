@@ -34,6 +34,7 @@ class FoodexpirationGroup {
   static GetLocationByIdCall getLocationByIdCall = GetLocationByIdCall();
   static UpdateLocationCall updateLocationCall = UpdateLocationCall();
   static CategoryCall categoryCall = CategoryCall();
+  static CreateItemCall createItemCall = CreateItemCall();
 }
 
 class RegisterDeviceCall {
@@ -530,6 +531,49 @@ class CategoryCall {
         'x-device-id': '${deviceid}',
       },
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class CreateItemCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? description = '',
+    String? storageDate = '',
+    String? expireDate = '',
+    int? forewarnDay,
+    String? category = '',
+    String? barcode = '',
+    int? imageId,
+    int? locationId,
+    String? deviceid = '',
+  }) {
+    final ffApiRequestBody = '''
+{
+  "name": "${name}",
+  "description": "${description}",
+  "storageDate": "${storageDate}",
+  "expireDate": "${expireDate}",
+  "forewarnDay": ${forewarnDay},
+  "category": "${category}",
+  "barcode": "${barcode}",
+  "imageId": ${imageId},
+  "locationId": ${locationId}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'createItem',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/item/create',
+      callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

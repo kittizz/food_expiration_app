@@ -200,3 +200,7 @@ ItemStruct toItem(dynamic jsonBody) {
 
   return val;
 }
+
+String toRFC3339(DateTime date) {
+  return date.toIso8601String();
+}

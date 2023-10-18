@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -119,7 +120,44 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('LocationInfo');
+                    _model.apiCreateItem =
+                        await FoodexpirationGroup.createItemCall.call(
+                      name: _model.nameFieldController.text,
+                      description: _model.descriptionFieldController1.text,
+                      storageDate: functions
+                          .toRFC3339(FFAppState().pageItemInfo.storageDate!),
+                      expireDate: functions
+                          .toRFC3339(FFAppState().pageItemInfo.expireDate!),
+                      forewarnDay:
+                          int.tryParse(_model.descriptionFieldController2.text),
+                      category: _model.categoryOptionValue,
+                      barcode: FFAppState().pageItemInfo.barcode,
+                      imageId: FFAppState().thumbnail.image.id,
+                      locationId: FFAppState()
+                          .locations
+                          .where((e) => e.name == _model.locationOptionValue)
+                          .toList()
+                          .first
+                          .id,
+                      deviceid: FFAppState().deviceId,
+                    );
+                    if ((_model.apiCreateItem?.succeeded ?? true)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'เพิ่มรายการสำเร็จ',
+                            style: TextStyle(
+                              color: FlutterFlowTheme.of(context).primaryText,
+                            ),
+                          ),
+                          duration: Duration(milliseconds: 2000),
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).secondary,
+                        ),
+                      );
+                    }
+
+                    setState(() {});
                   },
                   child: Text(
                     widget.isAdd! ? 'เพิ่ม' : 'บันทึก',
