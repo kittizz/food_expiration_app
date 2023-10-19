@@ -177,7 +177,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
           thickness: 1.0,
           color: FlutterFlowTheme.of(context).grey50,
         ),
-        Expanded(
+        Flexible(
           child: Builder(
             builder: (context) {
               final list = widget.items!.toList();
