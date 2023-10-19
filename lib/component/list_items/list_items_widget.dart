@@ -19,14 +19,12 @@ class ListItemsWidget extends StatefulWidget {
     this.title,
     bool? showClear,
     required this.items,
-    required this.locationName,
   })  : this.showClear = showClear ?? false,
         super(key: key);
 
   final String? title;
   final bool showClear;
   final List<ItemStruct>? items;
-  final String? locationName;
 
   @override
   _ListItemsWidgetState createState() => _ListItemsWidgetState();
@@ -197,7 +195,12 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                     name: listItem.name,
                     image: functions.getImage(listItem.image.path),
                     expiryDate: listItem.expireDate!,
-                    location: widget.locationName!,
+                    location: FFAppState()
+                        .locations
+                        .where((e) => e.id == listItem.locationId)
+                        .toList()
+                        .first
+                        .name,
                     preDay: listItem.forewarnDay,
                     imageBlurhash: listItem.image.blurHash,
                   ),
