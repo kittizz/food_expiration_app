@@ -170,7 +170,9 @@ Future openAddItem(
         ..forewarnDay = 3
         ..category = null
         ..barcode = null
-        ..location = null,
+        ..location = null
+        ..unit = 'ชิ้น'
+        ..quantity = 1,
     );
     FFAppState().thumbnail =
         ThumbnailStruct.fromSerializableMap(jsonDecode('{\"image\":\"{}\"}'));

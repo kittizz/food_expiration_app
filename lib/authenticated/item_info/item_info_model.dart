@@ -31,6 +31,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
 
   final unfocusNode = FocusNode();
   final formKey1 = GlobalKey<FormState>();
+  final formKey4 = GlobalKey<FormState>();
   final formKey3 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   bool isDataUploading = false;
@@ -40,14 +41,6 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   // State field(s) for NameField widget.
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
-  String? _nameFieldControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'โปรดกรอกชื่อรายการ';
-    }
-
-    return null;
-  }
-
   // State field(s) for DescriptionField widget.
   TextEditingController? descriptionFieldController;
   String? Function(BuildContext, String?)? descriptionFieldControllerValidator;
@@ -71,14 +64,32 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
 
   DateTime? datePicked1;
   DateTime? datePicked2;
+  // State field(s) for quantityField widget.
+  TextEditingController? quantityFieldController;
+  String? Function(BuildContext, String?)? quantityFieldControllerValidator;
+  String? _quantityFieldControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'โปรดกรอกจำนวน';
+    }
+
+    if (val.length < 1) {
+      return 'Requires at least 1 characters.';
+    }
+
+    return null;
+  }
+
+  // State field(s) for unitOption widget.
+  String? unitOptionValue;
+  FormFieldController<String>? unitOptionValueController;
   // Stores action output result for [Backend Call - API (createItem)] action in Text widget.
   ApiCallResponse? apiCreateItem;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    nameFieldControllerValidator = _nameFieldControllerValidator;
     forewarnDayFieldControllerValidator = _forewarnDayFieldControllerValidator;
+    quantityFieldControllerValidator = _quantityFieldControllerValidator;
   }
 
   void dispose() {
@@ -86,6 +97,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
     nameFieldController?.dispose();
     descriptionFieldController?.dispose();
     forewarnDayFieldController?.dispose();
+    quantityFieldController?.dispose();
   }
 
   /// Action blocks are added here.

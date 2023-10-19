@@ -18,6 +18,8 @@ class PageItemInfoStruct extends FFFirebaseStruct {
     String? barcode,
     DateTime? storageDate,
     DateTime? expireDate,
+    int? quantity,
+    String? unit,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _name = name,
         _description = description,
@@ -27,6 +29,8 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         _barcode = barcode,
         _storageDate = storageDate,
         _expireDate = expireDate,
+        _quantity = quantity,
+        _unit = unit,
         super(firestoreUtilData);
 
   // "name" field.
@@ -80,6 +84,19 @@ class PageItemInfoStruct extends FFFirebaseStruct {
   set expireDate(DateTime? val) => _expireDate = val;
   bool hasExpireDate() => _expireDate != null;
 
+  // "quantity" field.
+  int? _quantity;
+  int get quantity => _quantity ?? 0;
+  set quantity(int? val) => _quantity = val;
+  void incrementQuantity(int amount) => _quantity = quantity + amount;
+  bool hasQuantity() => _quantity != null;
+
+  // "unit" field.
+  String? _unit;
+  String get unit => _unit ?? '';
+  set unit(String? val) => _unit = val;
+  bool hasUnit() => _unit != null;
+
   static PageItemInfoStruct fromMap(Map<String, dynamic> data) =>
       PageItemInfoStruct(
         name: data['name'] as String?,
@@ -90,6 +107,8 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         barcode: data['barcode'] as String?,
         storageDate: data['storageDate'] as DateTime?,
         expireDate: data['expireDate'] as DateTime?,
+        quantity: castToType<int>(data['quantity']),
+        unit: data['unit'] as String?,
       );
 
   static PageItemInfoStruct? maybeFromMap(dynamic data) =>
@@ -104,6 +123,8 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         'barcode': _barcode,
         'storageDate': _storageDate,
         'expireDate': _expireDate,
+        'quantity': _quantity,
+        'unit': _unit,
       }.withoutNulls;
 
   @override
@@ -139,6 +160,14 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         'expireDate': serializeParam(
           _expireDate,
           ParamType.DateTime,
+        ),
+        'quantity': serializeParam(
+          _quantity,
+          ParamType.int,
+        ),
+        'unit': serializeParam(
+          _unit,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -185,6 +214,16 @@ class PageItemInfoStruct extends FFFirebaseStruct {
           ParamType.DateTime,
           false,
         ),
+        quantity: deserializeParam(
+          data['quantity'],
+          ParamType.int,
+          false,
+        ),
+        unit: deserializeParam(
+          data['unit'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -200,7 +239,9 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         location == other.location &&
         barcode == other.barcode &&
         storageDate == other.storageDate &&
-        expireDate == other.expireDate;
+        expireDate == other.expireDate &&
+        quantity == other.quantity &&
+        unit == other.unit;
   }
 
   @override
@@ -212,7 +253,9 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         location,
         barcode,
         storageDate,
-        expireDate
+        expireDate,
+        quantity,
+        unit
       ]);
 }
 
@@ -225,6 +268,8 @@ PageItemInfoStruct createPageItemInfoStruct({
   String? barcode,
   DateTime? storageDate,
   DateTime? expireDate,
+  int? quantity,
+  String? unit,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -239,6 +284,8 @@ PageItemInfoStruct createPageItemInfoStruct({
       barcode: barcode,
       storageDate: storageDate,
       expireDate: expireDate,
+      quantity: quantity,
+      unit: unit,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

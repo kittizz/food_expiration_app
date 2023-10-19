@@ -551,6 +551,8 @@ class CreateItemCall {
     String? barcode = '',
     int? imageId,
     int? locationId,
+    int? quantity,
+    String? unit = '',
     String? deviceid = '',
   }) {
     final ffApiRequestBody = '''
@@ -562,6 +564,8 @@ class CreateItemCall {
   "forewarnDay": ${forewarnDay},
   "category": "${category}",
   "barcode": "${barcode}",
+  "quantity": ${quantity},
+  "unit": "${unit}",
   "imageId": ${imageId},
   "locationId": ${locationId}
 }''';

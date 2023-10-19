@@ -62,6 +62,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
       FFAppState().pageItemInfo.forewarnDay.toString(),
       '1',
     ));
+    _model.quantityFieldController ??= TextEditingController(
+        text: FFAppState().pageItemInfo.quantity.toString());
   }
 
   @override
@@ -121,12 +123,15 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                   highlightColor: Colors.transparent,
                   onTap: () async {
                     var _shouldSetState = false;
-                    if (_model.formKey1.currentState == null ||
-                        !_model.formKey1.currentState!.validate()) {
+                    if (_model.formKey2.currentState == null ||
+                        !_model.formKey2.currentState!.validate()) {
                       return;
                     }
-                    if (_model.formKey3.currentState == null ||
-                        !_model.formKey3.currentState!.validate()) {
+                    if (_model.unitOptionValue == null) {
+                      return;
+                    }
+                    if (_model.formKey4.currentState == null ||
+                        !_model.formKey4.currentState!.validate()) {
                       return;
                     }
                     if (_model.categoryOptionValue == null) {
@@ -138,7 +143,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                     if (FFAppState().thumbnail.image.id > 0) {
                       _model.apiCreateItem =
                           await FoodexpirationGroup.createItemCall.call(
-                        name: _model.nameFieldController.text,
+                        name: _model.quantityFieldController.text,
                         description: _model.descriptionFieldController.text,
                         storageDate: functions
                             .toRFC3339(FFAppState().pageItemInfo.storageDate!),
@@ -1001,7 +1006,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         ),
                       ),
                       child: Form(
-                        key: _model.formKey3,
+                        key: _model.formKey4,
                         autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -1285,7 +1290,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         ),
                       ),
                       child: Form(
-                        key: _model.formKey2,
+                        key: _model.formKey3,
                         autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -1830,6 +1835,219 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     onPressed: () {
                                       print('IconButton pressed ...');
                                     },
+                                  ),
+                                ],
+                              ),
+                            ].divide(SizedBox(height: 1.0)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16.0),
+                        border: Border.all(
+                          color: Color(0xFFE0E3E7),
+                          width: 1.0,
+                        ),
+                      ),
+                      child: Form(
+                        key: _model.formKey2,
+                        autovalidateMode: AutovalidateMode.disabled,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 20.0, 20.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 2.0, 0.0, 0.0),
+                                      child: TextFormField(
+                                        controller:
+                                            _model.quantityFieldController,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.quantityFieldController',
+                                          Duration(milliseconds: 2000),
+                                          () async {
+                                            FFAppState()
+                                                .updatePageItemInfoStruct(
+                                              (e) => e
+                                                ..name = _model
+                                                    .quantityFieldController
+                                                    .text,
+                                            );
+                                          },
+                                        ),
+                                        textInputAction: TextInputAction.done,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'จำนวน',
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily,
+                                                fontSize: 16.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMediumFamily),
+                                              ),
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .red400,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          errorBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 16.0, 16.0, 8.0),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLargeFamily,
+                                              fontSize: 16.0,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyLargeFamily),
+                                              lineHeight: 1.0,
+                                            ),
+                                        keyboardType: TextInputType.number,
+                                        validator: _model
+                                            .quantityFieldControllerValidator
+                                            .asValidator(context),
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp('[0-9]'))
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  FlutterFlowDropDown<String>(
+                                    controller:
+                                        _model.unitOptionValueController ??=
+                                            FormFieldController<String>(
+                                      _model.unitOptionValue ??=
+                                          valueOrDefault<String>(
+                                        FFAppState().pageItemInfo.unit,
+                                        'ชิ้น',
+                                      ),
+                                    ),
+                                    options: [
+                                      'ชิ้น',
+                                      'ห่อ',
+                                      'ถุง',
+                                      'ขวด',
+                                      'กล่อง',
+                                      'กระป๋อง'
+                                    ],
+                                    onChanged: (val) => setState(
+                                        () => _model.unitOptionValue = val),
+                                    width: 170.0,
+                                    height: 50.0,
+                                    searchHintTextStyle: FlutterFlowTheme.of(
+                                            context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMediumFamily,
+                                          fontSize: 16.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMediumFamily),
+                                        ),
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium,
+                                    hintText: 'หน่วย',
+                                    searchHintText: 'ค้นหาสถานที่...',
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                    elevation: 2.0,
+                                    borderColor: Colors.transparent,
+                                    borderWidth: 0.0,
+                                    borderRadius: 0.0,
+                                    margin: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 4.0, 16.0, 4.0),
+                                    hidesUnderline: true,
+                                    isSearchable: true,
+                                    isMultiSelect: false,
                                   ),
                                 ],
                               ),
