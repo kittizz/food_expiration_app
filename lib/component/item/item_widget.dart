@@ -92,35 +92,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
       focusColor: Colors.transparent,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onTap: () async {
-        if (animationsMap['rowOnActionTriggerAnimation'] != null) {
-          setState(() => hasRowTriggered = true);
-          SchedulerBinding.instance.addPostFrameCallback((_) async =>
-              await animationsMap['rowOnActionTriggerAnimation']!
-                  .controller
-                  .forward(from: 0.0));
-        }
-
-        context.pushNamed(
-          'ItemInfo',
-          queryParameters: {
-            'name': serializeParam(
-              widget.name,
-              ParamType.String,
-            ),
-            'isAdd': serializeParam(
-              false,
-              ParamType.bool,
-            ),
-          }.withoutNulls,
-          extra: <String, dynamic>{
-            kTransitionInfoKey: TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.bottomToTop,
-            ),
-          },
-        );
-      },
+      onTap: () async {},
       onLongPress: () async {
         if (animationsMap['rowOnActionTriggerAnimation'] != null) {
           setState(() => hasRowTriggered = true);

@@ -349,20 +349,19 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         ),
                       ),
                     ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Visibility(
-                      visible: FFAppState()
-                              .items
-                              .where((e) =>
-                                  functions.getDateStatus(
-                                      e.expireDate!, e.forewarnDay) ==
-                                  'about_to_expire')
-                              .toList()
-                              .length !=
-                          0,
+                  if (FFAppState()
+                          .items
+                          .where((e) =>
+                              functions.getDateStatus(
+                                  e.expireDate!, e.forewarnDay) ==
+                              'expired')
+                          .toList()
+                          .length !=
+                      0)
+                    Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
                       child: wrapWithModel(
                         model: _model.listItemsModel1,
                         updateCallback: () => setState(() {}),
@@ -381,21 +380,19 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Visibility(
-                      visible: FFAppState()
-                              .items
-                              .where((e) =>
-                                  functions.getDateStatus(
-                                      e.expireDate!, e.forewarnDay) ==
-                                  'about_to_expire')
-                              .toList()
-                              .length !=
-                          0,
+                  if (FFAppState()
+                          .items
+                          .where((e) =>
+                              functions.getDateStatus(
+                                  e.expireDate!, e.forewarnDay) ==
+                              'about_to_expire')
+                          .toList()
+                          .length !=
+                      0)
+                    Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
                       child: wrapWithModel(
                         model: _model.listItemsModel2,
                         updateCallback: () => setState(() {}),
@@ -414,21 +411,19 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Visibility(
-                      visible: FFAppState()
-                              .items
-                              .where((e) =>
-                                  functions.getDateStatus(
-                                      e.expireDate!, e.forewarnDay) ==
-                                  'ok')
-                              .toList()
-                              .length !=
-                          0,
+                  if (FFAppState()
+                          .items
+                          .where((e) =>
+                              functions.getDateStatus(
+                                  e.expireDate!, e.forewarnDay) ==
+                              'ok')
+                          .toList()
+                          .length !=
+                      0)
+                    Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
                       child: wrapWithModel(
                         model: _model.listItemsModel3,
                         updateCallback: () => setState(() {}),
@@ -447,7 +442,6 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),

@@ -236,9 +236,11 @@ Future fetchItems(
     locationId: locationId,
   );
   if ((apiLocationItem?.succeeded ?? true)) {
-    FFAppState().items = functions
-        .toItemList((apiLocationItem?.jsonBody ?? ''))
-        .toList()
-        .cast<ItemStruct>();
+    FFAppState().update(() {
+      FFAppState().items = functions
+          .toItemList((apiLocationItem?.jsonBody ?? ''))
+          .toList()
+          .cast<ItemStruct>();
+    });
   }
 }
