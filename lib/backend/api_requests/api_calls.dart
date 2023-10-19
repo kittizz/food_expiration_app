@@ -619,13 +619,15 @@ class LocationItemCall {
 
 class ClearItemsCall {
   Future<ApiCallResponse> call({
-    String? id = '',
+    List<int>? idList,
     bool? archive,
     String? deviceid = '',
   }) async {
+    final id = _serializeList(idList);
+
     final ffApiRequestBody = '''
 {
-  "id": "${id}",
+  "id": ${id},
   "archive": ${archive}
 }''';
     return ApiManager.instance.makeApiCall(

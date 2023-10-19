@@ -212,6 +212,6 @@ String encodeString(String str) {
   return jsonEncode(escaped);
 }
 
-String mapItemIdList(List<ItemStruct> arr) {
-  return jsonEncode(arr.map((e) => e.id).toList());
+List<int> mapItemIdList(List<ItemStruct> arr) {
+  return arr.map((e) => e.id).toList();
 }

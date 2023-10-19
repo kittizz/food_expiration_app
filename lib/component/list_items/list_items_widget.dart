@@ -159,7 +159,8 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                         if (confirmDialogResponse) {
                           _model.apiClearItem =
                               await FoodexpirationGroup.clearItemsCall.call(
-                            id: functions.mapItemIdList(widget.items!.toList()),
+                            idList:
+                                functions.mapItemIdList(widget.items!.toList()),
                             archive: true,
                             deviceid: FFAppState().deviceId,
                           );
