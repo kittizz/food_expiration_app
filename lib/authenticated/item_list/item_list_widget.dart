@@ -343,12 +343,9 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         title: 'หมดอายุไปแล้ว',
                         showClear: true,
                         items: _model.items,
-                        locationName: valueOrDefault<String>(
-                          widget.isLocation
-                              ? FFAppState().pageLocationInfo.name
-                              : widget.title,
-                          'null',
-                        ),
+                        locationName: widget.isLocation
+                            ? FFAppState().pageLocationInfo.name
+                            : '',
                       ),
                     ),
                   ),
