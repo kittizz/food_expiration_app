@@ -177,37 +177,39 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
           thickness: 1.0,
           color: FlutterFlowTheme.of(context).grey50,
         ),
-        Builder(
-          builder: (context) {
-            final list = widget.items!.toList();
-            return ListView.builder(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: list.length,
-              itemBuilder: (context, listIndex) {
-                final listItem = list[listIndex];
-                return wrapWithModel(
-                  model: _model.itemModels.getModel(
-                    listItem.id.toString(),
-                    listIndex,
-                  ),
-                  updateCallback: () => setState(() {}),
-                  child: ItemWidget(
-                    key: Key(
-                      'Keyo1e_${listItem.id.toString()}',
+        Expanded(
+          child: Builder(
+            builder: (context) {
+              final list = widget.items!.toList();
+              return ListView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: list.length,
+                itemBuilder: (context, listIndex) {
+                  final listItem = list[listIndex];
+                  return wrapWithModel(
+                    model: _model.itemModels.getModel(
+                      listItem.id.toString(),
+                      listIndex,
                     ),
-                    name: listItem.name,
-                    image: functions.getImage(listItem.image.path),
-                    expiryDate: listItem.expireDate!,
-                    location: widget.locationName!,
-                    preDay: listItem.forewarnDay,
-                    imageBlurhash: listItem.image.blurHash,
-                  ),
-                );
-              },
-            );
-          },
+                    updateCallback: () => setState(() {}),
+                    child: ItemWidget(
+                      key: Key(
+                        'Keyo1e_${listItem.id.toString()}',
+                      ),
+                      name: listItem.name,
+                      image: functions.getImage(listItem.image.path),
+                      expiryDate: listItem.expireDate!,
+                      location: widget.locationName!,
+                      preDay: listItem.forewarnDay,
+                      imageBlurhash: listItem.image.blurHash,
+                    ),
+                  );
+                },
+              );
+            },
+          ),
         ),
       ],
     );
