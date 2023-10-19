@@ -35,6 +35,7 @@ class FoodexpirationGroup {
   static UpdateLocationCall updateLocationCall = UpdateLocationCall();
   static CategoryCall categoryCall = CategoryCall();
   static CreateItemCall createItemCall = CreateItemCall();
+  static LocationItemCall locationItemCall = LocationItemCall();
 }
 
 class RegisterDeviceCall {
@@ -585,6 +586,30 @@ class CreateItemCall {
         response,
         r'''$.message''',
       );
+}
+
+class LocationItemCall {
+  Future<ApiCallResponse> call({
+    bool? isArchived,
+    int? locationId,
+    String? deviceid = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'locationItem',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/item/location/${locationId}',
+      callType: ApiCallType.GET,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {
+        'isArchived': isArchived,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
 }
 
 /// End foodexpiration Group Code

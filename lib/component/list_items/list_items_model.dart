@@ -1,7 +1,9 @@
+import '/backend/schema/structs/index.dart';
 import '/component/item/item_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'list_items_widget.dart' show ListItemsWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -13,17 +15,17 @@ import 'package:provider/provider.dart';
 class ListItemsModel extends FlutterFlowModel<ListItemsWidget> {
   ///  State fields for stateful widgets in this component.
 
-  // Model for Item component.
-  late ItemModel itemModel;
+  // Models for Item dynamic component.
+  late FlutterFlowDynamicModels<ItemModel> itemModels;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    itemModel = createModel(context, () => ItemModel());
+    itemModels = FlutterFlowDynamicModels(() => ItemModel());
   }
 
   void dispose() {
-    itemModel.dispose();
+    itemModels.dispose();
   }
 
   /// Action blocks are added here.

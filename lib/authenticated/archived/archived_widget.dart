@@ -1,4 +1,3 @@
-import '/component/list_items/list_items_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -87,17 +86,7 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [
-              wrapWithModel(
-                model: _model.listItemsModel,
-                updateCallback: () => setState(() {}),
-                child: ListItemsWidget(
-                  parameter1: _model.testDate,
-                  title: 'ลบออกไปแล้ว',
-                  showClear: true,
-                ),
-              ),
-            ],
+            children: [],
           ),
         ),
       ),

@@ -1,4 +1,3 @@
-import '/component/list_items/list_items_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -17,19 +16,14 @@ class SearchModel extends FlutterFlowModel<SearchWidget> {
   // State field(s) for TextField widget.
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  // Model for ListItems component.
-  late ListItemsModel listItemsModel;
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {
-    listItemsModel = createModel(context, () => ListItemsModel());
-  }
+  void initState(BuildContext context) {}
 
   void dispose() {
     unfocusNode.dispose();
     textController?.dispose();
-    listItemsModel.dispose();
   }
 
   /// Action blocks are added here.

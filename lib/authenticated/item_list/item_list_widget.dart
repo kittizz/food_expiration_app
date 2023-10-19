@@ -1,3 +1,5 @@
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/component/list_items/list_items_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -8,6 +10,7 @@ import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -42,6 +45,12 @@ class _ItemListWidgetState extends State<ItemListWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ItemListModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await _model.fetchLocationItem(context);
+      setState(() {});
+    });
   }
 
   @override
@@ -66,7 +75,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
           onPressed: () async {
             await action_blocks.openAddItem(
               context,
-              replace: false,
+              replace: true,
             );
             setState(() {});
           },
@@ -139,54 +148,100 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              if (widget.isLocation)
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width * 1.0,
-                    height: 135.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).grey50,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 2.0,
-                          color: Color(0x1C000000),
-                          offset: Offset(0.0, 1.0),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          child: Container(
-                            width: 135.0,
-                            height: double.infinity,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                            child: Stack(
-                              children: [
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    await Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.fade,
-                                        child: FlutterFlowExpandedImageView(
-                                          image: OctoImage(
+          child: RefreshIndicator(
+            color: FlutterFlowTheme.of(context).red200,
+            onRefresh: () async {
+              await _model.fetchLocationItem(context);
+              setState(() {});
+            },
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  if (widget.isLocation)
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          10.0, 10.0, 10.0, 10.0),
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: 135.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).grey50,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 2.0,
+                              color: Color(0x1C000000),
+                              offset: Offset(0.0, 1.0),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              child: Container(
+                                width: 135.0,
+                                height: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: Stack(
+                                  children: [
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          PageTransition(
+                                            type: PageTransitionType.fade,
+                                            child: FlutterFlowExpandedImageView(
+                                              image: OctoImage(
+                                                placeholderBuilder:
+                                                    OctoPlaceholder.blurHash(
+                                                  FFAppState()
+                                                      .pageLocationInfo
+                                                      .imageBlurhash,
+                                                ),
+                                                image:
+                                                    CachedNetworkImageProvider(
+                                                  functions.getImage(
+                                                      FFAppState()
+                                                          .pageLocationInfo
+                                                          .image),
+                                                ),
+                                                fit: BoxFit.contain,
+                                              ),
+                                              allowRotation: false,
+                                              tag: functions.getImage(
+                                                  FFAppState()
+                                                      .pageLocationInfo
+                                                      .image),
+                                              useHeroAnimation: true,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Hero(
+                                        tag: functions.getImage(FFAppState()
+                                            .pageLocationInfo
+                                            .image),
+                                        transitionOnUserGestures: true,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(8.0),
+                                            bottomRight: Radius.circular(0.0),
+                                            topLeft: Radius.circular(8.0),
+                                            topRight: Radius.circular(0.0),
+                                          ),
+                                          child: OctoImage(
                                             placeholderBuilder:
                                                 OctoPlaceholder.blurHash(
                                               FFAppState()
@@ -198,159 +253,118 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                                   .pageLocationInfo
                                                   .image),
                                             ),
-                                            fit: BoxFit.contain,
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
                                           ),
-                                          allowRotation: false,
-                                          tag: functions.getImage(FFAppState()
-                                              .pageLocationInfo
-                                              .image),
-                                          useHeroAnimation: true,
                                         ),
-                                      ),
-                                    );
-                                  },
-                                  child: Hero(
-                                    tag: functions.getImage(
-                                        FFAppState().pageLocationInfo.image),
-                                    transitionOnUserGestures: true,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(8.0),
-                                        bottomRight: Radius.circular(0.0),
-                                        topLeft: Radius.circular(8.0),
-                                        topRight: Radius.circular(0.0),
-                                      ),
-                                      child: OctoImage(
-                                        placeholderBuilder:
-                                            OctoPlaceholder.blurHash(
-                                          FFAppState()
-                                              .pageLocationInfo
-                                              .imageBlurhash,
-                                        ),
-                                        image: CachedNetworkImageProvider(
-                                          functions.getImage(FFAppState()
-                                              .pageLocationInfo
-                                              .image),
-                                        ),
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        fit: BoxFit.cover,
                                       ),
                                     ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(1.00, 1.00),
-                                  child: Icon(
-                                    Icons.zoom_in_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                5.0, 5.0, 5.0, 5.0),
-                            child: Container(
-                              width: double.infinity,
-                              height: double.infinity,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).grey50,
-                                borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                  color: Color(0x34474747),
-                                ),
-                              ),
-                              alignment: AlignmentDirectional(-1.00, -1.00),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 5.0),
-                                      child: SelectionArea(
-                                          child: Text(
-                                        FFAppState()
-                                            .pageLocationInfo
-                                            .description,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontSize: 16.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
-                                      )),
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(1.00, 1.00),
+                                      child: Icon(
+                                        Icons.zoom_in_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                          ),
+                            Flexible(
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 5.0, 5.0, 5.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context).grey50,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    border: Border.all(
+                                      color: Color(0x34474747),
+                                    ),
+                                  ),
+                                  alignment: AlignmentDirectional(-1.00, -1.00),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  5.0, 5.0, 5.0, 5.0),
+                                          child: SelectionArea(
+                                              child: Text(
+                                            FFAppState()
+                                                .pageLocationInfo
+                                                .description,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 16.0,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
+                                                ),
+                                          )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
+                    ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: wrapWithModel(
+                      model: _model.listItemsModel,
+                      updateCallback: () => setState(() {}),
+                      child: ListItemsWidget(
+                        title: 'หมดอายุไปแล้ว',
+                        showClear: true,
+                        items: _model.items,
+                        locationName: valueOrDefault<String>(
+                          widget.isLocation
+                              ? FFAppState().pageLocationInfo.name
+                              : widget.title,
+                          'null',
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              Container(
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: wrapWithModel(
-                  model: _model.listItemsModel1,
-                  updateCallback: () => setState(() {}),
-                  child: ListItemsWidget(
-                    parameter1: _model.testDate,
-                    title: 'หมดอายุไปแล้ว',
-                    showClear: true,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: wrapWithModel(
-                  model: _model.listItemsModel2,
-                  updateCallback: () => setState(() {}),
-                  child: ListItemsWidget(
-                    parameter1: _model.testDate,
-                    title: 'ใกล้จะอายุ',
-                    showClear: false,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
                   ),
-                ),
+                ],
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: wrapWithModel(
-                  model: _model.listItemsModel3,
-                  updateCallback: () => setState(() {}),
-                  child: ListItemsWidget(
-                    parameter1: _model.testDate,
-                    title: 'รายการที่เหลือ',
-                    showClear: false,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

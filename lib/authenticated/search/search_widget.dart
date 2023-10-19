@@ -1,4 +1,3 @@
-import '/component/list_items/list_items_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -224,17 +223,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                     ),
                   ),
                 ],
-              ),
-              Expanded(
-                child: wrapWithModel(
-                  model: _model.listItemsModel,
-                  updateCallback: () => setState(() {}),
-                  child: ListItemsWidget(
-                    title: 'รายการที่เจอ',
-                    showClear: false,
-                    parameter1: getCurrentTimestamp,
-                  ),
-                ),
               ),
             ],
           ),

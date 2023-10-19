@@ -1,7 +1,9 @@
+import '/backend/schema/structs/index.dart';
 import '/component/item/item_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -14,15 +16,17 @@ export 'list_items_model.dart';
 class ListItemsWidget extends StatefulWidget {
   const ListItemsWidget({
     Key? key,
-    this.parameter1,
     this.title,
     bool? showClear,
+    required this.items,
+    required this.locationName,
   })  : this.showClear = showClear ?? false,
         super(key: key);
 
-  final DateTime? parameter1;
   final String? title;
   final bool showClear;
+  final List<ItemStruct>? items;
+  final String? locationName;
 
   @override
   _ListItemsWidgetState createState() => _ListItemsWidgetState();
@@ -173,26 +177,37 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
           thickness: 1.0,
           color: FlutterFlowTheme.of(context).grey50,
         ),
-        ListView(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          children: [
-            wrapWithModel(
-              model: _model.itemModel,
-              updateCallback: () => setState(() {}),
-              child: ItemWidget(
-                name: 'รายการ',
-                image:
-                    'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                expiryDate: widget.parameter1 == null
-                    ? getCurrentTimestamp
-                    : widget.parameter1!,
-                location: 'สถานที่',
-                preDay: 3,
-              ),
-            ),
-          ],
+        Builder(
+          builder: (context) {
+            final list = widget.items!.toList();
+            return ListView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: list.length,
+              itemBuilder: (context, listIndex) {
+                final listItem = list[listIndex];
+                return wrapWithModel(
+                  model: _model.itemModels.getModel(
+                    listItem.id.toString(),
+                    listIndex,
+                  ),
+                  updateCallback: () => setState(() {}),
+                  child: ItemWidget(
+                    key: Key(
+                      'Keyo1e_${listItem.id.toString()}',
+                    ),
+                    name: listItem.name,
+                    image: functions.getImage(listItem.image.path),
+                    expiryDate: listItem.expireDate!,
+                    location: widget.locationName!,
+                    preDay: listItem.forewarnDay,
+                    imageBlurhash: listItem.image.blurHash,
+                  ),
+                );
+              },
+            );
+          },
         ),
       ],
     );

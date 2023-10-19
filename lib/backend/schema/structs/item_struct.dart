@@ -20,6 +20,7 @@ class ItemStruct extends FFFirebaseStruct {
     String? category,
     String? barcode,
     ImageStruct? image,
+    int? locationId,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _name = name,
@@ -31,6 +32,7 @@ class ItemStruct extends FFFirebaseStruct {
         _category = category,
         _barcode = barcode,
         _image = image,
+        _locationId = locationId,
         super(firestoreUtilData);
 
   // "id" field.
@@ -97,6 +99,13 @@ class ItemStruct extends FFFirebaseStruct {
       updateFn(_image ??= ImageStruct());
   bool hasImage() => _image != null;
 
+  // "locationId" field.
+  int? _locationId;
+  int get locationId => _locationId ?? 0;
+  set locationId(int? val) => _locationId = val;
+  void incrementLocationId(int amount) => _locationId = locationId + amount;
+  bool hasLocationId() => _locationId != null;
+
   static ItemStruct fromMap(Map<String, dynamic> data) => ItemStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
@@ -108,6 +117,7 @@ class ItemStruct extends FFFirebaseStruct {
         category: data['category'] as String?,
         barcode: data['barcode'] as String?,
         image: ImageStruct.maybeFromMap(data['image']),
+        locationId: castToType<int>(data['locationId']),
       );
 
   static ItemStruct? maybeFromMap(dynamic data) =>
@@ -124,6 +134,7 @@ class ItemStruct extends FFFirebaseStruct {
         'category': _category,
         'barcode': _barcode,
         'image': _image?.toMap(),
+        'locationId': _locationId,
       }.withoutNulls;
 
   @override
@@ -167,6 +178,10 @@ class ItemStruct extends FFFirebaseStruct {
         'image': serializeParam(
           _image,
           ParamType.DataStruct,
+        ),
+        'locationId': serializeParam(
+          _locationId,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -223,6 +238,11 @@ class ItemStruct extends FFFirebaseStruct {
           false,
           structBuilder: ImageStruct.fromSerializableMap,
         ),
+        locationId: deserializeParam(
+          data['locationId'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -240,7 +260,8 @@ class ItemStruct extends FFFirebaseStruct {
         isArchived == other.isArchived &&
         category == other.category &&
         barcode == other.barcode &&
-        image == other.image;
+        image == other.image &&
+        locationId == other.locationId;
   }
 
   @override
@@ -254,7 +275,8 @@ class ItemStruct extends FFFirebaseStruct {
         isArchived,
         category,
         barcode,
-        image
+        image,
+        locationId
       ]);
 }
 
@@ -269,6 +291,7 @@ ItemStruct createItemStruct({
   String? category,
   String? barcode,
   ImageStruct? image,
+  int? locationId,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -285,6 +308,7 @@ ItemStruct createItemStruct({
       category: category,
       barcode: barcode,
       image: image ?? (clearUnsetFields ? ImageStruct() : null),
+      locationId: locationId,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
