@@ -48,6 +48,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await action_blocks.fetchLocations(context);
       await _model.fetchLocationItem(context);
       setState(() {});
     });
