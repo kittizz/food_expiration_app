@@ -50,7 +50,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
       await action_blocks.fetchLocations(context);
       await action_blocks.fetchItems(
         context,
-        archive: true,
+        archive: false,
         locationId: widget.isLocation ? widget.locationId : 0,
       );
       setState(() {});
@@ -166,7 +166,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
             onRefresh: () async {
               await action_blocks.fetchItems(
                 context,
-                archive: true,
+                archive: false,
                 locationId: widget.isLocation ? widget.locationId : 0,
               );
               setState(() {});
