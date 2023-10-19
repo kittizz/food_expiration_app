@@ -8,6 +8,7 @@ import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -41,8 +42,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
 
     _model.nameFieldController ??=
         TextEditingController(text: FFAppState().pageLocationInfo.name);
+    _model.nameFieldFocusNode ??= FocusNode();
     _model.descriptionFieldController ??=
         TextEditingController(text: FFAppState().pageLocationInfo.description);
+    _model.descriptionFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -54,6 +57,15 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -614,6 +626,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                       0.0, 10.0, 0.0, 5.0),
                                   child: TextFormField(
                                     controller: _model.nameFieldController,
+                                    focusNode: _model.nameFieldFocusNode,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'ชื่อสถานที่จัดเก็บ',
@@ -693,6 +706,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                   child: TextFormField(
                                     controller:
                                         _model.descriptionFieldController,
+                                    focusNode: _model.descriptionFieldFocusNode,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'บันทึกช่วยจำ',

@@ -7,6 +7,7 @@ import 'dart:async';
 import '/actions/actions.dart' as action_blocks;
 import 'signup_widget.dart' show SignupWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,16 +18,20 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
 
   final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode1;
   TextEditingController? emailTextController;
   String? Function(BuildContext, String?)? emailTextControllerValidator;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode2;
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode3;
   TextEditingController? passwordTextController;
   late bool passwordVisibility1;
   String? Function(BuildContext, String?)? passwordTextControllerValidator;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode4;
   TextEditingController? confirmPasswordTextController;
   late bool passwordVisibility2;
   String? Function(BuildContext, String?)?
@@ -41,9 +46,16 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    textFieldFocusNode1?.dispose();
     emailTextController?.dispose();
+
+    textFieldFocusNode2?.dispose();
     textController1?.dispose();
+
+    textFieldFocusNode3?.dispose();
     passwordTextController?.dispose();
+
+    textFieldFocusNode4?.dispose();
     confirmPasswordTextController?.dispose();
   }
 

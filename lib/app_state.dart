@@ -49,29 +49,33 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_deviceId', _value);
   }
 
-  bool _isDebug = true;
-  bool get isDebug => _isDebug;
-  set isDebug(bool _value) {
-    _isDebug = _value;
+  List<ItemStruct> _items = [];
+  List<ItemStruct> get items => _items;
+  set items(List<ItemStruct> _value) {
+    _items = _value;
   }
 
-  String _cdn = 'th-bkk-1.xvercloud.com';
-  String get cdn => _cdn;
-  set cdn(String _value) {
-    _cdn = _value;
+  void addToItems(ItemStruct _value) {
+    _items.add(_value);
   }
 
-  UserStruct _user = UserStruct.fromSerializableMap(jsonDecode(
-      '{\"role\":\"user\",\"nickname\":\"ผู้ใช้\",\"profilePicture\":\"/images/user.png\",\"profilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
-  UserStruct get user => _user;
-  set user(UserStruct _value) {
-    _user = _value;
-    prefs.setString('ff_user', _value.serialize());
+  void removeFromItems(ItemStruct _value) {
+    _items.remove(_value);
   }
 
-  void updateUserStruct(Function(UserStruct) updateFn) {
-    updateFn(_user);
-    prefs.setString('ff_user', _user.serialize());
+  void removeAtIndexFromItems(int _index) {
+    _items.removeAt(_index);
+  }
+
+  void updateItemsAtIndex(
+    int _index,
+    ItemStruct Function(ItemStruct) updateFn,
+  ) {
+    _items[_index] = updateFn(_items[_index]);
+  }
+
+  void insertAtIndexInItems(int _index, ItemStruct _value) {
+    _items.insert(_index, _value);
   }
 
   PageLocationInfoStruct _pageLocationInfo =
@@ -84,6 +88,28 @@ class FFAppState extends ChangeNotifier {
 
   void updatePageLocationInfoStruct(Function(PageLocationInfoStruct) updateFn) {
     updateFn(_pageLocationInfo);
+  }
+
+  PageItemInfoStruct _pageItemInfo = PageItemInfoStruct.fromSerializableMap(
+      jsonDecode('{\"location\":\"{\\\"image\\\":\\\"{}\\\"}\"}'));
+  PageItemInfoStruct get pageItemInfo => _pageItemInfo;
+  set pageItemInfo(PageItemInfoStruct _value) {
+    _pageItemInfo = _value;
+  }
+
+  void updatePageItemInfoStruct(Function(PageItemInfoStruct) updateFn) {
+    updateFn(_pageItemInfo);
+  }
+
+  ThumbnailStruct _thumbnail =
+      ThumbnailStruct.fromSerializableMap(jsonDecode('{\"image\":\"{}\"}'));
+  ThumbnailStruct get thumbnail => _thumbnail;
+  set thumbnail(ThumbnailStruct _value) {
+    _thumbnail = _value;
+  }
+
+  void updateThumbnailStruct(Function(ThumbnailStruct) updateFn) {
+    updateFn(_thumbnail);
   }
 
   List<LocationStruct> _locations = [];
@@ -115,15 +141,29 @@ class FFAppState extends ChangeNotifier {
     _locations.insert(_index, _value);
   }
 
-  ThumbnailStruct _thumbnail =
-      ThumbnailStruct.fromSerializableMap(jsonDecode('{\"image\":\"{}\"}'));
-  ThumbnailStruct get thumbnail => _thumbnail;
-  set thumbnail(ThumbnailStruct _value) {
-    _thumbnail = _value;
+  bool _isDebug = true;
+  bool get isDebug => _isDebug;
+  set isDebug(bool _value) {
+    _isDebug = _value;
   }
 
-  void updateThumbnailStruct(Function(ThumbnailStruct) updateFn) {
-    updateFn(_thumbnail);
+  String _cdn = 'th-bkk-1.xvercloud.com';
+  String get cdn => _cdn;
+  set cdn(String _value) {
+    _cdn = _value;
+  }
+
+  UserStruct _user = UserStruct.fromSerializableMap(jsonDecode(
+      '{\"role\":\"user\",\"nickname\":\"ผู้ใช้\",\"profilePicture\":\"/images/user.png\",\"profilePictureBlurHash\":\"LIEpzCa#1mt7EjWB?Hof5Xoe}fR%\"}'));
+  UserStruct get user => _user;
+  set user(UserStruct _value) {
+    _user = _value;
+    prefs.setString('ff_user', _value.serialize());
+  }
+
+  void updateUserStruct(Function(UserStruct) updateFn) {
+    updateFn(_user);
+    prefs.setString('ff_user', _user.serialize());
   }
 
   List<AddDateStruct> _addDate = [
@@ -170,17 +210,6 @@ class FFAppState extends ChangeNotifier {
 
   void insertAtIndexInAddDate(int _index, AddDateStruct _value) {
     _addDate.insert(_index, _value);
-  }
-
-  PageItemInfoStruct _pageItemInfo = PageItemInfoStruct.fromSerializableMap(
-      jsonDecode('{\"location\":\"{\\\"image\\\":\\\"{}\\\"}\"}'));
-  PageItemInfoStruct get pageItemInfo => _pageItemInfo;
-  set pageItemInfo(PageItemInfoStruct _value) {
-    _pageItemInfo = _value;
-  }
-
-  void updatePageItemInfoStruct(Function(PageItemInfoStruct) updateFn) {
-    updateFn(_pageItemInfo);
   }
 
   List<String> _categorys = [];

@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,7 +43,9 @@ class _SigninWidgetState extends State<SigninWidget> {
     }
 
     _model.emailTextController ??= TextEditingController();
+    _model.textFieldFocusNode1 ??= FocusNode();
     _model.passwordTextController ??= TextEditingController();
+    _model.textFieldFocusNode2 ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
           _model.emailTextController?.text = 'me@kittiza.com';
           _model.passwordTextController?.text = 'zxc25861';
@@ -61,6 +64,15 @@ class _SigninWidgetState extends State<SigninWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -142,6 +154,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                   16.0, 12.0, 16.0, 0.0),
                               child: TextFormField(
                                 controller: _model.emailTextController,
+                                focusNode: _model.textFieldFocusNode1,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'อีเมล',
@@ -217,6 +230,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                   16.0, 12.0, 16.0, 0.0),
                               child: TextFormField(
                                 controller: _model.passwordTextController,
+                                focusNode: _model.textFieldFocusNode2,
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: !_model.passwordVisibility,
                                 decoration: InputDecoration(

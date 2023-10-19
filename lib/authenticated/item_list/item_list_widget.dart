@@ -1,5 +1,3 @@
-import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/component/list_items/list_items_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -11,6 +9,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -49,7 +48,11 @@ class _ItemListWidgetState extends State<ItemListWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await action_blocks.fetchLocations(context);
-      await _model.fetchLocationItem(context);
+      await action_blocks.fetchItems(
+        context,
+        archive: true,
+        locationId: widget.isLocation ? widget.locationId : 0,
+      );
       setState(() {});
     });
   }
@@ -63,6 +66,15 @@ class _ItemListWidgetState extends State<ItemListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -152,7 +164,11 @@ class _ItemListWidgetState extends State<ItemListWidget> {
           child: RefreshIndicator(
             color: FlutterFlowTheme.of(context).red200,
             onRefresh: () async {
-              await _model.fetchLocationItem(context);
+              await action_blocks.fetchItems(
+                context,
+                archive: true,
+                locationId: widget.isLocation ? widget.locationId : 0,
+              );
               setState(() {});
             },
             child: SingleChildScrollView(
@@ -337,18 +353,32 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child: wrapWithModel(
-                      model: _model.listItemsModel1,
-                      updateCallback: () => setState(() {}),
-                      child: ListItemsWidget(
-                        title: 'หมดอายุไปแล้ว',
-                        showClear: true,
-                        items: _model.items
-                            .where((e) =>
-                                functions.getDateStatus(
-                                    e.expireDate!, e.forewarnDay) ==
-                                'expired')
-                            .toList(),
+                    child: Visibility(
+                      visible: FFAppState()
+                              .items
+                              .where((e) =>
+                                  functions.getDateStatus(
+                                      e.expireDate!, e.forewarnDay) ==
+                                  'about_to_expire')
+                              .toList()
+                              .length !=
+                          0,
+                      child: wrapWithModel(
+                        model: _model.listItemsModel1,
+                        updateCallback: () => setState(() {}),
+                        child: ListItemsWidget(
+                          title: 'หมดอายุไปแล้ว',
+                          showClear: true,
+                          items: FFAppState()
+                              .items
+                              .where((e) =>
+                                  functions.getDateStatus(
+                                      e.expireDate!, e.forewarnDay) ==
+                                  'expired')
+                              .toList(),
+                          locationId:
+                              widget.isLocation ? widget.locationId! : 0,
+                        ),
                       ),
                     ),
                   ),
@@ -356,18 +386,32 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child: wrapWithModel(
-                      model: _model.listItemsModel2,
-                      updateCallback: () => setState(() {}),
-                      child: ListItemsWidget(
-                        title: 'ใกล้จะหมดอายุ',
-                        showClear: false,
-                        items: _model.items
-                            .where((e) =>
-                                functions.getDateStatus(
-                                    e.expireDate!, e.forewarnDay) ==
-                                'about_to_expire')
-                            .toList(),
+                    child: Visibility(
+                      visible: FFAppState()
+                              .items
+                              .where((e) =>
+                                  functions.getDateStatus(
+                                      e.expireDate!, e.forewarnDay) ==
+                                  'about_to_expire')
+                              .toList()
+                              .length !=
+                          0,
+                      child: wrapWithModel(
+                        model: _model.listItemsModel2,
+                        updateCallback: () => setState(() {}),
+                        child: ListItemsWidget(
+                          title: 'ใกล้จะหมดอายุ',
+                          showClear: false,
+                          items: FFAppState()
+                              .items
+                              .where((e) =>
+                                  functions.getDateStatus(
+                                      e.expireDate!, e.forewarnDay) ==
+                                  'about_to_expire')
+                              .toList(),
+                          locationId:
+                              widget.isLocation ? widget.locationId! : 0,
+                        ),
                       ),
                     ),
                   ),
@@ -375,18 +419,32 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child: wrapWithModel(
-                      model: _model.listItemsModel3,
-                      updateCallback: () => setState(() {}),
-                      child: ListItemsWidget(
-                        title: 'รายการที่เหลือ',
-                        showClear: false,
-                        items: _model.items
-                            .where((e) =>
-                                functions.getDateStatus(
-                                    e.expireDate!, e.forewarnDay) ==
-                                'ok')
-                            .toList(),
+                    child: Visibility(
+                      visible: FFAppState()
+                              .items
+                              .where((e) =>
+                                  functions.getDateStatus(
+                                      e.expireDate!, e.forewarnDay) ==
+                                  'ok')
+                              .toList()
+                              .length !=
+                          0,
+                      child: wrapWithModel(
+                        model: _model.listItemsModel3,
+                        updateCallback: () => setState(() {}),
+                        child: ListItemsWidget(
+                          title: 'รายการที่เหลือ',
+                          showClear: false,
+                          items: FFAppState()
+                              .items
+                              .where((e) =>
+                                  functions.getDateStatus(
+                                      e.expireDate!, e.forewarnDay) ==
+                                  'ok')
+                              .toList(),
+                          locationId:
+                              widget.isLocation ? widget.locationId! : 0,
+                        ),
                       ),
                     ),
                   ),

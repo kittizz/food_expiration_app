@@ -13,6 +13,7 @@ import 'setting_widget.dart' show SettingWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -37,6 +38,7 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
   // Stores action output result for [Backend Call - API (changeProfilepicture)] action in IconButton widget.
   ApiCallResponse? apiChangeProfilepicture;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
 
@@ -47,6 +49,7 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
   void dispose() {
     unfocusNode.dispose();
     tabBarController?.dispose();
+    textFieldFocusNode?.dispose();
     textController?.dispose();
   }
 

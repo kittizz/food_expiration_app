@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import '../../flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -36,6 +36,7 @@ class FoodexpirationGroup {
   static CategoryCall categoryCall = CategoryCall();
   static CreateItemCall createItemCall = CreateItemCall();
   static LocationItemCall locationItemCall = LocationItemCall();
+  static ClearItemsCall clearItemsCall = ClearItemsCall();
 }
 
 class RegisterDeviceCall {
@@ -43,7 +44,7 @@ class RegisterDeviceCall {
     String? authToken = 'no',
     String? nickname = '',
     String? deviceid = '',
-  }) {
+  }) async {
     final ffApiRequestBody = '''
 {
   "auth_token": "${authToken}",
@@ -79,7 +80,7 @@ class RegisterDeviceCall {
 class GetUserCall {
   Future<ApiCallResponse> call({
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getUser',
       apiUrl: '${FoodexpirationGroup.baseUrl}/user',
@@ -120,7 +121,7 @@ class GetUserCall {
 class BlogRecommendCall {
   Future<ApiCallResponse> call({
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'blogRecommend',
       apiUrl: '${FoodexpirationGroup.baseUrl}/blog/recommend',
@@ -141,7 +142,7 @@ class BlogByIdCall {
   Future<ApiCallResponse> call({
     int? id,
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'blogById',
       apiUrl: '${FoodexpirationGroup.baseUrl}/blog/query',
@@ -188,7 +189,7 @@ class BlogByIdCall {
 class BlogAllCall {
   Future<ApiCallResponse> call({
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'blogAll',
       apiUrl: '${FoodexpirationGroup.baseUrl}/blog/all',
@@ -208,7 +209,7 @@ class BlogAllCall {
 class LocationListCall {
   Future<ApiCallResponse> call({
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'locationList',
       apiUrl: '${FoodexpirationGroup.baseUrl}/location/list',
@@ -234,7 +235,7 @@ class DeleteLocationCall {
   Future<ApiCallResponse> call({
     int? id,
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteLocation',
       apiUrl: '${FoodexpirationGroup.baseUrl}/location',
@@ -263,7 +264,7 @@ class UploadImageCall {
     FFUploadedFile? file,
     String? hash = '',
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'uploadImage',
       apiUrl: '${FoodexpirationGroup.baseUrl}/image/upload',
@@ -303,7 +304,7 @@ class UploadImageCall {
 class GetBannerCall {
   Future<ApiCallResponse> call({
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getBanner',
       apiUrl: '${FoodexpirationGroup.baseUrl}/image/banner',
@@ -330,7 +331,7 @@ class ChangeProfilepictureCall {
     FFUploadedFile? file,
     String? hash = '',
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'changeProfilepicture',
       apiUrl: '${FoodexpirationGroup.baseUrl}/user/change-profilepicture',
@@ -355,7 +356,7 @@ class ChangeNicknameCall {
   Future<ApiCallResponse> call({
     String? nickname = '',
     String? deviceid = '',
-  }) {
+  }) async {
     final ffApiRequestBody = '''
 {
   "nickname": "${nickname}"
@@ -381,7 +382,7 @@ class ChangeNicknameCall {
 class ThumbnailCategoryCall {
   Future<ApiCallResponse> call({
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'thumbnailCategory',
       apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/category',
@@ -402,7 +403,7 @@ class ThumbnailCategoryByIdCall {
   Future<ApiCallResponse> call({
     String? catrgoryId = '',
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'thumbnailCategoryById',
       apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail',
@@ -427,7 +428,7 @@ class CreateLocationCall {
     String? description = '',
     int? imageId,
     String? deviceid = '',
-  }) {
+  }) async {
     final ffApiRequestBody = '''
 {
   "name": "${name}",
@@ -462,7 +463,7 @@ class GetLocationByIdCall {
     int? id,
     bool? items = false,
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getLocationById',
       apiUrl: '${FoodexpirationGroup.baseUrl}/location',
@@ -489,7 +490,7 @@ class UpdateLocationCall {
     String? name = '',
     String? description = '',
     String? deviceid = '',
-  }) {
+  }) async {
     final ffApiRequestBody = '''
 {
   "name": "${name}",
@@ -523,7 +524,7 @@ class UpdateLocationCall {
 class CategoryCall {
   Future<ApiCallResponse> call({
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'category',
       apiUrl: '${FoodexpirationGroup.baseUrl}/category',
@@ -554,7 +555,7 @@ class CreateItemCall {
     int? quantity,
     String? unit = '',
     String? deviceid = '',
-  }) {
+  }) async {
     final ffApiRequestBody = '''
 {
   "name": "${name}",
@@ -597,7 +598,7 @@ class LocationItemCall {
     bool? isArchived,
     int? locationId,
     String? deviceid = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'locationItem',
       apiUrl: '${FoodexpirationGroup.baseUrl}/item/location/${locationId}',
@@ -614,6 +615,40 @@ class LocationItemCall {
       cache: false,
     );
   }
+}
+
+class ClearItemsCall {
+  Future<ApiCallResponse> call({
+    String? id = '',
+    bool? archive,
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "id": "${id}",
+  "archive": ${archive}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'clearItems',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/item/clear',
+      callType: ApiCallType.PUT,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
 }
 
 /// End foodexpiration Group Code

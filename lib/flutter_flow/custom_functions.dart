@@ -211,3 +211,7 @@ String encodeString(String str) {
   String escaped = str.split('\n').map((line) => line.trim()).join('\\n');
   return jsonEncode(escaped);
 }
+
+String mapItemIdList(List<ItemStruct> arr) {
+  return jsonEncode(arr.map((e) => e.id).toList());
+}

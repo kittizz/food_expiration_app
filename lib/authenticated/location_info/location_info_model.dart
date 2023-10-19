@@ -10,6 +10,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'location_info_widget.dart' show LocationInfoWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -33,6 +34,7 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // State field(s) for NameField widget.
+  FocusNode? nameFieldFocusNode;
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
   String? _nameFieldControllerValidator(BuildContext context, String? val) {
@@ -51,6 +53,7 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
   }
 
   // State field(s) for DescriptionField widget.
+  FocusNode? descriptionFieldFocusNode;
   TextEditingController? descriptionFieldController;
   String? Function(BuildContext, String?)? descriptionFieldControllerValidator;
   String? _descriptionFieldControllerValidator(
@@ -85,7 +88,10 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    nameFieldFocusNode?.dispose();
     nameFieldController?.dispose();
+
+    descriptionFieldFocusNode?.dispose();
     descriptionFieldController?.dispose();
   }
 

@@ -55,15 +55,19 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
 
     _model.nameFieldController ??=
         TextEditingController(text: FFAppState().pageItemInfo.name);
+    _model.nameFieldFocusNode ??= FocusNode();
     _model.descriptionFieldController ??=
         TextEditingController(text: FFAppState().pageItemInfo.description);
+    _model.descriptionFieldFocusNode ??= FocusNode();
     _model.forewarnDayFieldController ??= TextEditingController(
         text: valueOrDefault<String>(
       FFAppState().pageItemInfo.forewarnDay.toString(),
       '1',
     ));
+    _model.forewarnDayFieldFocusNode ??= FocusNode();
     _model.quantityFieldController ??= TextEditingController(
         text: FFAppState().pageItemInfo.quantity.toString());
+    _model.quantityFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -75,6 +79,15 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -706,6 +719,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     0.0, 2.0, 0.0, 0.0),
                                 child: TextFormField(
                                   controller: _model.nameFieldController,
+                                  focusNode: _model.nameFieldFocusNode,
                                   onChanged: (_) => EasyDebounce.debounce(
                                     '_model.nameFieldController',
                                     Duration(milliseconds: 2000),
@@ -821,6 +835,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                               ),
                               TextFormField(
                                 controller: _model.descriptionFieldController,
+                                focusNode: _model.descriptionFieldFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.descriptionFieldController',
                                   Duration(milliseconds: 2000),
@@ -1302,6 +1317,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                             children: [
                               TextFormField(
                                 controller: _model.forewarnDayFieldController,
+                                focusNode: _model.forewarnDayFieldFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.forewarnDayFieldController',
                                   Duration(milliseconds: 2000),
@@ -1875,6 +1891,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       child: TextFormField(
                                         controller:
                                             _model.quantityFieldController,
+                                        focusNode:
+                                            _model.quantityFieldFocusNode,
                                         onChanged: (_) => EasyDebounce.debounce(
                                           '_model.quantityFieldController',
                                           Duration(milliseconds: 2000),

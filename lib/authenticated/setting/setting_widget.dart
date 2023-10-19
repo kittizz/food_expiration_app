@@ -12,6 +12,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -62,6 +63,7 @@ class _SettingWidgetState extends State<SettingWidget>
     )..addListener(() => setState(() {}));
     _model.textController ??=
         TextEditingController(text: FFAppState().user.nickname);
+    _model.textFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -73,6 +75,15 @@ class _SettingWidgetState extends State<SettingWidget>
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -572,6 +583,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                             20.0, 12.0, 20.0, 0.0),
                                         child: TextFormField(
                                           controller: _model.textController,
+                                          focusNode: _model.textFieldFocusNode,
                                           onFieldSubmitted: (_) async {
                                             await _model.saveNickname(context);
                                           },

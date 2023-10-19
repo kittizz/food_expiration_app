@@ -1,11 +1,14 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/item/item_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,12 +22,14 @@ class ListItemsWidget extends StatefulWidget {
     this.title,
     bool? showClear,
     required this.items,
+    required this.locationId,
   })  : this.showClear = showClear ?? false,
         super(key: key);
 
   final String? title;
   final bool showClear;
   final List<ItemStruct>? items;
+  final int? locationId;
 
   @override
   _ListItemsWidgetState createState() => _ListItemsWidgetState();
@@ -132,8 +137,9 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                               context: context,
                               builder: (alertDialogContext) {
                                 return AlertDialog(
-                                  title: Text('ลบรายการทั้งหมด'),
-                                  content: Text('คุณกำลังจะลบ....'),
+                                  title: Text('ล้างรายการ'),
+                                  content: Text(
+                                      'คุณกำลังจะล้างรายการ ${widget.title}ทั้งหมด'),
                                   actions: [
                                     TextButton(
                                       onPressed: () => Navigator.pop(
@@ -150,6 +156,58 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                               },
                             ) ??
                             false;
+                        if (confirmDialogResponse) {
+                          _model.apiClearItem =
+                              await FoodexpirationGroup.clearItemsCall.call(
+                            id: functions.mapItemIdList(widget.items!.toList()),
+                            archive: true,
+                            deviceid: FFAppState().deviceId,
+                          );
+                          if ((_model.apiClearItem?.succeeded ?? true)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'ล้างรายการเรียบร้อย',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 2000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).secondary,
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  FoodexpirationGroup.clearItemsCall
+                                      .message(
+                                        (_model.apiClearItem?.jsonBody ?? ''),
+                                      )
+                                      .toString(),
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).error,
+                              ),
+                            );
+                          }
+
+                          await action_blocks.fetchItems(
+                            context,
+                            archive: false,
+                            locationId: widget.locationId,
+                          );
+                          setState(() {});
+                        }
+
+                        setState(() {});
                       },
                       child: Text(
                         'ล้าง',

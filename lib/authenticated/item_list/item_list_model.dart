@@ -1,6 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
-import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/component/list_items/list_items_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -13,6 +10,7 @@ import 'item_list_widget.dart' show ItemListWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -20,17 +18,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class ItemListModel extends FlutterFlowModel<ItemListWidget> {
-  ///  Local state fields for this page.
-
-  List<ItemStruct> items = [];
-  void addToItems(ItemStruct item) => items.add(item);
-  void removeFromItems(ItemStruct item) => items.remove(item);
-  void removeAtIndexFromItems(int index) => items.removeAt(index);
-  void insertAtIndexInItems(int index, ItemStruct item) =>
-      items.insert(index, item);
-  void updateItemsAtIndex(int index, Function(ItemStruct) updateFn) =>
-      items[index] = updateFn(items[index]);
-
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -57,22 +44,6 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   }
 
   /// Action blocks are added here.
-
-  Future fetchLocationItem(BuildContext context) async {
-    ApiCallResponse? apiLocationItem;
-
-    apiLocationItem = await FoodexpirationGroup.locationItemCall.call(
-      deviceid: FFAppState().deviceId,
-      isArchived: false,
-      locationId: widget.isLocation ? widget.locationId : 0,
-    );
-    if ((apiLocationItem?.succeeded ?? true)) {
-      items = functions
-          .toItemList((apiLocationItem?.jsonBody ?? ''))
-          .toList()
-          .cast<ItemStruct>();
-    }
-  }
 
   /// Additional helper methods are added here.
 }

@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,9 +43,13 @@ class _SignupWidgetState extends State<SignupWidget> {
     }
 
     _model.emailTextController ??= TextEditingController();
+    _model.textFieldFocusNode1 ??= FocusNode();
     _model.textController1 ??= TextEditingController();
+    _model.textFieldFocusNode2 ??= FocusNode();
     _model.passwordTextController ??= TextEditingController();
+    _model.textFieldFocusNode3 ??= FocusNode();
     _model.confirmPasswordTextController ??= TextEditingController();
+    _model.textFieldFocusNode4 ??= FocusNode();
   }
 
   @override
@@ -59,6 +64,15 @@ class _SignupWidgetState extends State<SignupWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -138,6 +152,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                   16.0, 12.0, 16.0, 0.0),
                               child: TextFormField(
                                 controller: _model.emailTextController,
+                                focusNode: _model.textFieldFocusNode1,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'ชื่อ',
@@ -212,6 +227,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                   16.0, 12.0, 16.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController1,
+                                focusNode: _model.textFieldFocusNode2,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'อีเมล',
@@ -287,6 +303,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                   16.0, 12.0, 16.0, 0.0),
                               child: TextFormField(
                                 controller: _model.passwordTextController,
+                                focusNode: _model.textFieldFocusNode3,
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: !_model.passwordVisibility1,
                                 decoration: InputDecoration(
@@ -379,6 +396,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                               child: TextFormField(
                                 controller:
                                     _model.confirmPasswordTextController,
+                                focusNode: _model.textFieldFocusNode4,
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: !_model.passwordVisibility2,
                                 decoration: InputDecoration(

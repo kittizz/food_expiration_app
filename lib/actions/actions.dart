@@ -222,3 +222,23 @@ Future fetchCategory(BuildContext context) async {
         (apiCategory?.jsonBody ?? '').toList().cast<String>();
   }
 }
+
+Future fetchItems(
+  BuildContext context, {
+  required bool? archive,
+  required int? locationId,
+}) async {
+  ApiCallResponse? apiLocationItem;
+
+  apiLocationItem = await FoodexpirationGroup.locationItemCall.call(
+    deviceid: FFAppState().deviceId,
+    isArchived: archive,
+    locationId: locationId,
+  );
+  if ((apiLocationItem?.succeeded ?? true)) {
+    FFAppState().items = functions
+        .toItemList((apiLocationItem?.jsonBody ?? ''))
+        .toList()
+        .cast<ItemStruct>();
+  }
+}

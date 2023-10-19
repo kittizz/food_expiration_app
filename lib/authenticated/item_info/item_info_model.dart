@@ -39,9 +39,11 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // State field(s) for NameField widget.
+  FocusNode? nameFieldFocusNode;
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
   // State field(s) for DescriptionField widget.
+  FocusNode? descriptionFieldFocusNode;
   TextEditingController? descriptionFieldController;
   String? Function(BuildContext, String?)? descriptionFieldControllerValidator;
   // State field(s) for CategoryOption widget.
@@ -51,6 +53,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   String? locationOptionValue;
   FormFieldController<String>? locationOptionValueController;
   // State field(s) for forewarnDayField widget.
+  FocusNode? forewarnDayFieldFocusNode;
   TextEditingController? forewarnDayFieldController;
   String? Function(BuildContext, String?)? forewarnDayFieldControllerValidator;
   String? _forewarnDayFieldControllerValidator(
@@ -65,6 +68,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   DateTime? datePicked1;
   DateTime? datePicked2;
   // State field(s) for quantityField widget.
+  FocusNode? quantityFieldFocusNode;
   TextEditingController? quantityFieldController;
   String? Function(BuildContext, String?)? quantityFieldControllerValidator;
   String? _quantityFieldControllerValidator(BuildContext context, String? val) {
@@ -94,9 +98,16 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    nameFieldFocusNode?.dispose();
     nameFieldController?.dispose();
+
+    descriptionFieldFocusNode?.dispose();
     descriptionFieldController?.dispose();
+
+    forewarnDayFieldFocusNode?.dispose();
     forewarnDayFieldController?.dispose();
+
+    quantityFieldFocusNode?.dispose();
     quantityFieldController?.dispose();
   }
 
