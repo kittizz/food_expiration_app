@@ -24,6 +24,7 @@ class ItemWidget extends StatefulWidget {
     String? location,
     required this.preDay,
     required this.imageBlurhash,
+    required this.showLocation,
   })  : this.location = location ?? 'สถานที่',
         super(key: key);
 
@@ -33,6 +34,7 @@ class ItemWidget extends StatefulWidget {
   final String location;
   final int? preDay;
   final String? imageBlurhash;
+  final bool? showLocation;
 
   @override
   _ItemWidgetState createState() => _ItemWidgetState();
