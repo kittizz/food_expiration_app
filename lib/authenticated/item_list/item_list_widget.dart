@@ -332,24 +332,22 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         ),
                       ),
                     ),
-                  Flexible(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: wrapWithModel(
-                        model: _model.listItemsModel,
-                        updateCallback: () => setState(() {}),
-                        child: ListItemsWidget(
-                          title: 'หมดอายุไปแล้ว',
-                          showClear: true,
-                          items: _model.items,
-                          locationName: valueOrDefault<String>(
-                            widget.isLocation
-                                ? FFAppState().pageLocationInfo.name
-                                : widget.title,
-                            'null',
-                          ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: wrapWithModel(
+                      model: _model.listItemsModel,
+                      updateCallback: () => setState(() {}),
+                      child: ListItemsWidget(
+                        title: 'หมดอายุไปแล้ว',
+                        showClear: true,
+                        items: _model.items,
+                        locationName: valueOrDefault<String>(
+                          widget.isLocation
+                              ? FFAppState().pageLocationInfo.name
+                              : widget.title,
+                          'null',
                         ),
                       ),
                     ),
