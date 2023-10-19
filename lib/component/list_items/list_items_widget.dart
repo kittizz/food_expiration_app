@@ -126,7 +126,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                 if (widget.showClear)
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -216,7 +216,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                   FlutterFlowTheme.of(context).bodyLargeFamily,
                               color: FlutterFlowTheme.of(context).red400,
                               fontSize: 16.0,
-                              fontWeight: FontWeight.normal,
+                              fontWeight: FontWeight.w500,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
                                   FlutterFlowTheme.of(context).bodyLargeFamily),
                             ),
