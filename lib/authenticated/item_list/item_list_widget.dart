@@ -338,12 +338,55 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
                     child: wrapWithModel(
-                      model: _model.listItemsModel,
+                      model: _model.listItemsModel1,
                       updateCallback: () => setState(() {}),
                       child: ListItemsWidget(
                         title: 'หมดอายุไปแล้ว',
                         showClear: true,
-                        items: _model.items,
+                        items: _model.items
+                            .where((e) =>
+                                functions.getDateStatus(
+                                    e.expireDate!, e.forewarnDay) ==
+                                'expired')
+                            .toList(),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: wrapWithModel(
+                      model: _model.listItemsModel2,
+                      updateCallback: () => setState(() {}),
+                      child: ListItemsWidget(
+                        title: 'ใกล้จะหมดอายุ',
+                        showClear: false,
+                        items: _model.items
+                            .where((e) =>
+                                functions.getDateStatus(
+                                    e.expireDate!, e.forewarnDay) ==
+                                'about_to_expire')
+                            .toList(),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: wrapWithModel(
+                      model: _model.listItemsModel3,
+                      updateCallback: () => setState(() {}),
+                      child: ListItemsWidget(
+                        title: 'รายการที่เหลือ',
+                        showClear: false,
+                        items: _model.items
+                            .where((e) =>
+                                functions.getDateStatus(
+                                    e.expireDate!, e.forewarnDay) ==
+                                'ok')
+                            .toList(),
                       ),
                     ),
                   ),

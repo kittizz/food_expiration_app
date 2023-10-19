@@ -35,17 +35,25 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
 
   final unfocusNode = FocusNode();
   // Model for ListItems component.
-  late ListItemsModel listItemsModel;
+  late ListItemsModel listItemsModel1;
+  // Model for ListItems component.
+  late ListItemsModel listItemsModel2;
+  // Model for ListItems component.
+  late ListItemsModel listItemsModel3;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    listItemsModel = createModel(context, () => ListItemsModel());
+    listItemsModel1 = createModel(context, () => ListItemsModel());
+    listItemsModel2 = createModel(context, () => ListItemsModel());
+    listItemsModel3 = createModel(context, () => ListItemsModel());
   }
 
   void dispose() {
     unfocusNode.dispose();
-    listItemsModel.dispose();
+    listItemsModel1.dispose();
+    listItemsModel2.dispose();
+    listItemsModel3.dispose();
   }
 
   /// Action blocks are added here.

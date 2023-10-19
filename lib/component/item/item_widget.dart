@@ -1,5 +1,4 @@
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -10,7 +9,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'item_model.dart';
 export 'item_model.dart';
@@ -192,36 +190,40 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Icon(
-                                Icons.date_range_outlined,
-                                color: valueOrDefault<Color>(
-                                  () {
-                                    if (functions.getDateStatus(
-                                            widget.expiryDate!,
-                                            widget.preDay!) ==
-                                        'ok') {
-                                      return FlutterFlowTheme.of(context)
-                                          .blue600;
-                                    } else if (functions.getDateStatus(
-                                            widget.expiryDate!,
-                                            widget.preDay!) ==
-                                        'expired') {
-                                      return FlutterFlowTheme.of(context)
-                                          .red600;
-                                    } else if (functions.getDateStatus(
-                                            widget.expiryDate!,
-                                            widget.preDay!) ==
-                                        'about_to_expire') {
-                                      return FlutterFlowTheme.of(context)
-                                          .orange600;
-                                    } else {
-                                      return FlutterFlowTheme.of(context)
-                                          .primaryText;
-                                    }
-                                  }(),
-                                  FlutterFlowTheme.of(context).blue600,
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: Icon(
+                                  Icons.date_range_outlined,
+                                  color: valueOrDefault<Color>(
+                                    () {
+                                      if (functions.getDateStatus(
+                                              widget.expiryDate!,
+                                              widget.preDay!) ==
+                                          'ok') {
+                                        return FlutterFlowTheme.of(context)
+                                            .blue600;
+                                      } else if (functions.getDateStatus(
+                                              widget.expiryDate!,
+                                              widget.preDay!) ==
+                                          'expired') {
+                                        return FlutterFlowTheme.of(context)
+                                            .red600;
+                                      } else if (functions.getDateStatus(
+                                              widget.expiryDate!,
+                                              widget.preDay!) ==
+                                          'about_to_expire') {
+                                        return FlutterFlowTheme.of(context)
+                                            .orange600;
+                                      } else {
+                                        return FlutterFlowTheme.of(context)
+                                            .primaryText;
+                                      }
+                                    }(),
+                                    FlutterFlowTheme.of(context).blue600,
+                                  ),
+                                  size: 16.0,
                                 ),
-                                size: 16.0,
                               ),
                               Text(
                                 functions.getFormattedDate(widget.expiryDate!),
@@ -268,10 +270,14 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Icon(
-                                Icons.location_on,
-                                color: FlutterFlowTheme.of(context).green800,
-                                size: 16.0,
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: Icon(
+                                  Icons.location_on,
+                                  color: FlutterFlowTheme.of(context).green800,
+                                  size: 16.0,
+                                ),
                               ),
                               Text(
                                 widget.location,
@@ -302,62 +308,21 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                   width: 85.0,
                   height: 85.0,
                   decoration: BoxDecoration(),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.fade,
-                          child: FlutterFlowExpandedImageView(
-                            image: OctoImage(
-                              placeholderBuilder: OctoPlaceholder.blurHash(
-                                widget.imageBlurhash!,
-                              ),
-                              image: CachedNetworkImageProvider(
-                                valueOrDefault<String>(
-                                  widget.image,
-                                  'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                                ),
-                              ),
-                              fit: BoxFit.contain,
-                            ),
-                            allowRotation: false,
-                            tag: valueOrDefault<String>(
-                              widget.image,
-                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                            ),
-                            useHeroAnimation: true,
-                          ),
-                        ),
-                      );
-                    },
-                    child: Hero(
-                      tag: valueOrDefault<String>(
-                        widget.image,
-                        'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: OctoImage(
+                      placeholderBuilder: OctoPlaceholder.blurHash(
+                        widget.imageBlurhash!,
                       ),
-                      transitionOnUserGestures: true,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: OctoImage(
-                          placeholderBuilder: OctoPlaceholder.blurHash(
-                            widget.imageBlurhash!,
-                          ),
-                          image: CachedNetworkImageProvider(
-                            valueOrDefault<String>(
-                              widget.image,
-                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                            ),
-                          ),
-                          width: 85.0,
-                          height: 85.0,
-                          fit: BoxFit.contain,
+                      image: CachedNetworkImageProvider(
+                        valueOrDefault<String>(
+                          widget.image,
+                          'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
                         ),
                       ),
+                      width: 85.0,
+                      height: 85.0,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
