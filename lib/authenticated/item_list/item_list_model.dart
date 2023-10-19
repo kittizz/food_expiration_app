@@ -56,7 +56,7 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
     apiLocationItem = await FoodexpirationGroup.locationItemCall.call(
       deviceid: FFAppState().deviceId,
       isArchived: false,
-      locationId: widget.locationId,
+      locationId: widget.isLocation ? widget.locationId : 0,
     );
     if ((apiLocationItem?.succeeded ?? true)) {
       items = functions
