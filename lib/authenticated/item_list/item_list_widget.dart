@@ -149,6 +149,12 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                       size: 24.0,
                     ),
                     onPressed: () async {
+                      await action_blocks.fetchLocationInfo(
+                        context,
+                        id: widget.locationId,
+                      );
+                      setState(() {});
+
                       context.pushNamed('LocationInfo');
                     },
                   ),

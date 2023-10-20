@@ -153,10 +153,17 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                     if (_model.locationOptionValue == null) {
                       return;
                     }
+                    if (_model.formKey2.currentState == null ||
+                        !_model.formKey2.currentState!.validate()) {
+                      return;
+                    }
+                    if (_model.unitOptionValue == null) {
+                      return;
+                    }
                     if (FFAppState().thumbnail.image.id > 0) {
                       _model.apiCreateItem =
                           await FoodexpirationGroup.createItemCall.call(
-                        name: _model.quantityFieldController.text,
+                        name: _model.nameFieldController.text,
                         description: _model.descriptionFieldController.text,
                         storageDate: functions
                             .toRFC3339(FFAppState().pageItemInfo.storageDate!),
@@ -178,6 +185,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 .id
                             : null,
                         deviceid: FFAppState().deviceId,
+                        quantity:
+                            int.tryParse(_model.quantityFieldController.text),
+                        unit: _model.unitOptionValue,
                       );
                       _shouldSetState = true;
                       if ((_model.apiCreateItem?.succeeded ?? true)) {

@@ -40,18 +40,32 @@ class ItemWidget extends StatefulWidget {
 class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
   late ItemModel _model;
 
-  var hasRowTriggered = false;
   final animationsMap = {
-    'rowOnActionTriggerAnimation': AnimationInfo(
+    'columnOnActionTriggerAnimation': AnimationInfo(
       trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: false,
+      applyInitialState: true,
       effects: [
+        VisibilityEffect(duration: 1.ms),
         ScaleEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 600.ms,
+          duration: 1000.ms,
           begin: Offset(1.0, 1.0),
-          end: Offset(1.02, 1.02),
+          end: Offset(1.05, 1.05),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1000.ms,
+          begin: Offset(1.05, 1.05),
+          end: Offset(0.8, 0.8),
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 600.ms,
+          duration: 600.ms,
+          begin: Offset(1.0, 0.0),
+          end: Offset(1000.0, 0.0),
         ),
       ],
     ),
@@ -93,15 +107,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {},
-      onLongPress: () async {
-        if (animationsMap['rowOnActionTriggerAnimation'] != null) {
-          setState(() => hasRowTriggered = true);
-          SchedulerBinding.instance.addPostFrameCallback((_) async =>
-              await animationsMap['rowOnActionTriggerAnimation']!
-                  .controller
-                  .forward(from: 0.0));
-        }
-      },
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -133,6 +138,16 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                         value: _model.checkboxValue ??= false,
                         onChanged: (newValue) async {
                           setState(() => _model.checkboxValue = newValue!);
+                          if (newValue!) {
+                            if (animationsMap[
+                                    'columnOnActionTriggerAnimation'] !=
+                                null) {
+                              await animationsMap[
+                                      'columnOnActionTriggerAnimation']!
+                                  .controller
+                                  .forward(from: 0.0);
+                            }
+                          }
                         },
                         activeColor: FlutterFlowTheme.of(context).red300,
                       ),
@@ -301,15 +316,15 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                 ),
               ),
             ],
-          ).animateOnActionTrigger(
-              animationsMap['rowOnActionTriggerAnimation']!,
-              hasBeenTriggered: hasRowTriggered),
+          ),
           Divider(
             thickness: 1.0,
             color: FlutterFlowTheme.of(context).grey50,
           ),
         ],
       ),
+    ).animateOnActionTrigger(
+      animationsMap['columnOnActionTriggerAnimation']!,
     );
   }
 }

@@ -37,6 +37,7 @@ class FoodexpirationGroup {
   static CreateItemCall createItemCall = CreateItemCall();
   static LocationItemCall locationItemCall = LocationItemCall();
   static ClearItemsCall clearItemsCall = ClearItemsCall();
+  static GetItemCall getItemCall = GetItemCall();
 }
 
 class RegisterDeviceCall {
@@ -651,6 +652,27 @@ class ClearItemsCall {
         response,
         r'''$.message''',
       );
+}
+
+class GetItemCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? deviceid = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getItem',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/item/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
 }
 
 /// End foodexpiration Group Code
