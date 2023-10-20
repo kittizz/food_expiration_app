@@ -45,7 +45,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
       trigger: AnimationTrigger.onActionTrigger,
       applyInitialState: true,
       effects: [
-        VisibilityEffect(duration: 1.ms),
         ScaleEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
