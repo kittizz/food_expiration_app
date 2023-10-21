@@ -102,6 +102,13 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
     super.initState();
     _model = createModel(context, () => ListItemsModel());
 
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.itemsLocal = widget.items!.toList().cast<ItemStruct>();
+      });
+    });
+
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
