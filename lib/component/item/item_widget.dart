@@ -156,6 +156,8 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               idList: (int var1) {
                                 return [var1];
                               }(widget.id!),
+                              archive: true,
+                              deviceid: FFAppState().deviceId,
                             );
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -168,10 +170,11 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 duration: Duration(milliseconds: 2000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).red200,
+                                backgroundColor: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
                                 action: SnackBarAction(
                                   label: 'ยกเลิก',
+                                  textColor: FlutterFlowTheme.of(context).error,
                                   onPressed: () async {
                                     context.pushNamed('Archived');
                                   },
