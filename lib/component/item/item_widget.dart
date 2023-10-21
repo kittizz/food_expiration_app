@@ -1,6 +1,8 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,8 @@ class ItemWidget extends StatefulWidget {
     String? location,
     required this.preDay,
     required this.imageBlurhash,
+    this.id,
+    required this.locationId,
   })  : this.location = location ?? 'สถานที่',
         super(key: key);
 
@@ -32,6 +36,8 @@ class ItemWidget extends StatefulWidget {
   final String location;
   final int? preDay;
   final String? imageBlurhash;
+  final int? id;
+  final int? locationId;
 
   @override
   _ItemWidgetState createState() => _ItemWidgetState();
@@ -146,6 +152,38 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   .controller
                                   .forward(from: 0.0);
                             }
+                            await FoodexpirationGroup.clearItemsCall.call(
+                              idList: (int var1) {
+                                return [var1];
+                              }(widget.id!),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'ย้อยไปหมดอายุ',
+                                  style: GoogleFonts.getFont(
+                                    'IBM Plex Sans Thai',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 2000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).red200,
+                                action: SnackBarAction(
+                                  label: 'ยกเลิก',
+                                  onPressed: () async {
+                                    context.pushNamed('Archived');
+                                  },
+                                ),
+                              ),
+                            );
+                            await action_blocks.fetchItems(
+                              context,
+                              archive: false,
+                              locationId: widget.locationId,
+                            );
+                            setState(() {});
                           }
                         },
                         activeColor: FlutterFlowTheme.of(context).red300,
