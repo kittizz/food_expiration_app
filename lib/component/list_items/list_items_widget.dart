@@ -1,17 +1,19 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
-import '/component/item/item_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'list_items_model.dart';
 export 'list_items_model.dart';
@@ -57,6 +59,33 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
           duration: 600.ms,
           begin: Offset(1.02, 1.02),
           end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
+    'columnOnActionTriggerAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: true,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 800.ms,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.05, 1.05),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 800.ms,
+          begin: Offset(1.05, 1.05),
+          end: Offset(0.8, 0.8),
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 400.ms,
+          duration: 600.ms,
+          begin: Offset(1.0, 0.0),
+          end: Offset(1000.0, 0.0),
         ),
       ],
     ),
@@ -236,34 +265,340 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
         ),
         Builder(
           builder: (context) {
-            final list = widget.items!.toList();
+            final list = _model.itemsLocal.toList();
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: List.generate(list.length, (listIndex) {
                 final listItem = list[listIndex];
-                return wrapWithModel(
-                  model: _model.itemModels.getModel(
-                    listItem.id.toString(),
-                    listIndex,
-                  ),
-                  updateCallback: () => setState(() {}),
-                  child: ItemWidget(
-                    key: Key(
-                      'Keyo1e_${listItem.id.toString()}',
+                return Container(
+                  decoration: BoxDecoration(),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {},
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 0.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Theme(
+                                    data: ThemeData(
+                                      checkboxTheme: CheckboxThemeData(
+                                        visualDensity: VisualDensity.standard,
+                                        materialTapTargetSize:
+                                            MaterialTapTargetSize.padded,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                        ),
+                                      ),
+                                      unselectedWidgetColor:
+                                          FlutterFlowTheme.of(context).grey400,
+                                    ),
+                                    child: Checkbox(
+                                      value: _model
+                                          .checkboxValueMap[listItem] ??= false,
+                                      onChanged: (newValue) async {
+                                        setState(() =>
+                                            _model.checkboxValueMap[listItem] =
+                                                newValue!);
+                                        if (newValue!) {
+                                          if (animationsMap[
+                                                  'columnOnActionTriggerAnimation'] !=
+                                              null) {
+                                            await animationsMap[
+                                                    'columnOnActionTriggerAnimation']!
+                                                .controller
+                                                .forward(from: 0.0);
+                                          }
+                                          await FoodexpirationGroup
+                                              .clearItemsCall
+                                              .call(
+                                            idList: (int var1) {
+                                              return [var1];
+                                            }(listItem.id),
+                                            archive: true,
+                                            deviceid: FFAppState().deviceId,
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'ย้อยไปหมดอายุ',
+                                                style: GoogleFonts.getFont(
+                                                  'IBM Plex Sans Thai',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 2000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              action: SnackBarAction(
+                                                label: 'ยกเลิก',
+                                                textColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                onPressed: () async {
+                                                  context.pushNamed('Archived');
+                                                },
+                                              ),
+                                            ),
+                                          );
+                                          setState(() {
+                                            _model.removeAtIndexFromItemsLocal(
+                                                listIndex);
+                                          });
+                                        }
+                                      },
+                                      activeColor:
+                                          FlutterFlowTheme.of(context).red300,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 5.0, 0.0, 0.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          listItem.name,
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineMediumFamily,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontSize: 16.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(FlutterFlowTheme
+                                                            .of(context)
+                                                        .headlineMediumFamily),
+                                              ),
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 10.0, 0.0),
+                                              child: Icon(
+                                                Icons.date_range_outlined,
+                                                color: valueOrDefault<Color>(
+                                                  () {
+                                                    if (functions.getDateStatus(
+                                                            listItem
+                                                                .expireDate!,
+                                                            listItem
+                                                                .forewarnDay) ==
+                                                        'ok') {
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .blue600;
+                                                    } else if (functions
+                                                            .getDateStatus(
+                                                                listItem
+                                                                    .expireDate!,
+                                                                listItem
+                                                                    .forewarnDay) ==
+                                                        'expired') {
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .red600;
+                                                    } else if (functions
+                                                            .getDateStatus(
+                                                                listItem
+                                                                    .expireDate!,
+                                                                listItem
+                                                                    .forewarnDay) ==
+                                                        'about_to_expire') {
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .orange600;
+                                                    } else {
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryText;
+                                                    }
+                                                  }(),
+                                                  FlutterFlowTheme.of(context)
+                                                      .blue600,
+                                                ),
+                                                size: 16.0,
+                                              ),
+                                            ),
+                                            Text(
+                                              functions.getFormattedDate(
+                                                  listItem.expireDate!),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        color: valueOrDefault<
+                                                            Color>(
+                                                          () {
+                                                            if (functions.getDateStatus(
+                                                                    listItem
+                                                                        .expireDate!,
+                                                                    listItem
+                                                                        .forewarnDay) ==
+                                                                'ok') {
+                                                              return FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .blue600;
+                                                            } else if (functions.getDateStatus(
+                                                                    listItem
+                                                                        .expireDate!,
+                                                                    listItem
+                                                                        .forewarnDay) ==
+                                                                'expired') {
+                                                              return FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .red600;
+                                                            } else if (functions.getDateStatus(
+                                                                    listItem
+                                                                        .expireDate!,
+                                                                    listItem
+                                                                        .forewarnDay) ==
+                                                                'about_to_expire') {
+                                                              return FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .orange600;
+                                                            } else {
+                                                              return FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText;
+                                                            }
+                                                          }(),
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .blue600,
+                                                        ),
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 10.0, 0.0),
+                                              child: Icon(
+                                                Icons.location_on,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .green800,
+                                                size: 16.0,
+                                              ),
+                                            ),
+                                            Text(
+                                              FFAppState()
+                                                  .locations
+                                                  .where((e) =>
+                                                      e.id ==
+                                                      listItem.locationId)
+                                                  .toList()
+                                                  .first
+                                                  .name,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .green800,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 15.0, 0.0),
+                              child: Container(
+                                width: 85.0,
+                                height: 85.0,
+                                decoration: BoxDecoration(),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: OctoImage(
+                                    placeholderBuilder:
+                                        OctoPlaceholder.blurHash(
+                                      listItem.image.blurHash,
+                                    ),
+                                    image: CachedNetworkImageProvider(
+                                      functions.getImage(listItem.image.path),
+                                    ),
+                                    width: 85.0,
+                                    height: 85.0,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          thickness: 1.0,
+                          color: FlutterFlowTheme.of(context).grey50,
+                        ),
+                      ],
                     ),
-                    name: listItem.name,
-                    image: functions.getImage(listItem.image.path),
-                    expiryDate: listItem.expireDate!,
-                    location: FFAppState()
-                        .locations
-                        .where((e) => e.id == listItem.locationId)
-                        .toList()
-                        .first
-                        .name,
-                    preDay: listItem.forewarnDay,
-                    imageBlurhash: listItem.image.blurHash,
-                    id: listItem.id,
-                    locationId: widget.locationId!,
+                  ).animateOnActionTrigger(
+                    animationsMap['columnOnActionTriggerAnimation']!,
                   ),
                 );
               }),
