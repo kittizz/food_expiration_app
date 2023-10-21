@@ -262,6 +262,8 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                         .name,
                     preDay: listItem.forewarnDay,
                     imageBlurhash: listItem.image.blurHash,
+                    id: listItem.id,
+                    locationId: widget.locationId!,
                   ),
                 );
               }),
