@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -12,6 +13,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'item_model.dart';
 export 'item_model.dart';
@@ -347,21 +349,62 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                   width: 85.0,
                   height: 85.0,
                   decoration: BoxDecoration(),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: OctoImage(
-                      placeholderBuilder: OctoPlaceholder.blurHash(
-                        widget.imageBlurhash!,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.fade,
+                          child: FlutterFlowExpandedImageView(
+                            image: OctoImage(
+                              placeholderBuilder: OctoPlaceholder.blurHash(
+                                widget.imageBlurhash!,
+                              ),
+                              image: CachedNetworkImageProvider(
+                                valueOrDefault<String>(
+                                  widget.image,
+                                  'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                                ),
+                              ),
+                              fit: BoxFit.contain,
+                            ),
+                            allowRotation: false,
+                            tag: valueOrDefault<String>(
+                              widget.image,
+                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                            ),
+                            useHeroAnimation: true,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Hero(
+                      tag: valueOrDefault<String>(
+                        widget.image,
+                        'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
                       ),
-                      image: CachedNetworkImageProvider(
-                        valueOrDefault<String>(
-                          widget.image,
-                          'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                      transitionOnUserGestures: true,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: OctoImage(
+                          placeholderBuilder: OctoPlaceholder.blurHash(
+                            widget.imageBlurhash!,
+                          ),
+                          image: CachedNetworkImageProvider(
+                            valueOrDefault<String>(
+                              widget.image,
+                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                            ),
+                          ),
+                          width: 85.0,
+                          height: 85.0,
+                          fit: BoxFit.contain,
                         ),
                       ),
-                      width: 85.0,
-                      height: 85.0,
-                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
