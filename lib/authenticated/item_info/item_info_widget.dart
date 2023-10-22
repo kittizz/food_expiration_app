@@ -1059,7 +1059,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    if (FFAppState().pageItemInfo.isArchived)
+                                    if (!(widget.isAdd! &&
+                                        FFAppState().pageItemInfo.isArchived))
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 10.0, 0.0),
@@ -1161,7 +1162,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           ],
                                         ),
                                       ),
-                                    if (widget.isAdd ?? true)
+                                    if (!(widget.isAdd! &&
+                                        !FFAppState().pageItemInfo.isArchived))
                                       Wrap(
                                         spacing: 0.0,
                                         runSpacing: 0.0,
@@ -1497,6 +1499,27 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             maxLines: 1,
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium,
+                                          ),
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              setState(() {
+                                                FFAppState()
+                                                    .updatePageItemInfoStruct(
+                                                  (e) => e..barcode = '',
+                                                );
+                                              });
+                                            },
+                                            child: Icon(
+                                              Icons.clear,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 15.0,
+                                            ),
                                           ),
                                         ].divide(SizedBox(width: 5.0)),
                                       ),
