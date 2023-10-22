@@ -154,6 +154,14 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                             setState(() {
                               _model.checkboxValue = false;
                             });
+                            if (animationsMap[
+                                    'columnOnActionTriggerAnimation'] !=
+                                null) {
+                              await animationsMap[
+                                      'columnOnActionTriggerAnimation']!
+                                  .controller
+                                  .forward();
+                            }
                             await FoodexpirationGroup.clearItemsCall.call(
                               idList: (int var1) {
                                 return [var1];
