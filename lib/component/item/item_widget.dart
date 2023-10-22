@@ -197,7 +197,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               archive: !widget.isArchived!,
                               deviceid: FFAppState().deviceId,
                             );
-                            FFAppState().update(() {
+                            setState(() {
                               FFAppState().removeFromItems(FFAppState()
                                   .items
                                   .where((e) => e.id == widget.id)
@@ -214,7 +214,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'ย้อยไปหมดอายุ',
+                                  'ย้ายไปหมดอายุ',
                                   style: GoogleFonts.getFont(
                                     'IBM Plex Sans Thai',
                                     color: FlutterFlowTheme.of(context)
