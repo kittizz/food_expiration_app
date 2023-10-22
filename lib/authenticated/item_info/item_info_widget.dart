@@ -1216,7 +1216,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   .showSnackBar(
                                                 SnackBar(
                                                   content: Text(
-                                                    'ย้อยไปหมดอายุ',
+                                                    'ย้ายไปหมดอายุ',
                                                     style: GoogleFonts.getFont(
                                                       'IBM Plex Sans Thai',
                                                       color:
@@ -1233,6 +1233,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                           .primaryBackground,
                                                 ),
                                               );
+                                              context.safePop();
                                             },
                                           ),
                                         ],
