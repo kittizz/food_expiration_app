@@ -146,6 +146,13 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                         onChanged: (newValue) async {
                           setState(() => _model.checkboxValue = newValue!);
                           if (newValue!) {
+                            await FoodexpirationGroup.clearItemsCall.call(
+                              idList: (int var1) {
+                                return [var1];
+                              }(widget.id!),
+                              archive: true,
+                              deviceid: FFAppState().deviceId,
+                            );
                             if (animationsMap[
                                     'columnOnActionTriggerAnimation'] !=
                                 null) {
@@ -154,14 +161,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   .controller
                                   .forward(from: 0.0);
                             }
-                            await FoodexpirationGroup.clearItemsCall.call(
-                              idList: (int var1) {
-                                return [var1];
-                              }(widget.id!),
-                              archive: true,
-                              deviceid: FFAppState().deviceId,
-                            );
-                            _model.updatePage(() {
+                            FFAppState().update(() {
                               FFAppState()
                                   .removeAtIndexFromItems(widget.index!);
                             });
