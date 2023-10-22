@@ -113,7 +113,27 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
       focusColor: Colors.transparent,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onTap: () async {},
+      onTap: () async {
+        context.pushNamed(
+          'ItemInfo',
+          queryParameters: {
+            'name': serializeParam(
+              widget.name,
+              ParamType.String,
+            ),
+            'isAdd': serializeParam(
+              false,
+              ParamType.bool,
+            ),
+          }.withoutNulls,
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.bottomToTop,
+            ),
+          },
+        );
+      },
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,

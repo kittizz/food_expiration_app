@@ -193,6 +193,8 @@ ItemStruct toItem(dynamic jsonBody) {
     category: v['category'],
     barcode: v['barcode'],
     locationId: v['locationId'],
+    unit: v['unit'],
+    quantity: v['quantity'],
     image: ImageStruct(
         id: v['image']['id'],
         path: v['image']['path'],
