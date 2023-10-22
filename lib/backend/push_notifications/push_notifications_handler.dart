@@ -133,11 +133,7 @@ final parametersBuilderMap =
       ),
   'LocationInfo': ParameterData.none(),
   'LocationList': ParameterData.none(),
-  'Archived': (data) async => ParameterData(
-        allParams: {
-          'isLocation': getParameter<bool>(data, 'isLocation'),
-        },
-      ),
+  'Archived': ParameterData.none(),
   'Setting': (data) async => ParameterData(
         allParams: {
           'tabId': getParameter<int>(data, 'tabId'),

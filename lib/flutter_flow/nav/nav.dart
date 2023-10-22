@@ -163,9 +163,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Archived',
           path: '/archived',
           requireAuth: true,
-          builder: (context, params) => ArchivedWidget(
-            isLocation: params.getParam('isLocation', ParamType.bool),
-          ),
+          builder: (context, params) => ArchivedWidget(),
         ),
         FFRoute(
           name: 'Setting',

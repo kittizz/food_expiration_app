@@ -1127,7 +1127,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                     .showSnackBar(
                                                   SnackBar(
                                                     content: Text(
-                                                      'ย้อยไปหมดอายุ',
+                                                      'กู้คืนเรียบร้อย',
                                                       style:
                                                           GoogleFonts.getFont(
                                                         'IBM Plex Sans Thai',
@@ -1143,17 +1143,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .primaryBackground,
-                                                    action: SnackBarAction(
-                                                      label: 'ยกเลิก',
-                                                      textColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                      onPressed: () async {
-                                                        context.pushNamed(
-                                                            'Archived');
-                                                      },
-                                                    ),
                                                   ),
                                                 );
                                                 context.safePop();
@@ -1255,7 +1244,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   ),
                                                 ),
                                               );
-                                              context.safePop();
                                             },
                                           ),
                                         ],

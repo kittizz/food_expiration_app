@@ -15,13 +15,7 @@ import 'archived_model.dart';
 export 'archived_model.dart';
 
 class ArchivedWidget extends StatefulWidget {
-  const ArchivedWidget({
-    Key? key,
-    bool? isLocation,
-  })  : this.isLocation = isLocation ?? false,
-        super(key: key);
-
-  final bool isLocation;
+  const ArchivedWidget({Key? key}) : super(key: key);
 
   @override
   _ArchivedWidgetState createState() => _ArchivedWidgetState();
