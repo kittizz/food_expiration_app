@@ -728,6 +728,11 @@ class GetItemCall {
       cache: false,
     );
   }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
 }
 
 /// End foodexpiration Group Code

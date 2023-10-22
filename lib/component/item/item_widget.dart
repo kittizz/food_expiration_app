@@ -197,7 +197,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               archive: !widget.isArchived!,
                               deviceid: FFAppState().deviceId,
                             );
-                            _model.updatePage(() {
+                            FFAppState().update(() {
                               FFAppState().removeFromItems(FFAppState()
                                   .items
                                   .where((e) => e.id == widget.id)

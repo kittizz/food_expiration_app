@@ -306,18 +306,46 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
-                          await action_blocks.fetchItems(
-                            context,
-                            archive: false,
-                            locationId: FFAppState()
-                                .locations
-                                .where(
-                                    (e) => e.name == _model.locationOptionValue)
-                                .toList()
-                                .first
-                                .id,
+                          _model.apiGetItem =
+                              await FoodexpirationGroup.getItemCall.call(
+                            deviceid: FFAppState().deviceId,
+                            id: widget.id,
                           );
-                          setState(() {});
+                          _shouldSetState = true;
+                          if ((_model.apiGetItem?.succeeded ?? true)) {
+                            FFAppState().update(() {
+                              FFAppState().updateItemsAtIndex(
+                                functions.findItemIndex(
+                                    FFAppState().items.toList(), widget.id!),
+                                (_) => functions.toItem(
+                                    (_model.apiGetItem?.jsonBody ?? '')),
+                              );
+                            });
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('ข้อผิดพลาด'),
+                                  content: Text(FoodexpirationGroup.getItemCall
+                                      .message(
+                                        (_model.apiGetItem?.jsonBody ?? ''),
+                                      )
+                                      .toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('ตกลง'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            if (_shouldSetState) setState(() {});
+                            return;
+                          }
+
                           context.safePop();
                         } else {
                           await showDialog(

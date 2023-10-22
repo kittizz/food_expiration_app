@@ -205,8 +205,8 @@ ItemStruct toItem(dynamic jsonBody) {
 }
 
 String toRFC3339(DateTime date) {
-  return DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSSSSS+00:00")
-      .format(DateTime.parse(date.toString()).toUtc());
+  return DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSSSSS+07:00")
+      .format(DateTime.parse(date.toString()));
 }
 
 String encodeString(String str) {
@@ -216,4 +216,16 @@ String encodeString(String str) {
 
 List<int> mapItemIdList(List<ItemStruct> arr) {
   return arr.map((e) => e.id).toList();
+}
+
+int findItemIndex(
+  List<ItemStruct> items,
+  int id,
+) {
+  for (int i = 0; i < items.length; i++) {
+    if (items[i].id == id) {
+      return i;
+    }
+  }
+  return -1;
 }

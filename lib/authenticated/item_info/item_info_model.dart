@@ -90,6 +90,8 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   ApiCallResponse? apiCreateItem;
   // Stores action output result for [Backend Call - API (updateItem )] action in Text widget.
   ApiCallResponse? apiUpdateItem;
+  // Stores action output result for [Backend Call - API (getItem)] action in Text widget.
+  ApiCallResponse? apiGetItem;
 
   /// Initialization and disposal methods.
 
