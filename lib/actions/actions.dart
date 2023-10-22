@@ -253,6 +253,7 @@ Future fetchItemInfo(
 
   apiItem = await FoodexpirationGroup.getItemCall.call(
     id: id,
+    deviceid: FFAppState().deviceId,
   );
   if ((apiItem?.succeeded ?? true)) {
     FFAppState().update(() {
