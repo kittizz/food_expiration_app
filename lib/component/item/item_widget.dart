@@ -119,6 +119,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
           context,
           id: widget.id,
         );
+        setState(() {});
 
         context.pushNamed(
           'ItemInfo',
