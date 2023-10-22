@@ -255,23 +255,29 @@ Future fetchItemInfo(
     id: id,
   );
   if ((apiItem?.succeeded ?? true)) {
-    FFAppState().updatePageItemInfoStruct(
-      (e) => e
-        ..name = functions.toItem((apiItem?.jsonBody ?? '')).name
-        ..description = functions.toItem((apiItem?.jsonBody ?? '')).description
-        ..forewarnDay = functions.toItem((apiItem?.jsonBody ?? '')).forewarnDay
-        ..category = functions.toItem((apiItem?.jsonBody ?? '')).category
-        ..location = FFAppState()
-            .locations
-            .where((e) =>
-                e.id == functions.toItem((apiItem?.jsonBody ?? '')).locationId)
-            .toList()
-            .first
-        ..barcode = functions.toItem((apiItem?.jsonBody ?? '')).barcode
-        ..storageDate = functions.toItem((apiItem?.jsonBody ?? '')).storageDate
-        ..expireDate = functions.toItem((apiItem?.jsonBody ?? '')).expireDate
-        ..quantity = functions.toItem((apiItem?.jsonBody ?? '')).quantity
-        ..unit = functions.toItem((apiItem?.jsonBody ?? '')).unit,
-    );
+    FFAppState().update(() {
+      FFAppState().updatePageItemInfoStruct(
+        (e) => e
+          ..name = functions.toItem((apiItem?.jsonBody ?? '')).name
+          ..description =
+              functions.toItem((apiItem?.jsonBody ?? '')).description
+          ..forewarnDay =
+              functions.toItem((apiItem?.jsonBody ?? '')).forewarnDay
+          ..category = functions.toItem((apiItem?.jsonBody ?? '')).category
+          ..location = FFAppState()
+              .locations
+              .where((e) =>
+                  e.id ==
+                  functions.toItem((apiItem?.jsonBody ?? '')).locationId)
+              .toList()
+              .first
+          ..barcode = functions.toItem((apiItem?.jsonBody ?? '')).barcode
+          ..storageDate =
+              functions.toItem((apiItem?.jsonBody ?? '')).storageDate
+          ..expireDate = functions.toItem((apiItem?.jsonBody ?? '')).expireDate
+          ..quantity = functions.toItem((apiItem?.jsonBody ?? '')).quantity
+          ..unit = functions.toItem((apiItem?.jsonBody ?? '')).unit,
+      );
+    });
   }
 }
