@@ -1,3 +1,4 @@
+import '/backend/schema/structs/index.dart';
 import '/component/list_items/list_items_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -38,6 +39,9 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        FFAppState().items = [];
+      });
       await action_blocks.fetchLocations(context);
       setState(() {});
       await action_blocks.fetchItems(
