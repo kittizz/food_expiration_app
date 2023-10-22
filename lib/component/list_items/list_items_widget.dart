@@ -282,38 +282,31 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
             );
           },
         ),
-        Flexible(
-          child: Container(
-            width: double.infinity,
+        if (FFAppState()
+                .items
+                .where((e) =>
+                    functions.getDateStatus(e.expireDate!, e.forewarnDay) ==
+                    widget.dateType)
+                .toList()
+                .length ==
+            0)
+          Container(
             height: 100.0,
             decoration: BoxDecoration(),
-            child: Visibility(
-              visible: FFAppState()
-                      .items
-                      .where((e) =>
-                          functions.getDateStatus(
-                              e.expireDate!, e.forewarnDay) ==
-                          widget.dateType)
-                      .toList()
-                      .length ==
-                  0,
-              child: Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
-                child: Text(
-                  'ไม่มีรายการ',
-                  style: FlutterFlowTheme.of(context).bodyLarge.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyLargeFamily,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w500,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyLargeFamily),
-                      ),
-                ),
+            child: Align(
+              alignment: AlignmentDirectional(0.00, 0.00),
+              child: Text(
+                'ไม่มีรายการ',
+                style: FlutterFlowTheme.of(context).bodyLarge.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w500,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).bodyLargeFamily),
+                    ),
               ),
             ),
           ),
-        ),
       ],
     );
   }
