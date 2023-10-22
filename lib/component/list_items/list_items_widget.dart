@@ -211,7 +211,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
 
                           await action_blocks.fetchItems(
                             context,
-                            archive: false,
+                            archive: widget.isArchived,
                             locationId: widget.locationId,
                           );
                           setState(() {});

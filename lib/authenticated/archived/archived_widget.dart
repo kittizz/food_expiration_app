@@ -109,23 +109,25 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: wrapWithModel(
-                  model: _model.listItemsModel,
-                  updateCallback: () => setState(() {}),
-                  child: ListItemsWidget(
-                    title: '',
-                    showClear: true,
-                    locationId: 0,
-                    dateType: '',
-                    isArchived: true,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Flexible(
+                  child: wrapWithModel(
+                    model: _model.listItemsModel,
+                    updateCallback: () => setState(() {}),
+                    child: ListItemsWidget(
+                      title: '',
+                      showClear: true,
+                      locationId: 0,
+                      dateType: '',
+                      isArchived: true,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
