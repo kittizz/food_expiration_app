@@ -552,10 +552,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   8.0, 8.0, 8.0, 8.0),
                                           child: Hero(
-                                            tag: functions.getImage(FFAppState()
-                                                .thumbnail
-                                                .image
-                                                .path),
+                                            tag: functions.getImage(
+                                                '${FFAppState().thumbnail.image.path}?i=${widget.id?.toString()}'),
                                             transitionOnUserGestures: true,
                                             child: ClipRRect(
                                               borderRadius:
@@ -570,10 +568,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 ),
                                                 image: NetworkImage(
                                                   functions.getImage(
-                                                      FFAppState()
-                                                          .thumbnail
-                                                          .image
-                                                          .path),
+                                                      '${FFAppState().thumbnail.image.path}?i=${widget.id?.toString()}'),
                                                 ),
                                                 width: double.infinity,
                                                 height: double.infinity,
