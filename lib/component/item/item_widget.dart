@@ -162,8 +162,11 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   .forward(from: 0.0);
                             }
                             FFAppState().update(() {
-                              FFAppState()
-                                  .removeAtIndexFromItems(widget.index!);
+                              FFAppState().removeFromItems(FFAppState()
+                                  .items
+                                  .where((e) => e.id == widget.id)
+                                  .toList()
+                                  .first);
                             });
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

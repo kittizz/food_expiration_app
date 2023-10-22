@@ -356,81 +356,51 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         ),
                       ),
                     ),
-                  if (FFAppState()
-                          .items
-                          .where((e) =>
-                              functions.getDateStatus(
-                                  e.expireDate!, e.forewarnDay) ==
-                              'expired')
-                          .toList()
-                          .length !=
-                      0)
-                    Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: wrapWithModel(
-                        model: _model.listItemsModel1,
-                        updateCallback: () => setState(() {}),
-                        child: ListItemsWidget(
-                          title: 'หมดอายุไปแล้ว',
-                          showClear: true,
-                          locationId:
-                              widget.isLocation ? widget.locationId! : 0,
-                          dateType: 'expired',
-                        ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: wrapWithModel(
+                      model: _model.listItemsModel1,
+                      updateCallback: () => setState(() {}),
+                      child: ListItemsWidget(
+                        title: 'หมดอายุไปแล้ว',
+                        showClear: true,
+                        locationId: widget.isLocation ? widget.locationId! : 0,
+                        dateType: 'expired',
                       ),
                     ),
-                  if (FFAppState()
-                          .items
-                          .where((e) =>
-                              functions.getDateStatus(
-                                  e.expireDate!, e.forewarnDay) ==
-                              'about_to_expire')
-                          .toList()
-                          .length !=
-                      0)
-                    Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: wrapWithModel(
-                        model: _model.listItemsModel2,
-                        updateCallback: () => setState(() {}),
-                        child: ListItemsWidget(
-                          title: 'ใกล้จะหมดอายุ',
-                          showClear: false,
-                          locationId:
-                              widget.isLocation ? widget.locationId! : 0,
-                          dateType: 'about_to_expire',
-                        ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: wrapWithModel(
+                      model: _model.listItemsModel2,
+                      updateCallback: () => setState(() {}),
+                      child: ListItemsWidget(
+                        title: 'ใกล้จะหมดอายุ',
+                        showClear: false,
+                        locationId: widget.isLocation ? widget.locationId! : 0,
+                        dateType: 'about_to_expire',
                       ),
                     ),
-                  if (FFAppState()
-                          .items
-                          .where((e) =>
-                              functions.getDateStatus(
-                                  e.expireDate!, e.forewarnDay) ==
-                              'ok')
-                          .toList()
-                          .length !=
-                      0)
-                    Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: wrapWithModel(
-                        model: _model.listItemsModel3,
-                        updateCallback: () => setState(() {}),
-                        child: ListItemsWidget(
-                          title: 'รายการที่เหลือ',
-                          showClear: false,
-                          locationId:
-                              widget.isLocation ? widget.locationId! : 0,
-                          dateType: 'ok',
-                        ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: wrapWithModel(
+                      model: _model.listItemsModel3,
+                      updateCallback: () => setState(() {}),
+                      child: ListItemsWidget(
+                        title: 'รายการที่เหลือ',
+                        showClear: false,
+                        locationId: widget.isLocation ? widget.locationId! : 0,
+                        dateType: 'ok',
                       ),
                     ),
+                  ),
                 ],
               ),
             ),
