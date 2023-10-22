@@ -149,8 +149,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                             if (animationsMap[
                                     'columnOnActionTriggerAnimation'] !=
                                 null) {
-                              await animationsMap[
-                                      'columnOnActionTriggerAnimation']!
+                              animationsMap['columnOnActionTriggerAnimation']!
                                   .controller
                                   .forward(from: 0.0);
                             }
@@ -161,7 +160,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               archive: true,
                               deviceid: FFAppState().deviceId,
                             );
-                            setState(() {
+                            _model.updatePage(() {
                               FFAppState().removeFromItems(FFAppState()
                                   .items
                                   .where((e) => e.id == widget.id)
