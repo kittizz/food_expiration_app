@@ -1,5 +1,6 @@
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/actions/actions.dart' as action_blocks;
@@ -12,6 +13,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'location_model.dart';
 export 'location_model.dart';
@@ -184,26 +186,77 @@ class _LocationWidgetState extends State<LocationWidget>
                 width: 80.0,
                 height: 80.0,
                 decoration: BoxDecoration(),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: OctoImage(
-                    placeholderBuilder: OctoPlaceholder.blurHash(
-                      widget.image!.blurHash,
-                    ),
-                    image: CachedNetworkImageProvider(
-                      valueOrDefault<String>(
-                        functions.getImage(widget.image!.path),
-                        'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.fade,
+                        child: FlutterFlowExpandedImageView(
+                          image: OctoImage(
+                            placeholderBuilder: OctoPlaceholder.blurHash(
+                              widget.image!.blurHash,
+                            ),
+                            image: CachedNetworkImageProvider(
+                              valueOrDefault<String>(
+                                functions.getImage(
+                                    '${widget.image?.path}?i=${widget.id?.toString()}'),
+                                'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                              ),
+                            ),
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Image.asset(
+                              'assets/images/error_image.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          allowRotation: false,
+                          tag: valueOrDefault<String>(
+                            functions.getImage(
+                                '${widget.image?.path}?i=${widget.id?.toString()}'),
+                            'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                          ),
+                          useHeroAnimation: true,
+                        ),
                       ),
+                    );
+                  },
+                  child: Hero(
+                    tag: valueOrDefault<String>(
+                      functions.getImage(
+                          '${widget.image?.path}?i=${widget.id?.toString()}'),
+                      'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
                     ),
-                    width: double.infinity,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Image.asset(
-                      'assets/images/error_image.png',
-                      width: double.infinity,
-                      height: double.infinity,
-                      fit: BoxFit.cover,
+                    transitionOnUserGestures: true,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: OctoImage(
+                        placeholderBuilder: OctoPlaceholder.blurHash(
+                          widget.image!.blurHash,
+                        ),
+                        image: CachedNetworkImageProvider(
+                          valueOrDefault<String>(
+                            functions.getImage(
+                                '${widget.image?.path}?i=${widget.id?.toString()}'),
+                            'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                          ),
+                        ),
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
+                          'assets/images/error_image.png',
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                 ),
