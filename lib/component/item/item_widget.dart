@@ -1,8 +1,8 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +27,7 @@ class ItemWidget extends StatefulWidget {
     required this.imageBlurhash,
     this.id,
     required this.locationId,
+    required this.index,
   })  : this.location = location ?? 'สถานที่',
         super(key: key);
 
@@ -38,6 +39,7 @@ class ItemWidget extends StatefulWidget {
   final String? imageBlurhash;
   final int? id;
   final int? locationId;
+  final int? index;
 
   @override
   _ItemWidgetState createState() => _ItemWidgetState();
@@ -159,6 +161,10 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               archive: true,
                               deviceid: FFAppState().deviceId,
                             );
+                            _model.updatePage(() {
+                              FFAppState()
+                                  .removeAtIndexFromItems(widget.index!);
+                            });
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -181,12 +187,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                 ),
                               ),
                             );
-                            await action_blocks.fetchItems(
-                              context,
-                              archive: false,
-                              locationId: widget.locationId,
-                            );
-                            setState(() {});
                           }
                         },
                         activeColor: FlutterFlowTheme.of(context).red300,

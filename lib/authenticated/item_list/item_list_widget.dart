@@ -374,15 +374,9 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         child: ListItemsWidget(
                           title: 'หมดอายุไปแล้ว',
                           showClear: true,
-                          items: FFAppState()
-                              .items
-                              .where((e) =>
-                                  functions.getDateStatus(
-                                      e.expireDate!, e.forewarnDay) ==
-                                  'expired')
-                              .toList(),
                           locationId:
                               widget.isLocation ? widget.locationId! : 0,
+                          dateType: 'expired',
                         ),
                       ),
                     ),
@@ -405,15 +399,9 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         child: ListItemsWidget(
                           title: 'ใกล้จะหมดอายุ',
                           showClear: false,
-                          items: FFAppState()
-                              .items
-                              .where((e) =>
-                                  functions.getDateStatus(
-                                      e.expireDate!, e.forewarnDay) ==
-                                  'about_to_expire')
-                              .toList(),
                           locationId:
                               widget.isLocation ? widget.locationId! : 0,
+                          dateType: 'about_to_expire',
                         ),
                       ),
                     ),
@@ -436,15 +424,9 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         child: ListItemsWidget(
                           title: 'รายการที่เหลือ',
                           showClear: false,
-                          items: FFAppState()
-                              .items
-                              .where((e) =>
-                                  functions.getDateStatus(
-                                      e.expireDate!, e.forewarnDay) ==
-                                  'ok')
-                              .toList(),
                           locationId:
                               widget.isLocation ? widget.locationId! : 0,
+                          dateType: 'ok',
                         ),
                       ),
                     ),
