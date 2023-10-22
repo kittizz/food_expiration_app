@@ -27,7 +27,6 @@ class ItemWidget extends StatefulWidget {
     required this.imageBlurhash,
     this.id,
     required this.locationId,
-    required this.index,
   })  : this.location = location ?? 'สถานที่',
         super(key: key);
 
@@ -39,7 +38,6 @@ class ItemWidget extends StatefulWidget {
   final String? imageBlurhash;
   final int? id;
   final int? locationId;
-  final int? index;
 
   @override
   _ItemWidgetState createState() => _ItemWidgetState();
@@ -161,9 +159,15 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               archive: true,
                               deviceid: FFAppState().deviceId,
                             );
+                            setState(() {
+                              _model.checkboxValue = false;
+                            });
                             FFAppState().update(() {
-                              FFAppState()
-                                  .removeAtIndexFromItems(widget.index!);
+                              FFAppState().removeFromItems(FFAppState()
+                                  .items
+                                  .where((e) => e.id == widget.id)
+                                  .toList()
+                                  .first);
                             });
                             if (animationsMap[
                                     'columnOnActionTriggerAnimation'] !=

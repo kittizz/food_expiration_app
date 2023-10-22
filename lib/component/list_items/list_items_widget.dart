@@ -275,7 +275,6 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                       id: itemsLocalItem.id,
                       locationId: widget.locationId!,
                       expiryDate: itemsLocalItem.expireDate!,
-                      index: itemsLocalIndex,
                     ),
                   ),
                 );
