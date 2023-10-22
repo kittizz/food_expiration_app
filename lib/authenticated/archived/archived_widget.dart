@@ -1,8 +1,11 @@
+import '/component/list_items/list_items_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,6 +35,18 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ArchivedModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await action_blocks.fetchLocations(context);
+      setState(() {});
+      await action_blocks.fetchItems(
+        context,
+        archive: true,
+        locationId: 0,
+      );
+      setState(() {});
+    });
   }
 
   @override
@@ -96,7 +111,21 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [],
+            children: [
+              Expanded(
+                child: wrapWithModel(
+                  model: _model.listItemsModel,
+                  updateCallback: () => setState(() {}),
+                  child: ListItemsWidget(
+                    title: '',
+                    showClear: false,
+                    locationId: 0,
+                    dateType: '',
+                    isArchived: true,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -30,6 +30,7 @@ class ItemWidget extends StatefulWidget {
     required this.imageBlurhash,
     this.id,
     required this.locationId,
+    required this.isArchived,
   })  : this.location = location ?? 'สถานที่',
         super(key: key);
 
@@ -41,6 +42,7 @@ class ItemWidget extends StatefulWidget {
   final String? imageBlurhash;
   final int? id;
   final int? locationId;
+  final bool? isArchived;
 
   @override
   _ItemWidgetState createState() => _ItemWidgetState();
@@ -192,7 +194,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               idList: (int var1) {
                                 return [var1];
                               }(widget.id!),
-                              archive: true,
+                              archive: !widget.isArchived!,
                               deviceid: FFAppState().deviceId,
                             );
                             _model.updatePage(() {

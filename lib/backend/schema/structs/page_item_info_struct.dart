@@ -20,6 +20,7 @@ class PageItemInfoStruct extends FFFirebaseStruct {
     DateTime? expireDate,
     int? quantity,
     String? unit,
+    bool? isArchived,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _name = name,
         _description = description,
@@ -31,6 +32,7 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         _expireDate = expireDate,
         _quantity = quantity,
         _unit = unit,
+        _isArchived = isArchived,
         super(firestoreUtilData);
 
   // "name" field.
@@ -97,6 +99,12 @@ class PageItemInfoStruct extends FFFirebaseStruct {
   set unit(String? val) => _unit = val;
   bool hasUnit() => _unit != null;
 
+  // "isArchived" field.
+  bool? _isArchived;
+  bool get isArchived => _isArchived ?? false;
+  set isArchived(bool? val) => _isArchived = val;
+  bool hasIsArchived() => _isArchived != null;
+
   static PageItemInfoStruct fromMap(Map<String, dynamic> data) =>
       PageItemInfoStruct(
         name: data['name'] as String?,
@@ -109,6 +117,7 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         expireDate: data['expireDate'] as DateTime?,
         quantity: castToType<int>(data['quantity']),
         unit: data['unit'] as String?,
+        isArchived: data['isArchived'] as bool?,
       );
 
   static PageItemInfoStruct? maybeFromMap(dynamic data) =>
@@ -125,6 +134,7 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         'expireDate': _expireDate,
         'quantity': _quantity,
         'unit': _unit,
+        'isArchived': _isArchived,
       }.withoutNulls;
 
   @override
@@ -168,6 +178,10 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         'unit': serializeParam(
           _unit,
           ParamType.String,
+        ),
+        'isArchived': serializeParam(
+          _isArchived,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -224,6 +238,11 @@ class PageItemInfoStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        isArchived: deserializeParam(
+          data['isArchived'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -241,7 +260,8 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         storageDate == other.storageDate &&
         expireDate == other.expireDate &&
         quantity == other.quantity &&
-        unit == other.unit;
+        unit == other.unit &&
+        isArchived == other.isArchived;
   }
 
   @override
@@ -255,7 +275,8 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         storageDate,
         expireDate,
         quantity,
-        unit
+        unit,
+        isArchived
       ]);
 }
 
@@ -270,6 +291,7 @@ PageItemInfoStruct createPageItemInfoStruct({
   DateTime? expireDate,
   int? quantity,
   String? unit,
+  bool? isArchived,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -286,6 +308,7 @@ PageItemInfoStruct createPageItemInfoStruct({
       expireDate: expireDate,
       quantity: quantity,
       unit: unit,
+      isArchived: isArchived,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

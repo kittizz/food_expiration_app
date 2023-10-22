@@ -1052,25 +1052,127 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     .descriptionFieldControllerValidator
                                     .asValidator(context),
                               ),
-                              if (!widget.isAdd!)
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 8.0, 0.0, 0.0),
-                                  child: Wrap(
-                                    spacing: 0.0,
-                                    runSpacing: 0.0,
-                                    alignment: WrapAlignment.start,
-                                    crossAxisAlignment:
-                                        WrapCrossAlignment.start,
-                                    direction: Axis.horizontal,
-                                    runAlignment: WrapAlignment.start,
-                                    verticalDirection: VerticalDirection.down,
-                                    clipBehavior: Clip.none,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 8.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    if (FFAppState().pageItemInfo.isArchived)
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 10.0, 0.0),
+                                        child: Wrap(
+                                          spacing: 0.0,
+                                          runSpacing: 0.0,
+                                          alignment: WrapAlignment.start,
+                                          crossAxisAlignment:
+                                              WrapCrossAlignment.center,
+                                          direction: Axis.horizontal,
+                                          runAlignment: WrapAlignment.start,
+                                          verticalDirection:
+                                              VerticalDirection.down,
+                                          clipBehavior: Clip.none,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                              child: Text(
+                                                'กู้คืน',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
+                                              ),
+                                            ),
+                                            FlutterFlowIconButton(
+                                              borderColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              borderRadius: 5.0,
+                                              borderWidth: 1.0,
+                                              buttonSize: 30.0,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              icon: Icon(
+                                                Icons.restore,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .blue600,
+                                                size: 15.0,
+                                              ),
+                                              onPressed: () async {
+                                                await FoodexpirationGroup
+                                                    .clearItemsCall
+                                                    .call(
+                                                  idList: (int var1) {
+                                                    return [var1];
+                                                  }(widget.id!),
+                                                  archive: false,
+                                                  deviceid:
+                                                      FFAppState().deviceId,
+                                                );
+                                                FFAppState().update(() {
+                                                  FFAppState().removeFromItems(
+                                                      FFAppState()
+                                                          .items
+                                                          .where((e) =>
+                                                              e.id == widget.id)
+                                                          .toList()
+                                                          .first);
+                                                });
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'ย้อยไปหมดอายุ',
+                                                      style:
+                                                          GoogleFonts.getFont(
+                                                        'IBM Plex Sans Thai',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 2000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                    action: SnackBarAction(
+                                                      label: 'ยกเลิก',
+                                                      textColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      onPressed: () async {
+                                                        context.pushNamed(
+                                                            'Archived');
+                                                      },
+                                                    ),
+                                                  ),
+                                                );
+                                                context.safePop();
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    if (widget.isAdd ?? true)
+                                      Wrap(
+                                        spacing: 0.0,
+                                        runSpacing: 0.0,
+                                        alignment: WrapAlignment.start,
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.center,
+                                        direction: Axis.horizontal,
+                                        runAlignment: WrapAlignment.start,
+                                        verticalDirection:
+                                            VerticalDirection.down,
+                                        clipBehavior: Clip.none,
                                         children: [
                                           Padding(
                                             padding:
@@ -1156,9 +1258,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
+                                  ],
                                 ),
+                              ),
                             ].divide(SizedBox(height: 1.0)),
                           ),
                         ),

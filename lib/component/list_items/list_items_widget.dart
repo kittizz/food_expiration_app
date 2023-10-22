@@ -22,6 +22,7 @@ class ListItemsWidget extends StatefulWidget {
     bool? showClear,
     required this.locationId,
     required this.dateType,
+    required this.isArchived,
   })  : this.showClear = showClear ?? false,
         super(key: key);
 
@@ -29,6 +30,7 @@ class ListItemsWidget extends StatefulWidget {
   final bool showClear;
   final int? locationId;
   final String? dateType;
+  final bool? isArchived;
 
   @override
   _ListItemsWidgetState createState() => _ListItemsWidgetState();
@@ -240,11 +242,15 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
         ),
         Builder(
           builder: (context) {
-            final itemsLocal = FFAppState()
-                .items
-                .where((e) =>
-                    functions.getDateStatus(e.expireDate!, e.forewarnDay) ==
-                    widget.dateType)
+            final itemsLocal = (widget.isArchived!
+                    ? FFAppState().items
+                    : FFAppState()
+                        .items
+                        .where((e) =>
+                            functions.getDateStatus(
+                                e.expireDate!, e.forewarnDay) ==
+                            widget.dateType)
+                        .toList())
                 .toList();
             return Column(
               mainAxisSize: MainAxisSize.max,
@@ -276,6 +282,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                       id: itemsLocalItem.id,
                       locationId: widget.locationId!,
                       expiryDate: itemsLocalItem.expireDate!,
+                      isArchived: widget.isArchived!,
                     ),
                   ),
                 );

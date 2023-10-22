@@ -277,7 +277,8 @@ Future fetchItemInfo(
               functions.toItem((apiItem?.jsonBody ?? '')).storageDate
           ..expireDate = functions.toItem((apiItem?.jsonBody ?? '')).expireDate
           ..quantity = functions.toItem((apiItem?.jsonBody ?? '')).quantity
-          ..unit = functions.toItem((apiItem?.jsonBody ?? '')).unit,
+          ..unit = functions.toItem((apiItem?.jsonBody ?? '')).unit
+          ..isArchived = functions.toItem((apiItem?.jsonBody ?? '')).isArchived,
       );
       FFAppState().updateThumbnailStruct(
         (e) => e..image = functions.toItem((apiItem?.jsonBody ?? '')).image,
