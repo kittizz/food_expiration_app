@@ -1231,17 +1231,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                       FlutterFlowTheme.of(
                                                               context)
                                                           .primaryBackground,
-                                                  action: SnackBarAction(
-                                                    label: 'ยกเลิก',
-                                                    textColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .error,
-                                                    onPressed: () async {
-                                                      context.pushNamed(
-                                                          'Archived');
-                                                    },
-                                                  ),
                                                 ),
                                               );
                                             },
