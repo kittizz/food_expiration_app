@@ -1539,15 +1539,26 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Text(
-                                            dateTimeFormat(
-                                              'yMMMd',
-                                              FFAppState()
-                                                  .pageItemInfo
-                                                  .storageDate!,
-                                              locale:
-                                                  FFLocalizations.of(context)
-                                                      .languageCode,
-                                            ),
+                                            FFAppState()
+                                                        .pageItemInfo
+                                                        .storageDate !=
+                                                    null
+                                                ? dateTimeFormat(
+                                                    'yMMMd',
+                                                    FFAppState()
+                                                        .pageItemInfo
+                                                        .storageDate!,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  )
+                                                : dateTimeFormat(
+                                                    'yMMMd',
+                                                    getCurrentTimestamp,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  ),
                                             maxLines: 1,
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium,
@@ -1625,15 +1636,26 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Text(
-                                            dateTimeFormat(
-                                              'yMMMd',
-                                              FFAppState()
-                                                  .pageItemInfo
-                                                  .expireDate!,
-                                              locale:
-                                                  FFLocalizations.of(context)
-                                                      .languageCode,
-                                            ),
+                                            FFAppState()
+                                                        .pageItemInfo
+                                                        .expireDate !=
+                                                    null
+                                                ? dateTimeFormat(
+                                                    'yMMMd',
+                                                    FFAppState()
+                                                        .pageItemInfo
+                                                        .expireDate!,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  )
+                                                : dateTimeFormat(
+                                                    'yMMMd',
+                                                    getCurrentTimestamp,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  ),
                                             maxLines: 1,
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium,

@@ -255,11 +255,6 @@ Future fetchItemInfo(
     id: id,
   );
   if ((apiItem?.succeeded ?? true)) {
-    FFAppState().updatePageItemInfoStruct(
-      (e) => e
-        ..storageDate = getCurrentTimestamp
-        ..expireDate = getCurrentTimestamp,
-    );
     FFAppState().update(() {
       FFAppState().updatePageItemInfoStruct(
         (e) => e
