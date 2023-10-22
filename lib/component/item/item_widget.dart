@@ -147,8 +147,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                             if (animationsMap[
                                     'columnOnActionTriggerAnimation'] !=
                                 null) {
-                              await animationsMap[
-                                      'columnOnActionTriggerAnimation']!
+                              animationsMap['columnOnActionTriggerAnimation']!
                                   .controller
                                   .forward(from: 0.0);
                             }
