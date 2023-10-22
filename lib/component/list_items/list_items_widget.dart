@@ -167,7 +167,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                         e.expireDate!, e.forewarnDay) ==
                                     widget.dateType)
                                 .toList()),
-                            archive: true,
+                            archive: !widget.isArchived!,
                             deviceid: FFAppState().deviceId,
                           );
                           if ((_model.apiClearItem?.succeeded ?? true)) {
@@ -217,7 +217,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                         setState(() {});
                       },
                       child: Text(
-                        'ล้าง',
+                        widget.isArchived! ? 'กู้คืน' : 'ล้าง',
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).bodyLargeFamily,

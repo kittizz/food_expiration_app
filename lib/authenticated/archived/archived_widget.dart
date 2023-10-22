@@ -118,7 +118,7 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
                   updateCallback: () => setState(() {}),
                   child: ListItemsWidget(
                     title: '',
-                    showClear: false,
+                    showClear: true,
                     locationId: 0,
                     dateType: '',
                     isArchived: true,
