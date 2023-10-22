@@ -162,12 +162,16 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               deviceid: FFAppState().deviceId,
                             );
                             FFAppState().update(() {
-                              FFAppState().removeFromItems(FFAppState()
-                                  .items
-                                  .where((e) => e.id == widget.id)
-                                  .toList()
-                                  .first);
+                              FFAppState()
+                                  .removeAtIndexFromItems(widget.index!);
                             });
+                            if (animationsMap[
+                                    'columnOnActionTriggerAnimation'] !=
+                                null) {
+                              animationsMap['columnOnActionTriggerAnimation']!
+                                  .controller
+                                  .reset();
+                            }
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -190,13 +194,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                 ),
                               ),
                             );
-                            if (animationsMap[
-                                    'columnOnActionTriggerAnimation'] !=
-                                null) {
-                              animationsMap['columnOnActionTriggerAnimation']!
-                                  .controller
-                                  .reset();
-                            }
                           }
                         },
                         activeColor: FlutterFlowTheme.of(context).red300,
