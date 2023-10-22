@@ -27,11 +27,13 @@ class ItemInfoWidget extends StatefulWidget {
     Key? key,
     String? name,
     required this.isAdd,
+    this.id,
   })  : this.name = name ?? '',
         super(key: key);
 
   final String name;
   final bool? isAdd;
+  final int? id;
 
   @override
   _ItemInfoWidgetState createState() => _ItemInfoWidgetState();
@@ -161,72 +163,174 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       return;
                     }
                     if (FFAppState().thumbnail.image.id > 0) {
-                      _model.apiCreateItem =
-                          await FoodexpirationGroup.createItemCall.call(
-                        name: _model.nameFieldController.text,
-                        description: _model.descriptionFieldController.text,
-                        storageDate: functions
-                            .toRFC3339(FFAppState().pageItemInfo.storageDate!),
-                        expireDate: functions
-                            .toRFC3339(FFAppState().pageItemInfo.expireDate!),
-                        forewarnDay: int.tryParse(
-                            _model.forewarnDayFieldController.text),
-                        category: _model.categoryOptionValue,
-                        barcode: FFAppState().pageItemInfo.barcode,
-                        imageId: FFAppState().thumbnail.image.id,
-                        locationId: _model.locationOptionValue != null &&
-                                _model.locationOptionValue != ''
-                            ? FFAppState()
-                                .locations
-                                .where(
-                                    (e) => e.name == _model.locationOptionValue)
-                                .toList()
-                                .first
-                                .id
-                            : null,
-                        deviceid: FFAppState().deviceId,
-                        quantity:
-                            int.tryParse(_model.quantityFieldController.text),
-                        unit: _model.unitOptionValue,
-                      );
-                      _shouldSetState = true;
-                      if ((_model.apiCreateItem?.succeeded ?? true)) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'เพิ่มรายการสำเร็จ',
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 2000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
+                      if (widget.isAdd!) {
+                        _model.apiCreateItem =
+                            await FoodexpirationGroup.createItemCall.call(
+                          name: _model.nameFieldController.text,
+                          description: _model.descriptionFieldController.text,
+                          storageDate: functions.toRFC3339(
+                              FFAppState().pageItemInfo.storageDate!),
+                          expireDate: functions
+                              .toRFC3339(FFAppState().pageItemInfo.expireDate!),
+                          forewarnDay: int.tryParse(
+                              _model.forewarnDayFieldController.text),
+                          category: _model.categoryOptionValue,
+                          barcode: FFAppState().pageItemInfo.barcode,
+                          imageId: FFAppState().thumbnail.image.id,
+                          locationId: _model.locationOptionValue != null &&
+                                  _model.locationOptionValue != ''
+                              ? FFAppState()
+                                  .locations
+                                  .where((e) =>
+                                      e.name == _model.locationOptionValue)
+                                  .toList()
+                                  .first
+                                  .id
+                              : null,
+                          deviceid: FFAppState().deviceId,
+                          quantity:
+                              int.tryParse(_model.quantityFieldController.text),
+                          unit: _model.unitOptionValue,
                         );
-                      } else {
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('ข้อผิดพลาด'),
-                              content: Text(FoodexpirationGroup.createItemCall
-                                  .message(
-                                    (_model.apiCreateItem?.jsonBody ?? ''),
-                                  )
-                                  .toString()),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('ตกลง'),
+                        _shouldSetState = true;
+                        if ((_model.apiCreateItem?.succeeded ?? true)) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'เพิ่มรายการสำเร็จ',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                 ),
-                              ],
-                            );
-                          },
+                              ),
+                              duration: Duration(milliseconds: 2000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
+                          if (Navigator.of(context).canPop()) {
+                            context.pop();
+                          }
+                          context.pushNamed(
+                            'ItemList',
+                            queryParameters: {
+                              'isLocation': serializeParam(
+                                false,
+                                ParamType.bool,
+                              ),
+                              'title': serializeParam(
+                                FFAppState().pageItemInfo.location.name !=
+                                            null &&
+                                        FFAppState()
+                                                .pageItemInfo
+                                                .location
+                                                .name !=
+                                            ''
+                                    ? FFAppState().pageItemInfo.location.name
+                                    : 'รายการทั้งหมด',
+                                ParamType.String,
+                              ),
+                              'locationId': serializeParam(
+                                FFAppState().pageItemInfo.location.id,
+                                ParamType.int,
+                              ),
+                            }.withoutNulls,
+                          );
+                        } else {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('ข้อผิดพลาด'),
+                                content: Text(FoodexpirationGroup.createItemCall
+                                    .message(
+                                      (_model.apiCreateItem?.jsonBody ?? ''),
+                                    )
+                                    .toString()),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('ตกลง'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        }
+                      } else {
+                        _model.apiUpdateItem =
+                            await FoodexpirationGroup.updateItemCall.call(
+                          deviceid: FFAppState().deviceId,
+                          name: _model.nameFieldController.text,
+                          description: _model.descriptionFieldController.text,
+                          storageDate: functions.toRFC3339(
+                              FFAppState().pageItemInfo.storageDate!),
+                          expireDate: functions
+                              .toRFC3339(FFAppState().pageItemInfo.expireDate!),
+                          forewarnDay: int.tryParse(
+                              _model.forewarnDayFieldController.text),
+                          category: _model.categoryOptionValue,
+                          barcode: FFAppState().pageItemInfo.barcode,
+                          imageId: FFAppState().thumbnail.image.id,
+                          locationId: _model.locationOptionValue != null &&
+                                  _model.locationOptionValue != ''
+                              ? FFAppState()
+                                  .locations
+                                  .where((e) =>
+                                      e.name == _model.locationOptionValue)
+                                  .toList()
+                                  .first
+                                  .id
+                              : null,
+                          quantity:
+                              int.tryParse(_model.quantityFieldController.text),
+                          unit: _model.unitOptionValue,
+                          id: widget.id,
                         );
-                        if (_shouldSetState) setState(() {});
-                        return;
+                        _shouldSetState = true;
+                        if ((_model.apiUpdateItem?.succeeded ?? true)) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'แก้ไขรายการสำเร็จ',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 2000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
+                          context.safePop();
+                        } else {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('ข้อผิดพลาด'),
+                                content: Text(FoodexpirationGroup.updateItemCall
+                                    .message(
+                                      (_model.apiUpdateItem?.jsonBody ?? ''),
+                                    )
+                                    .toString()),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('ตกลง'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        }
                       }
                     } else {
                       await showDialog(
@@ -249,30 +353,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                       if (_shouldSetState) setState(() {});
                       return;
                     }
-
-                    if (Navigator.of(context).canPop()) {
-                      context.pop();
-                    }
-                    context.pushNamed(
-                      'ItemList',
-                      queryParameters: {
-                        'isLocation': serializeParam(
-                          false,
-                          ParamType.bool,
-                        ),
-                        'title': serializeParam(
-                          FFAppState().pageItemInfo.location.name != null &&
-                                  FFAppState().pageItemInfo.location.name != ''
-                              ? FFAppState().pageItemInfo.location.name
-                              : 'รายการทั้งหมด',
-                          ParamType.String,
-                        ),
-                        'locationId': serializeParam(
-                          FFAppState().pageItemInfo.location.id,
-                          ParamType.int,
-                        ),
-                      }.withoutNulls,
-                    );
 
                     if (_shouldSetState) setState(() {});
                   },
@@ -1005,8 +1085,57 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                       .error,
                                               size: 15.0,
                                             ),
-                                            onPressed: () {
-                                              print('IconButton pressed ...');
+                                            onPressed: () async {
+                                              await FoodexpirationGroup
+                                                  .clearItemsCall
+                                                  .call(
+                                                idList: (int var1) {
+                                                  return [var1];
+                                                }(widget.id!),
+                                                archive: true,
+                                                deviceid: FFAppState().deviceId,
+                                              );
+                                              FFAppState().update(() {
+                                                FFAppState().removeFromItems(
+                                                    FFAppState()
+                                                        .items
+                                                        .where((e) =>
+                                                            e.id == widget.id)
+                                                        .toList()
+                                                        .first);
+                                              });
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'ย้อยไปหมดอายุ',
+                                                    style: GoogleFonts.getFont(
+                                                      'IBM Plex Sans Thai',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 2000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  action: SnackBarAction(
+                                                    label: 'ยกเลิก',
+                                                    textColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .error,
+                                                    onPressed: () async {
+                                                      context.pushNamed(
+                                                          'Archived');
+                                                    },
+                                                  ),
+                                                ),
+                                              );
                                             },
                                           ),
                                         ],

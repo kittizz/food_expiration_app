@@ -210,6 +210,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ItemInfoWidget(
             name: params.getParam('name', ParamType.String),
             isAdd: params.getParam('isAdd', ParamType.bool),
+            id: params.getParam('id', ParamType.int),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

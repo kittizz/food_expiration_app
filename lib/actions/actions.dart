@@ -279,6 +279,9 @@ Future fetchItemInfo(
           ..quantity = functions.toItem((apiItem?.jsonBody ?? '')).quantity
           ..unit = functions.toItem((apiItem?.jsonBody ?? '')).unit,
       );
+      FFAppState().updateThumbnailStruct(
+        (e) => e..image = functions.toItem((apiItem?.jsonBody ?? '')).image,
+      );
     });
   }
 }

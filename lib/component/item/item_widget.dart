@@ -130,6 +130,10 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
               false,
               ParamType.bool,
             ),
+            'id': serializeParam(
+              widget.id,
+              ParamType.int,
+            ),
           }.withoutNulls,
           extra: <String, dynamic>{
             kTransitionInfoKey: TransitionInfo(

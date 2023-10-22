@@ -168,6 +168,7 @@ final parametersBuilderMap =
         allParams: {
           'name': getParameter<String>(data, 'name'),
           'isAdd': getParameter<bool>(data, 'isAdd'),
+          'id': getParameter<int>(data, 'id'),
         },
       ),
 };

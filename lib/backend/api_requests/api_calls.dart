@@ -35,6 +35,7 @@ class FoodexpirationGroup {
   static UpdateLocationCall updateLocationCall = UpdateLocationCall();
   static CategoryCall categoryCall = CategoryCall();
   static CreateItemCall createItemCall = CreateItemCall();
+  static UpdateItemCall updateItemCall = UpdateItemCall();
   static LocationItemCall locationItemCall = LocationItemCall();
   static ClearItemsCall clearItemsCall = ClearItemsCall();
   static GetItemCall getItemCall = GetItemCall();
@@ -575,6 +576,60 @@ class CreateItemCall {
       callName: 'createItem',
       apiUrl: '${FoodexpirationGroup.baseUrl}/item/create',
       callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
+}
+
+class UpdateItemCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? description = '',
+    String? storageDate = '',
+    String? expireDate = '',
+    int? forewarnDay,
+    String? category = '',
+    String? barcode = '',
+    int? imageId,
+    int? locationId,
+    int? quantity,
+    String? unit = '',
+    int? id,
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "id": ${id},
+  "name": "${name}",
+  "description": "${description}",
+  "storageDate": "${storageDate}",
+  "expireDate": "${expireDate}",
+  "forewarnDay": ${forewarnDay},
+  "category": "${category}",
+  "barcode": "${barcode}",
+  "quantity": ${quantity},
+  "unit": "${unit}",
+  "imageId": ${imageId},
+  "locationId": ${locationId}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'updateItem ',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/item/create',
+      callType: ApiCallType.PUT,
       headers: {
         'x-device-id': '${deviceid}',
       },
