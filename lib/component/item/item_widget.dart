@@ -149,7 +149,8 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                             if (animationsMap[
                                     'columnOnActionTriggerAnimation'] !=
                                 null) {
-                              animationsMap['columnOnActionTriggerAnimation']!
+                              await animationsMap[
+                                      'columnOnActionTriggerAnimation']!
                                   .controller
                                   .forward(from: 0.0);
                             }
@@ -160,7 +161,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               archive: true,
                               deviceid: FFAppState().deviceId,
                             );
-                            _model.updatePage(() {
+                            FFAppState().update(() {
                               FFAppState().removeFromItems(FFAppState()
                                   .items
                                   .where((e) => e.id == widget.id)
@@ -189,6 +190,13 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                 ),
                               ),
                             );
+                            if (animationsMap[
+                                    'columnOnActionTriggerAnimation'] !=
+                                null) {
+                              animationsMap['columnOnActionTriggerAnimation']!
+                                  .controller
+                                  .reset();
+                            }
                           }
                         },
                         activeColor: FlutterFlowTheme.of(context).red300,
