@@ -237,26 +237,21 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                                 image:
                                                     CachedNetworkImageProvider(
                                                   functions.getImage(
-                                                      FFAppState()
-                                                          .pageLocationInfo
-                                                          .image),
+                                                      '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
                                                 ),
                                                 fit: BoxFit.contain,
                                               ),
                                               allowRotation: false,
                                               tag: functions.getImage(
-                                                  FFAppState()
-                                                      .pageLocationInfo
-                                                      .image),
+                                                  '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
                                               useHeroAnimation: true,
                                             ),
                                           ),
                                         );
                                       },
                                       child: Hero(
-                                        tag: functions.getImage(FFAppState()
-                                            .pageLocationInfo
-                                            .image),
+                                        tag: functions.getImage(
+                                            '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
                                         transitionOnUserGestures: true,
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.only(
@@ -273,9 +268,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                                   .imageBlurhash,
                                             ),
                                             image: CachedNetworkImageProvider(
-                                              functions.getImage(FFAppState()
-                                                  .pageLocationInfo
-                                                  .image),
+                                              functions.getImage(
+                                                  '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
                                             ),
                                             width: double.infinity,
                                             height: double.infinity,

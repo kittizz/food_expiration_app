@@ -263,7 +263,8 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                         'Keyld8_${itemsLocalIndex.toString()}',
                       ),
                       name: itemsLocalItem.name,
-                      image: functions.getImage(itemsLocalItem.image.path),
+                      image: functions.getImage(
+                          '${itemsLocalItem.image.path}?i=${itemsLocalItem.id.toString()}'),
                       location: FFAppState()
                           .locations
                           .where((e) => e.id == itemsLocalItem.locationId)

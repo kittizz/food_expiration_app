@@ -551,26 +551,34 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   8.0, 8.0, 8.0, 8.0),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            child: OctoImage(
-                                              placeholderBuilder:
-                                                  OctoPlaceholder.blurHash(
-                                                FFAppState()
-                                                    .thumbnail
-                                                    .image
-                                                    .blurHash,
+                                          child: Hero(
+                                            tag: functions.getImage(FFAppState()
+                                                .thumbnail
+                                                .image
+                                                .path),
+                                            transitionOnUserGestures: true,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              child: OctoImage(
+                                                placeholderBuilder:
+                                                    OctoPlaceholder.blurHash(
+                                                  FFAppState()
+                                                      .thumbnail
+                                                      .image
+                                                      .blurHash,
+                                                ),
+                                                image: NetworkImage(
+                                                  functions.getImage(
+                                                      FFAppState()
+                                                          .thumbnail
+                                                          .image
+                                                          .path),
+                                                ),
+                                                width: double.infinity,
+                                                height: double.infinity,
+                                                fit: BoxFit.contain,
                                               ),
-                                              image: NetworkImage(
-                                                functions.getImage(FFAppState()
-                                                    .thumbnail
-                                                    .image
-                                                    .path),
-                                              ),
-                                              width: double.infinity,
-                                              height: double.infinity,
-                                              fit: BoxFit.contain,
                                             ),
                                           ),
                                         ),
