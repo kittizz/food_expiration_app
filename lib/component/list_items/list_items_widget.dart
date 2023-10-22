@@ -160,12 +160,15 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                         if (confirmDialogResponse) {
                           _model.apiClearItem =
                               await FoodexpirationGroup.clearItemsCall.call(
-                            idList: functions.mapItemIdList(FFAppState()
-                                .items
-                                .where((e) =>
-                                    functions.getDateStatus(
-                                        e.expireDate!, e.forewarnDay) ==
-                                    widget.dateType)
+                            idList: functions.mapItemIdList((widget.isArchived!
+                                    ? FFAppState().items
+                                    : FFAppState()
+                                        .items
+                                        .where((e) =>
+                                            functions.getDateStatus(
+                                                e.expireDate!, e.forewarnDay) ==
+                                            widget.dateType)
+                                        .toList())
                                 .toList()),
                             archive: !widget.isArchived!,
                             deviceid: FFAppState().deviceId,
