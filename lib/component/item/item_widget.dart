@@ -152,6 +152,9 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   .controller
                                   .forward(from: 0.0);
                             }
+                            setState(() {
+                              _model.checkboxValue = false;
+                            });
                             await FoodexpirationGroup.clearItemsCall.call(
                               idList: (int var1) {
                                 return [var1];
@@ -159,9 +162,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               archive: true,
                               deviceid: FFAppState().deviceId,
                             );
-                            setState(() {
-                              _model.checkboxValue = false;
-                            });
                             FFAppState().update(() {
                               FFAppState().removeFromItems(FFAppState()
                                   .items
