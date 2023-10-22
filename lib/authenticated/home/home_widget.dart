@@ -267,38 +267,49 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     ],
                                                     shape: BoxShape.circle,
                                                   ),
-                                                  child: OctoImage(
-                                                    placeholderBuilder:
-                                                        OctoPlaceholder
-                                                            .blurHash(
-                                                      valueOrDefault<String>(
-                                                        FFAppState()
-                                                            .user
-                                                            .profilePictureBlurHash,
-                                                        'LIEpzCa#1mt7EjWB?Hof5Xoe}fR%',
-                                                      ),
+                                                  child: Hero(
+                                                    tag: valueOrDefault<String>(
+                                                      functions.getImage(
+                                                          FFAppState()
+                                                              .user
+                                                              .profilePicture),
+                                                      'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
                                                     ),
-                                                    image:
-                                                        CachedNetworkImageProvider(
-                                                      valueOrDefault<String>(
-                                                        functions.getImage(
-                                                            FFAppState()
-                                                                .user
-                                                                .profilePicture),
-                                                        'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                    transitionOnUserGestures:
+                                                        true,
+                                                    child: OctoImage(
+                                                      placeholderBuilder:
+                                                          OctoPlaceholder
+                                                              .blurHash(
+                                                        valueOrDefault<String>(
+                                                          FFAppState()
+                                                              .user
+                                                              .profilePictureBlurHash,
+                                                          'LIEpzCa#1mt7EjWB?Hof5Xoe}fR%',
+                                                        ),
                                                       ),
-                                                    ),
-                                                    width: double.infinity,
-                                                    height: double.infinity,
-                                                    fit: BoxFit.cover,
-                                                    errorBuilder: (context,
-                                                            error,
-                                                            stackTrace) =>
-                                                        Image.asset(
-                                                      'assets/images/error_image.png',
+                                                      image:
+                                                          CachedNetworkImageProvider(
+                                                        valueOrDefault<String>(
+                                                          functions.getImage(
+                                                              FFAppState()
+                                                                  .user
+                                                                  .profilePicture),
+                                                          'https://th-bkk-1.xvercloud.com/food-expiration/images/user.png',
+                                                        ),
+                                                      ),
                                                       width: double.infinity,
                                                       height: double.infinity,
                                                       fit: BoxFit.cover,
+                                                      errorBuilder: (context,
+                                                              error,
+                                                              stackTrace) =>
+                                                          Image.asset(
+                                                        'assets/images/error_image.png',
+                                                        width: double.infinity,
+                                                        height: double.infinity,
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
