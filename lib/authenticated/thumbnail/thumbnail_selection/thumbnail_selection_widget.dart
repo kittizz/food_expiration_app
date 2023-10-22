@@ -200,19 +200,25 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                               ),
                               child: Stack(
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: OctoImage(
-                                      placeholderBuilder:
-                                          OctoPlaceholder.blurHash(
-                                        listItem.image.blurHash,
-                                      ),
-                                      image: CachedNetworkImageProvider(
+                                  Hero(
+                                    tag:
                                         functions.getImage(listItem.image.path),
+                                    transitionOnUserGestures: true,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: OctoImage(
+                                        placeholderBuilder:
+                                            OctoPlaceholder.blurHash(
+                                          listItem.image.blurHash,
+                                        ),
+                                        image: CachedNetworkImageProvider(
+                                          functions
+                                              .getImage(listItem.image.path),
+                                        ),
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        fit: BoxFit.cover,
                                       ),
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                   Container(
