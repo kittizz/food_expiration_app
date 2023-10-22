@@ -1162,8 +1162,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           ],
                                         ),
                                       ),
-                                    if (!(!widget.isAdd! &&
-                                        !FFAppState().pageItemInfo.isArchived))
+                                    if (!widget.isAdd! &&
+                                        !FFAppState().pageItemInfo.isArchived)
                                       Wrap(
                                         spacing: 0.0,
                                         runSpacing: 0.0,
