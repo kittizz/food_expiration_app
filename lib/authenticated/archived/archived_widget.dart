@@ -113,17 +113,15 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Flexible(
-                  child: wrapWithModel(
-                    model: _model.listItemsModel,
-                    updateCallback: () => setState(() {}),
-                    child: ListItemsWidget(
-                      title: '',
-                      showClear: true,
-                      locationId: 0,
-                      dateType: '',
-                      isArchived: true,
-                    ),
+                wrapWithModel(
+                  model: _model.listItemsModel,
+                  updateCallback: () => setState(() {}),
+                  child: ListItemsWidget(
+                    title: '',
+                    showClear: true,
+                    locationId: 0,
+                    dateType: '',
+                    isArchived: true,
                   ),
                 ),
               ],
