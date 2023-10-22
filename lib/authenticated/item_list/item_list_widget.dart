@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/instant_timer.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -60,11 +59,6 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         locationId: widget.isLocation ? widget.locationId : 0,
       );
       setState(() {});
-      _model.instantTimer = InstantTimer.periodic(
-        duration: Duration(milliseconds: 1000),
-        callback: (timer) async {},
-        startImmediately: true,
-      );
     });
   }
 

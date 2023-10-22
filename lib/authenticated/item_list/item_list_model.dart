@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/instant_timer.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'item_list_widget.dart' show ItemListWidget;
@@ -23,7 +22,6 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  InstantTimer? instantTimer;
   // Model for ListItems component.
   late ListItemsModel listItemsModel1;
   // Model for ListItems component.
@@ -41,7 +39,6 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
 
   void dispose() {
     unfocusNode.dispose();
-    instantTimer?.cancel();
     listItemsModel1.dispose();
     listItemsModel2.dispose();
     listItemsModel3.dispose();
