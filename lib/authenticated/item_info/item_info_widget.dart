@@ -306,6 +306,18 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
+                          await action_blocks.fetchItems(
+                            context,
+                            archive: false,
+                            locationId: FFAppState()
+                                .locations
+                                .where(
+                                    (e) => e.name == _model.locationOptionValue)
+                                .toList()
+                                .first
+                                .id,
+                          );
+                          setState(() {});
                           context.safePop();
                         } else {
                           await showDialog(
@@ -1136,6 +1148,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   ),
                                                 ),
                                               );
+                                              context.safePop();
                                             },
                                           ),
                                         ],
