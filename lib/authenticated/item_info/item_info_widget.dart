@@ -1760,13 +1760,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     final _datePicked1Date =
                                         await showDatePicker(
                                       context: context,
-                                      initialDate: FFAppState()
-                                          .pageItemInfo
-                                          .storageDate!,
+                                      initialDate: getCurrentTimestamp,
                                       firstDate: DateTime(1900),
-                                      lastDate: FFAppState()
-                                          .pageItemInfo
-                                          .storageDate!,
+                                      lastDate: getCurrentTimestamp,
                                     );
 
                                     if (_datePicked1Date != null) {
