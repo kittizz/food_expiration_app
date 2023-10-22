@@ -266,7 +266,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                       image: functions.getImage(itemsLocalItem.image.path),
                       location: FFAppState()
                           .locations
-                          .where((e) => e.id == widget.locationId)
+                          .where((e) => e.id == itemsLocalItem.locationId)
                           .toList()
                           .first
                           .name,
