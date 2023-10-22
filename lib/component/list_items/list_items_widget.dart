@@ -264,12 +264,6 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                       ),
                       name: itemsLocalItem.name,
                       image: functions.getImage(itemsLocalItem.image.path),
-                      location: FFAppState()
-                          .locations
-                          .where((e) => e.id == widget.locationId)
-                          .toList()
-                          .first
-                          .name,
                       preDay: itemsLocalItem.forewarnDay,
                       imageBlurhash: itemsLocalItem.image.blurHash,
                       id: itemsLocalItem.id,
