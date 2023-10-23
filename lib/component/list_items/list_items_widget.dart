@@ -305,7 +305,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                 .length ==
             0)
           Container(
-            height: 100.0,
+            height: 40.0,
             decoration: BoxDecoration(),
             child: Align(
               alignment: AlignmentDirectional(0.00, 0.00),
@@ -313,6 +313,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                 'ไม่มีรายการ',
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
