@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/actions/actions.dart' as action_blocks;
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -212,16 +211,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   duration: Duration(milliseconds: 2000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  action: SnackBarAction(
-                                    label: 'ยกเลิก',
-                                    textColor:
-                                        FlutterFlowTheme.of(context).error,
-                                    onPressed: () async {
-                                      await actions.navListItem(
-                                        context,
-                                      );
-                                    },
-                                  ),
                                 ),
                               );
                             } else {
@@ -238,22 +227,10 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   duration: Duration(milliseconds: 1000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  action: SnackBarAction(
-                                    label: 'ยกเลิก',
-                                    textColor:
-                                        FlutterFlowTheme.of(context).error,
-                                    onPressed: () async {
-                                      await actions.navArchived(
-                                        context,
-                                      );
-                                    },
-                                  ),
                                 ),
                               );
                             }
 
-                            await Future.delayed(
-                                const Duration(milliseconds: 1200));
                             _model.updatePage(() {
                               FFAppState().removeFromItems(FFAppState()
                                   .items
