@@ -483,8 +483,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                           final selectedMedia =
                                               await selectMediaWithSourceBottomSheet(
                                             context: context,
-                                            maxWidth: 512.00,
-                                            maxHeight: 512.00,
+                                            maxWidth: 1024.00,
+                                            maxHeight: 1024.00,
                                             imageQuality: 100,
                                             allowPhoto: true,
                                             includeBlurHash: true,
