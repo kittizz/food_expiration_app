@@ -219,7 +219,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'ย้าย ${widget.name} ไปหมดอายุสำเร็จ',
+                                    'ย้าย ${widget.name} ไปหมดอายุ',
                                     style: GoogleFonts.getFont(
                                       'IBM Plex Sans Thai',
                                       color: FlutterFlowTheme.of(context)

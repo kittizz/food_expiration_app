@@ -178,7 +178,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'ล้างรายการสำเร็จ',
+                                  'ล้างรายการ',
                                   style: TextStyle(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
