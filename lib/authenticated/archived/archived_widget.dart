@@ -107,22 +107,36 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                wrapWithModel(
-                  model: _model.listItemsModel,
-                  updateCallback: () => setState(() {}),
-                  child: ListItemsWidget(
-                    title: '',
-                    showClear: true,
-                    locationId: 0,
-                    dateType: '',
-                    isArchived: true,
+          child: RefreshIndicator(
+            color: FlutterFlowTheme.of(context).red200,
+            onRefresh: () async {
+              await action_blocks.fetchLocations(context);
+              setState(() {});
+              await action_blocks.fetchItems(
+                context,
+                archive: true,
+                locationId: 0,
+              );
+              setState(() {});
+            },
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  wrapWithModel(
+                    model: _model.listItemsModel,
+                    updateCallback: () => setState(() {}),
+                    child: ListItemsWidget(
+                      title: '',
+                      showClear: true,
+                      locationId: 0,
+                      dateType: '',
+                      isArchived: true,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

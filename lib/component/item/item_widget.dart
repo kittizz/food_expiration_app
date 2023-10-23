@@ -264,7 +264,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                             }
 
                             await Future.delayed(
-                                const Duration(milliseconds: 2000));
+                                const Duration(milliseconds: 1600));
                             _model.updatePage(() {
                               FFAppState().removeFromItems(FFAppState()
                                   .items
