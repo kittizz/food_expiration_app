@@ -249,13 +249,15 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
           builder: (context) {
             final itemsLocal = (widget.isArchived!
                     ? FFAppState().items
-                    : FFAppState()
-                        .items
-                        .where((e) =>
-                            functions.getDateStatus(
-                                e.expireDate!, e.forewarnDay) ==
-                            widget.dateType)
-                        .toList())
+                    : functions.filter(
+                        FFAppState()
+                            .items
+                            .where((e) =>
+                                functions.getDateStatus(
+                                    e.expireDate!, e.forewarnDay) ==
+                                widget.dateType)
+                            .toList(),
+                        FFAppState().filter))
                 .toList();
             return Column(
               mainAxisSize: MainAxisSize.max,

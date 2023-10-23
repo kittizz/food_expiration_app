@@ -229,3 +229,10 @@ int findItemIndex(
   }
   return -1;
 }
+
+List<ItemStruct> filter(
+  List<ItemStruct> items,
+  FilterStruct filterType,
+) {
+  return null;
+}

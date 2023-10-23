@@ -10,9 +10,11 @@ import '/flutter_flow/form_field_controller.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -64,8 +66,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
       setState(() {});
     });
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.searchFieldController ??= TextEditingController();
+    _model.searchFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -210,14 +212,45 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 5.0, 0.0),
-                              child: Icon(
-                                Icons.filter_list_outlined,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 24.0,
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  setState(() {
+                                    FFAppState().filter =
+                                        FilterStruct.fromSerializableMap(
+                                            jsonDecode('{}'));
+                                  });
+                                  ScaffoldMessenger.of(context)
+                                      .clearSnackBars();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'ล้างตัวกรอง',
+                                        style: TextStyle(
+                                          color:
+                                              FlutterFlowTheme.of(context).info,
+                                        ),
+                                      ),
+                                      duration: Duration(milliseconds: 500),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                    ),
+                                  );
+                                },
+                                child: Icon(
+                                  Icons.filter_list_outlined,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 24.0,
+                                ),
                               ),
                             ),
                             Container(
-                              width: 160.0,
+                              width: 180.0,
                               height: 40.0,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
@@ -232,8 +265,40 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 2.0, 5.0, 2.0),
                                 child: TextFormField(
-                                  controller: _model.textController,
-                                  focusNode: _model.textFieldFocusNode,
+                                  controller: _model.searchFieldController,
+                                  focusNode: _model.searchFieldFocusNode,
+                                  onChanged: (_) => EasyDebounce.debounce(
+                                    '_model.searchFieldController',
+                                    Duration(milliseconds: 2000),
+                                    () async {
+                                      if (_model.searchFieldController.text !=
+                                              null &&
+                                          _model.searchFieldController.text !=
+                                              '') {
+                                        setState(() {
+                                          FFAppState().updateFilterStruct(
+                                            (e) => e
+                                              ..search = _model
+                                                  .searchFieldController.text,
+                                          );
+                                        });
+                                      }
+                                    },
+                                  ),
+                                  onFieldSubmitted: (_) async {
+                                    if (_model.searchFieldController.text !=
+                                            null &&
+                                        _model.searchFieldController.text !=
+                                            '') {
+                                      setState(() {
+                                        FFAppState().updateFilterStruct(
+                                          (e) => e
+                                            ..search = _model
+                                                .searchFieldController.text,
+                                        );
+                                      });
+                                    }
+                                  },
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'ค้นหา...',
@@ -282,7 +347,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   ),
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
-                                  validator: _model.textControllerValidator
+                                  validator: _model
+                                      .searchFieldControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
@@ -299,8 +365,24 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 color: FlutterFlowTheme.of(context).primaryText,
                                 size: 18.0,
                               ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
+                              onPressed: () async {
+                                _model.barcodeOut =
+                                    await FlutterBarcodeScanner.scanBarcode(
+                                  '#C62828', // scanning line color
+                                  'ยกเลิก', // cancel button text
+                                  true, // whether to show the flash icon
+                                  ScanMode.BARCODE,
+                                );
+
+                                if (_model.barcodeOut != '-1') {
+                                  setState(() {
+                                    FFAppState().updateFilterStruct(
+                                      (e) => e..barcode = _model.barcodeOut,
+                                    );
+                                  });
+                                }
+
+                                setState(() {});
                               },
                             ),
                             FlutterFlowDropDown<String>(
@@ -338,8 +420,17 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               hidesUnderline: true,
                               isSearchable: true,
                               isMultiSelect: true,
-                              onChangedForMultiSelect: (val) => setState(
-                                  () => _model.filterLocationValue = val),
+                              onChangedForMultiSelect: (val) async {
+                                setState(
+                                    () => _model.filterLocationValue = val);
+                                setState(() {
+                                  FFAppState().updateFilterStruct(
+                                    (e) => e
+                                      ..location =
+                                          _model.filterLocationValue!.toList(),
+                                  );
+                                });
+                              },
                             ),
                             FlutterFlowDropDown<String>(
                               controller: _model.filterCateValueController ??=
@@ -372,8 +463,16 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               hidesUnderline: true,
                               isSearchable: true,
                               isMultiSelect: true,
-                              onChangedForMultiSelect: (val) =>
-                                  setState(() => _model.filterCateValue = val),
+                              onChangedForMultiSelect: (val) async {
+                                setState(() => _model.filterCateValue = val);
+                                setState(() {
+                                  FFAppState().updateFilterStruct(
+                                    (e) => e
+                                      ..location =
+                                          _model.filterCateValue!.toList(),
+                                  );
+                                });
+                              },
                             ),
                             FlutterFlowDropDown<String>(
                               controller:
@@ -408,8 +507,17 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               hidesUnderline: true,
                               isSearchable: false,
                               isMultiSelect: true,
-                              onChangedForMultiSelect: (val) => setState(
-                                  () => _model.filterExpStatusValue = val),
+                              onChangedForMultiSelect: (val) async {
+                                setState(
+                                    () => _model.filterExpStatusValue = val);
+                                setState(() {
+                                  FFAppState().updateFilterStruct(
+                                    (e) => e
+                                      ..location =
+                                          _model.filterExpStatusValue!.toList(),
+                                  );
+                                });
+                              },
                             ),
                           ].divide(SizedBox(width: 5.0)),
                         ),

@@ -2332,7 +2332,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       'ถุง',
                                       'ขวด',
                                       'กล่อง',
-                                      'กระป๋อง'
+                                      'กระป๋อง',
+                                      'ลูก',
+                                      'ผล'
                                     ],
                                     onChanged: (val) => setState(
                                         () => _model.unitOptionValue = val),

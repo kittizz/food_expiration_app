@@ -240,6 +240,16 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInCategorys(int _index, String _value) {
     _categorys.insert(_index, _value);
   }
+
+  FilterStruct _filter = FilterStruct.fromSerializableMap(jsonDecode('{}'));
+  FilterStruct get filter => _filter;
+  set filter(FilterStruct _value) {
+    _filter = _value;
+  }
+
+  void updateFilterStruct(Function(FilterStruct) updateFn) {
+    updateFn(_filter);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

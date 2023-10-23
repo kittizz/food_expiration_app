@@ -11,9 +11,11 @@ import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'item_list_widget.dart' show ItemListWidget;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,10 +27,11 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
+  // State field(s) for searchField widget.
+  FocusNode? searchFieldFocusNode;
+  TextEditingController? searchFieldController;
+  String? Function(BuildContext, String?)? searchFieldControllerValidator;
+  var barcodeOut = '';
   // State field(s) for filterLocation widget.
   List<String>? filterLocationValue;
   FormFieldController<String>? filterLocationValueController;
@@ -55,8 +58,8 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
 
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
+    searchFieldFocusNode?.dispose();
+    searchFieldController?.dispose();
 
     listItemsModel1.dispose();
     listItemsModel2.dispose();

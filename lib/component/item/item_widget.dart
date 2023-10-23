@@ -202,7 +202,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'กู้คืนรายการสำเร็จ',
+                                    'กู้คืน ${widget.name} สำเร็จ',
                                     style: GoogleFonts.getFont(
                                       'IBM Plex Sans Thai',
                                       color: FlutterFlowTheme.of(context)
@@ -219,7 +219,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'ย้ายไปหมดอายุ',
+                                    'ย้าย ${widget.name} ไปหมดอายุสำเร็จ',
                                     style: GoogleFonts.getFont(
                                       'IBM Plex Sans Thai',
                                       color: FlutterFlowTheme.of(context)
