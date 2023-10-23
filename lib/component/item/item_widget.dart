@@ -226,6 +226,16 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   duration: Duration(milliseconds: 2000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).primaryText,
+                                  action: SnackBarAction(
+                                    label: 'ยกเลิก',
+                                    textColor:
+                                        FlutterFlowTheme.of(context).error,
+                                    onPressed: () async {
+                                      await actions.navListItem(
+                                        context,
+                                      );
+                                    },
+                                  ),
                                 ),
                               );
                             } else {
@@ -247,7 +257,9 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                     textColor:
                                         FlutterFlowTheme.of(context).error,
                                     onPressed: () async {
-                                      await actions.initializeDate();
+                                      await actions.navArchived(
+                                        context,
+                                      );
                                     },
                                   ),
                                 ),
