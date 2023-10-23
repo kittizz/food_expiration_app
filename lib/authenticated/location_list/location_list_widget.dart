@@ -93,8 +93,12 @@ class _LocationListWidgetState extends State<LocationListWidget>
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            print('FloatingActionButton pressed ...');
+          onPressed: () async {
+            await action_blocks.openAddItem(
+              context,
+              replace: true,
+            );
+            setState(() {});
           },
           backgroundColor: FlutterFlowTheme.of(context).red50,
           elevation: 5.0,

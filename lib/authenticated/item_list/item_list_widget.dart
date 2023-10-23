@@ -286,7 +286,15 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                     onChanged: (_) => EasyDebounce.debounce(
                                       '_model.searchFieldController',
                                       Duration(milliseconds: 2000),
-                                      () async {},
+                                      () async {
+                                        setState(() {
+                                          FFAppState().updateFilterStruct(
+                                            (e) => e
+                                              ..search = _model
+                                                  .searchFieldController.text,
+                                          );
+                                        });
+                                      },
                                     ),
                                     onFieldSubmitted: (_) async {
                                       setState(() {
@@ -356,6 +364,15 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                               onTap: () async {
                                                 _model.searchFieldController
                                                     ?.clear();
+                                                setState(() {
+                                                  FFAppState()
+                                                      .updateFilterStruct(
+                                                    (e) => e
+                                                      ..search = _model
+                                                          .searchFieldController
+                                                          .text,
+                                                  );
+                                                });
                                                 setState(() {});
                                               },
                                               child: Icon(
