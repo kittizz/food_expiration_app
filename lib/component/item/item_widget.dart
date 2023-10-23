@@ -211,21 +211,39 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   .controller
                                   .reset();
                             }
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'ย้ายไปหมดอายุ',
-                                  style: GoogleFonts.getFont(
-                                    'IBM Plex Sans Thai',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
+                            if (widget.isArchived!) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'กู้คืนรายการสำเร็จ',
+                                    style: GoogleFonts.getFont(
+                                      'IBM Plex Sans Thai',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
                                   ),
+                                  duration: Duration(milliseconds: 2000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).accent2,
                                 ),
-                                duration: Duration(milliseconds: 2000),
-                                backgroundColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                              ),
-                            );
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'ย้ายไปหมดอายุ',
+                                    style: GoogleFonts.getFont(
+                                      'IBM Plex Sans Thai',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 2000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).accent3,
+                                ),
+                              );
+                            }
                           }
                         },
                         activeColor: FlutterFlowTheme.of(context).red300,
