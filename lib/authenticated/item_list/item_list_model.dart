@@ -24,6 +24,10 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
   // State field(s) for filterLocation widget.
   List<String>? filterLocationValue;
   FormFieldController<String>? filterLocationValueController;
@@ -50,6 +54,9 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
+
     listItemsModel1.dispose();
     listItemsModel2.dispose();
     listItemsModel3.dispose();
