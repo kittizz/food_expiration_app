@@ -271,25 +271,6 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                     '_model.searchFieldController',
                                     Duration(milliseconds: 2000),
                                     () async {
-                                      if (_model.searchFieldController.text !=
-                                              null &&
-                                          _model.searchFieldController.text !=
-                                              '') {
-                                        setState(() {
-                                          FFAppState().updateFilterStruct(
-                                            (e) => e
-                                              ..search = _model
-                                                  .searchFieldController.text,
-                                          );
-                                        });
-                                      }
-                                    },
-                                  ),
-                                  onFieldSubmitted: (_) async {
-                                    if (_model.searchFieldController.text !=
-                                            null &&
-                                        _model.searchFieldController.text !=
-                                            '') {
                                       setState(() {
                                         FFAppState().updateFilterStruct(
                                           (e) => e
@@ -297,7 +278,16 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                                 .searchFieldController.text,
                                         );
                                       });
-                                    }
+                                    },
+                                  ),
+                                  onFieldSubmitted: (_) async {
+                                    setState(() {
+                                      FFAppState().updateFilterStruct(
+                                        (e) => e
+                                          ..search =
+                                              _model.searchFieldController.text,
+                                      );
+                                    });
                                   },
                                   obscureText: false,
                                   decoration: InputDecoration(
