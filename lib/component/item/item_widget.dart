@@ -288,125 +288,133 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                       ),
                                 ),
                               ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 10.0, 0.0),
-                                    child: Icon(
-                                      Icons.date_range_outlined,
-                                      color: valueOrDefault<Color>(
-                                        () {
-                                          if (functions.getDateStatus(
-                                                  widget.expiryDate!,
-                                                  widget.preDay!) ==
-                                              'ok') {
-                                            return FlutterFlowTheme.of(context)
-                                                .blue600;
-                                          } else if (functions.getDateStatus(
-                                                  widget.expiryDate!,
-                                                  widget.preDay!) ==
-                                              'expired') {
-                                            return FlutterFlowTheme.of(context)
-                                                .red600;
-                                          } else if (functions.getDateStatus(
-                                                  widget.expiryDate!,
-                                                  widget.preDay!) ==
-                                              'about_to_expire') {
-                                            return FlutterFlowTheme.of(context)
-                                                .orange600;
-                                          } else {
-                                            return FlutterFlowTheme.of(context)
-                                                .primaryText;
-                                          }
-                                        }(),
-                                        FlutterFlowTheme.of(context).blue600,
+                              Flexible(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 10.0, 0.0),
+                                      child: Icon(
+                                        Icons.date_range_outlined,
+                                        color: valueOrDefault<Color>(
+                                          () {
+                                            if (functions.getDateStatus(
+                                                    widget.expiryDate!,
+                                                    widget.preDay!) ==
+                                                'ok') {
+                                              return FlutterFlowTheme.of(
+                                                      context)
+                                                  .blue600;
+                                            } else if (functions.getDateStatus(
+                                                    widget.expiryDate!,
+                                                    widget.preDay!) ==
+                                                'expired') {
+                                              return FlutterFlowTheme.of(
+                                                      context)
+                                                  .red600;
+                                            } else if (functions.getDateStatus(
+                                                    widget.expiryDate!,
+                                                    widget.preDay!) ==
+                                                'about_to_expire') {
+                                              return FlutterFlowTheme.of(
+                                                      context)
+                                                  .orange600;
+                                            } else {
+                                              return FlutterFlowTheme.of(
+                                                      context)
+                                                  .primaryText;
+                                            }
+                                          }(),
+                                          FlutterFlowTheme.of(context).blue600,
+                                        ),
+                                        size: 16.0,
                                       ),
-                                      size: 16.0,
                                     ),
-                                  ),
-                                  Text(
-                                    functions
-                                        .getFormattedDate(widget.expiryDate!),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
+                                    Text(
+                                      functions
+                                          .getFormattedDate(widget.expiryDate!),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            color: valueOrDefault<Color>(
+                                              () {
+                                                if (functions.getDateStatus(
+                                                        widget.expiryDate!,
+                                                        widget.preDay!) ==
+                                                    'ok') {
+                                                  return FlutterFlowTheme.of(
+                                                          context)
+                                                      .blue600;
+                                                } else if (functions
+                                                        .getDateStatus(
+                                                            widget.expiryDate!,
+                                                            widget.preDay!) ==
+                                                    'expired') {
+                                                  return FlutterFlowTheme.of(
+                                                          context)
+                                                      .red600;
+                                                } else if (functions
+                                                        .getDateStatus(
+                                                            widget.expiryDate!,
+                                                            widget.preDay!) ==
+                                                    'about_to_expire') {
+                                                  return FlutterFlowTheme.of(
+                                                          context)
+                                                      .orange600;
+                                                } else {
+                                                  return FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText;
+                                                }
+                                              }(),
                                               FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          color: valueOrDefault<Color>(
-                                            () {
-                                              if (functions.getDateStatus(
-                                                      widget.expiryDate!,
-                                                      widget.preDay!) ==
-                                                  'ok') {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .blue600;
-                                              } else if (functions
-                                                      .getDateStatus(
-                                                          widget.expiryDate!,
-                                                          widget.preDay!) ==
-                                                  'expired') {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .red600;
-                                              } else if (functions
-                                                      .getDateStatus(
-                                                          widget.expiryDate!,
-                                                          widget.preDay!) ==
-                                                  'about_to_expire') {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .orange600;
-                                              } else {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .primaryText;
-                                              }
-                                            }(),
-                                            FlutterFlowTheme.of(context)
-                                                .blue600,
+                                                  .blue600,
+                                            ),
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
                                           ),
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily),
-                                        ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 10.0, 0.0),
-                                    child: Icon(
-                                      Icons.location_on,
-                                      color:
-                                          FlutterFlowTheme.of(context).green800,
-                                      size: 16.0,
                                     ),
-                                  ),
-                                  Text(
-                                    widget.location,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          color: FlutterFlowTheme.of(context)
-                                              .green800,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily),
-                                        ),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                              Flexible(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 10.0, 0.0),
+                                      child: Icon(
+                                        Icons.location_on,
+                                        color: FlutterFlowTheme.of(context)
+                                            .green800,
+                                        size: 16.0,
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.location,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .green800,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
