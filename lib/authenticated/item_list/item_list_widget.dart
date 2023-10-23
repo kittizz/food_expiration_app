@@ -1,10 +1,12 @@
 import '/backend/schema/structs/index.dart';
 import '/component/list_items/list_items_widget.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -187,6 +189,133 @@ class _ItemListWidgetState extends State<ItemListWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
+                  Container(
+                    width: double.infinity,
+                    height: 50.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 5.0, 0.0),
+                              child: Icon(
+                                Icons.filter_list_outlined,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 24.0,
+                              ),
+                            ),
+                            FlutterFlowDropDown<String>(
+                              controller:
+                                  _model.filterLocationValueController ??=
+                                      FormFieldController<String>(null),
+                              options: FFAppState()
+                                  .locations
+                                  .map((e) => e.name)
+                                  .toList(),
+                              onChanged: (val) => setState(
+                                  () => _model.filterLocationValue = val),
+                              width: 160.0,
+                              height: 40.0,
+                              textStyle:
+                                  FlutterFlowTheme.of(context).bodyMedium,
+                              hintText: 'สถานที่เก็บ',
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              elevation: 2.0,
+                              borderColor:
+                                  FlutterFlowTheme.of(context).alternate,
+                              borderWidth: 2.0,
+                              borderRadius: 8.0,
+                              margin: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 2.0, 16.0, 2.0),
+                              hidesUnderline: true,
+                              isSearchable: false,
+                              isMultiSelect: false,
+                            ),
+                            FlutterFlowDropDown<String>(
+                              controller: _model.filterCateValueController ??=
+                                  FormFieldController<String>(null),
+                              options: FFAppState().categorys,
+                              onChanged: (val) =>
+                                  setState(() => _model.filterCateValue = val),
+                              width: 160.0,
+                              height: 40.0,
+                              textStyle:
+                                  FlutterFlowTheme.of(context).bodyMedium,
+                              hintText: 'หมวดหมู่',
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              elevation: 2.0,
+                              borderColor:
+                                  FlutterFlowTheme.of(context).alternate,
+                              borderWidth: 2.0,
+                              borderRadius: 8.0,
+                              margin: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 2.0, 16.0, 2.0),
+                              hidesUnderline: true,
+                              isSearchable: false,
+                              isMultiSelect: false,
+                            ),
+                            FlutterFlowDropDown<String>(
+                              controller:
+                                  _model.filterExpStatusValueController ??=
+                                      FormFieldController<String>(null),
+                              options: [
+                                'หมดอายุไปแล้ว',
+                                'ใกล้จะหมดอายุ',
+                                'รายการที่เหลือ'
+                              ],
+                              onChanged: (val) => setState(
+                                  () => _model.filterExpStatusValue = val),
+                              width: 160.0,
+                              height: 40.0,
+                              textStyle:
+                                  FlutterFlowTheme.of(context).bodyMedium,
+                              hintText: 'วันหมดอายุ',
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              elevation: 2.0,
+                              borderColor:
+                                  FlutterFlowTheme.of(context).alternate,
+                              borderWidth: 2.0,
+                              borderRadius: 8.0,
+                              margin: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 2.0, 16.0, 2.0),
+                              hidesUnderline: true,
+                              isSearchable: false,
+                              isMultiSelect: false,
+                            ),
+                          ].divide(SizedBox(width: 5.0)),
+                        ),
+                      ),
+                    ),
+                  ),
                   if (widget.isLocation)
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(

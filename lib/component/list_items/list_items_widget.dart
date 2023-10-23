@@ -174,6 +174,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                             deviceid: FFAppState().deviceId,
                           );
                           if ((_model.apiClearItem?.succeeded ?? true)) {
+                            ScaffoldMessenger.of(context).clearSnackBars();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -183,12 +184,13 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                         .primaryBackground,
                                   ),
                                 ),
-                                duration: Duration(milliseconds: 2000),
+                                duration: Duration(milliseconds: 1000),
                                 backgroundColor:
                                     FlutterFlowTheme.of(context).primaryText,
                               ),
                             );
                           } else {
+                            ScaffoldMessenger.of(context).clearSnackBars();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(

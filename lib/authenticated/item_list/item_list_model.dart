@@ -1,10 +1,12 @@
 import '/backend/schema/structs/index.dart';
 import '/component/list_items/list_items_widget.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'item_list_widget.dart' show ItemListWidget;
@@ -22,6 +24,15 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // State field(s) for filterLocation widget.
+  String? filterLocationValue;
+  FormFieldController<String>? filterLocationValueController;
+  // State field(s) for filterCate widget.
+  String? filterCateValue;
+  FormFieldController<String>? filterCateValueController;
+  // State field(s) for filterExpStatus widget.
+  String? filterExpStatusValue;
+  FormFieldController<String>? filterExpStatusValueController;
   // Model for ListItems component.
   late ListItemsModel listItemsModel1;
   // Model for ListItems component.

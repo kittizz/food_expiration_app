@@ -198,6 +198,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               deviceid: FFAppState().deviceId,
                             );
                             if (widget.isArchived!) {
+                              ScaffoldMessenger.of(context).clearSnackBars();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -214,6 +215,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                 ),
                               );
                             } else {
+                              ScaffoldMessenger.of(context).clearSnackBars();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
