@@ -249,69 +249,137 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 ),
                               ),
                             ),
-                            Container(
-                              width: 180.0,
-                              height: 40.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(8.0),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  width: 2.0,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    5.0, 2.0, 5.0, 2.0),
-                                child: TextFormField(
-                                  controller: _model.searchFieldController,
-                                  focusNode: _model.searchFieldFocusNode,
-                                  onChanged: (_) => EasyDebounce.debounce(
-                                    '_model.searchFieldController',
-                                    Duration(milliseconds: 2000),
-                                    () async {
-                                      setState(() {
-                                        FFAppState().updateFilterStruct(
-                                          (e) => e
-                                            ..search = _model
-                                                .searchFieldController.text,
-                                        );
-                                      });
-                                    },
+                            Align(
+                              alignment: AlignmentDirectional(0.00, 0.00),
+                              child: Container(
+                                width: 180.0,
+                                height: 40.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  border: Border.all(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 2.0,
                                   ),
-                                  onFieldSubmitted: (_) async {
-                                    setState(() {
-                                      FFAppState().updateFilterStruct(
-                                        (e) => e
-                                          ..search =
-                                              _model.searchFieldController.text,
-                                      );
-                                    });
-                                  },
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    hintText: 'ค้นหา...',
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    errorBorder: InputBorder.none,
-                                    focusedErrorBorder: InputBorder.none,
-                                    suffixIcon: Icon(
-                                      Icons.search,
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      size: 10.0,
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional(0.00, 0.00),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 2.0, 5.0, 2.0),
+                                    child: TextFormField(
+                                      controller: _model.searchFieldController,
+                                      focusNode: _model.searchFieldFocusNode,
+                                      onChanged: (_) => EasyDebounce.debounce(
+                                        '_model.searchFieldController',
+                                        Duration(milliseconds: 2000),
+                                        () async {
+                                          setState(() {
+                                            FFAppState().updateFilterStruct(
+                                              (e) => e
+                                                ..search = _model
+                                                    .searchFieldController.text,
+                                            );
+                                          });
+                                        },
+                                      ),
+                                      onFieldSubmitted: (_) async {
+                                        setState(() {
+                                          FFAppState().updateFilterStruct(
+                                            (e) => e
+                                              ..search = _model
+                                                  .searchFieldController.text,
+                                          );
+                                        });
+                                      },
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        hintText: 'ค้นหา...',
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent3,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        errorBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        focusedErrorBorder:
+                                            UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        prefixIcon: Icon(
+                                          Icons.search,
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          size: 10.0,
+                                        ),
+                                        suffixIcon: _model
+                                                .searchFieldController!
+                                                .text
+                                                .isNotEmpty
+                                            ? InkWell(
+                                                onTap: () async {
+                                                  _model.searchFieldController
+                                                      ?.clear();
+                                                  setState(() {
+                                                    FFAppState()
+                                                        .updateFilterStruct(
+                                                      (e) => e
+                                                        ..search = _model
+                                                            .searchFieldController
+                                                            .text,
+                                                    );
+                                                  });
+                                                  setState(() {});
+                                                },
+                                                child: Icon(
+                                                  Icons.clear,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  size: 10.0,
+                                                ),
+                                              )
+                                            : null,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                      validator: _model
+                                          .searchFieldControllerValidator
+                                          .asValidator(context),
                                     ),
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                  validator: _model
-                                      .searchFieldControllerValidator
-                                      .asValidator(context),
                                 ),
                               ),
                             ),
