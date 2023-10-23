@@ -300,13 +300,16 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
         ),
         if ((widget.isArchived!
                     ? FFAppState().items
-                    : FFAppState()
-                        .items
-                        .where((e) =>
-                            functions.getDateStatus(
-                                e.expireDate!, e.forewarnDay) ==
-                            widget.dateType)
-                        .toList())
+                    : functions.filter(
+                        FFAppState()
+                            .items
+                            .where((e) =>
+                                functions.getDateStatus(
+                                    e.expireDate!, e.forewarnDay) ==
+                                widget.dateType)
+                            .toList(),
+                        FFAppState().filter,
+                        FFAppState().locations.toList()))
                 .length ==
             0)
           Container(
