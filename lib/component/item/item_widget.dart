@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/actions/actions.dart' as action_blocks;
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -197,6 +198,20 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               archive: !widget.isArchived!,
                               deviceid: FFAppState().deviceId,
                             );
+                            _model.updatePage(() {
+                              FFAppState().removeFromItems(FFAppState()
+                                  .items
+                                  .where((e) => e.id == widget.id)
+                                  .toList()
+                                  .first);
+                            });
+                            if (animationsMap[
+                                    'columnOnActionTriggerAnimation'] !=
+                                null) {
+                              animationsMap['columnOnActionTriggerAnimation']!
+                                  .controller
+                                  .reset();
+                            }
                             if (widget.isArchived!) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -211,30 +226,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   duration: Duration(milliseconds: 2000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  action: SnackBarAction(
-                                    label: 'ยกเลิก',
-                                    textColor:
-                                        FlutterFlowTheme.of(context).error,
-                                    onPressed: () async {
-                                      context.pushNamed(
-                                        'ItemList',
-                                        queryParameters: {
-                                          'isLocation': serializeParam(
-                                            false,
-                                            ParamType.bool,
-                                          ),
-                                          'title': serializeParam(
-                                            'รายการทั้งหมด',
-                                            ParamType.String,
-                                          ),
-                                          'locationId': serializeParam(
-                                            0,
-                                            ParamType.int,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                  ),
                                 ),
                               );
                             } else {
@@ -256,28 +247,11 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                     textColor:
                                         FlutterFlowTheme.of(context).error,
                                     onPressed: () async {
-                                      context.pushNamed('Archived');
+                                      await actions.initializeDate();
                                     },
                                   ),
                                 ),
                               );
-                            }
-
-                            await Future.delayed(
-                                const Duration(milliseconds: 1600));
-                            _model.updatePage(() {
-                              FFAppState().removeFromItems(FFAppState()
-                                  .items
-                                  .where((e) => e.id == widget.id)
-                                  .toList()
-                                  .first);
-                            });
-                            if (animationsMap[
-                                    'columnOnActionTriggerAnimation'] !=
-                                null) {
-                              animationsMap['columnOnActionTriggerAnimation']!
-                                  .controller
-                                  .reset();
                             }
                           }
                         },
