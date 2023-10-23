@@ -362,7 +362,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 'รายการที่เหลือ'
                               ],
                               onChanged: null,
-                              width: 160.0,
+                              width: 180.0,
                               height: 40.0,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
