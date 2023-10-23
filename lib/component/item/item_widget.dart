@@ -248,7 +248,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                           .primaryBackground,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 2000),
+                                  duration: Duration(milliseconds: 1500),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).primaryText,
                                   action: SnackBarAction(
@@ -263,6 +263,8 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               );
                             }
 
+                            await Future.delayed(
+                                const Duration(milliseconds: 2000));
                             _model.updatePage(() {
                               FFAppState().removeFromItems(FFAppState()
                                   .items
