@@ -290,7 +290,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   .map((e) => e.name)
                                   .toList(),
                               onChanged: null,
-                              width: 160.0,
+                              width: 200.0,
                               height: 40.0,
                               searchHintTextStyle:
                                   FlutterFlowTheme.of(context).labelMedium,
@@ -324,7 +324,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   FormFieldController<String>(null),
                               options: FFAppState().categorys,
                               onChanged: null,
-                              width: 160.0,
+                              width: 200.0,
                               height: 40.0,
                               searchHintTextStyle:
                                   FlutterFlowTheme.of(context).labelMedium,
@@ -364,7 +364,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               ],
                               onChanged: (val) => setState(
                                   () => _model.filterExpStatusValue = val),
-                              width: 160.0,
+                              width: 200.0,
                               height: 40.0,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
