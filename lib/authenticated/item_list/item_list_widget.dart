@@ -259,14 +259,21 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       .secondaryBackground,
                                   borderRadius: BorderRadius.circular(8.0),
                                   border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
+                                    color: valueOrDefault<Color>(
+                                      FFAppState().filter.search != null &&
+                                              FFAppState().filter.search != ''
+                                          ? FlutterFlowTheme.of(context)
+                                              .secondary
+                                          : FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      FlutterFlowTheme.of(context).alternate,
+                                    ),
                                     width: 2.0,
                                   ),
                                 ),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      1.0, 1.0, 1.0, 1.0),
+                                      3.0, 3.0, 3.0, 3.0),
                                   child: TextFormField(
                                     controller: _model.searchFieldController,
                                     focusNode: _model.searchFieldFocusNode,
@@ -362,8 +369,18 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                             )
                                           : null,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          fontSize: 12.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
                                     validator: _model
                                         .searchFieldControllerValidator
                                         .asValidator(context),
@@ -372,12 +389,18 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               ),
                             ),
                             FlutterFlowIconButton(
-                              borderColor:
-                                  FlutterFlowTheme.of(context).alternate,
+                              borderColor: valueOrDefault<Color>(
+                                FFAppState().filter.barcode != null &&
+                                        FFAppState().filter.barcode != ''
+                                    ? FlutterFlowTheme.of(context).secondary
+                                    : FlutterFlowTheme.of(context).alternate,
+                                FlutterFlowTheme.of(context).alternate,
+                              ),
                               borderRadius: 8.0,
                               borderWidth: 2.0,
                               buttonSize: 40.0,
-                              fillColor: FlutterFlowTheme.of(context).info,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                               icon: FaIcon(
                                 FontAwesomeIcons.barcode,
                                 color: FlutterFlowTheme.of(context).primaryText,
@@ -396,6 +419,12 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   setState(() {
                                     FFAppState().updateFilterStruct(
                                       (e) => e..barcode = _model.barcodeOut,
+                                    );
+                                  });
+                                } else {
+                                  setState(() {
+                                    FFAppState().updateFilterStruct(
+                                      (e) => e..barcode = null,
                                     );
                                   });
                                 }
@@ -429,8 +458,12 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                               elevation: 2.0,
-                              borderColor:
-                                  FlutterFlowTheme.of(context).alternate,
+                              borderColor: valueOrDefault<Color>(
+                                FFAppState().filter.location.length != 0
+                                    ? FlutterFlowTheme.of(context).secondary
+                                    : FlutterFlowTheme.of(context).alternate,
+                                FlutterFlowTheme.of(context).alternate,
+                              ),
                               borderWidth: 2.0,
                               borderRadius: 8.0,
                               margin: EdgeInsetsDirectional.fromSTEB(
@@ -472,8 +505,12 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                               elevation: 2.0,
-                              borderColor:
-                                  FlutterFlowTheme.of(context).alternate,
+                              borderColor: valueOrDefault<Color>(
+                                FFAppState().filter.category.length != 0
+                                    ? FlutterFlowTheme.of(context).secondary
+                                    : FlutterFlowTheme.of(context).alternate,
+                                FlutterFlowTheme.of(context).alternate,
+                              ),
                               borderWidth: 2.0,
                               borderRadius: 8.0,
                               margin: EdgeInsetsDirectional.fromSTEB(
@@ -516,8 +553,12 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                               elevation: 2.0,
-                              borderColor:
-                                  FlutterFlowTheme.of(context).alternate,
+                              borderColor: valueOrDefault<Color>(
+                                FFAppState().filter.expStatus.length != 0
+                                    ? FlutterFlowTheme.of(context).secondary
+                                    : FlutterFlowTheme.of(context).alternate,
+                                FlutterFlowTheme.of(context).alternate,
+                              ),
                               borderWidth: 2.0,
                               borderRadius: 8.0,
                               margin: EdgeInsetsDirectional.fromSTEB(
