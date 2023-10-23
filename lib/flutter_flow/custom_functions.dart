@@ -235,5 +235,37 @@ List<ItemStruct> filter(
   FilterStruct filterType,
   List<LocationStruct> locations,
 ) {
-  return null;
+  List<ItemStruct> itemsFilted = [];
+
+  items.forEach((element) {
+    String dateStatus = "";
+
+    switch (getDateStatus(element.expireDate!, element.forewarnDay)) {
+      case 'expired':
+        dateStatus = 'หมดอายุไปแล้ว';
+        break;
+      case 'about_to_expire':
+        dateStatus = 'ใกล้จะหมดอายุ';
+        break;
+      case 'ok':
+        dateStatus = 'รายการที่เหลือ';
+        break;
+    }
+    print("filterType.search:" +
+        filterType.search +
+        (filterType.search == '').toString());
+
+    if ((element.name.contains(filterType.search) || filterType.search == '') &&
+        (element.barcode == filterType.barcode || filterType.barcode.isEmpty) &&
+        (locations.where((e) => filterType.location.contains(e.name)).length >
+                0 ||
+            filterType.location.length == 0) &&
+        (filterType.category.contains(element.category) ||
+            filterType.category.length == 0) &&
+        (filterType.expStatus.contains(dateStatus) ||
+            filterType.expStatus.length == 0)) {
+      itemsFilted.add(element);
+    }
+  });
+  return itemsFilted;
 }
