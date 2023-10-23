@@ -224,7 +224,27 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   ),
                                   duration: Duration(milliseconds: 2000),
                                   backgroundColor:
-                                      FlutterFlowTheme.of(context).accent2,
+                                      FlutterFlowTheme.of(context).secondary,
+                                  action: SnackBarAction(
+                                    label: 'ยกเลิก',
+                                    textColor:
+                                        FlutterFlowTheme.of(context).error,
+                                    onPressed: () async {
+                                      context.pushNamed(
+                                        'ItemList',
+                                        queryParameters: {
+                                          'isLocation': serializeParam(
+                                            false,
+                                            ParamType.bool,
+                                          ),
+                                          'title': serializeParam(
+                                            '',
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                  ),
                                 ),
                               );
                             } else {
@@ -235,12 +255,20 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                     style: GoogleFonts.getFont(
                                       'IBM Plex Sans Thai',
                                       color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
+                                          .primaryText,
                                     ),
                                   ),
                                   duration: Duration(milliseconds: 2000),
                                   backgroundColor:
-                                      FlutterFlowTheme.of(context).accent3,
+                                      FlutterFlowTheme.of(context).red200,
+                                  action: SnackBarAction(
+                                    label: 'ยกเลิก',
+                                    textColor:
+                                        FlutterFlowTheme.of(context).error,
+                                    onPressed: () async {
+                                      context.pushNamed('Archived');
+                                    },
+                                  ),
                                 ),
                               );
                             }
