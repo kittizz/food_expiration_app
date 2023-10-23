@@ -198,20 +198,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               archive: !widget.isArchived!,
                               deviceid: FFAppState().deviceId,
                             );
-                            _model.updatePage(() {
-                              FFAppState().removeFromItems(FFAppState()
-                                  .items
-                                  .where((e) => e.id == widget.id)
-                                  .toList()
-                                  .first);
-                            });
-                            if (animationsMap[
-                                    'columnOnActionTriggerAnimation'] !=
-                                null) {
-                              animationsMap['columnOnActionTriggerAnimation']!
-                                  .controller
-                                  .reset();
-                            }
                             if (widget.isArchived!) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -249,7 +235,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                           .primaryBackground,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 1500),
+                                  duration: Duration(milliseconds: 1000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).primaryText,
                                   action: SnackBarAction(
@@ -264,6 +250,23 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   ),
                                 ),
                               );
+                            }
+
+                            await Future.delayed(
+                                const Duration(milliseconds: 1200));
+                            _model.updatePage(() {
+                              FFAppState().removeFromItems(FFAppState()
+                                  .items
+                                  .where((e) => e.id == widget.id)
+                                  .toList()
+                                  .first);
+                            });
+                            if (animationsMap[
+                                    'columnOnActionTriggerAnimation'] !=
+                                null) {
+                              animationsMap['columnOnActionTriggerAnimation']!
+                                  .controller
+                                  .reset();
                             }
                           }
                         },
