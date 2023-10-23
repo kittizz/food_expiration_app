@@ -410,6 +410,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   0,
                                                   ParamType.int,
                                                 ),
+                                                'isScan': serializeParam(
+                                                  false,
+                                                  ParamType.bool,
+                                                ),
+                                                'isSearch': serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
                                               }.withoutNulls,
                                             );
                                           },
