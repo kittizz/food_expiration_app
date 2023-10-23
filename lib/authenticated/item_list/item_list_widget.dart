@@ -802,15 +802,20 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child: wrapWithModel(
-                      model: _model.listItemsModel3,
-                      updateCallback: () => setState(() {}),
-                      child: ListItemsWidget(
-                        title: 'รายการที่เหลือ',
-                        showClear: false,
-                        locationId: widget.isLocation ? widget.locationId! : 0,
-                        dateType: 'ok',
-                        isArchived: false,
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 80.0),
+                      child: wrapWithModel(
+                        model: _model.listItemsModel3,
+                        updateCallback: () => setState(() {}),
+                        child: ListItemsWidget(
+                          title: 'รายการที่เหลือ',
+                          showClear: false,
+                          locationId:
+                              widget.isLocation ? widget.locationId! : 0,
+                          dateType: 'ok',
+                          isArchived: false,
+                        ),
                       ),
                     ),
                   ),
