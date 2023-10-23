@@ -35,7 +35,7 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   List<String>? filterCateValue;
   FormFieldController<String>? filterCateValueController;
   // State field(s) for filterExpStatus widget.
-  String? filterExpStatusValue;
+  List<String>? filterExpStatusValue;
   FormFieldController<String>? filterExpStatusValueController;
   // Model for ListItems component.
   late ListItemsModel listItemsModel1;

@@ -233,7 +233,6 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 child: TextFormField(
                                   controller: _model.textController,
                                   focusNode: _model.textFieldFocusNode,
-                                  autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'ค้นหา...',
@@ -324,7 +323,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   FormFieldController<String>(null),
                               options: FFAppState().categorys,
                               onChanged: null,
-                              width: 200.0,
+                              width: 240.0,
                               height: 40.0,
                               searchHintTextStyle:
                                   FlutterFlowTheme.of(context).labelMedium,
@@ -362,9 +361,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 'ใกล้จะหมดอายุ',
                                 'รายการที่เหลือ'
                               ],
-                              onChanged: (val) => setState(
-                                  () => _model.filterExpStatusValue = val),
-                              width: 200.0,
+                              onChanged: null,
+                              width: 160.0,
                               height: 40.0,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
@@ -386,7 +384,9 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   16.0, 2.0, 16.0, 2.0),
                               hidesUnderline: true,
                               isSearchable: false,
-                              isMultiSelect: false,
+                              isMultiSelect: true,
+                              onChangedForMultiSelect: (val) => setState(
+                                  () => _model.filterExpStatusValue = val),
                             ),
                           ].divide(SizedBox(width: 5.0)),
                         ),
