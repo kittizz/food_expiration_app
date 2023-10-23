@@ -29,16 +29,18 @@ class ItemListWidget extends StatefulWidget {
     bool? isLocation,
     this.title,
     this.locationId,
-    required this.isScan,
-    required this.isSearch,
+    bool? isScan,
+    bool? isSearch,
   })  : this.isLocation = isLocation ?? false,
+        this.isScan = isScan ?? false,
+        this.isSearch = isSearch ?? false,
         super(key: key);
 
   final bool isLocation;
   final String? title;
   final int? locationId;
-  final bool? isScan;
-  final bool? isSearch;
+  final bool isScan;
+  final bool isSearch;
 
   @override
   _ItemListWidgetState createState() => _ItemListWidgetState();
@@ -69,7 +71,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         locationId: widget.isLocation ? widget.locationId : 0,
       );
       setState(() {});
-      if (widget.isScan!) {
+      if (widget.isScan) {
         await _model.scanBarcode(context);
         setState(() {});
       }
@@ -264,7 +266,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 ),
                               ),
                             ),
-                            if (!widget.isSearch!)
+                            if (!widget.isSearch)
                               Align(
                                 alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Container(
@@ -422,7 +424,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   ),
                                 ),
                               ),
-                            if (widget.isSearch ?? true)
+                            if (widget.isSearch)
                               Align(
                                 alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Container(
