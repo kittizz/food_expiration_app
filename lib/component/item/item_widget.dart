@@ -223,8 +223,8 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   duration: Duration(milliseconds: 2000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).secondary,
+                                  backgroundColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                   action: SnackBarAction(
                                     label: 'ยกเลิก',
                                     textColor:
@@ -238,8 +238,12 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                             ParamType.bool,
                                           ),
                                           'title': serializeParam(
-                                            '',
+                                            'รายการทั้งหมด',
                                             ParamType.String,
+                                          ),
+                                          'locationId': serializeParam(
+                                            0,
+                                            ParamType.int,
                                           ),
                                         }.withoutNulls,
                                       );
