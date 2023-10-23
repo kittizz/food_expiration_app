@@ -117,7 +117,6 @@ final parametersBuilderMap =
   'Signin': ParameterData.none(),
   'ForgotPassword': ParameterData.none(),
   'Home': ParameterData.none(),
-  'Search': ParameterData.none(),
   'Blog': ParameterData.none(),
   'BlogPost': (data) async => ParameterData(
         allParams: {

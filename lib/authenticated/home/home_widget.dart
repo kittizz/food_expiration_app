@@ -389,18 +389,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed(
-                                        'Search',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.bottomToTop,
-                                            duration:
-                                                Duration(milliseconds: 10),
-                                          ),
-                                        },
-                                      );
+                                      context.pushNamed('Home');
                                     },
                                     child: Container(
                                       width: double.infinity,

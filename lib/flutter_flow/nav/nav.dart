@@ -118,12 +118,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HomeWidget(),
         ),
         FFRoute(
-          name: 'Search',
-          path: '/search',
-          requireAuth: true,
-          builder: (context, params) => SearchWidget(),
-        ),
-        FFRoute(
           name: 'Blog',
           path: '/blog',
           requireAuth: true,
