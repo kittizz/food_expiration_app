@@ -128,6 +128,8 @@ final parametersBuilderMap =
           'isLocation': getParameter<bool>(data, 'isLocation'),
           'title': getParameter<String>(data, 'title'),
           'locationId': getParameter<int>(data, 'locationId'),
+          'isScan': getParameter<bool>(data, 'isScan'),
+          'isSearch': getParameter<bool>(data, 'isSearch'),
         },
       ),
   'LocationInfo': ParameterData.none(),

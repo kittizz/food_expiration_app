@@ -27,11 +27,14 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for searchField widget.
-  FocusNode? searchFieldFocusNode;
-  TextEditingController? searchFieldController;
-  String? Function(BuildContext, String?)? searchFieldControllerValidator;
-  var barcodeOut = '';
+  // State field(s) for search1Field widget.
+  FocusNode? search1FieldFocusNode;
+  TextEditingController? search1FieldController;
+  String? Function(BuildContext, String?)? search1FieldControllerValidator;
+  // State field(s) for search2Field widget.
+  FocusNode? search2FieldFocusNode;
+  TextEditingController? search2FieldController;
+  String? Function(BuildContext, String?)? search2FieldControllerValidator;
   // State field(s) for filterLocation widget.
   List<String>? filterLocationValue;
   FormFieldController<String>? filterLocationValueController;
@@ -58,8 +61,11 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
 
   void dispose() {
     unfocusNode.dispose();
-    searchFieldFocusNode?.dispose();
-    searchFieldController?.dispose();
+    search1FieldFocusNode?.dispose();
+    search1FieldController?.dispose();
+
+    search2FieldFocusNode?.dispose();
+    search2FieldController?.dispose();
 
     listItemsModel1.dispose();
     listItemsModel2.dispose();
@@ -67,6 +73,27 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   }
 
   /// Action blocks are added here.
+
+  Future scanBarcode(BuildContext context) async {
+    var barcodeOut = '';
+
+    barcodeOut = await FlutterBarcodeScanner.scanBarcode(
+      '#C62828', // scanning line color
+      'ยกเลิก', // cancel button text
+      true, // whether to show the flash icon
+      ScanMode.BARCODE,
+    );
+
+    if (barcodeOut != '-1') {
+      FFAppState().updateFilterStruct(
+        (e) => e..barcode = barcodeOut,
+      );
+    } else {
+      FFAppState().updateFilterStruct(
+        (e) => e..barcode = null,
+      );
+    }
+  }
 
   /// Additional helper methods are added here.
 }

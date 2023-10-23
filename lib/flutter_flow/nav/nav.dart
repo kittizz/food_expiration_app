@@ -139,6 +139,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             isLocation: params.getParam('isLocation', ParamType.bool),
             title: params.getParam('title', ParamType.String),
             locationId: params.getParam('locationId', ParamType.int),
+            isScan: params.getParam('isScan', ParamType.bool),
+            isSearch: params.getParam('isSearch', ParamType.bool),
           ),
         ),
         FFRoute(
