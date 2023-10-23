@@ -628,7 +628,7 @@ class UpdateItemCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'updateItem ',
-      apiUrl: '${FoodexpirationGroup.baseUrl}/item/create',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/item/${id}',
       callType: ApiCallType.PUT,
       headers: {
         'x-device-id': '${deviceid}',
