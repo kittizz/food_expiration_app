@@ -25,10 +25,10 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
 
   final unfocusNode = FocusNode();
   // State field(s) for filterLocation widget.
-  String? filterLocationValue;
+  List<String>? filterLocationValue;
   FormFieldController<String>? filterLocationValueController;
   // State field(s) for filterCate widget.
-  String? filterCateValue;
+  List<String>? filterCateValue;
   FormFieldController<String>? filterCateValueController;
   // State field(s) for filterExpStatus widget.
   String? filterExpStatusValue;

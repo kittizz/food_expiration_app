@@ -220,13 +220,15 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   .locations
                                   .map((e) => e.name)
                                   .toList(),
-                              onChanged: (val) => setState(
-                                  () => _model.filterLocationValue = val),
+                              onChanged: null,
                               width: 160.0,
                               height: 40.0,
+                              searchHintTextStyle:
+                                  FlutterFlowTheme.of(context).labelMedium,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
                               hintText: 'สถานที่เก็บ',
+                              searchHintText: 'ค้นหารายการ...',
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:
@@ -243,20 +245,24 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               margin: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 2.0, 16.0, 2.0),
                               hidesUnderline: true,
-                              isSearchable: false,
-                              isMultiSelect: false,
+                              isSearchable: true,
+                              isMultiSelect: true,
+                              onChangedForMultiSelect: (val) => setState(
+                                  () => _model.filterLocationValue = val),
                             ),
                             FlutterFlowDropDown<String>(
                               controller: _model.filterCateValueController ??=
                                   FormFieldController<String>(null),
                               options: FFAppState().categorys,
-                              onChanged: (val) =>
-                                  setState(() => _model.filterCateValue = val),
+                              onChanged: null,
                               width: 160.0,
                               height: 40.0,
+                              searchHintTextStyle:
+                                  FlutterFlowTheme.of(context).labelMedium,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
                               hintText: 'หมวดหมู่',
+                              searchHintText: 'ค้นหารายการ...',
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:
@@ -273,8 +279,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               margin: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 2.0, 16.0, 2.0),
                               hidesUnderline: true,
-                              isSearchable: false,
-                              isMultiSelect: false,
+                              isSearchable: true,
+                              isMultiSelect: true,
+                              onChangedForMultiSelect: (val) =>
+                                  setState(() => _model.filterCateValue = val),
                             ),
                             FlutterFlowDropDown<String>(
                               controller:
