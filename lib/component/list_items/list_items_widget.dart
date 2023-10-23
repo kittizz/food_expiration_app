@@ -313,7 +313,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                 'ไม่มีรายการ',
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                      color: FlutterFlowTheme.of(context).secondaryText,
+                      color: Color(0x69474747),
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
