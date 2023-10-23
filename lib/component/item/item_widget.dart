@@ -197,20 +197,6 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               archive: !widget.isArchived!,
                               deviceid: FFAppState().deviceId,
                             );
-                            _model.updatePage(() {
-                              FFAppState().removeFromItems(FFAppState()
-                                  .items
-                                  .where((e) => e.id == widget.id)
-                                  .toList()
-                                  .first);
-                            });
-                            if (animationsMap[
-                                    'columnOnActionTriggerAnimation'] !=
-                                null) {
-                              animationsMap['columnOnActionTriggerAnimation']!
-                                  .controller
-                                  .reset();
-                            }
                             if (widget.isArchived!) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -275,6 +261,21 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                   ),
                                 ),
                               );
+                            }
+
+                            _model.updatePage(() {
+                              FFAppState().removeFromItems(FFAppState()
+                                  .items
+                                  .where((e) => e.id == widget.id)
+                                  .toList()
+                                  .first);
+                            });
+                            if (animationsMap[
+                                    'columnOnActionTriggerAnimation'] !=
+                                null) {
+                              animationsMap['columnOnActionTriggerAnimation']!
+                                  .controller
+                                  .reset();
                             }
                           }
                         },
