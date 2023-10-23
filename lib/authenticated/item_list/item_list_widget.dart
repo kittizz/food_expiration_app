@@ -289,7 +289,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   .map((e) => e.name)
                                   .toList(),
                               onChanged: null,
-                              width: 200.0,
+                              width: 240.0,
                               height: 40.0,
                               searchHintTextStyle:
                                   FlutterFlowTheme.of(context).labelMedium,
@@ -362,7 +362,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 'รายการที่เหลือ'
                               ],
                               onChanged: null,
-                              width: 180.0,
+                              width: 240.0,
                               height: 40.0,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
