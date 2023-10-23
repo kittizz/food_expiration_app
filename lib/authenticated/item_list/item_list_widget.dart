@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:page_transition/page_transition.dart';
@@ -272,6 +273,12 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       ),
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
+                                    suffixIcon: Icon(
+                                      Icons.search,
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      size: 10.0,
+                                    ),
                                   ),
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
@@ -279,6 +286,22 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       .asValidator(context),
                                 ),
                               ),
+                            ),
+                            FlutterFlowIconButton(
+                              borderColor:
+                                  FlutterFlowTheme.of(context).alternate,
+                              borderRadius: 8.0,
+                              borderWidth: 2.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).info,
+                              icon: FaIcon(
+                                FontAwesomeIcons.barcode,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 18.0,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                              },
                             ),
                             FlutterFlowDropDown<String>(
                               controller:

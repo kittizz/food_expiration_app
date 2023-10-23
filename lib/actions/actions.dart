@@ -218,8 +218,10 @@ Future fetchCategory(BuildContext context) async {
     deviceid: FFAppState().deviceId,
   );
   if ((apiCategory?.succeeded ?? true)) {
-    FFAppState().categorys =
-        (apiCategory?.jsonBody ?? '').toList().cast<String>();
+    FFAppState().update(() {
+      FFAppState().categorys =
+          (apiCategory?.jsonBody ?? '').toList().cast<String>();
+    });
   }
 }
 
