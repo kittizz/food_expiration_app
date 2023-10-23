@@ -151,323 +151,334 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Flexible(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Theme(
-                        data: ThemeData(
-                          checkboxTheme: CheckboxThemeData(
-                            visualDensity: VisualDensity.standard,
-                            materialTapTargetSize: MaterialTapTargetSize.padded,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0),
+          Flexible(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Theme(
+                          data: ThemeData(
+                            checkboxTheme: CheckboxThemeData(
+                              visualDensity: VisualDensity.standard,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
                             ),
+                            unselectedWidgetColor:
+                                FlutterFlowTheme.of(context).grey400,
                           ),
-                          unselectedWidgetColor:
-                              FlutterFlowTheme.of(context).grey400,
-                        ),
-                        child: Checkbox(
-                          value: _model.checkboxValue ??= false,
-                          onChanged: (newValue) async {
-                            setState(() => _model.checkboxValue = newValue!);
-                            if (newValue!) {
-                              if (animationsMap[
-                                      'columnOnActionTriggerAnimation'] !=
-                                  null) {
-                                await animationsMap[
-                                        'columnOnActionTriggerAnimation']!
-                                    .controller
-                                    .forward(from: 0.0);
-                              }
-                              setState(() {
-                                _model.checkboxValue = false;
-                              });
-                              await FoodexpirationGroup.clearItemsCall.call(
-                                idList: (int var1) {
-                                  return [var1];
-                                }(widget.id!),
-                                archive: !widget.isArchived!,
-                                deviceid: FFAppState().deviceId,
-                              );
-                              if (widget.isArchived!) {
-                                ScaffoldMessenger.of(context).clearSnackBars();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'กู้คืน ${widget.name} สำเร็จ',
-                                      style: GoogleFonts.getFont(
-                                        'IBM Plex Sans Thai',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                      ),
-                                    ),
-                                    duration: Duration(milliseconds: 2000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                  ),
+                          child: Checkbox(
+                            value: _model.checkboxValue ??= false,
+                            onChanged: (newValue) async {
+                              setState(() => _model.checkboxValue = newValue!);
+                              if (newValue!) {
+                                if (animationsMap[
+                                        'columnOnActionTriggerAnimation'] !=
+                                    null) {
+                                  await animationsMap[
+                                          'columnOnActionTriggerAnimation']!
+                                      .controller
+                                      .forward(from: 0.0);
+                                }
+                                setState(() {
+                                  _model.checkboxValue = false;
+                                });
+                                await FoodexpirationGroup.clearItemsCall.call(
+                                  idList: (int var1) {
+                                    return [var1];
+                                  }(widget.id!),
+                                  archive: !widget.isArchived!,
+                                  deviceid: FFAppState().deviceId,
                                 );
-                              } else {
-                                ScaffoldMessenger.of(context).clearSnackBars();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'ย้าย ${widget.name} ไปหมดอายุ',
-                                      style: GoogleFonts.getFont(
-                                        'IBM Plex Sans Thai',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                      ),
-                                    ),
-                                    duration: Duration(milliseconds: 1000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                  ),
-                                );
-                              }
-
-                              _model.updatePage(() {
-                                FFAppState().removeFromItems(FFAppState()
-                                    .items
-                                    .where((e) => e.id == widget.id)
-                                    .toList()
-                                    .first);
-                              });
-                              if (animationsMap[
-                                      'columnOnActionTriggerAnimation'] !=
-                                  null) {
-                                animationsMap['columnOnActionTriggerAnimation']!
-                                    .controller
-                                    .reset();
-                              }
-                            }
-                          },
-                          activeColor: FlutterFlowTheme.of(context).red300,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.name!,
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .headlineMediumFamily,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontSize: 16.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .headlineMediumFamily),
-                                  ),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 10.0, 0.0),
-                                  child: Icon(
-                                    Icons.date_range_outlined,
-                                    color: valueOrDefault<Color>(
-                                      () {
-                                        if (functions.getDateStatus(
-                                                widget.expiryDate!,
-                                                widget.preDay!) ==
-                                            'ok') {
-                                          return FlutterFlowTheme.of(context)
-                                              .blue600;
-                                        } else if (functions.getDateStatus(
-                                                widget.expiryDate!,
-                                                widget.preDay!) ==
-                                            'expired') {
-                                          return FlutterFlowTheme.of(context)
-                                              .red600;
-                                        } else if (functions.getDateStatus(
-                                                widget.expiryDate!,
-                                                widget.preDay!) ==
-                                            'about_to_expire') {
-                                          return FlutterFlowTheme.of(context)
-                                              .orange600;
-                                        } else {
-                                          return FlutterFlowTheme.of(context)
-                                              .primaryText;
-                                        }
-                                      }(),
-                                      FlutterFlowTheme.of(context).blue600,
-                                    ),
-                                    size: 16.0,
-                                  ),
-                                ),
-                                Text(
-                                  functions
-                                      .getFormattedDate(widget.expiryDate!),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
-                                        color: valueOrDefault<Color>(
-                                          () {
-                                            if (functions.getDateStatus(
-                                                    widget.expiryDate!,
-                                                    widget.preDay!) ==
-                                                'ok') {
-                                              return FlutterFlowTheme.of(
-                                                      context)
-                                                  .blue600;
-                                            } else if (functions.getDateStatus(
-                                                    widget.expiryDate!,
-                                                    widget.preDay!) ==
-                                                'expired') {
-                                              return FlutterFlowTheme.of(
-                                                      context)
-                                                  .red600;
-                                            } else if (functions.getDateStatus(
-                                                    widget.expiryDate!,
-                                                    widget.preDay!) ==
-                                                'about_to_expire') {
-                                              return FlutterFlowTheme.of(
-                                                      context)
-                                                  .orange600;
-                                            } else {
-                                              return FlutterFlowTheme.of(
-                                                      context)
-                                                  .primaryText;
-                                            }
-                                          }(),
-                                          FlutterFlowTheme.of(context).blue600,
+                                if (widget.isArchived!) {
+                                  ScaffoldMessenger.of(context)
+                                      .clearSnackBars();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'กู้คืน ${widget.name} สำเร็จ',
+                                        style: GoogleFonts.getFont(
+                                          'IBM Plex Sans Thai',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
                                         ),
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
                                       ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 10.0, 0.0),
-                                  child: Icon(
-                                    Icons.location_on,
-                                    color:
-                                        FlutterFlowTheme.of(context).green800,
-                                    size: 16.0,
-                                  ),
-                                ),
-                                Text(
-                                  widget.location,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
-                                        color: FlutterFlowTheme.of(context)
-                                            .green800,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
+                                      duration: Duration(milliseconds: 2000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                    ),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                      .clearSnackBars();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'ย้าย ${widget.name} ไปหมดอายุ',
+                                        style: GoogleFonts.getFont(
+                                          'IBM Plex Sans Thai',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                        ),
                                       ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                      duration: Duration(milliseconds: 1000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                    ),
+                                  );
+                                }
+
+                                _model.updatePage(() {
+                                  FFAppState().removeFromItems(FFAppState()
+                                      .items
+                                      .where((e) => e.id == widget.id)
+                                      .toList()
+                                      .first);
+                                });
+                                if (animationsMap[
+                                        'columnOnActionTriggerAnimation'] !=
+                                    null) {
+                                  animationsMap[
+                                          'columnOnActionTriggerAnimation']!
+                                      .controller
+                                      .reset();
+                                }
+                              }
+                            },
+                            activeColor: FlutterFlowTheme.of(context).red300,
+                          ),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 5.0, 0.0, 0.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.name!,
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .headlineMediumFamily,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 16.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineMediumFamily),
+                                    ),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 10.0, 0.0),
+                                    child: Icon(
+                                      Icons.date_range_outlined,
+                                      color: valueOrDefault<Color>(
+                                        () {
+                                          if (functions.getDateStatus(
+                                                  widget.expiryDate!,
+                                                  widget.preDay!) ==
+                                              'ok') {
+                                            return FlutterFlowTheme.of(context)
+                                                .blue600;
+                                          } else if (functions.getDateStatus(
+                                                  widget.expiryDate!,
+                                                  widget.preDay!) ==
+                                              'expired') {
+                                            return FlutterFlowTheme.of(context)
+                                                .red600;
+                                          } else if (functions.getDateStatus(
+                                                  widget.expiryDate!,
+                                                  widget.preDay!) ==
+                                              'about_to_expire') {
+                                            return FlutterFlowTheme.of(context)
+                                                .orange600;
+                                          } else {
+                                            return FlutterFlowTheme.of(context)
+                                                .primaryText;
+                                          }
+                                        }(),
+                                        FlutterFlowTheme.of(context).blue600,
+                                      ),
+                                      size: 16.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    functions
+                                        .getFormattedDate(widget.expiryDate!),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          color: valueOrDefault<Color>(
+                                            () {
+                                              if (functions.getDateStatus(
+                                                      widget.expiryDate!,
+                                                      widget.preDay!) ==
+                                                  'ok') {
+                                                return FlutterFlowTheme.of(
+                                                        context)
+                                                    .blue600;
+                                              } else if (functions
+                                                      .getDateStatus(
+                                                          widget.expiryDate!,
+                                                          widget.preDay!) ==
+                                                  'expired') {
+                                                return FlutterFlowTheme.of(
+                                                        context)
+                                                    .red600;
+                                              } else if (functions
+                                                      .getDateStatus(
+                                                          widget.expiryDate!,
+                                                          widget.preDay!) ==
+                                                  'about_to_expire') {
+                                                return FlutterFlowTheme.of(
+                                                        context)
+                                                    .orange600;
+                                              } else {
+                                                return FlutterFlowTheme.of(
+                                                        context)
+                                                    .primaryText;
+                                              }
+                                            }(),
+                                            FlutterFlowTheme.of(context)
+                                                .blue600,
+                                          ),
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 10.0, 0.0),
+                                    child: Icon(
+                                      Icons.location_on,
+                                      color:
+                                          FlutterFlowTheme.of(context).green800,
+                                      size: 16.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.location,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          color: FlutterFlowTheme.of(context)
+                                              .green800,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
-                child: Container(
-                  width: 85.0,
-                  height: 85.0,
-                  decoration: BoxDecoration(),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.fade,
-                          child: FlutterFlowExpandedImageView(
-                            image: OctoImage(
-                              placeholderBuilder: OctoPlaceholder.blurHash(
-                                widget.imageBlurhash!,
-                              ),
-                              image: CachedNetworkImageProvider(
-                                valueOrDefault<String>(
-                                  widget.image,
-                                  'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
+                  child: Container(
+                    width: 85.0,
+                    height: 85.0,
+                    decoration: BoxDecoration(),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            child: FlutterFlowExpandedImageView(
+                              image: OctoImage(
+                                placeholderBuilder: OctoPlaceholder.blurHash(
+                                  widget.imageBlurhash!,
                                 ),
+                                image: CachedNetworkImageProvider(
+                                  valueOrDefault<String>(
+                                    widget.image,
+                                    'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                                  ),
+                                ),
+                                fit: BoxFit.contain,
                               ),
-                              fit: BoxFit.contain,
+                              allowRotation: false,
+                              tag: valueOrDefault<String>(
+                                widget.image,
+                                'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                              ),
+                              useHeroAnimation: true,
                             ),
-                            allowRotation: false,
-                            tag: valueOrDefault<String>(
-                              widget.image,
-                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                            ),
-                            useHeroAnimation: true,
                           ),
+                        );
+                      },
+                      child: Hero(
+                        tag: valueOrDefault<String>(
+                          widget.image,
+                          'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
                         ),
-                      );
-                    },
-                    child: Hero(
-                      tag: valueOrDefault<String>(
-                        widget.image,
-                        'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                      ),
-                      transitionOnUserGestures: true,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: OctoImage(
-                          placeholderBuilder: OctoPlaceholder.blurHash(
-                            widget.imageBlurhash!,
-                          ),
-                          image: CachedNetworkImageProvider(
-                            valueOrDefault<String>(
-                              widget.image,
-                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                        transitionOnUserGestures: true,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: OctoImage(
+                            placeholderBuilder: OctoPlaceholder.blurHash(
+                              widget.imageBlurhash!,
                             ),
+                            image: CachedNetworkImageProvider(
+                              valueOrDefault<String>(
+                                widget.image,
+                                'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                              ),
+                            ),
+                            width: 85.0,
+                            height: 85.0,
+                            fit: BoxFit.contain,
                           ),
-                          width: 85.0,
-                          height: 85.0,
-                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Divider(
             thickness: 1.0,
