@@ -29,8 +29,8 @@ class ItemListWidget extends StatefulWidget {
     bool? isLocation,
     this.title,
     this.locationId,
-    this.isScan,
-    this.isSearch,
+    required this.isScan,
+    required this.isSearch,
   })  : this.isLocation = isLocation ?? false,
         super(key: key);
 
@@ -236,6 +236,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   });
                                   setState(() {
                                     _model.search1FieldController?.clear();
+                                    _model.search2FieldController?.clear();
                                   });
                                   ScaffoldMessenger.of(context)
                                       .clearSnackBars();
