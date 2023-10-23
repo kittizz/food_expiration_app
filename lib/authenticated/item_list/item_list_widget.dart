@@ -276,6 +276,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                     width: 2.0,
                                   ),
                                 ),
+                                alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       3.0, 3.0, 3.0, 3.0),
@@ -285,15 +286,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                     onChanged: (_) => EasyDebounce.debounce(
                                       '_model.searchFieldController',
                                       Duration(milliseconds: 2000),
-                                      () async {
-                                        setState(() {
-                                          FFAppState().updateFilterStruct(
-                                            (e) => e
-                                              ..search = _model
-                                                  .searchFieldController.text,
-                                          );
-                                        });
-                                      },
+                                      () async {},
                                     ),
                                     onFieldSubmitted: (_) async {
                                       setState(() {
@@ -304,13 +297,23 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                         );
                                       });
                                     },
+                                    textCapitalization: TextCapitalization.none,
+                                    textInputAction: TextInputAction.search,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
                                       hintText: 'ค้นหา...',
                                       hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            fontSize: 12.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
@@ -353,15 +356,6 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                               onTap: () async {
                                                 _model.searchFieldController
                                                     ?.clear();
-                                                setState(() {
-                                                  FFAppState()
-                                                      .updateFilterStruct(
-                                                    (e) => e
-                                                      ..search = _model
-                                                          .searchFieldController
-                                                          .text,
-                                                  );
-                                                });
                                                 setState(() {});
                                               },
                                               child: Icon(
