@@ -251,13 +251,14 @@ List<ItemStruct> filter(
         dateStatus = 'รายการที่เหลือ';
         break;
     }
-    print("filterType.search:" +
-        filterType.search +
-        (filterType.search == '').toString());
 
-    if ((element.name.contains(filterType.search) || filterType.search == '') &&
+    if ((element.name.contains(filterType.search) ||
+            filterType.search.isEmpty) &&
         (element.barcode == filterType.barcode || filterType.barcode.isEmpty) &&
-        (locations.where((e) => filterType.location.contains(e.name)).length >
+        (locations
+                    .where((e) => filterType.location.contains(e.name))
+                    .where((e) => e.id == element.locationId)
+                    .length >
                 0 ||
             filterType.location.length == 0) &&
         (filterType.category.contains(element.category) ||

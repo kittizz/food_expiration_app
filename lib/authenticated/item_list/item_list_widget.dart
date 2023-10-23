@@ -55,6 +55,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setState(() {
         FFAppState().items = [];
+        FFAppState().filter =
+            FilterStruct.fromSerializableMap(jsonDecode('{}'));
       });
       await action_blocks.fetchLocations(context);
       setState(() {});
@@ -222,6 +224,9 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                     FFAppState().filter =
                                         FilterStruct.fromSerializableMap(
                                             jsonDecode('{}'));
+                                  });
+                                  setState(() {
+                                    _model.searchFieldController?.clear();
                                   });
                                   ScaffoldMessenger.of(context)
                                       .clearSnackBars();
