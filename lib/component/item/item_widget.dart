@@ -219,12 +219,12 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                     style: GoogleFonts.getFont(
                                       'IBM Plex Sans Thai',
                                       color: FlutterFlowTheme.of(context)
-                                          .primaryText,
+                                          .primaryBackground,
                                     ),
                                   ),
                                   duration: Duration(milliseconds: 2000),
-                                  backgroundColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   action: SnackBarAction(
                                     label: 'ยกเลิก',
                                     textColor:
@@ -259,12 +259,12 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                     style: GoogleFonts.getFont(
                                       'IBM Plex Sans Thai',
                                       color: FlutterFlowTheme.of(context)
-                                          .primaryText,
+                                          .primaryBackground,
                                     ),
                                   ),
                                   duration: Duration(milliseconds: 2000),
                                   backgroundColor:
-                                      FlutterFlowTheme.of(context).red200,
+                                      FlutterFlowTheme.of(context).primaryText,
                                   action: SnackBarAction(
                                     label: 'ยกเลิก',
                                     textColor:
