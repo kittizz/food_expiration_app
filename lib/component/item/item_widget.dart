@@ -273,7 +273,10 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               children: [
                                 Flexible(
                                   child: Text(
-                                    'Hello Worldasdasdasdasdasdasdasdasdasdasdasdasdasdasd',
+                                    valueOrDefault<String>(
+                                      widget.name,
+                                      'ไม่ระบุ',
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .headlineMedium
                                         .override(
