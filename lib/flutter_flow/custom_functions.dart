@@ -233,6 +233,7 @@ int findItemIndex(
 List<ItemStruct> filter(
   List<ItemStruct> items,
   FilterStruct filterType,
+  List<LocationStruct> locations,
 ) {
   return null;
 }

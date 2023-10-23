@@ -257,7 +257,8 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                     e.expireDate!, e.forewarnDay) ==
                                 widget.dateType)
                             .toList(),
-                        FFAppState().filter))
+                        FFAppState().filter,
+                        FFAppState().locations.toList()))
                 .toList();
             return Column(
               mainAxisSize: MainAxisSize.max,

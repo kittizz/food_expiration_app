@@ -468,7 +468,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 setState(() {
                                   FFAppState().updateFilterStruct(
                                     (e) => e
-                                      ..location =
+                                      ..category =
                                           _model.filterCateValue!.toList(),
                                   );
                                 });
@@ -513,7 +513,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 setState(() {
                                   FFAppState().updateFilterStruct(
                                     (e) => e
-                                      ..location =
+                                      ..expStatus =
                                           _model.filterExpStatusValue!.toList(),
                                   );
                                 });
