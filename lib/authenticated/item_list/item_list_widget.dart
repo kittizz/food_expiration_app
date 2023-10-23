@@ -112,6 +112,20 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            if (widget.isLocation) {
+              FFAppState().updatePageItemInfoStruct(
+                (e) => e
+                  ..updateLocation(
+                    (e) => e
+                      ..name = FFAppState()
+                          .locations
+                          .where((e) => e.id == widget.locationId)
+                          .toList()
+                          .first
+                          .name,
+                  ),
+              );
+            }
             await action_blocks.openAddItem(
               context,
               replace: true,
