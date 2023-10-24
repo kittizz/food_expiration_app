@@ -94,7 +94,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
     context.watch<FFAppState>();
 
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
