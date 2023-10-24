@@ -39,6 +39,7 @@ class FoodexpirationGroup {
   static LocationsItemCall locationsItemCall = LocationsItemCall();
   static ClearItemsCall clearItemsCall = ClearItemsCall();
   static GetItemCall getItemCall = GetItemCall();
+  static UpdateFCMCall updateFCMCall = UpdateFCMCall();
 }
 
 class RegisterDeviceCall {
@@ -738,6 +739,37 @@ class GetItemCall {
         response,
         r'''$.message''',
       );
+}
+
+class UpdateFCMCall {
+  Future<ApiCallResponse> call({
+    String? userDocPath = '',
+    String? fcmToken = '',
+    String? deviceType = '',
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "userDocPath": "${userDocPath}",
+  "fcmToken": "${fcmToken}",
+  "deviceType": "${deviceType}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'updateFCM',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/user/update-fcm',
+      callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
 }
 
 /// End foodexpiration Group Code
