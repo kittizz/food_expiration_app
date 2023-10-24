@@ -232,10 +232,10 @@ Future fetchItems(
 }) async {
   ApiCallResponse? apiLocationItem;
 
-  apiLocationItem = await FoodexpirationGroup.locationItemCall.call(
-    deviceid: FFAppState().deviceId,
+  apiLocationItem = await FoodexpirationGroup.locationsItemCall.call(
     isArchived: archive,
-    locationId: locationId,
+    id: locationId,
+    deviceid: FFAppState().deviceId,
   );
   if ((apiLocationItem?.succeeded ?? true)) {
     FFAppState().update(() {

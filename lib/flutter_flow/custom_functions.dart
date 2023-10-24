@@ -169,6 +169,10 @@ LocationStruct toLocationStruct(dynamic jsonBody) {
   return item;
 }
 
+List<int> mapIocationIdList(List<LocationStruct> arr) {
+  return arr.map((e) => e.id).toList();
+}
+
 DateTime addDate(
   DateTime date,
   int day,

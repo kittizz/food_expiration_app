@@ -36,7 +36,7 @@ class FoodexpirationGroup {
   static CategoryCall categoryCall = CategoryCall();
   static CreateItemCall createItemCall = CreateItemCall();
   static UpdateItemCall updateItemCall = UpdateItemCall();
-  static LocationItemCall locationItemCall = LocationItemCall();
+  static LocationsItemCall locationsItemCall = LocationsItemCall();
   static ClearItemsCall clearItemsCall = ClearItemsCall();
   static GetItemCall getItemCall = GetItemCall();
 }
@@ -649,22 +649,27 @@ class UpdateItemCall {
       );
 }
 
-class LocationItemCall {
+class LocationsItemCall {
   Future<ApiCallResponse> call({
     bool? isArchived,
-    int? locationId,
+    int? id,
     String? deviceid = '',
   }) async {
+    final ffApiRequestBody = '''
+{
+  "id": ${id},
+  "isArchived": ${isArchived}
+}''';
     return ApiManager.instance.makeApiCall(
-      callName: 'locationItem',
-      apiUrl: '${FoodexpirationGroup.baseUrl}/item/location/${locationId}',
-      callType: ApiCallType.GET,
+      callName: 'locationsItem',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/item/location',
+      callType: ApiCallType.POST,
       headers: {
         'x-device-id': '${deviceid}',
       },
-      params: {
-        'isArchived': isArchived,
-      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
