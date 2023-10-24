@@ -106,51 +106,63 @@ class _BlogWidgetState extends State<BlogWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 0.0, 0.0),
-                  child: Text(
-                    'รวมบทความเกี่ยวกับ อาหาร และโภชนาการ อื่นๆ',
-                    style: FlutterFlowTheme.of(context).bodyMedium,
-                  ),
+          child: Align(
+            alignment: AlignmentDirectional(0.00, -1.00),
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: 600.0,
+              ),
+              decoration: BoxDecoration(),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 0.0, 0.0),
+                      child: Text(
+                        'รวมบทความเกี่ยวกับ อาหาร และโภชนาการ อื่นๆ',
+                        style: FlutterFlowTheme.of(context).bodyMedium,
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 5.0, 12.0, 0.0),
+                      child: Builder(
+                        builder: (context) {
+                          final list = _model.pageBlogList.toList();
+                          return SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: List.generate(list.length, (listIndex) {
+                                final listItem = list[listIndex];
+                                return wrapWithModel(
+                                  model: _model.blogCardModels.getModel(
+                                    listIndex.toString(),
+                                    listIndex,
+                                  ),
+                                  updateCallback: () => setState(() {}),
+                                  child: BlogCardWidget(
+                                    key: Key(
+                                      'Key0z1_${listIndex.toString()}',
+                                    ),
+                                    blogId: listItem.id,
+                                    image:
+                                        functions.getImage(listItem.image.path),
+                                    title: listItem.title,
+                                    blurHash: listItem.image.blurHash,
+                                  ),
+                                );
+                              }),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 5.0, 12.0, 0.0),
-                  child: Builder(
-                    builder: (context) {
-                      final list = _model.pageBlogList.toList();
-                      return SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: List.generate(list.length, (listIndex) {
-                            final listItem = list[listIndex];
-                            return wrapWithModel(
-                              model: _model.blogCardModels.getModel(
-                                listIndex.toString(),
-                                listIndex,
-                              ),
-                              updateCallback: () => setState(() {}),
-                              child: BlogCardWidget(
-                                key: Key(
-                                  'Key0z1_${listIndex.toString()}',
-                                ),
-                                blogId: listItem.id,
-                                image: functions.getImage(listItem.image.path),
-                                title: listItem.title,
-                                blurHash: listItem.image.blurHash,
-                              ),
-                            );
-                          }),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ),

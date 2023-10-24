@@ -112,33 +112,39 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(),
+                  Expanded(
+                    child: Align(
+                      alignment: AlignmentDirectional(0.00, -1.00),
                       child: Container(
-                        width: 0.0,
-                        height: 0.0,
-                        child: custom_widgets.MarkdownWidget(
+                        width: double.infinity,
+                        height: double.infinity,
+                        constraints: BoxConstraints(
+                          maxWidth: 900.0,
+                        ),
+                        decoration: BoxDecoration(),
+                        child: Container(
                           width: 0.0,
                           height: 0.0,
-                          content: FoodexpirationGroup.blogByIdCall
-                              .content(
-                                blogPostBlogByIdResponse.jsonBody,
-                              )
-                              .toString(),
-                          title: FoodexpirationGroup.blogByIdCall
-                              .title(
-                                blogPostBlogByIdResponse.jsonBody,
-                              )
-                              .toString(),
-                          image: functions
-                              .getImage(FoodexpirationGroup.blogByIdCall
-                                  .imagePath(
-                                    blogPostBlogByIdResponse.jsonBody,
-                                  )
-                                  .toString()),
+                          child: custom_widgets.MarkdownWidget(
+                            width: 0.0,
+                            height: 0.0,
+                            content: FoodexpirationGroup.blogByIdCall
+                                .content(
+                                  blogPostBlogByIdResponse.jsonBody,
+                                )
+                                .toString(),
+                            title: FoodexpirationGroup.blogByIdCall
+                                .title(
+                                  blogPostBlogByIdResponse.jsonBody,
+                                )
+                                .toString(),
+                            image: functions
+                                .getImage(FoodexpirationGroup.blogByIdCall
+                                    .imagePath(
+                                      blogPostBlogByIdResponse.jsonBody,
+                                    )
+                                    .toString()),
+                          ),
                         ),
                       ),
                     ),

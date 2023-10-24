@@ -486,74 +486,78 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       ),
                                     ),
                                   ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0.00, 1.00),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 8.0, 12.0, 0.0),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed(
-                                            'ItemList',
-                                            queryParameters: {
-                                              'isLocation': serializeParam(
-                                                false,
-                                                ParamType.bool,
-                                              ),
-                                              'title': serializeParam(
-                                                'รายการทั้งหมด',
-                                                ParamType.String,
-                                              ),
-                                              'locationId': serializeParam(
-                                                0,
-                                                ParamType.int,
-                                              ),
-                                              'isScan': serializeParam(
-                                                true,
-                                                ParamType.bool,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-                                        },
-                                        child: Container(
-                                          width: 60.0,
-                                          height: 60.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .info,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 13.0,
-                                                color: Color(0x37000000),
-                                                offset: Offset(0.0, 4.0),
-                                              )
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                          ),
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                0.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(4.0, 0.0, 4.0, 0.0),
-                                              child: FaIcon(
-                                                FontAwesomeIcons.barcode,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                size: 24.0,
+                                  if (isAndroid || isiOS)
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(0.00, 1.00),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 8.0, 12.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed(
+                                              'ItemList',
+                                              queryParameters: {
+                                                'isLocation': serializeParam(
+                                                  false,
+                                                  ParamType.bool,
+                                                ),
+                                                'title': serializeParam(
+                                                  'รายการทั้งหมด',
+                                                  ParamType.String,
+                                                ),
+                                                'locationId': serializeParam(
+                                                  0,
+                                                  ParamType.int,
+                                                ),
+                                                'isScan': serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          },
+                                          child: Container(
+                                            width: 60.0,
+                                            height: 60.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 13.0,
+                                                  color: Color(0x37000000),
+                                                  offset: Offset(0.0, 4.0),
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                            ),
+                                            child: Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.00, 0.00),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        4.0, 0.0, 4.0, 0.0),
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.barcode,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  size: 24.0,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),
