@@ -109,7 +109,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             if (widget.isLocation) {
@@ -760,223 +760,260 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                       ),
                     ),
                   ),
-                  if (widget.isLocation)
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          10.0, 10.0, 10.0, 10.0),
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: 135.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).grey50,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2.0,
-                              color: Color(0x1C000000),
-                              offset: Offset(0.0, 1.0),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
+                  Align(
+                    alignment: AlignmentDirectional(0.00, 0.00),
+                    child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: 600.0,
+                      ),
+                      decoration: BoxDecoration(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          if (widget.isLocation)
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 10.0, 10.0, 10.0),
                               child: Container(
-                                width: 135.0,
-                                height: double.infinity,
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: 135.0,
                                 decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                  color: FlutterFlowTheme.of(context).grey50,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 2.0,
+                                      color: Color(0x1C000000),
+                                      offset: Offset(0.0, 1.0),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                child: Stack(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          PageTransition(
-                                            type: PageTransitionType.fade,
-                                            child: FlutterFlowExpandedImageView(
-                                              image: OctoImage(
-                                                placeholderBuilder:
-                                                    OctoPlaceholder.blurHash(
-                                                  FFAppState()
-                                                      .pageLocationInfo
-                                                      .imageBlurhash,
+                                    ClipRRect(
+                                      child: Container(
+                                        width: 135.0,
+                                        height: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                        ),
+                                        child: Stack(
+                                          children: [
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await Navigator.push(
+                                                  context,
+                                                  PageTransition(
+                                                    type:
+                                                        PageTransitionType.fade,
+                                                    child:
+                                                        FlutterFlowExpandedImageView(
+                                                      image: OctoImage(
+                                                        placeholderBuilder:
+                                                            OctoPlaceholder
+                                                                .blurHash(
+                                                          FFAppState()
+                                                              .pageLocationInfo
+                                                              .imageBlurhash,
+                                                        ),
+                                                        image:
+                                                            CachedNetworkImageProvider(
+                                                          functions.getImage(
+                                                              '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
+                                                        ),
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                      allowRotation: false,
+                                                      tag: functions.getImage(
+                                                          '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
+                                                      useHeroAnimation: true,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: Hero(
+                                                tag: functions.getImage(
+                                                    '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
+                                                transitionOnUserGestures: true,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(8.0),
+                                                    bottomRight:
+                                                        Radius.circular(0.0),
+                                                    topLeft:
+                                                        Radius.circular(8.0),
+                                                    topRight:
+                                                        Radius.circular(0.0),
+                                                  ),
+                                                  child: OctoImage(
+                                                    placeholderBuilder:
+                                                        OctoPlaceholder
+                                                            .blurHash(
+                                                      FFAppState()
+                                                          .pageLocationInfo
+                                                          .imageBlurhash,
+                                                    ),
+                                                    image:
+                                                        CachedNetworkImageProvider(
+                                                      functions.getImage(
+                                                          '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
+                                                    ),
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
-                                                image:
-                                                    CachedNetworkImageProvider(
-                                                  functions.getImage(
-                                                      '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
-                                                ),
-                                                fit: BoxFit.contain,
                                               ),
-                                              allowRotation: false,
-                                              tag: functions.getImage(
-                                                  '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
-                                              useHeroAnimation: true,
                                             ),
-                                          ),
-                                        );
-                                      },
-                                      child: Hero(
-                                        tag: functions.getImage(
-                                            '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
-                                        transitionOnUserGestures: true,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(8.0),
-                                            bottomRight: Radius.circular(0.0),
-                                            topLeft: Radius.circular(8.0),
-                                            topRight: Radius.circular(0.0),
-                                          ),
-                                          child: OctoImage(
-                                            placeholderBuilder:
-                                                OctoPlaceholder.blurHash(
-                                              FFAppState()
-                                                  .pageLocationInfo
-                                                  .imageBlurhash,
+                                            Align(
+                                              alignment: AlignmentDirectional(
+                                                  1.00, 1.00),
+                                              child: Icon(
+                                                Icons.zoom_in_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 24.0,
+                                              ),
                                             ),
-                                            image: CachedNetworkImageProvider(
-                                              functions.getImage(
-                                                  '${FFAppState().pageLocationInfo.image}?i=${widget.locationId?.toString()}'),
-                                            ),
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(1.00, 1.00),
-                                      child: Icon(
-                                        Icons.zoom_in_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
+                                    Flexible(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5.0, 5.0, 5.0, 5.0),
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .grey50,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            border: Border.all(
+                                              color: Color(0x34474747),
+                                            ),
+                                          ),
+                                          alignment: AlignmentDirectional(
+                                              -1.00, -1.00),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 5.0, 5.0, 5.0),
+                                                  child: SelectionArea(
+                                                      child: Text(
+                                                    FFAppState()
+                                                        .pageLocationInfo
+                                                        .description,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 16.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                  )),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                            Flexible(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    5.0, 5.0, 5.0, 5.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).grey50,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(
-                                      color: Color(0x34474747),
-                                    ),
-                                  ),
-                                  alignment: AlignmentDirectional(-1.00, -1.00),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 5.0, 5.0, 5.0),
-                                          child: SelectionArea(
-                                              child: Text(
-                                            FFAppState()
-                                                .pageLocationInfo
-                                                .description,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 16.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          )),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: wrapWithModel(
+                              model: _model.listItemsModel1,
+                              updateCallback: () => setState(() {}),
+                              child: ListItemsWidget(
+                                title: 'หมดอายุไปแล้ว',
+                                showClear: true,
+                                locationId:
+                                    widget.isLocation ? widget.locationId! : 0,
+                                dateType: 'expired',
+                                isArchived: false,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: wrapWithModel(
+                              model: _model.listItemsModel2,
+                              updateCallback: () => setState(() {}),
+                              child: ListItemsWidget(
+                                title: 'ใกล้จะหมดอายุ',
+                                showClear: false,
+                                locationId:
+                                    widget.isLocation ? widget.locationId! : 0,
+                                dateType: 'about_to_expire',
+                                isArchived: false,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 80.0),
+                              child: wrapWithModel(
+                                model: _model.listItemsModel3,
+                                updateCallback: () => setState(() {}),
+                                child: ListItemsWidget(
+                                  title: 'รายการที่เหลือ',
+                                  showClear: false,
+                                  locationId: widget.isLocation
+                                      ? widget.locationId!
+                                      : 0,
+                                  dateType: 'ok',
+                                  isArchived: false,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: wrapWithModel(
-                      model: _model.listItemsModel1,
-                      updateCallback: () => setState(() {}),
-                      child: ListItemsWidget(
-                        title: 'หมดอายุไปแล้ว',
-                        showClear: true,
-                        locationId: widget.isLocation ? widget.locationId! : 0,
-                        dateType: 'expired',
-                        isArchived: false,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: wrapWithModel(
-                      model: _model.listItemsModel2,
-                      updateCallback: () => setState(() {}),
-                      child: ListItemsWidget(
-                        title: 'ใกล้จะหมดอายุ',
-                        showClear: false,
-                        locationId: widget.isLocation ? widget.locationId! : 0,
-                        dateType: 'about_to_expire',
-                        isArchived: false,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 80.0),
-                      child: wrapWithModel(
-                        model: _model.listItemsModel3,
-                        updateCallback: () => setState(() {}),
-                        child: ListItemsWidget(
-                          title: 'รายการที่เหลือ',
-                          showClear: false,
-                          locationId:
-                              widget.isLocation ? widget.locationId! : 0,
-                          dateType: 'ok',
-                          isArchived: false,
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
