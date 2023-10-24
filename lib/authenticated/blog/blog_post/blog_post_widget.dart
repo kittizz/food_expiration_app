@@ -34,6 +34,8 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BlogPostModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

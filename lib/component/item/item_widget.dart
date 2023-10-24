@@ -98,6 +98,8 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

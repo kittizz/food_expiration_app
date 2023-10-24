@@ -50,6 +50,8 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ThumbnailViewerModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

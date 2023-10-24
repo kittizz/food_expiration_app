@@ -109,6 +109,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

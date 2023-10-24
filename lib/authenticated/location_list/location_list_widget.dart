@@ -63,6 +63,8 @@ class _LocationListWidgetState extends State<LocationListWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

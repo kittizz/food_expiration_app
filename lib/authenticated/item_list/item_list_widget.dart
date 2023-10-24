@@ -81,6 +81,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
     _model.search1FieldFocusNode ??= FocusNode();
     _model.search2FieldController ??= TextEditingController();
     _model.search2FieldFocusNode ??= FocusNode();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -45,6 +45,8 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
       );
       setState(() {});
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -44,6 +44,8 @@ class _BlogWidgetState extends State<BlogWidget> {
         _model.pageBlogList = _model.blogList!.toList().cast<BlogStruct>();
       });
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -43,6 +43,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
     _model.emailTextController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -232,7 +233,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Email required!',
+                                  'ต้องใช้ อีเมล!',
                                 ),
                               ),
                             );

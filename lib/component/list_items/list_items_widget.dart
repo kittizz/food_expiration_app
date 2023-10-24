@@ -80,6 +80,8 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

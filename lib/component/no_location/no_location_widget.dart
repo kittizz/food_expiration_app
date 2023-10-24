@@ -28,6 +28,8 @@ class _NoLocationWidgetState extends State<NoLocationWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => NoLocationModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

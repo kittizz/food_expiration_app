@@ -61,7 +61,8 @@
     <string>In order to scan for barcodes and QR codes, this app requires permission to access the camera.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>In order to upload data, this app requires permission to access the photo library.</string>
-
+	<key>PermissionGroupNotification</key>
+    <string>ใช้สำหรับการแจ้งเตือน ภายใน app นี้</string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>

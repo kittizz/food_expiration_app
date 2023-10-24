@@ -40,6 +40,8 @@ class _BlogCardWidgetState extends State<BlogCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BlogCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

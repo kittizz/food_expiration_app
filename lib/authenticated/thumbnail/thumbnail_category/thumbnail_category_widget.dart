@@ -55,6 +55,8 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
         });
       }
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -64,6 +64,7 @@ class _SettingWidgetState extends State<SettingWidget>
     _model.textController ??=
         TextEditingController(text: FFAppState().user.nickname);
     _model.textFieldFocusNode ??= FocusNode();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

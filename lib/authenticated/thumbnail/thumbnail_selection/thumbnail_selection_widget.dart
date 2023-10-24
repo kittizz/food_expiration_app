@@ -53,6 +53,8 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
         });
       }
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

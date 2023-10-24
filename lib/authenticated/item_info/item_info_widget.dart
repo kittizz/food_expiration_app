@@ -70,6 +70,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
     _model.quantityFieldController ??= TextEditingController(
         text: FFAppState().pageItemInfo.quantity.toString());
     _model.quantityFieldFocusNode ??= FocusNode();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

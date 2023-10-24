@@ -50,6 +50,7 @@ class _SignupWidgetState extends State<SignupWidget> {
     _model.textFieldFocusNode3 ??= FocusNode();
     _model.confirmPasswordTextController ??= TextEditingController();
     _model.textFieldFocusNode4 ??= FocusNode();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -503,7 +504,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Passwords don\'t match!',
+                                  'รหัสผ่านไม่ตรงกัน',
                                 ),
                               ),
                             );
