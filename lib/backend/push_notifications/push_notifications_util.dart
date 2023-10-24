@@ -1,6 +1,8 @@
 import 'dart:io' show Platform;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food_expiration/backend/api_requests/api_calls.dart';
+import 'package:food_expiration/flutter_flow/flutter_flow_util.dart';
 
 import 'serialization_util.dart';
 import '../../auth/firebase_auth/auth_util.dart';
@@ -39,12 +41,14 @@ final fcmTokenUserStream = authenticatedUserStream
     .distinct()
     .switchMap(getFcmTokenStream)
     .map(
-      (userTokenInfo) => makeCloudCall(
-        'addFcmToken',
-        {
-          'userDocPath': userTokenInfo.userPath,
-          'fcmToken': userTokenInfo.fcmToken,
-          'deviceType': Platform.isIOS ? 'iOS' : 'Android',
-        },
+      (userTokenInfo) async => await FoodexpirationGroup.updateFCMCall(
+        deviceid: FFAppState().deviceId,
+        userDocPath: userTokenInfo.userPath,
+        fcmToken: userTokenInfo.fcmToken,
+        deviceType: Platform.isIOS
+            ? 'iOS'
+            : Platform.isAndroid
+                ? 'Android'
+                : 'Web',
       ),
     );
