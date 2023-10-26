@@ -31,6 +31,10 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
 
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue;
+  // Stores action output result for [Backend Call - API (updateNotifications)] action in SwitchListTile widget.
+  ApiCallResponse? apiResultrwc;
+  // Stores action output result for [Backend Call - API (updateNotifications)] action in SwitchListTile widget.
+  ApiCallResponse? apiResultrwcCopy;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));

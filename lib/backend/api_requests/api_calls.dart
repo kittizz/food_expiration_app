@@ -40,6 +40,8 @@ class FoodexpirationGroup {
   static ClearItemsCall clearItemsCall = ClearItemsCall();
   static GetItemCall getItemCall = GetItemCall();
   static UpdateFCMCall updateFCMCall = UpdateFCMCall();
+  static UpdateNotificationsCall updateNotificationsCall =
+      UpdateNotificationsCall();
 }
 
 class RegisterDeviceCall {
@@ -118,6 +120,14 @@ class GetUserCall {
   dynamic profilePicture(dynamic response) => getJsonField(
         response,
         r'''$.profilePicture''',
+      );
+  dynamic profilePictureBlurHash(dynamic response) => getJsonField(
+        response,
+        r'''$.profilePictureBlurHash''',
+      );
+  dynamic notification(dynamic response) => getJsonField(
+        response,
+        r'''$.notification''',
       );
 }
 
@@ -757,6 +767,33 @@ class UpdateFCMCall {
     return ApiManager.instance.makeApiCall(
       callName: 'updateFCM',
       apiUrl: '${FoodexpirationGroup.baseUrl}/user/update-fcm',
+      callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class UpdateNotificationsCall {
+  Future<ApiCallResponse> call({
+    bool? notifications,
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+"notifications":${notifications}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'updateNotifications',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/user/update-notifications',
       callType: ApiCallType.POST,
       headers: {
         'x-device-id': '${deviceid}',

@@ -16,6 +16,7 @@ class UserStruct extends FFFirebaseStruct {
     String? nickname,
     String? profilePicture,
     String? profilePictureBlurHash,
+    bool? notification,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _email = email,
         _signInProvider = signInProvider,
@@ -23,6 +24,7 @@ class UserStruct extends FFFirebaseStruct {
         _nickname = nickname,
         _profilePicture = profilePicture,
         _profilePictureBlurHash = profilePictureBlurHash,
+        _notification = notification,
         super(firestoreUtilData);
 
   // "email" field.
@@ -61,6 +63,12 @@ class UserStruct extends FFFirebaseStruct {
   set profilePictureBlurHash(String? val) => _profilePictureBlurHash = val;
   bool hasProfilePictureBlurHash() => _profilePictureBlurHash != null;
 
+  // "notification" field.
+  bool? _notification;
+  bool get notification => _notification ?? false;
+  set notification(bool? val) => _notification = val;
+  bool hasNotification() => _notification != null;
+
   static UserStruct fromMap(Map<String, dynamic> data) => UserStruct(
         email: data['email'] as String?,
         signInProvider: data['signInProvider'] as String?,
@@ -68,6 +76,7 @@ class UserStruct extends FFFirebaseStruct {
         nickname: data['nickname'] as String?,
         profilePicture: data['profilePicture'] as String?,
         profilePictureBlurHash: data['profilePictureBlurHash'] as String?,
+        notification: data['notification'] as bool?,
       );
 
   static UserStruct? maybeFromMap(dynamic data) =>
@@ -80,6 +89,7 @@ class UserStruct extends FFFirebaseStruct {
         'nickname': _nickname,
         'profilePicture': _profilePicture,
         'profilePictureBlurHash': _profilePictureBlurHash,
+        'notification': _notification,
       }.withoutNulls;
 
   @override
@@ -107,6 +117,10 @@ class UserStruct extends FFFirebaseStruct {
         'profilePictureBlurHash': serializeParam(
           _profilePictureBlurHash,
           ParamType.String,
+        ),
+        'notification': serializeParam(
+          _notification,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -142,6 +156,11 @@ class UserStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        notification: deserializeParam(
+          data['notification'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -155,7 +174,8 @@ class UserStruct extends FFFirebaseStruct {
         role == other.role &&
         nickname == other.nickname &&
         profilePicture == other.profilePicture &&
-        profilePictureBlurHash == other.profilePictureBlurHash;
+        profilePictureBlurHash == other.profilePictureBlurHash &&
+        notification == other.notification;
   }
 
   @override
@@ -165,7 +185,8 @@ class UserStruct extends FFFirebaseStruct {
         role,
         nickname,
         profilePicture,
-        profilePictureBlurHash
+        profilePictureBlurHash,
+        notification
       ]);
 }
 
@@ -176,6 +197,7 @@ UserStruct createUserStruct({
   String? nickname,
   String? profilePicture,
   String? profilePictureBlurHash,
+  bool? notification,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -188,6 +210,7 @@ UserStruct createUserStruct({
       nickname: nickname,
       profilePicture: profilePicture,
       profilePictureBlurHash: profilePictureBlurHash,
+      notification: notification,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

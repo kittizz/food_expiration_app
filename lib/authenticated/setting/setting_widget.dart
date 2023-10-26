@@ -185,10 +185,36 @@ class _SettingWidgetState extends State<SettingWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   SwitchListTile.adaptive(
-                                    value: _model.switchListTileValue ??= true,
+                                    value: _model.switchListTileValue ??=
+                                        FFAppState().user.notification,
                                     onChanged: (newValue) async {
                                       setState(() => _model
                                           .switchListTileValue = newValue!);
+                                      if (newValue!) {
+                                        _model.apiResultrwc =
+                                            await FoodexpirationGroup
+                                                .updateNotificationsCall
+                                                .call(
+                                          deviceid: FFAppState().deviceId,
+                                          notifications: true,
+                                        );
+                                        await action_blocks.fetchUser(context);
+                                        setState(() {});
+
+                                        setState(() {});
+                                      } else {
+                                        _model.apiResultrwcCopy =
+                                            await FoodexpirationGroup
+                                                .updateNotificationsCall
+                                                .call(
+                                          deviceid: FFAppState().deviceId,
+                                          notifications: false,
+                                        );
+                                        await action_blocks.fetchUser(context);
+                                        setState(() {});
+
+                                        setState(() {});
+                                      }
                                     },
                                     title: Text(
                                       'Push Notifications',
