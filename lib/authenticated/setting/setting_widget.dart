@@ -292,13 +292,16 @@ class _SettingWidgetState extends State<SettingWidget>
                                               );
                                             });
                                           }
-                                          await action_blocks.saveSettings(
-                                            context,
-                                            notification:
-                                                FFAppState().user.notification,
-                                            notificationAt: _model.datePicked,
-                                          );
-                                          setState(() {});
+                                          if (_model.datePicked != null) {
+                                            await action_blocks.saveSettings(
+                                              context,
+                                              notification: FFAppState()
+                                                  .user
+                                                  .notification,
+                                              notificationAt: _model.datePicked,
+                                            );
+                                            setState(() {});
+                                          }
                                         },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
