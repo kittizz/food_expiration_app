@@ -299,7 +299,7 @@ Future saveSettings(
 
   apiResultrwc = await FoodexpirationGroup.updateSettingsCall.call(
     deviceid: FFAppState().deviceId,
-    notification: false,
+    notification: notification,
     notificationAt: functions.toRFC3339(notificationAt!, false),
   );
   await action_blocks.fetchUser(context);
