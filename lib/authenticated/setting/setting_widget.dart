@@ -10,6 +10,7 @@ import '/flutter_flow/upload_data.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -191,33 +192,25 @@ class _SettingWidgetState extends State<SettingWidget>
                                       setState(() => _model
                                           .switchListTileValue = newValue!);
                                       if (newValue!) {
-                                        _model.apiResultrwc =
-                                            await FoodexpirationGroup
-                                                .updateNotificationsCall
-                                                .call(
-                                          deviceid: FFAppState().deviceId,
-                                          notifications: true,
+                                        await action_blocks.saveSettings(
+                                          context,
+                                          notification: true,
+                                          notificationAt:
+                                              FFAppState().user.notificationAt,
                                         );
-                                        await action_blocks.fetchUser(context);
-                                        setState(() {});
-
                                         setState(() {});
                                       } else {
-                                        _model.apiResultrwcCopy =
-                                            await FoodexpirationGroup
-                                                .updateNotificationsCall
-                                                .call(
-                                          deviceid: FFAppState().deviceId,
-                                          notifications: false,
+                                        await action_blocks.saveSettings(
+                                          context,
+                                          notification: false,
+                                          notificationAt:
+                                              FFAppState().user.notificationAt,
                                         );
-                                        await action_blocks.fetchUser(context);
-                                        setState(() {});
-
                                         setState(() {});
                                       }
                                     },
                                     title: Text(
-                                      'Push Notifications',
+                                      'การแจ้งเตือน',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
@@ -258,6 +251,125 @@ class _SettingWidgetState extends State<SettingWidget>
                                     contentPadding:
                                         EdgeInsetsDirectional.fromSTEB(
                                             24.0, 12.0, 24.0, 12.0),
+                                  ),
+                                  Container(
+                                    height: 100.0,
+                                    decoration: BoxDecoration(),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          21.0, 21.0, 21.0, 21.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          final _datePickedTime =
+                                              await showTimePicker(
+                                            context: context,
+                                            initialTime: TimeOfDay.fromDateTime(
+                                                FFAppState()
+                                                    .user
+                                                    .notificationAt!),
+                                          );
+                                          if (_datePickedTime != null) {
+                                            safeSetState(() {
+                                              _model.datePicked = DateTime(
+                                                FFAppState()
+                                                    .user
+                                                    .notificationAt!
+                                                    .year,
+                                                FFAppState()
+                                                    .user
+                                                    .notificationAt!
+                                                    .month,
+                                                FFAppState()
+                                                    .user
+                                                    .notificationAt!
+                                                    .day,
+                                                _datePickedTime.hour,
+                                                _datePickedTime.minute,
+                                              );
+                                            });
+                                          }
+                                          await action_blocks.saveSettings(
+                                            context,
+                                            notification:
+                                                FFAppState().user.notification,
+                                            notificationAt: FFAppState()
+                                                .user
+                                                .notificationAt,
+                                          );
+                                          setState(() {});
+                                        },
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Flexible(
+                                                  child: Text(
+                                                    'รับการแจ้งเตือนตอนเวลา',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyLarge,
+                                                  ),
+                                                ),
+                                                Flexible(
+                                                  child: Text(
+                                                    'กำหนดเวลาที่จะรับการแจ้งเตือนในทุกๆ วัน',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Flexible(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 14.0, 0.0),
+                                                child: Text(
+                                                  dateTimeFormat(
+                                                    'Hm',
+                                                    FFAppState()
+                                                        .user
+                                                        .notificationAt!,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyLarge,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),

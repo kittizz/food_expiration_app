@@ -40,8 +40,7 @@ class FoodexpirationGroup {
   static ClearItemsCall clearItemsCall = ClearItemsCall();
   static GetItemCall getItemCall = GetItemCall();
   static UpdateFCMCall updateFCMCall = UpdateFCMCall();
-  static UpdateNotificationsCall updateNotificationsCall =
-      UpdateNotificationsCall();
+  static UpdateSettingsCall updateSettingsCall = UpdateSettingsCall();
 }
 
 class RegisterDeviceCall {
@@ -782,18 +781,20 @@ class UpdateFCMCall {
   }
 }
 
-class UpdateNotificationsCall {
+class UpdateSettingsCall {
   Future<ApiCallResponse> call({
-    bool? notifications,
+    bool? notification,
+    String? notificationAt = '',
     String? deviceid = '',
   }) async {
     final ffApiRequestBody = '''
 {
-"notifications":${notifications}
+  "notification": ${notification},
+  "notificationAt": "${notificationAt}"
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'updateNotifications',
-      apiUrl: '${FoodexpirationGroup.baseUrl}/user/update-notifications',
+      callName: 'updateSettings',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/user/update-settings',
       callType: ApiCallType.POST,
       headers: {
         'x-device-id': '${deviceid}',
