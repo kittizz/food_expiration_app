@@ -257,7 +257,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                     decoration: BoxDecoration(),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          21.0, 21.0, 21.0, 21.0),
+                                          23.0, 23.0, 23.0, 23.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
                                         focusColor: Colors.transparent,
@@ -332,9 +332,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .bodyMediumFamily,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
+                                                          color:
+                                                              Color(0xFF8B97A2),
                                                           useGoogleFonts: GoogleFonts
                                                                   .asMap()
                                                               .containsKey(
