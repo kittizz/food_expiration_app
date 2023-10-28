@@ -208,8 +208,12 @@ ItemStruct toItem(dynamic jsonBody) {
   return val;
 }
 
-String toRFC3339(DateTime date) {
-  return DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSSSSS+07:00")
+String toRFC3339(
+  DateTime date,
+  bool includeTimezone,
+) {
+  String tz = includeTimezone ? '07' : '00';
+  return DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSSSSS+$tz:00")
       .format(DateTime.parse(date.toString()));
 }
 
