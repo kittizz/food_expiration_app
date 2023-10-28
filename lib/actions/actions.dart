@@ -301,6 +301,6 @@ Future saveSettings(
   apiResultrwc = await FoodexpirationGroup.updateSettingsCall.call(
     deviceid: FFAppState().deviceId,
     notification: false,
-    notificationAt: functions.toRFC3339(notificationAt!),
+    notificationAt: notificationAt?.toString(),
   );
 }

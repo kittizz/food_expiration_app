@@ -296,9 +296,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                             context,
                                             notification:
                                                 FFAppState().user.notification,
-                                            notificationAt: FFAppState()
-                                                .user
-                                                .notificationAt,
+                                            notificationAt: _model.datePicked,
                                           );
                                           setState(() {});
                                         },
