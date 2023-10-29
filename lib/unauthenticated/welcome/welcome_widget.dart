@@ -87,7 +87,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
-                                'assets/images/logo100x100.png',
+                                'assets/images/logo400.png',
                                 height: 64.0,
                                 fit: BoxFit.cover,
                               ),
