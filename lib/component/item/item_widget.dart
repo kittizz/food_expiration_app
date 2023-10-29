@@ -514,7 +514,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               ),
                               width: 85.0,
                               height: 85.0,
-                              fit: BoxFit.contain,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),

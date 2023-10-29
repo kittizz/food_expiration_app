@@ -250,13 +250,13 @@ class _LocationWidgetState extends State<LocationWidget>
                         ),
                         width: double.infinity,
                         height: double.infinity,
-                        fit: BoxFit.contain,
+                        fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
                             Image.asset(
                           'assets/images/error_image.png',
                           width: double.infinity,
                           height: double.infinity,
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
