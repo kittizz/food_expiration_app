@@ -386,13 +386,10 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/logo400x400.png',
-                      width: 120.0,
-                      fit: BoxFit.fitWidth,
-                    ),
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/logo400.png',
+                    fit: BoxFit.contain,
                   ),
                 )
               : PushNotificationsHandler(child: page);
