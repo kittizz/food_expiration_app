@@ -278,7 +278,9 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                   context: context,
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
-                                      title: Text('ล้างรายการ'),
+                                      title: Text(widget.isArchived!
+                                          ? 'กู้คืนรายการ'
+                                          : 'ล้างรายการ'),
                                       content: Text(widget.isArchived!
                                           ? 'คุณกำลังจะกู้คืนรายการทั้งหมด'
                                           : 'คุณกำลังจะล้างรายการ ${widget.title}ทั้งหมด'),
