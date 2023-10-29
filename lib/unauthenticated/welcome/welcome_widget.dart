@@ -80,39 +80,60 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.asset(
-                                'assets/images/logo400.png',
-                                height: 64.0,
-                                fit: BoxFit.cover,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 30.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.asset(
+                                  'assets/images/logo200.png',
+                                  height: 64.0,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  13.0, 0.0, 0.0, 0.0),
-                              child: Text(
-                                'Food Expiration Tracking ',
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    13.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'เตือนหน่อย',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Itim',
+                                        color:
+                                            FlutterFlowTheme.of(context).red300,
+                                        fontSize: 35.0,
+                                        fontWeight: FontWeight.w600,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLargeFamily),
+                                      ),
+                                ),
+                              ),
+                              Text(
+                                '!',
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyLarge
+                                    .bodyMedium
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
+                                      fontFamily: 'Itim',
                                       color:
-                                          FlutterFlowTheme.of(context).red400,
+                                          FlutterFlowTheme.of(context).red300,
+                                      fontSize: 60.0,
                                       fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.italic,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         Container(
                           height: 250.0,
