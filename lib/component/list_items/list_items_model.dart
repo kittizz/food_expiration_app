@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 class ListItemsModel extends FlutterFlowModel<ListItemsWidget> {
   ///  State fields for stateful widgets in this component.
 
+  // Stores action output result for [Backend Call - API (deleteItems)] action in Text widget.
+  ApiCallResponse? apiDeleteItem;
   // Stores action output result for [Backend Call - API (clearItems)] action in Text widget.
   ApiCallResponse? apiClearItem;
   // Models for Item dynamic component.

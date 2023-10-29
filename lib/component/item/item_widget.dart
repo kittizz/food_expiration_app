@@ -430,7 +430,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                                           .bodyMediumFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .green800,
+                                                      .success,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()
                                                       .containsKey(

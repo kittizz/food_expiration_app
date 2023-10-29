@@ -38,6 +38,7 @@ class FoodexpirationGroup {
   static UpdateItemCall updateItemCall = UpdateItemCall();
   static LocationsItemCall locationsItemCall = LocationsItemCall();
   static ClearItemsCall clearItemsCall = ClearItemsCall();
+  static DeleteItemsCall deleteItemsCall = DeleteItemsCall();
   static GetItemCall getItemCall = GetItemCall();
   static UpdateFCMCall updateFCMCall = UpdateFCMCall();
   static UpdateSettingsCall updateSettingsCall = UpdateSettingsCall();
@@ -705,6 +706,40 @@ class ClearItemsCall {
       callName: 'clearItems',
       apiUrl: '${FoodexpirationGroup.baseUrl}/item/clear',
       callType: ApiCallType.PUT,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
+}
+
+class DeleteItemsCall {
+  Future<ApiCallResponse> call({
+    List<int>? idList,
+    String? deviceid = '',
+  }) async {
+    final id = _serializeList(idList);
+
+    final ffApiRequestBody = '''
+{
+  "id": ${id}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'deleteItems',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/item/delete',
+      callType: ApiCallType.PATCH,
       headers: {
         'x-device-id': '${deviceid}',
       },
