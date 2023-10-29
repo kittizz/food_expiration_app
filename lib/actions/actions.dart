@@ -5,6 +5,7 @@ import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
@@ -287,4 +288,19 @@ Future fetchItemInfo(
       );
     });
   }
+}
+
+Future saveSettings(
+  BuildContext context, {
+  required bool? notification,
+  required DateTime? notificationAt,
+}) async {
+  ApiCallResponse? apiResultrwc;
+
+  apiResultrwc = await FoodexpirationGroup.updateSettingsCall.call(
+    deviceid: FFAppState().deviceId,
+    notification: notification,
+    notificationAt: functions.toRFC3339(notificationAt!, false),
+  );
+  await action_blocks.fetchUser(context);
 }

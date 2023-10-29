@@ -14,5 +14,7 @@ import 'package:flutter/material.dart';
 // and then add the boilerplate code using the button on the right!
 
 Future<UserStruct> toUserStruct(dynamic item) async {
-  return UserStruct.fromMap(item);
+  item['notificationAt'] = DateTime.parse(item['notificationAt']);
+  UserStruct user = UserStruct.fromMap(item);
+  return user;
 }

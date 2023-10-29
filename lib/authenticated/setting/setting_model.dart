@@ -11,6 +11,7 @@ import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'setting_widget.dart' show SettingWidget;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -31,6 +32,7 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
 
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue;
+  DateTime? datePicked;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));

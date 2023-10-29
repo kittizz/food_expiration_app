@@ -414,7 +414,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                           child: Icon(
                                             Icons.location_on,
                                             color: FlutterFlowTheme.of(context)
-                                                .green800,
+                                                .success,
                                             size: 16.0,
                                           ),
                                         ),
@@ -430,7 +430,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                                           .bodyMediumFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .green800,
+                                                      .success,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()
                                                       .containsKey(
@@ -454,51 +454,54 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
-                    child: Container(
-                      width: 85.0,
-                      height: 85.0,
-                      decoration: BoxDecoration(),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.fade,
-                              child: FlutterFlowExpandedImageView(
-                                image: OctoImage(
-                                  placeholderBuilder: OctoPlaceholder.blurHash(
-                                    widget.imageBlurhash!,
-                                  ),
-                                  image: CachedNetworkImageProvider(
-                                    valueOrDefault<String>(
-                                      widget.image,
-                                      'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        width: 85.0,
+                        height: 85.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                child: FlutterFlowExpandedImageView(
+                                  image: OctoImage(
+                                    placeholderBuilder:
+                                        OctoPlaceholder.blurHash(
+                                      widget.imageBlurhash!,
                                     ),
+                                    image: CachedNetworkImageProvider(
+                                      valueOrDefault<String>(
+                                        widget.image,
+                                        'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                                      ),
+                                    ),
+                                    fit: BoxFit.contain,
                                   ),
-                                  fit: BoxFit.contain,
+                                  allowRotation: false,
+                                  tag: valueOrDefault<String>(
+                                    widget.image,
+                                    'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
+                                  ),
+                                  useHeroAnimation: true,
                                 ),
-                                allowRotation: false,
-                                tag: valueOrDefault<String>(
-                                  widget.image,
-                                  'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                                ),
-                                useHeroAnimation: true,
                               ),
+                            );
+                          },
+                          child: Hero(
+                            tag: valueOrDefault<String>(
+                              widget.image,
+                              'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
                             ),
-                          );
-                        },
-                        child: Hero(
-                          tag: valueOrDefault<String>(
-                            widget.image,
-                            'https://th-bkk-1.xvercloud.com/food-expiration/images/lay.webp',
-                          ),
-                          transitionOnUserGestures: true,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
+                            transitionOnUserGestures: true,
                             child: OctoImage(
                               placeholderBuilder: OctoPlaceholder.blurHash(
                                 widget.imageBlurhash!,
@@ -511,7 +514,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                               ),
                               width: 85.0,
                               height: 85.0,
-                              fit: BoxFit.contain,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
