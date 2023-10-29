@@ -414,7 +414,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                           child: Icon(
                                             Icons.location_on,
                                             color: FlutterFlowTheme.of(context)
-                                                .green800,
+                                                .success,
                                             size: 16.0,
                                           ),
                                         ),
