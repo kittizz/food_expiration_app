@@ -279,8 +279,9 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
                                       title: Text('ล้างรายการ'),
-                                      content: Text(
-                                          'คุณกำลังจะล้างรายการ ${widget.title}ทั้งหมด'),
+                                      content: Text(widget.isArchived!
+                                          ? 'คุณกำลังจะกู้คืนรายการทั้งหมด'
+                                          : 'คุณกำลังจะล้างรายการ ${widget.title}ทั้งหมด'),
                                       actions: [
                                         TextButton(
                                           onPressed: () => Navigator.pop(
@@ -385,7 +386,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                         ).animateOnActionTrigger(
                           animationsMap['textOnActionTriggerAnimation2']!,
                         ),
-                    ].divide(SizedBox(width: 15.0)),
+                    ].divide(SizedBox(width: 40.0)),
                   ),
                 ),
               ],
