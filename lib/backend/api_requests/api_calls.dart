@@ -11,7 +11,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start foodexpiration Group Code
 
 class FoodexpirationGroup {
-  static String baseUrl = 'https://food_expiration.kittiza.com';
+  static String baseUrl = 'http://10.10.10.118:8080';
   static Map<String, String> headers = {
     'x-device-id': '[deviceid]',
   };
