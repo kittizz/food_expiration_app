@@ -394,9 +394,9 @@ class FFRoute {
                   color: FlutterFlowTheme.of(context).primaryBackground,
                   child: Center(
                     child: Image.asset(
-                      'assets/images/logo200.png',
-                      height: 50.0,
-                      fit: BoxFit.scaleDown,
+                      'assets/images/logo50.png',
+                      height: 0.0,
+                      fit: BoxFit.none,
                     ),
                   ),
                 )
