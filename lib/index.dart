@@ -23,3 +23,4 @@ export '/authenticated/thumbnail/thumbnail_viewer/thumbnail_viewer_widget.dart'
     show ThumbnailViewerWidget;
 export '/authenticated/item_info/item_info_widget.dart' show ItemInfoWidget;
 export '/unauthenticated/splash/splash_widget.dart' show SplashWidget;
+export '/authenticated/admin/admin_widget.dart' show AdminWidget;

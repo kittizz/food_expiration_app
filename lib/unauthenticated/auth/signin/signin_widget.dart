@@ -85,19 +85,22 @@ class _SigninWidgetState extends State<SigninWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
+          leading: Visibility(
+            visible: !isWeb,
+            child: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 60.0,
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                color: FlutterFlowTheme.of(context).primaryText,
+                size: 30.0,
+              ),
+              onPressed: () async {
+                context.pop();
+              },
             ),
-            onPressed: () async {
-              context.pop();
-            },
           ),
           actions: [],
           centerTitle: false,
@@ -134,21 +137,23 @@ class _SigninWidgetState extends State<SigninWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 32.0, 0.0, 8.0),
                               child: Text(
-                                'เข้าสู่ระบบ',
+                                isWeb ? 'ผู้ดูแลระบบ' : 'เข้าสู่ระบบ',
                                 textAlign: TextAlign.start,
                                 style:
                                     FlutterFlowTheme.of(context).displayMedium,
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 0.0, 12.0),
-                              child: Text(
-                                'กลับเข้าสู่ระบบรายการอาหารและการแจ้งเตือน',
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context).labelLarge,
+                            if (!isWeb)
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 0.0, 0.0, 12.0),
+                                child: Text(
+                                  'กลับเข้าสู่ระบบรายการอาหารและการแจ้งเตือน',
+                                  textAlign: TextAlign.start,
+                                  style:
+                                      FlutterFlowTheme.of(context).labelLarge,
+                                ),
                               ),
-                            ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 12.0, 16.0, 0.0),

@@ -1,8 +1,10 @@
 import '/auth/base_auth_user_provider.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -121,9 +123,29 @@ class _SplashWidgetState extends State<SplashWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 1800));
       if (loggedIn) {
-        context.goNamed('Home');
+        _model.outputFetchUser = await action_blocks.fetchUser(context);
+        if (_model.outputFetchUser!) {
+          if (FFAppState().user.role == 'admin') {
+            context.goNamedAuth('Admin', context.mounted);
+          } else {
+            context.goNamedAuth('Home', context.mounted);
+          }
+        } else {
+          FFAppState().deviceId = '';
+          GoRouter.of(context).prepareAuthEvent();
+          await authManager.signOut();
+          GoRouter.of(context).clearRedirectLocation();
+
+          context.goNamedAuth('Splash', context.mounted);
+
+          return;
+        }
       } else {
-        context.pushNamed('Welcome');
+        if (isWeb) {
+          context.goNamedAuth('Signin', context.mounted);
+        } else {
+          context.goNamedAuth('Welcome', context.mounted);
+        }
       }
     });
 
