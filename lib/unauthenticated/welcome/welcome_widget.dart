@@ -87,12 +87,17 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/logo200.png',
-                                  height: 64.0,
-                                  fit: BoxFit.cover,
+                              Container(
+                                width: 64.0,
+                                height: 64.0,
+                                decoration: BoxDecoration(),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/logo100.png',
+                                    height: 64.0,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                               Padding(

@@ -51,6 +51,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
         width: 270.0,
         height: double.infinity,
         constraints: BoxConstraints(
+          minWidth: 270.0,
           maxWidth: 300.0,
         ),
         decoration: BoxDecoration(
@@ -101,7 +102,16 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('AdminDashboard');
+                    context.pushNamed(
+                      'AdminDashboard',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.fade,
+                          duration: Duration(milliseconds: 0),
+                        ),
+                      },
+                    );
                   },
                   child: Container(
                     width: double.infinity,
@@ -147,7 +157,16 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('AdminImage');
+                    context.pushNamed(
+                      'AdminImage',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.fade,
+                          duration: Duration(milliseconds: 0),
+                        ),
+                      },
+                    );
                   },
                   child: Container(
                     width: double.infinity,
@@ -252,7 +271,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).error,
+                          color: FlutterFlowTheme.of(context).red300,
                           textStyle: FlutterFlowTheme.of(context)
                               .titleSmall
                               .override(

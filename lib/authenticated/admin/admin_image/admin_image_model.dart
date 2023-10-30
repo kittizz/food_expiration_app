@@ -24,16 +24,20 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   final unfocusNode = FocusNode();
   // Model for sideNav component.
   late SideNavModel sideNavModel;
+  // State field(s) for ListView widget.
+  ScrollController? listViewController;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
+    listViewController = ScrollController();
   }
 
   void dispose() {
     unfocusNode.dispose();
     sideNavModel.dispose();
+    listViewController?.dispose();
   }
 
   /// Action blocks are added here.
