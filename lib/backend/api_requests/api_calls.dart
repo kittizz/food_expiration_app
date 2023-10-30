@@ -620,6 +620,7 @@ class UpdateItemCall {
     int? quantity,
     String? unit = '',
     int? id,
+    bool? resetNotification,
     String? deviceid = '',
   }) async {
     final ffApiRequestBody = '''
@@ -635,7 +636,8 @@ class UpdateItemCall {
   "quantity": ${quantity},
   "unit": "${unit}",
   "imageId": ${imageId},
-  "locationId": ${locationId}
+  "locationId": ${locationId},
+  "resetNotification": ${resetNotification}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'updateItem ',

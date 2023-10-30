@@ -27,6 +27,8 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
 
   String hash = '';
 
+  bool resetNoti = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

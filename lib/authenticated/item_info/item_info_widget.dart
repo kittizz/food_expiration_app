@@ -290,6 +290,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                               int.tryParse(_model.quantityFieldController.text),
                           unit: _model.unitOptionValue,
                           id: widget.id,
+                          resetNotification: _model.resetNoti,
                         );
                         _shouldSetState = true;
                         if ((_model.apiUpdateItem?.succeeded ?? true)) {
@@ -1878,6 +1879,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           (e) => e
                                             ..expireDate = _model.datePicked2,
                                         );
+                                      });
+                                      setState(() {
+                                        _model.resetNoti = true;
                                       });
                                     }
                                   },
