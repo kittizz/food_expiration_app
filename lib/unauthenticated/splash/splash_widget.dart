@@ -27,7 +27,7 @@ class _SplashWidgetState extends State<SplashWidget>
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final animationsMap = {
-    'rowOnPageLoadAnimation': AnimationInfo(
+    'rowOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         FadeEffect(
@@ -40,6 +40,7 @@ class _SplashWidgetState extends State<SplashWidget>
       ],
     ),
     'imageOnPageLoadAnimation': AnimationInfo(
+      reverse: true,
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         MoveEffect(
@@ -47,6 +48,25 @@ class _SplashWidgetState extends State<SplashWidget>
           delay: 0.ms,
           duration: 400.ms,
           begin: Offset(-50.0, 0.0),
+          end: Offset(0.0, 0.0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 400.ms,
+          duration: 600.ms,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.1, 1.1),
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 400.ms,
+          begin: Offset(50.0, 0.0),
           end: Offset(0.0, 0.0),
         ),
       ],
@@ -201,9 +221,11 @@ class _SplashWidgetState extends State<SplashWidget>
                           ).animateOnPageLoad(
                               animationsMap['textOnPageLoadAnimation2']!),
                         ],
-                      ),
+                      ).animateOnPageLoad(
+                          animationsMap['rowOnPageLoadAnimation2']!),
                     ],
-                  ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
+                  ).animateOnPageLoad(
+                      animationsMap['rowOnPageLoadAnimation1']!),
                 ),
               ],
             ),
