@@ -45,8 +45,8 @@ class _SplashWidgetState extends State<SplashWidget>
         MoveEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(-150.0, 0.0),
+          duration: 400.ms,
+          begin: Offset(-50.0, 0.0),
           end: Offset(0.0, 0.0),
         ),
       ],
@@ -57,7 +57,7 @@ class _SplashWidgetState extends State<SplashWidget>
       effects: [
         ScaleEffect(
           curve: Curves.easeInOut,
-          delay: 400.ms,
+          delay: 200.ms,
           duration: 600.ms,
           begin: Offset(1.0, 1.0),
           end: Offset(1.1, 1.1),
