@@ -407,8 +407,8 @@ class FFRoute {
                   child: Center(
                     child: Image.asset(
                       'assets/images/logo50.png',
-                      height: 0.0,
-                      fit: BoxFit.none,
+                      width: 0.0,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 )
