@@ -213,10 +213,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => SplashWidget(),
         ),
         FFRoute(
-          name: 'Admin',
-          path: '/admin',
+          name: 'AdminDashboard',
+          path: '/admin/dashboard',
           requireAuth: true,
-          builder: (context, params) => AdminWidget(),
+          builder: (context, params) => AdminDashboardWidget(),
+        ),
+        FFRoute(
+          name: 'AdminImage',
+          path: '/admin/image',
+          requireAuth: true,
+          builder: (context, params) => AdminImageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
