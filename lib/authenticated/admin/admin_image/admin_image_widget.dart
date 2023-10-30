@@ -176,9 +176,30 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                   0.00, 0.00),
                                               child: Text(
                                                 kinItem.name,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily,
+                                                      color: kinItem.key ==
+                                                              _model.kindLocal
+                                                                  ?.key
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryBackground
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily),
+                                                    ),
                                               ),
                                             ),
                                           ),
@@ -187,6 +208,52 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                     }).divide(SizedBox(width: 10.0)),
                                   );
                                 },
+                              ),
+                              Divider(
+                                thickness: 1.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(-1.00, 0.00),
+                                child: FFButtonWidget(
+                                  onPressed: () {
+                                    print('Button pressed ...');
+                                  },
+                                  text: 'หมวดหมู่',
+                                  icon: Icon(
+                                    Icons.add_rounded,
+                                    size: 15.0,
+                                  ),
+                                  options: FFButtonOptions(
+                                    height: 30.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmallFamily,
+                                          color: Colors.white,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.normal,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily),
+                                        ),
+                                    elevation: 2.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -210,26 +277,40 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             children: [
-                              ListTile(
-                                title: Text(
-                                  'Title',
-                                  style:
-                                      FlutterFlowTheme.of(context).titleLarge,
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await _model.listViewController?.animateTo(
+                                    _model.listViewController!.position
+                                        .maxScrollExtent,
+                                    duration: Duration(milliseconds: 100),
+                                    curve: Curves.ease,
+                                  );
+                                },
+                                child: ListTile(
+                                  title: Text(
+                                    'Title',
+                                    style:
+                                        FlutterFlowTheme.of(context).titleLarge,
+                                  ),
+                                  subtitle: Text(
+                                    'Subtitle goes here...',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelMedium,
+                                  ),
+                                  trailing: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 20.0,
+                                  ),
+                                  tileColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  dense: false,
                                 ),
-                                subtitle: Text(
-                                  'Subtitle goes here...',
-                                  style:
-                                      FlutterFlowTheme.of(context).labelMedium,
-                                ),
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 20.0,
-                                ),
-                                tileColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                dense: false,
                               ),
                               ListTile(
                                 title: Text(
@@ -295,6 +376,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                 dense: false,
                               ),
                             ],
+                            controller: _model.listViewController,
                           ),
                         ),
                       ),
