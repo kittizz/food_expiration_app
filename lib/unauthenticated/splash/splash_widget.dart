@@ -126,7 +126,7 @@ class _SplashWidgetState extends State<SplashWidget>
         _model.outputFetchUser = await action_blocks.fetchUser(context);
         if (_model.outputFetchUser!) {
           if (FFAppState().user.role == 'admin') {
-            context.goNamedAuth('Admin', context.mounted);
+            context.goNamedAuth('AdminDashboard', context.mounted);
           } else {
             context.goNamedAuth('Home', context.mounted);
           }

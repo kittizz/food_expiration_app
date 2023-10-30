@@ -250,6 +250,40 @@ class FFAppState extends ChangeNotifier {
   void updateFilterStruct(Function(FilterStruct) updateFn) {
     updateFn(_filter);
   }
+
+  List<KindStruct> _kind = [
+    KindStruct.fromSerializableMap(
+        jsonDecode('{\"name\":\"รายการ\",\"key\":\"item\"}')),
+    KindStruct.fromSerializableMap(
+        jsonDecode('{\"name\":\"สถานที่เก็บ\",\"key\":\"location\"}'))
+  ];
+  List<KindStruct> get kind => _kind;
+  set kind(List<KindStruct> _value) {
+    _kind = _value;
+  }
+
+  void addToKind(KindStruct _value) {
+    _kind.add(_value);
+  }
+
+  void removeFromKind(KindStruct _value) {
+    _kind.remove(_value);
+  }
+
+  void removeAtIndexFromKind(int _index) {
+    _kind.removeAt(_index);
+  }
+
+  void updateKindAtIndex(
+    int _index,
+    KindStruct Function(KindStruct) updateFn,
+  ) {
+    _kind[_index] = updateFn(_kind[_index]);
+  }
+
+  void insertAtIndexInKind(int _index, KindStruct _value) {
+    _kind.insert(_index, _value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
