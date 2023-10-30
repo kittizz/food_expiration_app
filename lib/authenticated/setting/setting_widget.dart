@@ -869,7 +869,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                   GoRouter.of(context).clearRedirectLocation();
 
                                   _navigate = () => context.goNamedAuth(
-                                      'Welcome', context.mounted);
+                                      'Splash', context.mounted);
                                   setState(() {
                                     FFAppState().deviceId = '';
                                     FFAppState().user = UserStruct
