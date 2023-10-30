@@ -386,7 +386,7 @@ class _SigninWidgetState extends State<SigninWidget> {
 
                           await action_blocks.registerDevice(context);
 
-                          context.goNamedAuth('Home', context.mounted);
+                          context.goNamedAuth('Splash', context.mounted);
                         },
                         text: 'เข้าสู่ระบบ',
                         options: FFButtonOptions(

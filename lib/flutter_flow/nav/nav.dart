@@ -83,13 +83,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomeWidget() : SplashWidget(),
+          appStateNotifier.loggedIn ? SplashWidget() : SplashWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomeWidget() : SplashWidget(),
+              appStateNotifier.loggedIn ? SplashWidget() : SplashWidget(),
         ),
         FFRoute(
           name: 'Welcome',

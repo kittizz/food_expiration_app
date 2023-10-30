@@ -235,7 +235,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                     nickname: currentUserDisplayName,
                                   );
 
-                                  context.goNamedAuth('Home', context.mounted);
+                                  context.goNamedAuth(
+                                      'Splash', context.mounted);
                                 },
                                 text: 'ลงทะเบียน ด้วย Google',
                                 icon: FaIcon(
@@ -286,7 +287,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                     nickname: currentUserDisplayName,
                                   );
 
-                                  context.goNamedAuth('Home', context.mounted);
+                                  context.goNamedAuth(
+                                      'Splash', context.mounted);
                                 },
                                 text: 'ลงทะเบียน ด้วย Facebook',
                                 icon: Icon(
