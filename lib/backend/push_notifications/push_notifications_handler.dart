@@ -78,13 +78,13 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 
   @override
   Widget build(BuildContext context) => _loading
-      ? Container(
-          color: FlutterFlowTheme.of(context).primaryBackground,
-          child: Center(
-            child: Image.asset(
-              'assets/images/logo400.png',
-              height: 150.0,
-              fit: BoxFit.contain,
+      ? Center(
+          child: SizedBox(
+            width: 50.0,
+            height: 50.0,
+            child: SpinKitDoubleBounce(
+              color: FlutterFlowTheme.of(context).error,
+              size: 50.0,
             ),
           ),
         )
@@ -168,6 +168,7 @@ final parametersBuilderMap =
           'id': getParameter<int>(data, 'id'),
         },
       ),
+  'Splash': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

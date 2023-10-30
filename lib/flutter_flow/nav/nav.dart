@@ -83,13 +83,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomeWidget() : WelcomeWidget(),
+          appStateNotifier.loggedIn ? HomeWidget() : SplashWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomeWidget() : WelcomeWidget(),
+              appStateNotifier.loggedIn ? HomeWidget() : SplashWidget(),
         ),
         FFRoute(
           name: 'Welcome',
@@ -206,6 +206,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             isAdd: params.getParam('isAdd', ParamType.bool),
             id: params.getParam('id', ParamType.int),
           ),
+        ),
+        FFRoute(
+          name: 'Splash',
+          path: '/Splash',
+          builder: (context, params) => SplashWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -372,7 +377,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/welcome';
+            return '/Splash';
           }
           return null;
         },
@@ -385,13 +390,13 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Container(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/logo400.png',
-                      height: 150.0,
-                      fit: BoxFit.contain,
+              ? Center(
+                  child: SizedBox(
+                    width: 50.0,
+                    height: 50.0,
+                    child: SpinKitDoubleBounce(
+                      color: FlutterFlowTheme.of(context).error,
+                      size: 50.0,
                     ),
                   ),
                 )
