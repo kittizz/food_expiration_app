@@ -525,7 +525,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                             nickname: _model.emailTextController.text,
                           );
 
-                          context.goNamedAuth('Home', context.mounted);
+                          context.goNamedAuth('Splash', context.mounted);
                         },
                         text: 'ลงทะเบียน',
                         options: FFButtonOptions(
