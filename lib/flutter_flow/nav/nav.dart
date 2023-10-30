@@ -390,13 +390,13 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: SpinKitDoubleBounce(
-                      color: FlutterFlowTheme.of(context).error,
-                      size: 50.0,
+              ? Container(
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/logo200.png',
+                      height: 50.0,
+                      fit: BoxFit.scaleDown,
                     ),
                   ),
                 )
