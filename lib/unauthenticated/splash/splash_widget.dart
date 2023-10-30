@@ -39,8 +39,7 @@ class _SplashWidgetState extends State<SplashWidget>
         ),
       ],
     ),
-    'imageOnPageLoadAnimation': AnimationInfo(
-      reverse: true,
+    'containerOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         MoveEffect(
@@ -50,9 +49,15 @@ class _SplashWidgetState extends State<SplashWidget>
           begin: Offset(-50.0, 0.0),
           end: Offset(0.0, 0.0),
         ),
+      ],
+    ),
+    'imageOnPageLoadAnimation': AnimationInfo(
+      reverse: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
         ScaleEffect(
           curve: Curves.easeInOut,
-          delay: 400.ms,
+          delay: 200.ms,
           duration: 600.ms,
           begin: Offset(1.0, 1.0),
           end: Offset(1.1, 1.1),
@@ -180,7 +185,8 @@ class _SplashWidgetState extends State<SplashWidget>
                           ),
                         ).animateOnPageLoad(
                             animationsMap['imageOnPageLoadAnimation']!),
-                      ),
+                      ).animateOnPageLoad(
+                          animationsMap['containerOnPageLoadAnimation']!),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
