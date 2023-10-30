@@ -211,6 +211,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Splash',
           path: '/Splash',
           builder: (context, params) => SplashWidget(),
+        ),
+        FFRoute(
+          name: 'Admin',
+          path: '/admin',
+          requireAuth: true,
+          builder: (context, params) => AdminWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
@@ -41,8 +40,6 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Action Block - fetchUser] action in Home widget.
-  bool? outputFetchUser;
   // Stores action output result for [Backend Call - API (getBanner)] action in Home widget.
   ApiCallResponse? apiBanner;
   // Stores action output result for [Backend Call - API (blogRecommend)] action in Home widget.

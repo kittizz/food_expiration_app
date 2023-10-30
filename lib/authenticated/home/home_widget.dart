@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
@@ -71,20 +70,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             .controller
             .forward(from: 0.0);
       }
-      _model.outputFetchUser = await action_blocks.fetchUser(context);
-      if (_model.outputFetchUser!) {
-        _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();
-      } else {
-        FFAppState().deviceId = '';
-        GoRouter.of(context).prepareAuthEvent();
-        await authManager.signOut();
-        GoRouter.of(context).clearRedirectLocation();
-
-        context.pushNamedAuth('Welcome', context.mounted);
-
-        return;
-      }
-
+      _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();
       _model.apiBlogRecommendOutput =
           await FoodexpirationGroup.blogRecommendCall.call();
       _model.bloglist = await actions.toBlogStructList(
