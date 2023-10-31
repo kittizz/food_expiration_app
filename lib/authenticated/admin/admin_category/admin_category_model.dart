@@ -4,8 +4,7 @@ import '/component/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/random_data_util.dart' as random_data;
-import 'admin_image_widget.dart' show AdminImageWidget;
+import 'admin_category_widget.dart' show AdminCategoryWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +12,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
+class AdminCategoryModel extends FlutterFlowModel<AdminCategoryWidget> {
   ///  Local state fields for this page.
 
   KindStruct? kindLocal;
@@ -26,13 +25,9 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   // Model for sideNav component.
   late SideNavModel sideNavModel;
   // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -43,11 +38,8 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   void dispose() {
     unfocusNode.dispose();
     sideNavModel.dispose();
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
-
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 
   /// Action blocks are added here.

@@ -171,6 +171,7 @@ final parametersBuilderMap =
   'Splash': ParameterData.none(),
   'AdminDashboard': ParameterData.none(),
   'AdminImage': ParameterData.none(),
+  'AdminCategory': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

@@ -223,6 +223,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/admin/image',
           requireAuth: true,
           builder: (context, params) => AdminImageWidget(),
+        ),
+        FFRoute(
+          name: 'AdminCategory',
+          path: '/admin/category',
+          requireAuth: true,
+          builder: (context, params) => AdminCategoryWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

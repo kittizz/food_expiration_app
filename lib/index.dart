@@ -27,3 +27,5 @@ export '/authenticated/admin/admin_dashboard/admin_dashboard_widget.dart'
     show AdminDashboardWidget;
 export '/authenticated/admin/admin_image/admin_image_widget.dart'
     show AdminImageWidget;
+export '/authenticated/admin/admin_category/admin_category_widget.dart'
+    show AdminCategoryWidget;
