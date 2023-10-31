@@ -48,6 +48,38 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   FocusNode? textFieldFocusNode6;
   TextEditingController? textController6;
   String? Function(BuildContext, String?)? textController6Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode7;
+  TextEditingController? textController7;
+  String? Function(BuildContext, String?)? textController7Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode8;
+  TextEditingController? textController8;
+  String? Function(BuildContext, String?)? textController8Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode9;
+  TextEditingController? textController9;
+  String? Function(BuildContext, String?)? textController9Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode10;
+  TextEditingController? textController10;
+  String? Function(BuildContext, String?)? textController10Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode11;
+  TextEditingController? textController11;
+  String? Function(BuildContext, String?)? textController11Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode12;
+  TextEditingController? textController12;
+  String? Function(BuildContext, String?)? textController12Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode13;
+  TextEditingController? textController13;
+  String? Function(BuildContext, String?)? textController13Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode14;
+  TextEditingController? textController14;
+  String? Function(BuildContext, String?)? textController14Validator;
 
   /// Initialization and disposal methods.
 
@@ -75,6 +107,30 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
 
     textFieldFocusNode6?.dispose();
     textController6?.dispose();
+
+    textFieldFocusNode7?.dispose();
+    textController7?.dispose();
+
+    textFieldFocusNode8?.dispose();
+    textController8?.dispose();
+
+    textFieldFocusNode9?.dispose();
+    textController9?.dispose();
+
+    textFieldFocusNode10?.dispose();
+    textController10?.dispose();
+
+    textFieldFocusNode11?.dispose();
+    textController11?.dispose();
+
+    textFieldFocusNode12?.dispose();
+    textController12?.dispose();
+
+    textFieldFocusNode13?.dispose();
+    textController13?.dispose();
+
+    textFieldFocusNode14?.dispose();
+    textController14?.dispose();
   }
 
   /// Action blocks are added here.
