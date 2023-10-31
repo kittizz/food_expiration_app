@@ -285,14 +285,6 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                       .secondaryBackground,
                                 ),
                               ),
-                              Container(
-                                width: 100.0,
-                                height: 100.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                              ),
                             ],
                           ),
                         ),
