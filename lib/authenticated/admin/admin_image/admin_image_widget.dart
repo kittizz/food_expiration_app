@@ -277,106 +277,15 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             children: [
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  await _model.listViewController?.animateTo(
-                                    _model.listViewController!.position
-                                        .maxScrollExtent,
-                                    duration: Duration(milliseconds: 100),
-                                    curve: Curves.ease,
-                                  );
-                                },
-                                child: ListTile(
-                                  title: Text(
-                                    'Title',
-                                    style:
-                                        FlutterFlowTheme.of(context).titleLarge,
-                                  ),
-                                  subtitle: Text(
-                                    'Subtitle goes here...',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                  ),
-                                  trailing: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 20.0,
-                                  ),
-                                  tileColor: FlutterFlowTheme.of(context)
+                              Container(
+                                width: 100.0,
+                                height: 100.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
-                                  dense: false,
                                 ),
-                              ),
-                              ListTile(
-                                title: Text(
-                                  'Title',
-                                  style:
-                                      FlutterFlowTheme.of(context).titleLarge,
-                                ),
-                                subtitle: Text(
-                                  'Subtitle goes here...',
-                                  style:
-                                      FlutterFlowTheme.of(context).labelMedium,
-                                ),
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 20.0,
-                                ),
-                                tileColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                dense: false,
-                              ),
-                              ListTile(
-                                title: Text(
-                                  'Title',
-                                  style:
-                                      FlutterFlowTheme.of(context).titleLarge,
-                                ),
-                                subtitle: Text(
-                                  'Subtitle goes here...',
-                                  style:
-                                      FlutterFlowTheme.of(context).labelMedium,
-                                ),
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 20.0,
-                                ),
-                                tileColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                dense: false,
-                              ),
-                              ListTile(
-                                title: Text(
-                                  'Title',
-                                  style:
-                                      FlutterFlowTheme.of(context).titleLarge,
-                                ),
-                                subtitle: Text(
-                                  'Subtitle goes here...',
-                                  style:
-                                      FlutterFlowTheme.of(context).labelMedium,
-                                ),
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 20.0,
-                                ),
-                                tileColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                dense: false,
                               ),
                             ],
-                            controller: _model.listViewController,
                           ),
                         ),
                       ),

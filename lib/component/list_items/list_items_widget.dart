@@ -419,6 +419,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
               children: List.generate(itemsLocal.length, (itemsLocalIndex) {
                 final itemsLocalItem = itemsLocal[itemsLocalIndex];
                 return Container(
+                  height: 80.0,
                   decoration: BoxDecoration(),
                   child: wrapWithModel(
                     model: _model.itemModels.getModel(

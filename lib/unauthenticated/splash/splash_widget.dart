@@ -121,7 +121,7 @@ class _SplashWidgetState extends State<SplashWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(const Duration(milliseconds: 1800));
+      await Future.delayed(const Duration(milliseconds: 2000));
       if (loggedIn) {
         _model.outputFetchUser = await action_blocks.fetchUser(context);
         if (_model.outputFetchUser!) {
