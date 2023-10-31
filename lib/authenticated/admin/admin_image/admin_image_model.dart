@@ -24,6 +24,10 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   final unfocusNode = FocusNode();
   // Model for sideNav component.
   late SideNavModel sideNavModel;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -34,6 +38,8 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   void dispose() {
     unfocusNode.dispose();
     sideNavModel.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 
   /// Action blocks are added here.
