@@ -44,12 +44,9 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
     _model.textFieldFocusNode1 ??= FocusNode();
     _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
           _model.textController1?.text = 'asdasdasdasdasd';
           _model.textController2?.text = 'asdasdasdasdasd';
-          _model.textController3?.text = 'asdasdasdasdasd';
         }));
   }
 
@@ -219,52 +216,6 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                   );
                                 },
                               ),
-                              Divider(
-                                thickness: 1.0,
-                                color: FlutterFlowTheme.of(context).alternate,
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(-1.00, 0.00),
-                                child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
-                                  },
-                                  text: 'หมวดหมู่',
-                                  icon: Icon(
-                                    Icons.add_rounded,
-                                    size: 15.0,
-                                  ),
-                                  options: FFButtonOptions(
-                                    height: 30.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmallFamily,
-                                          color: Colors.white,
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmallFamily),
-                                        ),
-                                    elevation: 2.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -288,13 +239,56 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, 0.00),
-                                  child: Text(
-                                    'หมวดหมู่',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
-                                  ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Flexible(
+                                      child: Align(
+                                        alignment:
+                                            AlignmentDirectional(-1.00, 0.00),
+                                        child: Text(
+                                          'หมวดหมู่',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(1.00, 0.00),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Icon(
+                                            Icons.add_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .success,
+                                            size: 16.0,
+                                          ),
+                                          Text(
+                                            'เพิ่ม',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .success,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -309,6 +303,12 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                          ),
                                         ),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -371,7 +371,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        5.0, 0.0, 0.0, 0.0),
+                                                        10.0, 0.0, 2.0, 0.0),
                                                 child: Icon(
                                                   Icons
                                                       .arrow_forward_ios_rounded,
@@ -390,6 +390,12 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                          ),
                                         ),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -452,7 +458,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        5.0, 0.0, 0.0, 0.0),
+                                                        10.0, 0.0, 2.0, 0.0),
                                                 child: Icon(
                                                   Icons
                                                       .arrow_forward_ios_rounded,
@@ -466,88 +472,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                           ].divide(SizedBox(width: 5.0)),
                                         ),
                                       ),
-                                      Container(
-                                        height: 50.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                        ),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      10.0, 0.0, 5.0, 0.0),
-                                              child: Icon(
-                                                Icons.close_rounded,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 14.0,
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 0.0, 8.0, 0.0),
-                                                child: TextFormField(
-                                                  controller:
-                                                      _model.textController3,
-                                                  focusNode: _model
-                                                      .textFieldFocusNode3,
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    isDense: true,
-                                                    enabledBorder:
-                                                        InputBorder.none,
-                                                    focusedBorder:
-                                                        InputBorder.none,
-                                                    errorBorder:
-                                                        InputBorder.none,
-                                                    focusedErrorBorder:
-                                                        InputBorder.none,
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
-                                                  validator: _model
-                                                      .textController3Validator
-                                                      .asValidator(context),
-                                                ),
-                                              ),
-                                            ),
-                                            Icon(
-                                              Icons.mode_edit_outline,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              size: 14.0,
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.00, 0.00),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 0.0, 0.0, 0.0),
-                                                child: Icon(
-                                                  Icons
-                                                      .arrow_forward_ios_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 14.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ].divide(SizedBox(width: 5.0)),
-                                        ),
-                                      ),
-                                    ],
+                                    ].divide(SizedBox(height: 5.0)),
                                   ),
                                 ),
                               ],
