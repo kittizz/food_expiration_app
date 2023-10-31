@@ -170,9 +170,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                           name: _model.nameFieldController.text,
                           description: _model.descriptionFieldController.text,
                           storageDate: functions.toRFC3339(
-                              FFAppState().pageItemInfo.storageDate!, false),
+                              FFAppState().pageItemInfo.storageDate!, true),
                           expireDate: functions.toRFC3339(
-                              FFAppState().pageItemInfo.expireDate!, false),
+                              FFAppState().pageItemInfo.expireDate!, true),
                           forewarnDay: int.tryParse(
                               _model.forewarnDayFieldController.text),
                           category: _model.categoryOptionValue,
@@ -268,9 +268,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                           name: _model.nameFieldController.text,
                           description: _model.descriptionFieldController.text,
                           storageDate: functions.toRFC3339(
-                              FFAppState().pageItemInfo.storageDate!, false),
+                              FFAppState().pageItemInfo.storageDate!, true),
                           expireDate: functions.toRFC3339(
-                              FFAppState().pageItemInfo.expireDate!, false),
+                              FFAppState().pageItemInfo.expireDate!, true),
                           forewarnDay: int.tryParse(
                               _model.forewarnDayFieldController.text),
                           category: _model.categoryOptionValue,
