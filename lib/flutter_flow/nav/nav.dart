@@ -229,6 +229,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/admin/category',
           requireAuth: true,
           builder: (context, params) => AdminCategoryWidget(),
+        ),
+        FFRoute(
+          name: 'AdminBlog',
+          path: '/admin/blog',
+          requireAuth: true,
+          builder: (context, params) => AdminBlogWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

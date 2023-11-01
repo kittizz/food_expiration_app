@@ -29,3 +29,5 @@ export '/authenticated/admin/admin_image/admin_image_widget.dart'
     show AdminImageWidget;
 export '/authenticated/admin/admin_category/admin_category_widget.dart'
     show AdminCategoryWidget;
+export '/authenticated/admin/admin_blog/admin_blog_widget.dart'
+    show AdminBlogWidget;
