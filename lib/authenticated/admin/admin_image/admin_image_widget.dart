@@ -373,6 +373,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                 setState(() {
                                                   _model.kindLocal = _model
                                                       .modelAddImage?.kind;
+                                                  _model.useThumbnailCategorie =
+                                                      null;
                                                 });
                                                 if (_shouldSetState)
                                                   setState(() {});
