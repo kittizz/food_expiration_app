@@ -643,6 +643,11 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                 _model.textController1?.text =
                                                     categorieslistItem.name;
                                               });
+                                              await _model.fetchThumbnail(
+                                                context,
+                                                id: categorieslistItem.id,
+                                              );
+                                              setState(() {});
                                             },
                                             child: ListTile(
                                               title: Text(
