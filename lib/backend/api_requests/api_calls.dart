@@ -47,6 +47,8 @@ class FoodexpirationGroup {
       AdminSetCategoriesCall();
   static AdminGetCategoriesCall adminGetCategoriesCall =
       AdminGetCategoriesCall();
+  static AdminThumbnailCreateCategoryCall adminThumbnailCreateCategoryCall =
+      AdminThumbnailCreateCategoryCall();
 }
 
 class RegisterDeviceCall {
@@ -935,6 +937,37 @@ class AdminGetCategoriesCall {
         response,
         r'''$.categories''',
       );
+}
+
+class AdminThumbnailCreateCategoryCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    int? imageId,
+    String? type = '',
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "name": "${name}",
+  "imageId": ${imageId},
+  "type": "${type}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'adminThumbnailCreateCategory',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/create-category',
+      callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
 }
 
 /// End foodexpiration Group Code

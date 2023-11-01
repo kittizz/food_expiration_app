@@ -1,10 +1,16 @@
+import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
 import 'dart:ui';
-import 'package:cached_network_image/cached_network_image.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -70,12 +76,6 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
 
     _model.projectNameController ??= TextEditingController();
     _model.projectNameFocusNode ??= FocusNode();
-    _model.descriptionController ??= TextEditingController();
-    _model.descriptionFocusNode ??= FocusNode();
-    _model.projectURLController ??= TextEditingController();
-    _model.projectURLFocusNode ??= FocusNode();
-    _model.clonableURLController ??= TextEditingController();
-    _model.clonableURLFocusNode ??= FocusNode();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -154,40 +154,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                     0.0, 0.0, 0.0, 12.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 4.0),
-                                            child: Text(
-                                              'สร้างหมวด',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 8.0),
-                                            child: Text(
-                                              'Please enter the information below to add a project.',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
                                     FlutterFlowIconButton(
                                       borderColor: Colors.transparent,
                                       borderRadius: 30.0,
@@ -223,65 +191,251 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                           borderRadius:
                                               BorderRadius.circular(16.0),
                                         ),
-                                        child: Stack(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          children: [
-                                            Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.add_a_photo_outlined,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 72.0,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 12.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    'Add Photo',
-                                                    style: FlutterFlowTheme.of(
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            var _shouldSetState = false;
+                                            final selectedMedia =
+                                                await selectMediaWithSourceBottomSheet(
+                                              context: context,
+                                              maxWidth: 1000.00,
+                                              maxHeight: 1000.00,
+                                              allowPhoto: true,
+                                              includeBlurHash: true,
+                                            );
+                                            if (selectedMedia != null &&
+                                                selectedMedia.every((m) =>
+                                                    validateFileFormat(
+                                                        m.storagePath,
+                                                        context))) {
+                                              setState(() => _model
+                                                  .isDataUploading = true);
+                                              var selectedUploadedFiles =
+                                                  <FFUploadedFile>[];
+
+                                              try {
+                                                selectedUploadedFiles =
+                                                    selectedMedia
+                                                        .map((m) =>
+                                                            FFUploadedFile(
+                                                              name: m
+                                                                  .storagePath
+                                                                  .split('/')
+                                                                  .last,
+                                                              bytes: m.bytes,
+                                                              height: m
+                                                                  .dimensions
+                                                                  ?.height,
+                                                              width: m
+                                                                  .dimensions
+                                                                  ?.width,
+                                                              blurHash:
+                                                                  m.blurHash,
+                                                            ))
+                                                        .toList();
+                                              } finally {
+                                                _model.isDataUploading = false;
+                                              }
+                                              if (selectedUploadedFiles
+                                                      .length ==
+                                                  selectedMedia.length) {
+                                                setState(() {
+                                                  _model.uploadedLocalFile =
+                                                      selectedUploadedFiles
+                                                          .first;
+                                                });
+                                              } else {
+                                                setState(() {});
+                                                return;
+                                              }
+                                            }
+
+                                            if (_model.uploadedLocalFile !=
+                                                    null &&
+                                                (_model.uploadedLocalFile.bytes
+                                                        ?.isNotEmpty ??
+                                                    false)) {
+                                              if (fileUpload?.blurHash !=
+                                                  _model.hash) {
+                                                _model.apiUploadImage1 =
+                                                    await FoodexpirationGroup
+                                                        .uploadImageCall
+                                                        .call(
+                                                  file: fileUpload,
+                                                  deviceid:
+                                                      FFAppState().deviceId,
+                                                  hash: fileUpload?.blurHash,
+                                                );
+                                                _shouldSetState = true;
+                                                if ((apiUploadImage1
+                                                        ?.succeeded ??
+                                                    true)) {
+                                                  setState(() {
+                                                    _model.updateImageStruct(
+                                                      (e) => e
+                                                        ..id =
+                                                            FoodexpirationGroup
+                                                                .uploadImageCall
+                                                                .id(
+                                                          (_model.apiUploadImage1
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        )
+                                                        ..path =
+                                                            FoodexpirationGroup
+                                                                .uploadImageCall
+                                                                .path(
+                                                                  (_model.apiUploadImage1
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                )
+                                                                .toString()
+                                                        ..blurHash = _model
+                                                            .uploadedLocalFile
+                                                            .blurHash,
+                                                    );
+                                                  });
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'อัปโหลดรูปสำเร็จ',
+                                                        style: TextStyle(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                      ),
+                                                      duration: Duration(
+                                                          milliseconds: 1000),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondary,
+                                                    ),
+                                                  );
+                                                  if (_shouldSetState)
+                                                    setState(() {});
+                                                  return;
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        FoodexpirationGroup
+                                                            .uploadImageCall
+                                                            .message(
+                                                              (_model.apiUploadImage1
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                            )
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                      ),
+                                                      duration: Duration(
+                                                          milliseconds: 1000),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                    ),
+                                                  );
+                                                  if (_shouldSetState)
+                                                    setState(() {});
+                                                  return;
+                                                }
+                                              } else {
+                                                if (_shouldSetState)
+                                                  setState(() {});
+                                                return;
+                                              }
+                                            } else {
+                                              if (_shouldSetState)
+                                                setState(() {});
+                                              return;
+                                            }
+
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                          },
+                                          child: Stack(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
+                                            children: [
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.add_a_photo_outlined,
+                                                    color: FlutterFlowTheme.of(
                                                             context)
-                                                        .titleLarge,
+                                                        .secondaryText,
+                                                    size: 72.0,
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 4.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    'Upload an image here...',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium,
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 12.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      'Add Photo',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleLarge,
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8.0, 8.0, 8.0, 8.0),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                child: CachedNetworkImage(
-                                                  fadeInDuration: Duration(
-                                                      milliseconds: 500),
-                                                  fadeOutDuration: Duration(
-                                                      milliseconds: 500),
-                                                  imageUrl: '',
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                  fit: BoxFit.cover,
-                                                ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 4.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      'Upload an image here...',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                          ],
+                                              if (_model.image?.id != null)
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          8.0, 8.0, 8.0, 8.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    child: OctoImage(
+                                                      placeholderBuilder:
+                                                          OctoPlaceholder
+                                                              .blurHash(
+                                                        _model.image!.blurHash,
+                                                      ),
+                                                      image: NetworkImage(
+                                                        functions.getImage(
+                                                            _model.image!.path),
+                                                      ),
+                                                      width: double.infinity,
+                                                      height: double.infinity,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -297,7 +451,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                   autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    hintText: 'Showcase Project Name',
+                                    hintText: 'ชื่อ',
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .headlineMedium
                                         .override(
@@ -369,198 +523,49 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 12.0, 0.0, 12.0),
-                                child: TextFormField(
-                                  controller: _model.descriptionController,
-                                  focusNode: _model.descriptionFocusNode,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelStyle:
-                                        FlutterFlowTheme.of(context).labelLarge,
-                                    hintText: 'Description here...',
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).labelLarge,
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    errorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedErrorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
+                                    0.0, 10.0, 0.0, 0.0),
+                                child: FlutterFlowDropDown<String>(
+                                  controller: _model.dropDownValueController ??=
+                                      FormFieldController<String>(
+                                    _model.dropDownValue ??=
+                                        FFAppState().kind.first.name,
                                   ),
-                                  style: FlutterFlowTheme.of(context).bodyLarge,
-                                  maxLines: 5,
-                                  validator: _model
-                                      .descriptionControllerValidator
-                                      .asValidator(context),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 12.0),
-                                child: TextFormField(
-                                  controller: _model.projectURLController,
-                                  focusNode: _model.projectURLFocusNode,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'URL of the project',
-                                    labelStyle:
-                                        FlutterFlowTheme.of(context).labelLarge,
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).labelLarge,
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
+                                  options: FFAppState()
+                                      .kind
+                                      .map((e) => e.name)
+                                      .toList(),
+                                  onChanged: (val) => setState(
+                                      () => _model.dropDownValue = val),
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        fontSize: 24.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
                                       ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    errorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedErrorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
+                                  hintText: 'ชนิด',
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
                                   ),
-                                  style: FlutterFlowTheme.of(context).bodyLarge,
-                                  validator: _model
-                                      .projectURLControllerValidator
-                                      .asValidator(context),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 12.0),
-                                child: TextFormField(
-                                  controller: _model.clonableURLController,
-                                  focusNode: _model.clonableURLFocusNode,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'Clonable Link URL...',
-                                    labelStyle:
-                                        FlutterFlowTheme.of(context).labelLarge,
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).labelLarge,
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    errorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedErrorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                  ),
-                                  style: FlutterFlowTheme.of(context).bodyLarge,
-                                  validator: _model
-                                      .clonableURLControllerValidator
-                                      .asValidator(context),
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  elevation: 0.0,
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  borderWidth: 0.0,
+                                  borderRadius: 0.0,
+                                  margin: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 4.0, 16.0, 4.0),
+                                  hidesUnderline: true,
+                                  isSearchable: false,
+                                  isMultiSelect: false,
                                 ),
                               ),
                               Padding(
@@ -574,10 +579,22 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 4.0, 0.0),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          Navigator.pop(
+                                              context,
+                                              CreateImageStruct(
+                                                name: _model
+                                                    .projectNameController.text,
+                                                kind: FFAppState()
+                                                    .kind
+                                                    .where((e) =>
+                                                        e.name ==
+                                                        _model.dropDownValue)
+                                                    .toList()
+                                                    .first,
+                                              ));
                                         },
-                                        text: 'Create Showcase',
+                                        text: 'สร้าง',
                                         options: FFButtonOptions(
                                           height: 50.0,
                                           padding:
@@ -587,7 +604,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
-                                              .primary,
+                                              .success,
                                           textStyle: FlutterFlowTheme.of(
                                                   context)
                                               .titleSmall

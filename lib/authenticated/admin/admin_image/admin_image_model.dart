@@ -1,5 +1,7 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/component/modal_admin_add_image/modal_admin_add_image_widget.dart';
 import '/component/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -25,6 +27,10 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   final unfocusNode = FocusNode();
   // Model for sideNav component.
   late SideNavModel sideNavModel;
+  // Stores action output result for [Bottom Sheet - ModalAdminAddImage] action in Row widget.
+  CreateImageStruct? modelAddImage;
+  // Stores action output result for [Backend Call - API (adminThumbnailCreateCategory)] action in Row widget.
+  ApiCallResponse? apiThumbnailCreateCategory;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
