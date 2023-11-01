@@ -456,8 +456,18 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
-                                              child: Image.network(
-                                                'https://picsum.photos/seed/995/600',
+                                              child: OctoImage(
+                                                placeholderBuilder:
+                                                    OctoPlaceholder.blurHash(
+                                                  _model.useThumbnailCategorie!
+                                                      .image.blurHash,
+                                                ),
+                                                image: NetworkImage(
+                                                  functions.getImage(_model
+                                                      .useThumbnailCategorie!
+                                                      .image
+                                                      .path),
+                                                ),
                                                 width: 300.0,
                                                 height: 200.0,
                                                 fit: BoxFit.cover,
@@ -1486,7 +1496,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                           if (_model.useThumbnailCategorie == null)
                             Expanded(
                               child: Align(
-                                alignment: AlignmentDirectional(0.00, 0.00),
+                                alignment: AlignmentDirectional(0.00, -1.00),
                                 child: Text(
                                   '(โปรดเลือกหมวดหมู่)',
                                   style: FlutterFlowTheme.of(context)
