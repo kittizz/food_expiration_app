@@ -172,6 +172,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                         onTap: () async {
                                           setState(() {
                                             _model.kindLocal = kinItem;
+                                            _model.useThumbnailCategorie = null;
                                           });
                                         },
                                         child: Container(
@@ -958,26 +959,28 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                   ),
                                 ),
                               ),
-                            Expanded(
-                              child: Align(
-                                alignment: AlignmentDirectional(0.00, 0.00),
-                                child: Text(
-                                  '(โปรดเลือกหมวดหมู่)',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
-                                      ),
+                            if (_model.useThumbnailCategorie == null)
+                              Expanded(
+                                child: Align(
+                                  alignment: AlignmentDirectional(0.00, 0.00),
+                                  child: Text(
+                                    '(โปรดเลือกหมวดหมู่)',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                       ),
