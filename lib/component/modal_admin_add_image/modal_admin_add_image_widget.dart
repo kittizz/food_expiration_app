@@ -614,13 +614,6 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                   name: _model
                                                       .projectNameController
                                                       .text,
-                                                  kind: FFAppState()
-                                                      .kind
-                                                      .where((e) =>
-                                                          e.name ==
-                                                          _model.dropDownValue)
-                                                      .toList()
-                                                      .first,
                                                   image: _model.image,
                                                   thumbnailCategoriesId: widget
                                                       .thumbnailCategoriesId,
@@ -650,6 +643,23 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                               );
                                               return;
                                             }
+                                            Navigator.pop(
+                                                context,
+                                                CreateImageStruct(
+                                                  name: _model
+                                                      .projectNameController
+                                                      .text,
+                                                  kind: FFAppState()
+                                                      .kind
+                                                      .where((e) =>
+                                                          e.name ==
+                                                          _model.dropDownValue)
+                                                      .toList()
+                                                      .first,
+                                                  image: _model.image,
+                                                  thumbnailCategoriesId: widget
+                                                      .thumbnailCategoriesId,
+                                                ));
                                           }
                                         },
                                         text: 'สร้าง',
