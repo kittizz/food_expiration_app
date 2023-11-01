@@ -629,6 +629,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                           _model.useThumbnailCategorie =
                                                               null;
                                                         });
+                                                        await _model
+                                                            .fetchThumbnailCategories(
+                                                                context);
+                                                        setState(() {});
                                                         ScaffoldMessenger.of(
                                                                 context)
                                                             .showSnackBar(
