@@ -41,6 +41,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
           key: 'item',
         );
       });
+      await _model.fetchThumbnailCategories(context);
+      setState(() {});
     });
 
     _model.textController1 ??= TextEditingController();
@@ -253,10 +255,21 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                     child: Align(
                                       alignment:
                                           AlignmentDirectional(-1.00, 0.00),
-                                      child: Text(
-                                        'หมวดหมู่',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          await _model.fetchThumbnailCategories(
+                                              context);
+                                          setState(() {});
+                                        },
+                                        child: Text(
+                                          'หมวดหมู่',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -590,28 +603,42 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                           .alternate,
                                     ),
                                   ),
-                                  child: ListView(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    children: [
-                                      ListTile(
-                                        title: Text(
-                                          'test',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        trailing: Icon(
-                                          Icons.arrow_forward_ios_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 20.0,
-                                        ),
-                                        tileColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        dense: true,
-                                      ),
-                                    ],
+                                  child: Builder(
+                                    builder: (context) {
+                                      final categorieslist =
+                                          _model.thumbnailCategories.toList();
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: categorieslist.length,
+                                        itemBuilder:
+                                            (context, categorieslistIndex) {
+                                          final categorieslistItem =
+                                              categorieslist[
+                                                  categorieslistIndex];
+                                          return ListTile(
+                                            title: Text(
+                                              categorieslistItem.name,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                            trailing: Icon(
+                                              Icons.arrow_forward_ios_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 20.0,
+                                            ),
+                                            tileColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                            dense: true,
+                                          );
+                                        },
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
