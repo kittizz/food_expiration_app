@@ -37,6 +37,11 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
           int index, Function(ThumbnailCategoryStruct) updateFn) =>
       thumbnailCategories[index] = updateFn(thumbnailCategories[index]);
 
+  ThumbnailCategoryStruct? useThumbnailCategorie;
+  void updateUseThumbnailCategorieStruct(
+          Function(ThumbnailCategoryStruct) updateFn) =>
+      updateFn(useThumbnailCategorie ??= ThumbnailCategoryStruct());
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
