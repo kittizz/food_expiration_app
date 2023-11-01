@@ -56,6 +56,8 @@ class FoodexpirationGroup {
       AdminThumbnailCreateCall();
   static AdminRenameThumbnailCall adminRenameThumbnailCall =
       AdminRenameThumbnailCall();
+  static AdminUpdateCategoryImageCall adminUpdateCategoryImageCall =
+      AdminUpdateCategoryImageCall();
 }
 
 class RegisterDeviceCall {
@@ -1081,6 +1083,35 @@ class AdminRenameThumbnailCall {
       callName: 'adminRenameThumbnail',
       apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/rename',
       callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class AdminUpdateCategoryImageCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    int? imageId,
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "id": ${id},
+  "imageId": ${imageId}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'adminUpdateCategoryImage',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/update-category-image',
+      callType: ApiCallType.PUT,
       headers: {
         'x-device-id': '${deviceid}',
       },

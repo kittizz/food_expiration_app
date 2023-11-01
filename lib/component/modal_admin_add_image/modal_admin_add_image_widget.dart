@@ -308,7 +308,9 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                             .uploadedLocalFile
                                                             .blurHash,
                                                     );
-                                                    _model.hash = '';
+                                                    _model.hash = _model
+                                                        .uploadedLocalFile
+                                                        .blurHash!;
                                                   });
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(

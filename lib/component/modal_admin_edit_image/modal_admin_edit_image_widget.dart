@@ -462,8 +462,7 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                           0.0, 0.0, 4.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          Navigator.pop(
-                                              context, _model.image?.id);
+                                          Navigator.pop(context, _model.image);
                                         },
                                         text: 'ยืนยัน',
                                         options: FFButtonOptions(

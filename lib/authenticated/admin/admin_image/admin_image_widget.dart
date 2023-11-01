@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/modal_admin_add_image/modal_admin_add_image_widget.dart';
+import '/component/modal_admin_edit_image/modal_admin_edit_image_widget.dart';
 import '/component/modal_rename/modal_rename_widget.dart';
 import '/component/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
@@ -327,71 +328,73 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                 _model.modelAddImage = value));
 
                                             _shouldSetState = true;
-                                            _model.apiThumbnailCreateCategory =
-                                                await FoodexpirationGroup
-                                                    .adminThumbnailCreateCategoryCall
-                                                    .call(
-                                              deviceid: FFAppState().deviceId,
-                                              name: _model.modelAddImage?.name,
-                                              imageId: _model
-                                                  .modelAddImage?.image?.id,
-                                              type: _model
-                                                  .modelAddImage?.kind?.key,
-                                            );
-                                            _shouldSetState = true;
-                                            if ((_model
-                                                    .apiThumbnailCreateCategory
-                                                    ?.succeeded ??
-                                                true)) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'สำเร็จ',
-                                                    style: TextStyle(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                    ),
-                                                  ),
-                                                  duration: Duration(
-                                                      milliseconds: 1000),
-                                                  backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondary,
-                                                ),
+                                            if (_model.modelAddImage != null) {
+                                              _model.apiThumbnailCreateCategory =
+                                                  await FoodexpirationGroup
+                                                      .adminThumbnailCreateCategoryCall
+                                                      .call(
+                                                deviceid: FFAppState().deviceId,
+                                                name:
+                                                    _model.modelAddImage?.name,
+                                                imageId: _model
+                                                    .modelAddImage?.image?.id,
+                                                type: _model
+                                                    .modelAddImage?.kind?.key,
                                               );
-                                              if (_shouldSetState)
-                                                setState(() {});
-                                              return;
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'ผิดพลาด',
-                                                    style: TextStyle(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
+                                              _shouldSetState = true;
+                                              if ((_model
+                                                      .apiThumbnailCreateCategory
+                                                      ?.succeeded ??
+                                                  true)) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'สำเร็จ',
+                                                      style: TextStyle(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
                                                     ),
+                                                    duration: Duration(
+                                                        milliseconds: 1000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondary,
                                                   ),
-                                                  duration: Duration(
-                                                      milliseconds: 1000),
-                                                  backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .error,
-                                                ),
-                                              );
-                                              if (_shouldSetState)
-                                                setState(() {});
-                                              return;
+                                                );
+                                                if (_shouldSetState)
+                                                  setState(() {});
+                                                return;
+                                              } else {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'ผิดพลาด',
+                                                      style: TextStyle(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 1000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .error,
+                                                  ),
+                                                );
+                                                if (_shouldSetState)
+                                                  setState(() {});
+                                                return;
+                                              }
                                             }
-
                                             if (_shouldSetState)
                                               setState(() {});
                                           },
@@ -744,19 +747,64 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                 .viewInsetsOf(
                                                                     context),
                                                             child:
-                                                                ModalAdminAddImageWidget(
-                                                              isThumbnail:
-                                                                  false,
-                                                              thumbnailCategoriesId:
-                                                                  0,
-                                                            ),
+                                                                ModalAdminEditImageWidget(),
                                                           ),
                                                         );
                                                       },
                                                     ).then((value) =>
                                                         safeSetState(() => _model
-                                                                .modelAddImageEdit =
+                                                                .modelEditImage =
                                                             value));
+
+                                                    if (_model.modelEditImage !=
+                                                        null) {
+                                                      _model.apiUpdateCategoryImage =
+                                                          await FoodexpirationGroup
+                                                              .adminUpdateCategoryImageCall
+                                                              .call(
+                                                        deviceid: FFAppState()
+                                                            .deviceId,
+                                                        id: _model
+                                                            .useThumbnailCategorie
+                                                            ?.id,
+                                                        imageId: _model
+                                                            .modelEditImage?.id,
+                                                      );
+                                                      if ((_model
+                                                              .apiUpdateCategoryImage
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              'สำเร็จ',
+                                                              style: TextStyle(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                              ),
+                                                            ),
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    1000),
+                                                            backgroundColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                          ),
+                                                        );
+                                                        setState(() {
+                                                          _model
+                                                              .updateUseThumbnailCategorieStruct(
+                                                            (e) => e
+                                                              ..image = _model
+                                                                  .modelEditImage,
+                                                          );
+                                                        });
+                                                      }
+                                                    }
 
                                                     setState(() {});
                                                   },
@@ -963,62 +1011,65 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                         () => _model.modelAddImage2 = value));
 
                                     _shouldSetState = true;
-                                    _model.apiThumbnailCreate =
-                                        await FoodexpirationGroup
-                                            .adminThumbnailCreateCall
-                                            .call(
-                                      deviceid: FFAppState().deviceId,
-                                      name: _model.modelAddImage2?.name,
-                                      imageId: _model.modelAddImage2?.image?.id,
-                                      categoryId:
-                                          _model.useThumbnailCategorie?.id,
-                                    );
-                                    _shouldSetState = true;
-                                    if ((_model.apiThumbnailCreate?.succeeded ??
-                                        true)) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'สำเร็จ',
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                            ),
-                                          ),
-                                          duration:
-                                              Duration(milliseconds: 1000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondary,
-                                        ),
+                                    if (_model.modelAddImage2 != null) {
+                                      _model.apiThumbnailCreate =
+                                          await FoodexpirationGroup
+                                              .adminThumbnailCreateCall
+                                              .call(
+                                        deviceid: FFAppState().deviceId,
+                                        name: _model.modelAddImage2?.name,
+                                        imageId:
+                                            _model.modelAddImage2?.image?.id,
+                                        categoryId:
+                                            _model.useThumbnailCategorie?.id,
                                       );
-                                      if (_shouldSetState) setState(() {});
-                                      return;
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'ผิดพลาด',
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                      _shouldSetState = true;
+                                      if ((_model
+                                              .apiThumbnailCreate?.succeeded ??
+                                          true)) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'สำเร็จ',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
                                             ),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
                                           ),
-                                          duration:
-                                              Duration(milliseconds: 1000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .error,
-                                        ),
-                                      );
-                                      if (_shouldSetState) setState(() {});
-                                      return;
+                                        );
+                                        if (_shouldSetState) setState(() {});
+                                        return;
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'ผิดพลาด',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .error,
+                                          ),
+                                        );
+                                        if (_shouldSetState) setState(() {});
+                                        return;
+                                      }
                                     }
-
                                     if (_shouldSetState) setState(() {});
                                   },
                                   child: Row(
