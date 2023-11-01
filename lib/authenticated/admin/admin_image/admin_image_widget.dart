@@ -456,8 +456,18 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
-                                              child: Image.network(
-                                                'https://picsum.photos/seed/995/600',
+                                              child: OctoImage(
+                                                placeholderBuilder:
+                                                    OctoPlaceholder.blurHash(
+                                                  _model.useThumbnailCategorie!
+                                                      .image.blurHash,
+                                                ),
+                                                image: NetworkImage(
+                                                  functions.getImage(_model
+                                                      .useThumbnailCategorie!
+                                                      .image
+                                                      .path),
+                                                ),
                                                 width: 300.0,
                                                 height: 200.0,
                                                 fit: BoxFit.cover,
