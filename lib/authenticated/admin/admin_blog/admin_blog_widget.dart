@@ -197,6 +197,34 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 5.0, 0.0, 0.0),
+                                            child: Text(
+                                              '(กำลังแก้ไข)',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        fontSize: 12.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 8.0, 10.0),
                                             child: TextFormField(
                                               controller: _model.textController,
@@ -272,15 +300,42 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.network(
-                                                  'https://picsum.photos/seed/561/600',
-                                                  width: 150.0,
-                                                  height: 100.0,
-                                                  fit: BoxFit.cover,
-                                                ),
+                                              Stack(
+                                                children: [
+                                                  Container(
+                                                    width: 150.0,
+                                                    height: 100.0,
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.image,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24.0,
+                                                    ),
+                                                  ),
+                                                  if (false)
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: Image.network(
+                                                        'https://picsum.photos/seed/561/600',
+                                                        width: 150.0,
+                                                        height: 100.0,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                ],
                                               ),
                                               Column(
                                                 mainAxisSize: MainAxisSize.max,
@@ -319,6 +374,42 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                               .bodyMediumFamily),
                                                                 ),
                                                       ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    15.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Icon(
+                                                          Icons.cancel,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .warning,
+                                                          size: 24.0,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        'ยกเลิก',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .orange600,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
+                                                                ),
+                                                      ),
                                                     ].divide(
                                                         SizedBox(width: 5.0)),
                                                   ),
@@ -335,7 +426,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                         size: 24.0,
                                                       ),
                                                       Text(
-                                                        'เปลี่ยนภาพ',
+                                                        'เลือกภาพ',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -449,11 +540,13 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                               0,
                                               0,
                                             )).toList();
-                                    return ListView.builder(
+                                    return ListView.separated(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
                                       scrollDirection: Axis.vertical,
                                       itemCount: blog.length,
+                                      separatorBuilder: (_, __) =>
+                                          SizedBox(height: 5.0),
                                       itemBuilder: (context, blogIndex) {
                                         final blogItem = blog[blogIndex];
                                         return Material(
