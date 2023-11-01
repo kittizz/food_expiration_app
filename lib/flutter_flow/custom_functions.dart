@@ -219,7 +219,8 @@ String toRFC3339(
 
 String encodeString(String str) {
   String escaped = str.split('\n').map((line) => line.trim()).join('\\n');
-  return jsonEncode(escaped);
+  String jstr = jsonEncode(escaped);
+  return jstr.substring(1, jstr.length - 1);
 }
 
 List<int> mapItemIdList(List<ItemStruct> arr) {
