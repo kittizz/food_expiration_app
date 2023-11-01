@@ -3,15 +3,18 @@ import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/modal_admin_add_image/modal_admin_add_image_widget.dart';
 import '/component/side_nav/side_nav_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/random_data_util.dart' as random_data;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'admin_image_model.dart';
 export 'admin_image_model.dart';
@@ -48,11 +51,9 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
     _model.textController1 ??=
         TextEditingController(text: _model.useThumbnailCategorie?.name);
     _model.textFieldFocusNode1 ??= FocusNode();
-    _model.textController2 ??= TextEditingController();
+
     _model.textFieldFocusNode2 ??= FocusNode();
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          _model.textController2?.text = 'test';
-        }));
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -638,6 +639,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                 _model.useThumbnailCategorie =
                                                     categorieslistItem;
                                               });
+                                              setState(() {
+                                                _model.textController1?.text =
+                                                    categorieslistItem.name;
+                                              });
                                             },
                                             child: ListTile(
                                               title: Text(
@@ -752,15 +757,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                       20.0, 20.0, 20.0, 20.0),
                                   child: Builder(
                                     builder: (context) {
-                                      final list = List.generate(
-                                          random_data.randomInteger(3, 9),
-                                          (index) => random_data.randomString(
-                                                0,
-                                                0,
-                                                true,
-                                                false,
-                                                false,
-                                              )).toList();
+                                      final list = _model.thumbnails.toList();
                                       return Wrap(
                                         spacing: 10.0,
                                         runSpacing: 10.0,
@@ -796,27 +793,93 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
                                                   Expanded(
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        bottomLeft:
-                                                            Radius.circular(
-                                                                0.0),
-                                                        bottomRight:
-                                                            Radius.circular(
-                                                                0.0),
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                8.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                8.0),
-                                                      ),
-                                                      child: Image.network(
-                                                        'https://picsum.photos/seed/87/600',
-                                                        width: 300.0,
-                                                        height: 150.0,
-                                                        fit: BoxFit.cover,
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        await Navigator.push(
+                                                          context,
+                                                          PageTransition(
+                                                            type:
+                                                                PageTransitionType
+                                                                    .fade,
+                                                            child:
+                                                                FlutterFlowExpandedImageView(
+                                                              image: OctoImage(
+                                                                placeholderBuilder:
+                                                                    OctoPlaceholder
+                                                                        .blurHash(
+                                                                  listItem.image
+                                                                      .blurHash,
+                                                                ),
+                                                                image:
+                                                                    NetworkImage(
+                                                                  functions.getImage(
+                                                                      listItem
+                                                                          .image
+                                                                          .path),
+                                                                ),
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                              ),
+                                                              allowRotation:
+                                                                  false,
+                                                              tag: functions
+                                                                  .getImage(
+                                                                      listItem
+                                                                          .image
+                                                                          .path),
+                                                              useHeroAnimation:
+                                                                  true,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Hero(
+                                                        tag: functions.getImage(
+                                                            listItem
+                                                                .image.path),
+                                                        transitionOnUserGestures:
+                                                            true,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    8.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    8.0),
+                                                          ),
+                                                          child: OctoImage(
+                                                            placeholderBuilder:
+                                                                OctoPlaceholder
+                                                                    .blurHash(
+                                                              listItem.image
+                                                                  .blurHash,
+                                                            ),
+                                                            image: NetworkImage(
+                                                              functions.getImage(
+                                                                  listItem.image
+                                                                      .path),
+                                                            ),
+                                                            width: 300.0,
+                                                            height: 150.0,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -861,7 +924,11 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                               child:
                                                                   TextFormField(
                                                                 controller: _model
-                                                                    .textController2,
+                                                                        .textController2 ??=
+                                                                    TextEditingController(
+                                                                  text: listItem
+                                                                      .name,
+                                                                ),
                                                                 focusNode: _model
                                                                     .textFieldFocusNode2,
                                                                 obscureText:
