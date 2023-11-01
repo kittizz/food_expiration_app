@@ -1152,6 +1152,11 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                     .secondary,
                                           ),
                                         );
+                                        await _model.fetchThumbnail(
+                                          context,
+                                          id: _model.useThumbnailCategorie?.id,
+                                        );
+                                        setState(() {});
                                         if (_shouldSetState) setState(() {});
                                         return;
                                       } else {
