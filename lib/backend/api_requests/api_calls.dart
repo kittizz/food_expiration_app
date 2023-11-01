@@ -42,6 +42,7 @@ class FoodexpirationGroup {
   static GetItemCall getItemCall = GetItemCall();
   static UpdateFCMCall updateFCMCall = UpdateFCMCall();
   static UpdateSettingsCall updateSettingsCall = UpdateSettingsCall();
+  static AdminDashboardCall adminDashboardCall = AdminDashboardCall();
 }
 
 class RegisterDeviceCall {
@@ -845,6 +846,39 @@ class UpdateSettingsCall {
       cache: false,
     );
   }
+}
+
+class AdminDashboardCall {
+  Future<ApiCallResponse> call({
+    String? deviceid = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'adminDashboard',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/admin/dashboard',
+      callType: ApiCallType.GET,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic users(dynamic response) => getJsonField(
+        response,
+        r'''$.users''',
+      );
+  dynamic items(dynamic response) => getJsonField(
+        response,
+        r'''$.items''',
+      );
+  dynamic locations(dynamic response) => getJsonField(
+        response,
+        r'''$.locations''',
+      );
 }
 
 /// End foodexpiration Group Code

@@ -168,7 +168,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 4.0),
                                             child: Text(
-                                              'Create Project',
+                                              'สร้างหมวด',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .headlineMedium,

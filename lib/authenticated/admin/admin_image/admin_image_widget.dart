@@ -126,39 +126,6 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                     ),
                                   ),
                                 ),
-                                Align(
-                                  alignment: AlignmentDirectional(1.00, 0.00),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Icon(
-                                        Icons.file_upload_outlined,
-                                        color: FlutterFlowTheme.of(context)
-                                            .success,
-                                        size: 16.0,
-                                      ),
-                                      Text(
-                                        'อัปโหลด',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .success,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                               ],
                             ),
                             Align(
@@ -369,7 +336,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                           ),
                                         ),
                                         Text(
-                                          'แก้ไขภาพ',
+                                          'เลือกภาพ',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
