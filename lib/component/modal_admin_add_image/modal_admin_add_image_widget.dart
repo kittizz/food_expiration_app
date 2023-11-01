@@ -258,19 +258,22 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                 (_model.uploadedLocalFile.bytes
                                                         ?.isNotEmpty ??
                                                     false)) {
-                                              if (fileUpload?.blurHash !=
+                                              if (_model.uploadedLocalFile
+                                                      .blurHash !=
                                                   _model.hash) {
                                                 _model.apiUploadImage1 =
                                                     await FoodexpirationGroup
                                                         .uploadImageCall
                                                         .call(
-                                                  file: fileUpload,
+                                                  file:
+                                                      _model.uploadedLocalFile,
                                                   deviceid:
                                                       FFAppState().deviceId,
-                                                  hash: fileUpload?.blurHash,
+                                                  hash: _model.uploadedLocalFile
+                                                      .blurHash,
                                                 );
                                                 _shouldSetState = true;
-                                                if ((apiUploadImage1
+                                                if ((_model.apiUploadImage1
                                                         ?.succeeded ??
                                                     true)) {
                                                   setState(() {
