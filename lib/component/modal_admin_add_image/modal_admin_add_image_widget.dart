@@ -607,7 +607,12 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                   .isEmpty) {
                                             return;
                                           }
-                                          if (!widget.isThumbnail!) {
+                                          if (widget.isThumbnail!) {
+                                            setState(() {
+                                              _model.dropDownValueController
+                                                  ?.value = 'รายการ';
+                                            });
+                                          } else {
                                             if (_model.dropDownValue == null ||
                                                 _model.dropDownValue == '') {
                                               ScaffoldMessenger.of(context)
@@ -633,6 +638,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                               return;
                                             }
                                           }
+
                                           Navigator.pop(
                                               context,
                                               CreateImageStruct(
