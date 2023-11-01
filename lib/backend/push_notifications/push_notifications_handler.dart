@@ -172,6 +172,7 @@ final parametersBuilderMap =
   'AdminDashboard': ParameterData.none(),
   'AdminImage': ParameterData.none(),
   'AdminCategory': ParameterData.none(),
+  'AdminBlog': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {
