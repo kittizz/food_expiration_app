@@ -300,8 +300,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child:
-                                                    ModalAdminAddImageWidget(),
+                                                child: ModalAdminAddImageWidget(
+                                                  isThumbnail: false,
+                                                  thumbnailCategoriesId: 0,
+                                                ),
                                               ),
                                             );
                                           },
