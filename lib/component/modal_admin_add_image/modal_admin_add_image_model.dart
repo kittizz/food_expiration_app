@@ -44,13 +44,23 @@ class ModalAdminAddImageModel
   FocusNode? projectNameFocusNode;
   TextEditingController? projectNameController;
   String? Function(BuildContext, String?)? projectNameControllerValidator;
+  String? _projectNameControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    projectNameControllerValidator = _projectNameControllerValidator;
+  }
 
   void dispose() {
     projectNameFocusNode?.dispose();

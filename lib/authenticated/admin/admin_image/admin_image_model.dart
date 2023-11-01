@@ -6,6 +6,7 @@ import '/component/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'admin_image_widget.dart' show AdminImageWidget;
 import 'package:flutter/material.dart';
@@ -21,6 +22,20 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   KindStruct? kindLocal;
   void updateKindLocalStruct(Function(KindStruct) updateFn) =>
       updateFn(kindLocal ??= KindStruct());
+
+  List<ThumbnailCategoryStruct> thumbnailCategories = [];
+  void addToThumbnailCategories(ThumbnailCategoryStruct item) =>
+      thumbnailCategories.add(item);
+  void removeFromThumbnailCategories(ThumbnailCategoryStruct item) =>
+      thumbnailCategories.remove(item);
+  void removeAtIndexFromThumbnailCategories(int index) =>
+      thumbnailCategories.removeAt(index);
+  void insertAtIndexInThumbnailCategories(
+          int index, ThumbnailCategoryStruct item) =>
+      thumbnailCategories.insert(index, item);
+  void updateThumbnailCategoriesAtIndex(
+          int index, Function(ThumbnailCategoryStruct) updateFn) =>
+      thumbnailCategories[index] = updateFn(thumbnailCategories[index]);
 
   ///  State fields for stateful widgets in this page.
 
@@ -57,6 +72,22 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   }
 
   /// Action blocks are added here.
+
+  Future fetchThumbnailCategories(BuildContext context) async {
+    ApiCallResponse? apiThumbnailCategories;
+
+    apiThumbnailCategories =
+        await FoodexpirationGroup.thumbnailCategoryCall.call(
+      deviceid: FFAppState().deviceId,
+    );
+    if ((apiThumbnailCategories?.succeeded ?? true)) {
+      thumbnailCategories = functions
+          .toThumbnailCategoryStructList(
+              (apiThumbnailCategories?.jsonBody ?? ''))
+          .toList()
+          .cast<ThumbnailCategoryStruct>();
+    }
+  }
 
   /// Additional helper methods are added here.
 }

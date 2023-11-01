@@ -13,10 +13,12 @@ class CreateImageStruct extends FFFirebaseStruct {
     ImageStruct? image,
     String? name,
     KindStruct? kind,
+    int? thumbnailCategoriesId,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _image = image,
         _name = name,
         _kind = kind,
+        _thumbnailCategoriesId = thumbnailCategoriesId,
         super(firestoreUtilData);
 
   // "image" field.
@@ -41,11 +43,20 @@ class CreateImageStruct extends FFFirebaseStruct {
       updateFn(_kind ??= KindStruct());
   bool hasKind() => _kind != null;
 
+  // "thumbnailCategoriesId" field.
+  int? _thumbnailCategoriesId;
+  int get thumbnailCategoriesId => _thumbnailCategoriesId ?? 0;
+  set thumbnailCategoriesId(int? val) => _thumbnailCategoriesId = val;
+  void incrementThumbnailCategoriesId(int amount) =>
+      _thumbnailCategoriesId = thumbnailCategoriesId + amount;
+  bool hasThumbnailCategoriesId() => _thumbnailCategoriesId != null;
+
   static CreateImageStruct fromMap(Map<String, dynamic> data) =>
       CreateImageStruct(
         image: ImageStruct.maybeFromMap(data['image']),
         name: data['name'] as String?,
         kind: KindStruct.maybeFromMap(data['kind']),
+        thumbnailCategoriesId: castToType<int>(data['thumbnailCategoriesId']),
       );
 
   static CreateImageStruct? maybeFromMap(dynamic data) =>
@@ -55,6 +66,7 @@ class CreateImageStruct extends FFFirebaseStruct {
         'image': _image?.toMap(),
         'name': _name,
         'kind': _kind?.toMap(),
+        'thumbnailCategoriesId': _thumbnailCategoriesId,
       }.withoutNulls;
 
   @override
@@ -70,6 +82,10 @@ class CreateImageStruct extends FFFirebaseStruct {
         'kind': serializeParam(
           _kind,
           ParamType.DataStruct,
+        ),
+        'thumbnailCategoriesId': serializeParam(
+          _thumbnailCategoriesId,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -92,6 +108,11 @@ class CreateImageStruct extends FFFirebaseStruct {
           false,
           structBuilder: KindStruct.fromSerializableMap,
         ),
+        thumbnailCategoriesId: deserializeParam(
+          data['thumbnailCategoriesId'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -102,17 +123,20 @@ class CreateImageStruct extends FFFirebaseStruct {
     return other is CreateImageStruct &&
         image == other.image &&
         name == other.name &&
-        kind == other.kind;
+        kind == other.kind &&
+        thumbnailCategoriesId == other.thumbnailCategoriesId;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([image, name, kind]);
+  int get hashCode =>
+      const ListEquality().hash([image, name, kind, thumbnailCategoriesId]);
 }
 
 CreateImageStruct createCreateImageStruct({
   ImageStruct? image,
   String? name,
   KindStruct? kind,
+  int? thumbnailCategoriesId,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -122,6 +146,7 @@ CreateImageStruct createCreateImageStruct({
       image: image ?? (clearUnsetFields ? ImageStruct() : null),
       name: name,
       kind: kind ?? (clearUnsetFields ? KindStruct() : null),
+      thumbnailCategoriesId: thumbnailCategoriesId,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
