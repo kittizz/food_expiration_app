@@ -896,7 +896,7 @@ class AdminSetCategoriesCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'adminSetCategories',
-      apiUrl: '${FoodexpirationGroup.baseUrl}/admin/category',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/admin/set-category',
       callType: ApiCallType.POST,
       headers: {
         'x-device-id': '${deviceid}',
