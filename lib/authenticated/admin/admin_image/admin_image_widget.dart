@@ -1067,6 +1067,28 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     var _shouldSetState = false;
+                                    if (_model.useThumbnailCategorie == null) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'โปรดเลือกหมวดหมู่ก่อน',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 1000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .orange600,
+                                        ),
+                                      );
+                                      if (_shouldSetState) setState(() {});
+                                      return;
+                                    }
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
