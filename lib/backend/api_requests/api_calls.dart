@@ -43,6 +43,10 @@ class FoodexpirationGroup {
   static UpdateFCMCall updateFCMCall = UpdateFCMCall();
   static UpdateSettingsCall updateSettingsCall = UpdateSettingsCall();
   static AdminDashboardCall adminDashboardCall = AdminDashboardCall();
+  static AdminSetCategoriesCall adminSetCategoriesCall =
+      AdminSetCategoriesCall();
+  static AdminGetCategoriesCall adminGetCategoriesCall =
+      AdminGetCategoriesCall();
 }
 
 class RegisterDeviceCall {
@@ -878,6 +882,58 @@ class AdminDashboardCall {
   dynamic locations(dynamic response) => getJsonField(
         response,
         r'''$.locations''',
+      );
+}
+
+class AdminSetCategoriesCall {
+  Future<ApiCallResponse> call({
+    String? categories = '',
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "categories": "${categories}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'adminSetCategories',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/admin/category',
+      callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class AdminGetCategoriesCall {
+  Future<ApiCallResponse> call({
+    String? deviceid = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'adminGetCategories',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/admin/category',
+      callType: ApiCallType.GET,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic categories(dynamic response) => getJsonField(
+        response,
+        r'''$.categories''',
       );
 }
 
