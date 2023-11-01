@@ -366,6 +366,14 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                             .secondary,
                                                   ),
                                                 );
+                                                await _model
+                                                    .fetchThumbnailCategories(
+                                                        context);
+                                                setState(() {});
+                                                setState(() {
+                                                  _model.kindLocal = _model
+                                                      .modelAddImage?.kind;
+                                                });
                                                 if (_shouldSetState)
                                                   setState(() {});
                                                 return;
@@ -453,24 +461,77 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                             ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: OctoImage(
-                                                placeholderBuilder:
-                                                    OctoPlaceholder.blurHash(
-                                                  _model.useThumbnailCategorie!
-                                                      .image.blurHash,
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await Navigator.push(
+                                                  context,
+                                                  PageTransition(
+                                                    type:
+                                                        PageTransitionType.fade,
+                                                    child:
+                                                        FlutterFlowExpandedImageView(
+                                                      image: OctoImage(
+                                                        placeholderBuilder:
+                                                            OctoPlaceholder
+                                                                .blurHash(
+                                                          _model
+                                                              .useThumbnailCategorie!
+                                                              .image
+                                                              .blurHash,
+                                                        ),
+                                                        image: NetworkImage(
+                                                          functions.getImage(_model
+                                                              .useThumbnailCategorie!
+                                                              .image
+                                                              .path),
+                                                        ),
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                      allowRotation: false,
+                                                      tag: functions.getImage(_model
+                                                          .useThumbnailCategorie!
+                                                          .image
+                                                          .path),
+                                                      useHeroAnimation: true,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: Hero(
+                                                tag: functions.getImage(_model
+                                                    .useThumbnailCategorie!
+                                                    .image
+                                                    .path),
+                                                transitionOnUserGestures: true,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: OctoImage(
+                                                    placeholderBuilder:
+                                                        OctoPlaceholder
+                                                            .blurHash(
+                                                      _model
+                                                          .useThumbnailCategorie!
+                                                          .image
+                                                          .blurHash,
+                                                    ),
+                                                    image: NetworkImage(
+                                                      functions.getImage(_model
+                                                          .useThumbnailCategorie!
+                                                          .image
+                                                          .path),
+                                                    ),
+                                                    width: 300.0,
+                                                    height: 200.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
-                                                image: NetworkImage(
-                                                  functions.getImage(_model
-                                                      .useThumbnailCategorie!
-                                                      .image
-                                                      .path),
-                                                ),
-                                                width: 300.0,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),
@@ -1145,7 +1206,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                       if (_model.useThumbnailCategorie != null)
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(0.00, 0.00),
+                                              AlignmentDirectional(-1.00, 0.00),
                                           child: Builder(
                                             builder: (context) {
                                               final list =
