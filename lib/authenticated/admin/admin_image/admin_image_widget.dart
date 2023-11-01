@@ -2,6 +2,8 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/modal_admin_add_image/modal_admin_add_image_widget.dart';
+import '/component/modal_admin_edit_image/modal_admin_edit_image_widget.dart';
+import '/component/modal_rename/modal_rename_widget.dart';
 import '/component/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -48,9 +50,6 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
       setState(() {});
     });
 
-    _model.textController ??=
-        TextEditingController(text: _model.useThumbnailCategorie?.name);
-    _model.textFieldFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -329,71 +328,73 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                 _model.modelAddImage = value));
 
                                             _shouldSetState = true;
-                                            _model.apiThumbnailCreateCategory =
-                                                await FoodexpirationGroup
-                                                    .adminThumbnailCreateCategoryCall
-                                                    .call(
-                                              deviceid: FFAppState().deviceId,
-                                              name: _model.modelAddImage?.name,
-                                              imageId: _model
-                                                  .modelAddImage?.image?.id,
-                                              type: _model
-                                                  .modelAddImage?.kind?.key,
-                                            );
-                                            _shouldSetState = true;
-                                            if ((_model
-                                                    .apiThumbnailCreateCategory
-                                                    ?.succeeded ??
-                                                true)) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'สำเร็จ',
-                                                    style: TextStyle(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                    ),
-                                                  ),
-                                                  duration: Duration(
-                                                      milliseconds: 1000),
-                                                  backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondary,
-                                                ),
+                                            if (_model.modelAddImage != null) {
+                                              _model.apiThumbnailCreateCategory =
+                                                  await FoodexpirationGroup
+                                                      .adminThumbnailCreateCategoryCall
+                                                      .call(
+                                                deviceid: FFAppState().deviceId,
+                                                name:
+                                                    _model.modelAddImage?.name,
+                                                imageId: _model
+                                                    .modelAddImage?.image?.id,
+                                                type: _model
+                                                    .modelAddImage?.kind?.key,
                                               );
-                                              if (_shouldSetState)
-                                                setState(() {});
-                                              return;
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'ผิดพลาด',
-                                                    style: TextStyle(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
+                                              _shouldSetState = true;
+                                              if ((_model
+                                                      .apiThumbnailCreateCategory
+                                                      ?.succeeded ??
+                                                  true)) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'สำเร็จ',
+                                                      style: TextStyle(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
                                                     ),
+                                                    duration: Duration(
+                                                        milliseconds: 1000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondary,
                                                   ),
-                                                  duration: Duration(
-                                                      milliseconds: 1000),
-                                                  backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .error,
-                                                ),
-                                              );
-                                              if (_shouldSetState)
-                                                setState(() {});
-                                              return;
+                                                );
+                                                if (_shouldSetState)
+                                                  setState(() {});
+                                                return;
+                                              } else {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'ผิดพลาด',
+                                                      style: TextStyle(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 1000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .error,
+                                                  ),
+                                                );
+                                                if (_shouldSetState)
+                                                  setState(() {});
+                                                return;
+                                              }
                                             }
-
                                             if (_shouldSetState)
                                               setState(() {});
                                           },
@@ -464,46 +465,20 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                             ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 5.0, 0.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Flexible(
-                                                child: Icon(
-                                                  Icons.photo_library,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .success,
-                                                  size: 14.0,
-                                                ),
-                                              ),
-                                              Text(
-                                                'เลือกภาพ',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .success,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
-                                              ),
-                                            ],
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-1.00, 0.00),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 5.0, 0.0, 5.0),
+                                            child: Text(
+                                              _model
+                                                  .useThumbnailCategorie!.name,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
                                           ),
                                         ),
                                         Padding(
@@ -520,115 +495,358 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                                  MainAxisAlignment.center,
                                               children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          10.0, 0.0, 0.0, 0.0),
-                                                  child: Icon(
-                                                    Icons.delete,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .red300,
-                                                    size: 16.0,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(5.0, 0.0,
-                                                                5.0, 0.0),
-                                                    child: TextFormField(
-                                                      controller:
-                                                          _model.textController,
-                                                      focusNode: _model
-                                                          .textFieldFocusNode,
-                                                      obscureText: false,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        isDense: true,
-                                                        enabledBorder:
-                                                            UnderlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .alternate,
-                                                            width: 2.0,
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    var confirmDialogResponse =
+                                                        await showDialog<bool>(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      'ลบหมวดหมู่'),
+                                                                  content: Text(
+                                                                      'จะลบข้อมูลข้างในหมวดหมู่ทั้งหมด'),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                      child: Text(
+                                                                          'Cancel'),
+                                                                    ),
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                      child: Text(
+                                                                          'Confirm'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            ) ??
+                                                            false;
+                                                    if (confirmDialogResponse) {
+                                                      _model.apiDeleteThumCate =
+                                                          await FoodexpirationGroup
+                                                              .deleteThumbnailCategoryCall
+                                                              .call(
+                                                        deviceid: FFAppState()
+                                                            .deviceId,
+                                                        id: _model
+                                                            .useThumbnailCategorie
+                                                            ?.id,
+                                                      );
+                                                      if ((_model
+                                                              .apiDeleteThumCate
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        setState(() {
+                                                          _model.useThumbnailCategorie =
+                                                              null;
+                                                        });
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              'สำเร็จ',
+                                                              style: TextStyle(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                              ),
+                                                            ),
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    1000),
+                                                            backgroundColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
                                                           ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                        ),
-                                                        focusedBorder:
-                                                            UnderlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            width: 2.0,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                        ),
-                                                        errorBorder:
-                                                            UnderlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .error,
-                                                            width: 2.0,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            UnderlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .error,
-                                                            width: 2.0,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                        ),
+                                                        );
+                                                      }
+                                                    }
+
+                                                    setState(() {});
+                                                  },
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.delete,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .red300,
+                                                        size: 16.0,
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium,
-                                                      validator: _model
-                                                          .textControllerValidator
-                                                          .asValidator(context),
-                                                    ),
+                                                      Text(
+                                                        'ลบ',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .error,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
+                                                                ),
+                                                      ),
+                                                    ].divide(
+                                                        SizedBox(width: 5.0)),
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 10.0, 0.0),
-                                                  child: Icon(
-                                                    Icons.save_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .blue600,
-                                                    size: 16.0,
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      enableDrag: false,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child:
+                                                                ModalRenameWidget(
+                                                              name: _model
+                                                                  .useThumbnailCategorie
+                                                                  ?.name,
+                                                              id: _model
+                                                                  .useThumbnailCategorie!
+                                                                  .id,
+                                                              type: 'category',
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        safeSetState(() {}));
+
+                                                    await _model
+                                                        .fetchThumbnailCategories(
+                                                            context);
+                                                    setState(() {});
+                                                  },
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Icon(
+                                                        Icons
+                                                            .drive_file_rename_outline,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .orange600,
+                                                        size: 16.0,
+                                                      ),
+                                                      Text(
+                                                        'เปลี่ยนชื่อ',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .orange600,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
+                                                                ),
+                                                      ),
+                                                    ].divide(
+                                                        SizedBox(width: 5.0)),
                                                   ),
                                                 ),
-                                              ].divide(SizedBox(width: 5.0)),
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      enableDrag: false,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child:
+                                                                ModalAdminEditImageWidget(),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        safeSetState(() => _model
+                                                                .modelEditImage =
+                                                            value));
+
+                                                    if (_model.modelEditImage !=
+                                                        null) {
+                                                      _model.apiUpdateCategoryImage =
+                                                          await FoodexpirationGroup
+                                                              .adminUpdateCategoryImageCall
+                                                              .call(
+                                                        deviceid: FFAppState()
+                                                            .deviceId,
+                                                        id: _model
+                                                            .useThumbnailCategorie
+                                                            ?.id,
+                                                        imageId: _model
+                                                            .modelEditImage?.id,
+                                                      );
+                                                      if ((_model
+                                                              .apiUpdateCategoryImage
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              'สำเร็จ',
+                                                              style: TextStyle(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                              ),
+                                                            ),
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    1000),
+                                                            backgroundColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                          ),
+                                                        );
+                                                        setState(() {
+                                                          _model
+                                                              .updateUseThumbnailCategorieStruct(
+                                                            (e) => e
+                                                              ..image = _model
+                                                                  .modelEditImage,
+                                                          );
+                                                        });
+                                                      }
+                                                    }
+
+                                                    setState(() {});
+                                                  },
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.photo,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .blue600,
+                                                        size: 16.0,
+                                                      ),
+                                                      Text(
+                                                        'เลือกภาพ',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .blue600,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
+                                                                ),
+                                                      ),
+                                                    ].divide(
+                                                        SizedBox(width: 5.0)),
+                                                  ),
+                                                ),
+                                              ].divide(SizedBox(width: 20.0)),
                                             ),
                                           ),
                                         ),
@@ -681,11 +899,6 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                   setState(() {
                                                     _model.useThumbnailCategorie =
                                                         categorieslistItem;
-                                                  });
-                                                  setState(() {
-                                                    _model.textController
-                                                            ?.text =
-                                                        categorieslistItem.name;
                                                   });
                                                   await _model.fetchThumbnail(
                                                     context,
@@ -762,32 +975,133 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                               ),
                               Align(
                                 alignment: AlignmentDirectional(1.00, 0.00),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Icon(
-                                      Icons.add_rounded,
-                                      color:
-                                          FlutterFlowTheme.of(context).success,
-                                      size: 16.0,
-                                    ),
-                                    Text(
-                                      'เพิ่ม',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily,
-                                            color: FlutterFlowTheme.of(context)
-                                                .success,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    var _shouldSetState = false;
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: ModalAdminAddImageWidget(
+                                              isThumbnail: true,
+                                              thumbnailCategoriesId: _model
+                                                  .useThumbnailCategorie?.id,
+                                            ),
                                           ),
-                                    ),
-                                  ],
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(
+                                        () => _model.modelAddImage2 = value));
+
+                                    _shouldSetState = true;
+                                    if (_model.modelAddImage2 != null) {
+                                      _model.apiThumbnailCreate =
+                                          await FoodexpirationGroup
+                                              .adminThumbnailCreateCall
+                                              .call(
+                                        deviceid: FFAppState().deviceId,
+                                        name: _model.modelAddImage2?.name,
+                                        imageId:
+                                            _model.modelAddImage2?.image?.id,
+                                        categoryId:
+                                            _model.useThumbnailCategorie?.id,
+                                      );
+                                      _shouldSetState = true;
+                                      if ((_model
+                                              .apiThumbnailCreate?.succeeded ??
+                                          true)) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'สำเร็จ',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                        if (_shouldSetState) setState(() {});
+                                        return;
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'ผิดพลาด',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .error,
+                                          ),
+                                        );
+                                        if (_shouldSetState) setState(() {});
+                                        return;
+                                      }
+                                    }
+                                    if (_shouldSetState) setState(() {});
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Icon(
+                                        Icons.add_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .success,
+                                        size: 16.0,
+                                      ),
+                                      Text(
+                                        'เพิ่ม',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .success,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -987,13 +1301,74 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                     MainAxisAlignment
                                                                         .start,
                                                                 children: [
-                                                                  Icon(
-                                                                    Icons
-                                                                        .close_rounded,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryText,
-                                                                    size: 14.0,
+                                                                  InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      var confirmDialogResponse = await showDialog<
+                                                                              bool>(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (alertDialogContext) {
+                                                                              return AlertDialog(
+                                                                                title: Text('ลบภาพ'),
+                                                                                content: Text('คุณแน่ใจหรือไม่'),
+                                                                                actions: [
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                    child: Text('Cancel'),
+                                                                                  ),
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                    child: Text('Confirm'),
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          ) ??
+                                                                          false;
+                                                                      if (confirmDialogResponse) {
+                                                                        _model.apiDeleteThum = await FoodexpirationGroup
+                                                                            .deleteThumbnailCall
+                                                                            .call(
+                                                                          deviceid:
+                                                                              FFAppState().deviceId,
+                                                                          id: listItem
+                                                                              .id,
+                                                                        );
+                                                                        if ((_model.apiDeleteThum?.succeeded ??
+                                                                            true)) {
+                                                                          setState(
+                                                                              () {
+                                                                            _model.removeFromThumbnails(listItem);
+                                                                          });
+                                                                        }
+                                                                      }
+
+                                                                      setState(
+                                                                          () {});
+                                                                    },
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .close_rounded,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                      size:
+                                                                          20.0,
+                                                                    ),
                                                                   ),
                                                                   Expanded(
                                                                     child:
@@ -1012,12 +1387,70 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                  Icon(
-                                                                    Icons.save,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryText,
-                                                                    size: 14.0,
+                                                                  InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      await showModalBottomSheet(
+                                                                        isScrollControlled:
+                                                                            true,
+                                                                        backgroundColor:
+                                                                            Colors.transparent,
+                                                                        enableDrag:
+                                                                            false,
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (context) {
+                                                                          return GestureDetector(
+                                                                            onTap: () => _model.unfocusNode.canRequestFocus
+                                                                                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                                                                : FocusScope.of(context).unfocus(),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: MediaQuery.viewInsetsOf(context),
+                                                                              child: ModalRenameWidget(
+                                                                                name: listItem.name,
+                                                                                id: listItem.id,
+                                                                                type: 'thumbnail',
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      ).then((value) =>
+                                                                          safeSetState(
+                                                                              () {}));
+
+                                                                      await _model
+                                                                          .fetchThumbnail(
+                                                                        context,
+                                                                        id: _model
+                                                                            .useThumbnailCategorie
+                                                                            ?.id,
+                                                                      );
+                                                                      setState(
+                                                                          () {});
+                                                                    },
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .drive_file_rename_outline,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                      size:
+                                                                          20.0,
+                                                                    ),
                                                                   ),
                                                                 ],
                                                               ),

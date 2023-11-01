@@ -2,12 +2,10 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -19,28 +17,20 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
-import 'modal_admin_add_image_model.dart';
-export 'modal_admin_add_image_model.dart';
+import 'modal_admin_edit_image_model.dart';
+export 'modal_admin_edit_image_model.dart';
 
-class ModalAdminAddImageWidget extends StatefulWidget {
-  const ModalAdminAddImageWidget({
-    Key? key,
-    this.isThumbnail,
-    int? thumbnailCategoriesId,
-  })  : this.thumbnailCategoriesId = thumbnailCategoriesId ?? 0,
-        super(key: key);
-
-  final bool? isThumbnail;
-  final int thumbnailCategoriesId;
+class ModalAdminEditImageWidget extends StatefulWidget {
+  const ModalAdminEditImageWidget({Key? key}) : super(key: key);
 
   @override
-  _ModalAdminAddImageWidgetState createState() =>
-      _ModalAdminAddImageWidgetState();
+  _ModalAdminEditImageWidgetState createState() =>
+      _ModalAdminEditImageWidgetState();
 }
 
-class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
+class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
     with TickerProviderStateMixin {
-  late ModalAdminAddImageModel _model;
+  late ModalAdminEditImageModel _model;
 
   final animationsMap = {
     'containerOnPageLoadAnimation1': AnimationInfo(
@@ -80,10 +70,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ModalAdminAddImageModel());
+    _model = createModel(context, () => ModalAdminEditImageModel());
 
-    _model.projectNameController ??= TextEditingController();
-    _model.projectNameFocusNode ??= FocusNode();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -304,9 +292,15 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                                       ''),
                                                                 )
                                                                 .toString()
-                                                        ..blurHash = _model
-                                                            .uploadedLocalFile
-                                                            .blurHash,
+                                                        ..blurHash =
+                                                            FoodexpirationGroup
+                                                                .uploadImageCall
+                                                                .blurHash(
+                                                                  (_model.apiUploadImage1
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                )
+                                                                .toString(),
                                                     );
                                                     _model.hash = _model
                                                         .uploadedLocalFile
@@ -423,7 +417,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                   ),
                                                 ],
                                               ),
-                                              if (_model.image?.id != null)
+                                              if (_model.image != null)
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
@@ -458,132 +452,6 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 8.0, 0.0, 0.0),
-                                child: TextFormField(
-                                  controller: _model.projectNameController,
-                                  focusNode: _model.projectNameFocusNode,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    hintText: 'ชื่อ',
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .headlineMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineMediumFamily,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMediumFamily),
-                                        ),
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    errorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedErrorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 24.0, 0.0, 24.0),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium,
-                                  validator: _model
-                                      .projectNameControllerValidator
-                                      .asValidator(context),
-                                ),
-                              ),
-                              if (!widget.isThumbnail!)
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 20.0, 0.0, 0.0),
-                                  child: FlutterFlowDropDown<String>(
-                                    controller:
-                                        _model.dropDownValueController ??=
-                                            FormFieldController<String>(null),
-                                    options: FFAppState()
-                                        .kind
-                                        .map((e) => e.name)
-                                        .toList(),
-                                    onChanged: (val) => setState(
-                                        () => _model.dropDownValue = val),
-                                    height: 80.0,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 24.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily),
-                                        ),
-                                    hintText: 'เลือกชนิด....',
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_down_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 24.0,
-                                    ),
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    elevation: 0.0,
-                                    borderColor: Colors.transparent,
-                                    borderWidth: 0.0,
-                                    borderRadius: 0.0,
-                                    margin: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 8.0, 0.0, 8.0),
-                                    isSearchable: false,
-                                    isMultiSelect: false,
-                                  ),
-                                ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 16.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -594,40 +462,9 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                           0.0, 0.0, 4.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          if (_model.formKey.currentState ==
-                                                  null ||
-                                              !_model.formKey.currentState!
-                                                  .validate()) {
-                                            return;
-                                          }
-                                          if (_model.uploadedLocalFile ==
-                                                  null ||
-                                              (_model.uploadedLocalFile.bytes ??
-                                                      [])
-                                                  .isEmpty) {
-                                            return;
-                                          }
-                                          if (_model.dropDownValue == null) {
-                                            return;
-                                          }
-                                          Navigator.pop(
-                                              context,
-                                              CreateImageStruct(
-                                                name: _model
-                                                    .projectNameController.text,
-                                                kind: FFAppState()
-                                                    .kind
-                                                    .where((e) =>
-                                                        e.name ==
-                                                        _model.dropDownValue)
-                                                    .toList()
-                                                    .first,
-                                                image: _model.image,
-                                                thumbnailCategoriesId: widget
-                                                    .thumbnailCategoriesId,
-                                              ));
+                                          Navigator.pop(context, _model.image);
                                         },
-                                        text: 'สร้าง',
+                                        text: 'ยืนยัน',
                                         options: FFButtonOptions(
                                           height: 50.0,
                                           padding:

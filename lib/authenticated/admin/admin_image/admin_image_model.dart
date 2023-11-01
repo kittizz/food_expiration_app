@@ -2,6 +2,8 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/component/modal_admin_add_image/modal_admin_add_image_widget.dart';
+import '/component/modal_admin_edit_image/modal_admin_edit_image_widget.dart';
+import '/component/modal_rename/modal_rename_widget.dart';
 import '/component/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -62,10 +64,18 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   CreateImageStruct? modelAddImage;
   // Stores action output result for [Backend Call - API (adminThumbnailCreateCategory)] action in Row widget.
   ApiCallResponse? apiThumbnailCreateCategory;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
+  // Stores action output result for [Backend Call - API (deleteThumbnailCategory)] action in Row widget.
+  ApiCallResponse? apiDeleteThumCate;
+  // Stores action output result for [Bottom Sheet - ModalAdminEditImage] action in Row widget.
+  ImageStruct? modelEditImage;
+  // Stores action output result for [Backend Call - API (adminUpdateCategoryImage)] action in Row widget.
+  ApiCallResponse? apiUpdateCategoryImage;
+  // Stores action output result for [Bottom Sheet - ModalAdminAddImage] action in Row widget.
+  CreateImageStruct? modelAddImage2;
+  // Stores action output result for [Backend Call - API (adminThumbnailCreate)] action in Row widget.
+  ApiCallResponse? apiThumbnailCreate;
+  // Stores action output result for [Backend Call - API (deleteThumbnail)] action in Icon widget.
+  ApiCallResponse? apiDeleteThum;
 
   /// Initialization and disposal methods.
 
@@ -76,8 +86,6 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   void dispose() {
     unfocusNode.dispose();
     sideNavModel.dispose();
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
   }
 
   /// Action blocks are added here.
