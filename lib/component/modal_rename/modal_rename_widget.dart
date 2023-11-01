@@ -41,8 +41,8 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
     super.initState();
     _model = createModel(context, () => ModalRenameModel());
 
-    _model.emailAddressController ??= TextEditingController(text: widget.name);
-    _model.emailAddressFocusNode ??= FocusNode();
+    _model.nameController ??= TextEditingController(text: widget.name);
+    _model.nameFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -154,8 +154,8 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 16.0, 16.0, 0.0),
                         child: TextFormField(
-                          controller: _model.emailAddressController,
-                          focusNode: _model.emailAddressFocusNode,
+                          controller: _model.nameController,
+                          focusNode: _model.nameFocusNode,
                           textCapitalization: TextCapitalization.sentences,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -198,7 +198,7 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                           ),
                           style: FlutterFlowTheme.of(context).bodyMedium,
                           cursorColor: FlutterFlowTheme.of(context).primary,
-                          validator: _model.emailAddressControllerValidator
+                          validator: _model.nameControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -212,7 +212,7 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                                 .call(
                               deviceid: FFAppState().deviceId,
                               id: widget.id,
-                              name: _model.emailAddressController.text,
+                              name: _model.nameController.text,
                               type: widget.type,
                             );
                             if ((_model.apiResultv0m?.succeeded ?? true)) {
@@ -247,7 +247,7 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                               );
                             }
 
-                            Navigator.pop(context);
+                            Navigator.pop(context, _model.nameController.text);
 
                             setState(() {});
                           },

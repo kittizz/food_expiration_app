@@ -667,11 +667,23 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                         );
                                                       },
                                                     ).then((value) =>
-                                                        safeSetState(() {}));
+                                                        safeSetState(() =>
+                                                            _model.modelRename =
+                                                                value));
 
+                                                    setState(() {
+                                                      _model
+                                                          .updateUseThumbnailCategorieStruct(
+                                                        (e) => e
+                                                          ..name = _model
+                                                              .modelRename,
+                                                      );
+                                                    });
                                                     await _model
                                                         .fetchThumbnailCategories(
                                                             context);
+                                                    setState(() {});
+
                                                     setState(() {});
                                                   },
                                                   child: Row(
