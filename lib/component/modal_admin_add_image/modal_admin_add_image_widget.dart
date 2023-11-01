@@ -595,6 +595,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                         _model.dropDownValue)
                                                     .toList()
                                                     .first,
+                                                image: _model.image,
                                               ));
                                         },
                                         text: 'สร้าง',
