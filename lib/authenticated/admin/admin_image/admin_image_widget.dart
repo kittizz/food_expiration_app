@@ -733,413 +733,367 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                   ),
                 ),
               ),
-              Expanded(
+              Flexible(
                 child: Align(
                   alignment: AlignmentDirectional(0.00, -1.00),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Flexible(
-                          child: Align(
-                            alignment: AlignmentDirectional(0.00, -1.00),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(8.0),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Flexible(
+                                child: Align(
+                                  alignment: AlignmentDirectional(-1.00, 0.00),
+                                  child: Text(
+                                    'ภาพ',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                ),
                               ),
+                              Align(
+                                alignment: AlignmentDirectional(1.00, 0.00),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      Icons.add_rounded,
+                                      color:
+                                          FlutterFlowTheme.of(context).success,
+                                      size: 16.0,
+                                    ),
+                                    Text(
+                                      'เพิ่ม',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .success,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            thickness: 2.0,
+                            color: FlutterFlowTheme.of(context).alternate,
+                          ),
+                          if (_model.useThumbnailCategorie != null)
+                            Align(
+                              alignment: AlignmentDirectional(0.00, 0.00),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 10.0, 10.0, 10.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Flexible(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                -1.00, 0.00),
-                                            child: Text(
-                                              'ภาพ',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                    20.0, 20.0, 20.0, 20.0),
+                                child: Builder(
+                                  builder: (context) {
+                                    final list = _model.thumbnails.toList();
+                                    return Wrap(
+                                      spacing: 10.0,
+                                      runSpacing: 10.0,
+                                      alignment: WrapAlignment.start,
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.start,
+                                      direction: Axis.horizontal,
+                                      runAlignment: WrapAlignment.start,
+                                      verticalDirection: VerticalDirection.down,
+                                      clipBehavior: Clip.none,
+                                      children: List.generate(list.length,
+                                          (listIndex) {
+                                        final listItem = list[listIndex];
+                                        return Material(
+                                          color: Colors.transparent,
+                                          elevation: 2.0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          child: Container(
+                                            constraints: BoxConstraints(
+                                              minWidth: 220.0,
+                                              minHeight: 200.0,
+                                              maxWidth: 320.0,
+                                              maxHeight: 300.0,
                                             ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(1.00, 0.00),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Icons.add_rounded,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .success,
-                                                size: 16.0,
-                                              ),
-                                              Text(
-                                                'เพิ่ม',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .success,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Expanded(
+                                                  child: InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      await Navigator.push(
+                                                        context,
+                                                        PageTransition(
+                                                          type:
+                                                              PageTransitionType
+                                                                  .fade,
+                                                          child:
+                                                              FlutterFlowExpandedImageView(
+                                                            image: OctoImage(
+                                                              placeholderBuilder:
+                                                                  OctoPlaceholder
+                                                                      .blurHash(
+                                                                listItem.image
+                                                                    .blurHash,
+                                                              ),
+                                                              image:
+                                                                  NetworkImage(
+                                                                functions.getImage(
+                                                                    listItem
+                                                                        .image
+                                                                        .path),
+                                                              ),
+                                                              fit: BoxFit
+                                                                  .contain,
+                                                            ),
+                                                            allowRotation:
+                                                                false,
+                                                            tag: functions
+                                                                .getImage(
+                                                                    listItem
+                                                                        .image
+                                                                        .path),
+                                                            useHeroAnimation:
+                                                                true,
+                                                          ),
                                                         ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Divider(
-                                      thickness: 2.0,
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                    ),
-                                    if (_model.useThumbnailCategorie != null)
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(0.00, 0.00),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  20.0, 20.0, 20.0, 20.0),
-                                          child: Builder(
-                                            builder: (context) {
-                                              final list =
-                                                  _model.thumbnails.toList();
-                                              return Wrap(
-                                                spacing: 10.0,
-                                                runSpacing: 10.0,
-                                                alignment: WrapAlignment.start,
-                                                crossAxisAlignment:
-                                                    WrapCrossAlignment.start,
-                                                direction: Axis.horizontal,
-                                                runAlignment:
-                                                    WrapAlignment.start,
-                                                verticalDirection:
-                                                    VerticalDirection.down,
-                                                clipBehavior: Clip.none,
-                                                children: List.generate(
-                                                    list.length, (listIndex) {
-                                                  final listItem =
-                                                      list[listIndex];
-                                                  return Material(
-                                                    color: Colors.transparent,
-                                                    elevation: 2.0,
-                                                    shape:
-                                                        RoundedRectangleBorder(
+                                                      );
+                                                    },
+                                                    child: Hero(
+                                                      tag: functions.getImage(
+                                                          listItem.image.path),
+                                                      transitionOnUserGestures:
+                                                          true,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  0.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  0.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  8.0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  8.0),
+                                                        ),
+                                                        child: OctoImage(
+                                                          placeholderBuilder:
+                                                              OctoPlaceholder
+                                                                  .blurHash(
+                                                            listItem
+                                                                .image.blurHash,
+                                                          ),
+                                                          image: NetworkImage(
+                                                            functions.getImage(
+                                                                listItem.image
+                                                                    .path),
+                                                          ),
+                                                          width: 300.0,
+                                                          height: 150.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          10.0, 0.0, 10.0, 0.0),
+                                                  child: Container(
+                                                    height: 50.0,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               8.0),
                                                     ),
-                                                    child: Container(
-                                                      constraints:
-                                                          BoxConstraints(
-                                                        minWidth: 220.0,
-                                                        minHeight: 200.0,
-                                                        maxWidth: 320.0,
-                                                        maxHeight: 300.0,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                      ),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Expanded(
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .fade,
-                                                                    child:
-                                                                        FlutterFlowExpandedImageView(
-                                                                      image:
-                                                                          OctoImage(
-                                                                        placeholderBuilder:
-                                                                            OctoPlaceholder.blurHash(
-                                                                          listItem
-                                                                              .image
-                                                                              .blurHash,
-                                                                        ),
-                                                                        image:
-                                                                            NetworkImage(
-                                                                          functions.getImage(listItem
-                                                                              .image
-                                                                              .path),
-                                                                        ),
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                      allowRotation:
-                                                                          false,
-                                                                      tag: functions.getImage(listItem
-                                                                          .image
-                                                                          .path),
-                                                                      useHeroAnimation:
-                                                                          true,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Hero(
-                                                                tag: functions
-                                                                    .getImage(
-                                                                        listItem
-                                                                            .image
-                                                                            .path),
-                                                                transitionOnUserGestures:
-                                                                    true,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .only(
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            0.0),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            0.0),
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            8.0),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            8.0),
-                                                                  ),
-                                                                  child:
-                                                                      OctoImage(
-                                                                    placeholderBuilder:
-                                                                        OctoPlaceholder
-                                                                            .blurHash(
-                                                                      listItem
-                                                                          .image
-                                                                          .blurHash,
-                                                                    ),
-                                                                    image:
-                                                                        NetworkImage(
-                                                                      functions.getImage(listItem
-                                                                          .image
-                                                                          .path),
-                                                                    ),
-                                                                    width:
-                                                                        300.0,
-                                                                    height:
-                                                                        150.0,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.close_rounded,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 14.0,
+                                                        ),
+                                                        Expanded(
+                                                          child: Padding(
                                                             padding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        10.0,
+                                                                        8.0,
                                                                         0.0,
-                                                                        10.0,
+                                                                        8.0,
                                                                         0.0),
-                                                            child: Container(
-                                                              height: 50.0,
+                                                            child:
+                                                                TextFormField(
+                                                              controller: _model
+                                                                      .textController2 ??=
+                                                                  TextEditingController(
+                                                                text: listItem
+                                                                    .name,
+                                                              ),
+                                                              focusNode: _model
+                                                                  .textFieldFocusNode2,
+                                                              obscureText:
+                                                                  false,
                                                               decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryBackground,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                              ),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Icon(
-                                                                    Icons
-                                                                        .close_rounded,
+                                                                  InputDecoration(
+                                                                isDense: true,
+                                                                enabledBorder:
+                                                                    UnderlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .secondaryText,
-                                                                    size: 14.0,
+                                                                        .alternate,
+                                                                    width: 2.0,
                                                                   ),
-                                                                  Expanded(
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          TextFormField(
-                                                                        controller:
-                                                                            _model.textController2 ??=
-                                                                                TextEditingController(
-                                                                          text:
-                                                                              listItem.name,
-                                                                        ),
-                                                                        focusNode:
-                                                                            _model.textFieldFocusNode2,
-                                                                        obscureText:
-                                                                            false,
-                                                                        decoration:
-                                                                            InputDecoration(
-                                                                          isDense:
-                                                                              true,
-                                                                          enabledBorder:
-                                                                              UnderlineInputBorder(
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: FlutterFlowTheme.of(context).alternate,
-                                                                              width: 2.0,
-                                                                            ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(8.0),
-                                                                          ),
-                                                                          focusedBorder:
-                                                                              UnderlineInputBorder(
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: FlutterFlowTheme.of(context).primary,
-                                                                              width: 2.0,
-                                                                            ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(8.0),
-                                                                          ),
-                                                                          errorBorder:
-                                                                              UnderlineInputBorder(
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: FlutterFlowTheme.of(context).error,
-                                                                              width: 2.0,
-                                                                            ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(8.0),
-                                                                          ),
-                                                                          focusedErrorBorder:
-                                                                              UnderlineInputBorder(
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: FlutterFlowTheme.of(context).error,
-                                                                              width: 2.0,
-                                                                            ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(8.0),
-                                                                          ),
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium,
-                                                                        maxLines:
-                                                                            2,
-                                                                        minLines:
-                                                                            1,
-                                                                        validator: _model
-                                                                            .textController2Validator
-                                                                            .asValidator(context),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  Icon(
-                                                                    Icons.save,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
+                                                                focusedBorder:
+                                                                    UnderlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .secondaryText,
-                                                                    size: 14.0,
+                                                                        .primary,
+                                                                    width: 2.0,
                                                                   ),
-                                                                ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
+                                                                errorBorder:
+                                                                    UnderlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                                    width: 2.0,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
+                                                                focusedErrorBorder:
+                                                                    UnderlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                                    width: 2.0,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
                                                               ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium,
+                                                              maxLines: 2,
+                                                              minLines: 1,
+                                                              validator: _model
+                                                                  .textController2Validator
+                                                                  .asValidator(
+                                                                      context),
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                        Icon(
+                                                          Icons.save,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 14.0,
+                                                        ),
+                                                      ],
                                                     ),
-                                                  );
-                                                }),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    if (_model.useThumbnailCategorie == null)
-                                      Expanded(
-                                        child: Align(
-                                          alignment:
-                                              AlignmentDirectional(0.00, 0.00),
-                                          child: Text(
-                                            '(โปรดเลือกหมวดหมู่)',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
+                                                  ),
                                                 ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                  ],
+                                        );
+                                      }),
+                                    );
+                                  },
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      ],
+                          if (_model.useThumbnailCategorie == null)
+                            Expanded(
+                              child: Align(
+                                alignment: AlignmentDirectional(0.00, 0.00),
+                                child: Text(
+                                  '(โปรดเลือกหมวดหมู่)',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
+                                      ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
