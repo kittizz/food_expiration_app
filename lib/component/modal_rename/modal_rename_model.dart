@@ -13,10 +13,10 @@ import 'package:provider/provider.dart';
 class ModalRenameModel extends FlutterFlowModel<ModalRenameWidget> {
   ///  State fields for stateful widgets in this component.
 
-  // State field(s) for emailAddress widget.
-  FocusNode? emailAddressFocusNode;
-  TextEditingController? emailAddressController;
-  String? Function(BuildContext, String?)? emailAddressControllerValidator;
+  // State field(s) for name widget.
+  FocusNode? nameFocusNode;
+  TextEditingController? nameController;
+  String? Function(BuildContext, String?)? nameControllerValidator;
   // Stores action output result for [Backend Call - API (adminRenameThumbnail)] action in Button widget.
   ApiCallResponse? apiResultv0m;
 
@@ -25,8 +25,8 @@ class ModalRenameModel extends FlutterFlowModel<ModalRenameWidget> {
   void initState(BuildContext context) {}
 
   void dispose() {
-    emailAddressFocusNode?.dispose();
-    emailAddressController?.dispose();
+    nameFocusNode?.dispose();
+    nameController?.dispose();
   }
 
   /// Action blocks are added here.

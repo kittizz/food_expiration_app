@@ -66,6 +66,8 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   ApiCallResponse? apiThumbnailCreateCategory;
   // Stores action output result for [Backend Call - API (deleteThumbnailCategory)] action in Row widget.
   ApiCallResponse? apiDeleteThumCate;
+  // Stores action output result for [Bottom Sheet - ModalRename] action in Row widget.
+  String? modelRename;
   // Stores action output result for [Bottom Sheet - ModalAdminEditImage] action in Row widget.
   ImageStruct? modelEditImage;
   // Stores action output result for [Backend Call - API (adminUpdateCategoryImage)] action in Row widget.
