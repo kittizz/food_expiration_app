@@ -1486,7 +1486,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                           if (_model.useThumbnailCategorie == null)
                             Expanded(
                               child: Align(
-                                alignment: AlignmentDirectional(0.00, 0.00),
+                                alignment: AlignmentDirectional(0.00, -1.00),
                                 child: Text(
                                   '(โปรดเลือกหมวดหมู่)',
                                   style: FlutterFlowTheme.of(context)
