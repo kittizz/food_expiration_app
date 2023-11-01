@@ -608,10 +608,23 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                             return;
                                           }
                                           if (widget.isThumbnail!) {
-                                            setState(() {
-                                              _model.dropDownValueController
-                                                  ?.value = 'รายการ';
-                                            });
+                                            Navigator.pop(
+                                                context,
+                                                CreateImageStruct(
+                                                  name: _model
+                                                      .projectNameController
+                                                      .text,
+                                                  kind: FFAppState()
+                                                      .kind
+                                                      .where((e) =>
+                                                          e.name ==
+                                                          _model.dropDownValue)
+                                                      .toList()
+                                                      .first,
+                                                  image: _model.image,
+                                                  thumbnailCategoriesId: widget
+                                                      .thumbnailCategoriesId,
+                                                ));
                                           } else {
                                             if (_model.dropDownValue == null ||
                                                 _model.dropDownValue == '') {
@@ -638,23 +651,6 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                               return;
                                             }
                                           }
-
-                                          Navigator.pop(
-                                              context,
-                                              CreateImageStruct(
-                                                name: _model
-                                                    .projectNameController.text,
-                                                kind: FFAppState()
-                                                    .kind
-                                                    .where((e) =>
-                                                        e.name ==
-                                                        _model.dropDownValue)
-                                                    .toList()
-                                                    .first,
-                                                image: _model.image,
-                                                thumbnailCategoriesId: widget
-                                                    .thumbnailCategoriesId,
-                                              ));
                                         },
                                         text: 'สร้าง',
                                         options: FFButtonOptions(
