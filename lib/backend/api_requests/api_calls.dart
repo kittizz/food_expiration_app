@@ -22,6 +22,9 @@ class FoodexpirationGroup {
   static BlogAllCall blogAllCall = BlogAllCall();
   static LocationListCall locationListCall = LocationListCall();
   static DeleteLocationCall deleteLocationCall = DeleteLocationCall();
+  static DeleteThumbnailCall deleteThumbnailCall = DeleteThumbnailCall();
+  static DeleteThumbnailCategoryCall deleteThumbnailCategoryCall =
+      DeleteThumbnailCategoryCall();
   static UploadImageCall uploadImageCall = UploadImageCall();
   static GetBannerCall getBannerCall = GetBannerCall();
   static ChangeProfilepictureCall changeProfilepictureCall =
@@ -49,6 +52,10 @@ class FoodexpirationGroup {
       AdminGetCategoriesCall();
   static AdminThumbnailCreateCategoryCall adminThumbnailCreateCategoryCall =
       AdminThumbnailCreateCategoryCall();
+  static AdminThumbnailCreateCall adminThumbnailCreateCall =
+      AdminThumbnailCreateCall();
+  static AdminRenameThumbnailCall adminRenameThumbnailCall =
+      AdminRenameThumbnailCall();
 }
 
 class RegisterDeviceCall {
@@ -259,6 +266,62 @@ class DeleteLocationCall {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteLocation',
       apiUrl: '${FoodexpirationGroup.baseUrl}/location',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {
+        'id': id,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
+}
+
+class DeleteThumbnailCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? deviceid = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'deleteThumbnail',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {
+        'id': id,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
+}
+
+class DeleteThumbnailCategoryCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? deviceid = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'deleteThumbnailCategory',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/category',
       callType: ApiCallType.DELETE,
       headers: {
         'x-device-id': '${deviceid}',
@@ -955,6 +1018,68 @@ class AdminThumbnailCreateCategoryCall {
     return ApiManager.instance.makeApiCall(
       callName: 'adminThumbnailCreateCategory',
       apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/create-category',
+      callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class AdminThumbnailCreateCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    int? imageId,
+    int? categoryId,
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "name": "${name}",
+  "imageId": ${imageId},
+  "categoryId": ${categoryId}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'adminThumbnailCreate',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/create-thumbnail',
+      callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class AdminRenameThumbnailCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? name = '',
+    String? type = '',
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "id": ${id},
+  "name": "${name}",
+  "type": "${type}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'adminRenameThumbnail',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/rename',
       callType: ApiCallType.POST,
       headers: {
         'x-device-id': '${deviceid}',
