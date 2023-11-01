@@ -317,7 +317,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Divider(
                       height: 12.0,
