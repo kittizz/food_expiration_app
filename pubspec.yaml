@@ -87,6 +87,7 @@ dependencies:
   image_picker_platform_interface: 2.9.1
   intl: ^0.18.1
   json_path: 0.6.2
+  markdown_editor_plus: ^0.2.13
   mime_type: 1.0.0
   octo_image: 1.0.2
   page_transition: 2.0.4
