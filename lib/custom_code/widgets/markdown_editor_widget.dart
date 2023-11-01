@@ -32,9 +32,20 @@ class _MarkdownEditorWidgetState extends State<MarkdownEditorWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MarkdownAutoPreview(
-      controller: _controller,
-      emojiConvert: true,
-    );
+    _controller.text;
+
+    return SingleChildScrollView(
+        child: Padding(
+      padding: EdgeInsets.all(20),
+      child: MarkdownAutoPreview(
+        controller: _controller,
+        emojiConvert: true,
+        enableToolBar: true,
+        minLines: 10,
+        decoration: InputDecoration(
+          hintText: '<กดพิมพ์ markdown ที่นี่>',
+        ),
+      ),
+    ));
   }
 }
