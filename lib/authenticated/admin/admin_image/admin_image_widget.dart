@@ -1117,21 +1117,79 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                       FlutterFlowTheme.of(context).bodyMedium,
                                 ),
                               ),
-                              Align(
-                                alignment: AlignmentDirectional(1.00, 0.00),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    var _shouldSetState = false;
-                                    if (_model.useThumbnailCategorie == null) {
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  var _shouldSetState = false;
+                                  if (_model.useThumbnailCategorie == null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'โปรดเลือกหมวดหมู่ก่อน',
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 1000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .orange600,
+                                      ),
+                                    );
+                                    if (_shouldSetState) setState(() {});
+                                    return;
+                                  }
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    enableDrag: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return GestureDetector(
+                                        onTap: () => _model
+                                                .unfocusNode.canRequestFocus
+                                            ? FocusScope.of(context)
+                                                .requestFocus(
+                                                    _model.unfocusNode)
+                                            : FocusScope.of(context).unfocus(),
+                                        child: Padding(
+                                          padding:
+                                              MediaQuery.viewInsetsOf(context),
+                                          child: ModalAdminAddImageWidget(
+                                            isThumbnail: true,
+                                            thumbnailCategoriesId: _model
+                                                .useThumbnailCategorie?.id,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(
+                                      () => _model.modelAddImage2 = value));
+
+                                  _shouldSetState = true;
+                                  if (_model.modelAddImage2 != null) {
+                                    _model.apiThumbnailCreate =
+                                        await FoodexpirationGroup
+                                            .adminThumbnailCreateCall
+                                            .call(
+                                      deviceid: FFAppState().deviceId,
+                                      name: _model.modelAddImage2?.name,
+                                      imageId: _model.modelAddImage2?.image?.id,
+                                      categoryId:
+                                          _model.useThumbnailCategorie?.id,
+                                    );
+                                    _shouldSetState = true;
+                                    if ((_model.apiThumbnailCreate?.succeeded ??
+                                        true)) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
                                           content: Text(
-                                            'โปรดเลือกหมวดหมู่ก่อน',
+                                            'สำเร็จ',
                                             style: TextStyle(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1142,137 +1200,67 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                               Duration(milliseconds: 1000),
                                           backgroundColor:
                                               FlutterFlowTheme.of(context)
-                                                  .orange600,
+                                                  .secondary,
+                                        ),
+                                      );
+                                      await _model.fetchThumbnail(
+                                        context,
+                                        id: _model.useThumbnailCategorie?.id,
+                                      );
+                                      setState(() {});
+                                      if (_shouldSetState) setState(() {});
+                                      return;
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'ผิดพลาด',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 1000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .error,
                                         ),
                                       );
                                       if (_shouldSetState) setState(() {});
                                       return;
                                     }
-                                    await showModalBottomSheet(
-                                      isScrollControlled: true,
-                                      backgroundColor: Colors.transparent,
-                                      enableDrag: false,
-                                      context: context,
-                                      builder: (context) {
-                                        return GestureDetector(
-                                          onTap: () => _model
-                                                  .unfocusNode.canRequestFocus
-                                              ? FocusScope.of(context)
-                                                  .requestFocus(
-                                                      _model.unfocusNode)
-                                              : FocusScope.of(context)
-                                                  .unfocus(),
-                                          child: Padding(
-                                            padding: MediaQuery.viewInsetsOf(
-                                                context),
-                                            child: ModalAdminAddImageWidget(
-                                              isThumbnail: true,
-                                              thumbnailCategoriesId: _model
-                                                  .useThumbnailCategorie?.id,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ).then((value) => safeSetState(
-                                        () => _model.modelAddImage2 = value));
-
-                                    _shouldSetState = true;
-                                    if (_model.modelAddImage2 != null) {
-                                      _model.apiThumbnailCreate =
-                                          await FoodexpirationGroup
-                                              .adminThumbnailCreateCall
-                                              .call(
-                                        deviceid: FFAppState().deviceId,
-                                        name: _model.modelAddImage2?.name,
-                                        imageId:
-                                            _model.modelAddImage2?.image?.id,
-                                        categoryId:
-                                            _model.useThumbnailCategorie?.id,
-                                      );
-                                      _shouldSetState = true;
-                                      if ((_model
-                                              .apiThumbnailCreate?.succeeded ??
-                                          true)) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'สำเร็จ',
-                                              style: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor:
+                                  }
+                                  if (_shouldSetState) setState(() {});
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      Icons.add_rounded,
+                                      color:
+                                          FlutterFlowTheme.of(context).success,
+                                      size: 16.0,
+                                    ),
+                                    Text(
+                                      'เพิ่ม',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .secondary,
-                                          ),
-                                        );
-                                        await _model.fetchThumbnail(
-                                          context,
-                                          id: _model.useThumbnailCategorie?.id,
-                                        );
-                                        setState(() {});
-                                        if (_shouldSetState) setState(() {});
-                                        return;
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'ผิดพลาด',
-                                              style: TextStyle(
-                                                color:
+                                                    .bodyMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .success,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .error,
+                                                        .bodyMediumFamily),
                                           ),
-                                        );
-                                        if (_shouldSetState) setState(() {});
-                                        return;
-                                      }
-                                    }
-                                    if (_shouldSetState) setState(() {});
-                                  },
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Icon(
-                                        Icons.add_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .success,
-                                        size: 16.0,
-                                      ),
-                                      Text(
-                                        'เพิ่ม',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .success,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
