@@ -58,18 +58,22 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
     _model.nameFieldController ??=
         TextEditingController(text: FFAppState().pageItemInfo.name);
     _model.nameFieldFocusNode ??= FocusNode();
+
     _model.descriptionFieldController ??=
         TextEditingController(text: FFAppState().pageItemInfo.description);
     _model.descriptionFieldFocusNode ??= FocusNode();
+
     _model.forewarnDayFieldController ??= TextEditingController(
         text: valueOrDefault<String>(
       FFAppState().pageItemInfo.forewarnDay.toString(),
       '1',
     ));
     _model.forewarnDayFieldFocusNode ??= FocusNode();
+
     _model.quantityFieldController ??= TextEditingController(
         text: FFAppState().pageItemInfo.quantity.toString());
     _model.quantityFieldFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

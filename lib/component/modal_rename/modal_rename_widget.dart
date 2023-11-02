@@ -43,6 +43,7 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
 
     _model.nameController ??= TextEditingController(text: widget.name);
     _model.nameFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

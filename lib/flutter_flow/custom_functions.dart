@@ -180,6 +180,34 @@ DateTime addDate(
   return date.add(Duration(days: day));
 }
 
+BlogStruct toBlog(dynamic jsonBody) {
+  ItemStruct val = new ItemStruct();
+  if (jsonBody == null) {
+    return val;
+  }
+  var v = jsonBody;
+  val = new ItemStruct(
+    id: v['id'],
+    name: v['name'],
+    description: v['description'],
+    storageDate: DateTime.parse(v['storageDate']).toLocal(),
+    expireDate: DateTime.parse(v['expireDate']).toLocal(),
+    forewarnDay: v['forewarnDay'],
+    isArchived: v['isArchived'],
+    category: v['category'],
+    barcode: v['barcode'],
+    locationId: v['locationId'],
+    unit: v['unit'],
+    quantity: v['quantity'],
+    image: ImageStruct(
+        id: v['image']['id'],
+        path: v['image']['path'],
+        blurHash: v['image']['blurHash']),
+  );
+
+  return val;
+}
+
 ItemStruct toItem(dynamic jsonBody) {
   ItemStruct val = new ItemStruct();
   if (jsonBody == null) {
@@ -206,6 +234,17 @@ ItemStruct toItem(dynamic jsonBody) {
   );
 
   return val;
+}
+
+List<BlogStruct> toBlogList(dynamic jsonBody) {
+  List<ItemStruct> listOfStruct = [];
+  if (jsonBody == null) {
+    return listOfStruct;
+  }
+  for (var v in jsonBody) {
+    listOfStruct.add(toItem(v));
+  }
+  return listOfStruct;
 }
 
 String toRFC3339(

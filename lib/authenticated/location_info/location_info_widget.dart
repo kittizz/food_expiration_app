@@ -43,9 +43,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
     _model.nameFieldController ??=
         TextEditingController(text: FFAppState().pageLocationInfo.name);
     _model.nameFieldFocusNode ??= FocusNode();
+
     _model.descriptionFieldController ??=
         TextEditingController(text: FFAppState().pageLocationInfo.description);
     _model.descriptionFieldFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

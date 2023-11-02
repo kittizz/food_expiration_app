@@ -44,12 +44,16 @@ class _SignupWidgetState extends State<SignupWidget> {
 
     _model.emailTextController ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
+
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
+
     _model.passwordTextController ??= TextEditingController();
     _model.textFieldFocusNode3 ??= FocusNode();
+
     _model.confirmPasswordTextController ??= TextEditingController();
     _model.textFieldFocusNode4 ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

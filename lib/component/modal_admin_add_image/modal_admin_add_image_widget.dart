@@ -84,6 +84,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
 
     _model.projectNameController ??= TextEditingController();
     _model.projectNameFocusNode ??= FocusNode();
+
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
