@@ -107,7 +107,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Container(
-                          width: 300.0,
+                          constraints: BoxConstraints(
+                            minWidth: 300.0,
+                            maxWidth: 400.0,
+                          ),
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -243,7 +246,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Container(
-                            width: 300.0,
+                            constraints: BoxConstraints(
+                              minWidth: 300.0,
+                              maxWidth: 400.0,
+                            ),
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -455,7 +461,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                   0.0, 10.0, 0.0, 0.0),
                                           child: Container(
                                             width: double.infinity,
-                                            height: 150.0,
+                                            height: 210.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -529,8 +535,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                           .image
                                                           .path),
                                                     ),
-                                                    width: 300.0,
-                                                    height: 200.0,
+                                                    width: 400.0,
+                                                    height: 300.0,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
@@ -568,7 +574,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                                  MainAxisAlignment.spaceAround,
                                               children: [
                                                 InkWell(
                                                   splashColor:
@@ -693,8 +699,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                               .bodyMediumFamily),
                                                                 ),
                                                       ),
-                                                    ].divide(
-                                                        SizedBox(width: 5.0)),
+                                                    ],
                                                   ),
                                                 ),
                                                 InkWell(
@@ -798,8 +803,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                               .bodyMediumFamily),
                                                                 ),
                                                       ),
-                                                    ].divide(
-                                                        SizedBox(width: 5.0)),
+                                                    ],
                                                   ),
                                                 ),
                                                 InkWell(
@@ -931,11 +935,63 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                               .bodyMediumFamily),
                                                                 ),
                                                       ),
-                                                    ].divide(
-                                                        SizedBox(width: 5.0)),
+                                                    ],
                                                   ),
                                                 ),
-                                              ].divide(SizedBox(width: 20.0)),
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    setState(() {
+                                                      _model.useThumbnailCategorie =
+                                                          null;
+                                                    });
+                                                  },
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Icon(
+                                                        Icons
+                                                            .cancel_presentation_outlined,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        size: 16.0,
+                                                      ),
+                                                      Text(
+                                                        'ยกเลิก',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .error,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
+                                                                ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ].divide(SizedBox(width: 10.0)),
                                             ),
                                           ),
                                         ),
