@@ -1107,6 +1107,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                         children: [
                           Row(
                             mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Align(
                                 alignment: AlignmentDirectional(-1.00, 0.00),
