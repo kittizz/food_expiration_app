@@ -1010,13 +1010,6 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                 _model.selectedBlog =
                                                                     blogItem;
                                                               });
-                                                              FFAppState()
-                                                                  .update(() {
-                                                                FFAppState()
-                                                                        .markdownEditor =
-                                                                    blogItem
-                                                                        .content;
-                                                              });
                                                             },
                                                             child: Row(
                                                               mainAxisSize:
@@ -1097,6 +1090,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                           child: custom_widgets.MarkdownEditorWidget(
                             width: double.infinity,
                             height: double.infinity,
+                            content: _model.selectedBlog?.content,
                           ),
                         ),
                       ),

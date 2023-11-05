@@ -18,10 +18,12 @@ class MarkdownEditorWidget extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
+    this.content,
   }) : super(key: key);
 
   final double? width;
   final double? height;
+  final String? content;
 
   @override
   _MarkdownEditorWidgetState createState() => _MarkdownEditorWidgetState();
@@ -31,13 +33,22 @@ class _MarkdownEditorWidgetState extends State<MarkdownEditorWidget> {
   TextEditingController _controller = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    _controller.text;
+  void initState() {
+    super.initState();
+    _controller.text = widget.content ?? '';
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Padding(
       padding: EdgeInsets.all(20),
       child: MarkdownAutoPreview(
+        onChanged: (value) {
+          FFAppState().update(() {
+            FFAppState().markdownEditor = value;
+          });
+        },
         controller: _controller,
         emojiConvert: true,
         enableToolBar: true,
