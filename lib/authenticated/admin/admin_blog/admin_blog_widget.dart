@@ -532,8 +532,12 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                       true)) {
                                                                     setState(
                                                                         () {
-                                                                      _model.blogs =
-                                                                          [];
+                                                                      _model
+                                                                          .updateSelectedBlogStruct(
+                                                                        (e) => e
+                                                                          ..content =
+                                                                              FFAppState().markdownEditor,
+                                                                      );
                                                                     });
                                                                     await _model
                                                                         .fetchBlogs(
