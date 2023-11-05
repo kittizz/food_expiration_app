@@ -1286,7 +1286,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                             style: TextStyle(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                                      .info,
                                             ),
                                           ),
                                           duration:
