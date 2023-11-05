@@ -520,9 +520,9 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                     title: _model
                                                                         .selectedBlog
                                                                         ?.title,
-                                                                    content:
-                                                                        FFAppState()
-                                                                            .markdownEditor,
+                                                                    content: functions
+                                                                        .encodeString(
+                                                                            FFAppState().markdownEditor),
                                                                   );
                                                                   if ((_model
                                                                           .apiUpNCreBlog
