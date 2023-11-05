@@ -149,6 +149,9 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                               _model.selectedBlog =
                                                   BlogStruct();
                                             });
+                                            setState(() {
+                                              FFAppState().markdownEditor = '';
+                                            });
                                           },
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -362,9 +365,16 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                           ],
                                                         ),
                                                       ),
-                                                      if (_model.selectedBlog
-                                                              ?.image !=
-                                                          null)
+                                                      if (_model
+                                                                  .selectedBlog
+                                                                  ?.image
+                                                                  ?.path !=
+                                                              null &&
+                                                          _model
+                                                                  .selectedBlog
+                                                                  ?.image
+                                                                  ?.path !=
+                                                              '')
                                                         InkWell(
                                                           splashColor: Colors
                                                               .transparent,
@@ -595,6 +605,10 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                   setState(() {
                                                                     _model.selectedBlog =
                                                                         null;
+                                                                  });
+                                                                  setState(() {
+                                                                    FFAppState()
+                                                                        .markdownEditor = '';
                                                                   });
                                                                 },
                                                                 child: Row(
@@ -1009,6 +1023,12 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                               setState(() {
                                                                 _model.selectedBlog =
                                                                     blogItem;
+                                                              });
+                                                              setState(() {
+                                                                FFAppState()
+                                                                        .markdownEditor =
+                                                                    blogItem
+                                                                        .content;
                                                               });
                                                             },
                                                             child: Row(
