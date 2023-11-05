@@ -7,8 +7,10 @@ import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -43,8 +45,11 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
       setState(() {});
     });
 
-    _model.textController ??= TextEditingController();
+    _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
+
+    _model.imageLinkController ??= TextEditingController();
+    _model.imageLinkFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -152,7 +157,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                               FFAppState().markdownEditor = '';
                                             });
                                             setState(() {
-                                              _model.textController?.text = '';
+                                              _model.textController1?.text = '';
                                             });
                                           },
                                           child: Row(
@@ -249,7 +254,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                       8.0, 0.0, 8.0, 10.0),
                                               child: TextFormField(
                                                 controller:
-                                                    _model.textController,
+                                                    _model.textController1,
                                                 focusNode:
                                                     _model.textFieldFocusNode,
                                                 obscureText: false,
@@ -321,7 +326,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium,
                                                 validator: _model
-                                                    .textControllerValidator
+                                                    .textController1Validator
                                                     .asValidator(context),
                                               ),
                                             ),
@@ -511,10 +516,10 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                     () async {
                                                                   var _shouldSetState =
                                                                       false;
-                                                                  if (_model.textController
+                                                                  if (_model.textController1
                                                                               .text ==
                                                                           null ||
-                                                                      _model.textController
+                                                                      _model.textController1
                                                                               .text ==
                                                                           '') {
                                                                     ScaffoldMessenger.of(
@@ -531,7 +536,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                           ),
                                                                         ),
                                                                         duration:
-                                                                            Duration(milliseconds: 4000),
+                                                                            Duration(milliseconds: 1000),
                                                                         backgroundColor:
                                                                             FlutterFlowTheme.of(context).orange600,
                                                                       ),
@@ -545,7 +550,31 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                           .selectedBlog
                                                                           ?.image
                                                                           ?.id ==
-                                                                      0) {}
+                                                                      0) {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'โปรดเลือกภาพ',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 1000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).warning,
+                                                                      ),
+                                                                    );
+                                                                    if (_shouldSetState)
+                                                                      setState(
+                                                                          () {});
+                                                                    return;
+                                                                  }
                                                                   _model.apiUpNCreBlog =
                                                                       await FoodexpirationGroup
                                                                           .adminUpdateBlogCall
@@ -561,7 +590,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                         ?.image
                                                                         ?.id,
                                                                     title: _model
-                                                                        .textController
+                                                                        .textController1
                                                                         .text,
                                                                     content: functions
                                                                         .encodeString(
@@ -581,7 +610,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                           ..content =
                                                                               FFAppState().markdownEditor
                                                                           ..title = _model
-                                                                              .textController
+                                                                              .textController1
                                                                               .text,
                                                                       );
                                                                     });
@@ -1089,7 +1118,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                         .content;
                                                               });
                                                               setState(() {
-                                                                _model.textController
+                                                                _model.textController1
                                                                         ?.text =
                                                                     blogItem
                                                                         .title;
@@ -1150,7 +1179,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                   ),
                 ),
               ),
-              Expanded(
+              Flexible(
                 child: Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 20.0, 20.0),
@@ -1160,24 +1189,298 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          20.0, 20.0, 20.0, 20.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: custom_widgets.MarkdownEditorWidget(
-                            width: double.infinity,
-                            height: double.infinity,
-                            content: _model.selectedBlog?.content,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 10.0, 10.0, 10.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  final selectedMedia = await selectMedia(
+                                    maxWidth: 1000.00,
+                                    maxHeight: 1000.00,
+                                    includeBlurHash: true,
+                                    mediaSource: MediaSource.photoGallery,
+                                    multiImage: false,
+                                  );
+                                  if (selectedMedia != null &&
+                                      selectedMedia.every((m) =>
+                                          validateFileFormat(
+                                              m.storagePath, context))) {
+                                    setState(
+                                        () => _model.isDataUploading = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
+
+                                    try {
+                                      selectedUploadedFiles = selectedMedia
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                                height: m.dimensions?.height,
+                                                width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
+                                              ))
+                                          .toList();
+                                    } finally {
+                                      _model.isDataUploading = false;
+                                    }
+                                    if (selectedUploadedFiles.length ==
+                                        selectedMedia.length) {
+                                      setState(() {
+                                        _model.uploadedLocalFile =
+                                            selectedUploadedFiles.first;
+                                      });
+                                    } else {
+                                      setState(() {});
+                                      return;
+                                    }
+                                  }
+
+                                  if (_model.uploadedLocalFile != null &&
+                                      (_model.uploadedLocalFile.bytes
+                                              ?.isNotEmpty ??
+                                          false)) {
+                                    _model.apiUloadImage =
+                                        await FoodexpirationGroup
+                                            .uploadImageCall
+                                            .call(
+                                      file: _model.uploadedLocalFile,
+                                      hash: _model.uploadedLocalFile.blurHash,
+                                      deviceid: FFAppState().deviceId,
+                                    );
+                                    if ((_model.apiUloadImage?.succeeded ??
+                                        true)) {
+                                      setState(() {
+                                        _model.imageLinkController?.text =
+                                            functions.getImage(
+                                                FoodexpirationGroup
+                                                    .uploadImageCall
+                                                    .path(
+                                                      (_model.apiUloadImage
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    )
+                                                    .toString());
+                                      });
+                                      await Clipboard.setData(ClipboardData(
+                                          text:
+                                              _model.imageLinkController.text));
+                                      ScaffoldMessenger.of(context)
+                                          .clearSnackBars();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'อัปโหลดและคัดลอกสำเร็จ',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 1000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .blue600,
+                                        ),
+                                      );
+                                    }
+                                  }
+
+                                  setState(() {});
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      Icons.file_upload_outlined,
+                                      color:
+                                          FlutterFlowTheme.of(context).blue600,
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      'อัปโหลดภาพ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .blue600,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ].divide(SizedBox(width: 5.0)),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 0.0, 8.0, 0.0),
+                                    child: TextFormField(
+                                      controller: _model.imageLinkController,
+                                      focusNode: _model.imageLinkFocusNode,
+                                      onChanged: (_) => EasyDebounce.debounce(
+                                        '_model.imageLinkController',
+                                        Duration(milliseconds: 2000),
+                                        () => setState(() {}),
+                                      ),
+                                      textCapitalization:
+                                          TextCapitalization.none,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        labelText: 'ลิ้งภาพ...',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        errorBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        focusedErrorBorder:
+                                            UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        suffixIcon: _model.imageLinkController!
+                                                .text.isNotEmpty
+                                            ? InkWell(
+                                                onTap: () async {
+                                                  _model.imageLinkController
+                                                      ?.clear();
+                                                  setState(() {});
+                                                },
+                                                child: Icon(
+                                                  Icons.clear,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  size: 14.0,
+                                                ),
+                                              )
+                                            : null,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                      validator: _model
+                                          .imageLinkControllerValidator
+                                          .asValidator(context),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  await Clipboard.setData(ClipboardData(
+                                      text: _model.imageLinkController.text));
+                                },
+                                text: 'คัดลอก',
+                                icon: Icon(
+                                  Icons.content_copy,
+                                  size: 15.0,
+                                ),
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).blue600,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleSmallFamily,
+                                        color: Colors.white,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily),
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                20.0, 20.0, 20.0, 20.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Container(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: custom_widgets.MarkdownEditorWidget(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  content: _model.selectedBlog?.content,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
