@@ -1,26 +1,26 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/component/modal_admin_edit_image/modal_admin_edit_image_widget.dart';
 import '/component/side_nav/side_nav_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
-import '/flutter_flow/random_data_util.dart' as random_data;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'admin_blog_widget.dart' show AdminBlogWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class AdminBlogModel extends FlutterFlowModel<AdminBlogWidget> {
   ///  Local state fields for this page.
-
-  KindStruct? kindLocal;
-  void updateKindLocalStruct(Function(KindStruct) updateFn) =>
-      updateFn(kindLocal ??= KindStruct());
 
   List<BlogStruct> blogs = [];
   void addToBlogs(BlogStruct item) => blogs.add(item);
@@ -31,6 +31,10 @@ class AdminBlogModel extends FlutterFlowModel<AdminBlogWidget> {
   void updateBlogsAtIndex(int index, Function(BlogStruct) updateFn) =>
       blogs[index] = updateFn(blogs[index]);
 
+  BlogStruct? selectedBlog;
+  void updateSelectedBlogStruct(Function(BlogStruct) updateFn) =>
+      updateFn(selectedBlog ??= BlogStruct());
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -40,6 +44,12 @@ class AdminBlogModel extends FlutterFlowModel<AdminBlogWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // Stores action output result for [Backend Call - API (adminUpdateBlog)] action in Row widget.
+  ApiCallResponse? apiUpNCreBlog;
+  // Stores action output result for [Bottom Sheet - ModalAdminEditImage] action in Row widget.
+  ImageStruct? editImage;
+  // Stores action output result for [Backend Call - API (adminDeleteBlog)] action in Row widget.
+  ApiCallResponse? apiDeleteBlog;
 
   /// Initialization and disposal methods.
 
@@ -63,7 +73,10 @@ class AdminBlogModel extends FlutterFlowModel<AdminBlogWidget> {
       deviceid: FFAppState().deviceId,
     );
     if ((apiBlogs?.succeeded ?? true)) {
-      return;
+      blogs = functions
+          .toBlogList((apiBlogs?.jsonBody ?? ''))
+          .toList()
+          .cast<BlogStruct>();
     }
   }
 

@@ -25,6 +25,7 @@ class FoodexpirationGroup {
   static DeleteThumbnailCall deleteThumbnailCall = DeleteThumbnailCall();
   static DeleteThumbnailCategoryCall deleteThumbnailCategoryCall =
       DeleteThumbnailCategoryCall();
+  static AdminDeleteBlogCall adminDeleteBlogCall = AdminDeleteBlogCall();
   static UploadImageCall uploadImageCall = UploadImageCall();
   static GetBannerCall getBannerCall = GetBannerCall();
   static ChangeProfilepictureCall changeProfilepictureCall =
@@ -56,8 +57,10 @@ class FoodexpirationGroup {
       AdminThumbnailCreateCall();
   static AdminRenameThumbnailCall adminRenameThumbnailCall =
       AdminRenameThumbnailCall();
+  static AdminRenameBlogCall adminRenameBlogCall = AdminRenameBlogCall();
   static AdminUpdateCategoryImageCall adminUpdateCategoryImageCall =
       AdminUpdateCategoryImageCall();
+  static AdminUpdateBlogCall adminUpdateBlogCall = AdminUpdateBlogCall();
 }
 
 class RegisterDeviceCall {
@@ -324,6 +327,34 @@ class DeleteThumbnailCategoryCall {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteThumbnailCategory',
       apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/category',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {
+        'id': id,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
+}
+
+class AdminDeleteBlogCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? deviceid = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'adminDeleteBlog',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/blog',
       callType: ApiCallType.DELETE,
       headers: {
         'x-device-id': '${deviceid}',
@@ -1097,6 +1128,35 @@ class AdminRenameThumbnailCall {
   }
 }
 
+class AdminRenameBlogCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? name = '',
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "id": ${id},
+  "name": "${name}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'adminRenameBlog',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/blog/rename',
+      callType: ApiCallType.POST,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
 class AdminUpdateCategoryImageCall {
   Future<ApiCallResponse> call({
     int? id,
@@ -1111,6 +1171,39 @@ class AdminUpdateCategoryImageCall {
     return ApiManager.instance.makeApiCall(
       callName: 'adminUpdateCategoryImage',
       apiUrl: '${FoodexpirationGroup.baseUrl}/thumbnail/update-category-image',
+      callType: ApiCallType.PUT,
+      headers: {
+        'x-device-id': '${deviceid}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class AdminUpdateBlogCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    int? imageId,
+    String? title = '',
+    String? content = '',
+    String? deviceid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "id": ${id},
+  "imageId": ${imageId},
+  "title": "${title}",
+  "content": "${content}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'adminUpdateBlog',
+      apiUrl: '${FoodexpirationGroup.baseUrl}/blog/update',
       callType: ApiCallType.PUT,
       headers: {
         'x-device-id': '${deviceid}',

@@ -284,6 +284,12 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInKind(int _index, KindStruct _value) {
     _kind.insert(_index, _value);
   }
+
+  String _markdownEditor = '';
+  String get markdownEditor => _markdownEditor;
+  set markdownEditor(String _value) {
+    _markdownEditor = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
