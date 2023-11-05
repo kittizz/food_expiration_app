@@ -181,12 +181,12 @@ DateTime addDate(
 }
 
 BlogStruct toBlog(dynamic jsonBody) {
-  ItemStruct val = new ItemStruct();
+  BlogStruct val = new BlogStruct();
   if (jsonBody == null) {
     return val;
   }
   var v = jsonBody;
-  val = new ItemStruct(
+  val = new BlogStruct(
     id: v['id'],
     name: v['name'],
     description: v['description'],
