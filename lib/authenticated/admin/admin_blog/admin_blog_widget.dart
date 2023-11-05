@@ -520,8 +520,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                         ?.image
                                                                         ?.id,
                                                                     title: _model
-                                                                        .selectedBlog
-                                                                        ?.title,
+                                                                        .textController
+                                                                        .text,
                                                                     content: functions
                                                                         .encodeString(
                                                                             FFAppState().markdownEditor),
@@ -536,7 +536,10 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                           .updateSelectedBlogStruct(
                                                                         (e) => e
                                                                           ..content =
-                                                                              FFAppState().markdownEditor,
+                                                                              FFAppState().markdownEditor
+                                                                          ..title = _model
+                                                                              .textController
+                                                                              .text,
                                                                       );
                                                                     });
                                                                     await _model
