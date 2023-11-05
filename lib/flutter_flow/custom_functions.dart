@@ -57,7 +57,7 @@ String getDateStatus(
 }
 
 String getImage(String path) {
-  return "https://th-bkk-1.xvercloud.com/food-expiration/" + path;
+  return "https://th-bkk-1.xvercloud.com/food-expiration" + path;
 }
 
 List<ThumbnailCategoryStruct> toThumbnailCategoryStructList(dynamic jsonbody) {

@@ -195,12 +195,13 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                           onTap: () async {
                                             var _shouldSetState = false;
                                             final selectedMedia =
-                                                await selectMediaWithSourceBottomSheet(
-                                              context: context,
+                                                await selectMedia(
                                               maxWidth: 1000.00,
                                               maxHeight: 1000.00,
-                                              allowPhoto: true,
                                               includeBlurHash: true,
+                                              mediaSource:
+                                                  MediaSource.photoGallery,
+                                              multiImage: false,
                                             );
                                             if (selectedMedia != null &&
                                                 selectedMedia.every((m) =>
