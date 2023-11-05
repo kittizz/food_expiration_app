@@ -1084,13 +1084,16 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                           color: FlutterFlowTheme.of(context).alternate,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: custom_widgets.MarkdownEditorWidget(
+                        child: Visibility(
+                          visible: _model.selectedBlog != null,
+                          child: Container(
                             width: double.infinity,
                             height: double.infinity,
-                            content: _model.selectedBlog?.content,
+                            child: custom_widgets.MarkdownEditorWidget(
+                              width: double.infinity,
+                              height: double.infinity,
+                              content: _model.selectedBlog?.content,
+                            ),
                           ),
                         ),
                       ),
