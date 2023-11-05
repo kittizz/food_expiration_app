@@ -248,8 +248,8 @@ String toRFC3339(
 }
 
 String encodeString(String str) {
-  String escaped = str.split('\n').map((line) => line.trim()).join('\\n');
-  String jstr = jsonEncode(escaped);
+  //String escaped = str.split('\n').map((line) => line.trim()).join('\\n');
+  String jstr = jsonEncode(str);
   return jstr.substring(1, jstr.length - 1);
 }
 
