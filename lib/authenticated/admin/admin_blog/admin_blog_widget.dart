@@ -150,6 +150,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                             });
                                             setState(() {
                                               FFAppState().markdownEditor = '';
+                                              FFAppState().markdownContent = '';
                                             });
                                           },
                                           child: Row(
@@ -1021,12 +1022,6 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                             onTap: () async {
                                                               setState(() {
                                                                 _model.selectedBlog =
-                                                                    null;
-                                                                _model.content =
-                                                                    '';
-                                                              });
-                                                              setState(() {
-                                                                _model.selectedBlog =
                                                                     blogItem;
                                                                 _model.content =
                                                                     blogItem
@@ -1036,6 +1031,10 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                   .update(() {
                                                                 FFAppState()
                                                                         .markdownEditor =
+                                                                    blogItem
+                                                                        .content;
+                                                                FFAppState()
+                                                                        .markdownContent =
                                                                     blogItem
                                                                         .content;
                                                               });
@@ -1128,7 +1127,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                             child: custom_widgets.MarkdownEditorWidget(
                               width: double.infinity,
                               height: double.infinity,
-                              content: _model.content,
+                              content: FFAppState().markdownContent,
                             ),
                           ),
                         ),
