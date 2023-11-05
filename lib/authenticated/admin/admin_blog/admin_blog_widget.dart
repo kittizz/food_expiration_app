@@ -1023,9 +1023,6 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                               setState(() {
                                                                 _model.selectedBlog =
                                                                     blogItem;
-                                                                _model.content =
-                                                                    blogItem
-                                                                        .content;
                                                               });
                                                               FFAppState()
                                                                   .update(() {
@@ -1119,8 +1116,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Visibility(
-                          visible:
-                              _model.content != null && _model.content != '',
+                          visible: FFAppState().markdownContent != null &&
+                              FFAppState().markdownContent != '',
                           child: Container(
                             width: double.infinity,
                             height: double.infinity,

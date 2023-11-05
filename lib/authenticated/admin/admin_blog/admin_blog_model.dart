@@ -35,8 +35,6 @@ class AdminBlogModel extends FlutterFlowModel<AdminBlogWidget> {
   void updateSelectedBlogStruct(Function(BlogStruct) updateFn) =>
       updateFn(selectedBlog ??= BlogStruct());
 
-  String content = '';
-
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
