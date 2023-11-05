@@ -181,30 +181,21 @@ DateTime addDate(
 }
 
 BlogStruct toBlog(dynamic jsonBody) {
-  BlogStruct val = new BlogStruct();
+  BlogStruct val = BlogStruct();
   if (jsonBody == null) {
     return val;
   }
   var v = jsonBody;
-  val = new BlogStruct(
+  val = BlogStruct(
     id: v['id'],
-    name: v['name'],
-    description: v['description'],
-    storageDate: DateTime.parse(v['storageDate']).toLocal(),
-    expireDate: DateTime.parse(v['expireDate']).toLocal(),
-    forewarnDay: v['forewarnDay'],
-    isArchived: v['isArchived'],
-    category: v['category'],
-    barcode: v['barcode'],
-    locationId: v['locationId'],
-    unit: v['unit'],
-    quantity: v['quantity'],
+    createdAt: v['createdAt'],
+    title: v['title'],
+    content: v['content'],
     image: ImageStruct(
         id: v['image']['id'],
         path: v['image']['path'],
         blurHash: v['image']['blurHash']),
   );
-
   return val;
 }
 
@@ -237,12 +228,12 @@ ItemStruct toItem(dynamic jsonBody) {
 }
 
 List<BlogStruct> toBlogList(dynamic jsonBody) {
-  List<ItemStruct> listOfStruct = [];
+  List<BlogStruct> listOfStruct = [];
   if (jsonBody == null) {
     return listOfStruct;
   }
   for (var v in jsonBody) {
-    listOfStruct.add(toItem(v));
+    listOfStruct.add(toBlog(v));
   }
   return listOfStruct;
 }
