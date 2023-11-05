@@ -530,6 +530,11 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                           .apiUpNCreBlog
                                                                           ?.succeeded ??
                                                                       true)) {
+                                                                    setState(
+                                                                        () {
+                                                                      _model.blogs =
+                                                                          [];
+                                                                    });
                                                                     await _model
                                                                         .fetchBlogs(
                                                                             context);
