@@ -1,16 +1,21 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/component/modal_admin_edit_image/modal_admin_edit_image_widget.dart';
 import '/component/side_nav/side_nav_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
-import '/flutter_flow/random_data_util.dart' as random_data;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'admin_blog_model.dart';
 export 'admin_blog_model.dart';
@@ -34,15 +39,12 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.kindLocal = KindStruct(
-          name: 'รายการ',
-          key: 'item',
-        );
-      });
+      await _model.fetchBlogs(context);
+      setState(() {});
     });
 
-    _model.textController ??= TextEditingController();
+    _model.textController ??=
+        TextEditingController(text: _model.selectedBlog?.title);
     _model.textFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -137,362 +139,685 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                       Align(
                                         alignment:
                                             AlignmentDirectional(1.00, 0.00),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Icon(
-                                              Icons.add_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .success,
-                                              size: 16.0,
-                                            ),
-                                            Text(
-                                              'เพิ่ม',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .success,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                            ),
-                                          ],
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              _model.selectedBlog =
+                                                  BlogStruct();
+                                            });
+                                          },
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                Icons.add_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .success,
+                                                size: 16.0,
+                                              ),
+                                              Text(
+                                                'เพิ่ม',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .success,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                Material(
-                                  color: Colors.transparent,
-                                  elevation: 2.0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
+                                if (_model.selectedBlog != null)
+                                  Material(
+                                    color: Colors.transparent,
+                                    elevation: 2.0,
+                                    shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 10.0, 10.0, 10.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 5.0, 0.0, 0.0),
-                                            child: Text(
-                                              '(กำลังแก้ไข)',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        fontSize: 12.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 0.0, 8.0, 10.0),
-                                            child: TextFormField(
-                                              controller: _model.textController,
-                                              focusNode:
-                                                  _model.textFieldFocusNode,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                labelText: '\tหัวข้อ...',
-                                                labelStyle:
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 10.0, 10.0, 10.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                              child: Text(
+                                                _model.selectedBlog?.id == 0
+                                                    ? '(กำลังสร้าง)'
+                                                    : '(กำลังแก้ไข)',
+                                                style:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelMedium,
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium,
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .alternate,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                errorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 12.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
                                               ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                              validator: _model
-                                                  .textControllerValidator
-                                                  .asValidator(context),
                                             ),
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Stack(
-                                                children: [
-                                                  Container(
-                                                    width: 150.0,
-                                                    height: 100.0,
-                                                    decoration: BoxDecoration(
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      8.0, 0.0, 8.0, 10.0),
+                                              child: TextFormField(
+                                                controller:
+                                                    _model.textController,
+                                                focusNode:
+                                                    _model.textFieldFocusNode,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  isDense: true,
+                                                  labelText: '\tหัวข้อ...',
+                                                  labelStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium,
+                                                  hintStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium,
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .alternate,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
+                                                      width: 2.0,
                                                     ),
-                                                    child: Icon(
-                                                      Icons.image,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .secondaryText,
-                                                      size: 24.0,
+                                                              .primary,
+                                                      width: 2.0,
                                                     ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
                                                   ),
-                                                  if (false)
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                      child: Image.network(
-                                                        'https://picsum.photos/seed/561/600',
+                                                  errorBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 2.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 2.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
+                                                validator: _model
+                                                    .textControllerValidator
+                                                    .asValidator(context),
+                                              ),
+                                            ),
+                                            if (_model.selectedBlog?.id != null)
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Stack(
+                                                    children: [
+                                                      Container(
                                                         width: 150.0,
                                                         height: 100.0,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                ],
-                                              ),
-                                              Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Icon(
-                                                        Icons.save,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .success,
-                                                        size: 24.0,
-                                                      ),
-                                                      Text(
-                                                        'บันทึก',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .success,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    15.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Icon(
-                                                          Icons.cancel,
+                                                        decoration:
+                                                            BoxDecoration(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .warning,
-                                                          size: 24.0,
+                                                              .alternate,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Icon(
+                                                              Icons.image,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 24.0,
+                                                            ),
+                                                            Text(
+                                                              '(เลือกภาพ)',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium,
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                      Text(
-                                                        'ยกเลิก',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .orange600,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
+                                                      if (_model.selectedBlog
+                                                              ?.image !=
+                                                          null)
+                                                        InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            await Navigator
+                                                                .push(
+                                                              context,
+                                                              PageTransition(
+                                                                type:
+                                                                    PageTransitionType
+                                                                        .fade,
+                                                                child:
+                                                                    FlutterFlowExpandedImageView(
+                                                                  image:
+                                                                      OctoImage(
+                                                                    placeholderBuilder:
+                                                                        OctoPlaceholder
+                                                                            .blurHash(
+                                                                      _model
+                                                                          .selectedBlog!
+                                                                          .image
+                                                                          .blurHash,
+                                                                    ),
+                                                                    image:
+                                                                        NetworkImage(
+                                                                      functions.getImage(_model
+                                                                          .selectedBlog!
+                                                                          .image
+                                                                          .path),
+                                                                    ),
+                                                                    fit: BoxFit
+                                                                        .contain,
+                                                                  ),
+                                                                  allowRotation:
+                                                                      false,
+                                                                  tag: functions
+                                                                      .getImage(_model
+                                                                          .selectedBlog!
+                                                                          .image
+                                                                          .path),
+                                                                  useHeroAnimation:
+                                                                      true,
                                                                 ),
-                                                      ),
-                                                    ].divide(
-                                                        SizedBox(width: 5.0)),
+                                                              ),
+                                                            );
+                                                          },
+                                                          child: Hero(
+                                                            tag: functions
+                                                                .getImage(_model
+                                                                    .selectedBlog!
+                                                                    .image
+                                                                    .path),
+                                                            transitionOnUserGestures:
+                                                                true,
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.0),
+                                                              child: OctoImage(
+                                                                placeholderBuilder:
+                                                                    OctoPlaceholder
+                                                                        .blurHash(
+                                                                  _model
+                                                                      .selectedBlog!
+                                                                      .image
+                                                                      .blurHash,
+                                                                ),
+                                                                image:
+                                                                    NetworkImage(
+                                                                  functions.getImage(
+                                                                      _model
+                                                                          .selectedBlog!
+                                                                          .image
+                                                                          .path),
+                                                                ),
+                                                                width: 150.0,
+                                                                height: 100.0,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                    ],
                                                   ),
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Icon(
-                                                        Icons.photo,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .blue600,
-                                                        size: 24.0,
-                                                      ),
-                                                      Text(
-                                                        'เลือกภาพ',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  2.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  _model.apiUpNCreBlog =
+                                                                      await FoodexpirationGroup
+                                                                          .adminUpdateBlogCall
+                                                                          .call(
+                                                                    deviceid:
+                                                                        FFAppState()
+                                                                            .deviceId,
+                                                                    id: _model
+                                                                        .selectedBlog
+                                                                        ?.id,
+                                                                    imageId: _model
+                                                                        .selectedBlog
+                                                                        ?.image
+                                                                        ?.id,
+                                                                    title: _model
+                                                                        .selectedBlog
+                                                                        ?.title,
+                                                                    content:
+                                                                        FFAppState()
+                                                                            .markdownEditor,
+                                                                  );
+                                                                  if ((_model
+                                                                          .apiUpNCreBlog
+                                                                          ?.succeeded ??
+                                                                      true)) {
+                                                                    await _model
+                                                                        .fetchBlogs(
+                                                                            context);
+                                                                    setState(
+                                                                        () {});
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'สำเร็จ',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 1000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
+                                                                      ),
+                                                                    );
+                                                                  }
+
+                                                                  setState(
+                                                                      () {});
+                                                                },
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Icon(
+                                                                      Icons
+                                                                          .save,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .success,
+                                                                      size:
+                                                                          24.0,
+                                                                    ),
+                                                                    Text(
+                                                                      'บันทึก',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).success,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                          ),
+                                                                    ),
+                                                                  ].divide(SizedBox(
+                                                                      width:
+                                                                          5.0)),
+                                                                ),
+                                                              ),
+                                                              InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  setState(() {
+                                                                    _model.selectedBlog =
+                                                                        null;
+                                                                  });
+                                                                },
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          15.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .cancel,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .warning,
+                                                                        size:
+                                                                            24.0,
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      'ยกเลิก',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).orange600,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                          ),
+                                                                    ),
+                                                                  ].divide(SizedBox(
+                                                                      width:
+                                                                          5.0)),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                enableDrag:
+                                                                    false,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () => _model
+                                                                            .unfocusNode
+                                                                            .canRequestFocus
+                                                                        ? FocusScope.of(context).requestFocus(_model
+                                                                            .unfocusNode)
+                                                                        : FocusScope.of(context)
+                                                                            .unfocus(),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
+                                                                      child:
+                                                                          ModalAdminEditImageWidget(),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(() =>
+                                                                      _model.editImage =
+                                                                          value));
+
+                                                              if (_model
+                                                                      .editImage !=
+                                                                  null) {
+                                                                setState(() {
+                                                                  _model
+                                                                      .updateSelectedBlogStruct(
+                                                                    (e) => e
+                                                                      ..image =
+                                                                          _model
+                                                                              .editImage,
+                                                                  );
+                                                                });
+                                                              }
+
+                                                              setState(() {});
+                                                            },
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Icon(
+                                                                  Icons.photo,
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .blue600,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
+                                                                  size: 24.0,
                                                                 ),
-                                                      ),
-                                                    ].divide(
-                                                        SizedBox(width: 5.0)),
-                                                  ),
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Icon(
-                                                        Icons.delete,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        size: 24.0,
-                                                      ),
-                                                      Text(
-                                                        'ลบ',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                Text(
+                                                                  'เลือกภาพ',
+                                                                  style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyMediumFamily,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .error,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .blue600,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                      ),
                                                                 ),
+                                                              ].divide(SizedBox(
+                                                                  width: 5.0)),
+                                                            ),
+                                                          ),
+                                                          if (_model
+                                                                  .selectedBlog
+                                                                  ?.id !=
+                                                              null)
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                _model.apiDeleteBlog =
+                                                                    await FoodexpirationGroup
+                                                                        .adminDeleteBlogCall
+                                                                        .call(
+                                                                  deviceid:
+                                                                      FFAppState()
+                                                                          .deviceId,
+                                                                  id: _model
+                                                                      .selectedBlog
+                                                                      ?.id,
+                                                                );
+                                                                if ((_model
+                                                                        .apiDeleteBlog
+                                                                        ?.succeeded ??
+                                                                    true)) {
+                                                                  setState(() {
+                                                                    _model.selectedBlog =
+                                                                        null;
+                                                                  });
+                                                                  await _model
+                                                                      .fetchBlogs(
+                                                                          context);
+                                                                  setState(
+                                                                      () {});
+                                                                }
+
+                                                                setState(() {});
+                                                              },
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Icon(
+                                                                    Icons
+                                                                        .delete,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                                    size: 24.0,
+                                                                  ),
+                                                                  Text(
+                                                                    'ลบ',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).error,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                        ),
+                                                                  ),
+                                                                ].divide(SizedBox(
+                                                                    width:
+                                                                        5.0)),
+                                                              ),
+                                                            ),
+                                                        ].divide(SizedBox(
+                                                            height: 8.0)),
                                                       ),
-                                                    ].divide(
-                                                        SizedBox(width: 5.0)),
+                                                    ),
                                                   ),
-                                                ].divide(SizedBox(height: 8.0)),
+                                                ].divide(SizedBox(width: 5.0)),
                                               ),
-                                            ].divide(SizedBox(width: 5.0)),
-                                          ),
-                                        ].divide(SizedBox(height: 1.0)),
+                                          ].divide(SizedBox(height: 1.0)),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
                               ],
                             ),
                           ),
@@ -535,12 +860,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                 ),
                                 Builder(
                                   builder: (context) {
-                                    final blog = List.generate(
-                                        random_data.randomInteger(10, 10),
-                                        (index) => random_data.randomImageUrl(
-                                              0,
-                                              0,
-                                            )).toList();
+                                    final blog = _model.blogs.toList();
                                     return ListView.separated(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
@@ -575,7 +895,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Hello Worldasdasdasda',
+                                                    blogItem.title,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium,
@@ -586,15 +906,86 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment.end,
                                                     children: [
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        child: Image.network(
-                                                          blogItem,
-                                                          width: 150.0,
-                                                          height: 100.0,
-                                                          fit: BoxFit.cover,
+                                                      InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          await Navigator.push(
+                                                            context,
+                                                            PageTransition(
+                                                              type:
+                                                                  PageTransitionType
+                                                                      .fade,
+                                                              child:
+                                                                  FlutterFlowExpandedImageView(
+                                                                image:
+                                                                    OctoImage(
+                                                                  placeholderBuilder:
+                                                                      OctoPlaceholder
+                                                                          .blurHash(
+                                                                    blogItem
+                                                                        .image
+                                                                        .blurHash,
+                                                                  ),
+                                                                  image:
+                                                                      NetworkImage(
+                                                                    functions.getImage(
+                                                                        blogItem
+                                                                            .image
+                                                                            .path),
+                                                                  ),
+                                                                  fit: BoxFit
+                                                                      .contain,
+                                                                ),
+                                                                allowRotation:
+                                                                    false,
+                                                                tag: functions
+                                                                    .getImage(
+                                                                        blogItem
+                                                                            .image
+                                                                            .path),
+                                                                useHeroAnimation:
+                                                                    true,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: Hero(
+                                                          tag: functions
+                                                              .getImage(blogItem
+                                                                  .image.path),
+                                                          transitionOnUserGestures:
+                                                              true,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                            child: OctoImage(
+                                                              placeholderBuilder:
+                                                                  OctoPlaceholder
+                                                                      .blurHash(
+                                                                blogItem.image
+                                                                    .blurHash,
+                                                              ),
+                                                              image:
+                                                                  NetworkImage(
+                                                                functions.getImage(
+                                                                    blogItem
+                                                                        .image
+                                                                        .path),
+                                                              ),
+                                                              width: 150.0,
+                                                              height: 100.0,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                       Column(
@@ -604,39 +995,59 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Icon(
-                                                                Icons
-                                                                    .edit_outlined,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .warning,
-                                                                size: 24.0,
-                                                              ),
-                                                              Text(
-                                                                'แก้ไข',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .orange600,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                    ),
-                                                              ),
-                                                            ].divide(SizedBox(
-                                                                width: 5.0)),
+                                                          InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              setState(() {
+                                                                _model.selectedBlog =
+                                                                    blogItem;
+                                                              });
+                                                              FFAppState()
+                                                                  .update(() {
+                                                                FFAppState()
+                                                                        .markdownEditor =
+                                                                    blogItem
+                                                                        .content;
+                                                              });
+                                                            },
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Icon(
+                                                                  Icons
+                                                                      .edit_outlined,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .warning,
+                                                                  size: 24.0,
+                                                                ),
+                                                                Text(
+                                                                  'แก้ไข',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .orange600,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                      ),
+                                                                ),
+                                                              ].divide(SizedBox(
+                                                                  width: 5.0)),
+                                                            ),
                                                           ),
                                                         ].divide(SizedBox(
                                                             height: 5.0)),
