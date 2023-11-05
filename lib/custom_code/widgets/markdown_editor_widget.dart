@@ -46,9 +46,7 @@ class _MarkdownEditorWidgetState extends State<MarkdownEditorWidget> {
       padding: EdgeInsets.all(20),
       child: MarkdownAutoPreview(
         onChanged: (value) {
-          FFAppState().update(() {
-            FFAppState().markdownEditor = value;
-          });
+          FFAppState().markdownEditor = value;
         },
         controller: _controller,
         emojiConvert: true,
