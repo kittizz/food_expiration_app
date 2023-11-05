@@ -331,42 +331,46 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                 children: [
                                                   Stack(
                                                     children: [
-                                                      Container(
-                                                        width: 150.0,
-                                                        height: 100.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
+                                                      if (_model.selectedBlog
+                                                              ?.image ==
+                                                          null)
+                                                        Container(
+                                                          width: 150.0,
+                                                          height: 100.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .alternate,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                          ),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Icon(
+                                                                Icons.image,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                size: 24.0,
+                                                              ),
+                                                              Text(
+                                                                '(เลือกภาพ)',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Icon(
-                                                              Icons.image,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              size: 24.0,
-                                                            ),
-                                                            Text(
-                                                              '(เลือกภาพ)',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
                                                       if (_model
                                                                   .selectedBlog
                                                                   ?.image
@@ -505,6 +509,43 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                         .transparent,
                                                                 onTap:
                                                                     () async {
+                                                                  var _shouldSetState =
+                                                                      false;
+                                                                  if (_model.textController
+                                                                              .text ==
+                                                                          null ||
+                                                                      _model.textController
+                                                                              .text ==
+                                                                          '') {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'โปรดกรอกหัวข้อ',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).orange600,
+                                                                      ),
+                                                                    );
+                                                                    if (_shouldSetState)
+                                                                      setState(
+                                                                          () {});
+                                                                    return;
+                                                                  }
+                                                                  if (_model
+                                                                          .selectedBlog
+                                                                          ?.image
+                                                                          ?.id ==
+                                                                      0) {}
                                                                   _model.apiUpNCreBlog =
                                                                       await FoodexpirationGroup
                                                                           .adminUpdateBlogCall
@@ -526,6 +567,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                         .encodeString(
                                                                             FFAppState().markdownEditor),
                                                                   );
+                                                                  _shouldSetState =
+                                                                      true;
                                                                   if ((_model
                                                                           .apiUpNCreBlog
                                                                           ?.succeeded ??
@@ -567,9 +610,9 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                       ),
                                                                     );
                                                                   }
-
-                                                                  setState(
-                                                                      () {});
+                                                                  if (_shouldSetState)
+                                                                    setState(
+                                                                        () {});
                                                                 },
                                                                 child: Row(
                                                                   mainAxisSize:
