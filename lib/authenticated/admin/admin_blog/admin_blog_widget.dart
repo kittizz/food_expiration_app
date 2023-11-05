@@ -1021,9 +1021,14 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                             onTap: () async {
                                                               setState(() {
                                                                 _model.selectedBlog =
-                                                                    blogItem;
+                                                                    null;
                                                               });
                                                               setState(() {
+                                                                _model.selectedBlog =
+                                                                    blogItem;
+                                                              });
+                                                              FFAppState()
+                                                                  .update(() {
                                                                 FFAppState()
                                                                         .markdownEditor =
                                                                     blogItem
