@@ -1120,7 +1120,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Visibility(
-                          visible: _model.selectedBlog != null,
+                          visible:
+                              _model.content != null && _model.content != '',
                           child: Container(
                             width: double.infinity,
                             height: double.infinity,
