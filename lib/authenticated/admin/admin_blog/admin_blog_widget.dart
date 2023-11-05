@@ -1022,10 +1022,15 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                               setState(() {
                                                                 _model.selectedBlog =
                                                                     null;
+                                                                _model.content =
+                                                                    '';
                                                               });
                                                               setState(() {
                                                                 _model.selectedBlog =
                                                                     blogItem;
+                                                                _model.content =
+                                                                    blogItem
+                                                                        .content;
                                                               });
                                                               FFAppState()
                                                                   .update(() {
@@ -1122,7 +1127,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                             child: custom_widgets.MarkdownEditorWidget(
                               width: double.infinity,
                               height: double.infinity,
-                              content: _model.selectedBlog?.content,
+                              content: _model.content,
                             ),
                           ),
                         ),
