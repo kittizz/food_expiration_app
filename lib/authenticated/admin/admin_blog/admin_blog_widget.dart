@@ -43,8 +43,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
       setState(() {});
     });
 
-    _model.textController ??=
-        TextEditingController(text: _model.selectedBlog?.title);
+    _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -1029,6 +1028,12 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                         .markdownEditor =
                                                                     blogItem
                                                                         .content;
+                                                              });
+                                                              setState(() {
+                                                                _model.textController
+                                                                        ?.text =
+                                                                    blogItem
+                                                                        .title;
                                                               });
                                                             },
                                                             child: Row(
