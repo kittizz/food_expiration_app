@@ -7,9 +7,11 @@ import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'admin_blog_widget.dart' show AdminBlogWidget;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -42,14 +44,24 @@ class AdminBlogModel extends FlutterFlowModel<AdminBlogWidget> {
   late SideNavModel sideNavModel;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
+  TextEditingController? textController1;
+  String? Function(BuildContext, String?)? textController1Validator;
   // Stores action output result for [Backend Call - API (adminUpdateBlog)] action in Row widget.
   ApiCallResponse? apiUpNCreBlog;
   // Stores action output result for [Bottom Sheet - ModalAdminEditImage] action in Row widget.
   ImageStruct? editImage;
   // Stores action output result for [Backend Call - API (adminDeleteBlog)] action in Row widget.
   ApiCallResponse? apiDeleteBlog;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
+  // Stores action output result for [Backend Call - API (uploadImage)] action in Row widget.
+  ApiCallResponse? apiUloadImage;
+  // State field(s) for ImageLink widget.
+  FocusNode? imageLinkFocusNode;
+  TextEditingController? imageLinkController;
+  String? Function(BuildContext, String?)? imageLinkControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -61,7 +73,10 @@ class AdminBlogModel extends FlutterFlowModel<AdminBlogWidget> {
     unfocusNode.dispose();
     sideNavModel.dispose();
     textFieldFocusNode?.dispose();
-    textController?.dispose();
+    textController1?.dispose();
+
+    imageLinkFocusNode?.dispose();
+    imageLinkController?.dispose();
   }
 
   /// Action blocks are added here.
