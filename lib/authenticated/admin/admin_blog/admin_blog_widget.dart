@@ -150,7 +150,6 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                             });
                                             setState(() {
                                               FFAppState().markdownEditor = '';
-                                              FFAppState().markdownContent = '';
                                             });
                                             setState(() {
                                               _model.textController?.text = '';
@@ -1033,10 +1032,6 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                         .markdownEditor =
                                                                     blogItem
                                                                         .content;
-                                                                FFAppState()
-                                                                        .markdownContent =
-                                                                    blogItem
-                                                                        .content;
                                                               });
                                                               setState(() {
                                                                 _model.textController
@@ -1124,7 +1119,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                           child: custom_widgets.MarkdownEditorWidget(
                             width: double.infinity,
                             height: double.infinity,
-                            content: FFAppState().markdownContent,
+                            content: _model.selectedBlog?.content,
                           ),
                         ),
                       ),

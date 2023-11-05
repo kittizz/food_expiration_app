@@ -290,12 +290,6 @@ class FFAppState extends ChangeNotifier {
   set markdownEditor(String _value) {
     _markdownEditor = _value;
   }
-
-  String _markdownContent = '';
-  String get markdownContent => _markdownContent;
-  set markdownContent(String _value) {
-    _markdownContent = _value;
-  }
 }
 
 LatLng? _latLngFromString(String? val) {
