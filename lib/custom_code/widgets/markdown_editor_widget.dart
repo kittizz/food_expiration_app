@@ -40,6 +40,7 @@ class _MarkdownEditorWidgetState extends State<MarkdownEditorWidget> {
 
   @override
   Widget build(BuildContext context) {
+    _controller.text = widget.content ?? '';
     return SingleChildScrollView(
         child: Padding(
       padding: EdgeInsets.all(20),

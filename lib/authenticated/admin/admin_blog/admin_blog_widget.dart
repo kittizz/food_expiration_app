@@ -152,6 +152,9 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                               FFAppState().markdownEditor = '';
                                               FFAppState().markdownContent = '';
                                             });
+                                            setState(() {
+                                              _model.textController?.text = '';
+                                            });
                                           },
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -1115,17 +1118,13 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                           color: FlutterFlowTheme.of(context).alternate,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Visibility(
-                          visible: FFAppState().markdownContent != null &&
-                              FFAppState().markdownContent != '',
-                          child: Container(
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: custom_widgets.MarkdownEditorWidget(
                             width: double.infinity,
                             height: double.infinity,
-                            child: custom_widgets.MarkdownEditorWidget(
-                              width: double.infinity,
-                              height: double.infinity,
-                              content: FFAppState().markdownContent,
-                            ),
+                            content: FFAppState().markdownContent,
                           ),
                         ),
                       ),
