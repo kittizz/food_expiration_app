@@ -27,11 +27,11 @@ String getFormattedDate(DateTime date) {
 
   String result = "";
   if (difference < 0) {
-    result = '$dateString · ${difference.abs()} วันที่แล้ว';
+    result = '$dateString · ${difference.abs()} days ago';
   } else if (difference > 0) {
-    result = '$dateString · ในอีก $difference วัน';
+    result = '$dateString · in $difference days';
   } else {
-    result = '$dateString · วันนี้';
+    result = '$dateString · today';
   }
 
   return result;

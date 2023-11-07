@@ -132,7 +132,6 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                 decoration: BoxDecoration(
                   color: widget.navColor,
                 ),
-                alignment: AlignmentDirectional(-1.00, 0.00),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -429,7 +428,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
             if (false)
               Divider(
                 thickness: 1.0,
-                color: widget.navColor,
+                color: FlutterFlowTheme.of(context).grey50,
               ),
           ],
         ),
@@ -455,31 +454,35 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                 return Container(
                   height: 100.0,
                   decoration: BoxDecoration(),
-                  child: wrapWithModel(
-                    model: _model.itemModels.getModel(
-                      itemsLocalIndex.toString(),
-                      itemsLocalIndex,
-                    ),
-                    updateCallback: () => setState(() {}),
-                    child: ItemWidget(
-                      key: Key(
-                        'Keyld8_${itemsLocalIndex.toString()}',
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                    child: wrapWithModel(
+                      model: _model.itemModels.getModel(
+                        itemsLocalIndex.toString(),
+                        itemsLocalIndex,
                       ),
-                      name: itemsLocalItem.name,
-                      image: functions.getImage(
-                          '${itemsLocalItem.image.path}?i=${itemsLocalItem.id.toString()}'),
-                      location: FFAppState()
-                          .locations
-                          .where((e) => e.id == itemsLocalItem.locationId)
-                          .toList()
-                          .first
-                          .name,
-                      preDay: itemsLocalItem.forewarnDay,
-                      imageBlurhash: itemsLocalItem.image.blurHash,
-                      id: itemsLocalItem.id,
-                      locationId: widget.locationId!,
-                      expiryDate: itemsLocalItem.expireDate!,
-                      isArchived: widget.isArchived!,
+                      updateCallback: () => setState(() {}),
+                      child: ItemWidget(
+                        key: Key(
+                          'Keyld8_${itemsLocalIndex.toString()}',
+                        ),
+                        name: itemsLocalItem.name,
+                        image: functions.getImage(
+                            '${itemsLocalItem.image.path}?i=${itemsLocalItem.id.toString()}'),
+                        location: FFAppState()
+                            .locations
+                            .where((e) => e.id == itemsLocalItem.locationId)
+                            .toList()
+                            .first
+                            .name,
+                        preDay: itemsLocalItem.forewarnDay,
+                        imageBlurhash: itemsLocalItem.image.blurHash,
+                        id: itemsLocalItem.id,
+                        locationId: widget.locationId!,
+                        expiryDate: itemsLocalItem.expireDate!,
+                        isArchived: widget.isArchived!,
+                      ),
                     ),
                   ),
                 );
