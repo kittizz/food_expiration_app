@@ -211,107 +211,107 @@ class MobileTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'IBM Plex Sans Thai';
+  String get displayLargeFamily => 'Open Sans';
   TextStyle get displayLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'IBM Plex Sans Thai';
+  String get displayMediumFamily => 'Open Sans';
   TextStyle get displayMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'IBM Plex Sans Thai';
+  String get displaySmallFamily => 'Open Sans';
   TextStyle get displaySmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'IBM Plex Sans Thai';
+  String get headlineLargeFamily => 'Open Sans';
   TextStyle get headlineLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'IBM Plex Sans Thai';
+  String get headlineMediumFamily => 'Open Sans';
   TextStyle get headlineMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
-  String get headlineSmallFamily => 'IBM Plex Sans Thai';
+  String get headlineSmallFamily => 'Open Sans';
   TextStyle get headlineSmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'IBM Plex Sans Thai';
+  String get titleLargeFamily => 'Open Sans';
   TextStyle get titleLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 22.0,
       );
-  String get titleMediumFamily => 'IBM Plex Sans Thai';
+  String get titleMediumFamily => 'Open Sans';
   TextStyle get titleMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.info,
         fontWeight: FontWeight.normal,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'IBM Plex Sans Thai';
+  String get titleSmallFamily => 'Open Sans';
   TextStyle get titleSmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.info,
         fontWeight: FontWeight.w500,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'IBM Plex Sans Thai';
+  String get labelLargeFamily => 'Open Sans';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'IBM Plex Sans Thai';
+  String get labelMediumFamily => 'Open Sans';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'IBM Plex Sans Thai';
+  String get labelSmallFamily => 'Open Sans';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'IBM Plex Sans Thai';
+  String get bodyLargeFamily => 'Open Sans';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'IBM Plex Sans Thai';
+  String get bodyMediumFamily => 'Open Sans';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'IBM Plex Sans Thai';
+  String get bodySmallFamily => 'Open Sans';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -323,107 +323,107 @@ class TabletTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'IBM Plex Sans Thai';
+  String get displayLargeFamily => 'Open Sans';
   TextStyle get displayLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'IBM Plex Sans Thai';
+  String get displayMediumFamily => 'Open Sans';
   TextStyle get displayMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'IBM Plex Sans Thai';
+  String get displaySmallFamily => 'Open Sans';
   TextStyle get displaySmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'IBM Plex Sans Thai';
+  String get headlineLargeFamily => 'Open Sans';
   TextStyle get headlineLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'IBM Plex Sans Thai';
+  String get headlineMediumFamily => 'Open Sans';
   TextStyle get headlineMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
-  String get headlineSmallFamily => 'IBM Plex Sans Thai';
+  String get headlineSmallFamily => 'Open Sans';
   TextStyle get headlineSmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'IBM Plex Sans Thai';
+  String get titleLargeFamily => 'Open Sans';
   TextStyle get titleLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 22.0,
       );
-  String get titleMediumFamily => 'IBM Plex Sans Thai';
+  String get titleMediumFamily => 'Open Sans';
   TextStyle get titleMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.info,
         fontWeight: FontWeight.normal,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'IBM Plex Sans Thai';
+  String get titleSmallFamily => 'Open Sans';
   TextStyle get titleSmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.info,
         fontWeight: FontWeight.w500,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'IBM Plex Sans Thai';
+  String get labelLargeFamily => 'Open Sans';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'IBM Plex Sans Thai';
+  String get labelMediumFamily => 'Open Sans';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'IBM Plex Sans Thai';
+  String get labelSmallFamily => 'Open Sans';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'IBM Plex Sans Thai';
+  String get bodyLargeFamily => 'Open Sans';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'IBM Plex Sans Thai';
+  String get bodyMediumFamily => 'Open Sans';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'IBM Plex Sans Thai';
+  String get bodySmallFamily => 'Open Sans';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -435,107 +435,107 @@ class DesktopTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'IBM Plex Sans Thai';
+  String get displayLargeFamily => 'Open Sans';
   TextStyle get displayLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'IBM Plex Sans Thai';
+  String get displayMediumFamily => 'Open Sans';
   TextStyle get displayMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'IBM Plex Sans Thai';
+  String get displaySmallFamily => 'Open Sans';
   TextStyle get displaySmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'IBM Plex Sans Thai';
+  String get headlineLargeFamily => 'Open Sans';
   TextStyle get headlineLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'IBM Plex Sans Thai';
+  String get headlineMediumFamily => 'Open Sans';
   TextStyle get headlineMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
-  String get headlineSmallFamily => 'IBM Plex Sans Thai';
+  String get headlineSmallFamily => 'Open Sans';
   TextStyle get headlineSmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'IBM Plex Sans Thai';
+  String get titleLargeFamily => 'Open Sans';
   TextStyle get titleLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 22.0,
       );
-  String get titleMediumFamily => 'IBM Plex Sans Thai';
+  String get titleMediumFamily => 'Open Sans';
   TextStyle get titleMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.info,
         fontWeight: FontWeight.normal,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'IBM Plex Sans Thai';
+  String get titleSmallFamily => 'Open Sans';
   TextStyle get titleSmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.info,
         fontWeight: FontWeight.w500,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'IBM Plex Sans Thai';
+  String get labelLargeFamily => 'Open Sans';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'IBM Plex Sans Thai';
+  String get labelMediumFamily => 'Open Sans';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'IBM Plex Sans Thai';
+  String get labelSmallFamily => 'Open Sans';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'IBM Plex Sans Thai';
+  String get bodyLargeFamily => 'Open Sans';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'IBM Plex Sans Thai';
+  String get bodyMediumFamily => 'Open Sans';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'IBM Plex Sans Thai';
+  String get bodySmallFamily => 'Open Sans';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'IBM Plex Sans Thai',
+        'Open Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,

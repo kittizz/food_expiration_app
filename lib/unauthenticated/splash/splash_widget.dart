@@ -224,7 +224,7 @@ class _SplashWidgetState extends State<SplashWidget>
                                   .override(
                                     fontFamily: 'Itim',
                                     color: FlutterFlowTheme.of(context).red300,
-                                    fontSize: 35.0,
+                                    fontSize: 40.0,
                                     fontWeight: FontWeight.w600,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
