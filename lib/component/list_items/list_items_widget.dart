@@ -140,10 +140,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                       child: Text(
-                        valueOrDefault<String>(
-                          widget.title,
-                          'หมดอายุไปแล้ว',
-                        ),
+                        widget.title!,
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).bodyLargeFamily,

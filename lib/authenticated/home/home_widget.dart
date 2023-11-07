@@ -391,7 +391,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   ParamType.bool,
                                                 ),
                                                 'title': serializeParam(
-                                                  'รายการทั้งหมด',
+                                                  'All items',
                                                   ParamType.String,
                                                 ),
                                                 'locationId': serializeParam(
@@ -495,7 +495,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   ParamType.bool,
                                                 ),
                                                 'title': serializeParam(
-                                                  'รายการทั้งหมด',
+                                                  'All items',
                                                   ParamType.String,
                                                 ),
                                                 'locationId': serializeParam(
@@ -596,7 +596,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                             ParamType.bool,
                                           ),
                                           'title': serializeParam(
-                                            'รายการทั้งหมด',
+                                            'All items',
                                             ParamType.String,
                                           ),
                                         }.withoutNulls,

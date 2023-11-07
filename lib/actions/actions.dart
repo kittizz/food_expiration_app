@@ -67,12 +67,9 @@ Future registerDevice(
 }
 
 Future<bool?> fetchUser(BuildContext context) async {
-  ApiCallResponse? apiResultgetUser;
   UserStruct? userStruct;
+  ApiCallResponse? apiResultgetUser;
 
-  apiResultgetUser = await FoodexpirationGroup.getUserCall.call(
-    deviceid: FFAppState().deviceId,
-  );
   if ((apiResultgetUser?.succeeded ?? true)) {
     userStruct = await actions.toUserStruct(
       (apiResultgetUser?.jsonBody ?? ''),
@@ -84,6 +81,10 @@ Future<bool?> fetchUser(BuildContext context) async {
   } else {
     return false;
   }
+
+  apiResultgetUser = await FoodexpirationGroup.getUserCall.call(
+    deviceid: FFAppState().deviceId,
+  );
 }
 
 Future fetchLocations(BuildContext context) async {
@@ -186,7 +187,7 @@ Future openAddItem(
       'ItemInfo',
       queryParameters: {
         'name': serializeParam(
-          'เพิ่มรายการ',
+          'Add item',
           ParamType.String,
         ),
         'isAdd': serializeParam(
@@ -200,7 +201,7 @@ Future openAddItem(
       'ItemInfo',
       queryParameters: {
         'name': serializeParam(
-          'เพิ่มรายการ',
+          'Add item',
           ParamType.String,
         ),
         'isAdd': serializeParam(
