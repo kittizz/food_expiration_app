@@ -981,7 +981,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       : 0,
                                   dateType: 'expired',
                                   isArchived: false,
-                                  navColor: Color(0x31FFA4A4),
+                                  navColor: Color(0x25FFA4A4),
                                 ),
                               ),
                             ),
