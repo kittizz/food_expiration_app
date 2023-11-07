@@ -23,6 +23,7 @@ class ListItemsWidget extends StatefulWidget {
     required this.locationId,
     required this.dateType,
     required this.isArchived,
+    this.navColor,
   })  : this.showClear = showClear ?? false,
         super(key: key);
 
@@ -31,6 +32,7 @@ class ListItemsWidget extends StatefulWidget {
   final int? locationId;
   final String? dateType;
   final bool? isArchived;
+  final Color? navColor;
 
   @override
   _ListItemsWidgetState createState() => _ListItemsWidgetState();
@@ -119,285 +121,317 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-          child: Container(
-            width: MediaQuery.sizeOf(context).width * 1.0,
-            height: 45.0,
-            decoration: BoxDecoration(),
-            alignment: AlignmentDirectional(-1.00, 0.00),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                  child: Text(
-                    valueOrDefault<String>(
-                      widget.title,
-                      'หมดอายุไปแล้ว',
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+              child: Container(
+                width: MediaQuery.sizeOf(context).width * 1.0,
+                height: 60.0,
+                decoration: BoxDecoration(
+                  color: widget.navColor,
+                ),
+                alignment: AlignmentDirectional(-1.00, 0.00),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                      child: Text(
+                        valueOrDefault<String>(
+                          widget.title,
+                          'หมดอายุไปแล้ว',
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyLargeFamily,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyLargeFamily),
+                            ),
+                      ),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyLargeFamily,
-                          fontWeight: FontWeight.w500,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyLargeFamily),
-                        ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      if (widget.isArchived ?? true)
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            var confirmDialogResponse = await showDialog<bool>(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('ทิ้งรายการ'),
-                                      content: Text(
-                                          'คุณกำลังจะทิ้งรายการทั้งหมด และไม่สามารถกู้คืนได้'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              alertDialogContext, false),
-                                          child: Text('ยกเลิก'),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          if (widget.isArchived ?? true)
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                var confirmDialogResponse =
+                                    await showDialog<bool>(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('ทิ้งรายการ'),
+                                              content: Text(
+                                                  'คุณกำลังจะทิ้งรายการทั้งหมด และไม่สามารถกู้คืนได้'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext,
+                                                          false),
+                                                  child: Text('ยกเลิก'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext,
+                                                          true),
+                                                  child: Text('ยืนยัน'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ) ??
+                                        false;
+                                if (confirmDialogResponse) {
+                                  _model.apiDeleteItem =
+                                      await FoodexpirationGroup.deleteItemsCall
+                                          .call(
+                                    deviceid: FFAppState().deviceId,
+                                    idList: functions.mapItemIdList(
+                                        (widget.isArchived!
+                                                ? FFAppState().items
+                                                : FFAppState()
+                                                    .items
+                                                    .where((e) =>
+                                                        functions.getDateStatus(
+                                                            e.expireDate!,
+                                                            e.forewarnDay) ==
+                                                        widget.dateType)
+                                                    .toList())
+                                            .toList()),
+                                  );
+                                  if ((_model.apiDeleteItem?.succeeded ??
+                                      true)) {
+                                    ScaffoldMessenger.of(context)
+                                        .clearSnackBars();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'ล้างรายการ',
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                          ),
                                         ),
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              alertDialogContext, true),
-                                          child: Text('ยืนยัน'),
-                                        ),
-                                      ],
+                                        duration: Duration(milliseconds: 1000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                      ),
                                     );
-                                  },
-                                ) ??
-                                false;
-                            if (confirmDialogResponse) {
-                              _model.apiDeleteItem = await FoodexpirationGroup
-                                  .deleteItemsCall
-                                  .call(
-                                deviceid: FFAppState().deviceId,
-                                idList: functions.mapItemIdList(
-                                    (widget.isArchived!
-                                            ? FFAppState().items
-                                            : FFAppState()
-                                                .items
-                                                .where((e) =>
-                                                    functions.getDateStatus(
-                                                        e.expireDate!,
-                                                        e.forewarnDay) ==
-                                                    widget.dateType)
-                                                .toList())
-                                        .toList()),
-                              );
-                              if ((_model.apiDeleteItem?.succeeded ?? true)) {
-                                ScaffoldMessenger.of(context).clearSnackBars();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'ล้างรายการ',
-                                      style: TextStyle(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                      ),
-                                    ),
-                                    duration: Duration(milliseconds: 1000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                  ),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).clearSnackBars();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      FoodexpirationGroup.deleteItemsCall
-                                          .message(
-                                            (_model.apiDeleteItem?.jsonBody ??
-                                                ''),
-                                          )
-                                          .toString(),
-                                      style: TextStyle(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                      ),
-                                    ),
-                                    duration: Duration(milliseconds: 4000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context).error,
-                                  ),
-                                );
-                              }
-
-                              await action_blocks.fetchItems(
-                                context,
-                                archive: widget.isArchived,
-                                locationId: widget.locationId,
-                              );
-                              setState(() {});
-                            }
-
-                            setState(() {});
-                          },
-                          child: Text(
-                            'ทิ้ง',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyLarge
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyLargeFamily,
-                                  color: FlutterFlowTheme.of(context).red400,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily),
-                                ),
-                          ),
-                        ).animateOnActionTrigger(
-                          animationsMap['textOnActionTriggerAnimation1']!,
-                        ),
-                      if (widget.showClear)
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            var confirmDialogResponse = await showDialog<bool>(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text(widget.isArchived!
-                                          ? 'กู้คืนรายการ'
-                                          : 'ล้างรายการ'),
-                                      content: Text(widget.isArchived!
-                                          ? 'คุณกำลังจะกู้คืนรายการทั้งหมด'
-                                          : 'คุณกำลังจะล้างรายการ ${widget.title}ทั้งหมด'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              alertDialogContext, false),
-                                          child: Text('ยกเลิก'),
+                                  } else {
+                                    ScaffoldMessenger.of(context)
+                                        .clearSnackBars();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          FoodexpirationGroup.deleteItemsCall
+                                              .message(
+                                                (_model.apiDeleteItem
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              )
+                                              .toString(),
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
                                         ),
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              alertDialogContext, true),
-                                          child: Text('ยืนยัน'),
-                                        ),
-                                      ],
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context).error,
+                                      ),
                                     );
-                                  },
-                                ) ??
-                                false;
-                            if (confirmDialogResponse) {
-                              _model.apiClearItem =
-                                  await FoodexpirationGroup.clearItemsCall.call(
-                                idList: functions.mapItemIdList(
-                                    (widget.isArchived!
-                                            ? FFAppState().items
-                                            : FFAppState()
-                                                .items
-                                                .where((e) =>
-                                                    functions.getDateStatus(
-                                                        e.expireDate!,
-                                                        e.forewarnDay) ==
-                                                    widget.dateType)
-                                                .toList())
-                                        .toList()),
-                                archive: !widget.isArchived!,
-                                deviceid: FFAppState().deviceId,
-                              );
-                              if ((_model.apiClearItem?.succeeded ?? true)) {
-                                ScaffoldMessenger.of(context).clearSnackBars();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'ล้างรายการ',
-                                      style: TextStyle(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                      ),
-                                    ),
-                                    duration: Duration(milliseconds: 1000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                  ),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).clearSnackBars();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      FoodexpirationGroup.clearItemsCall
-                                          .message(
-                                            (_model.apiClearItem?.jsonBody ??
-                                                ''),
-                                          )
-                                          .toString(),
-                                      style: TextStyle(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                      ),
-                                    ),
-                                    duration: Duration(milliseconds: 4000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context).error,
-                                  ),
-                                );
-                              }
+                                  }
 
-                              await action_blocks.fetchItems(
-                                context,
-                                archive: widget.isArchived,
-                                locationId: widget.locationId,
-                              );
-                              setState(() {});
-                            }
+                                  await action_blocks.fetchItems(
+                                    context,
+                                    archive: widget.isArchived,
+                                    locationId: widget.locationId,
+                                  );
+                                  setState(() {});
+                                }
 
-                            setState(() {});
-                          },
-                          child: Text(
-                            widget.isArchived! ? 'กู้คืน' : 'ล้าง',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyLarge
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyLargeFamily,
-                                  color: widget.isArchived!
-                                      ? FlutterFlowTheme.of(context).success
-                                      : FlutterFlowTheme.of(context).red400,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily),
-                                ),
-                          ),
-                        ).animateOnActionTrigger(
-                          animationsMap['textOnActionTriggerAnimation2']!,
-                        ),
-                    ].divide(SizedBox(width: 40.0)),
-                  ),
+                                setState(() {});
+                              },
+                              child: Text(
+                                'ทิ้ง',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily,
+                                      color:
+                                          FlutterFlowTheme.of(context).red400,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLargeFamily),
+                                    ),
+                              ),
+                            ).animateOnActionTrigger(
+                              animationsMap['textOnActionTriggerAnimation1']!,
+                            ),
+                          if (widget.showClear)
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                var confirmDialogResponse =
+                                    await showDialog<bool>(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(widget.isArchived!
+                                                  ? 'กู้คืนรายการ'
+                                                  : 'ล้างรายการ'),
+                                              content: Text(widget.isArchived!
+                                                  ? 'คุณกำลังจะกู้คืนรายการทั้งหมด'
+                                                  : 'คุณกำลังจะล้างรายการ ${widget.title}ทั้งหมด'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext,
+                                                          false),
+                                                  child: Text('ยกเลิก'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext,
+                                                          true),
+                                                  child: Text('ยืนยัน'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ) ??
+                                        false;
+                                if (confirmDialogResponse) {
+                                  _model.apiClearItem =
+                                      await FoodexpirationGroup.clearItemsCall
+                                          .call(
+                                    idList: functions.mapItemIdList(
+                                        (widget.isArchived!
+                                                ? FFAppState().items
+                                                : FFAppState()
+                                                    .items
+                                                    .where((e) =>
+                                                        functions.getDateStatus(
+                                                            e.expireDate!,
+                                                            e.forewarnDay) ==
+                                                        widget.dateType)
+                                                    .toList())
+                                            .toList()),
+                                    archive: !widget.isArchived!,
+                                    deviceid: FFAppState().deviceId,
+                                  );
+                                  if ((_model.apiClearItem?.succeeded ??
+                                      true)) {
+                                    ScaffoldMessenger.of(context)
+                                        .clearSnackBars();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'ล้างรายการ',
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 1000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                      ),
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context)
+                                        .clearSnackBars();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          FoodexpirationGroup.clearItemsCall
+                                              .message(
+                                                (_model.apiClearItem
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              )
+                                              .toString(),
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context).error,
+                                      ),
+                                    );
+                                  }
+
+                                  await action_blocks.fetchItems(
+                                    context,
+                                    archive: widget.isArchived,
+                                    locationId: widget.locationId,
+                                  );
+                                  setState(() {});
+                                }
+
+                                setState(() {});
+                              },
+                              child: Text(
+                                widget.isArchived! ? 'กู้คืน' : 'ล้าง',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily,
+                                      color: widget.isArchived!
+                                          ? FlutterFlowTheme.of(context).success
+                                          : FlutterFlowTheme.of(context).red400,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLargeFamily),
+                                    ),
+                              ),
+                            ).animateOnActionTrigger(
+                              animationsMap['textOnActionTriggerAnimation2']!,
+                            ),
+                        ].divide(SizedBox(width: 40.0)),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-        Divider(
-          thickness: 1.0,
-          color: FlutterFlowTheme.of(context).grey50,
+            if (false)
+              Divider(
+                thickness: 1.0,
+                color: widget.navColor,
+              ),
+          ],
         ),
         Builder(
           builder: (context) {

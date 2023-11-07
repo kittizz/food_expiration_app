@@ -112,7 +112,6 @@ class _ItemListWidgetState extends State<ItemListWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             if (widget.isLocation) {
@@ -982,6 +981,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       : 0,
                                   dateType: 'expired',
                                   isArchived: false,
+                                  navColor: Color(0x31FFA4A4),
                                 ),
                               ),
                             ),
@@ -1001,6 +1001,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       : 0,
                                   dateType: 'about_to_expire',
                                   isArchived: false,
+                                  navColor: Color(0x38FFF5DA),
                                 ),
                               ),
                             ),
@@ -1020,6 +1021,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       : 0,
                                   dateType: 'ok',
                                   isArchived: false,
+                                  navColor: Color(0x2F39D2C0),
                                 ),
                               ),
                             ),
