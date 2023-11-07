@@ -113,9 +113,7 @@ class _SettingWidgetState extends State<SettingWidget>
             },
           ),
           title: Text(
-            FFLocalizations.of(context).getText(
-              'or3o9b8g' /* Settings */,
-            ),
+            'Settings',
             style: FlutterFlowTheme.of(context).headlineSmall,
           ),
           actions: [],
@@ -148,9 +146,7 @@ class _SettingWidgetState extends State<SettingWidget>
                           Icons.notifications_active,
                         ),
                         Tab(
-                          text: FFLocalizations.of(context).getText(
-                            '4385nih5' /* Notifications */,
-                          ),
+                          text: 'Notifications',
                         ),
                       ],
                     ),
@@ -161,9 +157,7 @@ class _SettingWidgetState extends State<SettingWidget>
                           Icons.person,
                         ),
                         Tab(
-                          text: FFLocalizations.of(context).getText(
-                            'n7cppjwy' /* Profile */,
-                          ),
+                          text: 'Profile',
                         ),
                       ],
                     ),
@@ -217,9 +211,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                       }
                                     },
                                     title: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'gjaj6gd1' /* Notifications */,
-                                      ),
+                                      'Notifications',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
@@ -234,9 +226,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                           ),
                                     ),
                                     subtitle: Text(
-                                      FFLocalizations.of(context).getText(
-                                        '1fwy28ke' /* Receive notifications from the... */,
-                                      ),
+                                      'Receive notifications from the application',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -326,10 +316,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                               children: [
                                                 Flexible(
                                                   child: Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'yt4mtp8m' /* Send  notifications at */,
-                                                    ),
+                                                    'Send  notifications at',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyLarge,
@@ -337,10 +324,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                                 ),
                                                 Flexible(
                                                   child: Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      '9gek6mu0' /* Set a time to receive notifica... */,
-                                                    ),
+                                                    'Set a time to receive notifications every day.',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -436,9 +420,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                       await _model.saveNickname(context);
                                     },
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        '8cls3emy' /* Save */,
-                                      ),
+                                      'Save',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
@@ -762,11 +744,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                           },
                                           obscureText: false,
                                           decoration: InputDecoration(
-                                            labelText:
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                              '7f5rptws' /* Name */,
-                                            ),
+                                            labelText: 'Name',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge,
@@ -905,9 +883,7 @@ class _SettingWidgetState extends State<SettingWidget>
 
                                 _navigate();
                               },
-                              text: FFLocalizations.of(context).getText(
-                                'raygdrcg' /* Sign out */,
-                              ),
+                              text: 'Sign out',
                               icon: Icon(
                                 Icons.logout,
                                 size: 15.0,

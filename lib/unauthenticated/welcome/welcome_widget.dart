@@ -104,9 +104,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     13.0, 0.0, 0.0, 0.0),
                                 child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'bskuw6oo' /* Expiry Date */,
-                                  ),
+                                  'Expiry Date',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
@@ -123,9 +121,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 ),
                               ),
                               Text(
-                                FFLocalizations.of(context).getText(
-                                  '6sraxs1o' /* ! */,
-                                ),
+                                '!',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -189,9 +185,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 onPressed: () async {
                                   context.pushNamed('Signup');
                                 },
-                                text: FFLocalizations.of(context).getText(
-                                  'hq4say6o' /* Sign in with Email */,
-                                ),
+                                text: 'Sign in with Email',
                                 icon: Icon(
                                   Icons.mail_outline_outlined,
                                   color: FlutterFlowTheme.of(context)
@@ -227,9 +221,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                               ),
                             ),
                             Text(
-                              FFLocalizations.of(context).getText(
-                                '9tejcfeh' /* or use social media */,
-                              ),
+                              'or use social media',
                               style: FlutterFlowTheme.of(context).labelMedium,
                             ),
                             Padding(
@@ -251,9 +243,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   context.goNamedAuth(
                                       'Splash', context.mounted);
                                 },
-                                text: FFLocalizations.of(context).getText(
-                                  'j5ol90b9' /* Sign in with Google */,
-                                ),
+                                text: 'Sign in with Google',
                                 icon: FaIcon(
                                   FontAwesomeIcons.google,
                                   color: FlutterFlowTheme.of(context).info,
@@ -305,9 +295,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   context.goNamedAuth(
                                       'Splash', context.mounted);
                                 },
-                                text: FFLocalizations.of(context).getText(
-                                  'bhqsii3r' /* Sign in with Facebook */,
-                                ),
+                                text: 'Sign in with Facebook',
                                 icon: Icon(
                                   Icons.mail_outline_outlined,
                                   color: FlutterFlowTheme.of(context).info,
@@ -356,17 +344,11 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          'n2z6jt1p' /* Already have an account?  */,
-                                        ),
+                                        text: 'Already have an account? ',
                                         style: TextStyle(),
                                       ),
                                       TextSpan(
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          'k2p5rijy' /*  Sign in! */,
-                                        ),
+                                        text: ' Sign in!',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge
                                             .override(

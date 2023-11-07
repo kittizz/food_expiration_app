@@ -79,9 +79,7 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
 
     barcodeOut = await FlutterBarcodeScanner.scanBarcode(
       '#C62828', // scanning line color
-      FFLocalizations.of(context).getText(
-        '90atx2hx' /* Cancel */,
-      ), // cancel button text
+      'Cancel', // cancel button text
       true, // whether to show the flash icon
       ScanMode.BARCODE,
     );

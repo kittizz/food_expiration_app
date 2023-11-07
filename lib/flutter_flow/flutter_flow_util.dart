@@ -35,8 +35,6 @@ T valueOrDefault<T>(T? value, T defaultValue) =>
 void _setTimeagoLocales() {
   timeago.setLocaleMessages('en', timeago.EnMessages());
   timeago.setLocaleMessages('en_short', timeago.EnShortMessages());
-  timeago.setLocaleMessages('th', timeago.ThMessages());
-  timeago.setLocaleMessages('th_short', timeago.ThShortMessages());
 }
 
 String dateTimeFormat(String format, DateTime? dateTime, {String? locale}) {

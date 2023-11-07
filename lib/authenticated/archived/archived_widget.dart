@@ -94,9 +94,7 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
             },
           ),
           title: Text(
-            FFLocalizations.of(context).getText(
-              'izlqo1kz' /* Archived */,
-            ),
+            'Archived',
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,

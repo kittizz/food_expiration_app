@@ -61,9 +61,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   String? _forewarnDayFieldControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return FFLocalizations.of(context).getText(
-        '4zbf4gt1' /* Please fill out notification i... */,
-      );
+      return 'Please fill out notification in advance.';
     }
 
     return null;
@@ -77,9 +75,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   String? Function(BuildContext, String?)? quantityFieldControllerValidator;
   String? _quantityFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return FFLocalizations.of(context).getText(
-        '0payu2p3' /* Please enter quantity */,
-      );
+      return 'Please enter quantity';
     }
 
     if (val.length < 1) {
@@ -205,9 +201,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
 
     barcodeOutput = await FlutterBarcodeScanner.scanBarcode(
       '#C62828', // scanning line color
-      FFLocalizations.of(context).getText(
-        '6qoom4gp' /* Cancel */,
-      ), // cancel button text
+      'Cancel', // cancel button text
       true, // whether to show the flash icon
       ScanMode.QR,
     );
