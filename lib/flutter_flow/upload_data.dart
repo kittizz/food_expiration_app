@@ -91,7 +91,9 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
                 padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
                 child: ListTile(
                   title: Text(
-                    'เลือก แหล่งที่มา',
+                    FFLocalizations.of(context).getText(
+                      '54j7oeqm' /* เลือก แหล่งที่มา */,
+                    ),
                     textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
                       pickerFontFamily,
@@ -108,27 +110,39 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
             ],
             if (allowPhoto && allowVideo) ...[
               createUploadMediaListTile(
-                'แกลเลอรี่ (รูปถ่าย)',
+                FFLocalizations.of(context).getText(
+                  'hai4aoss' /* แกลเลอรี่ (รูปถ่าย) */,
+                ),
                 MediaSource.photoGallery,
               ),
               const Divider(),
               createUploadMediaListTile(
-                'แกลเลอรี่  (วีดีโอ)',
+                FFLocalizations.of(context).getText(
+                  'z18jd9ms' /* แกลเลอรี่  (วีดีโอ) */,
+                ),
                 MediaSource.videoGallery,
               ),
             ] else if (allowPhoto)
               createUploadMediaListTile(
-                'แกลเลอรี่',
+                FFLocalizations.of(context).getText(
+                  'cquvznph' /* แกลเลอรี่ */,
+                ),
                 MediaSource.photoGallery,
               )
             else
               createUploadMediaListTile(
-                'แกลเลอรี่',
+                FFLocalizations.of(context).getText(
+                  'cquvznph' /* แกลเลอรี่ */,
+                ),
                 MediaSource.videoGallery,
               ),
             if (!kIsWeb) ...[
               const Divider(),
-              createUploadMediaListTile('กล้อง', MediaSource.camera),
+              createUploadMediaListTile(
+                  FFLocalizations.of(context).getText(
+                    'r8vd4qds' /* กล้อง */,
+                  ),
+                  MediaSource.camera),
               const Divider(),
             ],
             const SizedBox(height: 10),
@@ -244,7 +258,9 @@ bool validateFileFormat(String filePath, BuildContext context) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(
-      content: Text('รูปแบบไฟล์ไม่ถูกต้อง'),
+      content: Text(FFLocalizations.of(context).getText(
+        'oqm7ic3f' /* รูปแบบไฟล์ไม่ถูกต้อง */,
+      )),
     ));
   return false;
 }

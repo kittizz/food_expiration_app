@@ -35,7 +35,7 @@ Future registerDevice(
       context: context,
       builder: (alertDialogContext) {
         return AlertDialog(
-          title: Text('ข้อผิดพลาด'),
+          title: Text('Error'),
           content: Text(FoodexpirationGroup.registerDeviceCall
               .message(
                 (apiResultou6?.jsonBody ?? ''),
@@ -45,7 +45,7 @@ Future registerDevice(
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(alertDialogContext),
-              child: Text('ตกลง'),
+              child: Text('OK'),
             ),
           ],
         );
@@ -57,7 +57,7 @@ Future registerDevice(
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
-        'ยินดีต้อนรับกลับ',
+        'Welcome back',
         style: FlutterFlowTheme.of(context).bodyLarge,
       ),
       duration: Duration(milliseconds: 4000),

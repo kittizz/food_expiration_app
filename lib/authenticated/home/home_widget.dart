@@ -288,7 +288,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'สวัสดีคุณ ${FFAppState().user.nickname}',
+                                                    'Hello ${FFAppState().user.nickname}',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyLarge
@@ -446,7 +446,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     ),
                                                   ),
                                                   Text(
-                                                    'ค้นหา...',
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      '84eknr3b' /* search... */,
+                                                    ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -604,7 +607,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     },
                                   ),
                                   Text(
-                                    'รายการ',
+                                    FFLocalizations.of(context).getText(
+                                      '5msld3q9' /* Items */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
@@ -641,7 +646,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     },
                                   ),
                                   Text(
-                                    'สถานที่เก็บ',
+                                    FFLocalizations.of(context).getText(
+                                      'uci58zhy' /* Storage */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
@@ -678,7 +685,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     },
                                   ),
                                   Text(
-                                    'หมดอายุ',
+                                    FFLocalizations.of(context).getText(
+                                      'n60xch9g' /* Archived */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
@@ -715,7 +724,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     },
                                   ),
                                   Text(
-                                    'ตั้งค่า',
+                                    FFLocalizations.of(context).getText(
+                                      'uhvkz1ai' /* Settings */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
@@ -752,7 +763,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  'บทความสาระความรู้',
+                                  FFLocalizations.of(context).getText(
+                                    'upl7eyzw' /* Knowledge articles */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .titleMedium
                                       .override(

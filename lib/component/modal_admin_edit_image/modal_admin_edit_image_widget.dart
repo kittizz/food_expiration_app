@@ -396,7 +396,11 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                                             .fromSTEB(0.0, 12.0,
                                                                 0.0, 0.0),
                                                     child: Text(
-                                                      'Add Photo',
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'rsx9y5mm' /* Add Photo */,
+                                                      ),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -409,7 +413,11 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                                             .fromSTEB(0.0, 4.0,
                                                                 0.0, 0.0),
                                                     child: Text(
-                                                      'Upload an image here...',
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'p6hy7k64' /* Upload an image here... */,
+                                                      ),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -465,7 +473,10 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                         onPressed: () async {
                                           Navigator.pop(context, _model.image);
                                         },
-                                        text: 'ยืนยัน',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'qawtfrbp' /* Confirm */,
+                                        ),
                                         options: FFButtonOptions(
                                           height: 50.0,
                                           padding:

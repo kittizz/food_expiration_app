@@ -268,7 +268,9 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                 setState(() {});
                               },
                               child: Text(
-                                'ทิ้ง',
+                                FFLocalizations.of(context).getText(
+                                  'gxq9u7ap' /* Discard */,
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
                                     .override(
@@ -399,7 +401,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                 setState(() {});
                               },
                               child: Text(
-                                widget.isArchived! ? 'กู้คืน' : 'ล้าง',
+                                widget.isArchived! ? 'Recover' : 'Clear',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
                                     .override(
@@ -507,7 +509,9 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
             child: Align(
               alignment: AlignmentDirectional(0.00, 0.00),
               child: Text(
-                'ไม่มีรายการ',
+                FFLocalizations.of(context).getText(
+                  'l7sigmac' /* There are no items. */,
+                ),
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
                       color: Color(0x69474747),

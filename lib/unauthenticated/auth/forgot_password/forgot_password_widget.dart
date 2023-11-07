@@ -127,17 +127,30 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 32.0, 0.0, 8.0),
                               child: Text(
-                                'ลืมรหัสผ่าน',
+                                FFLocalizations.of(context).getText(
+                                  '5zgmpd1d' /* Forgot your password */,
+                                ),
                                 textAlign: TextAlign.start,
-                                style:
-                                    FlutterFlowTheme.of(context).displayMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .displayMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .displayMediumFamily,
+                                      fontSize: 32.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .displayMediumFamily),
+                                    ),
                               ),
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 12.0),
                               child: Text(
-                                'กรอกอีเมลเพื่อรับ OTP เพื่อเปลี่ยนรหัสผ่าน',
+                                FFLocalizations.of(context).getText(
+                                  '3ju9m9fy' /* Enter your email to receive an... */,
+                                ),
                                 textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.of(context).labelLarge,
                               ),
@@ -150,7 +163,10 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                 focusNode: _model.textFieldFocusNode,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Email Address',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    'ktpebxoj' /* Email Address */,
+                                  ),
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(
@@ -234,7 +250,9 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'ต้องใช้ อีเมล!',
+                                  FFLocalizations.of(context).getText(
+                                    'tbt57yq1' /* ต้องใช้ อีเมล! */,
+                                  ),
                                 ),
                               ),
                             );
@@ -264,7 +282,9 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
                           context.pushNamed('Signin');
                         },
-                        text: 'ส่ง',
+                        text: FFLocalizations.of(context).getText(
+                          'd8ab4v5r' /* Send */,
+                        ),
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 60.0,

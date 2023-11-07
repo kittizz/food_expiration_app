@@ -113,7 +113,9 @@ class _SettingWidgetState extends State<SettingWidget>
             },
           ),
           title: Text(
-            'ตั้งค่า',
+            FFLocalizations.of(context).getText(
+              'or3o9b8g' /* Settings */,
+            ),
             style: FlutterFlowTheme.of(context).headlineSmall,
           ),
           actions: [],
@@ -146,7 +148,9 @@ class _SettingWidgetState extends State<SettingWidget>
                           Icons.notifications_active,
                         ),
                         Tab(
-                          text: 'แจ้งเตือน',
+                          text: FFLocalizations.of(context).getText(
+                            '4385nih5' /* Notifications */,
+                          ),
                         ),
                       ],
                     ),
@@ -157,7 +161,9 @@ class _SettingWidgetState extends State<SettingWidget>
                           Icons.person,
                         ),
                         Tab(
-                          text: 'ผู้ใช้',
+                          text: FFLocalizations.of(context).getText(
+                            'n7cppjwy' /* Profile */,
+                          ),
                         ),
                       ],
                     ),
@@ -211,7 +217,9 @@ class _SettingWidgetState extends State<SettingWidget>
                                       }
                                     },
                                     title: Text(
-                                      'การแจ้งเตือน',
+                                      FFLocalizations.of(context).getText(
+                                        'gjaj6gd1' /* Notifications */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
@@ -226,7 +234,9 @@ class _SettingWidgetState extends State<SettingWidget>
                                           ),
                                     ),
                                     subtitle: Text(
-                                      'รับการแจ้งเตือนจากแอปพลิเคชัน',
+                                      FFLocalizations.of(context).getText(
+                                        '1fwy28ke' /* Receive notifications from the... */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -316,7 +326,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                               children: [
                                                 Flexible(
                                                   child: Text(
-                                                    'รับการแจ้งเตือนตอนเวลา',
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'yt4mtp8m' /* Send  notifications at */,
+                                                    ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyLarge,
@@ -324,7 +337,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                                 ),
                                                 Flexible(
                                                   child: Text(
-                                                    'กำหนดเวลาที่จะรับการแจ้งเตือนในทุกๆ วัน',
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      '9gek6mu0' /* Set a time to receive notifica... */,
+                                                    ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -420,7 +436,9 @@ class _SettingWidgetState extends State<SettingWidget>
                                       await _model.saveNickname(context);
                                     },
                                     child: Text(
-                                      'บันทึก',
+                                      FFLocalizations.of(context).getText(
+                                        '8cls3emy' /* Save */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
@@ -683,7 +701,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                                           .showSnackBar(
                                                         SnackBar(
                                                           content: Text(
-                                                            'แก้ไขรูปโปรไฟล์เรียบร้อย',
+                                                            'Profile picture edited.',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodySmall
@@ -744,7 +762,11 @@ class _SettingWidgetState extends State<SettingWidget>
                                           },
                                           obscureText: false,
                                           decoration: InputDecoration(
-                                            labelText: 'ชื่อ',
+                                            labelText:
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              '7f5rptws' /* Name */,
+                                            ),
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge,
@@ -883,7 +905,9 @@ class _SettingWidgetState extends State<SettingWidget>
 
                                 _navigate();
                               },
-                              text: 'ลงชื่อออก',
+                              text: FFLocalizations.of(context).getText(
+                                'raygdrcg' /* Sign out */,
+                              ),
                               icon: Icon(
                                 Icons.logout,
                                 size: 15.0,

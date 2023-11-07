@@ -93,7 +93,9 @@ class _BlogWidgetState extends State<BlogWidget> {
             },
           ),
           title: Text(
-            'บทความสาระความรู้',
+            FFLocalizations.of(context).getText(
+              'cechgn8m' /* Knowledge articles */,
+            ),
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).info,
@@ -124,7 +126,9 @@ class _BlogWidgetState extends State<BlogWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 0.0, 0.0),
                       child: Text(
-                        'รวมบทความเกี่ยวกับ อาหาร และโภชนาการ อื่นๆ',
+                        FFLocalizations.of(context).getText(
+                          '6fh86wfd' /* Includes articles about food a... */,
+                        ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
                     ),

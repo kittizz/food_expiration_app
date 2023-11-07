@@ -94,7 +94,9 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
             },
           ),
           title: Text(
-            'หมดอายุ',
+            FFLocalizations.of(context).getText(
+              'izlqo1kz' /* Archived */,
+            ),
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,

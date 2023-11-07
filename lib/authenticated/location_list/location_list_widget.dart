@@ -128,7 +128,9 @@ class _LocationListWidgetState extends State<LocationListWidget>
             },
           ),
           title: Text(
-            'สถานที่จัดเก็บ',
+            FFLocalizations.of(context).getText(
+              'jgngsj3n' /* Storages */,
+            ),
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -204,7 +206,9 @@ class _LocationListWidgetState extends State<LocationListWidget>
                                       size: 16.0,
                                     ),
                                     Text(
-                                      'เพิ่ม',
+                                      FFLocalizations.of(context).getText(
+                                        '53fax77t' /* Add */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(

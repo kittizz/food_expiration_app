@@ -104,7 +104,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     13.0, 0.0, 0.0, 0.0),
                                 child: Text(
-                                  'เตือนหน่อย',
+                                  FFLocalizations.of(context).getText(
+                                    'bskuw6oo' /* Expiry Date */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
@@ -121,7 +123,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 ),
                               ),
                               Text(
-                                '!',
+                                FFLocalizations.of(context).getText(
+                                  '6sraxs1o' /* ! */,
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -185,7 +189,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 onPressed: () async {
                                   context.pushNamed('Signup');
                                 },
-                                text: 'ลงทะเบียน ด้วย อีเมล',
+                                text: FFLocalizations.of(context).getText(
+                                  'hq4say6o' /* Sign in with Email */,
+                                ),
                                 icon: Icon(
                                   Icons.mail_outline_outlined,
                                   color: FlutterFlowTheme.of(context)
@@ -221,7 +227,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                               ),
                             ),
                             Text(
-                              'หรือ ใช้ โซเชียลมีเดีย',
+                              FFLocalizations.of(context).getText(
+                                '9tejcfeh' /* or use social media */,
+                              ),
                               style: FlutterFlowTheme.of(context).labelMedium,
                             ),
                             Padding(
@@ -243,7 +251,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   context.goNamedAuth(
                                       'Splash', context.mounted);
                                 },
-                                text: 'ลงทะเบียน ด้วย Google',
+                                text: FFLocalizations.of(context).getText(
+                                  'j5ol90b9' /* Sign in with Google */,
+                                ),
                                 icon: FaIcon(
                                   FontAwesomeIcons.google,
                                   color: FlutterFlowTheme.of(context).info,
@@ -295,7 +305,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   context.goNamedAuth(
                                       'Splash', context.mounted);
                                 },
-                                text: 'ลงทะเบียน ด้วย Facebook',
+                                text: FFLocalizations.of(context).getText(
+                                  'bhqsii3r' /* Sign in with Facebook */,
+                                ),
                                 icon: Icon(
                                   Icons.mail_outline_outlined,
                                   color: FlutterFlowTheme.of(context).info,
@@ -344,11 +356,17 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'มีบัญชีอยู่แล้ว?',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'n2z6jt1p' /* Already have an account?  */,
+                                        ),
                                         style: TextStyle(),
                                       ),
                                       TextSpan(
-                                        text: ' เข้าสู่ระบบ!',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'k2p5rijy' /*  Sign in! */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge
                                             .override(

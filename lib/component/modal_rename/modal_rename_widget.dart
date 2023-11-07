@@ -121,7 +121,9 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 16.0, 0.0, 0.0),
                             child: Text(
-                              'เปลี่ยนชื่อ',
+                              FFLocalizations.of(context).getText(
+                                'jz2szer5' /* Change name */,
+                              ),
                               style: FlutterFlowTheme.of(context).headlineSmall,
                             ),
                           ),
@@ -161,7 +163,9 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             labelStyle: FlutterFlowTheme.of(context).bodyLarge,
-                            hintText: 'Leave note here...',
+                            hintText: FFLocalizations.of(context).getText(
+                              'j9jw170q' /* Leave note here... */,
+                            ),
                             hintStyle: FlutterFlowTheme.of(context).labelLarge,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -252,7 +256,9 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
 
                             setState(() {});
                           },
-                          text: 'บันทึก',
+                          text: FFLocalizations.of(context).getText(
+                            'h0goderm' /* Save */,
+                          ),
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 50.0,

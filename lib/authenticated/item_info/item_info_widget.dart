@@ -202,7 +202,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                'เพิ่มรายการสำเร็จ',
+                                'Item added successfully',
                                 style: TextStyle(
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
@@ -246,7 +246,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                             context: context,
                             builder: (alertDialogContext) {
                               return AlertDialog(
-                                title: Text('ข้อผิดพลาด'),
+                                title: Text('Error'),
                                 content: Text(FoodexpirationGroup.createItemCall
                                     .message(
                                       (_model.apiCreateItem?.jsonBody ?? ''),
@@ -256,7 +256,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   TextButton(
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext),
-                                    child: Text('ตกลง'),
+                                    child: Text('OK'),
                                   ),
                                 ],
                               );
@@ -301,7 +301,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                'แก้ไขรายการสำเร็จ',
+                                'The item was edited successfully.',
                                 style: TextStyle(
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
@@ -332,7 +332,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                               context: context,
                               builder: (alertDialogContext) {
                                 return AlertDialog(
-                                  title: Text('ข้อผิดพลาด'),
+                                  title: Text('Error'),
                                   content: Text(FoodexpirationGroup.getItemCall
                                       .message(
                                         (_model.apiGetItem?.jsonBody ?? ''),
@@ -342,7 +342,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.pop(alertDialogContext),
-                                      child: Text('ตกลง'),
+                                      child: Text('OK'),
                                     ),
                                   ],
                                 );
@@ -358,7 +358,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                             context: context,
                             builder: (alertDialogContext) {
                               return AlertDialog(
-                                title: Text('ข้อผิดพลาด'),
+                                title: Text('Error'),
                                 content: Text(FoodexpirationGroup.updateItemCall
                                     .message(
                                       (_model.apiUpdateItem?.jsonBody ?? ''),
@@ -368,7 +368,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   TextButton(
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext),
-                                    child: Text('ตกลง'),
+                                    child: Text('Ok'),
                                   ),
                                 ],
                               );
@@ -403,7 +403,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                     if (_shouldSetState) setState(() {});
                   },
                   child: Text(
-                    widget.isAdd! ? 'เพิ่ม' : 'บันทึก',
+                    widget.isAdd! ? 'Add' : 'Save',
                     style: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).bodyLargeFamily,
@@ -529,7 +529,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 12.0, 0.0, 0.0),
                                             child: Text(
-                                              'เพิ่มรูปภาพ',
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'juadnolt' /* Add a photo */,
+                                              ),
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .titleLarge
@@ -553,7 +556,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 4.0, 0.0, 0.0),
                                             child: Text(
-                                              'อัพโหลดรูปภาพที่นี่...',
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '07v9ry29' /* Upload photos here... */,
+                                              ),
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .labelMedium
@@ -706,7 +712,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                     .fromSTEB(
                                                         0.0, 0.0, 5.0, 0.0),
                                                 child: Text(
-                                                  'ดูภาพ',
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'k8z306gt' /* View */,
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium,
@@ -793,7 +802,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 5.0, 0.0),
                                     child: Text(
-                                      'คลังภาพ',
+                                      FFLocalizations.of(context).getText(
+                                        'bumq7p0j' /* Gallery */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -872,7 +883,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   ),
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'ชื่อ',
+                                    labelText:
+                                        FFLocalizations.of(context).getText(
+                                      'lv8rurwn' /* name */,
+                                    ),
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -988,7 +1002,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 ),
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'บันทึกช่วยจำ',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    'fdxbaz1u' /* note */,
+                                  ),
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -1114,7 +1131,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 5.0, 0.0),
                                               child: Text(
-                                                'กู้คืน',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'niy8ef4c' /* Recover */,
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium,
@@ -1204,7 +1224,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 5.0, 0.0),
                                             child: Text(
-                                              'ย้ายไปหมดอายุ',
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'gxn38t5w' /* Move to archived */,
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
@@ -1311,7 +1334,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'หมวดหมู่',
+                                      FFLocalizations.of(context).getText(
+                                        'zqbb4f02' /* Category */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
@@ -1352,8 +1377,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           ),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
-                                      hintText: 'โปรดเลือก...',
-                                      searchHintText: 'ค้นหาหมวดหมู่...',
+                                      hintText:
+                                          FFLocalizations.of(context).getText(
+                                        'moljvwoy' /* Choose... */,
+                                      ),
+                                      searchHintText:
+                                          FFLocalizations.of(context).getText(
+                                        '7dawdbqa' /* Search category... */,
+                                      ),
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
                                         color: FlutterFlowTheme.of(context)
@@ -1385,7 +1416,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'สถานที่เก็บ',
+                                    FFLocalizations.of(context).getText(
+                                      'hg69anhn' /* Storage  */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
@@ -1432,8 +1465,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         ),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
-                                    hintText: 'โปรดเลือก...',
-                                    searchHintText: 'ค้นหาสถานที่...',
+                                    hintText:
+                                        FFLocalizations.of(context).getText(
+                                      'jvyr9bub' /* Choose... */,
+                                    ),
+                                    searchHintText:
+                                        FFLocalizations.of(context).getText(
+                                      '2afhl1rf' /* Find a storage... */,
+                                    ),
                                     icon: Icon(
                                       Icons.keyboard_arrow_down_rounded,
                                       color: FlutterFlowTheme.of(context)
@@ -1476,7 +1515,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'บาร์ โค้ด',
+                                        FFLocalizations.of(context).getText(
+                                          '0toljndu' /* Barcode */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -1507,7 +1548,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 ? FFAppState()
                                                     .pageItemInfo
                                                     .barcode
-                                                : 'กดเพื่อสแกน',
+                                                : 'Press to scan',
                                             maxLines: 1,
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium,
@@ -1551,7 +1592,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 5.0, 0.0),
                                     child: Text(
-                                      'สแกน',
+                                      FFLocalizations.of(context).getText(
+                                        'zcvtk8n9' /* Scan */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -1638,7 +1681,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 textInputAction: TextInputAction.done,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'แจ้งเตือนล่วงหน้า (วัน)',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    'i07t0e8c' /* Advance notification (days) */,
+                                  ),
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -1795,7 +1841,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'วันที่เริ่มเก็บ',
+                                        FFLocalizations.of(context).getText(
+                                          's2rnfgzt' /* Storage date */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -1895,7 +1943,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'วันที่หมดอายุ',
+                                        FFLocalizations.of(context).getText(
+                                          't2h35zv0' /* Expiration date */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -2103,7 +2153,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 5.0, 0.0),
                                     child: Text(
-                                      'รีเซ็ต',
+                                      FFLocalizations.of(context).getText(
+                                        '9pbzxvve' /* Reset */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -2138,33 +2190,37 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       },
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 5.0, 0.0),
-                                    child: Text(
-                                      'สแกน',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                  if (false)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 5.0, 0.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'l12omsze' /* Scan */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
                                     ),
-                                  ),
-                                  FlutterFlowIconButton(
-                                    borderColor:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    borderRadius: 5.0,
-                                    borderWidth: 1.0,
-                                    buttonSize: 30.0,
-                                    fillColor:
-                                        FlutterFlowTheme.of(context).info,
-                                    icon: Icon(
-                                      Icons.document_scanner_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 15.0,
+                                  if (false)
+                                    FlutterFlowIconButton(
+                                      borderColor: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      borderRadius: 5.0,
+                                      borderWidth: 1.0,
+                                      buttonSize: 30.0,
+                                      fillColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      icon: Icon(
+                                        Icons.document_scanner_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 15.0,
+                                      ),
+                                      onPressed: () {
+                                        print('IconButton pressed ...');
+                                      },
                                     ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
-                                    },
-                                  ),
                                 ],
                               ),
                             ].divide(SizedBox(height: 1.0)),
@@ -2222,7 +2278,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         textInputAction: TextInputAction.done,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: 'จำนวน',
+                                          labelText: FFLocalizations.of(context)
+                                              .getText(
+                                            '2olh9l70' /* Quantity */,
+                                          ),
                                           labelStyle: FlutterFlowTheme.of(
                                                   context)
                                               .bodyMedium
@@ -2336,14 +2395,24 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       ),
                                     ),
                                     options: [
-                                      'ชิ้น',
-                                      'ห่อ',
-                                      'ถุง',
-                                      'ขวด',
-                                      'กล่อง',
-                                      'กระป๋อง',
-                                      'ลูก',
-                                      'ผล'
+                                      FFLocalizations.of(context).getText(
+                                        'yp72eiii' /* item */,
+                                      ),
+                                      FFLocalizations.of(context).getText(
+                                        'r0i8t97a' /* wrap */,
+                                      ),
+                                      FFLocalizations.of(context).getText(
+                                        '2ta6f6r7' /* bag */,
+                                      ),
+                                      FFLocalizations.of(context).getText(
+                                        '6lhybi8m' /* bottle */,
+                                      ),
+                                      FFLocalizations.of(context).getText(
+                                        'j0peclxo' /* box */,
+                                      ),
+                                      FFLocalizations.of(context).getText(
+                                        'cn807wsj' /* unit */,
+                                      )
                                     ],
                                     onChanged: (val) => setState(
                                         () => _model.unitOptionValue = val),
@@ -2364,8 +2433,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         ),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
-                                    hintText: 'หน่วย',
-                                    searchHintText: 'ค้นหาสถานที่...',
+                                    hintText:
+                                        FFLocalizations.of(context).getText(
+                                      '9iwe0iyy' /* Unit */,
+                                    ),
+                                    searchHintText:
+                                        FFLocalizations.of(context).getText(
+                                      'qpmndrue' /* Find a storage... */,
+                                    ),
                                     icon: Icon(
                                       Icons.keyboard_arrow_down_rounded,
                                       color: FlutterFlowTheme.of(context)

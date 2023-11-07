@@ -117,19 +117,19 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                       context: context,
                       builder: (alertDialogContext) {
                         return AlertDialog(
-                          title: Text('ลบสถานที่จัดเก็บ'),
+                          title: Text('Delete a storage?'),
                           content: Text(
-                              'คุณกำลังจะลบสถานที่จัดเก็บ \"${FFAppState().pageLocationInfo.name}\" และรายการทั้งหมดจะถูกลบไปด้วย'),
+                              'You are about to delete the storage ”${FFAppState().pageLocationInfo.name}\" and all entries will be deleted as well.'),
                           actions: [
                             TextButton(
                               onPressed: () =>
                                   Navigator.pop(alertDialogContext, false),
-                              child: Text('ยกเลิก'),
+                              child: Text('Cancel'),
                             ),
                             TextButton(
                               onPressed: () =>
                                   Navigator.pop(alertDialogContext, true),
-                              child: Text('ยืนยัน'),
+                              child: Text('Confirm'),
                             ),
                           ],
                         );
@@ -370,7 +370,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        'เพิ่มรูปภาพ',
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'h1wyksg3' /* Add a photo */,
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -402,7 +406,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        'อัพโหลดรูปภาพที่นี่...',
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'rhik2hq1' /* Upload photos here... */,
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -544,7 +552,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                           );
                                           setState(() {});
                                         },
-                                        text: 'อัปโหลด',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'z0m1ey5r' /* Upload */,
+                                        ),
                                         icon: Icon(
                                           Icons.add_a_photo,
                                           color: FlutterFlowTheme.of(context)
@@ -575,7 +586,9 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                       ),
                                     ),
                                     Text(
-                                      'หรือ',
+                                      FFLocalizations.of(context).getText(
+                                        'jyto7gju' /* or */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -592,7 +605,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                             }.withoutNulls,
                                           );
                                         },
-                                        text: 'เลือกรูปภาพ',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          '343kb8yf' /* Select picture */,
+                                        ),
                                         icon: Icon(
                                           Icons.image_search,
                                           color: FlutterFlowTheme.of(context)
@@ -632,7 +648,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     focusNode: _model.nameFieldFocusNode,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'ชื่อสถานที่จัดเก็บ',
+                                      labelText:
+                                          FFLocalizations.of(context).getText(
+                                        'zk9dyxpe' /* Storage  name */,
+                                      ),
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelLarge,
                                       enabledBorder: UnderlineInputBorder(
@@ -712,7 +731,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     focusNode: _model.descriptionFieldFocusNode,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'บันทึกช่วยจำ',
+                                      labelText:
+                                          FFLocalizations.of(context).getText(
+                                        'mmyvdra0' /* Note */,
+                                      ),
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelLarge,
                                       enabledBorder: UnderlineInputBorder(
@@ -809,7 +831,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                   builder:
                                                       (alertDialogContext) {
                                                     return AlertDialog(
-                                                      title: Text('ข้อผิดพลาด'),
+                                                      title: Text('Error'),
                                                       content: Text(
                                                           FoodexpirationGroup
                                                               .createLocationCall
@@ -824,7 +846,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                           onPressed: () =>
                                                               Navigator.pop(
                                                                   alertDialogContext),
-                                                          child: Text('ตกลง'),
+                                                          child: Text('OK'),
                                                         ),
                                                       ],
                                                     );
@@ -861,7 +883,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                   builder:
                                                       (alertDialogContext) {
                                                     return AlertDialog(
-                                                      title: Text('ข้อผิดพลาด'),
+                                                      title: Text('Error'),
                                                       content: Text(
                                                           FoodexpirationGroup
                                                               .updateLocationCall
@@ -876,7 +898,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                           onPressed: () =>
                                                               Navigator.pop(
                                                                   alertDialogContext),
-                                                          child: Text('ตกลง'),
+                                                          child: Text('OK'),
                                                         ),
                                                       ],
                                                     );
@@ -904,7 +926,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  'ดำเนินการสำเร็จ',
+                                                  'Successfully completed',
                                                   style: TextStyle(
                                                     color: FlutterFlowTheme.of(
                                                             context)
@@ -924,8 +946,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                           text: FFAppState()
                                                   .pageLocationInfo
                                                   .isAdd
-                                              ? 'เพิ่ม'
-                                              : 'บันทึก',
+                                              ? 'Add'
+                                              : 'Save',
                                           options: FFButtonOptions(
                                             width: double.infinity,
                                             height: 50.0,
