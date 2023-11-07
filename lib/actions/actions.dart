@@ -186,7 +186,7 @@ Future openAddItem(
       'ItemInfo',
       queryParameters: {
         'name': serializeParam(
-          'เพิ่มรายการ',
+          'Add item',
           ParamType.String,
         ),
         'isAdd': serializeParam(
@@ -200,7 +200,7 @@ Future openAddItem(
       'ItemInfo',
       queryParameters: {
         'name': serializeParam(
-          'เพิ่มรายการ',
+          'Add item',
           ParamType.String,
         ),
         'isAdd': serializeParam(

@@ -140,10 +140,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                       child: Text(
-                        valueOrDefault<String>(
-                          widget.title,
-                          'หมดอายุไปแล้ว',
-                        ),
+                        widget.title!,
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).bodyLargeFamily,
@@ -432,31 +429,30 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
               ),
           ],
         ),
-        Builder(
-          builder: (context) {
-            final itemsLocal = (widget.isArchived!
-                    ? FFAppState().items
-                    : functions.filter(
-                        FFAppState()
-                            .items
-                            .where((e) =>
-                                functions.getDateStatus(
-                                    e.expireDate!, e.forewarnDay) ==
-                                widget.dateType)
-                            .toList(),
-                        FFAppState().filter,
-                        FFAppState().locations.toList()))
-                .toList();
-            return Column(
-              mainAxisSize: MainAxisSize.max,
-              children: List.generate(itemsLocal.length, (itemsLocalIndex) {
-                final itemsLocalItem = itemsLocal[itemsLocalIndex];
-                return Container(
-                  height: 100.0,
-                  decoration: BoxDecoration(),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+        Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+          child: Builder(
+            builder: (context) {
+              final itemsLocal = (widget.isArchived!
+                      ? FFAppState().items
+                      : functions.filter(
+                          FFAppState()
+                              .items
+                              .where((e) =>
+                                  functions.getDateStatus(
+                                      e.expireDate!, e.forewarnDay) ==
+                                  widget.dateType)
+                              .toList(),
+                          FFAppState().filter,
+                          FFAppState().locations.toList()))
+                  .toList();
+              return Column(
+                mainAxisSize: MainAxisSize.max,
+                children: List.generate(itemsLocal.length, (itemsLocalIndex) {
+                  final itemsLocalItem = itemsLocal[itemsLocalIndex];
+                  return Container(
+                    height: 100.0,
+                    decoration: BoxDecoration(),
                     child: wrapWithModel(
                       model: _model.itemModels.getModel(
                         itemsLocalIndex.toString(),
@@ -484,11 +480,11 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                         isArchived: widget.isArchived!,
                       ),
                     ),
-                  ),
-                );
-              }),
-            );
-          },
+                  );
+                }),
+              );
+            },
+          ),
         ),
         if ((widget.isArchived!
                     ? FFAppState().items
