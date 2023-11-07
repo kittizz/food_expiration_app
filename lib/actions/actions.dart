@@ -67,9 +67,12 @@ Future registerDevice(
 }
 
 Future<bool?> fetchUser(BuildContext context) async {
-  UserStruct? userStruct;
   ApiCallResponse? apiResultgetUser;
+  UserStruct? userStruct;
 
+  apiResultgetUser = await FoodexpirationGroup.getUserCall.call(
+    deviceid: FFAppState().deviceId,
+  );
   if ((apiResultgetUser?.succeeded ?? true)) {
     userStruct = await actions.toUserStruct(
       (apiResultgetUser?.jsonBody ?? ''),
@@ -81,10 +84,6 @@ Future<bool?> fetchUser(BuildContext context) async {
   } else {
     return false;
   }
-
-  apiResultgetUser = await FoodexpirationGroup.getUserCall.call(
-    deviceid: FFAppState().deviceId,
-  );
 }
 
 Future fetchLocations(BuildContext context) async {
