@@ -340,10 +340,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       textInputAction: TextInputAction.search,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        hintText:
-                                            FFLocalizations.of(context).getText(
-                                          'kay0ratk' /* search... */,
-                                        ),
+                                        hintText: 'search...',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -497,10 +494,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                     textInputAction: TextInputAction.search,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      hintText:
-                                          FFLocalizations.of(context).getText(
-                                        'fhj3tpfw' /* search... */,
-                                      ),
+                                      hintText: 'search...',
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -634,13 +628,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   FlutterFlowTheme.of(context).labelMedium,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
-                              hintText: FFLocalizations.of(context).getText(
-                                'k3hgegjn' /* Storage */,
-                              ),
-                              searchHintText:
-                                  FFLocalizations.of(context).getText(
-                                'yxt0npbn' /* Search for items... */,
-                              ),
+                              hintText: 'Storage',
+                              searchHintText: 'Search for items...',
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:
@@ -686,13 +675,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   FlutterFlowTheme.of(context).labelMedium,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
-                              hintText: FFLocalizations.of(context).getText(
-                                'y69jdgjk' /* Category */,
-                              ),
-                              searchHintText:
-                                  FFLocalizations.of(context).getText(
-                                'oyk95vyq' /* Search for items... */,
-                              ),
+                              hintText: 'Category',
+                              searchHintText: 'Search for items...',
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:
@@ -731,24 +715,16 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   _model.filterExpStatusValueController ??=
                                       FormFieldController<String>(null),
                               options: [
-                                FFLocalizations.of(context).getText(
-                                  'umwyoofu' /* Expired */,
-                                ),
-                                FFLocalizations.of(context).getText(
-                                  '2665s624' /* About to expire */,
-                                ),
-                                FFLocalizations.of(context).getText(
-                                  '3o3jxuok' /* Remaining */,
-                                )
+                                'Expired',
+                                'About to expire',
+                                'Remaining'
                               ],
                               onChanged: null,
                               width: 240.0,
                               height: 40.0,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
-                              hintText: FFLocalizations.of(context).getText(
-                                'snbouel1' /* Expiration */,
-                              ),
+                              hintText: 'Expiration',
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:

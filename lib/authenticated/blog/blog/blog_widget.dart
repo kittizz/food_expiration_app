@@ -93,9 +93,7 @@ class _BlogWidgetState extends State<BlogWidget> {
             },
           ),
           title: Text(
-            FFLocalizations.of(context).getText(
-              'cechgn8m' /* Knowledge articles */,
-            ),
+            'Knowledge articles',
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).info,
@@ -126,9 +124,7 @@ class _BlogWidgetState extends State<BlogWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 0.0, 0.0),
                       child: Text(
-                        FFLocalizations.of(context).getText(
-                          '6fh86wfd' /* Includes articles about food a... */,
-                        ),
+                        'Includes articles about food and other nutrition.',
                         style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
                     ),

@@ -49,14 +49,8 @@ class _SigninWidgetState extends State<SigninWidget> {
     _model.textFieldFocusNode2 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          _model.emailTextController?.text =
-              FFLocalizations.of(context).getText(
-            'swoe8qlq' /* me@kittiza.com */,
-          );
-          _model.passwordTextController?.text =
-              FFLocalizations.of(context).getText(
-            'plqsr9x6' /* zxc25861 */,
-          );
+          _model.emailTextController?.text = 'me@kittiza.com';
+          _model.passwordTextController?.text = 'zxc25861';
         }));
   }
 
@@ -156,9 +150,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 0.0, 12.0),
                                 child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'buzk97zh' /* Return to the menu and notific... */,
-                                  ),
+                                  'Return to the menu and notification system.',
                                   textAlign: TextAlign.start,
                                   style:
                                       FlutterFlowTheme.of(context).labelLarge,
@@ -172,10 +164,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                 focusNode: _model.textFieldFocusNode1,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText:
-                                      FFLocalizations.of(context).getText(
-                                    '4kyjks4e' /* Email */,
-                                  ),
+                                  labelText: 'Email',
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(
@@ -252,10 +241,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: !_model.passwordVisibility,
                                 decoration: InputDecoration(
-                                  labelText:
-                                      FFLocalizations.of(context).getText(
-                                    'azncqrv2' /* Password */,
-                                  ),
+                                  labelText: 'Password',
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(
@@ -348,9 +334,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                   onPressed: () async {
                                     context.pushNamed('ForgotPassword');
                                   },
-                                  text: FFLocalizations.of(context).getText(
-                                    '1alufxxe' /* Forgot your password? */,
-                                  ),
+                                  text: 'Forgot your password?',
                                   options: FFButtonOptions(
                                     width: double.infinity,
                                     height: 60.0,
@@ -411,9 +395,7 @@ class _SigninWidgetState extends State<SigninWidget> {
 
                           context.goNamedAuth('Splash', context.mounted);
                         },
-                        text: FFLocalizations.of(context).getText(
-                          'ih1pvoae' /* Login */,
-                        ),
+                        text: 'Login',
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 60.0,

@@ -268,9 +268,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                 setState(() {});
                               },
                               child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'gxq9u7ap' /* Discard */,
-                                ),
+                                'Discard',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
                                     .override(
@@ -509,9 +507,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
             child: Align(
               alignment: AlignmentDirectional(0.00, 0.00),
               child: Text(
-                FFLocalizations.of(context).getText(
-                  'l7sigmac' /* There are no items. */,
-                ),
+                'There are no items.',
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
                       color: Color(0x69474747),

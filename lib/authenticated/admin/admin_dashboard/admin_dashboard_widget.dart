@@ -143,9 +143,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                       ),
                                       SelectionArea(
                                           child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'c5xeaq9z' /* ผู้ใช้งาน ทั้งหมด */,
-                                        ),
+                                        'ผู้ใช้งาน ทั้งหมด',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge,
                                       )),
@@ -178,9 +176,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                   Align(
                                     alignment: AlignmentDirectional(1.00, 0.00),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'ei9jumvr' /* คน */,
-                                      ),
+                                      'คน',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge,
                                     ),
@@ -220,9 +216,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                       ),
                                       SelectionArea(
                                           child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          '86ag7vku' /* จำนวน รายการ ทั้งหมด */,
-                                        ),
+                                        'จำนวน รายการ ทั้งหมด',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge,
                                       )),
@@ -255,9 +249,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                   Align(
                                     alignment: AlignmentDirectional(1.00, 0.00),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'a27m9rg4' /* รายการ */,
-                                      ),
+                                      'รายการ',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge,
                                     ),
@@ -297,9 +289,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                       ),
                                       SelectionArea(
                                           child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'j7vp9193' /* จำนวน สถานที่เก็บ ทั้งหมด */,
-                                        ),
+                                        'จำนวน สถานที่เก็บ ทั้งหมด',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge,
                                       )),
@@ -334,9 +324,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                   Align(
                                     alignment: AlignmentDirectional(1.00, 0.00),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        '8qgi5nlx' /* แหล่ง */,
-                                      ),
+                                      'แหล่ง',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge,
                                     ),

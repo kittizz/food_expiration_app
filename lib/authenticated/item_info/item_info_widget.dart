@@ -529,10 +529,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 12.0, 0.0, 0.0),
                                             child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'juadnolt' /* Add a photo */,
-                                              ),
+                                              'Add a photo',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .titleLarge
@@ -556,10 +553,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 4.0, 0.0, 0.0),
                                             child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                '07v9ry29' /* Upload photos here... */,
-                                              ),
+                                              'Upload photos here...',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .labelMedium
@@ -712,10 +706,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                     .fromSTEB(
                                                         0.0, 0.0, 5.0, 0.0),
                                                 child: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'k8z306gt' /* View */,
-                                                  ),
+                                                  'View',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium,
@@ -802,9 +793,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 5.0, 0.0),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'bumq7p0j' /* Gallery */,
-                                      ),
+                                      'Gallery',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -883,10 +872,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   ),
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText:
-                                        FFLocalizations.of(context).getText(
-                                      'lv8rurwn' /* name */,
-                                    ),
+                                    labelText: 'name',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -1002,10 +988,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 ),
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText:
-                                      FFLocalizations.of(context).getText(
-                                    'fdxbaz1u' /* note */,
-                                  ),
+                                  labelText: 'note',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -1131,10 +1114,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 5.0, 0.0),
                                               child: Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'niy8ef4c' /* Recover */,
-                                                ),
+                                                'Recover',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium,
@@ -1224,10 +1204,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 5.0, 0.0),
                                             child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'gxn38t5w' /* Move to archived */,
-                                              ),
+                                              'Move to archived',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
@@ -1334,9 +1311,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      FFLocalizations.of(context).getText(
-                                        'zqbb4f02' /* Category */,
-                                      ),
+                                      'Category',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
@@ -1377,14 +1352,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           ),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
-                                      hintText:
-                                          FFLocalizations.of(context).getText(
-                                        'moljvwoy' /* Choose... */,
-                                      ),
-                                      searchHintText:
-                                          FFLocalizations.of(context).getText(
-                                        '7dawdbqa' /* Search category... */,
-                                      ),
+                                      hintText: 'Choose...',
+                                      searchHintText: 'Search category...',
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
                                         color: FlutterFlowTheme.of(context)
@@ -1416,9 +1385,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    FFLocalizations.of(context).getText(
-                                      'hg69anhn' /* Storage  */,
-                                    ),
+                                    'Storage ',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
@@ -1465,14 +1432,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         ),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
-                                    hintText:
-                                        FFLocalizations.of(context).getText(
-                                      'jvyr9bub' /* Choose... */,
-                                    ),
-                                    searchHintText:
-                                        FFLocalizations.of(context).getText(
-                                      '2afhl1rf' /* Find a storage... */,
-                                    ),
+                                    hintText: 'Choose...',
+                                    searchHintText: 'Find a storage...',
                                     icon: Icon(
                                       Icons.keyboard_arrow_down_rounded,
                                       color: FlutterFlowTheme.of(context)
@@ -1515,9 +1476,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        FFLocalizations.of(context).getText(
-                                          '0toljndu' /* Barcode */,
-                                        ),
+                                        'Barcode',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -1592,9 +1551,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 5.0, 0.0),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'zcvtk8n9' /* Scan */,
-                                      ),
+                                      'Scan',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -1681,10 +1638,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 textInputAction: TextInputAction.done,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText:
-                                      FFLocalizations.of(context).getText(
-                                    'i07t0e8c' /* Advance notification (days) */,
-                                  ),
+                                  labelText: 'Advance notification (days)',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -1841,9 +1795,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        FFLocalizations.of(context).getText(
-                                          's2rnfgzt' /* Storage date */,
-                                        ),
+                                        'Storage date',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -1943,9 +1895,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        FFLocalizations.of(context).getText(
-                                          't2h35zv0' /* Expiration date */,
-                                        ),
+                                        'Expiration date',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -2153,9 +2103,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 5.0, 0.0),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        '9pbzxvve' /* Reset */,
-                                      ),
+                                      'Reset',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -2195,9 +2143,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 5.0, 0.0),
                                       child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'l12omsze' /* Scan */,
-                                        ),
+                                        'Scan',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
@@ -2278,10 +2224,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         textInputAction: TextInputAction.done,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: FFLocalizations.of(context)
-                                              .getText(
-                                            '2olh9l70' /* Quantity */,
-                                          ),
+                                          labelText: 'Quantity',
                                           labelStyle: FlutterFlowTheme.of(
                                                   context)
                                               .bodyMedium
@@ -2395,24 +2338,12 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       ),
                                     ),
                                     options: [
-                                      FFLocalizations.of(context).getText(
-                                        'yp72eiii' /* item */,
-                                      ),
-                                      FFLocalizations.of(context).getText(
-                                        'r0i8t97a' /* wrap */,
-                                      ),
-                                      FFLocalizations.of(context).getText(
-                                        '2ta6f6r7' /* bag */,
-                                      ),
-                                      FFLocalizations.of(context).getText(
-                                        '6lhybi8m' /* bottle */,
-                                      ),
-                                      FFLocalizations.of(context).getText(
-                                        'j0peclxo' /* box */,
-                                      ),
-                                      FFLocalizations.of(context).getText(
-                                        'cn807wsj' /* unit */,
-                                      )
+                                      'item',
+                                      'wrap',
+                                      'bag',
+                                      'bottle',
+                                      'box',
+                                      'unit'
                                     ],
                                     onChanged: (val) => setState(
                                         () => _model.unitOptionValue = val),
@@ -2433,14 +2364,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         ),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
-                                    hintText:
-                                        FFLocalizations.of(context).getText(
-                                      '9iwe0iyy' /* Unit */,
-                                    ),
-                                    searchHintText:
-                                        FFLocalizations.of(context).getText(
-                                      'qpmndrue' /* Find a storage... */,
-                                    ),
+                                    hintText: 'Unit',
+                                    searchHintText: 'Find a storage...',
                                     icon: Icon(
                                       Icons.keyboard_arrow_down_rounded,
                                       color: FlutterFlowTheme.of(context)

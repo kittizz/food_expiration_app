@@ -446,10 +446,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     ),
                                                   ),
                                                   Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      '84eknr3b' /* search... */,
-                                                    ),
+                                                    'search...',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -607,9 +604,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     },
                                   ),
                                   Text(
-                                    FFLocalizations.of(context).getText(
-                                      '5msld3q9' /* Items */,
-                                    ),
+                                    'Items',
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
@@ -646,9 +641,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     },
                                   ),
                                   Text(
-                                    FFLocalizations.of(context).getText(
-                                      'uci58zhy' /* Storage */,
-                                    ),
+                                    'Storage',
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
@@ -685,9 +678,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     },
                                   ),
                                   Text(
-                                    FFLocalizations.of(context).getText(
-                                      'n60xch9g' /* Archived */,
-                                    ),
+                                    'Archived',
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
@@ -724,9 +715,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     },
                                   ),
                                   Text(
-                                    FFLocalizations.of(context).getText(
-                                      'uhvkz1ai' /* Settings */,
-                                    ),
+                                    'Settings',
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
@@ -763,9 +752,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  FFLocalizations.of(context).getText(
-                                    'upl7eyzw' /* Knowledge articles */,
-                                  ),
+                                  'Knowledge articles',
                                   style: FlutterFlowTheme.of(context)
                                       .titleMedium
                                       .override(

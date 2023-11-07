@@ -87,9 +87,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                       child: Text(
-                        FFLocalizations.of(context).getText(
-                          's1kz0c1i' /* ผู้ดูแลระบบ */,
-                        ),
+                        'ผู้ดูแลระบบ',
                         style: FlutterFlowTheme.of(context).headlineMedium,
                       ),
                     ),
@@ -141,9 +139,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              FFLocalizations.of(context).getText(
-                                '9ubvfjgb' /* แดชบอร์ด */,
-                              ),
+                              'แดชบอร์ด',
                               style: FlutterFlowTheme.of(context).bodyLarge,
                             ),
                           ),
@@ -198,9 +194,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              FFLocalizations.of(context).getText(
-                                '9i6597tv' /* คลังภาพ */,
-                              ),
+                              'คลังภาพ',
                               style: FlutterFlowTheme.of(context).labelLarge,
                             ),
                           ),
@@ -255,9 +249,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              FFLocalizations.of(context).getText(
-                                'echjr5rc' /* หมวดหมู่ */,
-                              ),
+                              'หมวดหมู่',
                               style: FlutterFlowTheme.of(context).labelLarge,
                             ),
                           ),
@@ -312,9 +304,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              FFLocalizations.of(context).getText(
-                                'ehosxlts' /* บทความ */,
-                              ),
+                              'บทความ',
                               style: FlutterFlowTheme.of(context).labelLarge,
                             ),
                           ),
@@ -345,9 +335,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
 
                         context.goNamedAuth('Splash', context.mounted);
                       },
-                      text: FFLocalizations.of(context).getText(
-                        'glwyy0rp' /* ออกจากระบบ */,
-                      ),
+                      text: 'ออกจากระบบ',
                       options: FFButtonOptions(
                         width: 200.0,
                         height: 40.0,

@@ -39,9 +39,7 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
   String? _nameFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return FFLocalizations.of(context).getText(
-        'dw0hgpb5' /* Field is required */,
-      );
+      return 'Field is required';
     }
 
     if (val.length < 1) {
@@ -61,9 +59,7 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
   String? _descriptionFieldControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return FFLocalizations.of(context).getText(
-        'zxddd6y1' /* Field is required */,
-      );
+      return 'Field is required';
     }
 
     if (val.length < 1) {

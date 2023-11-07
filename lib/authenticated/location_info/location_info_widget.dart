@@ -370,11 +370,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                          'h1wyksg3' /* Add a photo */,
-                                                        ),
+                                                        'Add a photo',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -406,11 +402,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                          'rhik2hq1' /* Upload photos here... */,
-                                                        ),
+                                                        'Upload photos here...',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -552,10 +544,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                           );
                                           setState(() {});
                                         },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          'z0m1ey5r' /* Upload */,
-                                        ),
+                                        text: 'Upload',
                                         icon: Icon(
                                           Icons.add_a_photo,
                                           color: FlutterFlowTheme.of(context)
@@ -586,9 +575,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                       ),
                                     ),
                                     Text(
-                                      FFLocalizations.of(context).getText(
-                                        'jyto7gju' /* or */,
-                                      ),
+                                      'or',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -605,10 +592,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                             }.withoutNulls,
                                           );
                                         },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          '343kb8yf' /* Select picture */,
-                                        ),
+                                        text: 'Select picture',
                                         icon: Icon(
                                           Icons.image_search,
                                           color: FlutterFlowTheme.of(context)
@@ -648,10 +632,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     focusNode: _model.nameFieldFocusNode,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText:
-                                          FFLocalizations.of(context).getText(
-                                        'zk9dyxpe' /* Storage  name */,
-                                      ),
+                                      labelText: 'Storage  name',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelLarge,
                                       enabledBorder: UnderlineInputBorder(
@@ -731,10 +712,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     focusNode: _model.descriptionFieldFocusNode,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText:
-                                          FFLocalizations.of(context).getText(
-                                        'mmyvdra0' /* Note */,
-                                      ),
+                                      labelText: 'Note',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelLarge,
                                       enabledBorder: UnderlineInputBorder(

@@ -182,9 +182,7 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                             onPressed: () async {
                               context.safePop();
                             },
-                            text: FFLocalizations.of(context).getText(
-                              'v8y5yk21' /* Cancel */,
-                            ),
+                            text: 'Cancel',
                             options: FFButtonOptions(
                               height: 45.0,
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -238,9 +236,7 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                                 });
                                 context.safePop();
                               },
-                              text: FFLocalizations.of(context).getText(
-                                'u3uarbkh' /* Confirm */,
-                              ),
+                              text: 'Confirm',
                               options: FFButtonOptions(
                                 height: 45.0,
                                 padding: EdgeInsetsDirectional.fromSTEB(

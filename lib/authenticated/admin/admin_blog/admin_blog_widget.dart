@@ -134,9 +134,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                           alignment:
                                               AlignmentDirectional(-1.00, 0.00),
                                           child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              'pjruehit' /* บทความ */,
-                                            ),
+                                            'บทความ',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
@@ -173,10 +171,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                 size: 16.0,
                                               ),
                                               Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'c64mty4z' /* เพิ่ม */,
-                                                ),
+                                                'เพิ่ม',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -265,11 +260,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                 obscureText: false,
                                                 decoration: InputDecoration(
                                                   isDense: true,
-                                                  labelText: FFLocalizations.of(
-                                                          context)
-                                                      .getText(
-                                                    '62w579j7' /* 	หัวข้อ... */,
-                                                  ),
+                                                  labelText: '\tหัวข้อ...',
                                                   labelStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -377,11 +368,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                 size: 24.0,
                                                               ),
                                                               Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'hqj0vfh5' /* (เลือกภาพ) */,
-                                                                ),
+                                                                '(เลือกภาพ)',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium,
@@ -671,11 +658,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                           24.0,
                                                                     ),
                                                                     Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'jqn8ualu' /* บันทึก */,
-                                                                      ),
+                                                                      'บันทึก',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -736,11 +719,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        '7jhm6547' /* ยกเลิก */,
-                                                                      ),
+                                                                      'ยกเลิก',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -835,11 +814,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                   size: 24.0,
                                                                 ),
                                                                 Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'd5x4rq5b' /* เลือกภาพ */,
-                                                                  ),
+                                                                  'เลือกภาพ',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -913,11 +888,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                     size: 24.0,
                                                                   ),
                                                                   Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'czskkd9v' /* ลบ */,
-                                                                    ),
+                                                                    'ลบ',
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyMedium
@@ -978,9 +949,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                           alignment:
                                               AlignmentDirectional(-1.00, 0.00),
                                           child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              'hacexiez' /* ทั้งหมด */,
-                                            ),
+                                            'ทั้งหมด',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
@@ -1169,11 +1138,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                   size: 24.0,
                                                                 ),
                                                                 Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'ln2cw1vr' /* แก้ไข */,
-                                                                  ),
+                                                                  'แก้ไข',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -1346,9 +1311,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                       size: 24.0,
                                     ),
                                     Text(
-                                      FFLocalizations.of(context).getText(
-                                        'ts5n7ots' /* อัปโหลดภาพ */,
-                                      ),
+                                      'อัปโหลดภาพ',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -1388,10 +1351,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         isDense: true,
-                                        labelText:
-                                            FFLocalizations.of(context).getText(
-                                          'uw8vebvp' /* ลิ้งภาพ... */,
-                                        ),
+                                        labelText: 'ลิ้งภาพ...',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .labelMedium,
                                         hintStyle: FlutterFlowTheme.of(context)
@@ -1465,9 +1425,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                   await Clipboard.setData(ClipboardData(
                                       text: _model.imageLinkController.text));
                                 },
-                                text: FFLocalizations.of(context).getText(
-                                  '2w88rgxm' /* คัดลอก */,
-                                ),
+                                text: 'คัดลอก',
                                 icon: Icon(
                                   Icons.content_copy,
                                   size: 15.0,
