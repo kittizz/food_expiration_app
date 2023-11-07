@@ -216,7 +216,9 @@ class _SplashWidgetState extends State<SplashWidget>
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 13.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'เตือนหน่อย',
+                              FFLocalizations.of(context).getText(
+                                'ugz5042v' /* Expiry Date */,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
@@ -233,7 +235,9 @@ class _SplashWidgetState extends State<SplashWidget>
                                 animationsMap['textOnPageLoadAnimation1']!),
                           ),
                           Text(
-                            '!',
+                            FFLocalizations.of(context).getText(
+                              'iis7f2xz' /* ! */,
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(

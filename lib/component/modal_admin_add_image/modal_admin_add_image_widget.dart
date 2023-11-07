@@ -403,7 +403,11 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                             .fromSTEB(0.0, 12.0,
                                                                 0.0, 0.0),
                                                     child: Text(
-                                                      'Add Photo',
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'boyveh8t' /* Add Photo */,
+                                                      ),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -416,7 +420,11 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                             .fromSTEB(0.0, 4.0,
                                                                 0.0, 0.0),
                                                     child: Text(
-                                                      'Upload an image here...',
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'fghvq5qy' /* Upload an image here... */,
+                                                      ),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -466,7 +474,10 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                   focusNode: _model.projectNameFocusNode,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    hintText: 'ชื่อ',
+                                    hintText:
+                                        FFLocalizations.of(context).getText(
+                                      'ew1mq539' /* ชื่อ */,
+                                    ),
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .headlineMedium
                                         .override(
@@ -565,7 +576,10 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMediumFamily),
                                         ),
-                                    hintText: 'เลือกชนิด....',
+                                    hintText:
+                                        FFLocalizations.of(context).getText(
+                                      '1v7a6msn' /* เลือกชนิด.... */,
+                                    ),
                                     icon: Icon(
                                       Icons.keyboard_arrow_down_rounded,
                                       color: FlutterFlowTheme.of(context)
@@ -664,7 +678,10 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                 ));
                                           }
                                         },
-                                        text: 'สร้าง',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          '9z1omedk' /* สร้าง */,
+                                        ),
                                         options: FFButtonOptions(
                                           height: 50.0,
                                           padding:

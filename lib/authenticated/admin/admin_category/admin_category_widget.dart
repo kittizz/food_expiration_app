@@ -119,7 +119,9 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
                                     alignment:
                                         AlignmentDirectional(-1.00, 0.00),
                                     child: Text(
-                                      'หมวดหมู่',
+                                      FFLocalizations.of(context).getText(
+                                        'u8w65r8a' /* หมวดหมู่ */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -179,7 +181,9 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   2.0, 0.0, 0.0, 0.0),
                                           child: Text(
-                                            'บันทึก',
+                                            FFLocalizations.of(context).getText(
+                                              'bvyyl93c' /* บันทึก */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -245,7 +249,10 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
                                     focusNode: _model.textFieldFocusNode,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'หมวดหมู่',
+                                      labelText:
+                                          FFLocalizations.of(context).getText(
+                                        'n90cjscx' /* หมวดหมู่ */,
+                                      ),
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       hintStyle: FlutterFlowTheme.of(context)

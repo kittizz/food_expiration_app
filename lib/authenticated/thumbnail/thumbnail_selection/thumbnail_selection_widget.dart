@@ -102,7 +102,9 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
             },
           ),
           title: Text(
-            'รูปภาพ',
+            FFLocalizations.of(context).getText(
+              'ulmaqq2e' /* Pictures */,
+            ),
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -125,7 +127,9 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                 Align(
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Text(
-                    'โปรดเลือกรูปภาพ',
+                    FFLocalizations.of(context).getText(
+                      'el9k8vp3' /* Please select a picture. */,
+                    ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).bodyMediumFamily,

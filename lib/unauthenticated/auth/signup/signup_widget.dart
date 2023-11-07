@@ -138,7 +138,9 @@ class _SignupWidgetState extends State<SignupWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 32.0, 0.0, 8.0),
                               child: Text(
-                                'ลงทะเบียน',
+                                FFLocalizations.of(context).getText(
+                                  'tl7r1e1r' /* Sign up */,
+                                ),
                                 textAlign: TextAlign.start,
                                 style:
                                     FlutterFlowTheme.of(context).displayMedium,
@@ -148,7 +150,9 @@ class _SignupWidgetState extends State<SignupWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 12.0),
                               child: Text(
-                                'เพื่อประสบการณ์ที่ยอดเยี่ยมไร้รอยต่อ',
+                                FFLocalizations.of(context).getText(
+                                  'i9n9msxo' /* For a great, seamless experien... */,
+                                ),
                                 textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.of(context).labelLarge,
                               ),
@@ -161,7 +165,10 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 focusNode: _model.textFieldFocusNode1,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'ชื่อ',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    'gnhy1df6' /* Name */,
+                                  ),
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(
@@ -236,7 +243,10 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 focusNode: _model.textFieldFocusNode2,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'อีเมล',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    'zca0py13' /* Email */,
+                                  ),
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(
@@ -313,7 +323,10 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: !_model.passwordVisibility1,
                                 decoration: InputDecoration(
-                                  labelText: 'รหัสผ่าน',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    'b9z5c9ac' /* Password */,
+                                  ),
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(
@@ -406,7 +419,10 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: !_model.passwordVisibility2,
                                 decoration: InputDecoration(
-                                  labelText: 'ยืนยันรหัสผ่าน',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    '52k92fhb' /* Password */,
+                                  ),
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   enabledBorder: UnderlineInputBorder(
@@ -508,7 +524,9 @@ class _SignupWidgetState extends State<SignupWidget> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'รหัสผ่านไม่ตรงกัน',
+                                  FFLocalizations.of(context).getText(
+                                    'p478g7n7' /* รหัสผ่านไม่ตรงกัน */,
+                                  ),
                                 ),
                               ),
                             );
@@ -531,7 +549,9 @@ class _SignupWidgetState extends State<SignupWidget> {
 
                           context.goNamedAuth('Splash', context.mounted);
                         },
-                        text: 'ลงทะเบียน',
+                        text: FFLocalizations.of(context).getText(
+                          '5aseghnx' /* Sign up */,
+                        ),
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 60.0,

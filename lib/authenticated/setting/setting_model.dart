@@ -68,7 +68,7 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'แก้ไขชื่อเรียบร้อย',
+            'Name corrected.',
             style: TextStyle(
               color: FlutterFlowTheme.of(context).primaryText,
             ),
@@ -82,7 +82,7 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'เกิดข้อผิดพลาด ${getJsonField(
+            'An error occurred ${getJsonField(
               (apiChangeNicknam?.jsonBody ?? ''),
               r'''$.messages''',
             ).toString().toString()}',

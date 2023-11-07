@@ -104,7 +104,9 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
             },
           ),
           title: Text(
-            'หมวดหมู่',
+            FFLocalizations.of(context).getText(
+              'tt014sab' /* Category */,
+            ),
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -127,7 +129,9 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                 Align(
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Text(
-                    'โปรดเลือกหมวดหมู่รูปภาพ',
+                    FFLocalizations.of(context).getText(
+                      '9g997eyf' /* Please select an image categor... */,
+                    ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).bodyMediumFamily,

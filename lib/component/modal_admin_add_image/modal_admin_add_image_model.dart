@@ -46,7 +46,9 @@ class ModalAdminAddImageModel
   String? Function(BuildContext, String?)? projectNameControllerValidator;
   String? _projectNameControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Field is required';
+      return FFLocalizations.of(context).getText(
+        '9umda4mk' /* Field is required */,
+      );
     }
 
     return null;

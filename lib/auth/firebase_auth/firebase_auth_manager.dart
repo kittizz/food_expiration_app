@@ -78,8 +78,9 @@ class FirebaseAuthManager extends AuthManager
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text(
-                  'นานเกินไปนับตั้งแต่ลงชื่อเข้าใช้ครั้งล่าสุด ลงชื่อเข้าใช้อีกครั้งก่อนที่จะลบบัญชีของคุณ')),
+              content: Text(FFLocalizations.of(context).getText(
+            '47l909fi' /* นานเกินไปนับตั้งแต่ลงชื่อเข้าใ... */,
+          ))),
         );
       }
     }
@@ -102,8 +103,9 @@ class FirebaseAuthManager extends AuthManager
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text(
-                  'นานเกินไปนับตั้งแต่ลงชื่อเข้าใช้ครั้งล่าสุด ลงชื่อเข้าใช้อีกครั้งก่อนอัปเดตอีเมลของคุณ')),
+              content: Text(FFLocalizations.of(context).getText(
+            'xi94kqji' /* นานเกินไปนับตั้งแต่ลงชื่อเข้าใ... */,
+          ))),
         );
       }
     }
@@ -120,13 +122,19 @@ class FirebaseAuthManager extends AuthManager
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content:
-                Text('ข้อผิดพลาด : [error]'.replaceAll('[error]', e.message!))),
+            content: Text(FFLocalizations.of(context)
+                .getText(
+                  'ks7efllk' /* ข้อผิดพลาด : [error] */,
+                )
+                .replaceAll('[error]', e.message!))),
       );
       return null;
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('ส่งอีเมลรีเซ็ตรหัสผ่าน!')),
+      SnackBar(
+          content: Text(FFLocalizations.of(context).getText(
+        'u3ihkk4s' /* ส่งอีเมลรีเซ็ตรหัสผ่าน! */,
+      ))),
     );
   }
 
@@ -192,8 +200,11 @@ class FirebaseAuthManager extends AuthManager
       } else if (phoneAuthManager.phoneAuthError != null) {
         final e = phoneAuthManager.phoneAuthError!;
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content:
-              Text('ข้อผิดพลาด : [error]'.replaceAll('[error]', e.message!)),
+          content: Text(FFLocalizations.of(context)
+              .getText(
+                'ks7efllk' /* ข้อผิดพลาด : [error] */,
+              )
+              .replaceAll('[error]', e.message!)),
         ));
         phoneAuthManager.update(() => phoneAuthManager.phoneAuthError = null);
       }
@@ -305,8 +316,11 @@ class FirebaseAuthManager extends AuthManager
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content:
-                Text('ข้อผิดพลาด : [error]'.replaceAll('[error]', e.message!))),
+            content: Text(FFLocalizations.of(context)
+                .getText(
+                  'ks7efllk' /* ข้อผิดพลาด : [error] */,
+                )
+                .replaceAll('[error]', e.message!))),
       );
       return null;
     }

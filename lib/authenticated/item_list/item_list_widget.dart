@@ -340,7 +340,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       textInputAction: TextInputAction.search,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        hintText: 'ค้นหา...',
+                                        hintText:
+                                            FFLocalizations.of(context).getText(
+                                          'kay0ratk' /* search... */,
+                                        ),
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -494,7 +497,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                     textInputAction: TextInputAction.search,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      hintText: 'ค้นหา...',
+                                      hintText:
+                                          FFLocalizations.of(context).getText(
+                                        'fhj3tpfw' /* search... */,
+                                      ),
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -628,8 +634,13 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   FlutterFlowTheme.of(context).labelMedium,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
-                              hintText: 'สถานที่เก็บ',
-                              searchHintText: 'ค้นหารายการ...',
+                              hintText: FFLocalizations.of(context).getText(
+                                'k3hgegjn' /* Storage */,
+                              ),
+                              searchHintText:
+                                  FFLocalizations.of(context).getText(
+                                'yxt0npbn' /* Search for items... */,
+                              ),
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:
@@ -675,8 +686,13 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   FlutterFlowTheme.of(context).labelMedium,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
-                              hintText: 'หมวดหมู่',
-                              searchHintText: 'ค้นหารายการ...',
+                              hintText: FFLocalizations.of(context).getText(
+                                'y69jdgjk' /* Category */,
+                              ),
+                              searchHintText:
+                                  FFLocalizations.of(context).getText(
+                                'oyk95vyq' /* Search for items... */,
+                              ),
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:
@@ -715,16 +731,24 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   _model.filterExpStatusValueController ??=
                                       FormFieldController<String>(null),
                               options: [
-                                'หมดอายุไปแล้ว',
-                                'ใกล้จะหมดอายุ',
-                                'รายการที่เหลือ'
+                                FFLocalizations.of(context).getText(
+                                  'umwyoofu' /* Expired */,
+                                ),
+                                FFLocalizations.of(context).getText(
+                                  '2665s624' /* About to expire */,
+                                ),
+                                FFLocalizations.of(context).getText(
+                                  '3o3jxuok' /* Remaining */,
+                                )
                               ],
                               onChanged: null,
                               width: 240.0,
                               height: 40.0,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
-                              hintText: 'วันหมดอายุ',
+                              hintText: FFLocalizations.of(context).getText(
+                                'snbouel1' /* Expiration */,
+                              ),
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:
@@ -974,7 +998,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 model: _model.listItemsModel1,
                                 updateCallback: () => setState(() {}),
                                 child: ListItemsWidget(
-                                  title: 'หมดอายุไปแล้ว',
+                                  title: 'Expired',
                                   showClear: true,
                                   locationId: widget.isLocation
                                       ? widget.locationId!
@@ -994,7 +1018,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 model: _model.listItemsModel2,
                                 updateCallback: () => setState(() {}),
                                 child: ListItemsWidget(
-                                  title: 'ใกล้จะหมดอายุ',
+                                  title: 'About to expire',
                                   showClear: false,
                                   locationId: widget.isLocation
                                       ? widget.locationId!
@@ -1014,7 +1038,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 model: _model.listItemsModel3,
                                 updateCallback: () => setState(() {}),
                                 child: ListItemsWidget(
-                                  title: 'รายการที่เหลือ',
+                                  title: 'Remaining',
                                   showClear: false,
                                   locationId: widget.isLocation
                                       ? widget.locationId!

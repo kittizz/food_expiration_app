@@ -130,7 +130,9 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                         alignment:
                                             AlignmentDirectional(-1.00, 0.00),
                                         child: Text(
-                                          'คลังภาพ',
+                                          FFLocalizations.of(context).getText(
+                                            'e5moehbi' /* คลังภาพ */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
@@ -144,7 +146,9 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 20.0, 0.0, 5.0),
                                     child: Text(
-                                      'ประเภท',
+                                      FFLocalizations.of(context).getText(
+                                        'hh8pppsh' /* ประเภท */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -284,7 +288,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                               setState(() {});
                                             },
                                             child: Text(
-                                              'หมวดหมู่',
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '2y3hnwsv' /* หมวดหมู่ */,
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
@@ -425,7 +432,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                 size: 16.0,
                                               ),
                                               Text(
-                                                'เพิ่ม',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'vr8xgawd' /* เพิ่ม */,
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -680,7 +690,11 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                         size: 16.0,
                                                       ),
                                                       Text(
-                                                        'ลบ',
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'afbxam0j' /* ลบ */,
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -784,7 +798,11 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                         size: 16.0,
                                                       ),
                                                       Text(
-                                                        'เปลี่ยนชื่อ',
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'u0s13zyz' /* เปลี่ยนชื่อ */,
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -916,7 +934,11 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                         size: 16.0,
                                                       ),
                                                       Text(
-                                                        'เลือกภาพ',
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'fc7o6377' /* เลือกภาพ */,
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -969,7 +991,11 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                         size: 16.0,
                                                       ),
                                                       Text(
-                                                        'ยกเลิก',
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'gw8b4ujj' /* ยกเลิก */,
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -1112,7 +1138,9 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                               Align(
                                 alignment: AlignmentDirectional(-1.00, 0.00),
                                 child: Text(
-                                  'ภาพ',
+                                  FFLocalizations.of(context).getText(
+                                    'xjr9dvfl' /* ภาพ */,
+                                  ),
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
                                 ),
@@ -1245,7 +1273,9 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                       size: 16.0,
                                     ),
                                     Text(
-                                      'เพิ่ม',
+                                      FFLocalizations.of(context).getText(
+                                        '1pc8ws6h' /* เพิ่ม */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -1635,7 +1665,9 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                               child: Align(
                                 alignment: AlignmentDirectional(0.00, -1.00),
                                 child: Text(
-                                  '(โปรดเลือกหมวดหมู่)',
+                                  FFLocalizations.of(context).getText(
+                                    'hjahqbu7' /* (โปรดเลือกหมวดหมู่) */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(

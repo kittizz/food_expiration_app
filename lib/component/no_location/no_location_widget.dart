@@ -46,7 +46,9 @@ class _NoLocationWidgetState extends State<NoLocationWidget> {
     return Align(
       alignment: AlignmentDirectional(0.00, 0.00),
       child: Text(
-        'ไม่มีสถานที่จัดเก็บ',
+        FFLocalizations.of(context).getText(
+          '39ykv9cj' /* There is no storage location. */,
+        ),
         style: FlutterFlowTheme.of(context).bodyLarge.override(
               fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
               color: Color(0x69474747),
