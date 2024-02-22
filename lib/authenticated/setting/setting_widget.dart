@@ -880,23 +880,23 @@ class _SettingWidgetState extends State<SettingWidget>
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
-                                              title: Text('ลงชื่อออก'),
+                                              title: Text('Sign out'),
                                               content: Text(
-                                                  'คุณกำลังลงชื่อออก แน่ใช่หรือไม่'),
+                                                  'You are signing out Are you sure?'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           false),
-                                                  child: Text('ไม่'),
+                                                  child: Text('no'),
                                                 ),
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           true),
-                                                  child: Text('ใช่'),
+                                                  child: Text('yes'),
                                                 ),
                                               ],
                                             );
