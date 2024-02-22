@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -13,18 +12,18 @@ export 'modal_rename_model.dart';
 
 class ModalRenameWidget extends StatefulWidget {
   const ModalRenameWidget({
-    Key? key,
+    super.key,
     this.name,
     required this.id,
     required this.type,
-  }) : super(key: key);
+  });
 
   final String? name;
   final int? id;
   final String? type;
 
   @override
-  _ModalRenameWidgetState createState() => _ModalRenameWidgetState();
+  State<ModalRenameWidget> createState() => _ModalRenameWidgetState();
 }
 
 class _ModalRenameWidgetState extends State<ModalRenameWidget> {
@@ -70,7 +69,7 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).accent4,
           ),
-          alignment: AlignmentDirectional(0.00, 1.00),
+          alignment: AlignmentDirectional(0.0, 1.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -127,7 +126,7 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                           ),
                           Expanded(
                             child: Align(
-                              alignment: AlignmentDirectional(1.00, 0.00),
+                              alignment: AlignmentDirectional(1.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 16.0, 16.0, 0.0),
@@ -137,6 +136,9 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'MODAL_RENAME_COMP_Icon_i54zojpz_ON_TAP');
+                                    logFirebaseEvent('Icon_bottom_sheet');
                                     Navigator.pop(context);
                                   },
                                   child: Icon(
@@ -208,6 +210,9 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                             16.0, 16.0, 16.0, 44.0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'MODAL_RENAME_COMP_SAVE_BTN_ON_TAP');
+                            logFirebaseEvent('Button_backend_call');
                             _model.apiResultv0m = await FoodexpirationGroup
                                 .adminRenameThumbnailCall
                                 .call(
@@ -217,11 +222,13 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                               type: widget.type,
                             );
                             if ((_model.apiResultv0m?.succeeded ?? true)) {
+                              logFirebaseEvent('Button_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'สำเร็จ',
-                                    style: TextStyle(
+                                    'Success',
+                                    style: GoogleFonts.getFont(
+                                      'Open Sans',
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
                                     ),
@@ -232,10 +239,11 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                                 ),
                               );
                             } else {
+                              logFirebaseEvent('Button_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'ผิดพลาด',
+                                    'Error',
                                     style: TextStyle(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
@@ -248,6 +256,7 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                               );
                             }
 
+                            logFirebaseEvent('Button_bottom_sheet');
                             Navigator.pop(context, _model.nameController.text);
 
                             setState(() {});

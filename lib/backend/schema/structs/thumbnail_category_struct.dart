@@ -70,10 +70,9 @@ class ThumbnailCategoryStruct extends FFFirebaseStruct {
         type: data['type'] as String?,
       );
 
-  static ThumbnailCategoryStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic>
-          ? ThumbnailCategoryStruct.fromMap(data)
-          : null;
+  static ThumbnailCategoryStruct? maybeFromMap(dynamic data) => data is Map
+      ? ThumbnailCategoryStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'id': _id,

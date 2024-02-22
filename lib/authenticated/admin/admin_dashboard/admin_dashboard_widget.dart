@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -13,10 +12,10 @@ import 'admin_dashboard_model.dart';
 export 'admin_dashboard_model.dart';
 
 class AdminDashboardWidget extends StatefulWidget {
-  const AdminDashboardWidget({Key? key}) : super(key: key);
+  const AdminDashboardWidget({super.key});
 
   @override
-  _AdminDashboardWidgetState createState() => _AdminDashboardWidgetState();
+  State<AdminDashboardWidget> createState() => _AdminDashboardWidgetState();
 }
 
 class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
@@ -29,6 +28,8 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
     super.initState();
     _model = createModel(context, () => AdminDashboardModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'AdminDashboard'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -41,15 +42,6 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
@@ -100,8 +92,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          50.0, 50.0, 50.0, 50.0),
+                      padding: EdgeInsets.all(50.0),
                       child: GridView(
                         padding: EdgeInsets.zero,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -121,8 +112,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 20.0, 20.0, 20.0),
+                              padding: EdgeInsets.all(20.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
@@ -133,7 +123,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                     children: [
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(-1.00, -1.00),
+                                            AlignmentDirectional(-1.0, -1.0),
                                         child: Icon(
                                           Icons.person,
                                           color: FlutterFlowTheme.of(context)
@@ -174,7 +164,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                     )),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(1.00, 0.00),
+                                    alignment: AlignmentDirectional(1.0, 0.0),
                                     child: Text(
                                       'คน',
                                       style: FlutterFlowTheme.of(context)
@@ -194,8 +184,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 20.0, 20.0, 20.0),
+                              padding: EdgeInsets.all(20.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
@@ -206,7 +195,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                     children: [
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(-1.00, -1.00),
+                                            AlignmentDirectional(-1.0, -1.0),
                                         child: Icon(
                                           Icons.format_list_bulleted_rounded,
                                           color: FlutterFlowTheme.of(context)
@@ -247,7 +236,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                     )),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(1.00, 0.00),
+                                    alignment: AlignmentDirectional(1.0, 0.0),
                                     child: Text(
                                       'รายการ',
                                       style: FlutterFlowTheme.of(context)
@@ -267,8 +256,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 20.0, 20.0, 20.0),
+                              padding: EdgeInsets.all(20.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
@@ -279,7 +267,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                     children: [
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(-1.00, -1.00),
+                                            AlignmentDirectional(-1.0, -1.0),
                                         child: Icon(
                                           Icons.location_on,
                                           color: FlutterFlowTheme.of(context)
@@ -322,7 +310,7 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
                                     )),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(1.00, 0.00),
+                                    alignment: AlignmentDirectional(1.0, 0.0),
                                     child: Text(
                                       'แหล่ง',
                                       style: FlutterFlowTheme.of(context)

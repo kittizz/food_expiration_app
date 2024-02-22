@@ -35,7 +35,7 @@ class KindStruct extends FFFirebaseStruct {
       );
 
   static KindStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? KindStruct.fromMap(data) : null;
+      data is Map ? KindStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'name': _name,

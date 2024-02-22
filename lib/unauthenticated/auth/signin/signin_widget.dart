@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,10 +14,10 @@ import 'signin_model.dart';
 export 'signin_model.dart';
 
 class SigninWidget extends StatefulWidget {
-  const SigninWidget({Key? key}) : super(key: key);
+  const SigninWidget({super.key});
 
   @override
-  _SigninWidgetState createState() => _SigninWidgetState();
+  State<SigninWidget> createState() => _SigninWidgetState();
 }
 
 class _SigninWidgetState extends State<SigninWidget> {
@@ -33,6 +32,7 @@ class _SigninWidgetState extends State<SigninWidget> {
     super.initState();
     _model = createModel(context, () => SigninModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Signin'});
     if (!isWeb) {
       _keyboardVisibilitySubscription =
           KeyboardVisibilityController().onChange.listen((bool visible) {
@@ -66,15 +66,6 @@ class _SigninWidgetState extends State<SigninWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -100,6 +91,8 @@ class _SigninWidgetState extends State<SigninWidget> {
                 size: 30.0,
               ),
               onPressed: () async {
+                logFirebaseEvent('SIGNIN_arrow_back_rounded_ICN_ON_TAP');
+                logFirebaseEvent('IconButton_navigate_back');
                 context.pop();
               },
             ),
@@ -111,7 +104,7 @@ class _SigninWidgetState extends State<SigninWidget> {
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
               width: double.infinity,
               constraints: BoxConstraints(
@@ -332,6 +325,10 @@ class _SigninWidgetState extends State<SigninWidget> {
                                     16.0, 12.0, 16.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent(
+                                        'SIGNIN_FORGOT_YOUR_PASSWORD?_BTN_ON_TAP');
+                                    logFirebaseEvent('Button_navigate_to');
+
                                     context.pushNamed('ForgotPassword');
                                   },
                                   text: 'Forgot your password?',
@@ -380,6 +377,8 @@ class _SigninWidgetState extends State<SigninWidget> {
                           16.0, 12.0, 16.0, 24.0),
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent('SIGNIN_PAGE_LOGIN_BTN_ON_TAP');
+                          logFirebaseEvent('Button_auth');
                           GoRouter.of(context).prepareAuthEvent();
 
                           final user = await authManager.signInWithEmail(
@@ -391,6 +390,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                             return;
                           }
 
+                          logFirebaseEvent('Button_action_block');
                           await action_blocks.registerDevice(context);
 
                           context.goNamedAuth('Splash', context.mounted);

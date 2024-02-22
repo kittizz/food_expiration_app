@@ -14,7 +14,6 @@ import 'home_widget.dart' show HomeWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -51,10 +50,12 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     blogCardModels = FlutterFlowDynamicModels(() => BlogCardModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     blogCardModels.dispose();

@@ -13,7 +13,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -24,15 +23,14 @@ export 'setting_model.dart';
 
 class SettingWidget extends StatefulWidget {
   const SettingWidget({
-    Key? key,
+    super.key,
     int? tabId,
-  })  : this.tabId = tabId ?? 0,
-        super(key: key);
+  }) : this.tabId = tabId ?? 0;
 
   final int tabId;
 
   @override
-  _SettingWidgetState createState() => _SettingWidgetState();
+  State<SettingWidget> createState() => _SettingWidgetState();
 }
 
 class _SettingWidgetState extends State<SettingWidget>
@@ -46,8 +44,11 @@ class _SettingWidgetState extends State<SettingWidget>
     super.initState();
     _model = createModel(context, () => SettingModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Setting'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SETTING_PAGE_Setting_ON_INIT_STATE');
+      logFirebaseEvent('Setting_action_block');
       await action_blocks.fetchUser(context);
       setState(() {});
     });
@@ -78,15 +79,6 @@ class _SettingWidgetState extends State<SettingWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -109,6 +101,8 @@ class _SettingWidgetState extends State<SettingWidget>
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('SETTING_arrow_back_rounded_ICN_ON_TAP');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -132,12 +126,12 @@ class _SettingWidgetState extends State<SettingWidget>
                       FlutterFlowTheme.of(context).secondaryText,
                   labelStyle: FlutterFlowTheme.of(context).titleMedium.override(
                         fontFamily: 'IBM Plex Sans Thai',
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).titleMediumFamily),
+                        useGoogleFonts: GoogleFonts.asMap()
+                            .containsKey('IBM Plex Sans Thai'),
                       ),
                   unselectedLabelStyle: TextStyle(),
                   indicatorColor: FlutterFlowTheme.of(context).red400,
-                  padding: EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
+                  padding: EdgeInsets.all(4.0),
                   tabs: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -163,6 +157,9 @@ class _SettingWidgetState extends State<SettingWidget>
                     ),
                   ],
                   controller: _model.tabBarController,
+                  onTap: (i) async {
+                    [() async {}, () async {}][i]();
+                  },
                 ),
               ),
               Expanded(
@@ -193,6 +190,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                       setState(() => _model
                                           .switchListTileValue = newValue!);
                                       if (newValue!) {
+                                        logFirebaseEvent(
+                                            'SETTING_SwitchListTile_2xfaq6et_ON_TOGGL');
+                                        logFirebaseEvent(
+                                            'SwitchListTile_action_block');
                                         await action_blocks.saveSettings(
                                           context,
                                           notification: true,
@@ -201,6 +202,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                         );
                                         setState(() {});
                                       } else {
+                                        logFirebaseEvent(
+                                            'SETTING_SwitchListTile_2xfaq6et_ON_TOGGL');
+                                        logFirebaseEvent(
+                                            'SwitchListTile_action_block');
                                         await action_blocks.saveSettings(
                                           context,
                                           notification: false,
@@ -257,36 +262,44 @@ class _SettingWidgetState extends State<SettingWidget>
                                     height: 100.0,
                                     decoration: BoxDecoration(),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          23.0, 23.0, 23.0, 23.0),
+                                      padding: EdgeInsets.all(23.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
                                         focusColor: Colors.transparent,
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'SETTING_PAGE_Row_63jrof6m_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Row_date_time_picker');
+
                                           final _datePickedTime =
                                               await showTimePicker(
                                             context: context,
                                             initialTime: TimeOfDay.fromDateTime(
-                                                FFAppState()
-                                                    .user
-                                                    .notificationAt!),
+                                                (FFAppState()
+                                                        .user
+                                                        .notificationAt ??
+                                                    DateTime.now())),
                                           );
                                           if (_datePickedTime != null) {
                                             safeSetState(() {
                                               _model.datePicked = DateTime(
-                                                FFAppState()
-                                                    .user
-                                                    .notificationAt!
+                                                (FFAppState()
+                                                            .user
+                                                            .notificationAt ??
+                                                        DateTime.now())
                                                     .year,
-                                                FFAppState()
-                                                    .user
-                                                    .notificationAt!
+                                                (FFAppState()
+                                                            .user
+                                                            .notificationAt ??
+                                                        DateTime.now())
                                                     .month,
-                                                FFAppState()
-                                                    .user
-                                                    .notificationAt!
+                                                (FFAppState()
+                                                            .user
+                                                            .notificationAt ??
+                                                        DateTime.now())
                                                     .day,
                                                 _datePickedTime.hour,
                                                 _datePickedTime.minute,
@@ -294,6 +307,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                             });
                                           }
                                           if (_model.datePicked != null) {
+                                            logFirebaseEvent(
+                                                'Row_action_block');
                                             await action_blocks.saveSettings(
                                               context,
                                               notification: FFAppState()
@@ -360,7 +375,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                                 child: Align(
                                                   alignment:
                                                       AlignmentDirectional(
-                                                          0.00, 0.00),
+                                                          0.0, 0.0),
                                                   child: Text(
                                                     valueOrDefault<String>(
                                                       dateTimeFormat(
@@ -407,7 +422,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                 color: FlutterFlowTheme.of(context).grey50,
                               ),
                               child: Align(
-                                alignment: AlignmentDirectional(1.00, 0.00),
+                                alignment: AlignmentDirectional(1.0, 0.0),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 20.0, 0.0),
@@ -417,6 +432,9 @@ class _SettingWidgetState extends State<SettingWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
+                                      logFirebaseEvent(
+                                          'SETTING_PAGE_Text_372fg6tv_ON_TAP');
+                                      logFirebaseEvent('Text_action_block');
                                       await _model.saveNickname(context);
                                     },
                                     child: Text(
@@ -471,6 +489,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'SETTING_PAGE_Image_ptp46don_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Image_expand_image');
                                                 await Navigator.push(
                                                   context,
                                                   PageTransition(
@@ -569,7 +591,7 @@ class _SettingWidgetState extends State<SettingWidget>
                                             ),
                                             Align(
                                               alignment: AlignmentDirectional(
-                                                  1.00, 1.00),
+                                                  1.0, 1.0),
                                               child: FlutterFlowIconButton(
                                                 borderColor:
                                                     FlutterFlowTheme.of(context)
@@ -588,7 +610,11 @@ class _SettingWidgetState extends State<SettingWidget>
                                                   size: 20.0,
                                                 ),
                                                 onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'SETTING_PAGE_edit_ICN_ON_TAP');
                                                   var _shouldSetState = false;
+                                                  logFirebaseEvent(
+                                                      'IconButton_store_media_for_upload');
                                                   final selectedMedia =
                                                       await selectMediaWithSourceBottomSheet(
                                                     context: context,
@@ -658,6 +684,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                                               .bytes
                                                               ?.isNotEmpty ??
                                                           false)) {
+                                                    logFirebaseEvent(
+                                                        'IconButton_backend_call');
                                                     _model.apiChangeProfilepicture =
                                                         await FoodexpirationGroup
                                                             .changeProfilepictureCall
@@ -675,6 +703,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                                             .apiChangeProfilepicture
                                                             ?.succeeded ??
                                                         true)) {
+                                                      logFirebaseEvent(
+                                                          'IconButton_show_snack_bar');
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .clearSnackBars();
@@ -716,6 +746,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                                       return;
                                                     }
 
+                                                    logFirebaseEvent(
+                                                        'IconButton_action_block');
                                                     await action_blocks
                                                         .fetchUser(context);
                                                     setState(() {});
@@ -740,6 +772,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                           controller: _model.textController,
                                           focusNode: _model.textFieldFocusNode,
                                           onFieldSubmitted: (_) async {
+                                            logFirebaseEvent(
+                                                'SETTING_TextField_qy3him1q_ON_TEXTFIELD_');
+                                            logFirebaseEvent(
+                                                'TextField_action_block');
                                             await _model.saveNickname(context);
                                           },
                                           obscureText: false,
@@ -835,7 +871,10 @@ class _SettingWidgetState extends State<SettingWidget>
                             ),
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'SETTING_PAGE_Button-Login_ON_TAP');
                                 Function() _navigate = () {};
+                                logFirebaseEvent('Button-Login_alert_dialog');
                                 var confirmDialogResponse =
                                     await showDialog<bool>(
                                           context: context,
@@ -865,12 +904,15 @@ class _SettingWidgetState extends State<SettingWidget>
                                         ) ??
                                         false;
                                 if (confirmDialogResponse) {
+                                  logFirebaseEvent('Button-Login_auth');
                                   GoRouter.of(context).prepareAuthEvent();
                                   await authManager.signOut();
                                   GoRouter.of(context).clearRedirectLocation();
 
                                   _navigate = () => context.goNamedAuth(
                                       'Splash', context.mounted);
+                                  logFirebaseEvent(
+                                      'Button-Login_update_app_state');
                                   setState(() {
                                     FFAppState().deviceId = '';
                                     FFAppState().user = UserStruct

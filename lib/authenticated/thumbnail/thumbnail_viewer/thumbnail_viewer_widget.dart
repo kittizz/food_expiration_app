@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -18,7 +17,7 @@ export 'thumbnail_viewer_model.dart';
 
 class ThumbnailViewerWidget extends StatefulWidget {
   const ThumbnailViewerWidget({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.imageId,
     required this.catrgoryId,
@@ -26,8 +25,7 @@ class ThumbnailViewerWidget extends StatefulWidget {
     this.name,
     required this.thumbailId,
     bool? viewOnly,
-  })  : this.viewOnly = viewOnly ?? false,
-        super(key: key);
+  }) : this.viewOnly = viewOnly ?? false;
 
   final String? imagePath;
   final int? imageId;
@@ -38,7 +36,7 @@ class ThumbnailViewerWidget extends StatefulWidget {
   final bool viewOnly;
 
   @override
-  _ThumbnailViewerWidgetState createState() => _ThumbnailViewerWidgetState();
+  State<ThumbnailViewerWidget> createState() => _ThumbnailViewerWidgetState();
 }
 
 class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
@@ -51,6 +49,8 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
     super.initState();
     _model = createModel(context, () => ThumbnailViewerModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ThumbnailViewer'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -63,15 +63,6 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -95,6 +86,8 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('THUMBNAIL_VIEWER_arrow_back_ios_rounded_');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -105,7 +98,7 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -120,6 +113,9 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'THUMBNAIL_VIEWER_Image_q7jggeom_ON_TAP');
+                          logFirebaseEvent('Image_expand_image');
                           await Navigator.push(
                             context,
                             PageTransition(
@@ -180,6 +176,9 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                         Expanded(
                           child: FFButtonWidget(
                             onPressed: () async {
+                              logFirebaseEvent(
+                                  'THUMBNAIL_VIEWER_PAGE_CANCEL_BTN_ON_TAP');
+                              logFirebaseEvent('Button_navigate_back');
                               context.safePop();
                             },
                             text: 'Cancel',
@@ -214,6 +213,9 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'THUMBNAIL_VIEWER_PAGE_CONFIRM_BTN_ON_TAP');
+                                logFirebaseEvent('Button_update_app_state');
                                 setState(() {
                                   FFAppState().updatePageLocationInfoStruct(
                                     (e) => e
@@ -234,6 +236,7 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                                       ),
                                   );
                                 });
+                                logFirebaseEvent('Button_navigate_back');
                                 context.safePop();
                               },
                               text: 'Confirm',

@@ -65,10 +65,12 @@ class AdminBlogModel extends FlutterFlowModel<AdminBlogWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     sideNavModel.dispose();
@@ -84,10 +86,12 @@ class AdminBlogModel extends FlutterFlowModel<AdminBlogWidget> {
   Future fetchBlogs(BuildContext context) async {
     ApiCallResponse? apiBlogs;
 
+    logFirebaseEvent('fetchBlogs_backend_call');
     apiBlogs = await FoodexpirationGroup.blogAllCall.call(
       deviceid: FFAppState().deviceId,
     );
     if ((apiBlogs?.succeeded ?? true)) {
+      logFirebaseEvent('fetchBlogs_update_page_state');
       blogs = functions
           .toBlogList((apiBlogs?.jsonBody ?? ''))
           .toList()

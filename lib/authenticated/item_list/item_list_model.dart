@@ -14,7 +14,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,13 +36,13 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   String? Function(BuildContext, String?)? search2FieldControllerValidator;
   // State field(s) for filterLocation widget.
   List<String>? filterLocationValue;
-  FormFieldController<String>? filterLocationValueController;
+  FormFieldController<List<String>>? filterLocationValueController;
   // State field(s) for filterCate widget.
   List<String>? filterCateValue;
-  FormFieldController<String>? filterCateValueController;
+  FormFieldController<List<String>>? filterCateValueController;
   // State field(s) for filterExpStatus widget.
   List<String>? filterExpStatusValue;
-  FormFieldController<String>? filterExpStatusValueController;
+  FormFieldController<List<String>>? filterExpStatusValueController;
   // Model for ListItems component.
   late ListItemsModel listItemsModel1;
   // Model for ListItems component.
@@ -53,12 +52,14 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     listItemsModel1 = createModel(context, () => ListItemsModel());
     listItemsModel2 = createModel(context, () => ListItemsModel());
     listItemsModel3 = createModel(context, () => ListItemsModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     search1FieldFocusNode?.dispose();
@@ -77,6 +78,7 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   Future scanBarcode(BuildContext context) async {
     var barcodeOut = '';
 
+    logFirebaseEvent('scanBarcode_scan_barcode_q_r_code');
     barcodeOut = await FlutterBarcodeScanner.scanBarcode(
       '#C62828', // scanning line color
       'Cancel', // cancel button text
@@ -85,10 +87,12 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
     );
 
     if (barcodeOut != '-1') {
+      logFirebaseEvent('scanBarcode_update_app_state');
       FFAppState().updateFilterStruct(
         (e) => e..barcode = barcodeOut,
       );
     } else {
+      logFirebaseEvent('scanBarcode_update_app_state');
       FFAppState().updateFilterStruct(
         (e) => e..barcode = null,
       );

@@ -9,7 +9,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,10 +17,10 @@ import 'location_list_model.dart';
 export 'location_list_model.dart';
 
 class LocationListWidget extends StatefulWidget {
-  const LocationListWidget({Key? key}) : super(key: key);
+  const LocationListWidget({super.key});
 
   @override
-  _LocationListWidgetState createState() => _LocationListWidgetState();
+  State<LocationListWidget> createState() => _LocationListWidgetState();
 }
 
 class _LocationListWidgetState extends State<LocationListWidget>
@@ -51,8 +50,12 @@ class _LocationListWidgetState extends State<LocationListWidget>
     super.initState();
     _model = createModel(context, () => LocationListModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'LocationList'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('LOCATION_LIST_LocationList_ON_INIT_STATE');
+      logFirebaseEvent('LocationList_action_block');
       await action_blocks.fetchLocations(context);
       setState(() {});
     });
@@ -76,15 +79,6 @@ class _LocationListWidgetState extends State<LocationListWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -96,6 +90,8 @@ class _LocationListWidgetState extends State<LocationListWidget>
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            logFirebaseEvent('LOCATION_LIST_FloatingActionButton_mz9n9');
+            logFirebaseEvent('FloatingActionButton_action_block');
             await action_blocks.openAddItem(
               context,
               replace: true,
@@ -124,6 +120,8 @@ class _LocationListWidgetState extends State<LocationListWidget>
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('LOCATION_LIST_arrow_back_ios_rounded_ICN');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -144,7 +142,7 @@ class _LocationListWidgetState extends State<LocationListWidget>
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
               width: double.infinity,
               constraints: BoxConstraints(
@@ -166,7 +164,7 @@ class _LocationListWidgetState extends State<LocationListWidget>
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(1.00, 0.00),
+                            alignment: AlignmentDirectional(1.0, 0.0),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 25.0, 0.0),
@@ -176,6 +174,9 @@ class _LocationListWidgetState extends State<LocationListWidget>
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'LOCATION_LIST_PAGE_Row_f7ek0hxy_ON_TAP');
+                                  logFirebaseEvent('Row_widget_animation');
                                   if (animationsMap[
                                           'rowOnActionTriggerAnimation'] !=
                                       null) {
@@ -186,10 +187,12 @@ class _LocationListWidgetState extends State<LocationListWidget>
                                             .controller
                                             .forward(from: 0.0));
                                   }
+                                  logFirebaseEvent('Row_update_app_state');
                                   FFAppState().pageLocationInfo =
                                       PageLocationInfoStruct
                                           .fromSerializableMap(jsonDecode(
                                               '{\"isAdd\":\"true\"}'));
+                                  logFirebaseEvent('Row_navigate_to');
 
                                   context.pushNamed('LocationInfo');
                                 },
@@ -256,6 +259,9 @@ class _LocationListWidgetState extends State<LocationListWidget>
                               return RefreshIndicator(
                                 color: FlutterFlowTheme.of(context).red200,
                                 onRefresh: () async {
+                                  logFirebaseEvent(
+                                      'LOCATION_LIST_ListView_h6pafquo_ON_PULL_');
+                                  logFirebaseEvent('ListView_action_block');
                                   await action_blocks.fetchLocations(context);
                                   setState(() {});
                                 },

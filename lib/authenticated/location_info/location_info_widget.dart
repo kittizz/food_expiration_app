@@ -8,7 +8,6 @@ import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -17,10 +16,10 @@ import 'location_info_model.dart';
 export 'location_info_model.dart';
 
 class LocationInfoWidget extends StatefulWidget {
-  const LocationInfoWidget({Key? key}) : super(key: key);
+  const LocationInfoWidget({super.key});
 
   @override
-  _LocationInfoWidgetState createState() => _LocationInfoWidgetState();
+  State<LocationInfoWidget> createState() => _LocationInfoWidgetState();
 }
 
 class _LocationInfoWidgetState extends State<LocationInfoWidget> {
@@ -33,8 +32,12 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
     super.initState();
     _model = createModel(context, () => LocationInfoModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'LocationInfo'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('LOCATION_INFO_LocationInfo_ON_INIT_STATE');
+      logFirebaseEvent('LocationInfo_update_page_state');
       setState(() {
         _model.hash = FFAppState().pageLocationInfo.imageBlurhash;
       });
@@ -60,15 +63,6 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -92,6 +86,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('LOCATION_INFO_arrow_back_ios_rounded_ICN');
+              logFirebaseEvent('IconButton_navigate_back');
               context.safePop();
             },
           ),
@@ -112,7 +108,9 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
+                logFirebaseEvent('LOCATION_INFO_PAGE_Row_8bahqunl_ON_TAP');
                 var _shouldSetState = false;
+                logFirebaseEvent('Row_alert_dialog');
                 var confirmDialogResponse = await showDialog<bool>(
                       context: context,
                       builder: (alertDialogContext) {
@@ -137,6 +135,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                     ) ??
                     false;
                 if (confirmDialogResponse) {
+                  logFirebaseEvent('Row_backend_call');
                   _model.apiLocationDelete =
                       await FoodexpirationGroup.deleteLocationCall.call(
                     deviceid: FFAppState().deviceId,
@@ -144,6 +143,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                   );
                   _shouldSetState = true;
                   if ((_model.apiLocationDelete?.succeeded ?? true)) {
+                    logFirebaseEvent('Row_show_snack_bar');
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -163,9 +163,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                         backgroundColor: FlutterFlowTheme.of(context).secondary,
                       ),
                     );
+                    logFirebaseEvent('Row_navigate_to');
 
                     context.goNamed('Home');
                   } else {
+                    logFirebaseEvent('Row_show_snack_bar');
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -225,10 +227,9 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
               children: [
                 Flexible(
                   child: Align(
-                    alignment: AlignmentDirectional(0.00, 0.00),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          20.0, 20.0, 20.0, 20.0),
+                      padding: EdgeInsets.all(20.0),
                       child: Container(
                         width: double.infinity,
                         constraints: BoxConstraints(
@@ -253,8 +254,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                           key: _model.formKey,
                           autovalidateMode: AutovalidateMode.disabled,
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 24.0, 24.0, 24.0),
+                            padding: EdgeInsets.all(24.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -274,6 +274,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'LOCATION_INFO_PAGE_heroImage_ON_TAP');
+                                            logFirebaseEvent(
+                                                'heroImage_store_media_for_upload');
                                             final selectedMedia =
                                                 await selectMediaWithSourceBottomSheet(
                                               context: context,
@@ -330,6 +334,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                               }
                                             }
 
+                                            logFirebaseEvent(
+                                                'heroImage_action_block');
                                             await _model.uploadImage(
                                               context,
                                               fileUpload:
@@ -371,26 +377,23 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                   0.0),
                                                       child: Text(
                                                         'Add a photo',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'IBM Plex Sans Thai',
-                                                                  color: Color(
-                                                                      0xFF14181B),
-                                                                  fontSize:
-                                                                      22.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .titleLargeFamily),
-                                                                ),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .titleLarge
+                                                            .override(
+                                                              fontFamily:
+                                                                  'IBM Plex Sans Thai',
+                                                              color: Color(
+                                                                  0xFF14181B),
+                                                              fontSize: 22.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              useGoogleFonts: GoogleFonts
+                                                                      .asMap()
+                                                                  .containsKey(
+                                                                      'IBM Plex Sans Thai'),
+                                                            ),
                                                       ),
                                                     ),
                                                     Padding(
@@ -403,26 +406,23 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                   0.0),
                                                       child: Text(
                                                         'Upload photos here...',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'IBM Plex Sans Thai',
-                                                                  color: Color(
-                                                                      0xFF57636C),
-                                                                  fontSize:
-                                                                      14.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .labelMediumFamily),
-                                                                ),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .labelMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'IBM Plex Sans Thai',
+                                                              color: Color(
+                                                                  0xFF57636C),
+                                                              fontSize: 14.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              useGoogleFonts: GoogleFonts
+                                                                      .asMap()
+                                                                  .containsKey(
+                                                                      'IBM Plex Sans Thai'),
+                                                            ),
                                                       ),
                                                     ),
                                                   ],
@@ -440,9 +440,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                 ))
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(8.0, 8.0,
-                                                                8.0, 8.0),
+                                                        EdgeInsets.all(8.0),
                                                     child: ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -483,6 +481,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'LOCATION_INFO_PAGE_UPLOAD_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_store_media_for_upload');
                                           final selectedMedia =
                                               await selectMediaWithSourceBottomSheet(
                                             context: context,
@@ -537,6 +539,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                             }
                                           }
 
+                                          logFirebaseEvent(
+                                              'Button_action_block');
                                           await _model.uploadImage(
                                             context,
                                             fileUpload:
@@ -582,6 +586,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'LOCATION_INFO_SELECT_PICTURE_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_navigate_to');
+
                                           context.pushNamed(
                                             'ThumbnailCategory',
                                             queryParameters: {
@@ -782,10 +791,14 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                       Expanded(
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            logFirebaseEvent(
+                                                'LOCATION_INFO_PAGE__BTN_ON_TAP');
                                             var _shouldSetState = false;
                                             if (FFAppState()
                                                 .pageLocationInfo
                                                 .isAdd) {
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
                                               _model.apiCreateLocation =
                                                   await FoodexpirationGroup
                                                       .createLocationCall
@@ -804,6 +817,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                               if (!(_model.apiCreateLocation
                                                       ?.succeeded ??
                                                   true)) {
+                                                logFirebaseEvent(
+                                                    'Button_alert_dialog');
                                                 await showDialog(
                                                   context: context,
                                                   builder:
@@ -835,6 +850,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                 return;
                                               }
                                             } else {
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
                                               _model.apiUpdatelocation =
                                                   await FoodexpirationGroup
                                                       .updateLocationCall
@@ -856,6 +873,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                               if (!(_model.apiUpdatelocation
                                                       ?.succeeded ??
                                                   true)) {
+                                                logFirebaseEvent(
+                                                    'Button_alert_dialog');
                                                 await showDialog(
                                                   context: context,
                                                   builder:
@@ -888,9 +907,13 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                               }
                                             }
 
+                                            logFirebaseEvent(
+                                                'Button_action_block');
                                             await action_blocks
                                                 .fetchLocations(context);
                                             setState(() {});
+                                            logFirebaseEvent(
+                                                'Button_action_block');
                                             await action_blocks
                                                 .fetchLocationInfo(
                                               context,
@@ -899,7 +922,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                   .locationId,
                                             );
                                             setState(() {});
+                                            logFirebaseEvent(
+                                                'Button_navigate_back');
                                             context.safePop();
+                                            logFirebaseEvent(
+                                                'Button_show_snack_bar');
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               SnackBar(
@@ -929,9 +956,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                           options: FFButtonOptions(
                                             width: double.infinity,
                                             height: 50.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
+                                            padding: EdgeInsets.all(0.0),
                                             iconPadding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
@@ -950,9 +975,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                       useGoogleFonts: GoogleFonts
                                                               .asMap()
                                                           .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily),
+                                                              'Plus Jakarta Sans'),
                                                     ),
                                             elevation: 2.0,
                                             borderRadius:

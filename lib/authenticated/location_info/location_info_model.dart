@@ -10,7 +10,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'location_info_widget.dart' show LocationInfoWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -81,11 +80,13 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     nameFieldControllerValidator = _nameFieldControllerValidator;
     descriptionFieldControllerValidator = _descriptionFieldControllerValidator;
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     nameFieldFocusNode?.dispose();
@@ -103,15 +104,18 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
   }) async {
     ApiCallResponse? apiUploadImage1;
 
-    if (fileUpload != null && (fileUpload.bytes?.isNotEmpty ?? false)) {
+    if (fileUpload != null && (fileUpload?.bytes?.isNotEmpty ?? false)) {
       if (fileUpload?.blurHash != hash) {
+        logFirebaseEvent('uploadImage_backend_call');
         apiUploadImage1 = await FoodexpirationGroup.uploadImageCall.call(
           file: fileUpload,
           deviceid: FFAppState().deviceId,
           hash: fileUpload?.blurHash,
         );
         if ((apiUploadImage1?.succeeded ?? true)) {
+          logFirebaseEvent('uploadImage_update_page_state');
           hash = fileUpload!.blurHash!;
+          logFirebaseEvent('uploadImage_update_app_state');
           FFAppState().updatePageLocationInfoStruct(
             (e) => e
               ..imageId = FoodexpirationGroup.uploadImageCall.id(
@@ -122,14 +126,13 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
                     (apiUploadImage1?.jsonBody ?? ''),
                   )
                   .toString()
-                  .toString()
               ..imageBlurhash = FoodexpirationGroup.uploadImageCall
                   .blurHash(
                     (apiUploadImage1?.jsonBody ?? ''),
                   )
-                  .toString()
                   .toString(),
           );
+          logFirebaseEvent('uploadImage_show_snack_bar');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -144,6 +147,7 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
           );
           return;
         } else {
+          logFirebaseEvent('uploadImage_show_snack_bar');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(

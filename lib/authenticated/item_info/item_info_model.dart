@@ -97,11 +97,13 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     forewarnDayFieldControllerValidator = _forewarnDayFieldControllerValidator;
     quantityFieldControllerValidator = _quantityFieldControllerValidator;
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     nameFieldFocusNode?.dispose();
@@ -125,15 +127,18 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   }) async {
     ApiCallResponse? apiUploadImage1;
 
-    if (fileUpload != null && (fileUpload.bytes?.isNotEmpty ?? false)) {
+    if (fileUpload != null && (fileUpload?.bytes?.isNotEmpty ?? false)) {
       if (fileUpload?.blurHash != hash) {
+        logFirebaseEvent('uploadImage_backend_call');
         apiUploadImage1 = await FoodexpirationGroup.uploadImageCall.call(
           file: fileUpload,
           deviceid: FFAppState().deviceId,
           hash: fileUpload?.blurHash,
         );
         if ((apiUploadImage1?.succeeded ?? true)) {
+          logFirebaseEvent('uploadImage_update_page_state');
           hash = uploadedLocalFile.blurHash!;
+          logFirebaseEvent('uploadImage_update_app_state');
           FFAppState().updateThumbnailStruct(
             (e) => e
               ..updateImage(
@@ -146,15 +151,14 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
                         (apiUploadImage1?.jsonBody ?? ''),
                       )
                       .toString()
-                      .toString()
                   ..blurHash = FoodexpirationGroup.uploadImageCall
                       .blurHash(
                         (apiUploadImage1?.jsonBody ?? ''),
                       )
-                      .toString()
                       .toString(),
               ),
           );
+          logFirebaseEvent('uploadImage_show_snack_bar');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -169,6 +173,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
           );
           return;
         } else {
+          logFirebaseEvent('uploadImage_show_snack_bar');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -176,7 +181,6 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
                     .message(
                       (apiUploadImage1?.jsonBody ?? ''),
                     )
-                    .toString()
                     .toString(),
                 style: TextStyle(
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -199,6 +203,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   Future scanBarcode(BuildContext context) async {
     var barcodeOutput = '';
 
+    logFirebaseEvent('scanBarcode_scan_barcode_q_r_code');
     barcodeOutput = await FlutterBarcodeScanner.scanBarcode(
       '#C62828', // scanning line color
       'Cancel', // cancel button text
@@ -207,6 +212,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
     );
 
     if (barcodeOutput != '-1') {
+      logFirebaseEvent('scanBarcode_update_app_state');
       FFAppState().update(() {
         FFAppState().updatePageItemInfoStruct(
           (e) => e..barcode = barcodeOutput,

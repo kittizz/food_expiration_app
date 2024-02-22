@@ -13,7 +13,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'admin_image_widget.dart' show AdminImageWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -81,10 +80,12 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     sideNavModel.dispose();
@@ -95,11 +96,13 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   Future fetchThumbnailCategories(BuildContext context) async {
     ApiCallResponse? apiThumbnailCategories;
 
+    logFirebaseEvent('fetchThumbnailCategories_backend_call');
     apiThumbnailCategories =
         await FoodexpirationGroup.thumbnailCategoryCall.call(
       deviceid: FFAppState().deviceId,
     );
     if ((apiThumbnailCategories?.succeeded ?? true)) {
+      logFirebaseEvent('fetchThumbnailCategories_update_page_sta');
       thumbnailCategories = functions
           .toThumbnailCategoryStructList(
               (apiThumbnailCategories?.jsonBody ?? ''))
@@ -114,12 +117,14 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   }) async {
     ApiCallResponse? apiThumbnailCategoriesByid;
 
+    logFirebaseEvent('fetchThumbnail_backend_call');
     apiThumbnailCategoriesByid =
         await FoodexpirationGroup.thumbnailCategoryByIdCall.call(
       catrgoryId: id?.toString(),
       deviceid: FFAppState().deviceId,
     );
     if ((apiThumbnailCategoriesByid?.succeeded ?? true)) {
+      logFirebaseEvent('fetchThumbnail_update_page_state');
       thumbnails = functions
           .toThumbnailCategoryStruct(
               (apiThumbnailCategoriesByid?.jsonBody ?? ''))

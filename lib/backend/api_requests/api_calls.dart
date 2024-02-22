@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import '../schema/structs/index.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -88,6 +89,7 @@ class RegisterDeviceCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -117,29 +119,30 @@ class GetUserCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
-  dynamic email(dynamic response) => getJsonField(
+  String? email(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.email''',
-      );
-  dynamic signInProvider(dynamic response) => getJsonField(
+      ));
+  String? signInProvider(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.signInProvider''',
-      );
-  dynamic role(dynamic response) => getJsonField(
+      ));
+  String? role(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.role''',
-      );
-  dynamic nickname(dynamic response) => getJsonField(
+      ));
+  String? nickname(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.nickname''',
-      );
-  dynamic profilePicture(dynamic response) => getJsonField(
+      ));
+  String? profilePicture(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.profilePicture''',
-      );
+      ));
   dynamic profilePictureBlurHash(dynamic response) => getJsonField(
         response,
         r'''$.profilePictureBlurHash''',
@@ -166,6 +169,7 @@ class BlogRecommendCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -189,25 +193,26 @@ class BlogByIdCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
-  dynamic id(dynamic response) => getJsonField(
+  int? id(dynamic response) => castToType<int>(getJsonField(
         response,
         r'''$.id''',
-      );
-  dynamic createdAt(dynamic response) => getJsonField(
+      ));
+  String? createdAt(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.createdAt''',
-      );
-  dynamic title(dynamic response) => getJsonField(
+      ));
+  String? title(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.title''',
-      );
-  dynamic content(dynamic response) => getJsonField(
+      ));
+  String? content(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.content''',
-      );
+      ));
   dynamic imagePath(dynamic response) => getJsonField(
         response,
         r'''$.image.path''',
@@ -234,6 +239,7 @@ class BlogAllCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -254,6 +260,7 @@ class LocationListCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -282,6 +289,7 @@ class DeleteLocationCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -310,6 +318,7 @@ class DeleteThumbnailCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -338,6 +347,7 @@ class DeleteThumbnailCategoryCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -366,6 +376,7 @@ class AdminDeleteBlogCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -396,6 +407,7 @@ class UploadImageCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -433,13 +445,14 @@ class GetBannerCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
-  dynamic banner(dynamic response) => getJsonField(
+  String? banner(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.banner''',
-      );
+      ));
 }
 
 class ChangeProfilepictureCall {
@@ -464,6 +477,7 @@ class ChangeProfilepictureCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -491,6 +505,7 @@ class ChangeNicknameCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -511,6 +526,7 @@ class ThumbnailCategoryCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -534,6 +550,7 @@ class ThumbnailCategoryByIdCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -565,6 +582,7 @@ class CreateLocationCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -595,6 +613,7 @@ class GetLocationByIdCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -628,6 +647,7 @@ class UpdateLocationCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -653,6 +673,7 @@ class CategoryCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -700,6 +721,7 @@ class CreateItemCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -756,6 +778,7 @@ class UpdateItemCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -790,6 +813,7 @@ class LocationsItemCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -821,6 +845,7 @@ class ClearItemsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -855,6 +880,7 @@ class DeleteItemsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -881,6 +907,7 @@ class GetItemCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -917,6 +944,7 @@ class UpdateFCMCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -946,6 +974,7 @@ class UpdateSettingsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -966,6 +995,7 @@ class AdminDashboardCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -1006,6 +1036,7 @@ class AdminSetCategoriesCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -1026,6 +1057,7 @@ class AdminGetCategoriesCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -1062,6 +1094,7 @@ class AdminThumbnailCreateCategoryCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -1093,6 +1126,7 @@ class AdminThumbnailCreateCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -1124,6 +1158,7 @@ class AdminRenameThumbnailCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -1153,6 +1188,7 @@ class AdminRenameBlogCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -1182,6 +1218,7 @@ class AdminUpdateCategoryImageCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -1215,6 +1252,7 @@ class AdminUpdateBlogCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }

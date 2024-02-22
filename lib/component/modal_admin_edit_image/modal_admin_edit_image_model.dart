@@ -12,7 +12,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'modal_admin_edit_image_widget.dart' show ModalAdminEditImageWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,8 +40,10 @@ class ModalAdminEditImageModel
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {}
 
+  @override
   void dispose() {}
 
   /// Action blocks are added here.

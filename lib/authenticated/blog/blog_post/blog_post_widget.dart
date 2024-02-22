@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,14 +14,14 @@ export 'blog_post_model.dart';
 
 class BlogPostWidget extends StatefulWidget {
   const BlogPostWidget({
-    Key? key,
+    super.key,
     required this.blogId,
-  }) : super(key: key);
+  });
 
   final int? blogId;
 
   @override
-  _BlogPostWidgetState createState() => _BlogPostWidgetState();
+  State<BlogPostWidget> createState() => _BlogPostWidgetState();
 }
 
 class _BlogPostWidgetState extends State<BlogPostWidget> {
@@ -35,6 +34,7 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
     super.initState();
     _model = createModel(context, () => BlogPostModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'BlogPost'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -47,15 +47,6 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
@@ -101,6 +92,8 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                   size: 24.0,
                 ),
                 onPressed: () async {
+                  logFirebaseEvent('BLOG_POST_arrow_back_ios_rounded_ICN_ON_');
+                  logFirebaseEvent('IconButton_navigate_back');
                   context.pop();
                 },
               ),
@@ -116,7 +109,7 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                 children: [
                   Expanded(
                     child: Align(
-                      alignment: AlignmentDirectional(0.00, -1.00),
+                      alignment: AlignmentDirectional(0.0, -1.0),
                       child: Container(
                         width: double.infinity,
                         height: double.infinity,
@@ -130,16 +123,12 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                           child: custom_widgets.MarkdownWidget(
                             width: 0.0,
                             height: 0.0,
-                            content: FoodexpirationGroup.blogByIdCall
-                                .content(
-                                  blogPostBlogByIdResponse.jsonBody,
-                                )
-                                .toString(),
-                            title: FoodexpirationGroup.blogByIdCall
-                                .title(
-                                  blogPostBlogByIdResponse.jsonBody,
-                                )
-                                .toString(),
+                            content: FoodexpirationGroup.blogByIdCall.content(
+                              blogPostBlogByIdResponse.jsonBody,
+                            )!,
+                            title: FoodexpirationGroup.blogByIdCall.title(
+                              blogPostBlogByIdResponse.jsonBody,
+                            )!,
                             image: functions
                                 .getImage(FoodexpirationGroup.blogByIdCall
                                     .imagePath(

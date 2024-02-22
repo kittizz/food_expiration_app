@@ -10,7 +10,6 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -18,10 +17,10 @@ import 'blog_model.dart';
 export 'blog_model.dart';
 
 class BlogWidget extends StatefulWidget {
-  const BlogWidget({Key? key}) : super(key: key);
+  const BlogWidget({super.key});
 
   @override
-  _BlogWidgetState createState() => _BlogWidgetState();
+  State<BlogWidget> createState() => _BlogWidgetState();
 }
 
 class _BlogWidgetState extends State<BlogWidget> {
@@ -34,12 +33,17 @@ class _BlogWidgetState extends State<BlogWidget> {
     super.initState();
     _model = createModel(context, () => BlogModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Blog'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('BLOG_PAGE_Blog_ON_INIT_STATE');
+      logFirebaseEvent('Blog_backend_call');
       _model.apiResultuzq = await FoodexpirationGroup.blogAllCall.call();
+      logFirebaseEvent('Blog_custom_action');
       _model.blogList = await actions.toBlogStructList(
         (_model.apiResultuzq?.jsonBody ?? ''),
       );
+      logFirebaseEvent('Blog_update_page_state');
       setState(() {
         _model.pageBlogList = _model.blogList!.toList().cast<BlogStruct>();
       });
@@ -57,15 +61,6 @@ class _BlogWidgetState extends State<BlogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -89,6 +84,8 @@ class _BlogWidgetState extends State<BlogWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('BLOG_arrow_back_ios_rounded_ICN_ON_TAP');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -109,7 +106,7 @@ class _BlogWidgetState extends State<BlogWidget> {
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.00, -1.00),
+            alignment: AlignmentDirectional(0.0, -1.0),
             child: Container(
               constraints: BoxConstraints(
                 maxWidth: 600.0,

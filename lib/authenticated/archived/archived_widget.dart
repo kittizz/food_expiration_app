@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,10 +14,10 @@ import 'archived_model.dart';
 export 'archived_model.dart';
 
 class ArchivedWidget extends StatefulWidget {
-  const ArchivedWidget({Key? key}) : super(key: key);
+  const ArchivedWidget({super.key});
 
   @override
-  _ArchivedWidgetState createState() => _ArchivedWidgetState();
+  State<ArchivedWidget> createState() => _ArchivedWidgetState();
 }
 
 class _ArchivedWidgetState extends State<ArchivedWidget> {
@@ -31,13 +30,18 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
     super.initState();
     _model = createModel(context, () => ArchivedModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Archived'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ARCHIVED_PAGE_Archived_ON_INIT_STATE');
+      logFirebaseEvent('Archived_update_app_state');
       setState(() {
         FFAppState().items = [];
       });
+      logFirebaseEvent('Archived_action_block');
       await action_blocks.fetchLocations(context);
       setState(() {});
+      logFirebaseEvent('Archived_action_block');
       await action_blocks.fetchItems(
         context,
         archive: true,
@@ -58,15 +62,6 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -90,6 +85,8 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('ARCHIVED_arrow_back_ios_rounded_ICN_ON_T');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -110,7 +107,7 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.00, -1.00),
+            alignment: AlignmentDirectional(0.0, -1.0),
             child: Container(
               constraints: BoxConstraints(
                 maxWidth: 600.0,
@@ -119,8 +116,11 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
               child: RefreshIndicator(
                 color: FlutterFlowTheme.of(context).red200,
                 onRefresh: () async {
+                  logFirebaseEvent('ARCHIVED_Column_e2nftuog_ON_PULL_TO_REFR');
+                  logFirebaseEvent('Column_action_block');
                   await action_blocks.fetchLocations(context);
                   setState(() {});
+                  logFirebaseEvent('Column_action_block');
                   await action_blocks.fetchItems(
                     context,
                     archive: true,

@@ -23,10 +23,10 @@ import 'admin_blog_model.dart';
 export 'admin_blog_model.dart';
 
 class AdminBlogWidget extends StatefulWidget {
-  const AdminBlogWidget({Key? key}) : super(key: key);
+  const AdminBlogWidget({super.key});
 
   @override
-  _AdminBlogWidgetState createState() => _AdminBlogWidgetState();
+  State<AdminBlogWidget> createState() => _AdminBlogWidgetState();
 }
 
 class _AdminBlogWidgetState extends State<AdminBlogWidget> {
@@ -39,8 +39,11 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
     super.initState();
     _model = createModel(context, () => AdminBlogModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'AdminBlog'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ADMIN_BLOG_PAGE_AdminBlog_ON_INIT_STATE');
+      logFirebaseEvent('AdminBlog_action_block');
       await _model.fetchBlogs(context);
       setState(() {});
     });
@@ -63,15 +66,6 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -99,10 +93,9 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, -1.00),
+                alignment: AlignmentDirectional(0.0, -1.0),
                 child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                  padding: EdgeInsets.all(20.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -118,8 +111,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
+                            padding: EdgeInsets.all(10.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -132,7 +124,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(-1.00, 0.00),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: Text(
                                             'บทความ',
                                             style: FlutterFlowTheme.of(context)
@@ -142,20 +134,28 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(1.00, 0.00),
+                                            AlignmentDirectional(1.0, 0.0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
                                           focusColor: Colors.transparent,
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'ADMIN_BLOG_PAGE_Row_rgv3ucyx_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Row_update_page_state');
                                             setState(() {
                                               _model.selectedBlog =
                                                   BlogStruct();
                                             });
+                                            logFirebaseEvent(
+                                                'Row_update_app_state');
                                             setState(() {
                                               FFAppState().markdownEditor = '';
                                             });
+                                            logFirebaseEvent(
+                                                'Row_set_form_field');
                                             setState(() {
                                               _model.textController1?.text = '';
                                             });
@@ -213,8 +213,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 10.0),
+                                        padding: EdgeInsets.all(10.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           crossAxisAlignment:
@@ -396,6 +395,10 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                           highlightColor: Colors
                                                               .transparent,
                                                           onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'ADMIN_BLOG_PAGE_Image_36dtsn0q_ON_TAP');
+                                                            logFirebaseEvent(
+                                                                'Image_expand_image');
                                                             await Navigator
                                                                 .push(
                                                               context,
@@ -514,6 +517,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                         .transparent,
                                                                 onTap:
                                                                     () async {
+                                                                  logFirebaseEvent(
+                                                                      'ADMIN_BLOG_PAGE_Row_mp3tekm4_ON_TAP');
                                                                   var _shouldSetState =
                                                                       false;
                                                                   if (_model.textController1
@@ -522,6 +527,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                       _model.textController1
                                                                               .text ==
                                                                           '') {
+                                                                    logFirebaseEvent(
+                                                                        'Row_show_snack_bar');
                                                                     ScaffoldMessenger.of(
                                                                             context)
                                                                         .showSnackBar(
@@ -551,6 +558,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                           ?.image
                                                                           ?.id ==
                                                                       0) {
+                                                                    logFirebaseEvent(
+                                                                        'Row_show_snack_bar');
                                                                     ScaffoldMessenger.of(
                                                                             context)
                                                                         .showSnackBar(
@@ -575,6 +584,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                           () {});
                                                                     return;
                                                                   }
+                                                                  logFirebaseEvent(
+                                                                      'Row_backend_call');
                                                                   _model.apiUpNCreBlog =
                                                                       await FoodexpirationGroup
                                                                           .adminUpdateBlogCall
@@ -602,6 +613,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                           .apiUpNCreBlog
                                                                           ?.succeeded ??
                                                                       true)) {
+                                                                    logFirebaseEvent(
+                                                                        'Row_update_page_state');
                                                                     setState(
                                                                         () {
                                                                       _model
@@ -614,11 +627,15 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                               .text,
                                                                       );
                                                                     });
+                                                                    logFirebaseEvent(
+                                                                        'Row_action_block');
                                                                     await _model
                                                                         .fetchBlogs(
                                                                             context);
                                                                     setState(
                                                                         () {});
+                                                                    logFirebaseEvent(
+                                                                        'Row_show_snack_bar');
                                                                     ScaffoldMessenger.of(
                                                                             context)
                                                                         .showSnackBar(
@@ -688,10 +705,16 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                         .transparent,
                                                                 onTap:
                                                                     () async {
+                                                                  logFirebaseEvent(
+                                                                      'ADMIN_BLOG_PAGE_Row_y600p79d_ON_TAP');
+                                                                  logFirebaseEvent(
+                                                                      'Row_update_page_state');
                                                                   setState(() {
                                                                     _model.selectedBlog =
                                                                         null;
                                                                   });
+                                                                  logFirebaseEvent(
+                                                                      'Row_update_app_state');
                                                                   setState(() {
                                                                     FFAppState()
                                                                         .markdownEditor = '';
@@ -750,6 +773,10 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                 Colors
                                                                     .transparent,
                                                             onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'ADMIN_BLOG_PAGE_Row_1uboqcr6_ON_TAP');
+                                                              logFirebaseEvent(
+                                                                  'Row_bottom_sheet');
                                                               await showModalBottomSheet(
                                                                 isScrollControlled:
                                                                     true,
@@ -788,6 +815,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                               if (_model
                                                                       .editImage !=
                                                                   null) {
+                                                                logFirebaseEvent(
+                                                                    'Row_update_page_state');
                                                                 setState(() {
                                                                   _model
                                                                       .updateSelectedBlogStruct(
@@ -846,6 +875,10 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                   Colors
                                                                       .transparent,
                                                               onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'ADMIN_BLOG_PAGE_Row_f1xxnfy9_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'Row_backend_call');
                                                                 _model.apiDeleteBlog =
                                                                     await FoodexpirationGroup
                                                                         .adminDeleteBlogCall
@@ -861,10 +894,14 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                         .apiDeleteBlog
                                                                         ?.succeeded ??
                                                                     true)) {
+                                                                  logFirebaseEvent(
+                                                                      'Row_update_page_state');
                                                                   setState(() {
                                                                     _model.selectedBlog =
                                                                         null;
                                                                   });
+                                                                  logFirebaseEvent(
+                                                                      'Row_action_block');
                                                                   await _model
                                                                       .fetchBlogs(
                                                                           context);
@@ -933,8 +970,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
+                            padding: EdgeInsets.all(10.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -947,7 +983,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(-1.00, 0.00),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: Text(
                                             'ทั้งหมด',
                                             style: FlutterFlowTheme.of(context)
@@ -986,9 +1022,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                   BorderRadius.circular(8.0),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      10.0, 10.0, 10.0, 10.0),
+                                              padding: EdgeInsets.all(10.0),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 crossAxisAlignment:
@@ -1016,6 +1050,10 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                         highlightColor:
                                                             Colors.transparent,
                                                         onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'ADMIN_BLOG_PAGE_Image_q1reziwk_ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'Image_expand_image');
                                                           await Navigator.push(
                                                             context,
                                                             PageTransition(
@@ -1106,10 +1144,16 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                 Colors
                                                                     .transparent,
                                                             onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'ADMIN_BLOG_PAGE_Row_joe2h8rt_ON_TAP');
+                                                              logFirebaseEvent(
+                                                                  'Row_update_page_state');
                                                               setState(() {
                                                                 _model.selectedBlog =
                                                                     blogItem;
                                                               });
+                                                              logFirebaseEvent(
+                                                                  'Row_update_app_state');
                                                               FFAppState()
                                                                   .update(() {
                                                                 FFAppState()
@@ -1117,6 +1161,8 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                                     blogItem
                                                                         .content;
                                                               });
+                                                              logFirebaseEvent(
+                                                                  'Row_set_form_field');
                                                               setState(() {
                                                                 _model.textController1
                                                                         ?.text =
@@ -1193,8 +1239,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -1204,6 +1249,10 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'ADMIN_BLOG_PAGE_Row_xpjnj8v7_ON_TAP');
+                                  logFirebaseEvent(
+                                      'Row_store_media_for_upload');
                                   final selectedMedia = await selectMedia(
                                     maxWidth: 1000.00,
                                     maxHeight: 1000.00,
@@ -1251,6 +1300,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                       (_model.uploadedLocalFile.bytes
                                               ?.isNotEmpty ??
                                           false)) {
+                                    logFirebaseEvent('Row_backend_call');
                                     _model.apiUloadImage =
                                         await FoodexpirationGroup
                                             .uploadImageCall
@@ -1261,6 +1311,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                     );
                                     if ((_model.apiUloadImage?.succeeded ??
                                         true)) {
+                                      logFirebaseEvent('Row_set_form_field');
                                       setState(() {
                                         _model.imageLinkController?.text =
                                             functions.getImage(
@@ -1273,9 +1324,11 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                     )
                                                     .toString());
                                       });
+                                      logFirebaseEvent('Row_copy_to_clipboard');
                                       await Clipboard.setData(ClipboardData(
                                           text:
                                               _model.imageLinkController.text));
+                                      logFirebaseEvent('Row_show_snack_bar');
                                       ScaffoldMessenger.of(context)
                                           .clearSnackBars();
                                       ScaffoldMessenger.of(context)
@@ -1422,6 +1475,9 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                               ),
                               FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'ADMIN_BLOG_PAGE_คัดลอก_BTN_ON_TAP');
+                                  logFirebaseEvent('Button_copy_to_clipboard');
                                   await Clipboard.setData(ClipboardData(
                                       text: _model.imageLinkController.text));
                                 },
@@ -1461,8 +1517,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 20.0, 20.0, 20.0),
+                            padding: EdgeInsets.all(20.0),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context).alternate,

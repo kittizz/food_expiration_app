@@ -13,7 +13,6 @@ import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,17 +23,16 @@ export 'modal_admin_add_image_model.dart';
 
 class ModalAdminAddImageWidget extends StatefulWidget {
   const ModalAdminAddImageWidget({
-    Key? key,
+    super.key,
     this.isThumbnail,
     int? thumbnailCategoriesId,
-  })  : this.thumbnailCategoriesId = thumbnailCategoriesId ?? 0,
-        super(key: key);
+  }) : this.thumbnailCategoriesId = thumbnailCategoriesId ?? 0;
 
   final bool? isThumbnail;
   final int thumbnailCategoriesId;
 
   @override
-  _ModalAdminAddImageWidgetState createState() =>
+  State<ModalAdminAddImageWidget> createState() =>
       _ModalAdminAddImageWidgetState();
 }
 
@@ -122,7 +120,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
+              padding: EdgeInsets.all(12.0),
               child: Container(
                 width: double.infinity,
                 constraints: BoxConstraints(
@@ -152,8 +150,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                         key: _model.formKey,
                         autovalidateMode: AutovalidateMode.always,
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 24.0, 24.0, 24.0),
+                          padding: EdgeInsets.all(24.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,6 +174,10 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                         size: 30.0,
                                       ),
                                       onPressed: () async {
+                                        logFirebaseEvent(
+                                            'MODAL_ADMIN_ADD_IMAGE_close_rounded_ICN_');
+                                        logFirebaseEvent(
+                                            'IconButton_bottom_sheet');
                                         Navigator.pop(context);
                                       },
                                     ),
@@ -206,7 +207,11 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'MODAL_ADMIN_ADD_IMAGE_Stack_7gljw48q_ON_');
                                             var _shouldSetState = false;
+                                            logFirebaseEvent(
+                                                'Stack_store_media_for_upload');
                                             final selectedMedia =
                                                 await selectMedia(
                                               maxWidth: 1000.00,
@@ -271,6 +276,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                               if (_model.uploadedLocalFile
                                                       .blurHash !=
                                                   _model.hash) {
+                                                logFirebaseEvent(
+                                                    'Stack_backend_call');
                                                 _model.apiUploadImage1 =
                                                     await FoodexpirationGroup
                                                         .uploadImageCall
@@ -286,6 +293,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                 if ((_model.apiUploadImage1
                                                         ?.succeeded ??
                                                     true)) {
+                                                  logFirebaseEvent(
+                                                      'Stack_update_component_state');
                                                   setState(() {
                                                     _model.updateImageStruct(
                                                       (e) => e
@@ -314,6 +323,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                         .uploadedLocalFile
                                                         .blurHash!;
                                                   });
+                                                  logFirebaseEvent(
+                                                      'Stack_show_snack_bar');
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
                                                     SnackBar(
@@ -337,6 +348,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                     setState(() {});
                                                   return;
                                                 } else {
+                                                  logFirebaseEvent(
+                                                      'Stack_show_snack_bar');
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
                                                     SnackBar(
@@ -427,9 +440,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                               ),
                                               if (_model.image?.id != null)
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          8.0, 8.0, 8.0, 8.0),
+                                                  padding: EdgeInsets.all(8.0),
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -596,6 +607,10 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                           0.0, 0.0, 4.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'MODAL_ADMIN_ADD_IMAGE_สร้าง_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_validate_form');
                                           if (_model.formKey.currentState ==
                                                   null ||
                                               !_model.formKey.currentState!
@@ -610,6 +625,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                             return;
                                           }
                                           if (widget.isThumbnail!) {
+                                            logFirebaseEvent(
+                                                'Button_bottom_sheet');
                                             Navigator.pop(
                                                 context,
                                                 CreateImageStruct(
@@ -623,6 +640,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                           } else {
                                             if (_model.dropDownValue == null ||
                                                 _model.dropDownValue == '') {
+                                              logFirebaseEvent(
+                                                  'Button_show_snack_bar');
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
@@ -645,6 +664,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                               );
                                               return;
                                             }
+                                            logFirebaseEvent(
+                                                'Button_bottom_sheet');
                                             Navigator.pop(
                                                 context,
                                                 CreateImageStruct(

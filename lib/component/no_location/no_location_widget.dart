@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -9,10 +8,10 @@ import 'no_location_model.dart';
 export 'no_location_model.dart';
 
 class NoLocationWidget extends StatefulWidget {
-  const NoLocationWidget({Key? key}) : super(key: key);
+  const NoLocationWidget({super.key});
 
   @override
-  _NoLocationWidgetState createState() => _NoLocationWidgetState();
+  State<NoLocationWidget> createState() => _NoLocationWidgetState();
 }
 
 class _NoLocationWidgetState extends State<NoLocationWidget> {
@@ -44,7 +43,7 @@ class _NoLocationWidgetState extends State<NoLocationWidget> {
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.00, 0.00),
+      alignment: AlignmentDirectional(0.0, 0.0),
       child: Text(
         'There is no storage location.',
         style: FlutterFlowTheme.of(context).bodyLarge.override(

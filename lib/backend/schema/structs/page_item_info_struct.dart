@@ -120,8 +120,9 @@ class PageItemInfoStruct extends FFFirebaseStruct {
         isArchived: data['isArchived'] as bool?,
       );
 
-  static PageItemInfoStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? PageItemInfoStruct.fromMap(data) : null;
+  static PageItemInfoStruct? maybeFromMap(dynamic data) => data is Map
+      ? PageItemInfoStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'name': _name,
