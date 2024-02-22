@@ -16,7 +16,7 @@ import 'dart:io';
 
 Future<bool> checkIsAdminDomain() async {
   if (window.location.hostname != "expirydate.mc.sv") {
-    return false;
+    return true;
   }
-  return true;
+  return false;
 }
