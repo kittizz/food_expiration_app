@@ -168,23 +168,23 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
-                                              title: Text('ทิ้งรายการ'),
+                                              title: Text('Discard items'),
                                               content: Text(
-                                                  'คุณกำลังจะทิ้งรายการทั้งหมด และไม่สามารถกู้คืนได้'),
+                                                  'You are about to discard all items. and cannot be recovered.'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           false),
-                                                  child: Text('ยกเลิก'),
+                                                  child: Text('Cancel'),
                                                 ),
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           true),
-                                                  child: Text('ยืนยัน'),
+                                                  child: Text('Confirm'),
                                                 ),
                                               ],
                                             );
@@ -216,7 +216,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          'ล้างรายการ',
+                                          'Clear items',
                                           style: TextStyle(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryBackground,
@@ -296,25 +296,25 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
                                               title: Text(widget.isArchived!
-                                                  ? 'กู้คืนรายการ'
-                                                  : 'ล้างรายการ'),
+                                                  ? 'restore items'
+                                                  : 'Clear items'),
                                               content: Text(widget.isArchived!
-                                                  ? 'คุณกำลังจะกู้คืนรายการทั้งหมด'
-                                                  : 'คุณกำลังจะล้างรายการ ${widget.title}ทั้งหมด'),
+                                                  ? 'You are about to restore all items.'
+                                                  : 'You are about to clear the list.${widget.title}all'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           false),
-                                                  child: Text('ยกเลิก'),
+                                                  child: Text('Cancel'),
                                                 ),
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           true),
-                                                  child: Text('ยืนยัน'),
+                                                  child: Text('Confirm'),
                                                 ),
                                               ],
                                             );
