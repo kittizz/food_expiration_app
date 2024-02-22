@@ -213,113 +213,118 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                               'or use social media',
                               style: FlutterFlowTheme.of(context).labelMedium,
                             ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 12.0, 16.0, 16.0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'WELCOME_SIGN_IN_WITH_GOOGLE_BTN_ON_TAP');
-                                  logFirebaseEvent('Button_auth');
-                                  GoRouter.of(context).prepareAuthEvent();
-                                  final user = await authManager
-                                      .signInWithGoogle(context);
-                                  if (user == null) {
-                                    return;
-                                  }
-                                  logFirebaseEvent('Button_action_block');
-                                  await action_blocks.registerDevice(
-                                    context,
-                                    nickname: currentUserDisplayName,
-                                  );
+                            if (isWeb)
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 12.0, 16.0, 16.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'WELCOME_SIGN_IN_WITH_GOOGLE_BTN_ON_TAP');
+                                    logFirebaseEvent('Button_auth');
+                                    GoRouter.of(context).prepareAuthEvent();
+                                    final user = await authManager
+                                        .signInWithGoogle(context);
+                                    if (user == null) {
+                                      return;
+                                    }
+                                    logFirebaseEvent('Button_action_block');
+                                    await action_blocks.registerDevice(
+                                      context,
+                                      nickname: currentUserDisplayName,
+                                    );
 
-                                  context.goNamedAuth(
-                                      'Splash', context.mounted);
-                                },
-                                text: 'Sign in with Google',
-                                icon: FaIcon(
-                                  FontAwesomeIcons.google,
-                                  color: FlutterFlowTheme.of(context).info,
-                                  size: 24.0,
-                                ),
-                                options: FFButtonOptions(
-                                  width: double.infinity,
-                                  height: 50.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 12.0, 0.0),
-                                  color: FlutterFlowTheme.of(context).error,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'IBM Plex Sans Thai',
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey('IBM Plex Sans Thai'),
-                                      ),
-                                  elevation: 0.0,
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
+                                    context.goNamedAuth(
+                                        'Splash', context.mounted);
+                                  },
+                                  text: 'Sign in with Google',
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.google,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(50.0),
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 50.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 12.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).error,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'IBM Plex Sans Thai',
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  'IBM Plex Sans Thai'),
+                                        ),
+                                    elevation: 0.0,
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(50.0),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 12.0, 16.0, 16.0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'WELCOME_SIGN_IN_WITH_FACEBOOK_BTN_ON_TAP');
-                                  logFirebaseEvent('Button_auth');
-                                  GoRouter.of(context).prepareAuthEvent();
-                                  final user = await authManager
-                                      .signInWithFacebook(context);
-                                  if (user == null) {
-                                    return;
-                                  }
-                                  logFirebaseEvent('Button_action_block');
-                                  await action_blocks.registerDevice(
-                                    context,
-                                    nickname: currentUserDisplayName,
-                                  );
+                            if (isWeb)
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 12.0, 16.0, 16.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'WELCOME_SIGN_IN_WITH_FACEBOOK_BTN_ON_TAP');
+                                    logFirebaseEvent('Button_auth');
+                                    GoRouter.of(context).prepareAuthEvent();
+                                    final user = await authManager
+                                        .signInWithFacebook(context);
+                                    if (user == null) {
+                                      return;
+                                    }
+                                    logFirebaseEvent('Button_action_block');
+                                    await action_blocks.registerDevice(
+                                      context,
+                                      nickname: currentUserDisplayName,
+                                    );
 
-                                  context.goNamedAuth(
-                                      'Splash', context.mounted);
-                                },
-                                text: 'Sign in with Facebook',
-                                icon: Icon(
-                                  Icons.mail_outline_outlined,
-                                  color: FlutterFlowTheme.of(context).info,
-                                  size: 24.0,
-                                ),
-                                options: FFButtonOptions(
-                                  width: double.infinity,
-                                  height: 50.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 12.0, 0.0),
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'IBM Plex Sans Thai',
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey('IBM Plex Sans Thai'),
-                                      ),
-                                  elevation: 0.0,
-                                  borderSide: BorderSide(
+                                    context.goNamedAuth(
+                                        'Splash', context.mounted);
+                                  },
+                                  text: 'Sign in with Facebook',
+                                  icon: Icon(
+                                    Icons.mail_outline_outlined,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 50.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 12.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'IBM Plex Sans Thai',
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  'IBM Plex Sans Thai'),
+                                        ),
+                                    elevation: 0.0,
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(50.0),
                                   ),
-                                  borderRadius: BorderRadius.circular(50.0),
                                 ),
                               ),
-                            ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 24.0, 0.0, 0.0),
