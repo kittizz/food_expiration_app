@@ -140,7 +140,7 @@ class ItemStruct extends FFFirebaseStruct {
       );
 
   static ItemStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? ItemStruct.fromMap(data) : null;
+      data is Map ? ItemStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'id': _id,

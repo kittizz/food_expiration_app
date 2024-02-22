@@ -8,7 +8,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -16,10 +15,10 @@ import 'admin_category_model.dart';
 export 'admin_category_model.dart';
 
 class AdminCategoryWidget extends StatefulWidget {
-  const AdminCategoryWidget({Key? key}) : super(key: key);
+  const AdminCategoryWidget({super.key});
 
   @override
-  _AdminCategoryWidgetState createState() => _AdminCategoryWidgetState();
+  State<AdminCategoryWidget> createState() => _AdminCategoryWidgetState();
 }
 
 class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
@@ -56,15 +55,6 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -92,7 +82,7 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
                 ],
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                padding: EdgeInsets.all(20.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -106,8 +96,7 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 10.0, 10.0, 10.0),
+                        padding: EdgeInsets.all(10.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -116,8 +105,7 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
                               children: [
                                 Flexible(
                                   child: Align(
-                                    alignment:
-                                        AlignmentDirectional(-1.00, 0.00),
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
                                     child: Text(
                                       'หมวดหมู่',
                                       style: FlutterFlowTheme.of(context)
@@ -126,7 +114,7 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(1.00, 0.00),
+                                  alignment: AlignmentDirectional(1.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,

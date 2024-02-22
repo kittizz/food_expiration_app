@@ -9,7 +9,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'admin_category_widget.dart' show AdminCategoryWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -35,10 +34,12 @@ class AdminCategoryModel extends FlutterFlowModel<AdminCategoryWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     sideNavModel.dispose();

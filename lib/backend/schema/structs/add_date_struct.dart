@@ -36,7 +36,7 @@ class AddDateStruct extends FFFirebaseStruct {
       );
 
   static AddDateStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? AddDateStruct.fromMap(data) : null;
+      data is Map ? AddDateStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'short': _short,

@@ -24,19 +24,18 @@ export 'item_info_model.dart';
 
 class ItemInfoWidget extends StatefulWidget {
   const ItemInfoWidget({
-    Key? key,
+    super.key,
     String? name,
     required this.isAdd,
     this.id,
-  })  : this.name = name ?? '',
-        super(key: key);
+  }) : this.name = name ?? '';
 
   final String name;
   final bool? isAdd;
   final int? id;
 
   @override
-  _ItemInfoWidgetState createState() => _ItemInfoWidgetState();
+  State<ItemInfoWidget> createState() => _ItemInfoWidgetState();
 }
 
 class _ItemInfoWidgetState extends State<ItemInfoWidget> {
@@ -86,15 +85,6 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -133,7 +123,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
           ),
           actions: [
             Align(
-              alignment: AlignmentDirectional(1.00, 0.00),
+              alignment: AlignmentDirectional(1.0, 0.0),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                 child: InkWell(
@@ -422,7 +412,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+            padding: EdgeInsets.all(20.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -438,15 +428,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         ),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 20.0, 20.0, 20.0),
+                        padding: EdgeInsets.all(20.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.00, 0.00),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -542,9 +531,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                     useGoogleFonts: GoogleFonts
                                                             .asMap()
                                                         .containsKey(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleLargeFamily),
+                                                            'IBM Plex Sans Thai'),
                                                   ),
                                             ),
                                           ),
@@ -566,9 +553,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                     useGoogleFonts: GoogleFonts
                                                             .asMap()
                                                         .containsKey(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMediumFamily),
+                                                            'IBM Plex Sans Thai'),
                                                   ),
                                             ),
                                           ),
@@ -582,9 +567,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         false,
                                       ))
                                         Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  8.0, 8.0, 8.0, 8.0),
+                                          padding: EdgeInsets.all(8.0),
                                           child: Hero(
                                             tag: functions.getImage(
                                                 '${FFAppState().thumbnail.image.path}?i=${widget.id?.toString()}'),
@@ -613,7 +596,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         ),
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(1.00, 1.00),
+                                            AlignmentDirectional(1.0, 1.0),
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -846,8 +829,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         key: _model.formKey1,
                         autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 20.0, 20.0, 20.0),
+                          padding: EdgeInsets.all(20.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -1295,8 +1277,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         key: _model.formKey4,
                         autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 20.0, 20.0, 20.0),
+                          padding: EdgeInsets.all(20.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -1350,6 +1331,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .labelMediumFamily),
                                           ),
+                                      searchTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyMedium,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       hintText: 'Choose...',
@@ -1430,6 +1414,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .labelMediumFamily),
                                         ),
+                                    searchTextStyle:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
                                     hintText: 'Choose...',
@@ -1557,7 +1543,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(1.00, 1.00),
+                                    alignment: AlignmentDirectional(1.0, 1.0),
                                     child: FlutterFlowIconButton(
                                       borderColor: FlutterFlowTheme.of(context)
                                           .alternate,
@@ -1600,8 +1586,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         key: _model.formKey3,
                         autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 20.0, 20.0, 20.0),
+                          padding: EdgeInsets.all(20.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -2189,8 +2174,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         key: _model.formKey2,
                         autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 20.0, 20.0, 20.0),
+                          padding: EdgeInsets.all(20.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -2362,6 +2346,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .labelMediumFamily),
                                         ),
+                                    searchTextStyle:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
                                     hintText: 'Unit',

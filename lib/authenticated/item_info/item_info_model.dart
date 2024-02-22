@@ -97,11 +97,13 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     forewarnDayFieldControllerValidator = _forewarnDayFieldControllerValidator;
     quantityFieldControllerValidator = _quantityFieldControllerValidator;
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     nameFieldFocusNode?.dispose();
@@ -125,7 +127,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   }) async {
     ApiCallResponse? apiUploadImage1;
 
-    if (fileUpload != null && (fileUpload.bytes?.isNotEmpty ?? false)) {
+    if (fileUpload != null && (fileUpload?.bytes?.isNotEmpty ?? false)) {
       if (fileUpload?.blurHash != hash) {
         apiUploadImage1 = await FoodexpirationGroup.uploadImageCall.call(
           file: fileUpload,
@@ -146,12 +148,10 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
                         (apiUploadImage1?.jsonBody ?? ''),
                       )
                       .toString()
-                      .toString()
                   ..blurHash = FoodexpirationGroup.uploadImageCall
                       .blurHash(
                         (apiUploadImage1?.jsonBody ?? ''),
                       )
-                      .toString()
                       .toString(),
               ),
           );
@@ -176,7 +176,6 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
                     .message(
                       (apiUploadImage1?.jsonBody ?? ''),
                     )
-                    .toString()
                     .toString(),
                 style: TextStyle(
                   color: FlutterFlowTheme.of(context).primaryText,

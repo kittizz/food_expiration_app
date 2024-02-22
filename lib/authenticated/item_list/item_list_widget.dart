@@ -13,7 +13,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +24,7 @@ export 'item_list_model.dart';
 
 class ItemListWidget extends StatefulWidget {
   const ItemListWidget({
-    Key? key,
+    super.key,
     bool? isLocation,
     this.title,
     this.locationId,
@@ -33,8 +32,7 @@ class ItemListWidget extends StatefulWidget {
     bool? isSearch,
   })  : this.isLocation = isLocation ?? false,
         this.isScan = isScan ?? false,
-        this.isSearch = isSearch ?? false,
-        super(key: key);
+        this.isSearch = isSearch ?? false;
 
   final bool isLocation;
   final String? title;
@@ -43,7 +41,7 @@ class ItemListWidget extends StatefulWidget {
   final bool isSearch;
 
   @override
-  _ItemListWidgetState createState() => _ItemListWidgetState();
+  State<ItemListWidget> createState() => _ItemListWidgetState();
 }
 
 class _ItemListWidgetState extends State<ItemListWidget> {
@@ -95,15 +93,6 @@ class _ItemListWidgetState extends State<ItemListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -178,7 +167,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
             Visibility(
               visible: widget.isLocation,
               child: Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                   child: FlutterFlowIconButton(
@@ -284,7 +273,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                             ),
                             if (!widget.isSearch)
                               Align(
-                                alignment: AlignmentDirectional(0.00, 0.00),
+                                alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Container(
                                   width: 180.0,
                                   height: 40.0,
@@ -305,10 +294,9 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       width: 2.0,
                                     ),
                                   ),
-                                  alignment: AlignmentDirectional(0.00, 0.00),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        3.0, 3.0, 3.0, 3.0),
+                                    padding: EdgeInsets.all(3.0),
                                     child: TextFormField(
                                       controller: _model.search1FieldController,
                                       focusNode: _model.search1FieldFocusNode,
@@ -462,8 +450,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      3.0, 3.0, 3.0, 3.0),
+                                  padding: EdgeInsets.all(3.0),
                                   child: TextFormField(
                                     controller: _model.search2FieldController,
                                     focusNode: _model.search2FieldFocusNode,
@@ -614,18 +601,19 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 },
                               ),
                             FlutterFlowDropDown<String>(
-                              controller:
+                              multiSelectController:
                                   _model.filterLocationValueController ??=
-                                      FormFieldController<String>(null),
+                                      FormFieldController<List<String>>(null),
                               options: FFAppState()
                                   .locations
                                   .map((e) => e.name)
                                   .toList(),
-                              onChanged: null,
                               width: 240.0,
                               height: 40.0,
                               searchHintTextStyle:
                                   FlutterFlowTheme.of(context).labelMedium,
+                              searchTextStyle:
+                                  FlutterFlowTheme.of(context).bodyMedium,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
                               hintText: 'Storage',
@@ -652,7 +640,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               hidesUnderline: true,
                               isSearchable: true,
                               isMultiSelect: true,
-                              onChangedForMultiSelect: (val) async {
+                              onMultiSelectChanged: (val) async {
                                 setState(
                                     () => _model.filterLocationValue = val);
                                 setState(() {
@@ -665,14 +653,16 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               },
                             ),
                             FlutterFlowDropDown<String>(
-                              controller: _model.filterCateValueController ??=
-                                  FormFieldController<String>(null),
+                              multiSelectController:
+                                  _model.filterCateValueController ??=
+                                      FormFieldController<List<String>>(null),
                               options: FFAppState().categorys,
-                              onChanged: null,
                               width: 240.0,
                               height: 40.0,
                               searchHintTextStyle:
                                   FlutterFlowTheme.of(context).labelMedium,
+                              searchTextStyle:
+                                  FlutterFlowTheme.of(context).bodyMedium,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
                               hintText: 'Category',
@@ -699,7 +689,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               hidesUnderline: true,
                               isSearchable: true,
                               isMultiSelect: true,
-                              onChangedForMultiSelect: (val) async {
+                              onMultiSelectChanged: (val) async {
                                 setState(() => _model.filterCateValue = val);
                                 setState(() {
                                   FFAppState().updateFilterStruct(
@@ -711,15 +701,14 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               },
                             ),
                             FlutterFlowDropDown<String>(
-                              controller:
+                              multiSelectController:
                                   _model.filterExpStatusValueController ??=
-                                      FormFieldController<String>(null),
+                                      FormFieldController<List<String>>(null),
                               options: [
                                 'Expired',
                                 'About to expire',
                                 'Remaining'
                               ],
-                              onChanged: null,
                               width: 240.0,
                               height: 40.0,
                               textStyle:
@@ -747,7 +736,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               hidesUnderline: true,
                               isSearchable: false,
                               isMultiSelect: true,
-                              onChangedForMultiSelect: (val) async {
+                              onMultiSelectChanged: (val) async {
                                 setState(
                                     () => _model.filterExpStatusValue = val);
                                 setState(() {
@@ -765,7 +754,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.00, -1.00),
+                    alignment: AlignmentDirectional(0.0, -1.0),
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 80.0),
@@ -779,8 +768,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                           children: [
                             if (widget.isLocation)
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 10.0, 10.0, 10.0),
+                                padding: EdgeInsets.all(10.0),
                                 child: Container(
                                   width: MediaQuery.sizeOf(context).width * 1.0,
                                   height: 135.0,
@@ -888,7 +876,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                               ),
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    1.00, 1.00),
+                                                    1.0, 1.0),
                                                 child: Icon(
                                                   Icons.zoom_in_rounded,
                                                   color: FlutterFlowTheme.of(
@@ -903,9 +891,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       ),
                                       Flexible(
                                         child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 5.0, 5.0, 5.0),
+                                          padding: EdgeInsets.all(5.0),
                                           child: Container(
                                             width: double.infinity,
                                             height: double.infinity,
@@ -920,16 +906,14 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                               ),
                                             ),
                                             alignment: AlignmentDirectional(
-                                                -1.00, -1.00),
+                                                -1.0, -1.0),
                                             child: SingleChildScrollView(
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(5.0, 5.0,
-                                                                5.0, 5.0),
+                                                        EdgeInsets.all(5.0),
                                                     child: SelectionArea(
                                                         child: Text(
                                                       FFAppState()

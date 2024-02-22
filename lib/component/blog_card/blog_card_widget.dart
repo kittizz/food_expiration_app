@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,12 +13,12 @@ export 'blog_card_model.dart';
 
 class BlogCardWidget extends StatefulWidget {
   const BlogCardWidget({
-    Key? key,
+    super.key,
     this.blogId,
     required this.image,
     required this.title,
     this.blurHash,
-  }) : super(key: key);
+  });
 
   final int? blogId;
   final String? image;
@@ -27,7 +26,7 @@ class BlogCardWidget extends StatefulWidget {
   final String? blurHash;
 
   @override
-  _BlogCardWidgetState createState() => _BlogCardWidgetState();
+  State<BlogCardWidget> createState() => _BlogCardWidgetState();
 }
 
 class _BlogCardWidgetState extends State<BlogCardWidget>

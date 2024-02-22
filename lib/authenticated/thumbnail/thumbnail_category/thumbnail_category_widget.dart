@@ -9,7 +9,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -19,14 +18,14 @@ export 'thumbnail_category_model.dart';
 
 class ThumbnailCategoryWidget extends StatefulWidget {
   const ThumbnailCategoryWidget({
-    Key? key,
+    super.key,
     required this.type,
-  }) : super(key: key);
+  });
 
   final String? type;
 
   @override
-  _ThumbnailCategoryWidgetState createState() =>
+  State<ThumbnailCategoryWidget> createState() =>
       _ThumbnailCategoryWidgetState();
 }
 
@@ -68,15 +67,6 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -120,12 +110,12 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+            padding: EdgeInsets.all(20.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Text(
                     'Please select an image category.',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -219,8 +209,7 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                                       ),
                                     ),
                                     child: Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 1.00),
+                                      alignment: AlignmentDirectional(0.0, 1.0),
                                       child: Text(
                                         listItem.name,
                                         style: FlutterFlowTheme.of(context)

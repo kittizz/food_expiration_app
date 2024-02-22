@@ -8,7 +8,6 @@ import '/actions/actions.dart' as action_blocks;
 import 'archived_widget.dart' show ArchivedWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,10 +27,12 @@ class ArchivedModel extends FlutterFlowModel<ArchivedWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     listItemsModel = createModel(context, () => ListItemsModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     listItemsModel.dispose();

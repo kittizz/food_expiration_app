@@ -82,10 +82,9 @@ class PageLocationInfoStruct extends FFFirebaseStruct {
         imageBlurhash: data['imageBlurhash'] as String?,
       );
 
-  static PageLocationInfoStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic>
-          ? PageLocationInfoStruct.fromMap(data)
-          : null;
+  static PageLocationInfoStruct? maybeFromMap(dynamic data) => data is Map
+      ? PageLocationInfoStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'isAdd': _isAdd,

@@ -8,7 +8,6 @@ import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -17,10 +16,10 @@ import 'location_info_model.dart';
 export 'location_info_model.dart';
 
 class LocationInfoWidget extends StatefulWidget {
-  const LocationInfoWidget({Key? key}) : super(key: key);
+  const LocationInfoWidget({super.key});
 
   @override
-  _LocationInfoWidgetState createState() => _LocationInfoWidgetState();
+  State<LocationInfoWidget> createState() => _LocationInfoWidgetState();
 }
 
 class _LocationInfoWidgetState extends State<LocationInfoWidget> {
@@ -60,15 +59,6 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -225,10 +215,9 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
               children: [
                 Flexible(
                   child: Align(
-                    alignment: AlignmentDirectional(0.00, 0.00),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          20.0, 20.0, 20.0, 20.0),
+                      padding: EdgeInsets.all(20.0),
                       child: Container(
                         width: double.infinity,
                         constraints: BoxConstraints(
@@ -253,8 +242,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                           key: _model.formKey,
                           autovalidateMode: AutovalidateMode.disabled,
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 24.0, 24.0, 24.0),
+                            padding: EdgeInsets.all(24.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -371,26 +359,23 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                   0.0),
                                                       child: Text(
                                                         'Add a photo',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'IBM Plex Sans Thai',
-                                                                  color: Color(
-                                                                      0xFF14181B),
-                                                                  fontSize:
-                                                                      22.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .titleLargeFamily),
-                                                                ),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .titleLarge
+                                                            .override(
+                                                              fontFamily:
+                                                                  'IBM Plex Sans Thai',
+                                                              color: Color(
+                                                                  0xFF14181B),
+                                                              fontSize: 22.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              useGoogleFonts: GoogleFonts
+                                                                      .asMap()
+                                                                  .containsKey(
+                                                                      'IBM Plex Sans Thai'),
+                                                            ),
                                                       ),
                                                     ),
                                                     Padding(
@@ -403,26 +388,23 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                                   0.0),
                                                       child: Text(
                                                         'Upload photos here...',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'IBM Plex Sans Thai',
-                                                                  color: Color(
-                                                                      0xFF57636C),
-                                                                  fontSize:
-                                                                      14.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .labelMediumFamily),
-                                                                ),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .labelMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'IBM Plex Sans Thai',
+                                                              color: Color(
+                                                                  0xFF57636C),
+                                                              fontSize: 14.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              useGoogleFonts: GoogleFonts
+                                                                      .asMap()
+                                                                  .containsKey(
+                                                                      'IBM Plex Sans Thai'),
+                                                            ),
                                                       ),
                                                     ),
                                                   ],
@@ -440,9 +422,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                 ))
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(8.0, 8.0,
-                                                                8.0, 8.0),
+                                                        EdgeInsets.all(8.0),
                                                     child: ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -929,9 +909,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                           options: FFButtonOptions(
                                             width: double.infinity,
                                             height: 50.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
+                                            padding: EdgeInsets.all(0.0),
                                             iconPadding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
@@ -950,9 +928,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                       useGoogleFonts: GoogleFonts
                                                               .asMap()
                                                           .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily),
+                                                              'Plus Jakarta Sans'),
                                                     ),
                                             elevation: 2.0,
                                             borderRadius:

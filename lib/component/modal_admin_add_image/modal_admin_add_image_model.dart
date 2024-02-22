@@ -14,7 +14,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'modal_admin_add_image_widget.dart' show ModalAdminAddImageWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -58,10 +57,12 @@ class ModalAdminAddImageModel
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     projectNameControllerValidator = _projectNameControllerValidator;
   }
 
+  @override
   void dispose() {
     projectNameFocusNode?.dispose();
     projectNameController?.dispose();

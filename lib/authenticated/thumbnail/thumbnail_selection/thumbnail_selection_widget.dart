@@ -9,7 +9,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -19,14 +18,14 @@ export 'thumbnail_selection_model.dart';
 
 class ThumbnailSelectionWidget extends StatefulWidget {
   const ThumbnailSelectionWidget({
-    Key? key,
+    super.key,
     this.thumbnailCategoryId,
-  }) : super(key: key);
+  });
 
   final int? thumbnailCategoryId;
 
   @override
-  _ThumbnailSelectionWidgetState createState() =>
+  State<ThumbnailSelectionWidget> createState() =>
       _ThumbnailSelectionWidgetState();
 }
 
@@ -66,15 +65,6 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -118,12 +108,12 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+            padding: EdgeInsets.all(20.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Text(
                     'Please select a picture.',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -238,8 +228,7 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                                       ),
                                     ),
                                     child: Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 1.00),
+                                      alignment: AlignmentDirectional(0.0, 1.0),
                                       child: Text(
                                         listItem.name,
                                         style: FlutterFlowTheme.of(context)

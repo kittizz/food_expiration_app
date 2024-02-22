@@ -9,7 +9,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +20,7 @@ export 'item_model.dart';
 
 class ItemWidget extends StatefulWidget {
   const ItemWidget({
-    Key? key,
+    super.key,
     required this.expiryDate,
     required this.name,
     this.image,
@@ -31,8 +30,7 @@ class ItemWidget extends StatefulWidget {
     this.id,
     required this.locationId,
     required this.isArchived,
-  })  : this.location = location ?? 'สถานที่',
-        super(key: key);
+  }) : this.location = location ?? 'สถานที่';
 
   final DateTime? expiryDate;
   final String? name;
@@ -45,7 +43,7 @@ class ItemWidget extends StatefulWidget {
   final bool? isArchived;
 
   @override
-  _ItemWidgetState createState() => _ItemWidgetState();
+  State<ItemWidget> createState() => _ItemWidgetState();
 }
 
 class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {

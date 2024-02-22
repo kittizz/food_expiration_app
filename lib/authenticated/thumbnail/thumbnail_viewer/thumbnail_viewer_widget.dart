@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -18,7 +17,7 @@ export 'thumbnail_viewer_model.dart';
 
 class ThumbnailViewerWidget extends StatefulWidget {
   const ThumbnailViewerWidget({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.imageId,
     required this.catrgoryId,
@@ -26,8 +25,7 @@ class ThumbnailViewerWidget extends StatefulWidget {
     this.name,
     required this.thumbailId,
     bool? viewOnly,
-  })  : this.viewOnly = viewOnly ?? false,
-        super(key: key);
+  }) : this.viewOnly = viewOnly ?? false;
 
   final String? imagePath;
   final int? imageId;
@@ -38,7 +36,7 @@ class ThumbnailViewerWidget extends StatefulWidget {
   final bool viewOnly;
 
   @override
-  _ThumbnailViewerWidgetState createState() => _ThumbnailViewerWidgetState();
+  State<ThumbnailViewerWidget> createState() => _ThumbnailViewerWidgetState();
 }
 
 class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
@@ -63,15 +61,6 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -105,7 +94,7 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,

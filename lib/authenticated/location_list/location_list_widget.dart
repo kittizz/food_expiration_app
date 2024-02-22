@@ -9,7 +9,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,10 +17,10 @@ import 'location_list_model.dart';
 export 'location_list_model.dart';
 
 class LocationListWidget extends StatefulWidget {
-  const LocationListWidget({Key? key}) : super(key: key);
+  const LocationListWidget({super.key});
 
   @override
-  _LocationListWidgetState createState() => _LocationListWidgetState();
+  State<LocationListWidget> createState() => _LocationListWidgetState();
 }
 
 class _LocationListWidgetState extends State<LocationListWidget>
@@ -76,15 +75,6 @@ class _LocationListWidgetState extends State<LocationListWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -144,7 +134,7 @@ class _LocationListWidgetState extends State<LocationListWidget>
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
               width: double.infinity,
               constraints: BoxConstraints(
@@ -166,7 +156,7 @@ class _LocationListWidgetState extends State<LocationListWidget>
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(1.00, 0.00),
+                            alignment: AlignmentDirectional(1.0, 0.0),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 25.0, 0.0),

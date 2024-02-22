@@ -27,7 +27,6 @@ Future registerDevice(
           .deviceId(
             (apiResultou6?.jsonBody ?? ''),
           )
-          .toString()
           .toString();
     });
   } else {
@@ -40,7 +39,6 @@ Future registerDevice(
               .message(
                 (apiResultou6?.jsonBody ?? ''),
               )
-              .toString()
               .toString()),
           actions: [
             TextButton(
@@ -107,7 +105,6 @@ Future fetchLocations(BuildContext context) async {
               .message(
                 (apiLocList?.jsonBody ?? ''),
               )
-              .toString()
               .toString()),
           actions: [
             TextButton(

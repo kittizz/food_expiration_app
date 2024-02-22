@@ -59,8 +59,9 @@ class CreateImageStruct extends FFFirebaseStruct {
         thumbnailCategoriesId: castToType<int>(data['thumbnailCategoriesId']),
       );
 
-  static CreateImageStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? CreateImageStruct.fromMap(data) : null;
+  static CreateImageStruct? maybeFromMap(dynamic data) => data is Map
+      ? CreateImageStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'image': _image?.toMap(),

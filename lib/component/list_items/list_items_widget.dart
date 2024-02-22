@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/component/item/item_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -7,7 +8,6 @@ import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,15 +17,14 @@ export 'list_items_model.dart';
 
 class ListItemsWidget extends StatefulWidget {
   const ListItemsWidget({
-    Key? key,
+    super.key,
     this.title,
     bool? showClear,
     required this.locationId,
     required this.dateType,
     required this.isArchived,
     this.navColor,
-  })  : this.showClear = showClear ?? false,
-        super(key: key);
+  }) : this.showClear = showClear ?? false;
 
   final String? title;
   final bool showClear;
@@ -35,7 +34,7 @@ class ListItemsWidget extends StatefulWidget {
   final Color? navColor;
 
   @override
-  _ListItemsWidgetState createState() => _ListItemsWidgetState();
+  State<ListItemsWidget> createState() => _ListItemsWidgetState();
 }
 
 class _ListItemsWidgetState extends State<ListItemsWidget>
@@ -504,7 +503,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
             height: 40.0,
             decoration: BoxDecoration(),
             child: Align(
-              alignment: AlignmentDirectional(0.00, 0.00),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: Text(
                 'There are no items.',
                 style: FlutterFlowTheme.of(context).bodyLarge.override(

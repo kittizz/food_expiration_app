@@ -12,7 +12,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -22,10 +21,10 @@ import 'admin_image_model.dart';
 export 'admin_image_model.dart';
 
 class AdminImageWidget extends StatefulWidget {
-  const AdminImageWidget({Key? key}) : super(key: key);
+  const AdminImageWidget({super.key});
 
   @override
-  _AdminImageWidgetState createState() => _AdminImageWidgetState();
+  State<AdminImageWidget> createState() => _AdminImageWidgetState();
 }
 
 class _AdminImageWidgetState extends State<AdminImageWidget> {
@@ -62,15 +61,6 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -98,10 +88,9 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, -1.00),
+                alignment: AlignmentDirectional(0.0, -1.0),
                 child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                  padding: EdgeInsets.all(20.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -117,8 +106,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
+                            padding: EdgeInsets.all(10.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -128,7 +116,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                     Flexible(
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(-1.00, 0.00),
+                                            AlignmentDirectional(-1.0, 0.0),
                                         child: Text(
                                           'คลังภาพ',
                                           style: FlutterFlowTheme.of(context)
@@ -139,7 +127,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                   ],
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(-1.00, 0.00),
+                                  alignment: AlignmentDirectional(-1.0, 0.0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 20.0, 0.0, 5.0),
@@ -200,7 +188,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                               ),
                                               child: Align(
                                                 alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                    0.0, 0.0),
                                                 child: Text(
                                                   kinItem.name,
                                                   style:
@@ -260,8 +248,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                               ),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 10.0, 10.0, 10.0),
+                              padding: EdgeInsets.all(10.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -271,7 +258,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(-1.00, 0.00),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -294,7 +281,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(1.00, 0.00),
+                                            AlignmentDirectional(1.0, 0.0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
                                           focusColor: Colors.transparent,
@@ -546,7 +533,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                         ),
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(-1.00, 0.00),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -1099,8 +1086,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          10.0, 10.0, 10.0, 10.0),
+                      padding: EdgeInsets.all(10.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1110,7 +1096,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(-1.00, 0.00),
+                                alignment: AlignmentDirectional(-1.0, 0.0),
                                 child: Text(
                                   'ภาพ',
                                   style:
@@ -1271,7 +1257,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                           ),
                           Flexible(
                             child: Align(
-                              alignment: AlignmentDirectional(0.00, -1.00),
+                              alignment: AlignmentDirectional(0.0, -1.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
@@ -1282,7 +1268,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                       if (_model.useThumbnailCategorie != null)
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(-1.00, 0.00),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: Builder(
                                             builder: (context) {
                                               final list =
@@ -1633,7 +1619,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                           if (_model.useThumbnailCategorie == null)
                             Expanded(
                               child: Align(
-                                alignment: AlignmentDirectional(0.00, -1.00),
+                                alignment: AlignmentDirectional(0.0, -1.0),
                                 child: Text(
                                   '(โปรดเลือกหมวดหมู่)',
                                   style: FlutterFlowTheme.of(context)

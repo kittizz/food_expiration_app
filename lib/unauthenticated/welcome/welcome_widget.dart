@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,10 +13,10 @@ import 'welcome_model.dart';
 export 'welcome_model.dart';
 
 class WelcomeWidget extends StatefulWidget {
-  const WelcomeWidget({Key? key}) : super(key: key);
+  const WelcomeWidget({super.key});
 
   @override
-  _WelcomeWidgetState createState() => _WelcomeWidgetState();
+  State<WelcomeWidget> createState() => _WelcomeWidgetState();
 }
 
 class _WelcomeWidgetState extends State<WelcomeWidget> {
@@ -42,15 +41,6 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -114,9 +104,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                         fontSize: 35.0,
                                         fontWeight: FontWeight.w600,
                                         useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyLargeFamily),
+                                            .containsKey('Itim'),
                                       ),
                                 ),
                               ),
@@ -132,9 +120,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.italic,
                                       useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
+                                          .containsKey('Itim'),
                                     ),
                               ),
                             ],
@@ -206,9 +192,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                       .override(
                                         fontFamily: 'IBM Plex Sans Thai',
                                         useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily),
+                                            .containsKey('IBM Plex Sans Thai'),
                                       ),
                                   elevation: 0.0,
                                   borderSide: BorderSide(
@@ -262,9 +246,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                       .override(
                                         fontFamily: 'IBM Plex Sans Thai',
                                         useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily),
+                                            .containsKey('IBM Plex Sans Thai'),
                                       ),
                                   elevation: 0.0,
                                   borderSide: BorderSide(
@@ -314,9 +296,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                       .override(
                                         fontFamily: 'IBM Plex Sans Thai',
                                         useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily),
+                                            .containsKey('IBM Plex Sans Thai'),
                                       ),
                                   elevation: 0.0,
                                   borderSide: BorderSide(

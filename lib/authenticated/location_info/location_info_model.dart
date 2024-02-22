@@ -10,7 +10,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'location_info_widget.dart' show LocationInfoWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -81,11 +80,13 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     nameFieldControllerValidator = _nameFieldControllerValidator;
     descriptionFieldControllerValidator = _descriptionFieldControllerValidator;
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     nameFieldFocusNode?.dispose();
@@ -103,7 +104,7 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
   }) async {
     ApiCallResponse? apiUploadImage1;
 
-    if (fileUpload != null && (fileUpload.bytes?.isNotEmpty ?? false)) {
+    if (fileUpload != null && (fileUpload?.bytes?.isNotEmpty ?? false)) {
       if (fileUpload?.blurHash != hash) {
         apiUploadImage1 = await FoodexpirationGroup.uploadImageCall.call(
           file: fileUpload,
@@ -122,12 +123,10 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
                     (apiUploadImage1?.jsonBody ?? ''),
                   )
                   .toString()
-                  .toString()
               ..imageBlurhash = FoodexpirationGroup.uploadImageCall
                   .blurHash(
                     (apiUploadImage1?.jsonBody ?? ''),
                   )
-                  .toString()
                   .toString(),
           );
           ScaffoldMessenger.of(context).showSnackBar(

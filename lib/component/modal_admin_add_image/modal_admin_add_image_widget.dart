@@ -13,7 +13,6 @@ import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,17 +23,16 @@ export 'modal_admin_add_image_model.dart';
 
 class ModalAdminAddImageWidget extends StatefulWidget {
   const ModalAdminAddImageWidget({
-    Key? key,
+    super.key,
     this.isThumbnail,
     int? thumbnailCategoriesId,
-  })  : this.thumbnailCategoriesId = thumbnailCategoriesId ?? 0,
-        super(key: key);
+  }) : this.thumbnailCategoriesId = thumbnailCategoriesId ?? 0;
 
   final bool? isThumbnail;
   final int thumbnailCategoriesId;
 
   @override
-  _ModalAdminAddImageWidgetState createState() =>
+  State<ModalAdminAddImageWidget> createState() =>
       _ModalAdminAddImageWidgetState();
 }
 
@@ -122,7 +120,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
+              padding: EdgeInsets.all(12.0),
               child: Container(
                 width: double.infinity,
                 constraints: BoxConstraints(
@@ -152,8 +150,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                         key: _model.formKey,
                         autovalidateMode: AutovalidateMode.always,
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 24.0, 24.0, 24.0),
+                          padding: EdgeInsets.all(24.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -427,9 +424,7 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                               ),
                                               if (_model.image?.id != null)
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          8.0, 8.0, 8.0, 8.0),
+                                                  padding: EdgeInsets.all(8.0),
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(

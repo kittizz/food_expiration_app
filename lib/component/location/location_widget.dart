@@ -8,7 +8,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,12 +19,12 @@ export 'location_model.dart';
 
 class LocationWidget extends StatefulWidget {
   const LocationWidget({
-    Key? key,
+    super.key,
     required this.name,
     this.image,
     this.description,
     required this.id,
-  }) : super(key: key);
+  });
 
   final String? name;
   final ImageStruct? image;
@@ -33,7 +32,7 @@ class LocationWidget extends StatefulWidget {
   final int? id;
 
   @override
-  _LocationWidgetState createState() => _LocationWidgetState();
+  State<LocationWidget> createState() => _LocationWidgetState();
 }
 
 class _LocationWidgetState extends State<LocationWidget>

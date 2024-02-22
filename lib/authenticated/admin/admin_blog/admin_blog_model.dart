@@ -65,10 +65,12 @@ class AdminBlogModel extends FlutterFlowModel<AdminBlogWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     sideNavModel.dispose();

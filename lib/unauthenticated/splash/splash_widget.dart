@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,10 +15,10 @@ import 'splash_model.dart';
 export 'splash_model.dart';
 
 class SplashWidget extends StatefulWidget {
-  const SplashWidget({Key? key}) : super(key: key);
+  const SplashWidget({super.key});
 
   @override
-  _SplashWidgetState createState() => _SplashWidgetState();
+  State<SplashWidget> createState() => _SplashWidgetState();
 }
 
 class _SplashWidgetState extends State<SplashWidget>
@@ -161,15 +160,6 @@ class _SplashWidgetState extends State<SplashWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -182,7 +172,7 @@ class _SplashWidgetState extends State<SplashWidget>
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -224,10 +214,8 @@ class _SplashWidgetState extends State<SplashWidget>
                                     color: FlutterFlowTheme.of(context).red300,
                                     fontSize: 40.0,
                                     fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyLargeFamily),
+                                    useGoogleFonts:
+                                        GoogleFonts.asMap().containsKey('Itim'),
                                   ),
                             ).animateOnPageLoad(
                                 animationsMap['textOnPageLoadAnimation1']!),
@@ -242,9 +230,8 @@ class _SplashWidgetState extends State<SplashWidget>
                                   fontSize: 60.0,
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.italic,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily),
+                                  useGoogleFonts:
+                                      GoogleFonts.asMap().containsKey('Itim'),
                                 ),
                           ).animateOnPageLoad(
                               animationsMap['textOnPageLoadAnimation2']!),

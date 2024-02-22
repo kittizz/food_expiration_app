@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,10 +14,10 @@ import 'archived_model.dart';
 export 'archived_model.dart';
 
 class ArchivedWidget extends StatefulWidget {
-  const ArchivedWidget({Key? key}) : super(key: key);
+  const ArchivedWidget({super.key});
 
   @override
-  _ArchivedWidgetState createState() => _ArchivedWidgetState();
+  State<ArchivedWidget> createState() => _ArchivedWidgetState();
 }
 
 class _ArchivedWidgetState extends State<ArchivedWidget> {
@@ -58,15 +57,6 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -110,7 +100,7 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.00, -1.00),
+            alignment: AlignmentDirectional(0.0, -1.0),
             child: Container(
               constraints: BoxConstraints(
                 maxWidth: 600.0,

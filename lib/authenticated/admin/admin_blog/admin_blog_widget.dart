@@ -23,10 +23,10 @@ import 'admin_blog_model.dart';
 export 'admin_blog_model.dart';
 
 class AdminBlogWidget extends StatefulWidget {
-  const AdminBlogWidget({Key? key}) : super(key: key);
+  const AdminBlogWidget({super.key});
 
   @override
-  _AdminBlogWidgetState createState() => _AdminBlogWidgetState();
+  State<AdminBlogWidget> createState() => _AdminBlogWidgetState();
 }
 
 class _AdminBlogWidgetState extends State<AdminBlogWidget> {
@@ -63,15 +63,6 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -99,10 +90,9 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, -1.00),
+                alignment: AlignmentDirectional(0.0, -1.0),
                 child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                  padding: EdgeInsets.all(20.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -118,8 +108,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
+                            padding: EdgeInsets.all(10.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -132,7 +121,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(-1.00, 0.00),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: Text(
                                             'บทความ',
                                             style: FlutterFlowTheme.of(context)
@@ -142,7 +131,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(1.00, 0.00),
+                                            AlignmentDirectional(1.0, 0.0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
                                           focusColor: Colors.transparent,
@@ -213,8 +202,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 10.0),
+                                        padding: EdgeInsets.all(10.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           crossAxisAlignment:
@@ -933,8 +921,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
+                            padding: EdgeInsets.all(10.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -947,7 +934,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(-1.00, 0.00),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: Text(
                                             'ทั้งหมด',
                                             style: FlutterFlowTheme.of(context)
@@ -986,9 +973,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                                                   BorderRadius.circular(8.0),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      10.0, 10.0, 10.0, 10.0),
+                                              padding: EdgeInsets.all(10.0),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 crossAxisAlignment:
@@ -1193,8 +1178,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -1461,8 +1445,7 @@ class _AdminBlogWidgetState extends State<AdminBlogWidget> {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 20.0, 20.0, 20.0),
+                            padding: EdgeInsets.all(20.0),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context).alternate,

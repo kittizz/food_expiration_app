@@ -68,7 +68,7 @@ class FilterStruct extends FFFirebaseStruct {
       );
 
   static FilterStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? FilterStruct.fromMap(data) : null;
+      data is Map ? FilterStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'search': _search,
