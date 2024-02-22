@@ -1,9 +1,9 @@
 import 'dart:io' show Platform;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:food_expiration/backend/api_requests/api_calls.dart';
-import 'package:food_expiration/flutter_flow/flutter_flow_util.dart';
 
+import '../../app_state.dart';
+import '../api_requests/api_calls.dart';
 import 'serialization_util.dart';
 import '../../auth/firebase_auth/auth_util.dart';
 import '../cloud_functions/cloud_functions.dart';
