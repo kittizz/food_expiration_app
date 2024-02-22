@@ -5,7 +5,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/actions/actions.dart' as action_blocks;
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,6 +35,13 @@ class _SigninWidgetState extends State<SigninWidget> {
     _model = createModel(context, () => SigninModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Signin'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SIGNIN_PAGE_Signin_ON_INIT_STATE');
+      logFirebaseEvent('Signin_custom_action');
+      _model.isAdmin = await actions.checkIsAdminDomain();
+    });
+
     if (!isWeb) {
       _keyboardVisibilitySubscription =
           KeyboardVisibilityController().onChange.listen((bool visible) {
@@ -132,13 +141,13 @@ class _SigninWidgetState extends State<SigninWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 32.0, 0.0, 8.0),
                               child: Text(
-                                isWeb ? 'ผู้ดูแลระบบ' : 'Login',
+                                _model.isAdmin! ? 'ผู้ดูแลระบบ' : 'Login',
                                 textAlign: TextAlign.start,
                                 style:
                                     FlutterFlowTheme.of(context).displayMedium,
                               ),
                             ),
-                            if (!isWeb)
+                            if (!_model.isAdmin!)
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 0.0, 12.0),
