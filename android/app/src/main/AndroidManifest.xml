@@ -63,7 +63,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="foodexpiration" android:host="foodexpiration.com" />
+                <data android:scheme="fdx" android:host="expirydate.mc.sv" />
             </intent-filter>
 
         </activity>

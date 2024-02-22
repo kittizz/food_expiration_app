@@ -174,6 +174,10 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                         size: 30.0,
                                       ),
                                       onPressed: () async {
+                                        logFirebaseEvent(
+                                            'MODAL_ADMIN_ADD_IMAGE_close_rounded_ICN_');
+                                        logFirebaseEvent(
+                                            'IconButton_bottom_sheet');
                                         Navigator.pop(context);
                                       },
                                     ),
@@ -203,7 +207,11 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'MODAL_ADMIN_ADD_IMAGE_Stack_7gljw48q_ON_');
                                             var _shouldSetState = false;
+                                            logFirebaseEvent(
+                                                'Stack_store_media_for_upload');
                                             final selectedMedia =
                                                 await selectMedia(
                                               maxWidth: 1000.00,
@@ -268,6 +276,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                               if (_model.uploadedLocalFile
                                                       .blurHash !=
                                                   _model.hash) {
+                                                logFirebaseEvent(
+                                                    'Stack_backend_call');
                                                 _model.apiUploadImage1 =
                                                     await FoodexpirationGroup
                                                         .uploadImageCall
@@ -283,6 +293,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                 if ((_model.apiUploadImage1
                                                         ?.succeeded ??
                                                     true)) {
+                                                  logFirebaseEvent(
+                                                      'Stack_update_component_state');
                                                   setState(() {
                                                     _model.updateImageStruct(
                                                       (e) => e
@@ -311,6 +323,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                         .uploadedLocalFile
                                                         .blurHash!;
                                                   });
+                                                  logFirebaseEvent(
+                                                      'Stack_show_snack_bar');
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
                                                     SnackBar(
@@ -334,6 +348,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                                     setState(() {});
                                                   return;
                                                 } else {
+                                                  logFirebaseEvent(
+                                                      'Stack_show_snack_bar');
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
                                                     SnackBar(
@@ -591,6 +607,10 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                           0.0, 0.0, 4.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'MODAL_ADMIN_ADD_IMAGE_สร้าง_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_validate_form');
                                           if (_model.formKey.currentState ==
                                                   null ||
                                               !_model.formKey.currentState!
@@ -605,6 +625,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                             return;
                                           }
                                           if (widget.isThumbnail!) {
+                                            logFirebaseEvent(
+                                                'Button_bottom_sheet');
                                             Navigator.pop(
                                                 context,
                                                 CreateImageStruct(
@@ -618,6 +640,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                           } else {
                                             if (_model.dropDownValue == null ||
                                                 _model.dropDownValue == '') {
+                                              logFirebaseEvent(
+                                                  'Button_show_snack_bar');
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
@@ -640,6 +664,8 @@ class _ModalAdminAddImageWidgetState extends State<ModalAdminAddImageWidget>
                                               );
                                               return;
                                             }
+                                            logFirebaseEvent(
+                                                'Button_bottom_sheet');
                                             Navigator.pop(
                                                 context,
                                                 CreateImageStruct(

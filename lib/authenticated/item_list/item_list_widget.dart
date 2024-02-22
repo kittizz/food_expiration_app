@@ -54,15 +54,20 @@ class _ItemListWidgetState extends State<ItemListWidget> {
     super.initState();
     _model = createModel(context, () => ItemListModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'ItemList'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ITEM_LIST_PAGE_ItemList_ON_INIT_STATE');
+      logFirebaseEvent('ItemList_update_app_state');
       setState(() {
         FFAppState().items = [];
         FFAppState().filter =
             FilterStruct.fromSerializableMap(jsonDecode('{}'));
       });
+      logFirebaseEvent('ItemList_action_block');
       await action_blocks.fetchLocations(context);
       setState(() {});
+      logFirebaseEvent('ItemList_action_block');
       await action_blocks.fetchItems(
         context,
         archive: false,
@@ -70,6 +75,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
       );
       setState(() {});
       if (widget.isScan) {
+        logFirebaseEvent('ItemList_action_block');
         await _model.scanBarcode(context);
         setState(() {});
       }
@@ -103,7 +109,9 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         key: scaffoldKey,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            logFirebaseEvent('ITEM_LIST_FloatingActionButton_kt6pygzd_');
             if (widget.isLocation) {
+              logFirebaseEvent('FloatingActionButton_update_app_state');
               FFAppState().updatePageItemInfoStruct(
                 (e) => e
                   ..updateLocation(
@@ -117,6 +125,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                   ),
               );
             }
+            logFirebaseEvent('FloatingActionButton_action_block');
             await action_blocks.openAddItem(
               context,
               replace: true,
@@ -145,6 +154,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('ITEM_LIST_arrow_back_ios_rounded_ICN_ON_');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -180,11 +191,14 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                       size: 24.0,
                     ),
                     onPressed: () async {
+                      logFirebaseEvent('ITEM_LIST_PAGE_edit_ICN_ON_TAP');
+                      logFirebaseEvent('IconButton_action_block');
                       await action_blocks.fetchLocationInfo(
                         context,
                         id: widget.locationId,
                       );
                       setState(() {});
+                      logFirebaseEvent('IconButton_navigate_to');
 
                       context.pushNamed('LocationInfo');
                     },
@@ -201,6 +215,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
           child: RefreshIndicator(
             color: FlutterFlowTheme.of(context).red200,
             onRefresh: () async {
+              logFirebaseEvent('ITEM_LIST_Column_dd7hream_ON_PULL_TO_REF');
+              logFirebaseEvent('Column_action_block');
               await action_blocks.fetchItems(
                 context,
                 archive: false,
@@ -236,15 +252,20 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'ITEM_LIST_PAGE_Icon_e1bjcq6f_ON_TAP');
+                                  logFirebaseEvent('Icon_update_app_state');
                                   setState(() {
                                     FFAppState().filter =
                                         FilterStruct.fromSerializableMap(
                                             jsonDecode('{}'));
                                   });
+                                  logFirebaseEvent('Icon_reset_form_fields');
                                   setState(() {
                                     _model.search1FieldController?.clear();
                                     _model.search2FieldController?.clear();
                                   });
+                                  logFirebaseEvent('Icon_show_snack_bar');
                                   ScaffoldMessenger.of(context)
                                       .clearSnackBars();
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -304,6 +325,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                         '_model.search1FieldController',
                                         Duration(milliseconds: 2000),
                                         () async {
+                                          logFirebaseEvent(
+                                              'ITEM_LIST_search1Field_ON_TEXTFIELD_CHAN');
+                                          logFirebaseEvent(
+                                              'search1Field_update_app_state');
                                           setState(() {
                                             FFAppState().updateFilterStruct(
                                               (e) => e
@@ -315,6 +340,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                         },
                                       ),
                                       onFieldSubmitted: (_) async {
+                                        logFirebaseEvent(
+                                            'ITEM_LIST_search1Field_ON_TEXTFIELD_SUBM');
+                                        logFirebaseEvent(
+                                            'search1Field_update_app_state');
                                         setState(() {
                                           FFAppState().updateFilterStruct(
                                             (e) => e
@@ -388,6 +417,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                                 onTap: () async {
                                                   _model.search1FieldController
                                                       ?.clear();
+                                                  logFirebaseEvent(
+                                                      'ITEM_LIST_search1Field_ON_TEXTFIELD_CHAN');
+                                                  logFirebaseEvent(
+                                                      'search1Field_update_app_state');
                                                   setState(() {
                                                     FFAppState()
                                                         .updateFilterStruct(
@@ -458,6 +491,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       '_model.search2FieldController',
                                       Duration(milliseconds: 2000),
                                       () async {
+                                        logFirebaseEvent(
+                                            'ITEM_LIST_search2Field_ON_TEXTFIELD_CHAN');
+                                        logFirebaseEvent(
+                                            'search2Field_update_app_state');
                                         setState(() {
                                           FFAppState().updateFilterStruct(
                                             (e) => e
@@ -468,6 +505,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                       },
                                     ),
                                     onFieldSubmitted: (_) async {
+                                      logFirebaseEvent(
+                                          'ITEM_LIST_search2Field_ON_TEXTFIELD_SUBM');
+                                      logFirebaseEvent(
+                                          'search2Field_update_app_state');
                                       setState(() {
                                         FFAppState().updateFilterStruct(
                                           (e) => e
@@ -536,6 +577,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                               onTap: () async {
                                                 _model.search2FieldController
                                                     ?.clear();
+                                                logFirebaseEvent(
+                                                    'ITEM_LIST_search2Field_ON_TEXTFIELD_CHAN');
+                                                logFirebaseEvent(
+                                                    'search2Field_update_app_state');
                                                 setState(() {
                                                   FFAppState()
                                                       .updateFilterStruct(
@@ -596,6 +641,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   size: 18.0,
                                 ),
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'ITEM_LIST_PAGE_barcodeIconButton_ON_TAP');
+                                  logFirebaseEvent(
+                                      'barcodeIconButton_action_block');
                                   await _model.scanBarcode(context);
                                   setState(() {});
                                 },
@@ -643,6 +692,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               onMultiSelectChanged: (val) async {
                                 setState(
                                     () => _model.filterLocationValue = val);
+                                logFirebaseEvent(
+                                    'ITEM_LIST_filterLocation_ON_FORM_WIDGET_');
+                                logFirebaseEvent(
+                                    'filterLocation_update_app_state');
                                 setState(() {
                                   FFAppState().updateFilterStruct(
                                     (e) => e
@@ -691,6 +744,9 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               isMultiSelect: true,
                               onMultiSelectChanged: (val) async {
                                 setState(() => _model.filterCateValue = val);
+                                logFirebaseEvent(
+                                    'ITEM_LIST_filterCate_ON_FORM_WIDGET_SELE');
+                                logFirebaseEvent('filterCate_update_app_state');
                                 setState(() {
                                   FFAppState().updateFilterStruct(
                                     (e) => e
@@ -739,6 +795,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                               onMultiSelectChanged: (val) async {
                                 setState(
                                     () => _model.filterExpStatusValue = val);
+                                logFirebaseEvent(
+                                    'ITEM_LIST_filterExpStatus_ON_FORM_WIDGET');
+                                logFirebaseEvent(
+                                    'filterExpStatus_update_app_state');
                                 setState(() {
                                   FFAppState().updateFilterStruct(
                                     (e) => e
@@ -807,6 +867,10 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'ITEM_LIST_PAGE_Image_pvtepp3f_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Image_expand_image');
                                                   await Navigator.push(
                                                     context,
                                                     PageTransition(

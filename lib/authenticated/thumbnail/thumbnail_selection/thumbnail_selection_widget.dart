@@ -39,13 +39,18 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
     super.initState();
     _model = createModel(context, () => ThumbnailSelectionModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ThumbnailSelection'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('THUMBNAIL_SELECTION_ThumbnailSelection_O');
+      logFirebaseEvent('ThumbnailSelection_backend_call');
       _model.apiThumbnails =
           await FoodexpirationGroup.thumbnailCategoryByIdCall.call(
         catrgoryId: widget.thumbnailCategoryId?.toString(),
       );
       if ((_model.apiThumbnails?.succeeded ?? true)) {
+        logFirebaseEvent('ThumbnailSelection_update_page_state');
         setState(() {
           _model.thumbnails = functions.toThumbnailCategoryStruct(
               (_model.apiThumbnails?.jsonBody ?? ''));
@@ -88,6 +93,8 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('THUMBNAIL_SELECTION_arrow_back_ios_round');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -149,6 +156,9 @@ class _ThumbnailSelectionWidgetState extends State<ThumbnailSelectionWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'THUMBNAIL_SELECTION_Card_fjxjdep4_ON_TAP');
+                              logFirebaseEvent('Card_navigate_to');
                               if (Navigator.of(context).canPop()) {
                                 context.pop();
                               }

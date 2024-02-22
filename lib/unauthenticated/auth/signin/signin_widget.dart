@@ -32,6 +32,7 @@ class _SigninWidgetState extends State<SigninWidget> {
     super.initState();
     _model = createModel(context, () => SigninModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Signin'});
     if (!isWeb) {
       _keyboardVisibilitySubscription =
           KeyboardVisibilityController().onChange.listen((bool visible) {
@@ -90,6 +91,8 @@ class _SigninWidgetState extends State<SigninWidget> {
                 size: 30.0,
               ),
               onPressed: () async {
+                logFirebaseEvent('SIGNIN_arrow_back_rounded_ICN_ON_TAP');
+                logFirebaseEvent('IconButton_navigate_back');
                 context.pop();
               },
             ),
@@ -322,6 +325,10 @@ class _SigninWidgetState extends State<SigninWidget> {
                                     16.0, 12.0, 16.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent(
+                                        'SIGNIN_FORGOT_YOUR_PASSWORD?_BTN_ON_TAP');
+                                    logFirebaseEvent('Button_navigate_to');
+
                                     context.pushNamed('ForgotPassword');
                                   },
                                   text: 'Forgot your password?',
@@ -370,6 +377,8 @@ class _SigninWidgetState extends State<SigninWidget> {
                           16.0, 12.0, 16.0, 24.0),
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent('SIGNIN_PAGE_LOGIN_BTN_ON_TAP');
+                          logFirebaseEvent('Button_auth');
                           GoRouter.of(context).prepareAuthEvent();
 
                           final user = await authManager.signInWithEmail(
@@ -381,6 +390,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                             return;
                           }
 
+                          logFirebaseEvent('Button_action_block');
                           await action_blocks.registerDevice(context);
 
                           context.goNamedAuth('Splash', context.mounted);

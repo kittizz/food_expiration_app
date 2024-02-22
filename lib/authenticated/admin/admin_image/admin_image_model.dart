@@ -96,11 +96,13 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   Future fetchThumbnailCategories(BuildContext context) async {
     ApiCallResponse? apiThumbnailCategories;
 
+    logFirebaseEvent('fetchThumbnailCategories_backend_call');
     apiThumbnailCategories =
         await FoodexpirationGroup.thumbnailCategoryCall.call(
       deviceid: FFAppState().deviceId,
     );
     if ((apiThumbnailCategories?.succeeded ?? true)) {
+      logFirebaseEvent('fetchThumbnailCategories_update_page_sta');
       thumbnailCategories = functions
           .toThumbnailCategoryStructList(
               (apiThumbnailCategories?.jsonBody ?? ''))
@@ -115,12 +117,14 @@ class AdminImageModel extends FlutterFlowModel<AdminImageWidget> {
   }) async {
     ApiCallResponse? apiThumbnailCategoriesByid;
 
+    logFirebaseEvent('fetchThumbnail_backend_call');
     apiThumbnailCategoriesByid =
         await FoodexpirationGroup.thumbnailCategoryByIdCall.call(
       catrgoryId: id?.toString(),
       deviceid: FFAppState().deviceId,
     );
     if ((apiThumbnailCategoriesByid?.succeeded ?? true)) {
+      logFirebaseEvent('fetchThumbnail_update_page_state');
       thumbnails = functions
           .toThumbnailCategoryStruct(
               (apiThumbnailCategoriesByid?.jsonBody ?? ''))

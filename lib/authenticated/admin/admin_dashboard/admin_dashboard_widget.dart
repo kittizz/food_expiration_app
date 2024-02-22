@@ -28,6 +28,8 @@ class _AdminDashboardWidgetState extends State<AdminDashboardWidget> {
     super.initState();
     _model = createModel(context, () => AdminDashboardModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'AdminDashboard'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

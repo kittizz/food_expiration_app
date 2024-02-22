@@ -106,13 +106,16 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
 
     if (fileUpload != null && (fileUpload?.bytes?.isNotEmpty ?? false)) {
       if (fileUpload?.blurHash != hash) {
+        logFirebaseEvent('uploadImage_backend_call');
         apiUploadImage1 = await FoodexpirationGroup.uploadImageCall.call(
           file: fileUpload,
           deviceid: FFAppState().deviceId,
           hash: fileUpload?.blurHash,
         );
         if ((apiUploadImage1?.succeeded ?? true)) {
+          logFirebaseEvent('uploadImage_update_page_state');
           hash = fileUpload!.blurHash!;
+          logFirebaseEvent('uploadImage_update_app_state');
           FFAppState().updatePageLocationInfoStruct(
             (e) => e
               ..imageId = FoodexpirationGroup.uploadImageCall.id(
@@ -129,6 +132,7 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
                   )
                   .toString(),
           );
+          logFirebaseEvent('uploadImage_show_snack_bar');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -143,6 +147,7 @@ class LocationInfoModel extends FlutterFlowModel<LocationInfoWidget> {
           );
           return;
         } else {
+          logFirebaseEvent('uploadImage_show_snack_bar');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(

@@ -101,6 +101,9 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent('SIDE_NAV_COMP_bg_color_ON_TAP');
+                    logFirebaseEvent('bg_color_navigate_to');
+
                     context.pushNamed(
                       'AdminDashboard',
                       extra: <String, dynamic>{
@@ -116,7 +119,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color:
-                          'foodexpiration://foodexpiration.com${GoRouter.of(context).location}' ==
+                          'fdx://expirydate.mc.sv${GoRouter.of(context).location}' ==
                                   'admin/dashboard'
                               ? FlutterFlowTheme.of(context).alternate
                               : Color(0x00000000),
@@ -155,6 +158,9 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent('SIDE_NAV_COMP_bg_color_ON_TAP');
+                    logFirebaseEvent('bg_color_navigate_to');
+
                     context.pushNamed(
                       'AdminImage',
                       extra: <String, dynamic>{
@@ -170,7 +176,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color:
-                          'foodexpiration://foodexpiration.com${GoRouter.of(context).location}' ==
+                          'fdx://expirydate.mc.sv${GoRouter.of(context).location}' ==
                                   'admin/image'
                               ? FlutterFlowTheme.of(context).alternate
                               : Color(0x00000000),
@@ -209,6 +215,9 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent('SIDE_NAV_COMP_bg_color_ON_TAP');
+                    logFirebaseEvent('bg_color_navigate_to');
+
                     context.pushNamed(
                       'AdminCategory',
                       extra: <String, dynamic>{
@@ -224,7 +233,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color:
-                          'foodexpiration://foodexpiration.com${GoRouter.of(context).location}' ==
+                          'fdx://expirydate.mc.sv${GoRouter.of(context).location}' ==
                                   'admin/dashboard'
                               ? FlutterFlowTheme.of(context).alternate
                               : Color(0x00000000),
@@ -263,6 +272,9 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent('SIDE_NAV_COMP_bg_color_ON_TAP');
+                    logFirebaseEvent('bg_color_navigate_to');
+
                     context.pushNamed(
                       'AdminBlog',
                       extra: <String, dynamic>{
@@ -278,7 +290,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color:
-                          'foodexpiration://foodexpiration.com${GoRouter.of(context).location}' ==
+                          'fdx://expirydate.mc.sv${GoRouter.of(context).location}' ==
                                   'admin/dashboard'
                               ? FlutterFlowTheme.of(context).alternate
                               : Color(0x00000000),
@@ -321,9 +333,12 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                     ),
                     FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent('SIDE_NAV_COMP_ออกจากระบบ_BTN_ON_TAP');
+                        logFirebaseEvent('Button_update_app_state');
                         setState(() {
                           FFAppState().deviceId = '';
                         });
+                        logFirebaseEvent('Button_auth');
                         GoRouter.of(context).prepareAuthEvent();
                         await authManager.signOut();
                         GoRouter.of(context).clearRedirectLocation();

@@ -162,6 +162,10 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                         size: 30.0,
                                       ),
                                       onPressed: () async {
+                                        logFirebaseEvent(
+                                            'MODAL_ADMIN_EDIT_IMAGE_close_rounded_ICN');
+                                        logFirebaseEvent(
+                                            'IconButton_bottom_sheet');
                                         Navigator.pop(context);
                                       },
                                     ),
@@ -191,7 +195,11 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'MODAL_ADMIN_EDIT_IMAGE_Stack_3ojglci5_ON');
                                             var _shouldSetState = false;
+                                            logFirebaseEvent(
+                                                'Stack_store_media_for_upload');
                                             final selectedMedia =
                                                 await selectMedia(
                                               maxWidth: 1000.00,
@@ -256,6 +264,8 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                               if (_model.uploadedLocalFile
                                                       .blurHash !=
                                                   _model.hash) {
+                                                logFirebaseEvent(
+                                                    'Stack_backend_call');
                                                 _model.apiUploadImage1 =
                                                     await FoodexpirationGroup
                                                         .uploadImageCall
@@ -271,6 +281,8 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                                 if ((_model.apiUploadImage1
                                                         ?.succeeded ??
                                                     true)) {
+                                                  logFirebaseEvent(
+                                                      'Stack_update_component_state');
                                                   setState(() {
                                                     _model.updateImageStruct(
                                                       (e) => e
@@ -305,6 +317,8 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                                         .uploadedLocalFile
                                                         .blurHash!;
                                                   });
+                                                  logFirebaseEvent(
+                                                      'Stack_show_snack_bar');
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
                                                     SnackBar(
@@ -328,6 +342,8 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                                     setState(() {});
                                                   return;
                                                 } else {
+                                                  logFirebaseEvent(
+                                                      'Stack_show_snack_bar');
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
                                                     SnackBar(
@@ -459,6 +475,10 @@ class _ModalAdminEditImageWidgetState extends State<ModalAdminEditImageWidget>
                                           0.0, 0.0, 4.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'MODAL_ADMIN_EDIT_IMAGE_CONFIRM_BTN_ON_TA');
+                                          logFirebaseEvent(
+                                              'Button_bottom_sheet');
                                           Navigator.pop(context, _model.image);
                                         },
                                         text: 'Confirm',

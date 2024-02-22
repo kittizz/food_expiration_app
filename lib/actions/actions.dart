@@ -17,11 +17,13 @@ Future registerDevice(
 }) async {
   ApiCallResponse? apiResultou6;
 
+  logFirebaseEvent('registerDevice_backend_call');
   apiResultou6 = await FoodexpirationGroup.registerDeviceCall.call(
     authToken: currentJwtToken,
     nickname: nickname,
   );
   if ((apiResultou6?.succeeded ?? true)) {
+    logFirebaseEvent('registerDevice_update_app_state');
     FFAppState().update(() {
       FFAppState().deviceId = FoodexpirationGroup.registerDeviceCall
           .deviceId(
@@ -30,6 +32,7 @@ Future registerDevice(
           .toString();
     });
   } else {
+    logFirebaseEvent('registerDevice_alert_dialog');
     await showDialog(
       context: context,
       builder: (alertDialogContext) {
@@ -52,6 +55,7 @@ Future registerDevice(
     return;
   }
 
+  logFirebaseEvent('registerDevice_show_snack_bar');
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
@@ -68,13 +72,16 @@ Future<bool?> fetchUser(BuildContext context) async {
   ApiCallResponse? apiResultgetUser;
   UserStruct? userStruct;
 
+  logFirebaseEvent('fetchUser_backend_call');
   apiResultgetUser = await FoodexpirationGroup.getUserCall.call(
     deviceid: FFAppState().deviceId,
   );
   if ((apiResultgetUser?.succeeded ?? true)) {
+    logFirebaseEvent('fetchUser_custom_action');
     userStruct = await actions.toUserStruct(
       (apiResultgetUser?.jsonBody ?? ''),
     );
+    logFirebaseEvent('fetchUser_update_app_state');
     FFAppState().update(() {
       FFAppState().user = userStruct!;
     });
@@ -87,15 +94,18 @@ Future<bool?> fetchUser(BuildContext context) async {
 Future fetchLocations(BuildContext context) async {
   ApiCallResponse? apiLocList;
 
+  logFirebaseEvent('fetchLocations_backend_call');
   apiLocList = await FoodexpirationGroup.locationListCall.call(
     deviceid: FFAppState().deviceId,
   );
   if ((apiLocList?.succeeded ?? true)) {
+    logFirebaseEvent('fetchLocations_update_app_state');
     FFAppState().locations = functions
         .toLocationStructList((apiLocList?.jsonBody ?? ''))
         .toList()
         .cast<LocationStruct>();
   } else {
+    logFirebaseEvent('fetchLocations_alert_dialog');
     await showDialog(
       context: context,
       builder: (alertDialogContext) {
@@ -124,12 +134,14 @@ Future<bool> fetchLocationInfo(
 }) async {
   ApiCallResponse? apiLocation;
 
+  logFirebaseEvent('fetchLocationInfo_backend_call');
   apiLocation = await FoodexpirationGroup.getLocationByIdCall.call(
     id: id,
     items: false,
     deviceid: FFAppState().deviceId,
   );
   if ((apiLocation?.succeeded ?? true)) {
+    logFirebaseEvent('fetchLocationInfo_update_app_state');
     FFAppState().updatePageLocationInfoStruct(
       (e) => e
         ..name = functions.toLocationStruct((apiLocation?.jsonBody ?? '')).name
@@ -158,6 +170,7 @@ Future openAddItem(
   BuildContext context, {
   required bool? replace,
 }) async {
+  logFirebaseEvent('openAddItem_update_app_state');
   FFAppState().update(() {
     FFAppState().updatePageItemInfoStruct(
       (e) => e
@@ -176,6 +189,7 @@ Future openAddItem(
         ThumbnailStruct.fromSerializableMap(jsonDecode('{\"image\":\"{}\"}'));
   });
   if (replace!) {
+    logFirebaseEvent('openAddItem_navigate_to');
     if (Navigator.of(context).canPop()) {
       context.pop();
     }
@@ -193,6 +207,8 @@ Future openAddItem(
       }.withoutNulls,
     );
   } else {
+    logFirebaseEvent('openAddItem_navigate_to');
+
     context.pushNamed(
       'ItemInfo',
       queryParameters: {
@@ -212,10 +228,12 @@ Future openAddItem(
 Future fetchCategory(BuildContext context) async {
   ApiCallResponse? apiCategory;
 
+  logFirebaseEvent('fetchCategory_backend_call');
   apiCategory = await FoodexpirationGroup.categoryCall.call(
     deviceid: FFAppState().deviceId,
   );
   if ((apiCategory?.succeeded ?? true)) {
+    logFirebaseEvent('fetchCategory_update_app_state');
     FFAppState().update(() {
       FFAppState().categorys =
           (apiCategory?.jsonBody ?? '').toList().cast<String>();
@@ -230,12 +248,14 @@ Future fetchItems(
 }) async {
   ApiCallResponse? apiLocationItem;
 
+  logFirebaseEvent('fetchItems_backend_call');
   apiLocationItem = await FoodexpirationGroup.locationsItemCall.call(
     isArchived: archive,
     id: locationId,
     deviceid: FFAppState().deviceId,
   );
   if ((apiLocationItem?.succeeded ?? true)) {
+    logFirebaseEvent('fetchItems_update_app_state');
     FFAppState().update(() {
       FFAppState().items = functions
           .toItemList((apiLocationItem?.jsonBody ?? ''))
@@ -251,11 +271,13 @@ Future fetchItemInfo(
 }) async {
   ApiCallResponse? apiItem;
 
+  logFirebaseEvent('fetchItemInfo_backend_call');
   apiItem = await FoodexpirationGroup.getItemCall.call(
     id: id,
     deviceid: FFAppState().deviceId,
   );
   if ((apiItem?.succeeded ?? true)) {
+    logFirebaseEvent('fetchItemInfo_update_app_state');
     FFAppState().update(() {
       FFAppState().updatePageItemInfoStruct(
         (e) => e
@@ -294,10 +316,12 @@ Future saveSettings(
 }) async {
   ApiCallResponse? apiResultrwc;
 
+  logFirebaseEvent('saveSettings_backend_call');
   apiResultrwc = await FoodexpirationGroup.updateSettingsCall.call(
     deviceid: FFAppState().deviceId,
     notification: notification,
     notificationAt: functions.toRFC3339(notificationAt!, false),
   );
+  logFirebaseEvent('saveSettings_action_block');
   await action_blocks.fetchUser(context);
 }

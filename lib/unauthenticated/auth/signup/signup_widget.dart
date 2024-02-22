@@ -32,6 +32,7 @@ class _SignupWidgetState extends State<SignupWidget> {
     super.initState();
     _model = createModel(context, () => SignupModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Signup'});
     if (!isWeb) {
       _keyboardVisibilitySubscription =
           KeyboardVisibilityController().onChange.listen((bool visible) {
@@ -91,6 +92,8 @@ class _SignupWidgetState extends State<SignupWidget> {
               size: 30.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('SIGNUP_arrow_back_rounded_ICN_ON_TAP');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -492,6 +495,8 @@ class _SignupWidgetState extends State<SignupWidget> {
                           16.0, 12.0, 16.0, 24.0),
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent('SIGNUP_PAGE_SIGN_UP_BTN_ON_TAP');
+                          logFirebaseEvent('Button_auth');
                           GoRouter.of(context).prepareAuthEvent();
                           if (_model.passwordTextController.text !=
                               _model.confirmPasswordTextController.text) {
@@ -514,6 +519,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                             return;
                           }
 
+                          logFirebaseEvent('Button_action_block');
                           await action_blocks.registerDevice(
                             context,
                             nickname: _model.emailTextController.text,

@@ -48,8 +48,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
     super.initState();
     _model = createModel(context, () => ItemInfoModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'ItemInfo'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ITEM_INFO_PAGE_ItemInfo_ON_INIT_STATE');
+      logFirebaseEvent('ItemInfo_action_block');
       await action_blocks.fetchLocations(context);
       setState(() {});
     });
@@ -108,6 +111,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('ITEM_INFO_arrow_back_ios_rounded_ICN_ON_');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -132,7 +137,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent('ITEM_INFO_PAGE_Text_iihne0pf_ON_TAP');
                     var _shouldSetState = false;
+                    logFirebaseEvent('Text_validate_form');
                     if (_model.formKey2.currentState == null ||
                         !_model.formKey2.currentState!.validate()) {
                       return;
@@ -140,6 +147,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                     if (_model.unitOptionValue == null) {
                       return;
                     }
+                    logFirebaseEvent('Text_validate_form');
                     if (_model.formKey4.currentState == null ||
                         !_model.formKey4.currentState!.validate()) {
                       return;
@@ -150,6 +158,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                     if (_model.locationOptionValue == null) {
                       return;
                     }
+                    logFirebaseEvent('Text_validate_form');
                     if (_model.formKey2.currentState == null ||
                         !_model.formKey2.currentState!.validate()) {
                       return;
@@ -159,6 +168,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                     }
                     if (FFAppState().thumbnail.image.id > 0) {
                       if (widget.isAdd!) {
+                        logFirebaseEvent('Text_backend_call');
                         _model.apiCreateItem =
                             await FoodexpirationGroup.createItemCall.call(
                           name: _model.nameFieldController.text,
@@ -189,6 +199,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         );
                         _shouldSetState = true;
                         if ((_model.apiCreateItem?.succeeded ?? true)) {
+                          logFirebaseEvent('Text_show_snack_bar');
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -203,6 +214,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
+                          logFirebaseEvent('Text_navigate_to');
                           if (Navigator.of(context).canPop()) {
                             context.pop();
                           }
@@ -232,6 +244,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                             }.withoutNulls,
                           );
                         } else {
+                          logFirebaseEvent('Text_alert_dialog');
                           await showDialog(
                             context: context,
                             builder: (alertDialogContext) {
@@ -256,6 +269,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                           return;
                         }
                       } else {
+                        logFirebaseEvent('Text_backend_call');
                         _model.apiUpdateItem =
                             await FoodexpirationGroup.updateItemCall.call(
                           deviceid: FFAppState().deviceId,
@@ -288,6 +302,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         );
                         _shouldSetState = true;
                         if ((_model.apiUpdateItem?.succeeded ?? true)) {
+                          logFirebaseEvent('Text_show_snack_bar');
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -302,6 +317,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
+                          logFirebaseEvent('Text_backend_call');
                           _model.apiGetItem =
                               await FoodexpirationGroup.getItemCall.call(
                             deviceid: FFAppState().deviceId,
@@ -309,6 +325,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                           );
                           _shouldSetState = true;
                           if ((_model.apiGetItem?.succeeded ?? true)) {
+                            logFirebaseEvent('Text_update_app_state');
                             FFAppState().update(() {
                               FFAppState().updateItemsAtIndex(
                                 functions.findItemIndex(
@@ -318,6 +335,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                               );
                             });
                           } else {
+                            logFirebaseEvent('Text_alert_dialog');
                             await showDialog(
                               context: context,
                               builder: (alertDialogContext) {
@@ -342,8 +360,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                             return;
                           }
 
+                          logFirebaseEvent('Text_navigate_back');
                           context.safePop();
                         } else {
+                          logFirebaseEvent('Text_alert_dialog');
                           await showDialog(
                             context: context,
                             builder: (alertDialogContext) {
@@ -369,6 +389,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         }
                       }
                     } else {
+                      logFirebaseEvent('Text_alert_dialog');
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -442,6 +463,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'ITEM_INFO_PAGE_heroImage_ON_TAP');
+                                  logFirebaseEvent(
+                                      'heroImage_store_media_for_upload');
                                   final selectedMedia =
                                       await selectMediaWithSourceBottomSheet(
                                     context: context,
@@ -487,6 +512,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     }
                                   }
 
+                                  logFirebaseEvent('heroImage_action_block');
                                   await _model.uploadImage(
                                     context,
                                     fileUpload: _model.uploadedLocalFile,
@@ -632,6 +658,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
+                                        logFirebaseEvent(
+                                            'ITEM_INFO_PAGE_Row_180qhfu2_ON_TAP');
+                                        logFirebaseEvent('Wrap_navigate_to');
+
                                         context.pushNamed(
                                           'ThumbnailViewer',
                                           queryParameters: {
@@ -719,6 +749,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                     size: 15.0,
                                                   ),
                                                   onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'ITEM_INFO_zoom_in_outlined_ICN_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'IconButton_navigate_to');
+
                                                     context.pushNamed(
                                                       'ThumbnailViewer',
                                                       queryParameters: {
@@ -796,6 +831,11 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       size: 15.0,
                                     ),
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'ITEM_INFO_PAGE_image_search_ICN_ON_TAP');
+                                      logFirebaseEvent(
+                                          'IconButton_navigate_to');
+
                                       context.pushNamed(
                                         'ThumbnailCategory',
                                         queryParameters: {
@@ -845,6 +885,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                     '_model.nameFieldController',
                                     Duration(milliseconds: 2000),
                                     () async {
+                                      logFirebaseEvent(
+                                          'ITEM_INFO_NameField_ON_TEXTFIELD_CHANGE');
+                                      logFirebaseEvent(
+                                          'NameField_update_app_state');
                                       FFAppState().updatePageItemInfoStruct(
                                         (e) => e
                                           ..name =
@@ -923,6 +967,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             onTap: () async {
                                               _model.nameFieldController
                                                   ?.clear();
+                                              logFirebaseEvent(
+                                                  'ITEM_INFO_NameField_ON_TEXTFIELD_CHANGE');
+                                              logFirebaseEvent(
+                                                  'NameField_update_app_state');
                                               FFAppState()
                                                   .updatePageItemInfoStruct(
                                                 (e) => e
@@ -961,6 +1009,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   '_model.descriptionFieldController',
                                   Duration(milliseconds: 2000),
                                   () async {
+                                    logFirebaseEvent(
+                                        'ITEM_INFO_DescriptionField_ON_TEXTFIELD_');
+                                    logFirebaseEvent(
+                                        'DescriptionField_update_app_state');
                                     FFAppState().updatePageItemInfoStruct(
                                       (e) => e
                                         ..description = _model
@@ -1036,6 +1088,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           onTap: () async {
                                             _model.descriptionFieldController
                                                 ?.clear();
+                                            logFirebaseEvent(
+                                                'ITEM_INFO_DescriptionField_ON_TEXTFIELD_');
+                                            logFirebaseEvent(
+                                                'DescriptionField_update_app_state');
                                             FFAppState()
                                                 .updatePageItemInfoStruct(
                                               (e) => e
@@ -1120,6 +1176,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 size: 15.0,
                                               ),
                                               onPressed: () async {
+                                                logFirebaseEvent(
+                                                    'ITEM_INFO_PAGE_restore_ICN_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'IconButton_backend_call');
                                                 await FoodexpirationGroup
                                                     .clearItemsCall
                                                     .call(
@@ -1130,6 +1190,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                   deviceid:
                                                       FFAppState().deviceId,
                                                 );
+                                                logFirebaseEvent(
+                                                    'IconButton_update_app_state');
                                                 FFAppState().update(() {
                                                   FFAppState().removeFromItems(
                                                       FFAppState()
@@ -1139,6 +1201,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                           .toList()
                                                           .first);
                                                 });
+                                                logFirebaseEvent(
+                                                    'IconButton_show_snack_bar');
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                   SnackBar(
@@ -1161,6 +1225,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                             .primaryBackground,
                                                   ),
                                                 );
+                                                logFirebaseEvent(
+                                                    'IconButton_navigate_back');
                                                 context.safePop();
                                               },
                                             ),
@@ -1210,6 +1276,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                               size: 15.0,
                                             ),
                                             onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'ITEM_INFO_PAGE_auto_delete_ICN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'IconButton_backend_call');
                                               await FoodexpirationGroup
                                                   .clearItemsCall
                                                   .call(
@@ -1219,6 +1289,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 archive: true,
                                                 deviceid: FFAppState().deviceId,
                                               );
+                                              logFirebaseEvent(
+                                                  'IconButton_update_app_state');
                                               FFAppState().update(() {
                                                 FFAppState().removeFromItems(
                                                     FFAppState()
@@ -1228,6 +1300,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                         .toList()
                                                         .first);
                                               });
+                                              logFirebaseEvent(
+                                                  'IconButton_show_snack_bar');
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
@@ -1249,6 +1323,8 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                           .primaryBackground,
                                                 ),
                                               );
+                                              logFirebaseEvent(
+                                                  'IconButton_navigate_back');
                                               context.safePop();
                                             },
                                           ),
@@ -1453,6 +1529,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'ITEM_INFO_PAGE_Row_vzv59fjj_ON_TAP');
+                                    logFirebaseEvent('Row_action_block');
                                     await _model.scanBarcode(context);
                                     setState(() {});
                                   },
@@ -1504,6 +1583,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'ITEM_INFO_PAGE_Icon_t1vbs3yz_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Icon_update_app_state');
                                               setState(() {
                                                 FFAppState()
                                                     .updatePageItemInfoStruct(
@@ -1559,6 +1642,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         size: 15.0,
                                       ),
                                       onPressed: () async {
+                                        logFirebaseEvent(
+                                            'ITEM_INFO_PAGE_barcode_ICN_ON_TAP');
+                                        logFirebaseEvent(
+                                            'IconButton_action_block');
                                         await _model.scanBarcode(context);
                                         setState(() {});
                                       },
@@ -1599,6 +1686,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   '_model.forewarnDayFieldController',
                                   Duration(milliseconds: 2000),
                                   () async {
+                                    logFirebaseEvent(
+                                        'ITEM_INFO_forewarnDayField_ON_TEXTFIELD_');
+                                    logFirebaseEvent(
+                                        'forewarnDayField_set_form_field');
                                     setState(() {
                                       _model.forewarnDayFieldController
                                           ?.text = (_model
@@ -1689,6 +1780,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           onTap: () async {
                                             _model.forewarnDayFieldController
                                                 ?.clear();
+                                            logFirebaseEvent(
+                                                'ITEM_INFO_forewarnDayField_ON_TEXTFIELD_');
+                                            logFirebaseEvent(
+                                                'forewarnDayField_set_form_field');
                                             setState(() {
                                               _model.forewarnDayFieldController
                                                   ?.text = (_model
@@ -1748,6 +1843,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'ITEM_INFO_PAGE_Row_ngp20res_ON_TAP');
+                                    logFirebaseEvent('Row_date_time_picker');
                                     final _datePicked1Date =
                                         await showDatePicker(
                                       context: context,
@@ -1766,6 +1864,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       });
                                     }
                                     if (_model.datePicked1 != null) {
+                                      logFirebaseEvent('Row_update_app_state');
                                       setState(() {
                                         FFAppState().updatePageItemInfoStruct(
                                           (e) => e
@@ -1845,6 +1944,9 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'ITEM_INFO_PAGE_Row_pioikcd0_ON_TAP');
+                                    logFirebaseEvent('Row_date_time_picker');
                                     final _datePicked2Date =
                                         await showDatePicker(
                                       context: context,
@@ -1863,12 +1965,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                       });
                                     }
                                     if (_model.datePicked2 != null) {
+                                      logFirebaseEvent('Row_update_app_state');
                                       setState(() {
                                         FFAppState().updatePageItemInfoStruct(
                                           (e) => e
                                             ..expireDate = _model.datePicked2,
                                         );
                                       });
+                                      logFirebaseEvent('Row_update_page_state');
                                       setState(() {
                                         _model.resetNoti = true;
                                       });
@@ -1958,6 +2062,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'ITEM_INFO_PAGE_Text_ri68hmmf_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Text_update_app_state');
                                             setState(() {
                                               FFAppState()
                                                   .updatePageItemInfoStruct(
@@ -2031,6 +2139,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'ITEM_INFO_PAGE_Text_8egbxfpg_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Text_update_app_state');
                                                   setState(() {
                                                     FFAppState()
                                                         .updatePageItemInfoStruct(
@@ -2111,6 +2223,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                         size: 15.0,
                                       ),
                                       onPressed: () async {
+                                        logFirebaseEvent(
+                                            'ITEM_INFO_PAGE_restore_ICN_ON_TAP');
+                                        logFirebaseEvent(
+                                            'IconButton_update_app_state');
                                         setState(() {
                                           FFAppState().updatePageItemInfoStruct(
                                             (e) => e
@@ -2196,6 +2312,10 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                           '_model.quantityFieldController',
                                           Duration(milliseconds: 2000),
                                           () async {
+                                            logFirebaseEvent(
+                                                'ITEM_INFO_quantityField_ON_TEXTFIELD_CHA');
+                                            logFirebaseEvent(
+                                                'quantityField_update_app_state');
                                             FFAppState()
                                                 .updatePageItemInfoStruct(
                                               (e) => e

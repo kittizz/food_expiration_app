@@ -162,6 +162,9 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
+                                logFirebaseEvent(
+                                    'LIST_ITEMS_COMP_Text_wyoshgbs_ON_TAP');
+                                logFirebaseEvent('Text_alert_dialog');
                                 var confirmDialogResponse =
                                     await showDialog<bool>(
                                           context: context,
@@ -191,6 +194,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                         ) ??
                                         false;
                                 if (confirmDialogResponse) {
+                                  logFirebaseEvent('Text_backend_call');
                                   _model.apiDeleteItem =
                                       await FoodexpirationGroup.deleteItemsCall
                                           .call(
@@ -210,6 +214,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                   );
                                   if ((_model.apiDeleteItem?.succeeded ??
                                       true)) {
+                                    logFirebaseEvent('Text_show_snack_bar');
                                     ScaffoldMessenger.of(context)
                                         .clearSnackBars();
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -228,6 +233,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                       ),
                                     );
                                   } else {
+                                    logFirebaseEvent('Text_show_snack_bar');
                                     ScaffoldMessenger.of(context)
                                         .clearSnackBars();
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -252,6 +258,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                     );
                                   }
 
+                                  logFirebaseEvent('Text_action_block');
                                   await action_blocks.fetchItems(
                                     context,
                                     archive: widget.isArchived,
@@ -289,6 +296,9 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
+                                logFirebaseEvent(
+                                    'LIST_ITEMS_COMP_Text_iuj3q4pt_ON_TAP');
+                                logFirebaseEvent('Text_alert_dialog');
                                 var confirmDialogResponse =
                                     await showDialog<bool>(
                                           context: context,
@@ -321,6 +331,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                         ) ??
                                         false;
                                 if (confirmDialogResponse) {
+                                  logFirebaseEvent('Text_backend_call');
                                   _model.apiClearItem =
                                       await FoodexpirationGroup.clearItemsCall
                                           .call(
@@ -341,6 +352,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                   );
                                   if ((_model.apiClearItem?.succeeded ??
                                       true)) {
+                                    logFirebaseEvent('Text_show_snack_bar');
                                     ScaffoldMessenger.of(context)
                                         .clearSnackBars();
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -359,6 +371,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                       ),
                                     );
                                   } else {
+                                    logFirebaseEvent('Text_show_snack_bar');
                                     ScaffoldMessenger.of(context)
                                         .clearSnackBars();
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -383,6 +396,7 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                     );
                                   }
 
+                                  logFirebaseEvent('Text_action_block');
                                   await action_blocks.fetchItems(
                                     context,
                                     archive: widget.isArchived,

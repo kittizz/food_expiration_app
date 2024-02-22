@@ -31,6 +31,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
     super.initState();
     _model = createModel(context, () => ForgotPasswordModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ForgotPassword'});
     if (!isWeb) {
       _keyboardVisibilitySubscription =
           KeyboardVisibilityController().onChange.listen((bool visible) {
@@ -81,6 +83,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
               size: 30.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('FORGOT_PASSWORD_arrow_back_rounded_ICN_O');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -229,6 +233,9 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                           16.0, 12.0, 16.0, 24.0),
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent(
+                              'FORGOT_PASSWORD_PAGE_SEND_BTN_ON_TAP');
+                          logFirebaseEvent('Button_auth');
                           if (_model.emailTextController.text.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -243,6 +250,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                             email: _model.emailTextController.text,
                             context: context,
                           );
+                          logFirebaseEvent('Button_alert_dialog');
                           await showDialog(
                             context: context,
                             builder: (alertDialogContext) {
@@ -260,6 +268,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                               );
                             },
                           );
+                          logFirebaseEvent('Button_navigate_to');
 
                           context.pushNamed('Signin');
                         },

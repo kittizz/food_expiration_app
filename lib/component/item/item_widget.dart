@@ -117,11 +117,14 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
+        logFirebaseEvent('ITEM_COMP_Column_3tl31rpu_ON_TAP');
+        logFirebaseEvent('Column_action_block');
         await action_blocks.fetchItemInfo(
           context,
           id: widget.id,
         );
         setState(() {});
+        logFirebaseEvent('Column_navigate_to');
 
         context.pushNamed(
           'ItemInfo',
@@ -187,6 +190,9 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                 setState(
                                     () => _model.checkboxValue = newValue!);
                                 if (newValue!) {
+                                  logFirebaseEvent(
+                                      'ITEM_COMP_Checkbox_svq64i28_ON_TOGGLE_ON');
+                                  logFirebaseEvent('Checkbox_widget_animation');
                                   if (animationsMap[
                                           'columnOnActionTriggerAnimation'] !=
                                       null) {
@@ -195,9 +201,12 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                         .controller
                                         .forward(from: 0.0);
                                   }
+                                  logFirebaseEvent(
+                                      'Checkbox_reset_form_fields');
                                   setState(() {
                                     _model.checkboxValue = false;
                                   });
+                                  logFirebaseEvent('Checkbox_backend_call');
                                   await FoodexpirationGroup.clearItemsCall.call(
                                     idList: (int var1) {
                                       return [var1];
@@ -206,6 +215,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                     deviceid: FFAppState().deviceId,
                                   );
                                   if (widget.isArchived!) {
+                                    logFirebaseEvent('Checkbox_show_snack_bar');
                                     ScaffoldMessenger.of(context)
                                         .clearSnackBars();
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -225,6 +235,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                       ),
                                     );
                                   } else {
+                                    logFirebaseEvent('Checkbox_show_snack_bar');
                                     ScaffoldMessenger.of(context)
                                         .clearSnackBars();
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -245,6 +256,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                     );
                                   }
 
+                                  logFirebaseEvent('Checkbox_update_app_state');
                                   _model.updatePage(() {
                                     FFAppState().removeFromItems(FFAppState()
                                         .items
@@ -252,6 +264,7 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                                         .toList()
                                         .first);
                                   });
+                                  logFirebaseEvent('Checkbox_widget_animation');
                                   if (animationsMap[
                                           'columnOnActionTriggerAnimation'] !=
                                       null) {
@@ -465,6 +478,8 @@ class _ItemWidgetState extends State<ItemWidget> with TickerProviderStateMixin {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent('ITEM_COMP_Image_0n6vyh45_ON_TAP');
+                            logFirebaseEvent('Image_expand_image');
                             await Navigator.push(
                               context,
                               PageTransition(

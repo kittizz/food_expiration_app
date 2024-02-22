@@ -78,6 +78,7 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
   Future scanBarcode(BuildContext context) async {
     var barcodeOut = '';
 
+    logFirebaseEvent('scanBarcode_scan_barcode_q_r_code');
     barcodeOut = await FlutterBarcodeScanner.scanBarcode(
       '#C62828', // scanning line color
       'Cancel', // cancel button text
@@ -86,10 +87,12 @@ class ItemListModel extends FlutterFlowModel<ItemListWidget> {
     );
 
     if (barcodeOut != '-1') {
+      logFirebaseEvent('scanBarcode_update_app_state');
       FFAppState().updateFilterStruct(
         (e) => e..barcode = barcodeOut,
       );
     } else {
+      logFirebaseEvent('scanBarcode_update_app_state');
       FFAppState().updateFilterStruct(
         (e) => e..barcode = null,
       );

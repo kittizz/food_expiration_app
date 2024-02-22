@@ -34,6 +34,7 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
     super.initState();
     _model = createModel(context, () => BlogPostModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'BlogPost'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -91,6 +92,8 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
                   size: 24.0,
                 ),
                 onPressed: () async {
+                  logFirebaseEvent('BLOG_POST_arrow_back_ios_rounded_ICN_ON_');
+                  logFirebaseEvent('IconButton_navigate_back');
                   context.pop();
                 },
               ),

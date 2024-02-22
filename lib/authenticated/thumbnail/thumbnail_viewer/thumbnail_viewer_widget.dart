@@ -49,6 +49,8 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
     super.initState();
     _model = createModel(context, () => ThumbnailViewerModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ThumbnailViewer'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -84,6 +86,8 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('THUMBNAIL_VIEWER_arrow_back_ios_rounded_');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -109,6 +113,9 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'THUMBNAIL_VIEWER_Image_q7jggeom_ON_TAP');
+                          logFirebaseEvent('Image_expand_image');
                           await Navigator.push(
                             context,
                             PageTransition(
@@ -169,6 +176,9 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                         Expanded(
                           child: FFButtonWidget(
                             onPressed: () async {
+                              logFirebaseEvent(
+                                  'THUMBNAIL_VIEWER_PAGE_CANCEL_BTN_ON_TAP');
+                              logFirebaseEvent('Button_navigate_back');
                               context.safePop();
                             },
                             text: 'Cancel',
@@ -203,6 +213,9 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'THUMBNAIL_VIEWER_PAGE_CONFIRM_BTN_ON_TAP');
+                                logFirebaseEvent('Button_update_app_state');
                                 setState(() {
                                   FFAppState().updatePageLocationInfoStruct(
                                     (e) => e
@@ -223,6 +236,7 @@ class _ThumbnailViewerWidgetState extends State<ThumbnailViewerWidget> {
                                       ),
                                   );
                                 });
+                                logFirebaseEvent('Button_navigate_back');
                                 context.safePop();
                               },
                               text: 'Confirm',

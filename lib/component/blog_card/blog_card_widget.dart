@@ -79,6 +79,9 @@ class _BlogCardWidgetState extends State<BlogCardWidget>
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
+        logFirebaseEvent('BLOG_CARD_COMP_Container_lhceacdz_ON_TAP');
+        logFirebaseEvent('Container_navigate_to');
+
         context.pushNamed(
           'BlogPost',
           queryParameters: {

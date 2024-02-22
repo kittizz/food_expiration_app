@@ -94,10 +94,13 @@ class _LocationWidgetState extends State<LocationWidget>
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
+        logFirebaseEvent('LOCATION_COMP_Column_w1vuj1zq_ON_TAP');
+        logFirebaseEvent('Column_action_block');
         await action_blocks.fetchLocationInfo(
           context,
           id: widget.id,
         );
+        logFirebaseEvent('Column_navigate_to');
 
         context.pushNamed(
           'ItemList',
@@ -124,6 +127,8 @@ class _LocationWidgetState extends State<LocationWidget>
         );
       },
       onLongPress: () async {
+        logFirebaseEvent('LOCATION_Column_w1vuj1zq_ON_LONG_PRESS');
+        logFirebaseEvent('Column_widget_animation');
         if (animationsMap['rowOnActionTriggerAnimation'] != null) {
           setState(() => hasRowTriggered = true);
           SchedulerBinding.instance.addPostFrameCallback((_) async =>
@@ -193,6 +198,8 @@ class _LocationWidgetState extends State<LocationWidget>
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent('LOCATION_COMP_Image_w95994v1_ON_TAP');
+                    logFirebaseEvent('Image_expand_image');
                     await Navigator.push(
                       context,
                       PageTransition(

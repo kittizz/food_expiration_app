@@ -62,21 +62,29 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
     super.initState();
     _model = createModel(context, () => HomeModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Home'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('HOME_PAGE_Home_ON_INIT_STATE');
+      logFirebaseEvent('Home_widget_animation');
       if (animationsMap['iconOnActionTriggerAnimation'] != null) {
         await animationsMap['iconOnActionTriggerAnimation']!
             .controller
             .forward(from: 0.0);
       }
+      logFirebaseEvent('Home_backend_call');
       _model.apiBanner = await FoodexpirationGroup.getBannerCall.call();
+      logFirebaseEvent('Home_backend_call');
       _model.apiBlogRecommendOutput =
           await FoodexpirationGroup.blogRecommendCall.call();
+      logFirebaseEvent('Home_custom_action');
       _model.bloglist = await actions.toBlogStructList(
         (_model.apiBlogRecommendOutput?.jsonBody ?? ''),
       );
+      logFirebaseEvent('Home_action_block');
       await action_blocks.fetchCategory(context);
       setState(() {});
+      logFirebaseEvent('Home_update_page_state');
       setState(() {
         _model.blogList = _model.bloglist!.toList().cast<BlogStruct>();
         _model.bannerImage =
@@ -116,6 +124,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            logFirebaseEvent('HOME_FloatingActionButton_aj4nwdjz_ON_TA');
+            logFirebaseEvent('FloatingActionButton_action_block');
             await action_blocks.openAddItem(
               context,
               replace: true,
@@ -338,6 +348,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'HOME_PAGE_ContainerSearch_ON_TAP');
+                              logFirebaseEvent('ContainerSearch_navigate_to');
+
                               context.pushNamed(
                                 'Setting',
                                 queryParameters: {
@@ -370,6 +384,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'HOME_PAGE_Container_o4olnfwb_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Container_navigate_to');
+
                                             context.pushNamed(
                                               'ItemList',
                                               queryParameters: {
@@ -473,6 +492,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'HOME_PAGE_Container_b53dab4y_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Container_navigate_to');
+
                                             context.pushNamed(
                                               'ItemList',
                                               queryParameters: {
@@ -574,6 +598,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       size: 30.0,
                                     ),
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'HOME_PAGE_date_range_outlined_ICN_ON_TAP');
+                                      logFirebaseEvent(
+                                          'IconButton_navigate_to');
+
                                       context.pushNamed(
                                         'ItemList',
                                         queryParameters: {
@@ -623,6 +652,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       size: 30.0,
                                     ),
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'HOME_PAGE_location_on_ICN_ON_TAP');
+                                      logFirebaseEvent(
+                                          'IconButton_navigate_to');
+
                                       context.pushNamed('LocationList');
                                     },
                                   ),
@@ -660,6 +694,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       size: 30.0,
                                     ),
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'HOME_PAGE_auto_delete_ICN_ON_TAP');
+                                      logFirebaseEvent(
+                                          'IconButton_navigate_to');
+
                                       context.pushNamed('Archived');
                                     },
                                   ),
@@ -697,6 +736,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       size: 30.0,
                                     ),
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'HOME_PAGE_settings_outlined_ICN_ON_TAP');
+                                      logFirebaseEvent(
+                                          'IconButton_navigate_to');
+
                                       context.pushNamed('Setting');
                                     },
                                   ),
@@ -730,6 +774,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent('HOME_PAGE_Row_nk9sfzvg_ON_TAP');
+                              logFirebaseEvent('Row_navigate_to');
+
                               context.pushNamed('Blog');
                             },
                             child: Row(

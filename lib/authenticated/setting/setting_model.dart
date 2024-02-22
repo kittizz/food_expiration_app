@@ -61,11 +61,13 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
   Future saveNickname(BuildContext context) async {
     ApiCallResponse? apiChangeNicknam;
 
+    logFirebaseEvent('saveNickname_backend_call');
     apiChangeNicknam = await FoodexpirationGroup.changeNicknameCall.call(
       deviceid: FFAppState().deviceId,
       nickname: textController.text,
     );
     if ((apiChangeNicknam?.succeeded ?? true)) {
+      logFirebaseEvent('saveNickname_show_snack_bar');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -78,8 +80,10 @@ class SettingModel extends FlutterFlowModel<SettingWidget> {
           backgroundColor: FlutterFlowTheme.of(context).secondary,
         ),
       );
+      logFirebaseEvent('saveNickname_action_block');
       await action_blocks.fetchUser(context);
     } else {
+      logFirebaseEvent('saveNickname_show_snack_bar');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

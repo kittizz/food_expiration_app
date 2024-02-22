@@ -29,6 +29,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     super.initState();
     _model = createModel(context, () => WelcomeModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Welcome'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -169,6 +170,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   16.0, 12.0, 16.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'WELCOME_SIGN_IN_WITH_EMAIL_BTN_ON_TAP');
+                                  logFirebaseEvent('Button_navigate_to');
+
                                   context.pushNamed('Signup');
                                 },
                                 text: 'Sign in with Email',
@@ -213,12 +218,16 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   16.0, 12.0, 16.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'WELCOME_SIGN_IN_WITH_GOOGLE_BTN_ON_TAP');
+                                  logFirebaseEvent('Button_auth');
                                   GoRouter.of(context).prepareAuthEvent();
                                   final user = await authManager
                                       .signInWithGoogle(context);
                                   if (user == null) {
                                     return;
                                   }
+                                  logFirebaseEvent('Button_action_block');
                                   await action_blocks.registerDevice(
                                     context,
                                     nickname: currentUserDisplayName,
@@ -263,12 +272,16 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   16.0, 12.0, 16.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'WELCOME_SIGN_IN_WITH_FACEBOOK_BTN_ON_TAP');
+                                  logFirebaseEvent('Button_auth');
                                   GoRouter.of(context).prepareAuthEvent();
                                   final user = await authManager
                                       .signInWithFacebook(context);
                                   if (user == null) {
                                     return;
                                   }
+                                  logFirebaseEvent('Button_action_block');
                                   await action_blocks.registerDevice(
                                     context,
                                     nickname: currentUserDisplayName,
@@ -316,6 +329,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'WELCOME_PAGE_RichText_570poqwy_ON_TAP');
+                                  logFirebaseEvent('RichText_navigate_to');
+
                                   context.pushNamed('Signin');
                                 },
                                 child: RichText(

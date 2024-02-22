@@ -32,8 +32,12 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
     super.initState();
     _model = createModel(context, () => LocationInfoModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'LocationInfo'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('LOCATION_INFO_LocationInfo_ON_INIT_STATE');
+      logFirebaseEvent('LocationInfo_update_page_state');
       setState(() {
         _model.hash = FFAppState().pageLocationInfo.imageBlurhash;
       });
@@ -82,6 +86,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('LOCATION_INFO_arrow_back_ios_rounded_ICN');
+              logFirebaseEvent('IconButton_navigate_back');
               context.safePop();
             },
           ),
@@ -102,7 +108,9 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
+                logFirebaseEvent('LOCATION_INFO_PAGE_Row_8bahqunl_ON_TAP');
                 var _shouldSetState = false;
+                logFirebaseEvent('Row_alert_dialog');
                 var confirmDialogResponse = await showDialog<bool>(
                       context: context,
                       builder: (alertDialogContext) {
@@ -127,6 +135,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                     ) ??
                     false;
                 if (confirmDialogResponse) {
+                  logFirebaseEvent('Row_backend_call');
                   _model.apiLocationDelete =
                       await FoodexpirationGroup.deleteLocationCall.call(
                     deviceid: FFAppState().deviceId,
@@ -134,6 +143,7 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                   );
                   _shouldSetState = true;
                   if ((_model.apiLocationDelete?.succeeded ?? true)) {
+                    logFirebaseEvent('Row_show_snack_bar');
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -153,9 +163,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                         backgroundColor: FlutterFlowTheme.of(context).secondary,
                       ),
                     );
+                    logFirebaseEvent('Row_navigate_to');
 
                     context.goNamed('Home');
                   } else {
+                    logFirebaseEvent('Row_show_snack_bar');
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -262,6 +274,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'LOCATION_INFO_PAGE_heroImage_ON_TAP');
+                                            logFirebaseEvent(
+                                                'heroImage_store_media_for_upload');
                                             final selectedMedia =
                                                 await selectMediaWithSourceBottomSheet(
                                               context: context,
@@ -318,6 +334,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                               }
                                             }
 
+                                            logFirebaseEvent(
+                                                'heroImage_action_block');
                                             await _model.uploadImage(
                                               context,
                                               fileUpload:
@@ -463,6 +481,10 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'LOCATION_INFO_PAGE_UPLOAD_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_store_media_for_upload');
                                           final selectedMedia =
                                               await selectMediaWithSourceBottomSheet(
                                             context: context,
@@ -517,6 +539,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                             }
                                           }
 
+                                          logFirebaseEvent(
+                                              'Button_action_block');
                                           await _model.uploadImage(
                                             context,
                                             fileUpload:
@@ -562,6 +586,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'LOCATION_INFO_SELECT_PICTURE_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_navigate_to');
+
                                           context.pushNamed(
                                             'ThumbnailCategory',
                                             queryParameters: {
@@ -762,10 +791,14 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                       Expanded(
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            logFirebaseEvent(
+                                                'LOCATION_INFO_PAGE__BTN_ON_TAP');
                                             var _shouldSetState = false;
                                             if (FFAppState()
                                                 .pageLocationInfo
                                                 .isAdd) {
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
                                               _model.apiCreateLocation =
                                                   await FoodexpirationGroup
                                                       .createLocationCall
@@ -784,6 +817,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                               if (!(_model.apiCreateLocation
                                                       ?.succeeded ??
                                                   true)) {
+                                                logFirebaseEvent(
+                                                    'Button_alert_dialog');
                                                 await showDialog(
                                                   context: context,
                                                   builder:
@@ -815,6 +850,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                 return;
                                               }
                                             } else {
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
                                               _model.apiUpdatelocation =
                                                   await FoodexpirationGroup
                                                       .updateLocationCall
@@ -836,6 +873,8 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                               if (!(_model.apiUpdatelocation
                                                       ?.succeeded ??
                                                   true)) {
+                                                logFirebaseEvent(
+                                                    'Button_alert_dialog');
                                                 await showDialog(
                                                   context: context,
                                                   builder:
@@ -868,9 +907,13 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                               }
                                             }
 
+                                            logFirebaseEvent(
+                                                'Button_action_block');
                                             await action_blocks
                                                 .fetchLocations(context);
                                             setState(() {});
+                                            logFirebaseEvent(
+                                                'Button_action_block');
                                             await action_blocks
                                                 .fetchLocationInfo(
                                               context,
@@ -879,7 +922,11 @@ class _LocationInfoWidgetState extends State<LocationInfoWidget> {
                                                   .locationId,
                                             );
                                             setState(() {});
+                                            logFirebaseEvent(
+                                                'Button_navigate_back');
                                             context.safePop();
+                                            logFirebaseEvent(
+                                                'Button_show_snack_bar');
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               SnackBar(

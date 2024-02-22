@@ -129,13 +129,16 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
 
     if (fileUpload != null && (fileUpload?.bytes?.isNotEmpty ?? false)) {
       if (fileUpload?.blurHash != hash) {
+        logFirebaseEvent('uploadImage_backend_call');
         apiUploadImage1 = await FoodexpirationGroup.uploadImageCall.call(
           file: fileUpload,
           deviceid: FFAppState().deviceId,
           hash: fileUpload?.blurHash,
         );
         if ((apiUploadImage1?.succeeded ?? true)) {
+          logFirebaseEvent('uploadImage_update_page_state');
           hash = uploadedLocalFile.blurHash!;
+          logFirebaseEvent('uploadImage_update_app_state');
           FFAppState().updateThumbnailStruct(
             (e) => e
               ..updateImage(
@@ -155,6 +158,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
                       .toString(),
               ),
           );
+          logFirebaseEvent('uploadImage_show_snack_bar');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -169,6 +173,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
           );
           return;
         } else {
+          logFirebaseEvent('uploadImage_show_snack_bar');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -198,6 +203,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
   Future scanBarcode(BuildContext context) async {
     var barcodeOutput = '';
 
+    logFirebaseEvent('scanBarcode_scan_barcode_q_r_code');
     barcodeOutput = await FlutterBarcodeScanner.scanBarcode(
       '#C62828', // scanning line color
       'Cancel', // cancel button text
@@ -206,6 +212,7 @@ class ItemInfoModel extends FlutterFlowModel<ItemInfoWidget> {
     );
 
     if (barcodeOutput != '-1') {
+      logFirebaseEvent('scanBarcode_update_app_state');
       FFAppState().update(() {
         FFAppState().updatePageItemInfoStruct(
           (e) => e..barcode = barcodeOutput,

@@ -39,12 +39,17 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
     super.initState();
     _model = createModel(context, () => ThumbnailCategoryModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ThumbnailCategory'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('THUMBNAIL_CATEGORY_ThumbnailCategory_ON_');
+      logFirebaseEvent('ThumbnailCategory_backend_call');
       _model.apiCategory = await FoodexpirationGroup.thumbnailCategoryCall.call(
         deviceid: FFAppState().deviceId,
       );
       if ((_model.apiCategory?.succeeded ?? true)) {
+        logFirebaseEvent('ThumbnailCategory_update_page_state');
         setState(() {
           _model.categorys = functions
               .toThumbnailCategoryStructList(
@@ -90,6 +95,8 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('THUMBNAIL_CATEGORY_arrow_back_ios_rounde');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -152,6 +159,9 @@ class _ThumbnailCategoryWidgetState extends State<ThumbnailCategoryWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'THUMBNAIL_CATEGORY_Card_lswyrp43_ON_TAP');
+                              logFirebaseEvent('Card_navigate_to');
                               if (Navigator.of(context).canPop()) {
                                 context.pop();
                               }

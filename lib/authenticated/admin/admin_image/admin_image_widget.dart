@@ -37,14 +37,18 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
     super.initState();
     _model = createModel(context, () => AdminImageModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'AdminImage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ADMIN_IMAGE_AdminImage_ON_INIT_STATE');
+      logFirebaseEvent('AdminImage_update_page_state');
       setState(() {
         _model.kindLocal = KindStruct(
           name: 'รายการ',
           key: 'item',
         );
       });
+      logFirebaseEvent('AdminImage_action_block');
       await _model.fetchThumbnailCategories(context);
       setState(() {});
     });
@@ -165,6 +169,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'ADMIN_IMAGE_Container_snowljrm_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Container_update_page_state');
                                               setState(() {
                                                 _model.kindLocal = kinItem;
                                                 _model.useThumbnailCategorie =
@@ -265,6 +273,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'ADMIN_IMAGE_PAGE_Text_tm72ib5t_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Text_action_block');
                                               await _model
                                                   .fetchThumbnailCategories(
                                                       context);
@@ -288,7 +300,11 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'ADMIN_IMAGE_PAGE_Row_irpsoqr4_ON_TAP');
                                             var _shouldSetState = false;
+                                            logFirebaseEvent(
+                                                'Row_bottom_sheet');
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
                                               backgroundColor:
@@ -322,6 +338,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
 
                                             _shouldSetState = true;
                                             if (_model.modelAddImage != null) {
+                                              logFirebaseEvent(
+                                                  'Row_backend_call');
                                               _model.apiThumbnailCreateCategory =
                                                   await FoodexpirationGroup
                                                       .adminThumbnailCreateCategoryCall
@@ -339,6 +357,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                       .apiThumbnailCreateCategory
                                                       ?.succeeded ??
                                                   true)) {
+                                                logFirebaseEvent(
+                                                    'Row_show_snack_bar');
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                   SnackBar(
@@ -359,10 +379,14 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                             .secondary,
                                                   ),
                                                 );
+                                                logFirebaseEvent(
+                                                    'Row_action_block');
                                                 await _model
                                                     .fetchThumbnailCategories(
                                                         context);
                                                 setState(() {});
+                                                logFirebaseEvent(
+                                                    'Row_update_page_state');
                                                 setState(() {
                                                   _model.kindLocal = _model
                                                       .modelAddImage?.kind;
@@ -373,6 +397,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                   setState(() {});
                                                 return;
                                               } else {
+                                                logFirebaseEvent(
+                                                    'Row_show_snack_bar');
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                   SnackBar(
@@ -463,6 +489,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'ADMIN_IMAGE_PAGE_Image_zja0fsx0_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Image_expand_image');
                                                 await Navigator.push(
                                                   context,
                                                   PageTransition(
@@ -573,6 +603,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'ADMIN_IMAGE_PAGE_Row_tghsihdb_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Row_alert_dialog');
                                                     var confirmDialogResponse =
                                                         await showDialog<bool>(
                                                               context: context,
@@ -604,6 +638,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                             ) ??
                                                             false;
                                                     if (confirmDialogResponse) {
+                                                      logFirebaseEvent(
+                                                          'Row_backend_call');
                                                       _model.apiDeleteThumCate =
                                                           await FoodexpirationGroup
                                                               .deleteThumbnailCategoryCall
@@ -618,14 +654,20 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                               .apiDeleteThumCate
                                                               ?.succeeded ??
                                                           true)) {
+                                                        logFirebaseEvent(
+                                                            'Row_update_page_state');
                                                         setState(() {
                                                           _model.useThumbnailCategorie =
                                                               null;
                                                         });
+                                                        logFirebaseEvent(
+                                                            'Row_action_block');
                                                         await _model
                                                             .fetchThumbnailCategories(
                                                                 context);
                                                         setState(() {});
+                                                        logFirebaseEvent(
+                                                            'Row_show_snack_bar');
                                                         ScaffoldMessenger.of(
                                                                 context)
                                                             .showSnackBar(
@@ -699,6 +741,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'ADMIN_IMAGE_PAGE_Row_uja4oe6a_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Row_bottom_sheet');
                                                     await showModalBottomSheet(
                                                       isScrollControlled: true,
                                                       backgroundColor:
@@ -740,6 +786,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                             _model.modelRename =
                                                                 value));
 
+                                                    logFirebaseEvent(
+                                                        'Row_update_page_state');
                                                     setState(() {
                                                       _model
                                                           .updateUseThumbnailCategorieStruct(
@@ -748,6 +796,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                               .modelRename,
                                                       );
                                                     });
+                                                    logFirebaseEvent(
+                                                        'Row_action_block');
                                                     await _model
                                                         .fetchThumbnailCategories(
                                                             context);
@@ -803,6 +853,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'ADMIN_IMAGE_PAGE_Row_nn5zhvkg_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Row_bottom_sheet');
                                                     await showModalBottomSheet(
                                                       isScrollControlled: true,
                                                       backgroundColor:
@@ -838,6 +892,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
 
                                                     if (_model.modelEditImage !=
                                                         null) {
+                                                      logFirebaseEvent(
+                                                          'Row_backend_call');
                                                       _model.apiUpdateCategoryImage =
                                                           await FoodexpirationGroup
                                                               .adminUpdateCategoryImageCall
@@ -854,6 +910,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                               .apiUpdateCategoryImage
                                                               ?.succeeded ??
                                                           true)) {
+                                                        logFirebaseEvent(
+                                                            'Row_show_snack_bar');
                                                         ScaffoldMessenger.of(
                                                                 context)
                                                             .showSnackBar(
@@ -875,6 +933,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                     .secondary,
                                                           ),
                                                         );
+                                                        logFirebaseEvent(
+                                                            'Row_update_page_state');
                                                         setState(() {
                                                           _model
                                                               .updateUseThumbnailCategorieStruct(
@@ -935,6 +995,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'ADMIN_IMAGE_PAGE_Row_fg7vnind_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Row_update_page_state');
                                                     setState(() {
                                                       _model.useThumbnailCategorie =
                                                           null;
@@ -1028,10 +1092,16 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'ADMIN_IMAGE_ListTile_uc2qd1eg_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'ListTile_update_page_state');
                                                   setState(() {
                                                     _model.useThumbnailCategorie =
                                                         categorieslistItem;
                                                   });
+                                                  logFirebaseEvent(
+                                                      'ListTile_action_block');
                                                   await _model.fetchThumbnail(
                                                     context,
                                                     id: categorieslistItem.id,
@@ -1109,8 +1179,11 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'ADMIN_IMAGE_PAGE_Row_0ogw48od_ON_TAP');
                                   var _shouldSetState = false;
                                   if (_model.useThumbnailCategorie == null) {
+                                    logFirebaseEvent('Row_show_snack_bar');
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
@@ -1129,6 +1202,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                     if (_shouldSetState) setState(() {});
                                     return;
                                   }
+                                  logFirebaseEvent('Row_bottom_sheet');
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
@@ -1158,6 +1232,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
 
                                   _shouldSetState = true;
                                   if (_model.modelAddImage2 != null) {
+                                    logFirebaseEvent('Row_backend_call');
                                     _model.apiThumbnailCreate =
                                         await FoodexpirationGroup
                                             .adminThumbnailCreateCall
@@ -1171,6 +1246,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                     _shouldSetState = true;
                                     if ((_model.apiThumbnailCreate?.succeeded ??
                                         true)) {
+                                      logFirebaseEvent('Row_show_snack_bar');
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
@@ -1189,6 +1265,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                   .secondary,
                                         ),
                                       );
+                                      logFirebaseEvent('Row_action_block');
                                       await _model.fetchThumbnail(
                                         context,
                                         id: _model.useThumbnailCategorie?.id,
@@ -1197,6 +1274,7 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                       if (_shouldSetState) setState(() {});
                                       return;
                                     } else {
+                                      logFirebaseEvent('Row_show_snack_bar');
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
@@ -1330,6 +1408,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                   Colors
                                                                       .transparent,
                                                               onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'ADMIN_IMAGE_PAGE_Image_izy5jwia_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'Image_expand_image');
                                                                 await Navigator
                                                                     .push(
                                                                   context,
@@ -1461,6 +1543,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                             .transparent,
                                                                     onTap:
                                                                         () async {
+                                                                      logFirebaseEvent(
+                                                                          'ADMIN_IMAGE_PAGE_Icon_u1xenrab_ON_TAP');
+                                                                      logFirebaseEvent(
+                                                                          'Icon_alert_dialog');
                                                                       var confirmDialogResponse = await showDialog<
                                                                               bool>(
                                                                             context:
@@ -1485,6 +1571,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                           ) ??
                                                                           false;
                                                                       if (confirmDialogResponse) {
+                                                                        logFirebaseEvent(
+                                                                            'Icon_backend_call');
                                                                         _model.apiDeleteThum = await FoodexpirationGroup
                                                                             .deleteThumbnailCall
                                                                             .call(
@@ -1495,6 +1583,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                         );
                                                                         if ((_model.apiDeleteThum?.succeeded ??
                                                                             true)) {
+                                                                          logFirebaseEvent(
+                                                                              'Icon_update_page_state');
                                                                           setState(
                                                                               () {
                                                                             _model.removeFromThumbnails(listItem);
@@ -1547,6 +1637,10 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                             .transparent,
                                                                     onTap:
                                                                         () async {
+                                                                      logFirebaseEvent(
+                                                                          'ADMIN_IMAGE_PAGE_Icon_86olv9d7_ON_TAP');
+                                                                      logFirebaseEvent(
+                                                                          'Icon_bottom_sheet');
                                                                       await showModalBottomSheet(
                                                                         isScrollControlled:
                                                                             true,
@@ -1577,6 +1671,8 @@ class _AdminImageWidgetState extends State<AdminImageWidget> {
                                                                           safeSetState(
                                                                               () {}));
 
+                                                                      logFirebaseEvent(
+                                                                          'Icon_action_block');
                                                                       await _model
                                                                           .fetchThumbnail(
                                                                         context,

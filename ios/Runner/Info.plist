@@ -37,10 +37,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>foodexpiration.com</string>
+        <string>expirydate.mc.sv</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>foodexpiration</string>
+        <string>fdx</string>
         </array>
         </dict>
     </array>

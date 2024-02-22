@@ -30,13 +30,18 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
     super.initState();
     _model = createModel(context, () => ArchivedModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Archived'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ARCHIVED_PAGE_Archived_ON_INIT_STATE');
+      logFirebaseEvent('Archived_update_app_state');
       setState(() {
         FFAppState().items = [];
       });
+      logFirebaseEvent('Archived_action_block');
       await action_blocks.fetchLocations(context);
       setState(() {});
+      logFirebaseEvent('Archived_action_block');
       await action_blocks.fetchItems(
         context,
         archive: true,
@@ -80,6 +85,8 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('ARCHIVED_arrow_back_ios_rounded_ICN_ON_T');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -109,8 +116,11 @@ class _ArchivedWidgetState extends State<ArchivedWidget> {
               child: RefreshIndicator(
                 color: FlutterFlowTheme.of(context).red200,
                 onRefresh: () async {
+                  logFirebaseEvent('ARCHIVED_Column_e2nftuog_ON_PULL_TO_REFR');
+                  logFirebaseEvent('Column_action_block');
                   await action_blocks.fetchLocations(context);
                   setState(() {});
+                  logFirebaseEvent('Column_action_block');
                   await action_blocks.fetchItems(
                     context,
                     archive: true,

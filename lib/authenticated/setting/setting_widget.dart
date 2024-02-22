@@ -44,8 +44,11 @@ class _SettingWidgetState extends State<SettingWidget>
     super.initState();
     _model = createModel(context, () => SettingModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Setting'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SETTING_PAGE_Setting_ON_INIT_STATE');
+      logFirebaseEvent('Setting_action_block');
       await action_blocks.fetchUser(context);
       setState(() {});
     });
@@ -98,6 +101,8 @@ class _SettingWidgetState extends State<SettingWidget>
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('SETTING_arrow_back_rounded_ICN_ON_TAP');
+              logFirebaseEvent('IconButton_navigate_back');
               context.pop();
             },
           ),
@@ -185,6 +190,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                       setState(() => _model
                                           .switchListTileValue = newValue!);
                                       if (newValue!) {
+                                        logFirebaseEvent(
+                                            'SETTING_SwitchListTile_2xfaq6et_ON_TOGGL');
+                                        logFirebaseEvent(
+                                            'SwitchListTile_action_block');
                                         await action_blocks.saveSettings(
                                           context,
                                           notification: true,
@@ -193,6 +202,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                         );
                                         setState(() {});
                                       } else {
+                                        logFirebaseEvent(
+                                            'SETTING_SwitchListTile_2xfaq6et_ON_TOGGL');
+                                        logFirebaseEvent(
+                                            'SwitchListTile_action_block');
                                         await action_blocks.saveSettings(
                                           context,
                                           notification: false,
@@ -256,6 +269,11 @@ class _SettingWidgetState extends State<SettingWidget>
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'SETTING_PAGE_Row_63jrof6m_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Row_date_time_picker');
+
                                           final _datePickedTime =
                                               await showTimePicker(
                                             context: context,
@@ -289,6 +307,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                             });
                                           }
                                           if (_model.datePicked != null) {
+                                            logFirebaseEvent(
+                                                'Row_action_block');
                                             await action_blocks.saveSettings(
                                               context,
                                               notification: FFAppState()
@@ -412,6 +432,9 @@ class _SettingWidgetState extends State<SettingWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
+                                      logFirebaseEvent(
+                                          'SETTING_PAGE_Text_372fg6tv_ON_TAP');
+                                      logFirebaseEvent('Text_action_block');
                                       await _model.saveNickname(context);
                                     },
                                     child: Text(
@@ -466,6 +489,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'SETTING_PAGE_Image_ptp46don_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Image_expand_image');
                                                 await Navigator.push(
                                                   context,
                                                   PageTransition(
@@ -583,7 +610,11 @@ class _SettingWidgetState extends State<SettingWidget>
                                                   size: 20.0,
                                                 ),
                                                 onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'SETTING_PAGE_edit_ICN_ON_TAP');
                                                   var _shouldSetState = false;
+                                                  logFirebaseEvent(
+                                                      'IconButton_store_media_for_upload');
                                                   final selectedMedia =
                                                       await selectMediaWithSourceBottomSheet(
                                                     context: context,
@@ -653,6 +684,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                                               .bytes
                                                               ?.isNotEmpty ??
                                                           false)) {
+                                                    logFirebaseEvent(
+                                                        'IconButton_backend_call');
                                                     _model.apiChangeProfilepicture =
                                                         await FoodexpirationGroup
                                                             .changeProfilepictureCall
@@ -670,6 +703,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                                             .apiChangeProfilepicture
                                                             ?.succeeded ??
                                                         true)) {
+                                                      logFirebaseEvent(
+                                                          'IconButton_show_snack_bar');
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .clearSnackBars();
@@ -711,6 +746,8 @@ class _SettingWidgetState extends State<SettingWidget>
                                                       return;
                                                     }
 
+                                                    logFirebaseEvent(
+                                                        'IconButton_action_block');
                                                     await action_blocks
                                                         .fetchUser(context);
                                                     setState(() {});
@@ -735,6 +772,10 @@ class _SettingWidgetState extends State<SettingWidget>
                                           controller: _model.textController,
                                           focusNode: _model.textFieldFocusNode,
                                           onFieldSubmitted: (_) async {
+                                            logFirebaseEvent(
+                                                'SETTING_TextField_qy3him1q_ON_TEXTFIELD_');
+                                            logFirebaseEvent(
+                                                'TextField_action_block');
                                             await _model.saveNickname(context);
                                           },
                                           obscureText: false,
@@ -830,7 +871,10 @@ class _SettingWidgetState extends State<SettingWidget>
                             ),
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'SETTING_PAGE_Button-Login_ON_TAP');
                                 Function() _navigate = () {};
+                                logFirebaseEvent('Button-Login_alert_dialog');
                                 var confirmDialogResponse =
                                     await showDialog<bool>(
                                           context: context,
@@ -860,12 +904,15 @@ class _SettingWidgetState extends State<SettingWidget>
                                         ) ??
                                         false;
                                 if (confirmDialogResponse) {
+                                  logFirebaseEvent('Button-Login_auth');
                                   GoRouter.of(context).prepareAuthEvent();
                                   await authManager.signOut();
                                   GoRouter.of(context).clearRedirectLocation();
 
                                   _navigate = () => context.goNamedAuth(
                                       'Splash', context.mounted);
+                                  logFirebaseEvent(
+                                      'Button-Login_update_app_state');
                                   setState(() {
                                     FFAppState().deviceId = '';
                                     FFAppState().user = UserStruct

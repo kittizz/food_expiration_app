@@ -31,8 +31,12 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
     super.initState();
     _model = createModel(context, () => AdminCategoryModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'AdminCategory'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ADMIN_CATEGORY_AdminCategory_ON_INIT_STA');
+      logFirebaseEvent('AdminCategory_update_page_state');
       setState(() {
         _model.kindLocal = KindStruct(
           name: 'รายการ',
@@ -121,6 +125,9 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
+                                      logFirebaseEvent(
+                                          'ADMIN_CATEGORY_PAGE_Row_v9zx1tur_ON_TAP');
+                                      logFirebaseEvent('Row_backend_call');
                                       _model.apiResulti08 =
                                           await FoodexpirationGroup
                                               .adminSetCategoriesCall
@@ -131,6 +138,7 @@ class _AdminCategoryWidgetState extends State<AdminCategoryWidget> {
                                       );
                                       if ((_model.apiResulti08?.succeeded ??
                                           true)) {
+                                        logFirebaseEvent('Row_show_snack_bar');
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(

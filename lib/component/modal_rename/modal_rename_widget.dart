@@ -136,6 +136,9 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'MODAL_RENAME_COMP_Icon_i54zojpz_ON_TAP');
+                                    logFirebaseEvent('Icon_bottom_sheet');
                                     Navigator.pop(context);
                                   },
                                   child: Icon(
@@ -207,6 +210,9 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                             16.0, 16.0, 16.0, 44.0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'MODAL_RENAME_COMP_SAVE_BTN_ON_TAP');
+                            logFirebaseEvent('Button_backend_call');
                             _model.apiResultv0m = await FoodexpirationGroup
                                 .adminRenameThumbnailCall
                                 .call(
@@ -216,6 +222,7 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                               type: widget.type,
                             );
                             if ((_model.apiResultv0m?.succeeded ?? true)) {
+                              logFirebaseEvent('Button_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -232,6 +239,7 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                                 ),
                               );
                             } else {
+                              logFirebaseEvent('Button_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -248,6 +256,7 @@ class _ModalRenameWidgetState extends State<ModalRenameWidget> {
                               );
                             }
 
+                            logFirebaseEvent('Button_bottom_sheet');
                             Navigator.pop(context, _model.nameController.text);
 
                             setState(() {});

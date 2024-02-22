@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -118,22 +119,38 @@ class _SplashWidgetState extends State<SplashWidget>
     super.initState();
     _model = createModel(context, () => SplashModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Splash'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SPLASH_PAGE_Splash_ON_INIT_STATE');
+      if (isWeb) {
+        logFirebaseEvent('Splash_custom_action');
+        _model.isAdmibSite = await actions.checkIsAdminDomain();
+      }
+      logFirebaseEvent('Splash_wait__delay');
       await Future.delayed(const Duration(milliseconds: 2000));
       if (loggedIn) {
+        logFirebaseEvent('Splash_action_block');
         _model.outputFetchUser = await action_blocks.fetchUser(context);
         if (_model.outputFetchUser!) {
-          if (FFAppState().user.role == 'admin') {
+          if ((FFAppState().user.role == 'admin') && _model.isAdmibSite!) {
+            logFirebaseEvent('Splash_navigate_to');
+
             context.goNamedAuth('AdminDashboard', context.mounted);
           } else {
+            logFirebaseEvent('Splash_navigate_to');
+
             context.goNamedAuth('Home', context.mounted);
           }
         } else {
+          logFirebaseEvent('Splash_update_app_state');
           FFAppState().deviceId = '';
+          logFirebaseEvent('Splash_auth');
           GoRouter.of(context).prepareAuthEvent();
           await authManager.signOut();
           GoRouter.of(context).clearRedirectLocation();
+
+          logFirebaseEvent('Splash_navigate_to');
 
           context.goNamedAuth('Splash', context.mounted);
 
@@ -141,8 +158,12 @@ class _SplashWidgetState extends State<SplashWidget>
         }
       } else {
         if (isWeb) {
+          logFirebaseEvent('Splash_navigate_to');
+
           context.goNamedAuth('Signin', context.mounted);
         } else {
+          logFirebaseEvent('Splash_navigate_to');
+
           context.goNamedAuth('Welcome', context.mounted);
         }
       }
