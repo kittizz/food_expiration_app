@@ -7,8 +7,8 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class FoodExpirationFirebaseUser extends BaseAuthUser {
-  FoodExpirationFirebaseUser(this.user);
+class ExpiryDateFirebaseUser extends BaseAuthUser {
+  ExpiryDateFirebaseUser(this.user);
   User? user;
   bool get loggedIn => user != null;
 
@@ -56,17 +56,17 @@ class FoodExpirationFirebaseUser extends BaseAuthUser {
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
   static BaseAuthUser fromFirebaseUser(User? user) =>
-      FoodExpirationFirebaseUser(user);
+      ExpiryDateFirebaseUser(user);
 }
 
-Stream<BaseAuthUser> foodExpirationFirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> expiryDateFirebaseUserStream() => FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = FoodExpirationFirebaseUser(user);
+        currentUser = ExpiryDateFirebaseUser(user);
         if (!kIsWeb) {
           FirebaseCrashlytics.instance.setUserIdentifier(user?.uid ?? '');
         }
