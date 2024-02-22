@@ -157,15 +157,9 @@ class _SplashWidgetState extends State<SplashWidget>
           return;
         }
       } else {
-        if (isWeb) {
-          logFirebaseEvent('Splash_navigate_to');
+        logFirebaseEvent('Splash_navigate_to');
 
-          context.goNamedAuth('Signin', context.mounted);
-        } else {
-          logFirebaseEvent('Splash_navigate_to');
-
-          context.goNamedAuth('Welcome', context.mounted);
-        }
+        context.goNamedAuth('Welcome', context.mounted);
       }
     });
 
