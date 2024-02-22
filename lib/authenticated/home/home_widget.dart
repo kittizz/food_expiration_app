@@ -286,7 +286,12 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Hello ${FFAppState().user.nickname}',
+                                                    'Hello ${valueOrDefault<String>(
+                                                      FFAppState()
+                                                          .user
+                                                          .nickname,
+                                                      'User',
+                                                    )}',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyLarge

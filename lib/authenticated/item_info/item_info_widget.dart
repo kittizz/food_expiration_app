@@ -394,14 +394,14 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                         context: context,
                         builder: (alertDialogContext) {
                           return AlertDialog(
-                            title: Text('ข้อผิดพลาด'),
-                            content:
-                                Text('โปรดอัพโหลดรูปภาพ หรือ เลือกจากคลังภาพ'),
+                            title: Text('Error'),
+                            content: Text(
+                                'Please upload a photo or select from the photo gallery.'),
                             actions: [
                               TextButton(
                                 onPressed: () =>
                                     Navigator.pop(alertDialogContext),
-                                child: Text('ตกลง'),
+                                child: Text('ok'),
                               ),
                             ],
                           );
