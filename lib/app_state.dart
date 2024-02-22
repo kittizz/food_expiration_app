@@ -168,21 +168,21 @@ class FFAppState extends ChangeNotifier {
 
   List<AddDateStruct> _addDate = [
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"1 ว\",\"day\":\"1\"}')),
+        jsonDecode('{\"short\":\"1 d\",\"day\":\"1\"}')),
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"3 ว\",\"day\":\"3\"}')),
+        jsonDecode('{\"short\":\"3 d\",\"day\":\"3\"}')),
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"5 ว\",\"day\":\"5\"}')),
+        jsonDecode('{\"short\":\"5 d\",\"day\":\"5\"}')),
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"1 ส\",\"day\":\"7\"}')),
+        jsonDecode('{\"short\":\"1 w\",\"day\":\"7\"}')),
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"1 ด\",\"day\":\"30\"}')),
+        jsonDecode('{\"short\":\"1 m\",\"day\":\"30\"}')),
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"3 ด\",\"day\":\"90\"}')),
+        jsonDecode('{\"short\":\"3 m\",\"day\":\"90\"}')),
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"1 ป\",\"day\":\"365\"}')),
+        jsonDecode('{\"short\":\"1 y\",\"day\":\"365\"}')),
     AddDateStruct.fromSerializableMap(
-        jsonDecode('{\"short\":\"2 ส\",\"day\":\"14\"}'))
+        jsonDecode('{\"short\":\"2 w\",\"day\":\"14\"}'))
   ];
   List<AddDateStruct> get addDate => _addDate;
   set addDate(List<AddDateStruct> _value) {
