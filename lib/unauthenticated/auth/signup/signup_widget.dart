@@ -42,17 +42,17 @@ class _SignupWidgetState extends State<SignupWidget> {
       });
     }
 
-    _model.emailTextController ??= TextEditingController();
+    _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.emailTextFieldController ??= TextEditingController();
+    _model.emailTextFieldFocusNode ??= FocusNode();
 
     _model.passwordTextController ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
+    _model.textFieldFocusNode2 ??= FocusNode();
 
     _model.confirmPasswordTextController ??= TextEditingController();
-    _model.textFieldFocusNode4 ??= FocusNode();
+    _model.textFieldFocusNode3 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -150,7 +150,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 12.0, 16.0, 0.0),
                               child: TextFormField(
-                                controller: _model.emailTextController,
+                                controller: _model.textController1,
                                 focusNode: _model.textFieldFocusNode1,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -217,7 +217,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                                   .bodyLargeFamily),
                                       lineHeight: 3.0,
                                     ),
-                                validator: _model.emailTextControllerValidator
+                                validator: _model.textController1Validator
                                     .asValidator(context),
                               ),
                             ),
@@ -225,8 +225,8 @@ class _SignupWidgetState extends State<SignupWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 12.0, 16.0, 0.0),
                               child: TextFormField(
-                                controller: _model.textController1,
-                                focusNode: _model.textFieldFocusNode2,
+                                controller: _model.emailTextFieldController,
+                                focusNode: _model.emailTextFieldFocusNode,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Email',
@@ -293,7 +293,8 @@ class _SignupWidgetState extends State<SignupWidget> {
                                       lineHeight: 3.0,
                                     ),
                                 keyboardType: TextInputType.emailAddress,
-                                validator: _model.textController1Validator
+                                validator: _model
+                                    .emailTextFieldControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -302,7 +303,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                   16.0, 12.0, 16.0, 0.0),
                               child: TextFormField(
                                 controller: _model.passwordTextController,
-                                focusNode: _model.textFieldFocusNode3,
+                                focusNode: _model.textFieldFocusNode2,
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: !_model.passwordVisibility1,
                                 decoration: InputDecoration(
@@ -395,7 +396,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                               child: TextFormField(
                                 controller:
                                     _model.confirmPasswordTextController,
-                                focusNode: _model.textFieldFocusNode4,
+                                focusNode: _model.textFieldFocusNode3,
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: !_model.passwordVisibility2,
                                 decoration: InputDecoration(
@@ -512,7 +513,7 @@ class _SignupWidgetState extends State<SignupWidget> {
 
                           final user = await authManager.createAccountWithEmail(
                             context,
-                            _model.emailTextController.text,
+                            _model.emailTextFieldController.text,
                             _model.passwordTextController.text,
                           );
                           if (user == null) {
@@ -522,7 +523,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                           logFirebaseEvent('Button_action_block');
                           await action_blocks.registerDevice(
                             context,
-                            nickname: _model.emailTextController.text,
+                            nickname: _model.textController1.text,
                           );
 
                           context.goNamedAuth('Splash', context.mounted);

@@ -271,7 +271,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        'ล้างตัวกรอง',
+                                        'Clear filter',
                                         style: TextStyle(
                                           color:
                                               FlutterFlowTheme.of(context).info,
