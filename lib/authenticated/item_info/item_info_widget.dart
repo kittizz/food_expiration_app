@@ -234,7 +234,7 @@ class _ItemInfoWidgetState extends State<ItemInfoWidget> {
                                                 .name !=
                                             ''
                                     ? FFAppState().pageItemInfo.location.name
-                                    : 'รายการทั้งหมด',
+                                    : 'All items',
                                 ParamType.String,
                               ),
                               'locationId': serializeParam(
