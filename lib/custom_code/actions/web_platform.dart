@@ -10,8 +10,22 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'dart:html';
+import 'dart:async';
+import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import './custom_platform.dart';
 
-Future<bool> checkIsAdminDomain() async {
-  return await CustomPlatform().checkIsAdminDomain();
+CustomPlatform getInstance() => CustomPlatformWeb();
+
+class CustomPlatformWeb implements CustomPlatform {
+  @override
+  Future<bool> checkIsAdminDomain() async {
+    if (kIsWeb) {
+      if (window.location.hostname != "expirydate.mc.sv") {
+        return true;
+      }
+    }
+    return false;
+  }
 }
