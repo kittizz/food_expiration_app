@@ -358,8 +358,9 @@ class _ListItemsWidgetState extends State<ListItemsWidget>
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          'ล้างรายการ',
-                                          style: TextStyle(
+                                          'Clear items',
+                                          style: GoogleFonts.getFont(
+                                            'Open Sans',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryBackground,
                                           ),

@@ -171,12 +171,12 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
-                                      'WELCOME_SIGN_IN_WITH_EMAIL_BTN_ON_TAP');
+                                      'WELCOME_SIGN_UP_WITH_EMAIL_BTN_ON_TAP');
                                   logFirebaseEvent('Button_navigate_to');
 
                                   context.pushNamed('Signup');
                                 },
-                                text: 'Sign in with Email',
+                                text: 'Sign up with Email',
                                 icon: Icon(
                                   Icons.mail_outline_outlined,
                                   color: FlutterFlowTheme.of(context)
