@@ -19,7 +19,7 @@ String getFormattedDate(DateTime date) {
 
   DateFormat formatter;
   try {
-    formatter = DateFormat('d MMMM', 'th');
+    formatter = DateFormat('d MMMM', 'en');
   } catch (e) {
     formatter = DateFormat('d MMMM');
   }
@@ -281,13 +281,13 @@ List<ItemStruct> filter(
 
     switch (getDateStatus(element.expireDate!, element.forewarnDay)) {
       case 'expired':
-        dateStatus = 'หมดอายุไปแล้ว';
+        dateStatus = 'Expired';
         break;
       case 'about_to_expire':
-        dateStatus = 'ใกล้จะหมดอายุ';
+        dateStatus = 'About to expire';
         break;
       case 'ok':
-        dateStatus = 'รายการที่เหลือ';
+        dateStatus = 'Remaining items';
         break;
     }
 
